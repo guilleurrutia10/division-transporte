@@ -1,2 +1,16 @@
-hola muchachos!
-un cambio
+#para configurar:
+
+git config --global user.name "Alejandro Perez Garcia"
+git config --global user.email "alejandropg@autentia.com"
+
+#para clonar nuestro repo:
+git clone division-transporte
+
+#modificar el archivo que queramos modificar y lo agregamos
+git add archivo
+
+#comitear...
+git commit -m 'Subo un cambio a tal cosa"
+
+#subimos...
+git push archivo
