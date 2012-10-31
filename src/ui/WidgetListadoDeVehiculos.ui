@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormListadoVehiculos</class>
+ <widget class="QWidget" name="FormListadoVehiculos">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>817</width>
+    <height>510</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="labelListadoVehiculos">
+     <property name="text">
+      <string>Listado de Vehículos</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableWidgetListadoDeVehiculos">
+     <column>
+      <property name="text">
+       <string>Dominio</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Marca</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Registro Interno</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Numero de Chasis</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Comisaría</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
