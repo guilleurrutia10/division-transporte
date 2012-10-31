@@ -1,10 +1,10 @@
 #para configurar:
 
-git config --global user.name "Alejandro Perez Garcia"
-git config --global user.email "alejandropg@autentia.com"
+git config user.name "Alejandro Perez Garcia"
+git config user.email "alejandropg@autentia.com"
 
 #para clonar nuestro repo:
-git clone division-transporte
+git clone https://github.com/guilleurrutia10/division-transporte.git
 
 #modificar el archivo que queramos modificar y lo agregamos
 git add archivo
@@ -13,4 +13,4 @@ git add archivo
 git commit -m 'Subo un cambio a tal cosa"
 
 #subimos...
-git push archivo
+git push "origin master"
