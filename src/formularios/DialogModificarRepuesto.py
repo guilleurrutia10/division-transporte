@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogModificarRepuesto.ui'
 #
-# Created: Sun Oct 28 02:29:29 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Oct 31 17:55:04 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -20,25 +20,21 @@ class Ui_DialogMoficarRepuesto(object):
         DialogMoficarRepuesto.resize(300, 140)
         DialogMoficarRepuesto.setMinimumSize(QtCore.QSize(300, 140))
         DialogMoficarRepuesto.setMaximumSize(QtCore.QSize(300, 140))
-        DialogMoficarRepuesto.setWindowTitle(QtGui.QApplication.translate("DialogMoficarRepuesto", "Modificar Repuesto", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogMoficarRepuesto)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogMoficarRepuesto)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogMoficarRepuesto", "Modificar Repuesto", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setText(QtGui.QApplication.translate("DialogMoficarRepuesto", "Nombre Repuesto:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.lineEditNombreRepuesto = QtGui.QLineEdit(self.groupBox)
         self.lineEditNombreRepuesto.setObjectName(_fromUtf8("lineEditNombreRepuesto"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEditNombreRepuesto)
         self.label_2 = QtGui.QLabel(self.groupBox)
-        self.label_2.setText(QtGui.QApplication.translate("DialogMoficarRepuesto", "Descripcion Repuesto:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
         self.lineEditDescRepuesto = QtGui.QLineEdit(self.groupBox)
@@ -57,7 +53,10 @@ class Ui_DialogMoficarRepuesto(object):
         QtCore.QMetaObject.connectSlotsByName(DialogMoficarRepuesto)
 
     def retranslateUi(self, DialogMoficarRepuesto):
-        pass
+        DialogMoficarRepuesto.setWindowTitle(QtGui.QApplication.translate("DialogMoficarRepuesto", "Modificar Repuesto", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogMoficarRepuesto", "Modificar Repuesto", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("DialogMoficarRepuesto", "Nombre Repuesto:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("DialogMoficarRepuesto", "Descripcion Repuesto:", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'WidgetMostrarRepuestos.ui'
 #
-# Created: Sun Oct 28 02:29:34 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Oct 31 17:55:09 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,7 +18,6 @@ class Ui_FormMostrarRepuestos(object):
     def setupUi(self, FormMostrarRepuestos):
         FormMostrarRepuestos.setObjectName(_fromUtf8("FormMostrarRepuestos"))
         FormMostrarRepuestos.resize(688, 476)
-        FormMostrarRepuestos.setWindowTitle(QtGui.QApplication.translate("FormMostrarRepuestos", "Mostrar Repuestos", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(FormMostrarRepuestos)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(FormMostrarRepuestos)
@@ -39,7 +38,6 @@ class Ui_FormMostrarRepuestos(object):
         self.groupBox_2.setSizePolicy(sizePolicy)
         self.groupBox_2.setMinimumSize(QtCore.QSize(150, 70))
         self.groupBox_2.setMaximumSize(QtCore.QSize(200, 70))
-        self.groupBox_2.setTitle(QtGui.QApplication.translate("FormMostrarRepuestos", "Buscar Nombre", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.groupBox_2)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
@@ -53,8 +51,6 @@ class Ui_FormMostrarRepuestos(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pushButtonBuscar.sizePolicy().hasHeightForWidth())
         self.pushButtonBuscar.setSizePolicy(sizePolicy)
-        self.pushButtonBuscar.setWhatsThis(QtGui.QApplication.translate("FormMostrarRepuestos", "Buscar segun el criterio elegido", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonBuscar.setText(QtGui.QApplication.translate("FormMostrarRepuestos", "Buscar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonBuscar.setObjectName(_fromUtf8("pushButtonBuscar"))
         self.verticalLayout_2.addWidget(self.pushButtonBuscar)
         self.verticalLayout.addWidget(self.groupBox)
@@ -63,10 +59,8 @@ class Ui_FormMostrarRepuestos(object):
         self.tableWidgetDatosRepuestos.setColumnCount(2)
         self.tableWidgetDatosRepuestos.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormMostrarRepuestos", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetDatosRepuestos.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormMostrarRepuestos", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetDatosRepuestos.setHorizontalHeaderItem(1, item)
         self.verticalLayout.addWidget(self.tableWidgetDatosRepuestos)
         self.groupBox_3 = QtGui.QGroupBox(FormMostrarRepuestos)
@@ -78,7 +72,6 @@ class Ui_FormMostrarRepuestos(object):
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButtonModificarRepuesto = QtGui.QPushButton(self.groupBox_3)
-        self.pushButtonModificarRepuesto.setText(QtGui.QApplication.translate("FormMostrarRepuestos", "Modificar Repuesto", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonModificarRepuesto.setObjectName(_fromUtf8("pushButtonModificarRepuesto"))
         self.horizontalLayout.addWidget(self.pushButtonModificarRepuesto)
         self.verticalLayout.addWidget(self.groupBox_3)
@@ -87,8 +80,15 @@ class Ui_FormMostrarRepuestos(object):
         QtCore.QMetaObject.connectSlotsByName(FormMostrarRepuestos)
 
     def retranslateUi(self, FormMostrarRepuestos):
+        FormMostrarRepuestos.setWindowTitle(QtGui.QApplication.translate("FormMostrarRepuestos", "Mostrar Repuestos", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("FormMostrarRepuestos", "Buscar Nombre", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonBuscar.setWhatsThis(QtGui.QApplication.translate("FormMostrarRepuestos", "Buscar segun el criterio elegido", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonBuscar.setText(QtGui.QApplication.translate("FormMostrarRepuestos", "Buscar", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidgetDatosRepuestos.horizontalHeaderItem(0)
+        item.setText(QtGui.QApplication.translate("FormMostrarRepuestos", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidgetDatosRepuestos.horizontalHeaderItem(1)
+        item.setText(QtGui.QApplication.translate("FormMostrarRepuestos", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonModificarRepuesto.setText(QtGui.QApplication.translate("FormMostrarRepuestos", "Modificar Repuesto", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

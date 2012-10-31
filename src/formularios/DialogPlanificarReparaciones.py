@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogPlanificarReparaciones.ui'
 #
-# Created: Sun Oct 28 02:29:30 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Oct 31 17:55:05 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -19,11 +19,9 @@ class Ui_DialogPlanificarReparaciones(object):
         DialogPlanificarReparaciones.setObjectName(_fromUtf8("DialogPlanificarReparaciones"))
         DialogPlanificarReparaciones.resize(435, 350)
         DialogPlanificarReparaciones.setMinimumSize(QtCore.QSize(435, 350))
-        DialogPlanificarReparaciones.setWindowTitle(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Planificar Reparaciones", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogPlanificarReparaciones)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogPlanificarReparaciones)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Reparaciones", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.groupBox)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
@@ -32,13 +30,10 @@ class Ui_DialogPlanificarReparaciones(object):
         self.tableWidgetReparaciones.setColumnCount(3)
         self.tableWidgetReparaciones.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Tipo de Reparacion", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetReparaciones.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Id Reparacion", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetReparaciones.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetReparaciones.setHorizontalHeaderItem(2, item)
         self.verticalLayout_2.addWidget(self.tableWidgetReparaciones)
         self.groupBox_2 = QtGui.QGroupBox(self.groupBox)
@@ -49,7 +44,6 @@ class Ui_DialogPlanificarReparaciones(object):
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButtonPlanificarReparacion = QtGui.QPushButton(self.groupBox_2)
-        self.pushButtonPlanificarReparacion.setText(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Planificar Reparacion", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonPlanificarReparacion.setObjectName(_fromUtf8("pushButtonPlanificarReparacion"))
         self.horizontalLayout.addWidget(self.pushButtonPlanificarReparacion)
         self.verticalLayout_2.addWidget(self.groupBox_2)
@@ -66,9 +60,15 @@ class Ui_DialogPlanificarReparaciones(object):
         QtCore.QMetaObject.connectSlotsByName(DialogPlanificarReparaciones)
 
     def retranslateUi(self, DialogPlanificarReparaciones):
+        DialogPlanificarReparaciones.setWindowTitle(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Planificar Reparaciones", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Reparaciones", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(0)
+        item.setText(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Tipo de Reparacion", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(1)
+        item.setText(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Id Reparacion", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(2)
+        item.setText(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonPlanificarReparacion.setText(QtGui.QApplication.translate("DialogPlanificarReparaciones", "Planificar Reparacion", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

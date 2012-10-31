@@ -9,11 +9,11 @@ from formularios.DialogAltaVehiculo import Ui_DialogAltaVehiculo
 #===============================================================================
 # Import Dialogos
 #===============================================================================
-from Dialogs import DialogModificarVehiculo,DialogAltaPersonal,DialogRegistrarReparaciones,DialogAltaRepuesto,DialogAltaSeccion, DialogModificarPersonal
+from Dialogs import DialogModificarVehiculo,DialogAltaPersonal,DialogRegistrarReparaciones,DialogAltaRepuesto,DialogAltaSeccion, DialogModificarPersonal, DialogMuestraLosRepuestos
 #===============================================================================
 # import widgets
 #===============================================================================
-from Dialogs import WidgetMostrarReparacionesPorVehiculo,WidgetMostrarTiposDeReparaciones,WidgetMostrarVehiculosSinPlanificar,WidgetBajaPersonal,WidgetMostrarRepuestos
+from Dialogs import WidgetMostrarReparacionesPorVehiculo,WidgetMostrarTiposDeReparaciones,WidgetMostrarVehiculosSinPlanificar,WidgetBajaPersonal
 from Dialogs import WidgetPedidosDeActuacion, WidgetListadoSecciones, WidgetListadoDeRepuestosUtilizados, WidgetListadoDeVehiculos
 
 class MyListado(QtGui.QWidget, Ui_Form):
@@ -204,7 +204,9 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_actionModificacion_de_Repuesto_triggered(self):
         print 'agregando widget baja personal'
-        self.setCentralWidget(WidgetMostrarRepuestos.WidgetMostrarRepuestos(self))
+        dlMuesRep = DialogMuestraLosRepuestos.DialogMuestraLosRepuestos()
+        dlMuesRep.exec_()
+#        self.setCentralWidget(WidgetMostrarRepuestos.WidgetMostrarRepuestos(self))
     
     #Conectamos la accion Modificar Personal...
     @QtCore.pyqtSlot()

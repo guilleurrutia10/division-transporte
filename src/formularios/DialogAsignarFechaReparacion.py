@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogAsignarFechaReparacion.ui'
 #
-# Created: Sun Oct 28 02:29:28 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Oct 31 17:55:03 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -19,22 +19,18 @@ class Ui_AsignarFechaReparacion(object):
         AsignarFechaReparacion.setObjectName(_fromUtf8("AsignarFechaReparacion"))
         AsignarFechaReparacion.resize(293, 139)
         AsignarFechaReparacion.setMinimumSize(QtCore.QSize(293, 139))
-        AsignarFechaReparacion.setWindowTitle(QtGui.QApplication.translate("AsignarFechaReparacion", "Asignar Fecha", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(AsignarFechaReparacion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(AsignarFechaReparacion)
-        self.groupBox.setTitle(QtGui.QApplication.translate("AsignarFechaReparacion", "Planificar Reparacion", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label_3 = QtGui.QLabel(self.groupBox)
-        self.label_3.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Fecha Estimada Inicio:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label_3)
         self.label_4 = QtGui.QLabel(self.groupBox)
-        self.label_4.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Nro de Secuencia:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_4)
         self.lineEditNroSecuencia = QtGui.QLineEdit(self.groupBox)
@@ -56,7 +52,10 @@ class Ui_AsignarFechaReparacion(object):
         QtCore.QMetaObject.connectSlotsByName(AsignarFechaReparacion)
 
     def retranslateUi(self, AsignarFechaReparacion):
-        pass
+        AsignarFechaReparacion.setWindowTitle(QtGui.QApplication.translate("AsignarFechaReparacion", "Asignar Fecha", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("AsignarFechaReparacion", "Planificar Reparacion", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Fecha Estimada Inicio:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Nro de Secuencia:", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

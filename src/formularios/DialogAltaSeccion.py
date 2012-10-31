@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogAltaSeccion.ui'
 #
-# Created: Sun Oct 28 02:29:28 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Oct 31 17:55:02 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,11 +18,9 @@ class Ui_DialogAltaSeccion(object):
     def setupUi(self, DialogAltaSeccion):
         DialogAltaSeccion.setObjectName(_fromUtf8("DialogAltaSeccion"))
         DialogAltaSeccion.resize(817, 515)
-        DialogAltaSeccion.setWindowTitle(QtGui.QApplication.translate("DialogAltaSeccion", "Alta Seccion", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogAltaSeccion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogAltaSeccion)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogAltaSeccion", "Nueva Seccion", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.groupBox)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
@@ -33,7 +31,6 @@ class Ui_DialogAltaSeccion(object):
         self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox_3)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.label = QtGui.QLabel(self.groupBox_3)
-        self.label.setText(QtGui.QApplication.translate("DialogAltaSeccion", "Nombre Seccion:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.horizontalLayout.addWidget(self.label)
         self.lineEditNombreSeccion = QtGui.QLineEdit(self.groupBox_3)
@@ -43,7 +40,6 @@ class Ui_DialogAltaSeccion(object):
         self.horizontalLayout.addItem(spacerItem)
         self.verticalLayout_2.addWidget(self.groupBox_3)
         self.groupBox_2 = QtGui.QGroupBox(self.groupBox)
-        self.groupBox_2.setTitle(QtGui.QApplication.translate("DialogAltaSeccion", "Asignar Empleados", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.gridLayout = QtGui.QGridLayout(self.groupBox_2)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
@@ -58,17 +54,14 @@ class Ui_DialogAltaSeccion(object):
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.groupBox_4)
         self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
         self.pushButtonAsignarEmpleado = QtGui.QPushButton(self.groupBox_4)
-        self.pushButtonAsignarEmpleado.setText(QtGui.QApplication.translate("DialogAltaSeccion", ">", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAsignarEmpleado.setObjectName(_fromUtf8("pushButtonAsignarEmpleado"))
         self.verticalLayout_3.addWidget(self.pushButtonAsignarEmpleado)
         self.pushButtonDesasignarEmpleado = QtGui.QPushButton(self.groupBox_4)
-        self.pushButtonDesasignarEmpleado.setText(QtGui.QApplication.translate("DialogAltaSeccion", "<", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonDesasignarEmpleado.setObjectName(_fromUtf8("pushButtonDesasignarEmpleado"))
         self.verticalLayout_3.addWidget(self.pushButtonDesasignarEmpleado)
         self.gridLayout.addWidget(self.groupBox_4, 1, 1, 1, 1)
         self.pushButtonAsignarComoEncargado = QtGui.QPushButton(self.groupBox_2)
         self.pushButtonAsignarComoEncargado.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.pushButtonAsignarComoEncargado.setText(QtGui.QApplication.translate("DialogAltaSeccion", "Asignar como Encargado", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAsignarComoEncargado.setObjectName(_fromUtf8("pushButtonAsignarComoEncargado"))
         self.gridLayout.addWidget(self.pushButtonAsignarComoEncargado, 2, 3, 1, 1)
         self.tableWidgetEmpleadosAsignados = QtGui.QTableWidget(self.groupBox_2)
@@ -90,7 +83,13 @@ class Ui_DialogAltaSeccion(object):
         QtCore.QMetaObject.connectSlotsByName(DialogAltaSeccion)
 
     def retranslateUi(self, DialogAltaSeccion):
-        pass
+        DialogAltaSeccion.setWindowTitle(QtGui.QApplication.translate("DialogAltaSeccion", "Alta Seccion", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogAltaSeccion", "Nueva Seccion", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("DialogAltaSeccion", "Nombre Seccion:", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("DialogAltaSeccion", "Asignar Empleados", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAsignarEmpleado.setText(QtGui.QApplication.translate("DialogAltaSeccion", ">", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonDesasignarEmpleado.setText(QtGui.QApplication.translate("DialogAltaSeccion", "<", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAsignarComoEncargado.setText(QtGui.QApplication.translate("DialogAltaSeccion", "Asignar como Encargado", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

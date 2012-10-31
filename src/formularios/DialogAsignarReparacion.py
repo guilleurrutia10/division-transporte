@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogAsignarReparacion.ui'
 #
-# Created: Sun Oct 28 02:29:28 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Oct 31 17:55:03 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,10 +18,8 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
         Dialog.resize(810, 711)
-        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox = QtGui.QGroupBox(Dialog)
         self.groupBox.setGeometry(QtCore.QRect(20, 10, 411, 221))
-        self.groupBox.setTitle(QtGui.QApplication.translate("Dialog", "Reparación", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.groupBox)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
@@ -30,18 +28,14 @@ class Ui_Dialog(object):
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("Dialog", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("Dialog", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("Dialog", "Tiempo Estimado", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget.setHorizontalHeaderItem(2, item)
         self.horizontalLayout_2.addWidget(self.tableWidget)
         self.groupBox_2 = QtGui.QGroupBox(Dialog)
         self.groupBox_2.setGeometry(QtCore.QRect(20, 230, 411, 391))
-        self.groupBox_2.setTitle(QtGui.QApplication.translate("Dialog", "Empleados", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.gridLayout = QtGui.QGridLayout(self.groupBox_2)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
@@ -51,7 +45,6 @@ class Ui_Dialog(object):
         self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox_3)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.pushButton = QtGui.QPushButton(self.groupBox_3)
-        self.pushButton.setText(QtGui.QApplication.translate("Dialog", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.horizontalLayout.addWidget(self.pushButton)
         self.lineEdit = QtGui.QLineEdit(self.groupBox_3)
@@ -67,15 +60,12 @@ class Ui_Dialog(object):
         self.tableWidget_2.setColumnCount(2)
         self.tableWidget_2.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("Dialog", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget_2.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("Dialog", "Numero de Documento", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidget_2.setHorizontalHeaderItem(1, item)
         self.tableWidget_2.horizontalHeader().setDefaultSectionSize(120)
         self.gridLayout.addWidget(self.tableWidget_2, 2, 0, 1, 4)
         self.pushButton_3 = QtGui.QPushButton(self.groupBox_2)
-        self.pushButton_3.setText(QtGui.QApplication.translate("Dialog", "Asignar Responsable", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
         self.gridLayout.addWidget(self.pushButton_3, 3, 0, 1, 1)
         spacerItem2 = QtGui.QSpacerItem(149, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -83,7 +73,6 @@ class Ui_Dialog(object):
         spacerItem3 = QtGui.QSpacerItem(20, 71, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem3, 3, 3, 1, 1)
         self.pushButton_2 = QtGui.QPushButton(self.groupBox_2)
-        self.pushButton_2.setText(QtGui.QApplication.translate("Dialog", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
         self.gridLayout.addWidget(self.pushButton_2, 3, 4, 1, 1)
 
@@ -91,11 +80,22 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
+        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("Dialog", "Reparación", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(QtGui.QApplication.translate("Dialog", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(QtGui.QApplication.translate("Dialog", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(QtGui.QApplication.translate("Dialog", "Tiempo Estimado", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("Dialog", "Empleados", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setText(QtGui.QApplication.translate("Dialog", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidget_2.horizontalHeaderItem(0)
+        item.setText(QtGui.QApplication.translate("Dialog", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidget_2.horizontalHeaderItem(1)
+        item.setText(QtGui.QApplication.translate("Dialog", "Numero de Documento", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_3.setText(QtGui.QApplication.translate("Dialog", "Asignar Responsable", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_2.setText(QtGui.QApplication.translate("Dialog", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
