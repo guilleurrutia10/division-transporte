@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>280</width>
-    <height>152</height>
+    <width>270</width>
+    <height>150</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,7 +21,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>280</width>
+    <width>270</width>
     <height>150</height>
    </size>
   </property>
@@ -44,70 +44,31 @@
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
      <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
       <property name="labelAlignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="comboBoxUsuario">
-        <item>
-         <property name="text">
-          <string>Jefe de Division</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Jefe de Seccion</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Inspector</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Empleado Administrativo</string>
-         </property>
-        </item>
-       </widget>
-      </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Usuario</string>
+         <string>Usuario:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Password:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QComboBox" name="comboBoxTipoDocumento">
-        <item>
-         <property name="text">
-          <string>L.C.</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>D.N.I.</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Tipo Documento</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
        <widget class="QLineEdit" name="lineEditNumeroDocumento"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Numero Documento</string>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>
