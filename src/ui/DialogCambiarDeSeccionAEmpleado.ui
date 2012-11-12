@@ -1,87 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogDatosIngresoVehiculo</class>
- <widget class="QDialog" name="DialogDatosIngresoVehiculo">
+ <class>DialogCambiarDeSeccionAEmpleado</class>
+ <widget class="QDialog" name="DialogCambiarDeSeccionAEmpleado">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>334</width>
-    <height>244</height>
+    <width>419</width>
+    <height>392</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Datos Ingreso Vehiculo</string>
+   <string>Cambiar de Seccion a Empleado</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Registrar Ingreso Vehiculo</string>
+      <string>Seleccionar Nueva Seccion:  </string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <property name="labelAlignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
-      <item row="0" column="0">
+      <property name="horizontalSpacing">
+       <number>7</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <item row="1" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Kilometraje actual:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditKilometraje"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Nivel de combustible actual:</string>
+         <string>Empleado: </string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEditCombustible"/>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEditEquipamiento"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEditReparacion"/>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEditComisaria"/>
+       <widget class="QLabel" name="labelNombreEmpleado">
+        <property name="text">
+         <string>&lt;nombre y apellido del empleado&gt;</string>
+        </property>
+       </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Equipamiento:</string>
+         <string>Seleccione la Nueva Seccion:</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Reparacion solicitada:</string>
-        </property>
-       </widget>
+      <item row="2" column="1">
+       <widget class="QTableWidget" name="tableWidgetSecciones"/>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>Comisaria:</string>
+      <item row="0" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
         </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>Localidad:</string>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
         </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="lineEditLocalidad"/>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>10</width>
+          <height>10</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
@@ -103,7 +89,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DialogDatosIngresoVehiculo</receiver>
+   <receiver>DialogCambiarDeSeccionAEmpleado</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -119,7 +105,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DialogDatosIngresoVehiculo</receiver>
+   <receiver>DialogCambiarDeSeccionAEmpleado</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
