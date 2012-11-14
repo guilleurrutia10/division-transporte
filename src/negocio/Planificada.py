@@ -5,12 +5,17 @@ Created on 07/11/2012
 @author: urrutia
 '''
 from EstadoOrdenReparacion import EstadoOrdenReparacion
+from Plan import *
+
 
 class Planificada(EstadoOrdenReparacion):
     '''
     classdocs
     @version: 
-    @author: 
+    @author:
+    
+    atributes 
+                plan.
     '''
 
 
@@ -20,5 +25,10 @@ class Planificada(EstadoOrdenReparacion):
         @return: 
         @author: 
         '''
-        pass
+        self._plan = None
         
+    def getPlan(self):
+        return self._plan
+    
+    def setPlan(self,unPlan):
+        self._plan = unPlan
