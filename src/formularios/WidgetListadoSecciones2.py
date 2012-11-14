@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'WidgetListadoSecciones2.ui'
 #
-# Created: Wed Nov 14 00:01:27 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Nov 14 18:14:45 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,11 +18,9 @@ class Ui_FormListadoSecciones(object):
     def setupUi(self, FormListadoSecciones):
         FormListadoSecciones.setObjectName(_fromUtf8("FormListadoSecciones"))
         FormListadoSecciones.resize(600, 323)
-        FormListadoSecciones.setWindowTitle(QtGui.QApplication.translate("FormListadoSecciones", "Form", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(FormListadoSecciones)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(FormListadoSecciones)
-        self.groupBox.setTitle(QtGui.QApplication.translate("FormListadoSecciones", "Listado de Secciones", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.groupBox)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
@@ -31,19 +29,15 @@ class Ui_FormListadoSecciones(object):
         self.tableWidgetListadoSecciones.setColumnCount(4)
         self.tableWidgetListadoSecciones.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormListadoSecciones", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         item.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
         self.tableWidgetListadoSecciones.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormListadoSecciones", "Cantidad de empleados", None, QtGui.QApplication.UnicodeUTF8))
         item.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
         self.tableWidgetListadoSecciones.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormListadoSecciones", "Nombre encargado", None, QtGui.QApplication.UnicodeUTF8))
         item.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
         self.tableWidgetListadoSecciones.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormListadoSecciones", "Código Sección", None, QtGui.QApplication.UnicodeUTF8))
         item.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
         self.tableWidgetListadoSecciones.setHorizontalHeaderItem(3, item)
         self.tableWidgetListadoSecciones.horizontalHeader().setDefaultSectionSize(150)
@@ -54,10 +48,16 @@ class Ui_FormListadoSecciones(object):
         QtCore.QMetaObject.connectSlotsByName(FormListadoSecciones)
 
     def retranslateUi(self, FormListadoSecciones):
+        FormListadoSecciones.setWindowTitle(QtGui.QApplication.translate("FormListadoSecciones", "Form", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("FormListadoSecciones", "Listado de Secciones", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidgetListadoSecciones.horizontalHeaderItem(0)
+        item.setText(QtGui.QApplication.translate("FormListadoSecciones", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidgetListadoSecciones.horizontalHeaderItem(1)
+        item.setText(QtGui.QApplication.translate("FormListadoSecciones", "Cantidad de empleados", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidgetListadoSecciones.horizontalHeaderItem(2)
+        item.setText(QtGui.QApplication.translate("FormListadoSecciones", "Nombre encargado", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidgetListadoSecciones.horizontalHeaderItem(3)
+        item.setText(QtGui.QApplication.translate("FormListadoSecciones", "Código Sección", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogIngresarNombreSeccion.ui'
 #
-# Created: Wed Nov 14 00:01:19 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Nov 14 18:14:39 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -14,43 +14,62 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(293, 97)
-        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
-        self.buttonBox = QtGui.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(50, 50, 231, 32))
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
-        self.groupBox = QtGui.QGroupBox(Dialog)
-        self.groupBox.setGeometry(QtCore.QRect(10, 10, 271, 41))
-        self.groupBox.setTitle(QtGui.QApplication.translate("Dialog", "Nueva Seccion", None, QtGui.QApplication.UnicodeUTF8))
+class Ui_DialogIngresarNombreSeccion(object):
+    def setupUi(self, DialogIngresarNombreSeccion):
+        DialogIngresarNombreSeccion.setObjectName(_fromUtf8("DialogIngresarNombreSeccion"))
+        DialogIngresarNombreSeccion.resize(289, 116)
+        self.verticalLayout = QtGui.QVBoxLayout(DialogIngresarNombreSeccion)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.groupBox = QtGui.QGroupBox(DialogIngresarNombreSeccion)
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
-        self.listView = QtGui.QListView(self.groupBox)
-        self.listView.setGeometry(QtCore.QRect(100, 20, 161, 16))
-        self.listView.setObjectName(_fromUtf8("listView"))
+        self.formLayout = QtGui.QFormLayout(self.groupBox)
+        self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setGeometry(QtCore.QRect(10, 20, 81, 16))
-        self.label.setText(QtGui.QApplication.translate("Dialog", "Nombre Sección:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
+        self.comboBox = QtGui.QComboBox(self.groupBox)
+        self.comboBox.setObjectName(_fromUtf8("comboBox"))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.comboBox.addItem(_fromUtf8(""))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.comboBox)
+        self.verticalLayout.addWidget(self.groupBox)
+        self.groupBoxButtonBox = QtGui.QGroupBox(DialogIngresarNombreSeccion)
+        self.groupBoxButtonBox.setMinimumSize(QtCore.QSize(271, 41))
+        self.groupBoxButtonBox.setMaximumSize(QtCore.QSize(16777215, 41))
+        self.groupBoxButtonBox.setTitle(_fromUtf8(""))
+        self.groupBoxButtonBox.setObjectName(_fromUtf8("groupBoxButtonBox"))
+        self.gridLayout_2 = QtGui.QGridLayout(self.groupBoxButtonBox)
+        self.gridLayout_2.setContentsMargins(9, 9, 9, 8)
+        self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
+        self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
+        self.gridLayout_2.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
+        self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
+        self.gridLayout_2.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.gridLayout_2.addItem(spacerItem, 0, 0, 1, 1)
+        self.verticalLayout.addWidget(self.groupBoxButtonBox)
 
-        self.retranslateUi(Dialog)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(DialogIngresarNombreSeccion)
+        QtCore.QMetaObject.connectSlotsByName(DialogIngresarNombreSeccion)
 
-    def retranslateUi(self, Dialog):
-        pass
+    def retranslateUi(self, DialogIngresarNombreSeccion):
+        DialogIngresarNombreSeccion.setWindowTitle(QtGui.QApplication.translate("DialogIngresarNombreSeccion", "Seleccionar Nombre Seccion", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogIngresarNombreSeccion", "Nueva Seccion", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("DialogIngresarNombreSeccion", "Nombre Sección:", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(0, QtGui.QApplication.translate("DialogIngresarNombreSeccion", "Mecanica", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBox.setItemText(1, QtGui.QApplication.translate("DialogIngresarNombreSeccion", "Gomeria", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogIngresarNombreSeccion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogIngresarNombreSeccion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
-    Dialog = QtGui.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
+    DialogIngresarNombreSeccion = QtGui.QDialog()
+    ui = Ui_DialogIngresarNombreSeccion()
+    ui.setupUi(DialogIngresarNombreSeccion)
+    DialogIngresarNombreSeccion.show()
     sys.exit(app.exec_())
 

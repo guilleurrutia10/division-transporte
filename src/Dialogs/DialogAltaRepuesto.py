@@ -21,22 +21,23 @@ class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto):
         '''
         super(DialogAltaRepuesto, self).__init__(parent)
         self.setupUi(self)
-        
-        self.buttonBox.connect(self.buttonBox, QtCore.SIGNAL("accepted()"), self.on_buttonBox_accepted)
+        self.pushButtonCancelar
         
         #Validación a medida que se escribe en el lineEdit        
         self.lineEditDescRepuesto.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z]+'),self))
         self.lineEditNombreRepuesto.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z]+'),self))
         
-        self.buttonBox = QtGui.QDialogButtonBox(QtGui.QDialogButtonBox.Apply|QtGui.QDialogButtonBox.Cancel)
         
     @QtCore.pyqtSlot('QString')
     def on_lineEditNombreRepuesto_textEdited(self, cadena):
         print 'El texto cambio................... %s' %cadena
-        
     
-#    @QtCore.pyqtSlot()
-    def on_buttonBox_accepted(self):
+    @QtCore.pyqtSlot()
+    def on_pushButtonCancelar_clicked(self):
+        self.close()    
+    
+    @QtCore.pyqtSlot()
+    def on_pushButtonAceptar_accepted(self):
         print 'Click sobre Aceptar'
         if not match('', self.lineEditDescRepuesto.text()):
             descripcion = unicode(self.lineEditDescRepuesto.text())

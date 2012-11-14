@@ -55,7 +55,10 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         from negocio import Division_Transporte
         division = Division_Transporte.Division_Transporte()
         division.addVehiculo(dominio, marca, registroInterno, numeroChasis)
-        self.close()
+        msgBox = QtGui.QMessageBox(self)
+        msgBox.setText('El vehiculo se ha ingresado correctamente!!!')
+        if msgBox.exec_():
+            self.close()
     
     def testearDialogo(self):
         '''

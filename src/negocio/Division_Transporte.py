@@ -65,6 +65,7 @@ class Division_Transporte(Persistent):
         self.instance.tiposDeDocumentos = {}
         self.instance.vehiculos = {}
         self.instance.tiposDeDocumentos = {}
+        self.instance.empleados = {}
     
     @classmethod
     def getInstancia(cls, *args, **kargs):
@@ -184,3 +185,12 @@ class Division_Transporte(Persistent):
         @author: 
         '''
         pass
+    
+    def agregarEmpleado(self, nombre, apellido, numeroDocumento):
+        '''
+        @return: 
+        @author: 
+        '''
+        empleado = Empleado(nombre,apellido, numeroDocumento)
+        empleado.save()
+        self.empleados[numeroDocumento] = empleado

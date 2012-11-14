@@ -7,10 +7,10 @@ Created on 13/11/2012
 
 from PyQt4 import QtCore, QtGui
 
-from formularios.DialogCambiarDeSeccionUnEmpleado import Ui_Dialog
+from formularios.DialogCambiarDeSeccionUnEmpleado import Ui_DialogCambiarDeSeccionUnEmpleado
 
 
-class DialogCambiardeSeccionunEmpleado(QtGui.QDialog, Ui_Dialog):
+class DialogCambiardeSeccionunEmpleado(QtGui.QDialog, Ui_DialogCambiarDeSeccionUnEmpleado):
     '''
     classdocs
     '''

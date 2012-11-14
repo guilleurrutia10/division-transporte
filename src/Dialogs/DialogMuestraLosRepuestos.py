@@ -18,3 +18,12 @@ class DialogMuestraLosRepuestos(QtGui.QDialog, Ui_Dialog):
         '''
         super(DialogMuestraLosRepuestos, self).__init__(parent)
         self.setupUi(self)
+        self.lineEditBuscarNombre
+    @QtCore.pyqtSlot()
+    def on_pushButtonCancelar_clicked(self):
+        self.close()
+        
+    @QtCore.pyqtSlot('QString')
+    def on_lineEditBuscarNombre_textChanged(self, cadena):
+        print 'Filtrar %s' %cadena
+        #refrescar Grilla

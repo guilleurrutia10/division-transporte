@@ -18,3 +18,12 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         '''
         super(DialogAltaSeccion, self).__init__(parent)
         self.setupUi(self)
+        self.pushButtonAceptar
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonAceptar_clicked(self):
+        print 'Click sobre Aceptar'
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonCancelar_clicked(self):
+        self.close()

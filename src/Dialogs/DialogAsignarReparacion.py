@@ -5,9 +5,9 @@ Created on 03/11/2012
 '''
 
 from PyQt4 import QtCore, QtGui
-from formularios.DialogAsignarReparacion import Ui_Dialog
+from formularios.DialogAsignarReparacion import Ui_DialogAsignarReparacion
 
-class DialogAsignarReparacion(QtGui.QDialog, Ui_Dialog):
+class DialogAsignarReparacion(QtGui.QDialog, Ui_DialogAsignarReparacion):
     '''
     classdocs
     @version: 

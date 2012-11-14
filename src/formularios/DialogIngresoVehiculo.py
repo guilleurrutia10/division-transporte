@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogIngresoVehiculo.ui'
 #
-# Created: Wed Nov 14 00:01:19 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Nov 14 18:14:39 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,24 +18,20 @@ class Ui_DialogIngresoVehiculo(object):
     def setupUi(self, DialogIngresoVehiculo):
         DialogIngresoVehiculo.setObjectName(_fromUtf8("DialogIngresoVehiculo"))
         DialogIngresoVehiculo.resize(334, 244)
-        DialogIngresoVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogIngresoVehiculo", "Registrar Ingreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogIngresoVehiculo)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogIngresoVehiculo)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogIngresoVehiculo", "Registrar Ingreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Kilometraje actual:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.lineEditKilometraje = QtGui.QLineEdit(self.groupBox)
         self.lineEditKilometraje.setObjectName(_fromUtf8("lineEditKilometraje"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEditKilometraje)
         self.label_2 = QtGui.QLabel(self.groupBox)
-        self.label_2.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Nivel de combustible actual:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
         self.lineEditCombustible = QtGui.QLineEdit(self.groupBox)
@@ -51,38 +47,53 @@ class Ui_DialogIngresoVehiculo(object):
         self.lineEditComisaria.setObjectName(_fromUtf8("lineEditComisaria"))
         self.formLayout.setWidget(4, QtGui.QFormLayout.FieldRole, self.lineEditComisaria)
         self.label_3 = QtGui.QLabel(self.groupBox)
-        self.label_3.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Equipamiento:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_3)
         self.label_4 = QtGui.QLabel(self.groupBox)
-        self.label_4.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Reparacion solicitada:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_4)
         self.label_5 = QtGui.QLabel(self.groupBox)
-        self.label_5.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Comisaria:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.formLayout.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_5)
         self.label_6 = QtGui.QLabel(self.groupBox)
-        self.label_6.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Localidad:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setObjectName(_fromUtf8("label_6"))
         self.formLayout.setWidget(5, QtGui.QFormLayout.LabelRole, self.label_6)
         self.lineEditLocalidad = QtGui.QLineEdit(self.groupBox)
         self.lineEditLocalidad.setObjectName(_fromUtf8("lineEditLocalidad"))
         self.formLayout.setWidget(5, QtGui.QFormLayout.FieldRole, self.lineEditLocalidad)
         self.verticalLayout.addWidget(self.groupBox)
-        self.buttonBox = QtGui.QDialogButtonBox(DialogIngresoVehiculo)
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
-        self.verticalLayout.addWidget(self.buttonBox)
+        self.groupBoxButtonBox = QtGui.QGroupBox(DialogIngresoVehiculo)
+        self.groupBoxButtonBox.setMinimumSize(QtCore.QSize(271, 41))
+        self.groupBoxButtonBox.setMaximumSize(QtCore.QSize(16777215, 41))
+        self.groupBoxButtonBox.setTitle(_fromUtf8(""))
+        self.groupBoxButtonBox.setObjectName(_fromUtf8("groupBoxButtonBox"))
+        self.gridLayout_2 = QtGui.QGridLayout(self.groupBoxButtonBox)
+        self.gridLayout_2.setContentsMargins(9, 9, 9, 8)
+        self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
+        self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
+        self.gridLayout_2.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
+        self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
+        self.gridLayout_2.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.gridLayout_2.addItem(spacerItem, 0, 0, 1, 1)
+        self.verticalLayout.addWidget(self.groupBoxButtonBox)
 
         self.retranslateUi(DialogIngresoVehiculo)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), DialogIngresoVehiculo.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), DialogIngresoVehiculo.reject)
         QtCore.QMetaObject.connectSlotsByName(DialogIngresoVehiculo)
 
     def retranslateUi(self, DialogIngresoVehiculo):
-        pass
+        DialogIngresoVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogIngresoVehiculo", "Registrar Ingreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogIngresoVehiculo", "Registrar Ingreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Kilometraje actual:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Nivel de combustible actual:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Equipamiento:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Reparacion solicitada:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_5.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Comisaria:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Localidad:", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogIngresoVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

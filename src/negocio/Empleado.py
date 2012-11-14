@@ -67,3 +67,8 @@ class Empleado(Persistent):
         self.nombre = nombre
         self.apellido = apellido
         self.documento = documento
+        
+    def save(self):
+        from MiZODB import ZopeDB, MiZODB
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb.save('empleados',self.documento,self)
