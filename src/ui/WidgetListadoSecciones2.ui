@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormListadoSecciones</class>
+ <widget class="QWidget" name="FormListadoSecciones">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>323</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Listado de Secciones</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QTableWidget" name="tableWidgetListadoSecciones">
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>150</number>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Nombre</string>
+         </property>
+         <property name="textAlignment">
+          <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Cantidad de empleados</string>
+         </property>
+         <property name="textAlignment">
+          <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Nombre encargado</string>
+         </property>
+         <property name="textAlignment">
+          <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Código Sección</string>
+         </property>
+         <property name="textAlignment">
+          <set>AlignHCenter|AlignVCenter|AlignCenter</set>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>621</width>
+    <height>350</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="minimumSize">
+      <size>
+       <width>331</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>331</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Buscar por Nº Documento</string>
+     </property>
+     <widget class="QListView" name="listView">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>211</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>211</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>211</width>
+        <height>16</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>20</y>
+        <width>75</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Filtrar</string>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="minimumSize">
+      <size>
+       <width>331</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>331</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Buscar por Nombre</string>
+     </property>
+     <widget class="QListView" name="listView_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>211</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>211</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>211</width>
+        <height>16</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>20</y>
+        <width>75</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Filtrar</string>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QTableWidget" name="tableWidget">
+     <column>
+      <property name="text">
+       <string>Nombre</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tipo de Documento</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nº Documento</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Sección</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Fecha de Nac.</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Email</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>163</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="3" column="1">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>431</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>431</width>
+       <height>41</height>
+      </size>
+     </property>
+     <widget class="QPushButton" name="pushButton_Cancelar">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>10</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cancelar</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Cambiar">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>10</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cambiar</string>
+      </property>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
