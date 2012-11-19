@@ -22,5 +22,5 @@ class DialogCambiardeSeccionunEmpleado(QtGui.QDialog, Ui_DialogCambiarDeSeccionU
         self.setupUi(self)
         
     @QtCore.pyqtSlot()
-    def on_pushButton_Cancelar_clicked(self):
+    def on_pushButtonCancelar_clicked(self):
         self.close()

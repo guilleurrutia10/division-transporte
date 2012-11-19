@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogDatosEgresoVehiculo.ui'
 #
-# Created: Wed Nov 14 18:14:38 2012
-#      by: PyQt4 UI code generator 4.9.5
+# Created: Sun Nov 18 20:37:42 2012
+#      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -19,27 +19,32 @@ class Ui_DialogDatosEgresoVehiculo(object):
         DialogDatosEgresoVehiculo.setObjectName(_fromUtf8("DialogDatosEgresoVehiculo"))
         DialogDatosEgresoVehiculo.resize(311, 160)
         DialogDatosEgresoVehiculo.setMinimumSize(QtCore.QSize(310, 160))
+        DialogDatosEgresoVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Datos Egreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogDatosEgresoVehiculo)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogDatosEgresoVehiculo)
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Registrar Ingreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(self.groupBox)
+        self.label.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Kilometraje Egreso:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.lineEditKilometraje = QtGui.QLineEdit(self.groupBox)
         self.lineEditKilometraje.setObjectName(_fromUtf8("lineEditKilometraje"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEditKilometraje)
         self.label_2 = QtGui.QLabel(self.groupBox)
+        self.label_2.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Nivel De Combustible Egreso:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
         self.lineEditCombustible = QtGui.QLineEdit(self.groupBox)
         self.lineEditCombustible.setObjectName(_fromUtf8("lineEditCombustible"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.lineEditCombustible)
         self.label_3 = QtGui.QLabel(self.groupBox)
+        self.label_3.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Fecha Egreso", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_3)
         self.lineEditEquipamiento = QtGui.QLineEdit(self.groupBox)
@@ -55,9 +60,11 @@ class Ui_DialogDatosEgresoVehiculo(object):
         self.gridLayout_2.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_2.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_2.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -68,13 +75,7 @@ class Ui_DialogDatosEgresoVehiculo(object):
         QtCore.QMetaObject.connectSlotsByName(DialogDatosEgresoVehiculo)
 
     def retranslateUi(self, DialogDatosEgresoVehiculo):
-        DialogDatosEgresoVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Datos Egreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Registrar Ingreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Kilometraje Egreso:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Nivel De Combustible Egreso:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Fecha Egreso", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogDatosEgresoVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
+        pass
 
 
 if __name__ == "__main__":

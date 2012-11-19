@@ -44,6 +44,7 @@ class Usuario():
         
 def main():
     username = "diego"
+    username = "guille"
     password = "1234"
     usuario = Usuario(username)
     if not usuario.validar(password):

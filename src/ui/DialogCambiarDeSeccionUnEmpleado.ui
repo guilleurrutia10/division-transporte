@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>609</width>
-    <height>311</height>
+    <width>683</width>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,111 +18,78 @@
     <widget class="QGroupBox" name="groupBox">
      <property name="minimumSize">
       <size>
-       <width>331</width>
-       <height>41</height>
+       <width>234</width>
+       <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>331</width>
-       <height>41</height>
+       <width>234</width>
+       <height>56</height>
       </size>
      </property>
      <property name="title">
       <string>Buscar por Nº Documento</string>
      </property>
-     <widget class="QListView" name="listView">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>211</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>20</y>
-        <width>75</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Filtrar</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="lineEditFiltrarDocumento"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonFiltrarDocumento">
+        <property name="text">
+         <string>Filtrar</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
+   <item row="0" column="2">
     <widget class="QGroupBox" name="groupBox_2">
      <property name="minimumSize">
       <size>
-       <width>331</width>
-       <height>41</height>
+       <width>0</width>
+       <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>331</width>
-       <height>41</height>
+       <width>234</width>
+       <height>56</height>
       </size>
      </property>
      <property name="title">
       <string>Buscar por Nombre</string>
      </property>
-     <widget class="QListView" name="listView_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>211</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>20</y>
-        <width>75</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Filtrar</string>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="lineEditFiltrarNombre"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonFiltrarNombre">
+        <property name="text">
+         <string>Filtrar</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
+   <item row="0" column="3">
+    <spacer name="horizontalSpacer_4">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>185</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="1" column="0" colspan="4">
     <widget class="QTableWidget" name="tableWidget">
      <column>
       <property name="text">
@@ -156,7 +123,58 @@
      </column>
     </widget>
    </item>
-   <item row="5" column="0" colspan="2">
+   <item row="2" column="0">
+    <spacer name="horizontalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="1" colspan="3">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>431</width>
+       <height>41</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>431</width>
+       <height>41</height>
+      </size>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="1">
+       <widget class="QPushButton" name="pushButton_Cambiar">
+        <property name="text">
+         <string>Cambiar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>163</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="4">
     <widget class="QGroupBox" name="groupBoxButtonBox">
      <property name="minimumSize">
       <size>
@@ -215,57 +233,6 @@
       </item>
      </layout>
     </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QWidget" name="widget" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>431</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>431</width>
-       <height>41</height>
-      </size>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="1">
-       <widget class="QPushButton" name="pushButton_Cambiar">
-        <property name="text">
-         <string>Cambiar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>163</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <spacer name="horizontalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
    </item>
   </layout>
  </widget>

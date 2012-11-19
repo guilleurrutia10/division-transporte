@@ -34,6 +34,7 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
             @version: 
             @author:  
         '''
+        print 'Debo configurar los usuarios!!!! ;P'
         self.close()
     
     @QtCore.pyqtSlot()

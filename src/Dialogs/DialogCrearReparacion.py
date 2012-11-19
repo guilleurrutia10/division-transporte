@@ -17,4 +17,16 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         '''
         super(DialogCrearReparacion, self).__init__(parent)
         self.setupUi(self)
-       
+        self.pushButtonAgregarRepuesto
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonCancelar_clicked(self):
+        self.close()
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonAceptar_clicked(self):
+        print 'Click sobre aceptar'
+    
+    @QtCore.pyqtSlot()
+    def on_pushButtonAgregarRepuesto_clicked(self):
+        print 'Agregando repuesto.....'

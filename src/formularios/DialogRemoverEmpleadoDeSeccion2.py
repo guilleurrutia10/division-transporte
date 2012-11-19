@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogRemoverEmpleadoDeSeccion2.ui'
 #
-# Created: Wed Nov 14 18:14:42 2012
-#      by: PyQt4 UI code generator 4.9.5
+# Created: Sun Nov 18 20:37:54 2012
+#      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,6 +18,7 @@ class Ui_DialogRemoverEmpleadoDeSeccion(object):
     def setupUi(self, DialogRemoverEmpleadoDeSeccion):
         DialogRemoverEmpleadoDeSeccion.setObjectName(_fromUtf8("DialogRemoverEmpleadoDeSeccion"))
         DialogRemoverEmpleadoDeSeccion.resize(400, 300)
+        DialogRemoverEmpleadoDeSeccion.setWindowTitle(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Remover Empleado de Seccion", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogRemoverEmpleadoDeSeccion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.widget = QtGui.QWidget(DialogRemoverEmpleadoDeSeccion)
@@ -32,6 +33,7 @@ class Ui_DialogRemoverEmpleadoDeSeccion(object):
         spacerItem = QtGui.QSpacerItem(770, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButtonRemoverDeSeccion = QtGui.QPushButton(self.groupBox)
+        self.pushButtonRemoverDeSeccion.setText(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Remover De Seccion", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonRemoverDeSeccion.setObjectName(_fromUtf8("pushButtonRemoverDeSeccion"))
         self.horizontalLayout.addWidget(self.pushButtonRemoverDeSeccion)
         self.verticalLayout.addWidget(self.groupBox)
@@ -44,9 +46,11 @@ class Ui_DialogRemoverEmpleadoDeSeccion(object):
         self.gridLayout_3.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_3.setObjectName(_fromUtf8("gridLayout_3"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_3.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_3.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -57,10 +61,7 @@ class Ui_DialogRemoverEmpleadoDeSeccion(object):
         QtCore.QMetaObject.connectSlotsByName(DialogRemoverEmpleadoDeSeccion)
 
     def retranslateUi(self, DialogRemoverEmpleadoDeSeccion):
-        DialogRemoverEmpleadoDeSeccion.setWindowTitle(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Remover Empleado de Seccion", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonRemoverDeSeccion.setText(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Remover De Seccion", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
+        pass
 
 
 if __name__ == "__main__":

@@ -30,16 +30,18 @@ class Seccion(Persistent):
     """
 
 
-    def __init__(self):
+    def __init__(self, nombre, empleados, encargado):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        pass
+        self.nombre = nombre
+        self.empleados = empleados
+        self.encargado = encargado
     
     
-    def setEncargado(self):
+    def setEncargado(self, encargado):
         '''
         @return: 
         @author: 
@@ -53,16 +55,31 @@ class Seccion(Persistent):
         '''
         pass
     
-    def addEmpleado(self):
+    def agregarEmpleado(self, empleado):
         '''
         @return: 
         @author: 
         '''
-        pass
+        self.empleados[empleado.documento] = empleado
     
     def quitarEmpleado(self):
         '''
         @return: 
         @author: 
         '''
-        pass    
+        pass
+    
+    def save(self):
+        '''
+        @return: 
+        @author: 
+        '''
+        from MiZODB import ZopeDB, MiZODB
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb.save('secciones', self.nombre, self)
+    
+    def cantidadEmpleados(self):
+        '''
+        Devuelve la cantidad de empleados que tiene la Sección.
+        '''
+        return len(self.empleados) + 1

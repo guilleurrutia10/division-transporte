@@ -12,7 +12,7 @@ from PyQt4 import QtGui
 from mainwindow import MyMainWindow
 from mainLogin import MyLogin
 
-#constante global que referencia a la aplicación
+#constante global que referencia a la aplicación.
 APP = None
 
 def main(args):
@@ -22,7 +22,7 @@ def main(args):
     '''
     global APP
     APP = QtGui.QApplication(sys.argv)
-    #conectamos la senal que indica que se cerró la ultima ventana con la fc cerrar aplicación
+    #conectamos la senal que indica que se cerró la ultima ventana con la fc cerrar aplicación.
     APP.lastWindowClosed.connect(cerrarAplicacion)
 
     #abrimos el Dialog de Login principal...
@@ -39,7 +39,7 @@ def main(args):
 
 def cerrarAplicacion():
     '''
-    Cierra la Aplicación
+    Cierra la Aplicación.
     @version: 
     @author: 
     '''

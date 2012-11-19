@@ -14,14 +14,31 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
     def __init__(self, parent = None):
         super(DialogRegistrarRecepcionDePedidoDeActuacion, self).__init__(parent)
         self.setupUi(self)
+        self.pushButtonCancelar
 
     @QtCore.pyqtSlot()
     def on_pushButton_Registrar_clicked(self):
         dlgAsignarFecha = DialogAsignarFechaRecepcionPedidoActuacion()
         dlgAsignarFecha.exec_()
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonAceptar_clicked(self):
+        print 'Click sobre aceptar'
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonCancelar_clicked(self):
+        self.close()
 
 class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignarFechaRecepcionPedidoActuacion):
     
     def __init__(self, parent = None):
         super(DialogAsignarFechaRecepcionPedidoActuacion, self).__init__(parent)
         self.setupUi(self)
+    
+    @QtCore.pyqtSlot()
+    def on_pushButtonAceptar_clicked(self):
+        print 'Click sobre aceptar'
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonCancelar_clicked(self):
+        self.close()

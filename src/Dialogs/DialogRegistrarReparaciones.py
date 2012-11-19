@@ -20,9 +20,20 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.setupUi(self)
         #Conectamos el boton Agregar Reparaciones...
         self.connect(self.pushButtonAgregarReparacion, QtCore.SIGNAL("pressed()"), self.abrirDialogCrearReparacion)
-       
+        self.pushButtonBuscarVehiculo
     def abrirDialogCrearReparacion(self):
         print 'abriendo dialogo Crear Reparacion'
         dlgCrearReparacion = DialogCrearReparacion.DialogCrearReparacion(self)
         dlgCrearReparacion.exec_()
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonAceptar_clicked(self):
+        print 'Click sobre aceptar'
     
+    @QtCore.pyqtSlot()
+    def on_pushButtonCancelar_clicked(self):
+        self.close()
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonBuscarVehiculo_clicked(self):
+        print 'Buscando............'

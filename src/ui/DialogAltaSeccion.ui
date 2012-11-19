@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>716</width>
-    <height>403</height>
+    <width>1242</width>
+    <height>541</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,7 +40,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEditNombreSeccion"/>
+          <widget class="QLineEdit" name="lineEditNombreSeccion">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="horizontalSpacer">
@@ -67,9 +74,6 @@
          <string>Asignar Empleados</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="1" column="0">
-          <widget class="QTableWidget" name="tableWidgetEmpleadosSinAsignar"/>
-         </item>
          <item row="1" column="1">
           <widget class="QGroupBox" name="groupBox_4">
            <property name="title">
@@ -107,7 +111,38 @@
           </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QTableWidget" name="tableWidgetEmpleadosAsignados"/>
+          <widget class="QTableWidget" name="tableWidgetEmpleadosAsignados">
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>150</number>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Número de Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Nombre</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QTableWidget" name="tableWidgetEmpleadosSinAsignar">
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>150</number>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Número de Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Nombre</string>
+            </property>
+           </column>
+          </widget>
          </item>
         </layout>
        </widget>

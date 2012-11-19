@@ -23,9 +23,17 @@ class DialogAsignarReparacion(QtGui.QDialog, Ui_DialogAsignarReparacion):
         self.setupUi(self)
         
     @QtCore.pyqtSlot()
-    def on_pushButton_Cancelar_clicked(self):
+    def on_pushButtonCancelar_clicked(self):
         '''
         @version: 
         @author: 
         '''
         self.close()
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonAceptar_clicked(self):
+        '''
+        @version: 
+        @author: 
+        '''
+        print 'Click sobre aceptar'

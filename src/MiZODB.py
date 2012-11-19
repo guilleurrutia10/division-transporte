@@ -128,6 +128,14 @@ class ZopeDB(object):
             dictionary = self.zodb.raiz[lista]
             #Lanzar excepcion que dicho diccionario con esa clave no existe.
         return dictionary
+    
+    def remove(self, lista, clave):
+        try:
+            raiz = self.zodb.raiz[lista]
+            del raiz[clave]
+            self.zodb.commiting()
+        except KeyError:
+            raise ObjeNoExiste('El elemento no se encuentra.')
             
     def cargarTiposDeDocumentos(self):
         from negocio import TipoDocumento

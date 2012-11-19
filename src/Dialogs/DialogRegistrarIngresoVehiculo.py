@@ -35,6 +35,14 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         @author: 
         '''
         self.close()
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonAceptar_clicked(self):
+        '''
+        @version: 
+        @author: 
+        '''
+        print 'Click sobre aceptar'
     
     @QtCore.pyqtSlot()
     def on_pushButtonRegistrarNuevoIngreso_clicked(self):
@@ -42,7 +50,6 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         @version: 
         @author: 
         '''
-        self.close()
         dlgDatosIngreso = DialogDatosIngresoVehiculo()
         dlgDatosIngreso.exec_()
         
@@ -61,17 +68,20 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         '''
         super(DialogDatosIngresoVehiculo, self).__init__(parent)
         self.setupUi(self)
-        self.buttonBox = QtGui.QDialogButtonBox(QtGui.QDialogButtonBox.Apply|QtGui.QDialogButtonBox.Cancel)
-        #Validación a medida que se escribe en el lineEdit
+        self.validacionesLineEdit()
+        
+        
+    #Validación a medida que se escribe en el lineEdit
+    def validacionesLineEdit(self):
         self.lineEditKilometraje.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
         self.lineEditCombustible.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
         self.lineEditEquipamiento.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'),self))
         self.lineEditReparacion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'),self))
         self.lineEditComisaria.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'),self))
         self.lineEditLocalidad.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'),self))
-        
+            
     @QtCore.pyqtSlot()
-    def on_buttonBox_accepted(self):
+    def on_pushButtonAceptar_clicked(self):
         '''
         @version: 
         @author: 
@@ -79,7 +89,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         print 'Click sobre aceptar'
     
     @QtCore.pyqtSlot()
-    def on_buttonBox_rejected(self):
+    def on_pushButtonCancelar_clicked(self):
         '''
         @version: 
         @author: 

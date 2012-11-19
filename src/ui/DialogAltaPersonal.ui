@@ -180,6 +180,18 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEditNombre</tabstop>
+  <tabstop>lineEditApellido</tabstop>
+  <tabstop>comboBoxTipoDocumento</tabstop>
+  <tabstop>lineEditNroDocumento</tabstop>
+  <tabstop>dateEditFechaNacimiento</tabstop>
+  <tabstop>lineEditDomicilio</tabstop>
+  <tabstop>lineEditTelefono</tabstop>
+  <tabstop>lineEditEmail</tabstop>
+  <tabstop>pushButtonAceptar</tabstop>
+  <tabstop>pushButtonCancelar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

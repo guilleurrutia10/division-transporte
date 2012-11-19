@@ -16,6 +16,7 @@ from TipoRepuesto import *
 from Seccion import *
 from TipoDeReparacion import *
 from TipoDocumento import *
+from PyQt4 import QtCore
 
 class Division_Transporte(Persistent):
     """
@@ -67,23 +68,25 @@ class Division_Transporte(Persistent):
         self.instance.tiposDeDocumentos = {}
         self.instance.empleados = {}
     
-    @classmethod
-    def getInstancia(cls, *args, **kargs):
-        '''
-        @return: 
-        @author: 
-        '''
-        if cls.instance is None:
-            cls.instance = Persistent.__new__(cls, *args, **kargs)
-            cls.instance.inicialize()
-        return cls.instance
-    
     def getSecciones(self):
         '''
         @return: 
         @author: 
         '''
-        return self.secciones
+        from MiZODB import ZopeDB, MiZODB
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        return zodb.getAlls('secciones')
+#        return self.secciones
+    
+    def agregarSecciones(self, nombreSeccion, empleados, encargado):
+        '''
+        @return: 
+        @author: 
+        '''
+        seccion = Seccion(nombreSeccion, empleados, encargado)
+#        seccion.setEncargado(encargado)
+        # Para cada x en empleados hacer seccion.agregarEmpleado(x)
+        seccion.save()
         
     def getTipoDeDocumentos(self):
         '''
@@ -123,14 +126,31 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        pass
+        from MiZODB import ZopeDB, MiZODB
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        empleados = zodb.getAlls('empleados')
+        secciones = zodb.getAlls('secciones')
+        empleadosSinAsignar = {}
+        esta = False
+        for empleado  in empleados:
+            esta = False
+            for seccion in secciones:
+                    if ((empleados[empleado].documento in secciones[seccion].empleados)or(empleados[empleado] == secciones[seccion].encargado)):
+                        esta = True
+                        break
+            if not esta:
+                empleadosSinAsignar[empleados[empleado].documento] = empleados[empleado]
+        return empleadosSinAsignar
+            
     
-    def registrarEmpleado(self):
+    def getEmpleado(self, clave):
         '''
         @return: 
         @author: 
         '''
-        pass
+        from MiZODB import ZopeDB, MiZODB
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        return zodb.get('empleados',clave)
     
     def darDeBajaEmpleado(self):
         '''
@@ -162,6 +182,13 @@ class Division_Transporte(Persistent):
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('vehiculos')
 #        return self.vehiculos
+
+    def modificarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
+        from MiZODB import ZopeDB, MiZODB
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb.remove('vehiculos', dominio)
+        vehiculo = Legajo(dominio, marca, registroInterno, numeroChasis)
+        vehiculo.save()
     
     def addVehiculo(self, dominio, marca, registroInterno, numeroChasis):
         '''
@@ -170,7 +197,7 @@ class Division_Transporte(Persistent):
         '''
         vehiculo = Legajo(dominio, marca, registroInterno, numeroChasis)
         vehiculo.save()
-        self.vehiculos[dominio] = vehiculo 
+#        self.vehiculos[dominio] = vehiculo 
     
     def registrarEgresoDeVehiculo(self):
         '''
@@ -193,4 +220,10 @@ class Division_Transporte(Persistent):
         '''
         empleado = Empleado(nombre,apellido, numeroDocumento)
         empleado.save()
-        self.empleados[numeroDocumento] = empleado
+#        self.empleados[numeroDocumento] = empleado
+
+    def __str__(self):
+        '''
+        Sobrecarga del método que imprime una cadena que representa a la División Transporte.
+        '''
+        return '%s, Id: %s'%(self.__class__, id(self))
