@@ -14,7 +14,7 @@ from Dialogs import DialogSeleccionarSeccion, DialogRegistrarIngresoVehiculo, Di
 # import widgets
 #===============================================================================
 from Dialogs import WidgetMostrarReparacionesPorVehiculo,WidgetMostrarTiposDeReparaciones,WidgetMostrarVehiculosSinPlanificar,WidgetBajaPersonal
-from Dialogs import WidgetListadoSecciones, WidgetListadoDeRepuestosUtilizados, WidgetListadoDeVehiculos
+from Dialogs import WidgetListadoSecciones, WidgetListadoDeRepuestosUtilizados, WidgetListadoDeVehiculos, WidgetListadoEmpleados
 
 from Dialogs import DialogCambiarDeSeccionUnEmpleado, DialogCambiarDeSeccionUnEncargado, DialogRegistrarEgresoVehiculo, DialogRemoverEmpleadoDeSeccion
 from Dialogs import DialogRegistrarRecepcionDePedidoDeActuacion
@@ -55,12 +55,6 @@ class MyListado(QtGui.QWidget, Ui_Form):
         print "Click sobre una celda"
         self.close()
         
-
-class ListadoEmpleados(QtGui.QWidget, Ui_Form):
-    def __init__(self, parent = None):
-        super(ListadoEmpleados, self).__init__(parent)
-        self.setupUi(self)
-        
 MyOtroListado = MyListado
 
 class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
@@ -81,7 +75,6 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     
     @QtCore.pyqtSlot()
     def on_actionAlta_de_Vehiculo_triggered(self):
-        print 'abriendo dialogo Alta Vehiculo'
         dlgAltaVehiculo = DialogAltaVehiculo.DialogAltaVehiculo(self)
         dlgAltaVehiculo.exec_()
     
@@ -102,7 +95,6 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     #Conectamos la accion Alta Personal...
     @QtCore.pyqtSlot()
     def on_actionAlta_de_Personal_triggered(self):
-        print 'abriendo dialogo Alta Personal'
         dlgAltaPersonal = DialogAltaPersonal.DialogAltaPersonal(self)
         dlgAltaPersonal.exec_()
     
@@ -116,7 +108,6 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     #Conectamos la accion Alta Repuesto...
     @QtCore.pyqtSlot()
     def on_actionAlta_de_Seccion_triggered(self):
-        print 'abriendo dialogo Alta Repuesto'
         dlgAltaSeccion = DialogAltaSeccion.DialogAltaSeccion(self)
         dlgAltaSeccion.exec_()
     
@@ -138,8 +129,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 #===============================================================================
     @QtCore.pyqtSlot()
     def on_actionListado_de_Personal_de_la_Division_triggered(self):
-        print 'agregando widget listado Personas'
-        self.setCentralWidget(ListadoEmpleados(self))
+        self.setCentralWidget(WidgetListadoEmpleados.WidgetListadoEmpleados(self))
         
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_de_la_Division_2_triggered(self):

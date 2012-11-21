@@ -80,15 +80,15 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         empleados = division.getEmpleadosSinAsignar()
         fila = 0
         self.tableWidgetEmpleadosSinAsignar.setRowCount(len(empleados))
-        for clave,valor in empleados.iteritems():
-#            print '%s,%s'%(fila, columna), clave, valor
+        for clave,empl in empleados.iteritems():
+#            print '%s,%s'%(fila, columna), clave, empl
             columna = 0
             miItem1 = QtGui.QTableWidgetItem()
-            miItem1.setText(unicode(valor.documento))
+            miItem1.setText(unicode(empl.documento))
             self.tableWidgetEmpleadosSinAsignar.setItem(fila,columna,miItem1)
             columna += 1
             miItem2 = QtGui.QTableWidgetItem()
-            miItem2.setText(unicode(valor.nombre))
+            miItem2.setText(unicode(empl.nombre))
             self.tableWidgetEmpleadosSinAsignar.setItem(fila,columna,miItem2)
             fila += 1
     
@@ -150,7 +150,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
     @QtCore.pyqtSlot()
     def on_pushButtonDesasignarEmpleado_clicked(self):
         '''
-        @todo: Mejorar la modularizacion.
+        TODO: Mejorar la modularizacion.
         '''
         print 'Desasignando empleado'
         try:
@@ -188,6 +188,9 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         print self._filaEmpleadoAsignados
         self.mostrarMensaje('El encargado %s se cargado correctamente. :)'%self._encargado.nombre, 'Cargando Encargado')
         
+    '''
+    TODO: Este método se repite en varios Dialogs.
+    '''
     def mostrarMensaje(self, mensaje, titulo):
         msgBox = QtGui.QMessageBox(self)
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))

@@ -26,33 +26,16 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
         super(DialogMostrarLosVehiculosParaModificar, self).__init__(parent)
         self.setupUi(self)
         self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
-        self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.probando)
+        self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.itemParaModificar = None
-#        miWidget.connect(miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('itemClicked(QTableWidgetItem *)'), self.celdaClickeada)
-#        miWidget.connect(miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellDoubleClicked(int,int)'), self.celdaClickeada)
-
-#    @QtCore.pyqtSlot('QTableWidgetItem *')
-#    def on_table_itemClicked(self, item):
-#        print 'Se clickeo sobre un item %s'% QtGui.QTableWidgetItem(item).text()
-#        row = QtGui.QTableWidgetItem(item).row()
-#        print 'fila:', row
-#        return
-        
-    def celdaClickeada(self, *item):
-        print 'Se clickeo sobre un item %s'% QtGui.QTableWidgetItem(*item).text()
-        row = QtGui.QTableWidgetItem(*item).row()
-        print 'fila:', row
-        QtGui.QTableWidgetItem(*item).setText('hola')
-        return
     
     #===========================================================================
     # Tratando de agarrar el evento de Seleccionar un Vehiculos de la grilla
     # y utilizarlo para retomar sus datos de la BD para mostrarlos en el 
     # modificar.
     #===========================================================================
-    def probando(self, row, column):
+    def seleccionarCelda(self, row, column):
         print row, ',' , column
-        fila = row
         item = QtGui.QTableWidgetItem()
         item = self.miWidget.tableWidgetListadoDeVehiculos.item(row, 0)
         print item.text()
@@ -78,11 +61,22 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
             global itemglobal
             assert not(itemglobal is None)
         except AssertionError:
+            self.mostrarMensaje('Debe seleccionar un Veehículo.', 'Ingresar Vehículo')
             return
         dlgModificar = DialogModificarVehiculo()
         if dlgModificar.exec_():
-            self.miWidget.cargarGrilla()
+            itemglobal = None
+            self.miWidget.cargarGrillaInicial()
         return
+    
+    '''
+    TODO: Este método se repite en varios Dialogs.
+    '''
+    def mostrarMensaje(self, mensaje, titulo):
+        msgBox = QtGui.QMessageBox(self)
+        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+        return msgBox.exec_()
     
     #===========================================================================
     # Evento que se dispara cada vez que el Dialog toma el Foco
@@ -125,6 +119,12 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
         self.lineEditChasisNro.setText(tutu.numeroChasis)
         self.lineEditMarca.setText(tutu.marca)
         return
+
+    @QtCore.pyqtSlot()
+    def on_pushButtonCancelar_clicked(self):
+        '''
+        '''
+        self.close()
     
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
@@ -136,6 +136,7 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
                     if (self.lineEditRegistroInterno is self.auto.registroInterno):
                         return
         else:
+            '''TODO: Crear método ModificarVehiculo()'''
             division = Division_Transporte()
             dominio = unicode(self.lineEditDominio.text())
             marca = unicode(self.lineEditMarca.text())
@@ -143,15 +144,16 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
             nroChasis = unicode(self.lineEditChasisNro.text())
             # Se le pide a la Division que modifique el informacion del vehiculo.
             division.modificarVehiculo(dominio, marca, registroInterno, nroChasis)
-            msgBox = QtGui.QMessageBox(self)
-            msgBox.setWindowTitle(QtCore.QString.fromUtf8('Ingresando Vehiculo'))
-            msgBox.setText(QtCore.QString.fromUtf8('El vehiculo se ha modificado correctamente!!! :)'))
-            if msgBox.exec_():
+            
+            if self.mostrarMensaje('El vehiculo se ha modificado correctamente!!! :)', 'Ingresando Vehiculo'):
                 # Evento que lanza el ButtonBox, creo?
                 self.accept()
     
-    @QtCore.pyqtSlot()
-    def on_pushButtonCancelar_clicked(self):
-        '''
-        '''
-        self.close()
+    '''
+    TODO: Este método se repite en varios Dialogs.
+    '''
+    def mostrarMensaje(self, mensaje, titulo):
+        msgBox = QtGui.QMessageBox(self)
+        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+        return msgBox.exec_()

@@ -67,7 +67,7 @@ class Empleado(Persistent):
         self.nombre = nombre
         self.apellido = apellido
         self.documento = documento
-#        self.tipoDocumento = tipoDocumneto
+#        self.tipoDocumento = 'None'
         
     def save(self):
         from MiZODB import ZopeDB, MiZODB

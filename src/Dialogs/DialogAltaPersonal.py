@@ -55,16 +55,22 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
             assert self.testearDialogo() is True
         except AssertionError:
             return
+        '''
+        TODO: Armar métod cargarEmpleado.....
+        '''
         nombre = unicode(self.lineEditNombre.text())
         apellido = unicode(self.lineEditApellido.text())
         nroDocumento = unicode(self.lineEditNroDocumento.text())
         tipoDocumento = unicode(self.comboBoxTipoDocumento.currentText())
-        
         division = Division_Transporte()
         division.agregarEmpleado(nombre, apellido, nroDocumento)
+        
         if self.mostrarMensaje('El Empleado se ha cargado exitosamente!! :)', 'Cargando Empleado'):
             self.accept()
     
+    '''
+    TODO: Se ha repetido este mismo método en varias de las clsase Dialogos.
+    '''
     def mostrarMensaje(self, mensaje, titulo):
         '''
         Función que muestra un pequeña ventana con información relevante.

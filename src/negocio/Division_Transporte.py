@@ -16,7 +16,8 @@ from TipoRepuesto import *
 from Seccion import *
 from TipoDeReparacion import *
 from TipoDocumento import *
-from PyQt4 import QtCore
+
+from MiZODB import ZopeDB, MiZODB
 
 class Division_Transporte(Persistent):
     """
@@ -73,7 +74,6 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        from MiZODB import ZopeDB, MiZODB
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('secciones')
 #        return self.secciones
@@ -93,7 +93,6 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        from MiZODB import ZopeDB, MiZODB
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('tiposDocumentos')
 #        return self.tiposDeDocumentos
@@ -117,7 +116,6 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        from MiZODB import ZopeDB, MiZODB
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('empleados')
     
@@ -126,7 +124,6 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        from MiZODB import ZopeDB, MiZODB
         zodb = ZopeDB(MiZODB('zeo.conf'))
         empleados = zodb.getAlls('empleados')
         secciones = zodb.getAlls('secciones')
@@ -148,7 +145,6 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        from MiZODB import ZopeDB, MiZODB
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.get('empleados',clave)
     
@@ -159,37 +155,45 @@ class Division_Transporte(Persistent):
         '''
         pass
     
-    def addRepuestos(self):
+    '''
+    TODO: Tener en cuenta q la el módulo q manipula la BD lanzará una Excepción
+    si el repuesto con las característcas q se intentan ingresar y existe.
+    '''
+    def agregarRepuestos(self, nombre, descripcion):
         '''
         @return: 
         @author: 
         '''
-        pass
+        repuesto = TipoRepuesto(nombre, descripcion)
+        repuesto.save()
     
     def getRepuestos(self):
         '''
         @return: 
         @author: 
         '''
-        pass
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        return zodb.getAlls('tiposRepuestos')
     
     def getVehiculos(self):
         '''
         @return: 
         @author: 
         '''
-        from MiZODB import ZopeDB, MiZODB
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('vehiculos')
 #        return self.vehiculos
 
     def modificarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
-        from MiZODB import ZopeDB, MiZODB
         zodb = ZopeDB(MiZODB('zeo.conf'))
         zodb.remove('vehiculos', dominio)
         vehiculo = Legajo(dominio, marca, registroInterno, numeroChasis)
         vehiculo.save()
     
+    '''
+    @TODO: Tener en cuenta q la el módulo q manipula la BD lanzará una Excepción
+    si el repuesto con las característcas q se intentan ingresar y existe.
+    '''
     def addVehiculo(self, dominio, marca, registroInterno, numeroChasis):
         '''
         @return: 
@@ -213,6 +217,10 @@ class Division_Transporte(Persistent):
         '''
         pass
     
+    '''
+    @TODO: Tener en cuenta q la el módulo q manipula la BD lanzará una Excepción
+    si el repuesto con las característcas q se intentan ingresar y existe.
+    '''
     def agregarEmpleado(self, nombre, apellido, numeroDocumento):
         '''
         @return: 

@@ -28,31 +28,61 @@ class TipoRepuesto(Persistent):
     
     
     
-    descricion  (private)
+    descripcion  (private)
     
     """
 
-    def __init__(self):
+    def __init__(self, nombre, descripcion):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        pass
+        self._nombre = nombre
+        self._descripcion = descripcion
+        self._codigo = None
         
-    def setNombre(self):
+    def setCodigo(self, codigo):
         '''
         @return: 
         @author: 
         '''
-        pass
+        self._codigo = codigo
+        
+    def getCodigo(self):
+        '''
+        @return: 
+        @author: 
+        '''
+        return self._codigo
     
-    def setDescripcion(self):
+    def setNombre(self, nombre):
         '''
         @return: 
         @author: 
         '''
-        pass
+        self._nombre = nombre
+        
+    def getNombre(self):
+        '''
+        @return: 
+        @author: 
+        '''
+        return self._nombre
+    
+    def setDescripcion(self, descripcion):
+        '''
+        @return: 
+        @author: 
+        '''
+        self._descripcion = descripcion
+        
+    def getDescripcion(self):
+        '''
+        @return: 
+        @author: 
+        '''
+        return self._descripcion
     
     def datosRepuesto(self):
         '''
@@ -68,5 +98,10 @@ class TipoRepuesto(Persistent):
         '''
         pass
     
+    def __str__(self):
+        return '%s: %s' %(self._nombre, self._descripcion)
     
-        
+    def save(self):
+        from MiZODB import ZopeDB, MiZODB
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb.save('tiposRepuestos',self.getNombre(),self)

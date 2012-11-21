@@ -42,7 +42,6 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
         @version: 
         @author: 
         '''
-        self.close()
         dlgDatosIngreso = DialogDatosEgresoVehiculo()
         dlgDatosIngreso.exec_()
         
@@ -61,9 +60,10 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         '''
         super(DialogDatosEgresoVehiculo, self).__init__(parent)
         self.setupUi(self)
+        self.pushButtonCancelar
         
     @QtCore.pyqtSlot()
-    def on_buttonBox_accepted(self):
+    def on_pushButtonAceptar_clicked(self):
         '''
         @version: 
         @author: 
@@ -71,10 +71,9 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         print 'Click sobre aceptar'
     
     @QtCore.pyqtSlot()
-    def on_buttonBox_rejected(self):
+    def on_pushButtonCancelar_clicked(self):
         '''
         @version: 
         @author: 
         '''
         self.close()
-        self.setupUi(self)    

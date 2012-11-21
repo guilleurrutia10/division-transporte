@@ -9,6 +9,8 @@ from re import match
 
 from formularios.DialogAltaVehiculoPrueba import Ui_DialogAltaVehiculo
 
+from negocio.Division_Transporte import Division_Transporte
+
 class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
     '''
         Classdocs
@@ -29,13 +31,6 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         self.lineEditRegistroInterno.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
         self.lineEditChasisNro.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
         
-    def mostrarMensaje(self, mensaje):
-        '''
-        '''
-        msgBox = QtGui.QMessageBox(self)
-        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
-        msgBox.show()
-        
     @QtCore.pyqtSlot()
     def on_pushButton_Cancelar_pressed(self):
         '''
@@ -45,40 +40,55 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
     @QtCore.pyqtSlot()
     def on_pushButton_2Aceptar_pressed(self):
         '''
-            Acciones que se deben llevar a cabo al presionar el botón aceptar.
-            Validar los lineEdit, y más....
+        Acciones que se deben llevar a cabo al presionar el botón aceptar.
+        Validar los lineEdit, y más....
         '''
         try:
             assert self.testearDialogo() is True
         except AssertionError:
             return
+        '''TODO: Armar método cargar Vehiculo'''  
         dominio = unicode(self.lineEditDominio.text())
         marca = unicode(self.lineEditMarca.text())
         registroInterno = unicode(self.lineEditRegistroInterno.text())
         numeroChasis = unicode(self.lineEditChasisNro.text())
-        from negocio import Division_Transporte
-        division = Division_Transporte.Division_Transporte()
+        division = Division_Transporte()
         division.addVehiculo(dominio, marca, registroInterno, numeroChasis)
-        msgBox = QtGui.QMessageBox(self)
-        msgBox.setWindowTitle(QtCore.QString.fromUtf8('Ingresando Vehiculo'))
-        msgBox.setText(QtCore.QString.fromUtf8('El vehiculo se ha ingresado correctamente!!! :)'))
-        if msgBox.exec_():
+         
+        if self.mostrarMensaje('El vehiculo se ha ingresado correctamente!!! :)', 'Ingresando Vehiculo'):
             self.accept()
     
     def testearDialogo(self):
         '''
-            @todo: Cambiar el nombre si no es significativo.
+        TODO: Cambiar el nombre si no es significativo.
         '''
         if not match('([A-Z|a-z]{3})([0-9]{3})', self.lineEditDominio.text()):
-            self.mostrarMensaje('Debe ingresar el dominio del vehículo. Debe ser alfanumérico.')
+            self.mostrarMensaje('Debe ingresar el dominio del vehículo. Debe ser alfanumérico.', 'Ingresar Dominio')
+            self.lineEditDominio.clear()
+            self.lineEditDominio.setFocus()
             return
         if not match('[a-z|A-Z]+', self.lineEditMarca.text()):
-            self.mostrarMensaje('Debe ingresar la Marca del vehículo.Debe ser alfabético.')
+            self.mostrarMensaje('Debe ingresar la Marca del vehículo.Debe ser alfabético.', 'Ingresar Marca')
+            self.lineEditMarca.clear()
+            self.lineEditMarca.setFocus()
             return
         if not match('[0-9]+', self.lineEditRegistroInterno.text()):
-            self.mostrarMensaje('Debe ingresar el Registro Interno del vehículo.Debe ser numérico.')
+            self.mostrarMensaje('Debe ingresar el Registro Interno del vehículo.Debe ser numérico.', 'Ingresar Registro Interno')
+            self.lineEditRegistroInterno.clear()
+            self.lineEditRegistroInterno.setFocus()
             return
         if not match('[0-9]+', self.lineEditChasisNro.text()):
-            self.mostrarMensaje('Debe ingresar el Número de Chasis del vehículo.Debe ser numérico.')
+            self.mostrarMensaje('Debe ingresar el Número de Chasis del vehículo.Debe ser numérico.', 'Ingresar Número de Chasis')
+            self.lineEditChasisNro.clear()
+            self.lineEditChasisNro.setFocus()
             return
         return True
+    
+    '''
+    TODO: Este método se repite en varios Dialogs.
+    '''
+    def mostrarMensaje(self, mensaje, titulo):
+        msgBox = QtGui.QMessageBox(self)
+        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+        return msgBox.exec_()

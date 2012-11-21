@@ -21,10 +21,10 @@ class MiZODB(object):
 
     def __init__(self, url):
         '''
-            Constructor, se conecta al Servidor de la BD a traves del archivo de configuracion zeo.conf
-            en donde se indica la IP:PORT.
-            @return: 
-            @author: 
+        Constructor, se conecta al Servidor de la BD a traves del archivo de configuracion zeo.conf
+        en donde se indica la IP:PORT.
+        @return: 
+        @author: 
         '''
         self.url = url
         self.db = config.databaseFromURL(url)
@@ -57,7 +57,7 @@ class MiZODB(object):
         @return: 
         @author: 
         '''
-        self.db._p_changed = True
+        self.db._p_changed = True # The object has been changed.
         transaction.commit()
     
 class ZopeDB(object):
@@ -80,10 +80,10 @@ class ZopeDB(object):
             self.zodb.raiz[lista] = {}
             dictionary = PersistentMapping(self.zodb.raiz[lista])
         try:
-            objetos = dictionary[clave]
             #Existe la clave, lanzar una excepción de objeto con esa clave Existe.
 #            raise ObjetoExiste('''El elemento que se trata de ingresar ya existe, probar recuperarlo
 #            y modificar su información''')
+            objeto = dictionary[clave]
             self.zodb.commiting()
         except KeyError:
             dictionary[clave] = objeto
@@ -112,7 +112,8 @@ class ZopeDB(object):
             self.zodb.raiz[lista] = {}
             dictionary = PersistentMapping(self.zodb.raiz[lista])
         try:
-            dictionary[clave] = objeto
+            objeto = dictionary[clave]
+            self.zodb.commiting()
         except KeyError:
             raise ObjeNoExiste('El elemento no Existe')
         finally:
