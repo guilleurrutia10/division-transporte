@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'FormLogin.ui'
 #
-# Created: Sun Nov 18 20:37:55 2012
+# Created: Wed Nov 21 16:16:55 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -52,15 +52,21 @@ class Ui_Dialog(object):
         self.linePassword.setObjectName(_fromUtf8("linePassword"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.linePassword)
         self.verticalLayout.addWidget(self.groupBox)
-        self.buttonBox = QtGui.QDialogButtonBox(Dialog)
-        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
-        self.verticalLayout.addWidget(self.buttonBox)
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.pushButtonOk = QtGui.QPushButton(Dialog)
+        self.pushButtonOk.setText(QtGui.QApplication.translate("Dialog", "Ok", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonOk.setObjectName(_fromUtf8("pushButtonOk"))
+        self.horizontalLayout.addWidget(self.pushButtonOk)
+        self.pushButtonCancel = QtGui.QPushButton(Dialog)
+        self.pushButtonCancel.setText(QtGui.QApplication.translate("Dialog", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonCancel.setObjectName(_fromUtf8("pushButtonCancel"))
+        self.horizontalLayout.addWidget(self.pushButtonCancel)
+        self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.retranslateUi(Dialog)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), Dialog.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):

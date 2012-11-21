@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogAltaVehiculo.ui'
 #
-# Created: Sun Nov 18 20:37:35 2012
+# Created: Wed Nov 21 16:16:43 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

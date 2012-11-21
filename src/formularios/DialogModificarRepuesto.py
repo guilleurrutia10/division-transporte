@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogModificarRepuesto.ui'
 #
-# Created: Sun Nov 18 20:37:45 2012
+# Created: Wed Nov 21 16:16:49 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

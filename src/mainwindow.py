@@ -61,7 +61,39 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self, parent = None):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
-        
+        self.menues = {'actionAlta_de_Vehiculo': self.actionAlta_de_Vehiculo,
+                       'actionRegistrar_Ingreso_de_Vehiculo': self.actionRegistrar_Ingreso_de_Vehiculo,
+                       'actionRegistrar_Egreso': self.actionRegistrar_Egreso,
+                       'actionModificacion_de_Vehiculo': self.actionModificacion_de_Vehiculo,
+                       'actionVerificar_Reparaciones_Necesarias_del_Vehiculo': self.actionVerificar_Reparaciones_Necesarias_del_Vehiculo,
+                       'actionPlanificar_Reparaciones_de_Vehiculo': self.actionPlanificar_Reparaciones_de_Vehiculo,
+                       'actionListado_Vehiculos_de_la_Division_2': self.actionListado_Vehiculos_de_la_Division_2,
+                       'actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2': self.actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2,
+                       'actionListado_Vehiculos_con_Reparaciones_Planificadas_2': self.actionListado_Vehiculos_con_Reparaciones_Planificadas_2,
+                       'actionListado_Vehiculos_con_Reparaciones_no_Planificadas_2': self.actionListado_Vehiculos_con_Reparaciones_no_Planificadas_2,
+                       'actionListado_Vehiculos_en_Reparacion_por_Seccion': self.actionListado_Vehiculos_en_reparacion_por_Seccion,
+                       'actionListado_Vehiculos_Reparados_por_Seccion_2': self.actionListado_Vehiculos_Reparados_por_Seccion_2,
+                       'actionListado_de_Tipos_de_Reparaciones_de_la_Division_2': self.actionListado_de_Tipos_de_Reparaciones_de_la_Division_2,
+                       'actionAlta_de_Personal': self.actionAlta_de_Personal,
+                       'actionBaja_de_Personal': self.actionBaja_de_Personal,
+                       'actionModificacion_de_Personal': self.actionModificacion_de_Personal,
+                       'actionCambiar_de_Seccion_a_un_Empleado': self.actionCambiar_de_Seccion_a_un_Empleado,
+                       'actionCambiar_el_Encargado_de_una_Seccion': self.actionCambiar_el_Encargado_de_una_Seccion,
+                       'actionRemover_Empleado_de_Seccion': self.actionRemover_Empleado_de_Seccion,
+                       'actionListado_de_Personal_de_la_Division': self.actionListado_de_Personal_de_la_Division,
+                       'actionAlta_de_Repuesto': self.actionAlta_de_Repuesto,
+                       'actionModificacion_de_Repuesto': self.actionModificacion_de_Repuesto,
+                       'actionRegistrar_Recepcion_de_Pedido_de_Actuacion': self.actionRegistrar_Recepcion_de_Pedido_de_Actuacion,
+                       'actionListado_de_Repuestos_de_la_Division': self.actionListado_de_Repuestos_de_la_Division,
+                       'actionAlta_de_Seccion': self.actionAlta_de_Seccion,
+                       'actionAsignar_Reparacion': self.actionAsignar_Reparacion,
+                       'actionRegistrar_Finalizacion_de_Reparacion': self.actionRegistrar_Finalizacion_de_Reparacion,
+                       'actionListados_de_Seccion': self.actionListados_de_Seccion}
+    
+    def habilitarMenues(self,permisos):
+        for permiso in permisos:
+            self.menues[permiso].setEnabled(True)
+
     @QtCore.pyqtSlot()
     def on_actionListado_triggered(self):
         print 'agregando listado'

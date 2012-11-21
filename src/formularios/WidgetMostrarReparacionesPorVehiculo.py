@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'WidgetMostrarReparacionesPorVehiculo.ui'
 #
-# Created: Sun Nov 18 20:38:04 2012
+# Created: Wed Nov 21 16:17:01 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

@@ -15,36 +15,34 @@ from mainLogin import MyLogin
 #constante global que referencia a la aplicación.
 APP = None
 
-def main(args):
-    '''
-    @version: 
-    @author: 
-    '''
-    global APP
-    APP = QtGui.QApplication(sys.argv)
-    #conectamos la senal que indica que se cerró la ultima ventana con la fc cerrar aplicación.
-    APP.lastWindowClosed.connect(cerrarAplicacion)
-
-    #abrimos el Dialog de Login principal...
-    myLogin = MyLogin()
-    #si se presionó Aceptar del Login, abrimos la Ventana Principal...
-    if myLogin.exec_():
-        mainWindow = MyMainWindow()
-        mainWindow.show()
-    else:
-        cerrarAplicacion()
-        return
+class Aplicacion(QtGui.QApplication):
     
-    return APP.exec_()    
-
-def cerrarAplicacion():
-    '''
-    Cierra la Aplicación.
-    @version: 
-    @author: 
-    '''
-    global APP
-    APP.exit()
+    def __init__(self):
+        super(Aplicacion, self).__init__(sys.argv)
+        self.valueDialog = True
+        self.usuarioActual = None
+        self.lastWindowClosed.connect(self.exit)
     
+    def setUsuarioActual(self,usrActual):
+        self.usuarioActual = usrActual
+    
+    
+    def exec_(self):
+        '''
+        @version: 
+        @author: 
+        '''
+        #abrimos el Dialog de Login principal...
+        myLogin = MyLogin()
+        #si se presionó Aceptar del Login, abrimos la Ventana Principal...
+        if myLogin.exec_() == QtGui.QDialog.Accepted:
+            mainWindow = MyMainWindow()
+            listaPermisos = self.usuarioActual.getPermisos()
+            mainWindow.habilitarMenues(listaPermisos)
+            mainWindow.show()
+            super(Aplicacion, self).exec_()
+            
+
 if __name__ == "__main__":
-    main(sys.argv)
+    miAplicacion = Aplicacion()
+    sys.exit(miAplicacion.exec_())

@@ -35,7 +35,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">
@@ -169,31 +169,49 @@
    </property>
   </action>
   <action name="actionAlta_de_Vehiculo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Alta de Vehiculo</string>
    </property>
   </action>
   <action name="actionModificacion_de_Vehiculo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modificacion de Vehiculo</string>
    </property>
   </action>
   <action name="actionRegistrar_Ingreso_de_Vehiculo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Registrar Ingreso de Vehiculo</string>
    </property>
   </action>
   <action name="actionVerificar_Reparaciones_Necesarias_del_Vehiculo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Registrar Reparaciones necesarias del Vehiculo</string>
    </property>
   </action>
   <action name="actionRegistrar_Egreso">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Registrar Egreso Vehiculo</string>
    </property>
   </action>
   <action name="actionPlanificar_Reparaciones_de_Vehiculo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Planificar Reparaciones de Vehiculo</string>
    </property>
@@ -224,66 +242,105 @@
    </property>
   </action>
   <action name="actionListado_Vehiculos_de_la_Division_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listado Vehiculos de la Division</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_con_Reparaciones_Planificadas_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listado Vehiculos con Reparaciones Planificadas</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_en_Reparacion_por_Seccion">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listado Vehiculos en Reparacion por Seccion</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_Reparados_por_Seccion_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listado Vehiculos Reparados por Seccion</string>
    </property>
   </action>
   <action name="actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listado de Reparaciones Realizadas a un Vehiculos</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_con_Reparaciones_no_Planificadas_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listado Vehiculos con Reparaciones no Planificadas</string>
    </property>
   </action>
   <action name="actionAlta_de_Personal">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Alta de Personal</string>
    </property>
   </action>
   <action name="actionBaja_de_Personal">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Baja de Personal</string>
    </property>
   </action>
   <action name="actionModificacion_de_Personal">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modificacion de Personal</string>
    </property>
   </action>
   <action name="actionCambiar_de_Seccion_a_un_Empleado">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Cambiar de Seccion a un Empleado</string>
    </property>
   </action>
   <action name="actionCambiar_el_Encargado_de_una_Seccion">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Cambiar el Encargado de una Seccion</string>
    </property>
   </action>
   <action name="actionRemover_Empleado_de_Seccion">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Remover Empleado de Seccion</string>
    </property>
   </action>
   <action name="actionListado_de_Personal_de_la_Division">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listado de Personal de la Division</string>
    </property>
@@ -294,41 +351,65 @@
    </property>
   </action>
   <action name="actionAlta_de_Repuesto">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Alta de Repuesto</string>
    </property>
   </action>
   <action name="actionModificacion_de_Repuesto">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Modificacion de Repuesto</string>
    </property>
   </action>
   <action name="actionRegistrar_Recepcion_de_Pedido_de_Actuacion">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Registrar Recepcion de Pedido de Actuacion</string>
    </property>
   </action>
   <action name="actionListado_de_Repuestos_de_la_Division">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listado de Repuestos Solicitados</string>
    </property>
   </action>
   <action name="actionAlta_de_Seccion">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Alta de Seccion</string>
    </property>
   </action>
   <action name="actionAsignar_Reparacion">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Asignar Reparacion</string>
    </property>
   </action>
   <action name="actionRegistrar_Finalizacion_de_Reparacion">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Registrar Finalizacion de Reparacion</string>
    </property>
   </action>
   <action name="actionListados_de_Seccion">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listados de Seccion</string>
    </property>
@@ -339,6 +420,9 @@
    </property>
   </action>
   <action name="actionListado_de_Tipos_de_Reparaciones_de_la_Division_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Listado de Tipos de Reparaciones de la Division</string>
    </property>
