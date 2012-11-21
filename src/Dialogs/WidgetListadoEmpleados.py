@@ -54,6 +54,6 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         empleados = division.getEmpleados()
         values = empleados.values()
         
-        personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(p.nombre), values)
+        personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), values)
         personal.sort(cmp=lambda x,y : cmp(x.nombre, y.nombre))
         self.cargarGrilla(personal) 

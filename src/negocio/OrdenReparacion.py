@@ -71,13 +71,21 @@ class OrdenReparacion(object):
     """
   
 
-    def __init__(self):
+    def __init__(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        pass
+#        self.codigoOrdenReparacion = incremental
+        self.codigoOrdenReparacion = 1
+        self.kilometrajeActual = kilometrajeActual
+        self.combustibleActual = combustibleActual
+        self.equipamiento = equipamiento
+        self.reparacion = reparacion
+        self.comisaria = comisaria
+        self.localidad = localidad
+        self.fecha = fecha
     
     def getReparaciones(self):
         '''

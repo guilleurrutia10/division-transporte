@@ -30,7 +30,7 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         vehiculos = division.getVehiculos()
         values = vehiculos.values()
         
-        coches = filter(lambda p: unicode.lower(filtro) in unicode.lower(p.dominio), values)
+        coches = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.dominio)), values)
         coches.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
         self.cargarGrilla(coches)
             

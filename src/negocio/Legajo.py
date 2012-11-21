@@ -31,7 +31,7 @@ class Legajo(Persistent):
         self.comisaria = comisaria
         # Tener en consideraón luego.
         self.localidad = ''
-        self.ordenesDeReparacion = {}
+        self.ordenesDeReparacion = []
     
     """ ATTRIBUTES
 
@@ -54,6 +54,8 @@ class Legajo(Persistent):
        
     
       numeroChasis  (private)
+      
+      ordenesReparacion
 
     """
     
@@ -72,12 +74,15 @@ class Legajo(Persistent):
         '''
         pass
     
-    def crearOrdenDeReparacion(self):
+    def crearOrdenDeReparacion(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
         '''
         @return: 
         @author: 
         '''
-        pass
+        ordenReparacion = OrdenReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
+        self.ordenesDeReparacion[1] = ordenReparacion
+#        self.ordenesDeReparacion.append(ordenReparacion)
+        print ordenReparacion
     
     def save(self):
         from MiZODB import ZopeDB, MiZODB

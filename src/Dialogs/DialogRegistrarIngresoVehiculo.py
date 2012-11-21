@@ -6,10 +6,15 @@ Created on 03/11/2012
 '''
 
 from PyQt4 import QtCore, QtGui
+from re import match
 
 from formularios.DialogRegistrarIngresoVehiculo import Ui_DialogRegistrarIngresoVehiculo
 from formularios.DialogDatosIngresoVehiculo import Ui_DialogIngresoVehiculo 
 import WidgetListadoDeVehiculos
+from negocio.Division_Transporte import Division_Transporte
+
+global itemglobal
+itemglobal = None
 
 class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVehiculo):
     '''
@@ -26,7 +31,8 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         '''
         super(DialogRegistrarIngresoVehiculo, self).__init__(parent)
         self.setupUi(self)
-        WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
+        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
+        self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -52,6 +58,11 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         '''
         dlgDatosIngreso = DialogDatosIngresoVehiculo()
         dlgDatosIngreso.exec_()
+        
+    def seleccionarCelda(self, fila, columna):
+        itemVehiculo = self.miWidget.tableWidgetListadoDeVehiculos.item(fila, 0)
+        global itemglobal
+        itemglobal = itemVehiculo
         
 class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
     '''
@@ -87,6 +98,16 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         @author: 
         '''
         print 'Click sobre aceptar'
+        global itemglobal
+        print itemglobal.text()
+        try:
+            assert self.testearDialogo() is True
+        except AssertionError:
+            return
+        self.registrarIngresoVehiculo()
+        print 'Imprimiendo Orden-......'
+        self.mostrarMensaje('Orden de Reparación Creada. :)', 'Creando Orden de Reparación')
+        self.accept()
     
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -95,3 +116,51 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         @author: 
         '''
         self.close()
+    
+    def registrarIngresoVehiculo(self):
+        dominio = unicode(itemglobal.text())
+        division = Division_Transporte()
+        vehiculo = division.getVehiculo(dominio)
+        
+        kilometrajeActual = unicode(self.lineEditKilometraje.text())
+        combustibleActual = unicode(self.lineEditCombustible.text())
+        equipamiento = unicode(self.lineEditEquipamiento.text())
+        reparacion = unicode(self.lineEditReparacion.text())
+        comisaria = unicode(self.lineEditComisaria.text())
+        localidad = unicode(self.lineEditLocalidad.text())
+        
+        division.registrarIngresoDeVehiculo(dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
+        
+    def testearDialogo(self):
+        if not match('[0-9]+', self.lineEditKilometraje.text()):
+            self.mostrarMensaje('Debe ingresar el kilometraje.', 'Ingresar Kilometraje')
+            self.lineEditKilometraje.clear()
+            self.lineEditKilometraje.setFocus()
+            return
+        if not match('[0-9]+', self.lineEditCombustible.text()):
+            self.mostrarMensaje('Debe ingresar el Combustible','Ingresar Combustible' )
+            self.lineEditCombustible.clear()
+            self.lineEditCombustible.setFocus()
+            return
+        if not match('[a-zA-Z]+', self.lineEditReparacion.text()):
+            self.mostrarMensaje('Debe ingresar la reparacion solicitada', 'Ingresar reparacion')
+            self.lineEditReparacion.clear()
+            self.lineEditReparacion.setFocus()
+        if not match('[a-zA-Z]+', self.lineEditComisaria.text()):
+            self.mostrarMensaje('Debe ingresar la Comisaria solicitada', 'Ingresar Comisaria')
+            self.lineEditComisaria.clear()
+            self.lineEditComisaria.setFocus()
+        if not match('[a-zA-Z]+', self.lineEditLocalidad.text()):
+            self.mostrarMensaje('Debe ingresar la Localidad solicitada', 'Ingresar Localidad')
+            self.lineEditLocalidad.clear()
+            self.lineEditLocalidad.setFocus()
+        return True
+            
+    '''
+    TODO: Este método se repite en varios Dialogs.
+    '''
+    def mostrarMensaje(self, mensaje, titulo):
+        msgBox = QtGui.QMessageBox(self)
+        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+        return msgBox.exec_()

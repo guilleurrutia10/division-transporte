@@ -184,6 +184,14 @@ class Division_Transporte(Persistent):
         return zodb.getAlls('vehiculos')
 #        return self.vehiculos
 
+    def getVehiculo(self, clave):
+        '''
+        @return: 
+        @author: 
+        '''
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        return zodb.get('vehiculos',clave)
+    
     def modificarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
         zodb = ZopeDB(MiZODB('zeo.conf'))
         zodb.remove('vehiculos', dominio)
@@ -210,12 +218,15 @@ class Division_Transporte(Persistent):
         '''
         pass
     
-    def registrarIngresoDeVehiculo(self):
+    def registrarIngresoDeVehiculo(self, dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad):
         '''
         @return: 
         @author: 
         '''
-        pass
+        vehiculo = self.getVehiculo(dominio)
+        import datetime
+        hoy = datetime.datetime.now()
+        vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
     
     '''
     @TODO: Tener en cuenta q la el módulo q manipula la BD lanzará una Excepción
