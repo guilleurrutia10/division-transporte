@@ -58,7 +58,7 @@ class Empleado(Persistent):
 
     """
     
-    def __init__(self, nombre, apellido, documento):
+    def __init__(self, nombre, apellido, documento, tipoDocumento):
         '''
         Constructor
         :version:
@@ -67,7 +67,7 @@ class Empleado(Persistent):
         self.nombre = nombre
         self.apellido = apellido
         self.documento = documento
-#        self.tipoDocumento = 'None'
+        self.tipoDocumento = tipoDocumento
         
     def save(self):
         from MiZODB import ZopeDB, MiZODB

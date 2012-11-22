@@ -30,9 +30,9 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
             miItemc2.setText(empleado.apellido)
             self.tableWidgetDatosEmpleados.setItem(fila,columna,miItemc2)
             columna += 1
-#            miItemc3 = QtGui.QTableWidgetItem()
-#            miItemc3.setText(empleado.tipoDocumento)
-#            self.tableWidgetDatosEmpleados.setItem(fila,columna,miItemc3)
+            miItemc3 = QtGui.QTableWidgetItem()
+            miItemc3.setText(empleado.tipoDocumento.get_codigo_tipo_documento())
+            self.tableWidgetDatosEmpleados.setItem(fila,columna,miItemc3)
             columna += 1
             miItemc4 = QtGui.QTableWidgetItem()
             miItemc4.setText(empleado.documento)

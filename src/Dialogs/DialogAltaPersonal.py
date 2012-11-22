@@ -63,7 +63,7 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         nroDocumento = unicode(self.lineEditNroDocumento.text())
         tipoDocumento = unicode(self.comboBoxTipoDocumento.currentText())
         division = Division_Transporte()
-        division.agregarEmpleado(nombre, apellido, nroDocumento)
+        division.agregarEmpleado(nombre, apellido, nroDocumento, tipoDocumento)
         
         if self.mostrarMensaje('El Empleado se ha cargado exitosamente!! :)', 'Cargando Empleado'):
             self.accept()

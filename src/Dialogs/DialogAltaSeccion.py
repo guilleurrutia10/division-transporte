@@ -27,9 +27,8 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         
     def validacionesLineEdit(self):
         self.lineEditNombreSeccion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z]+'),self))
-        self.tableWidgetEmpleadosSinAsignar.connect(self.tableWidgetEmpleadosSinAsignar, QtCore.SIGNAL('cellClicked(int,int)'), self.on_tableWidgetEmpleadosSinAsignar_cellClicked)
-        self.tableWidgetEmpleadosAsignados.connect(self.tableWidgetEmpleadosAsignados, QtCore.SIGNAL('cellClicked(int,int)'), self.on_tableWidgetEmpleadosAsignados_cellClicked)
-        self.pushButtonAsignarComoEncargado
+        self.tableWidgetEmpleadosSinAsignar.connect(self.tableWidgetEmpleadosSinAsignar, QtCore.SIGNAL('cellClicked(int,int)'), self.celdaClickeada_on_tableWidgetEmpleadosSinAsignar)
+        self.tableWidgetEmpleadosAsignados.connect(self.tableWidgetEmpleadosAsignados, QtCore.SIGNAL('cellClicked(int,int)'), self.celdaClickeada_on_tableWidgetEmpleadosAsignados)
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
@@ -81,7 +80,6 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         fila = 0
         self.tableWidgetEmpleadosSinAsignar.setRowCount(len(empleados))
         for clave,empl in empleados.iteritems():
-#            print '%s,%s'%(fila, columna), clave, empl
             columna = 0
             miItem1 = QtGui.QTableWidgetItem()
             miItem1.setText(unicode(empl.documento))
@@ -92,8 +90,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
             self.tableWidgetEmpleadosSinAsignar.setItem(fila,columna,miItem2)
             fila += 1
     
-#    @QtCore.pyqtSlot('int,int')
-    def on_tableWidgetEmpleadosSinAsignar_cellClicked(self, fila, columna):
+    def celdaClickeada_on_tableWidgetEmpleadosSinAsignar(self, fila, columna):
         print fila, ',' , columna
         self._filaEmpleadoSinAsignar = {}
         item1 = QtGui.QTableWidgetItem()
@@ -108,21 +105,20 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self._filaEmpleadoSinAsignar[item2.text()] = item2
         self._filaEmpleadoSinAsignar['fila'] = fila
     
-    def on_tableWidgetEmpleadosAsignados_cellClicked(self, fila, columna):
+    def celdaClickeada_on_tableWidgetEmpleadosAsignados(self, fila, columna):
         print fila, ',' , columna
         self._filaEmpleadoAsignados = {}
         item1 = QtGui.QTableWidgetItem()
         item = self.tableWidgetEmpleadosAsignados.item(fila, 0)
         item1.setText(item.text())
         self._filaEmpleadoAsignados['documento'] = item1
-#        self._filaEmpleadoSinAsignar[item1.text()] = item1
+        
         print item.text()
         item2 = QtGui.QTableWidgetItem()
         item = self.tableWidgetEmpleadosAsignados.item(fila, 1)
         print item.text()
         item2.setText(item.text())
         self._filaEmpleadoAsignados['nombre'] = item2
-#        self._filaEmpleadoSinAsignar[item2.text()] = item2
         self._filaEmpleadoAsignados['fila'] = fila
     
     @QtCore.pyqtSlot()

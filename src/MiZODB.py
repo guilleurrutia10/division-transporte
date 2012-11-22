@@ -95,10 +95,11 @@ class ZopeDB(object):
     def get(self, lista, clave):
         try:
             raiz = self.zodb.raiz[lista]
-            objeto = raiz[clave]
+            return raiz[clave]
+#            objeto = raiz[clave]
         except KeyError:
             raise ObjeNoExiste('El elemento no se encuentra.')
-        return objeto
+#        return objeto
     
     def modify(self, lista, clave, objeto):
         '''
@@ -134,7 +135,9 @@ class ZopeDB(object):
         try:
             raiz = self.zodb.raiz[lista]
             del raiz[clave]
-            self.zodb.commiting()
+            self.zodb.raiz[lista] = raiz
+            transaction.commit()
+#            self.zodb.commiting()
         except KeyError:
             raise ObjeNoExiste('El elemento no se encuentra.')
             

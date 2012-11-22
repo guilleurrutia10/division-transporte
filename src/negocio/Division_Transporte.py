@@ -231,14 +231,16 @@ class Division_Transporte(Persistent):
     @TODO: Tener en cuenta q la el módulo q manipula la BD lanzará una Excepción
     si el repuesto con las característcas q se intentan ingresar y existe.
     '''
-    def agregarEmpleado(self, nombre, apellido, numeroDocumento):
+    def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento):
         '''
         @return: 
         @author: 
         '''
-        empleado = Empleado(nombre,apellido, numeroDocumento)
-        empleado.save()
-#        self.empleados[numeroDocumento] = empleado
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+#        tipoDoc = zodb.get('tiposDocumentos',tipoDocumento)
+        empleado = Empleado(nombre,apellido, numeroDocumento, zodb.get('tiposDocumentos',tipoDocumento))
+        zodb.save('empleados', empleado.documento, empleado)
+#        empleado.save()
 
     def __str__(self):
         '''
