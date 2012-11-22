@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogCrearReparacion.ui'
 #
-# Created: Wed Nov 21 16:16:47 2012
+# Created: Thu Nov 22 02:15:05 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

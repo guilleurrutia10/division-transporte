@@ -13,7 +13,7 @@ from mainwindow import MyMainWindow
 from mainLogin import MyLogin
 
 #constante global que referencia a la aplicación.
-APP = None
+#APP = None
 
 class Aplicacion(QtGui.QApplication):
     

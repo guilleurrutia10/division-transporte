@@ -80,7 +80,8 @@ class Legajo(Persistent):
         @author: 
         '''
         ordenReparacion = OrdenReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
-        self.ordenesDeReparacion[1] = ordenReparacion
+        self.ordenesDeReparacion.append(ordenReparacion)
+#        self.ordenesDeReparacion[1] = ordenReparacion
 #        self.ordenesDeReparacion.append(ordenReparacion)
         print ordenReparacion
     

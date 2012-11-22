@@ -15,7 +15,6 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         super(WidgetListadoEmpleados, self).__init__(parent)
         self.setupUi(self)
         self.cargarGrillaInicial()
-        self.lineEditFiltroNombre
         
     def cargarGrilla(self, empleados):
         self.tableWidgetDatosEmpleados.clearContents()
@@ -56,4 +55,15 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         
         personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), values)
         personal.sort(cmp=lambda x,y : cmp(x.nombre, y.nombre))
+        self.cargarGrilla(personal)
+        
+    @QtCore.pyqtSlot('QString')        
+    def on_lineEditBuscarDocumento_textChanged(self, cadena):
+        filtro = unicode(cadena)
+        division = Division_Transporte()
+        empleados = division.getEmpleados()
+        values = empleados.values()
+        
+        personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.documento)), values)
+        personal.sort(cmp=lambda x,y : cmp(x.documento, y.documento))
         self.cargarGrilla(personal) 

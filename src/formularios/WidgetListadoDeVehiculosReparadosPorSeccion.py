@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'WidgetListadoDeVehiculosReparadosPorSeccion.ui'
 #
-# Created: Wed Nov 21 16:16:59 2012
+# Created: Thu Nov 22 02:15:32 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

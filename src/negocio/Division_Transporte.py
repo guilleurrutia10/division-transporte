@@ -208,8 +208,7 @@ class Division_Transporte(Persistent):
         @author: 
         '''
         vehiculo = Legajo(dominio, marca, registroInterno, numeroChasis)
-        vehiculo.save()
-#        self.vehiculos[dominio] = vehiculo 
+        vehiculo.save() 
     
     def registrarEgresoDeVehiculo(self):
         '''

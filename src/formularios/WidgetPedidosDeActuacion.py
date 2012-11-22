@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'WidgetPedidosDeActuacion.ui'
 #
-# Created: Wed Nov 21 16:17:03 2012
+# Created: Thu Nov 22 02:15:41 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

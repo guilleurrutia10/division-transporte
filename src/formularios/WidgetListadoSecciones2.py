@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'WidgetListadoSecciones2.ui'
 #
-# Created: Wed Nov 21 16:17:00 2012
+# Created: Thu Nov 22 02:15:35 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

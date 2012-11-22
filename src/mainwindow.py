@@ -17,7 +17,7 @@ from Dialogs import WidgetMostrarReparacionesPorVehiculo,WidgetMostrarTiposDeRep
 from Dialogs import WidgetListadoSecciones, WidgetListadoDeRepuestosUtilizados, WidgetListadoDeVehiculos, WidgetListadoEmpleados
 
 from Dialogs import DialogCambiarDeSeccionUnEmpleado, DialogCambiarDeSeccionUnEncargado, DialogRegistrarEgresoVehiculo, DialogRemoverEmpleadoDeSeccion
-from Dialogs import DialogRegistrarRecepcionDePedidoDeActuacion
+from Dialogs import DialogRegistrarRecepcionDePedidoDeActuacion, DialogBajaPersonal
 
 class MyListado(QtGui.QWidget, Ui_Form):
     def __init__(self, parent = None):
@@ -209,8 +209,9 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     
     @QtCore.pyqtSlot()
     def on_actionBaja_de_Personal_triggered(self):
-        print 'agregando widget baja personal'
-        self.setCentralWidget(WidgetBajaPersonal.WidgetBajaPersonal(self))
+        print 'agregando Dialog baja personal'
+        dlgBajaPersonal = DialogBajaPersonal.DialogBajaPersonal()
+        dlgBajaPersonal.exec_()
         
     @QtCore.pyqtSlot()
     def on_actionModificacion_de_Repuesto_triggered(self):
