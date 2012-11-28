@@ -10,7 +10,7 @@ from PyQt4 import QtGui, QtCore
 from formularios.WidgetListadoDeVehiculos import Ui_FormListadoVehiculos
 from negocio.Division_Transporte import Division_Transporte
 
-'''@todo: lo que sigue............ ;p'''
+'''TODO: lo que sigue............ ;p'''
 #===============================================================================
 # Crear clases similares con los nombres significativos correspondientes, por ejemplo
 # ListadoVehiculosSinReparaciones para evitar grandes sentencias condicionales...
@@ -19,19 +19,22 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent = None):
         super(ListadoVehiculos, self).__init__(parent)
         self.setupUi(self)
+        #Para evitar que se modifique la información presentada por la grilla.
+        self.tableWidgetListadoDeVehiculos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+#        self.vehiculos = None
         self.cargarGrillaInicial()
     
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscar_textChanged(self, cadena):
-        print 'Iniciando filtrado......................'
-        print '%s' %self.lineEditBuscar.text()
         filtro = unicode(self.lineEditBuscar.text())
-        division = Division_Transporte()
-        vehiculos = division.getVehiculos()
-        values = vehiculos.values()
+#        division = Division_Transporte()
+#        vehiculos = division.getVehiculos()
+#        values = vehiculos.values()
         
-        coches = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.dominio)), values)
-        coches.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
+        coches = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.dominio)), self.vehiculos)
+        #El método de comparación por igual está sobrecargado en la clase Legajo.
+        coches.sort(cmp=lambda x,y : cmp(x, y))
+#        coches.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
         self.cargarGrilla(coches)
             
     def cargarGrilla(self, vehiculos):
@@ -64,10 +67,17 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
     def cargarGrillaInicial(self):
         division = Division_Transporte()
         vehiculos = division.getVehiculos()
-        coches = vehiculos.values()
-        coches.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
-        self.cargarGrilla(coches)
-        
+        self.vehiculos = vehiculos.values()
+        self.vehiculos.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
+        self.cargarGrilla(self.vehiculos)
+    
+    '''
+    TODO: cambiar por un refrescar grilla.
+    '''
+    @QtCore.pyqtSlot()
+    def on_pushButtonRefrescar_clicked(self):
+        self.lineEditBuscar.clear()
+        self.cargarGrillaInicial()
 
 class Listado_Vehiculos_en_reparacion_por_Seccion(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent = None):

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>683</width>
-    <height>507</height>
+    <width>623</width>
+    <height>476</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,14 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLineEdit" name="lineEditFiltrarDocumento"/>
+       <widget class="QLineEdit" name="lineEditFiltrarDocumento">
+        <property name="minimumSize">
+         <size>
+          <width>133</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButtonFiltrarDocumento">
@@ -64,7 +71,14 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLineEdit" name="lineEditFiltrarNombre"/>
+       <widget class="QLineEdit" name="lineEditFiltrarNombre">
+        <property name="minimumSize">
+         <size>
+          <width>133</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButtonFiltrarNombre">
@@ -123,58 +137,7 @@
      </column>
     </widget>
    </item>
-   <item row="2" column="0">
-    <spacer name="horizontalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="2" column="1" colspan="3">
-    <widget class="QWidget" name="widget" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>431</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>431</width>
-       <height>41</height>
-      </size>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="1">
-       <widget class="QPushButton" name="pushButton_Cambiar">
-        <property name="text">
-         <string>Cambiar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>163</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="4">
+   <item row="2" column="0" colspan="4">
     <widget class="QGroupBox" name="groupBoxButtonBox">
      <property name="minimumSize">
       <size>
@@ -192,32 +155,6 @@
       <string/>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <property name="leftMargin">
-       <number>9</number>
-      </property>
-      <property name="topMargin">
-       <number>9</number>
-      </property>
-      <property name="rightMargin">
-       <number>9</number>
-      </property>
-      <property name="bottomMargin">
-       <number>8</number>
-      </property>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="pushButtonAceptar">
-        <property name="text">
-         <string>Aceptar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="pushButtonCancelar">
-        <property name="text">
-         <string>Cancelar</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="0">
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
@@ -230,6 +167,27 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="pushButton_Cambiar">
+        <property name="text">
+         <string>Cambiar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="pushButtonAceptar">
+        <property name="text">
+         <string>Aceptar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="pushButtonCancelar">
+        <property name="text">
+         <string>Cancelar</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

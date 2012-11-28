@@ -10,6 +10,9 @@ from persistent import Persistent
 from EstadoOrdenReparacion import *
 #from PedidoDeActuacion import *
 from Reparacion import *
+from EnRevision import *
+from EsperandoAprobacion import *
+from Planificada import *
 
 class OrdenReparacion(object):
     '''
@@ -70,15 +73,28 @@ class OrdenReparacion(object):
     
     """
   
-
-    def __init__(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
+    
+    '''
+    TODO: falta migrar comportamiento a las clases EstadoOrden y según dicho estado se 
+    podrán realizar algunas operaciones y otras no.
+    '''
+    def __init__(self, codigoOrdenReparacion, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
         '''
         Constructor
         @return: 
         @author: 
         '''
+        
+        '''
+        TODO: tener en cuenta los comentarios siguientes.
+        '''
 #        self.codigoOrdenReparacion = incremental
-        self.codigoOrdenReparacion = 1
+        #La primera vez debe instanciarse como EnRevision()
+#        self.estadoOrden = EstadoOrdenReparacion(), self.estadoOrden =  EnRevision()
+        self.codigoOrdenReparacion = codigoOrdenReparacion
+        self.estadoOrden = EnRevision(self)
+        self.reparaciones = {}
+        
         self.kilometrajeActual = kilometrajeActual
         self.combustibleActual = combustibleActual
         self.equipamiento = equipamiento
@@ -92,7 +108,7 @@ class OrdenReparacion(object):
         @return: 
         @author: 
         '''
-        pass
+        return self.reparaciones
     
     def getReparacionesDeSeccion(self):
         '''
@@ -100,6 +116,7 @@ class OrdenReparacion(object):
         @author: 
         '''
         pass
+    
     def siguienteSeccion(self):
         '''
         @return: 
@@ -112,28 +129,32 @@ class OrdenReparacion(object):
         @return: 
         @author: 
         '''
-        pass
+        self.estadoOrden.getPedidoActuacion()
     
     def generarPedidoDeActuacion(self):
         '''
         @return: 
         @author: 
         '''
-        pass
+        self.estadoOrden = EsperandoAprobacion()
+        self.estadoOrdengenerarPedidoDeActuacion()
     
     def registrarOrdenDeReparacionPlanificada(self):
         '''
         @return: 
         @author: 
         '''
-        pass
+        self.estadoOrden = Planificada()
     
+    '''
+    TODO: este método debería estar en el EstadoOrden-->EnRevision.
+    '''
     def addReparacion(self):
         '''
         @return: 
         @author: 
         '''
-        pass
+        self.estadoOrden.addReparacion()
     
     def getreparacionesPendientes(self):
         '''

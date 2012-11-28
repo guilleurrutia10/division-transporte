@@ -62,7 +62,7 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
     def on_pushButtonCancelar_clicked(self):
         '''
         '''
-        self.close()
+        self.reject()
         
     @QtCore.pyqtSlot()
     def on_pushButtonDarDeBaja_clicked(self):
@@ -94,6 +94,8 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
     def celdaClickeada(self, fila, columna):
         print 'Celda clickeada fila %s columna %s' %(fila,columna)
         
+        
+        
 class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
     '''
     classdocs
@@ -109,7 +111,7 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
     def on_pushButtonCancelar_clicked(self):
         '''
         '''
-        self.close()
+        self.reject()
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):

@@ -106,12 +106,12 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
     #===========================================================================
     def cargarLineEdit(self):
         division = Division_Transporte()
-        vehiculo = division.getVehiculo(unicode(self.item.text()))
+        self.auto = division.getVehiculo(unicode(self.item.text()))
         # Se cargan.....
-        self.lineEditDominio.setText(vehiculo.dominio)
-        self.lineEditRegistroInterno.setText(vehiculo.registroInterno)
-        self.lineEditChasisNro.setText(vehiculo.numeroChasis)
-        self.lineEditMarca.setText(vehiculo.marca)
+        self.lineEditDominio.setText(self.auto.dominio)
+        self.lineEditRegistroInterno.setText(self.auto.registroInterno)
+        self.lineEditChasisNro.setText(self.auto.numeroChasis)
+        self.lineEditMarca.setText(self.auto.marca)
         return
 
     @QtCore.pyqtSlot()

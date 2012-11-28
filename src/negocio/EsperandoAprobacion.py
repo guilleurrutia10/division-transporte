@@ -5,7 +5,7 @@ Created on 07/11/2012
 @author: urrutia
 '''
 
-from EstadoOrdenReparacion import EstadoOrdenReparacion
+from EstadoOrdenReparacion import *
 
 class EsperandoAprobacion(EstadoOrdenReparacion):
     '''
@@ -15,11 +15,19 @@ class EsperandoAprobacion(EstadoOrdenReparacion):
     '''
 
 
-    def __init__(self):
+    def __init__(self, ordenReparacion):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        pass
-        
+        super(EsperandoAprobacion, self).__init__(ordenReparacion)
+        self.pedidoDeActuacion = None 
+    
+    def generarPedidoDeActuacion(self):
+        '''
+        @return: 
+        @author: 
+        '''
+        if self.pedidoDeActuacion is None:
+            self.pedidoDeActuacion = PedidoDeActuacion()

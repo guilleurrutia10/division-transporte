@@ -129,7 +129,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         comisaria = unicode(self.lineEditComisaria.text())
         localidad = unicode(self.lineEditLocalidad.text())
         
-        division.registrarIngresoDeVehiculo(dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
+        division.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
         
     def testearDialogo(self):
         if not match('[0-9]+', self.lineEditKilometraje.text()):

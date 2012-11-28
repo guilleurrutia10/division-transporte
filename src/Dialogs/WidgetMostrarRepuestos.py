@@ -8,7 +8,6 @@ from PyQt4 import QtCore, QtGui
 
 from formularios.WidgetMostrarRepuestos import Ui_FormMostrarRepuestos
 from formularios.DialogModificarRepuesto import Ui_DialogMoficarRepuesto
-from negocio.Division_Transporte import Division_Transporte
 
 class DialogModificarRepuesto(QtGui.QDialog, Ui_DialogMoficarRepuesto):
     '''

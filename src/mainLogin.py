@@ -18,10 +18,6 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
         super(MyLogin, self).__init__(parent)
         self.setupUi(self)
         self.puedoAbrirVentanaPrincipal = False
-        #self.connect(self.buttonBox, QtCore.SIGNAL("accepted()"), self.abrirVentanaPrincipal)
-        
-        #Definimos los roles de los botones, Aceptar y Cancelar
-        
         
         self.lineEditUser.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9|a-z|A-z]+'),self))
         self.linePassword.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9|a-z|A-z]+'),self))
@@ -33,9 +29,9 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
     @QtCore.pyqtSlot()    
     def on_pushButtonOk_clicked(self):
         '''
-            Función que permite al usuario ingresar a la aplicación.
-            @version: 
-            @author:  
+        Función que permite al usuario ingresar a la aplicación.
+        @version: 
+        @author:  
         '''
         try:
             usr = self.validarUsr()

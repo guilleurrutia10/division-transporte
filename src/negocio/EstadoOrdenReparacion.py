@@ -17,19 +17,33 @@ class EstadoOrdenReparacion(Persistent):
     @author: 
     '''
 
-
-    def __init__(self):
+    #def __init__(self, ordenReparacion)
+    def __init__(self, ordenReparacion):
         '''
         Constructor
         @return: 
         @author:
         '''
-        pass
+        self.estadoOrden = ordenReparacion
+        self.pedidoDeActuacion = None
     
     def getPedidoActuacion(self):
+        '''
+        Devuelve el pedido de Actuación correspondiente a la Orden de Reparación.
+        @return: PedidoDeActuacion
+        @author:
+        ''' 
+        return self.pedidoDeActuacion
+    
+    '''
+    TODO: implementado sólo estado EnRevision()
+    '''    
+    def addReparacion(self):
+        NotImplemented
+        
+    def getEstadoOrden(self):
         '''
         @return:  
         @author:
         ''' 
-        pass
-        
+        return self.estadoOrden

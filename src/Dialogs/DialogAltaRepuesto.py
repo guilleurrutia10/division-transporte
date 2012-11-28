@@ -51,7 +51,7 @@ class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto):
             
     def testearDialogo(self):
         '''
-            TODO: Cambiar el nombre si no es significativo.
+        TODO: Cambiar el nombre si no es significativo.
         '''
         if len(self.lineEditNombreRepuesto.text()) is 0:
             self.mostrarMensaje('Debe ingresar el nombre del repuesto.', 'Ingresar Nombre')
@@ -67,7 +67,7 @@ class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto):
     
     def cargarRepuesto(self):
         '''
-        Deberíamos atrapar una Excepción que nos lance la División_Transporte.
+        TODO: Deberíamos atrapar una Excepción que nos lance la División_Transporte.
         '''
         nombre = unicode(self.lineEditNombreRepuesto.text())
         descripcion = unicode(self.lineEditDescRepuesto.text())

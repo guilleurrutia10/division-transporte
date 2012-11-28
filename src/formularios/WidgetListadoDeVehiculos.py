@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'WidgetListadoDeVehiculos.ui'
 #
-# Created: Thu Nov 22 02:15:31 2012
+# Created: Sun Nov 25 16:33:52 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,8 @@ except AttributeError:
 class Ui_FormListadoVehiculos(object):
     def setupUi(self, FormListadoVehiculos):
         FormListadoVehiculos.setObjectName(_fromUtf8("FormListadoVehiculos"))
-        FormListadoVehiculos.resize(547, 476)
+        FormListadoVehiculos.resize(771, 476)
+        FormListadoVehiculos.setMinimumSize(QtCore.QSize(771, 476))
         FormListadoVehiculos.setWindowTitle(QtGui.QApplication.translate("FormListadoVehiculos", "Form", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(FormListadoVehiculos)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -44,10 +45,10 @@ class Ui_FormListadoVehiculos(object):
         self.lineEditBuscar.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.lineEditBuscar.setObjectName(_fromUtf8("lineEditBuscar"))
         self.horizontalLayout.addWidget(self.lineEditBuscar)
-        self.pushButtonBuscar = QtGui.QPushButton(self.groupBox)
-        self.pushButtonBuscar.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Buscar", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonBuscar.setObjectName(_fromUtf8("pushButtonBuscar"))
-        self.horizontalLayout.addWidget(self.pushButtonBuscar)
+        self.pushButtonRefrescar = QtGui.QPushButton(self.groupBox)
+        self.pushButtonRefrescar.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Refrescar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonRefrescar.setObjectName(_fromUtf8("pushButtonRefrescar"))
+        self.horizontalLayout.addWidget(self.pushButtonRefrescar)
         spacerItem = QtGui.QSpacerItem(513, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.verticalLayout.addWidget(self.groupBox)
@@ -74,6 +75,7 @@ class Ui_FormListadoVehiculos(object):
         item = QtGui.QTableWidgetItem()
         item.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Comisaría", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetListadoDeVehiculos.setHorizontalHeaderItem(4, item)
+        self.tableWidgetListadoDeVehiculos.horizontalHeader().setDefaultSectionSize(150)
         self.verticalLayout.addWidget(self.tableWidgetListadoDeVehiculos)
 
         self.retranslateUi(FormListadoVehiculos)
@@ -85,7 +87,6 @@ class Ui_FormListadoVehiculos(object):
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(2)
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(3)
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(4)
-
 
 if __name__ == "__main__":
     import sys

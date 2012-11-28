@@ -21,7 +21,7 @@ class MiZODB(object):
 
     def __init__(self, url):
         '''
-        Constructor, se conecta al Servidor de la BD a traves del archivo de configuracion zeo.conf
+        Constructor, se conecta al Servidor de la BD a través del archivo de configuracion zeo.conf
         en donde se indica la IP:PORT.
         @return: 
         @author: 

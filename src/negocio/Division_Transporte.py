@@ -104,7 +104,7 @@ class Division_Transporte(Persistent):
         '''
         pass
     
-    def getOrdenDeReparacionDeVehiculo(self):
+    def getOrdenDeReparacionDeVehiculo(self, dominio):
         '''
         @return: 
         @author: 
@@ -174,6 +174,14 @@ class Division_Transporte(Persistent):
         '''
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('tiposRepuestos')
+        
+    def getRepuesto(self, clave):
+        '''
+        @return: 
+        @author: 
+        '''
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        return zodb.get('tiposRepuestos', clave)
     
     def getVehiculos(self):
         '''
@@ -223,9 +231,15 @@ class Division_Transporte(Persistent):
         @author: 
         '''
         vehiculo = self.getVehiculo(dominio)
+        '''
+        TODO: tener en cuenta el método obtenerOrdenDeReparacionEnCurso de Legajo que nos indica
+        si ese vehículo tiene o no orden Reparación, por lo tanto no debemos crearle otra hasta
+        que esa haya sido finalizada.
+        '''
         import datetime
         hoy = datetime.datetime.now()
         vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
+        vehiculo.save()
     
     '''
     @TODO: Tener en cuenta q la el módulo q manipula la BD lanzará una Excepción

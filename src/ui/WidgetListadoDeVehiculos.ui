@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>547</width>
+    <width>771</width>
     <height>476</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>771</width>
+    <height>476</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -59,9 +65,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButtonBuscar">
+       <widget class="QPushButton" name="pushButtonRefrescar">
         <property name="text">
-         <string>Buscar</string>
+         <string>Refrescar</string>
         </property>
        </widget>
       </item>
@@ -90,6 +96,9 @@
    </item>
    <item>
     <widget class="QTableWidget" name="tableWidgetListadoDeVehiculos">
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>150</number>
+     </attribute>
      <column>
       <property name="text">
        <string>Dominio</string>
@@ -119,6 +128,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resources/resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

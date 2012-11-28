@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogMostrarLosVehiculosParaModificar.ui'
 #
-# Created: Thu Nov 22 02:15:12 2012
+# Created: Sun Nov 25 16:33:35 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,11 +17,12 @@ except AttributeError:
 class Ui_DialogMostrarLosVehiculosParaModificar(object):
     def setupUi(self, DialogMostrarLosVehiculosParaModificar):
         DialogMostrarLosVehiculosParaModificar.setObjectName(_fromUtf8("DialogMostrarLosVehiculosParaModificar"))
-        DialogMostrarLosVehiculosParaModificar.resize(759, 495)
+        DialogMostrarLosVehiculosParaModificar.resize(789, 597)
         DialogMostrarLosVehiculosParaModificar.setWindowTitle(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaModificar", " Modificar Vehiculos", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogMostrarLosVehiculosParaModificar)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.widget = QtGui.QWidget(DialogMostrarLosVehiculosParaModificar)
+        self.widget.setMinimumSize(QtCore.QSize(771, 476))
         self.widget.setObjectName(_fromUtf8("widget"))
         self.verticalLayout.addWidget(self.widget)
         self.groupBox = QtGui.QGroupBox(DialogMostrarLosVehiculosParaModificar)

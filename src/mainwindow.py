@@ -113,7 +113,6 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     #Conectamos la accion modificar vehiculo...
     @QtCore.pyqtSlot()
     def on_actionModificacion_de_Vehiculo_triggered(self):
-        print 'abriendo dialogo Modificar Vehiculo'
         dlgModificarVehiculo = DialogModificarVehiculo.DialogMostrarLosVehiculosParaModificar(self) 
         dlgModificarVehiculo.exec_()
         

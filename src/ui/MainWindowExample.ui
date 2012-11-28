@@ -35,12 +35,12 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">
     <property name="title">
-     <string>Archivo</string>
+     <string>&amp;Archivo</string>
     </property>
     <addaction name="actionSobre"/>
     <addaction name="actionListado"/>
@@ -50,11 +50,11 @@
    </widget>
    <widget class="QMenu" name="menuVerificacion_y_Reparacion">
     <property name="title">
-     <string>Verificacion y Reparacion</string>
+     <string>&amp;Verificacion y Reparacion</string>
     </property>
     <widget class="QMenu" name="menuListados_de_Vehiculos">
      <property name="title">
-      <string>Listados de Vehiculos</string>
+      <string>&amp;Listados de Vehiculos</string>
      </property>
      <addaction name="actionListado_Vehiculos_de_la_Division_2"/>
      <addaction name="actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2"/>
@@ -78,11 +78,11 @@
    </widget>
    <widget class="QMenu" name="menuPersonal">
     <property name="title">
-     <string>Personal</string>
+     <string>&amp;Personal</string>
     </property>
     <widget class="QMenu" name="menuListados_Personal">
      <property name="title">
-      <string>Listados Personal</string>
+      <string>&amp;Listados Personal</string>
      </property>
      <addaction name="actionListado_de_Personal_de_la_Division"/>
     </widget>
@@ -98,11 +98,11 @@
    </widget>
    <widget class="QMenu" name="menuRepuestos">
     <property name="title">
-     <string>Repuestos</string>
+     <string>&amp;Repuestos</string>
     </property>
     <widget class="QMenu" name="menuListados_de_Repuestos">
      <property name="title">
-      <string>Listados de Repuestos</string>
+      <string>&amp;Listados de Repuestos</string>
      </property>
      <addaction name="actionListado_de_Repuestos_de_la_Division"/>
     </widget>
@@ -115,7 +115,7 @@
    </widget>
    <widget class="QMenu" name="menuSecciones">
     <property name="title">
-     <string>Secciones</string>
+     <string>&amp;Secciones</string>
     </property>
     <addaction name="actionAlta_de_Seccion"/>
     <addaction name="separator"/>
@@ -126,13 +126,13 @@
    </widget>
    <widget class="QMenu" name="menuConfiguracion">
     <property name="title">
-     <string>Configuracion</string>
+     <string>&amp;Configuracion</string>
     </property>
     <addaction name="actionPreferencias"/>
    </widget>
    <widget class="QMenu" name="menuAyuda">
     <property name="title">
-     <string>Ayuda</string>
+     <string>&amp;Ayuda</string>
     </property>
     <addaction name="actionAcerca_de_Division_de_Transporte"/>
    </widget>
@@ -147,17 +147,17 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSalir">
    <property name="text">
-    <string>Salir</string>
+    <string>&amp;Salir</string>
    </property>
   </action>
   <action name="actionListado">
    <property name="text">
-    <string>Listado</string>
+    <string>&amp;Listado</string>
    </property>
   </action>
   <action name="actionSobre">
    <property name="text">
-    <string>Sobre</string>
+    <string>&amp;Sobre</string>
    </property>
   </action>
   <action name="actionAyuda">
@@ -165,7 +165,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Ayuda</string>
+    <string>&amp;Ayuda</string>
    </property>
   </action>
   <action name="actionAlta_de_Vehiculo">
@@ -173,7 +173,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Alta de Vehiculo</string>
+    <string>&amp;Alta de Vehiculo</string>
    </property>
   </action>
   <action name="actionModificacion_de_Vehiculo">
@@ -181,7 +181,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Modificacion de Vehiculo</string>
+    <string>&amp;Modificacion de Vehiculo</string>
    </property>
   </action>
   <action name="actionRegistrar_Ingreso_de_Vehiculo">
@@ -189,7 +189,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Registrar Ingreso de Vehiculo</string>
+    <string>&amp;Registrar Ingreso de Vehiculo</string>
    </property>
   </action>
   <action name="actionVerificar_Reparaciones_Necesarias_del_Vehiculo">
@@ -197,7 +197,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Registrar Reparaciones necesarias del Vehiculo</string>
+    <string>&amp;Registrar Reparaciones necesarias del Vehiculo</string>
    </property>
   </action>
   <action name="actionRegistrar_Egreso">
@@ -205,7 +205,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Registrar Egreso Vehiculo</string>
+    <string>&amp;Registrar Egreso Vehiculo</string>
    </property>
   </action>
   <action name="actionPlanificar_Reparaciones_de_Vehiculo">
@@ -213,7 +213,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Planificar Reparaciones de Vehiculo</string>
+    <string>&amp;Planificar Reparaciones de Vehiculo</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_en_reparacion_por_Seccion">
@@ -246,7 +246,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listado Vehiculos de la Division</string>
+    <string>&amp;Listado Vehiculos de la Division</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_con_Reparaciones_Planificadas_2">
@@ -254,7 +254,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listado Vehiculos con Reparaciones Planificadas</string>
+    <string>&amp;Listado Vehiculos con Reparaciones Planificadas</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_en_Reparacion_por_Seccion">
@@ -262,7 +262,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listado Vehiculos en Reparacion por Seccion</string>
+    <string>&amp;Listado Vehiculos en Reparacion por Seccion</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_Reparados_por_Seccion_2">
@@ -270,7 +270,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listado Vehiculos Reparados por Seccion</string>
+    <string>&amp;Listado Vehiculos Reparados por Seccion</string>
    </property>
   </action>
   <action name="actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2">
@@ -278,7 +278,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listado de Reparaciones Realizadas a un Vehiculos</string>
+    <string>&amp;Listado de Reparaciones Realizadas a un Vehiculos</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_con_Reparaciones_no_Planificadas_2">
@@ -286,7 +286,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listado Vehiculos con Reparaciones no Planificadas</string>
+    <string>&amp;Listado Vehiculos con Reparaciones no Planificadas</string>
    </property>
   </action>
   <action name="actionAlta_de_Personal">
@@ -294,7 +294,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Alta de Personal</string>
+    <string>&amp;Alta de Personal</string>
    </property>
   </action>
   <action name="actionBaja_de_Personal">
@@ -302,7 +302,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Baja de Personal</string>
+    <string>&amp;Baja de Personal</string>
    </property>
   </action>
   <action name="actionModificacion_de_Personal">
@@ -310,7 +310,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Modificacion de Personal</string>
+    <string>&amp;Modificacion de Personal</string>
    </property>
   </action>
   <action name="actionCambiar_de_Seccion_a_un_Empleado">
@@ -318,7 +318,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Cambiar de Seccion a un Empleado</string>
+    <string>&amp;Cambiar de Seccion a un Empleado</string>
    </property>
   </action>
   <action name="actionCambiar_el_Encargado_de_una_Seccion">
@@ -326,7 +326,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Cambiar el Encargado de una Seccion</string>
+    <string>&amp;Cambiar el Encargado de una Seccion</string>
    </property>
   </action>
   <action name="actionRemover_Empleado_de_Seccion">
@@ -334,7 +334,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Remover Empleado de Seccion</string>
+    <string>&amp;Remover Empleado de Seccion</string>
    </property>
   </action>
   <action name="actionListado_de_Personal_de_la_Division">
@@ -342,7 +342,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listado de Personal de la Division</string>
+    <string>&amp;Listado de Personal de la Division</string>
    </property>
   </action>
   <action name="actionListado_de_Personal_sin_Asignar_a_Secciones">
@@ -355,7 +355,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Alta de Repuesto</string>
+    <string>&amp;Alta de Repuesto</string>
    </property>
   </action>
   <action name="actionModificacion_de_Repuesto">
@@ -363,7 +363,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Modificacion de Repuesto</string>
+    <string>&amp;Modificacion de Repuesto</string>
    </property>
   </action>
   <action name="actionRegistrar_Recepcion_de_Pedido_de_Actuacion">
@@ -371,7 +371,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Registrar Recepcion de Pedido de Actuacion</string>
+    <string>&amp;Registrar Recepcion de Pedido de Actuacion</string>
    </property>
   </action>
   <action name="actionListado_de_Repuestos_de_la_Division">
@@ -379,7 +379,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listado de Repuestos Solicitados</string>
+    <string>&amp;Listado de Repuestos Solicitados</string>
    </property>
   </action>
   <action name="actionAlta_de_Seccion">
@@ -387,7 +387,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Alta de Seccion</string>
+    <string>&amp;Alta de Seccion</string>
    </property>
   </action>
   <action name="actionAsignar_Reparacion">
@@ -395,7 +395,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Asignar Reparacion</string>
+    <string>&amp;Asignar Reparacion</string>
    </property>
   </action>
   <action name="actionRegistrar_Finalizacion_de_Reparacion">
@@ -403,7 +403,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Registrar Finalizacion de Reparacion</string>
+    <string>&amp;Registrar Finalizacion de Reparacion</string>
    </property>
   </action>
   <action name="actionListados_de_Seccion">
@@ -411,7 +411,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listados de Seccion</string>
+    <string>&amp;Listados de Seccion</string>
    </property>
   </action>
   <action name="actionListado_de_Tipos_de_Reparaciones_de_la_Division">
@@ -424,17 +424,17 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Listado de Tipos de Reparaciones de la Division</string>
+    <string>&amp;Listado de Tipos de Reparaciones de la Division</string>
    </property>
   </action>
   <action name="actionAcerca_de_Division_de_Transporte">
    <property name="text">
-    <string>Acerca de &quot;Division de Transporte&quot;</string>
+    <string>&amp;Acerca de &quot;Division de Transporte&quot;</string>
    </property>
   </action>
   <action name="actionPreferencias">
    <property name="text">
-    <string>Preferencias</string>
+    <string>&amp;Preferencias</string>
    </property>
   </action>
  </widget>
