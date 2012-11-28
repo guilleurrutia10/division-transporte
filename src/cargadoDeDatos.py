@@ -12,11 +12,17 @@ from negocio.Empleado import Empleado
 from negocio.TipoDocumento import TipoDocumento
 from MiZODB import MiZODB, ZopeDB
 
+from MiZODB import MiZODB, ZopeDB
+
 if __name__ == '__main__':
     
     bd = ZopeDB(MiZODB('zeo.conf'))
     bd.cargarTiposDeDocumentos()
+<<<<<<< HEAD
     bd.zodb.close()
+=======
+    bd.zodb.close()    
+>>>>>>> 2c2d23523e6ce9347d47681b5483d7a9e596a41e
     
 #    bd = config.databaseFromURL('zeo.conf')
 #    conexion = bd.open()
