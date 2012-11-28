@@ -18,19 +18,11 @@ class TipoDeReparacion(Persistent):
 
     ''' ATTRIBUTES
     
-    
-    
     codigoTipoReparacion  (private)
-    
-    
     
     nombre  (private)
     
-    
-    
     descripcion  (private)
-    
-    
     
     tiempoEstimado  (private)
     
@@ -38,10 +30,23 @@ class TipoDeReparacion(Persistent):
     
     '''
 
-    def __init__(self):
+    def __init__(self, nombre, descripcion):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        pass
+        self._nombre = nombre
+        self._descripcion = descripcion
+    
+    def getNombre(self):
+        return self._nombre
+    
+    def setNombre(self, nombre):
+        self._nombre = nombre
+        
+    def getDescipcion(self):
+        return self._descripcion
+    
+    def setDescripcion(self, descripcion):
+        self._descripcion = descripcion

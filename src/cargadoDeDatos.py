@@ -20,16 +20,12 @@ if __name__ == '__main__':
     
     bd = ZopeDB(MiZODB('zeo.conf'))
     bd.cargarTiposDeDocumentos()
-<<<<<<< HEAD
-<<<<<<< HEAD
+    bd.cargarTiposDeReparaciones()
     bd.zodb.close()
-=======
-    bd.zodb.close()    
->>>>>>> 2c2d23523e6ce9347d47681b5483d7a9e596a41e
-=======
-    bd.zodb.close()    
->>>>>>> 2c2d23523e6ce9347d47681b5483d7a9e596a41e
     
+    bd.zodb.open()
+    print bd.getAlls('tiposReparaciones')
+    bd.zodb.close()
 #    bd = config.databaseFromURL('zeo.conf')
 #    conexion = bd.open()
 #    raiz = conexion.root()
