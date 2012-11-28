@@ -21,7 +21,7 @@ class OrdenReparacion(object):
     @author: 
     '''
     
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
     
     
     
@@ -71,7 +71,7 @@ class OrdenReparacion(object):
     
     aprobada  (private)
     
-    """
+    '''
   
     
     '''
@@ -94,6 +94,7 @@ class OrdenReparacion(object):
         self.codigoOrdenReparacion = codigoOrdenReparacion
         self.estadoOrden = EnRevision(self)
         self.reparaciones = {}
+        self._plan = None
         
         self.kilometrajeActual = kilometrajeActual
         self.combustibleActual = combustibleActual
@@ -102,6 +103,9 @@ class OrdenReparacion(object):
         self.comisaria = comisaria
         self.localidad = localidad
         self.fecha = fecha
+    
+    def getEstadoOrdenReparacion(self):
+        return self.estadoOrden
     
     def getReparaciones(self):
         '''
@@ -162,3 +166,9 @@ class OrdenReparacion(object):
         @author: 
         '''
         pass
+    
+    def getPlan(self):
+        return self._plan
+    
+    def setPlan(self,unPlan):
+        self._plan = unPlan

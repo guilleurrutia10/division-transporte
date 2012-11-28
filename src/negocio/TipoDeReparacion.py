@@ -16,7 +16,7 @@ class TipoDeReparacion(Persistent):
     @author: 
     '''
 
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
     
     
     
@@ -36,7 +36,7 @@ class TipoDeReparacion(Persistent):
     
     repuestosRequeridos 
     
-    """
+    '''
 
     def __init__(self):
         '''

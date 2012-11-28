@@ -18,7 +18,7 @@ class Empleado(Persistent):
     :author:
     '''
 
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
 
    
 
@@ -56,7 +56,7 @@ class Empleado(Persistent):
 
         domicilio  (private)
 
-    """
+    '''
     
     def __init__(self, nombre, apellido, documento, tipoDocumento):
         '''

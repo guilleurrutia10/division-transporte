@@ -20,13 +20,13 @@ from TipoDocumento import *
 from MiZODB import ZopeDB, MiZODB
 
 class Division_Transporte(Persistent):
-    """
+    '''
     Clase que representa a la División de Transporte.
     :version:
     :author:
-    """
+    '''
     
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
         
         legajos
         
@@ -42,7 +42,7 @@ class Division_Transporte(Persistent):
         
         secciones
         
-    """
+    '''
     
     instance = None
     

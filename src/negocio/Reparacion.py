@@ -18,7 +18,7 @@ class Reparacion(Persistent):
     @author: 
     '''
     
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
     
     
     
@@ -46,7 +46,7 @@ class Reparacion(Persistent):
     
     repuestosUtilizados
     
-    """
+    '''
 
     def __init__(self):
         '''

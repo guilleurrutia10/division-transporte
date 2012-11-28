@@ -14,13 +14,13 @@ class RepuestoUtilizados(DetalleRepuesto):
     @author: 
     '''
 
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
     
     
     
     cantidad  (private)
     
-    """
+    '''
 
     def __init__(self):
         '''

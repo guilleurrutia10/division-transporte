@@ -25,10 +25,10 @@ class Planificada(EstadoOrdenReparacion):
         @return: 
         @author: 
         '''
-        self._plan = None
-        
-    def getPlan(self):
-        return self._plan
-    
-    def setPlan(self,unPlan):
-        self._plan = unPlan
+#        self._plan = None
+#        
+#    def getPlan(self):
+#        return self._plan
+#    
+#    def setPlan(self,unPlan):
+#        self._plan = unPlan

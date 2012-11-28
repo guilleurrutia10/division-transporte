@@ -16,7 +16,7 @@ class TipoRepuesto(Persistent):
     @author: 
     '''
 
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
     
     
     
@@ -30,7 +30,7 @@ class TipoRepuesto(Persistent):
     
     descripcion  (private)
     
-    """
+    '''
 
     def __init__(self, nombre, descripcion):
         '''

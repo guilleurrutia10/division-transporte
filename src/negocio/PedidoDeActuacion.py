@@ -16,7 +16,7 @@ class PedidoDeActuacion(Persistent):
     @author: 
     '''
     
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
     
     
     
@@ -32,7 +32,7 @@ class PedidoDeActuacion(Persistent):
     
     repuestosUtilizados
     
-    """
+    '''
 
 
     def __init__(self):
