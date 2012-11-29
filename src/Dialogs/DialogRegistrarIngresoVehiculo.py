@@ -13,6 +13,8 @@ from formularios.DialogDatosIngresoVehiculo import Ui_DialogIngresoVehiculo
 import WidgetListadoDeVehiculos
 from negocio.Division_Transporte import Division_Transporte
 
+from excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
+
 global itemglobal
 itemglobal = None
 
@@ -102,11 +104,13 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         print itemglobal.text()
         try:
             assert self.testearDialogo() is True
+            self.registrarIngresoVehiculo()
+            print 'Imprimiendo Orden-......'
+            self.mostrarMensaje('Orden de Reparación Creada. :)', 'Creando Orden de Reparación')
         except AssertionError:
             return
-        self.registrarIngresoVehiculo()
-        print 'Imprimiendo Orden-......'
-        self.mostrarMensaje('Orden de Reparación Creada. :)', 'Creando Orden de Reparación')
+        except ExcepcionPoseeOrdenReparacionEnCurso, e:
+            self.mostrarMensaje(e.getMensaje(), 'ERROR!')
         self.accept()
     
     @QtCore.pyqtSlot()

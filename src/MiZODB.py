@@ -192,3 +192,21 @@ class ZopeDB(object):
         diccinarioDivisionTransporte[clave] = division
         self.zodb._p_changed = True
         transaction.commit()
+        
+    def cargarTiposDeReparaciones(self):
+        from negocio.TipoDeReparacion import TipoDeReparacion
+        raiz = self.zodb.raiz
+        diccionario = {'Reacondicionamiento de motor':1, 
+                       'Afinado de motor':2, 
+                       'Ensayo de sistema de escape':3, 
+                       'Reparacion de ejes':4,
+                       'Reparacion de frenos':5,
+                       'Reparacion del tanque de combustible':6,
+                       'Reparacion de radiador': 7}
+        tiposReparaciones = {}
+        for nombre in diccionario:
+            tRep = TipoDeReparacion(nombre, diccionario[nombre])
+            tiposReparaciones[nombre] = tRep
+        raiz['tiposReparaciones'] = tiposReparaciones
+        self.zodb._p_changed = True
+        transaction.commit()

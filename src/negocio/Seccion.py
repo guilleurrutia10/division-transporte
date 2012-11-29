@@ -17,7 +17,7 @@ class Seccion(Persistent):
     @author: 
     '''
     
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
     
     
     
@@ -27,7 +27,7 @@ class Seccion(Persistent):
     
     nombre  (private)
     
-    """
+    '''
 
 
     def __init__(self, nombre, empleados, encargado):

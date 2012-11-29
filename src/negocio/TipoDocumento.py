@@ -14,7 +14,7 @@ class TipoDocumento(Persistent):
     @author: 
     '''
 
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
     
     
     
@@ -24,7 +24,7 @@ class TipoDocumento(Persistent):
     
     descripcion  (private)
     
-    """
+    '''
         
     def __init__(self, codigoTipoDocumento=None, descripcion=None):
         '''

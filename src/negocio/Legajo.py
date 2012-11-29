@@ -10,6 +10,8 @@ from persistent import Persistent
 from Localidad import *
 from OrdenReparacion import *
 
+from excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso 
+
 class Legajo(Persistent):
     '''
     classdocs
@@ -17,23 +19,7 @@ class Legajo(Persistent):
     @author: 
     '''
     
-    def __init__(self, dominio, marca, registroInterno, numeroChasis, comisaria=''):
-        '''
-        Constructor
-        @return: 
-        @author: 
-        '''
-        self.dominio = dominio
-        self.marca = marca
-        self.registroInterno = registroInterno
-        self.numeroChasis = numeroChasis
-        self.comisaria = comisaria
-        # Tener en consideraón luego.
-        self.localidad = ''
-        self.ordenesDeReparacion = []
-        self.numeroOrden = 0
-    
-    """ ATTRIBUTES
+    ''' ATTRIBUTES
 
    
 
@@ -57,7 +43,23 @@ class Legajo(Persistent):
       
       ordenesReparacion
 
-    """
+    '''
+    
+    def __init__(self, dominio, marca, registroInterno, numeroChasis, comisaria=''):
+        '''
+        Constructor
+        @return: 
+        @author: 
+        '''
+        self.dominio = dominio
+        self.marca = marca
+        self.registroInterno = registroInterno
+        self.numeroChasis = numeroChasis
+        self.comisaria = comisaria
+        # Tener en consideraón luego.
+        self.localidad = ''
+        self.ordenesDeReparacion = []
+        self.numeroOrden = 0
     
     def datosLegajo(self):
         '''
@@ -67,25 +69,38 @@ class Legajo(Persistent):
         # Probar devolviendo vars(Legajo)
         return [self.dominio, self.marca, self.registroInterno, self.numeroChasis, self.comisaria, self.localidad, self.ordenesDeReparacion]
     
+    def noEstaFinalizada(self, ordenReparacion):
+        return ordenReparacion.getEstadoOrdenReparacion() != 'Finalizada'
+    
     def obtenerOrdenDeReparacionEnCurso(self):
         '''
         @return: 
         @author: 
         '''
-        pass
-    
+        ordenEnCurso = filter(lambda unaOrden: unaOrden != 'Finalizada', self.ordenesDeReparacion)
+#        ordenEnCurso = filter(self.noEstaFinalizada, self.ordenesDeReparacion)
+        try:
+            ordenEnCurso[0]
+            raise ExcepcionPoseeOrdenReparacionEnCurso('El vehículo ya posee una orden de Reparación en Curso.')
+        except IndexError:
+            return None
+        
     def crearOrdenDeReparacion(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
         '''
         @return: 
         @author: 
         '''
         #Antes de crear la orden, obtener orden en curso, si no existe(no tiene) crearla.
-        ordenReparacion = OrdenReparacion(self.dameNumeroOrden(), kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
-        self.ordenesDeReparacion.append(ordenReparacion)
-        ordenReparacion.addReparacion()
+        try:
+            self.obtenerOrdenDeReparacionEnCurso()
+            ordenReparacion = OrdenReparacion(self.dameNumeroOrden(), kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
+            self.ordenesDeReparacion.append(ordenReparacion)
+        except ExcepcionPoseeOrdenReparacionEnCurso, e:
+            raise ExcepcionPoseeOrdenReparacionEnCurso(e.getMensaje())
+#        ordenReparacion.addReparacion()
 #        self.ordenesDeReparacion[1] = ordenReparacion
 #        self.ordenesDeReparacion.append(ordenReparacion)
-        print ordenReparacion.codigoOrdenReparacion
+#        print ordenReparacion.codigoOrdenReparacion
     
     def save(self):
         from MiZODB import ZopeDB, MiZODB
