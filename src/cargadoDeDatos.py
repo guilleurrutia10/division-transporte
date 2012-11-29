@@ -11,16 +11,9 @@ from persistent.mapping import PersistentMapping
 
 from negocio.Empleado import Empleado
 from negocio.TipoDocumento import TipoDocumento
-<<<<<<< HEAD
+
 from MiZODB import ZopeDB, MiZODB
-
-#if __name__ == '__main__':
-=======
-from MiZODB import MiZODB, ZopeDB
-
-from MiZODB import MiZODB, ZopeDB
-
-from MiZODB import MiZODB, ZopeDB
+from pprint import pprint
 
 if __name__ == '__main__':
     
@@ -30,9 +23,9 @@ if __name__ == '__main__':
     bd.zodb.close()
     
     bd.zodb.open()
-    print bd.getAlls('tiposReparaciones')
+    pprint(bd.getAlls('tiposReparaciones'))
     bd.zodb.close()
->>>>>>> 81a6d94d0b93b16d5c30d25fd5588a1bec146ee1
+    
 #    bd = config.databaseFromURL('zeo.conf')
 #    conexion = bd.open()
 #    raiz = conexion.root()
@@ -61,7 +54,6 @@ if __name__ == '__main__':
 #    print id(raiz[empleado.documento].tipoDocumento)
 #    
 #    conexion = bd.close()
-<<<<<<< HEAD
 #    raiz = conexion
 
 class Clase1(object):
@@ -85,6 +77,4 @@ nuevaVariableDeInstancia = 2
 #En tiempo de Ejecución la instancia del objeto Clase1 adquiere una nueva variable de instancia.
 objeto.nuevaVariableDeInstancia = nuevaVariableDeInstancia
 objeto.imprime(objeto.nuevaVariableDeInstancia)
-=======
 #    raiz = conexion
->>>>>>> 81a6d94d0b93b16d5c30d25fd5588a1bec146ee1

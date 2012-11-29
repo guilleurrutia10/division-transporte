@@ -50,3 +50,6 @@ class TipoDeReparacion(Persistent):
     
     def setDescripcion(self, descripcion):
         self._descripcion = descripcion
+
+    def __eq__(self, otro):
+        return self.getNombre() == otro.getNombre()

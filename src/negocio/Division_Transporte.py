@@ -26,21 +26,22 @@ class Division_Transporte(Persistent):
     :author:
     '''
     
-    ''' ATTRIBUTES
+    ''' 
+    ATTRIBUTES
         
-        legajos
-        
-        localidades
-        
-        empleados
-        
-        tiposDocumentos
-        
-        repuestos
-        
-        tiposDeReparacion
-        
-        secciones
+    legajos
+    
+    localidades
+    
+    empleados
+    
+    tiposDocumentos
+    
+    repuestos
+    
+    tiposDeReparacion
+    
+    secciones
         
     '''
     
@@ -149,6 +150,21 @@ class Division_Transporte(Persistent):
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.get('empleados',clave)
     
+    '''
+    @TODO: Tener en cuenta q la el módulo q manipula la BD lanzará una Excepción
+    si el repuesto con las característcas q se intentan ingresar y existe.
+    '''
+    def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento):
+        '''
+        @return: 
+        @author: 
+        '''
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+#        tipoDoc = zodb.get('tiposDocumentos',tipoDocumento)
+        empleado = Empleado(nombre,apellido, numeroDocumento, zodb.get('tiposDocumentos',tipoDocumento))
+        zodb.save('empleados', empleado.documento, empleado)
+#        empleado.save()
+    
     def darDeBajaEmpleado(self):
         '''
         @return: 
@@ -241,24 +257,13 @@ class Division_Transporte(Persistent):
         hoy = datetime.datetime.now()
         vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
         vehiculo.save()
-    
-    '''
-    @TODO: Tener en cuenta q la el módulo q manipula la BD lanzará una Excepción
-    si el repuesto con las característcas q se intentan ingresar y existe.
-    '''
-    def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento):
-        '''
-        @return: 
-        @author: 
-        '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
-#        tipoDoc = zodb.get('tiposDocumentos',tipoDocumento)
-        empleado = Empleado(nombre,apellido, numeroDocumento, zodb.get('tiposDocumentos',tipoDocumento))
-        zodb.save('empleados', empleado.documento, empleado)
-#        empleado.save()
 
     def __str__(self):
         '''
         Sobrecarga del método que imprime una cadena que representa a la División Transporte.
         '''
         return '%s, Id: %s'%(self.__class__, id(self))
+    
+    def getTipoReparaciones(self):
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        return zodb.getAlls('tiposReparaciones')
