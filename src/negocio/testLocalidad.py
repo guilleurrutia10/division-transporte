@@ -6,14 +6,17 @@ Created on 28/11/2012
 '''
 import unittest
 
+from Localidad import Localidad
 
 class Test(unittest.TestCase):
 
     def setUp(self):
         unittest.TestCase.setUp(self)
-
+        self.localidad =  Localidad('Rawson', 9000)
+        
     def testNombreLocalidad(self):
-        pass
+        print self.localidad.getNombre()
+        assert self.localidad.getNombre() is 'Rawson'
     
     def tearDown(self):
         unittest.TestCase.tearDown(self)

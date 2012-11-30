@@ -43,25 +43,25 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         fila = 0
         for vehiculo in vehiculos:
             columna = 0
-            miItem1 = QtGui.QTableWidgetItem()
-            miItem1.setText(vehiculo.dominio)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,miItem1)
+            itemDominio = QtGui.QTableWidgetItem()
+            itemDominio.setText(vehiculo.dominio)
+            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemDominio)
             columna += 1
-            miItem2 = QtGui.QTableWidgetItem()
-            miItem2.setText(vehiculo.marca)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,miItem2)
+            itemMarca = QtGui.QTableWidgetItem()
+            itemMarca.setText(vehiculo.marca)
+            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemMarca)
             columna += 1
-            miItem3 = QtGui.QTableWidgetItem()
-            miItem3.setText(vehiculo.registroInterno)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,miItem3)
+            itemRegistroInterno = QtGui.QTableWidgetItem()
+            itemRegistroInterno.setText(vehiculo.registroInterno)
+            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemRegistroInterno)
             columna += 1
-            miItem4 = QtGui.QTableWidgetItem()
-            miItem4.setText(vehiculo.numeroChasis)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,miItem4)
+            itemNumeroChasis = QtGui.QTableWidgetItem()
+            itemNumeroChasis.setText(vehiculo.numeroChasis)
+            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemNumeroChasis)
             columna += 1
-            miItem5 = QtGui.QTableWidgetItem()
-            miItem5.setText(vehiculo.comisaria)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,miItem5)
+            itemComisaria = QtGui.QTableWidgetItem()
+            itemComisaria.setText(vehiculo.comisaria)
+            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemComisaria)
             fila += 1
     
     def cargarGrillaInicial(self):

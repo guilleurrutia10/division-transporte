@@ -17,46 +17,6 @@ class Empleado(Persistent):
     :version:
     :author:
     '''
-
-    ''' ATTRIBUTES
-
-   
-
-        numeroDocumento  (private)
-
-   
-
-        nombre  (private)
-
-   
-
-        apellido  (private)
-
-   
-
-        fechaNacimiento  (private)
-
-   
-
-        fechaAlta  (private)
-
-   
-
-        fechaBaja  (private)
-
-   
-
-        email  (private)
-
-   
-
-        telefono_  (private)
-
-   
-
-        domicilio  (private)
-
-    '''
     
     def __init__(self, nombre, apellido, documento, tipoDocumento):
         '''
@@ -76,3 +36,25 @@ class Empleado(Persistent):
         
     def __eq__(self, otro):
         return self.documento == otro.documento
+    
+    '''     ATTRIBUTES
+
+        numeroDocumento  (private)
+
+        nombre  (private)
+
+        apellido  (private)
+
+        fechaNacimiento  (private)
+
+        fechaAlta  (private)
+
+        fechaBaja  (private)
+
+        email  (private)
+
+        telefono_  (private)
+
+        domicilio  (private)
+
+    '''

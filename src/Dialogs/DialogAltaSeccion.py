@@ -40,12 +40,12 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         try:
             assert not(self.tableWidgetEmpleadosAsignados.rowCount() < 2)
         except AssertionError:
-            print 'No se han cargado empleados a la Seccion'
+            self.mostrarMensaje('No se han cargado empleados a la Seccion. Debe cargar al menos dos.', 'Cargar Empleados')
             return
         try:
             assert not(self._encargado is None)
         except AssertionError:
-            print 'No se ha asignado el Encargado de la Seccion'
+            self.mostrarMensaje('No se ha asignado el Encargado de la Seccion.', 'Cargar encargados')
             return
         print 'Cargando Seccion.... Realizar todavía'
         nombreSeccion = unicode(self.lineEditNombreSeccion.text())
@@ -67,7 +67,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
-        self.close()
+        self.reject()
         
     def cargarGrilla(self):
         #=======================================================================

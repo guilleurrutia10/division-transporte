@@ -35,7 +35,7 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
     def on_pushButton_Cancelar_pressed(self):
         '''
         '''
-        self.close()
+        self.reject()
         
     @QtCore.pyqtSlot()
     def on_pushButton_2Aceptar_pressed(self):

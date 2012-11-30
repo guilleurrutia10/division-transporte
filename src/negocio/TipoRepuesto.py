@@ -16,18 +16,12 @@ class TipoRepuesto(Persistent):
     @author: 
     '''
 
-    ''' ATTRIBUTES
-    
-    
-    
+    '''     ATTRIBUTES
+        
     codigoRepuesto  (private)
-    
-    
-    
+        
     nombre  (private)
-    
-    
-    
+        
     descripcion  (private)
     
     '''

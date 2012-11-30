@@ -36,6 +36,5 @@ class WidgetMostrarRepuestos(QtGui.QWidget, Ui_FormMostrarRepuestos):
         self.connect(self.pushButtonModificarRepuesto, QtCore.SIGNAL("pressed()"), self.abrirDialogModificarRepuesto)
         
     def abrirDialogModificarRepuesto(self):
-        print 'abriendo dialogo ModificarRepuesto'
         dlgModificarRepuesto= DialogModificarRepuesto(self)
         dlgModificarRepuesto.exec_()

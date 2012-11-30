@@ -11,8 +11,8 @@ from re import match
 from formularios.DialogRegistrarIngresoVehiculo import Ui_DialogRegistrarIngresoVehiculo
 from formularios.DialogDatosIngresoVehiculo import Ui_DialogIngresoVehiculo 
 import WidgetListadoDeVehiculos
-from negocio.Division_Transporte import Division_Transporte
 
+from negocio.Division_Transporte import Division_Transporte
 from excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
 
 global itemglobal
@@ -35,6 +35,8 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         self.setupUi(self)
         self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
+        self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellEntered(int,int)'), self.seleccionarCelda)
+        self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellPressed(int,int)'), self.seleccionarCelda)
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -42,7 +44,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         @version: 
         @author: 
         '''
-        self.close()
+        self.reject()
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
@@ -58,13 +60,29 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         @version: 
         @author: 
         '''
-        dlgDatosIngreso = DialogDatosIngresoVehiculo()
-        dlgDatosIngreso.exec_()
+        '''
+        TODO: Obtener algún indicio de que el vehiculo seleccionado tiene Orden de
+        Reparacion en Curso.
+        '''
+        if itemglobal:
+            dlgDatosIngreso = DialogDatosIngresoVehiculo()
+            dlgDatosIngreso.exec_()
+        else:
+            self.mostrarMensaje('Debe seleccionar un Vehiculo.', 'Seleccionar Vehiculo')
         
     def seleccionarCelda(self, fila, columna):
         itemVehiculo = self.miWidget.tableWidgetListadoDeVehiculos.item(fila, 0)
         global itemglobal
         itemglobal = itemVehiculo
+        
+    '''
+    TODO: Este método se repite en varios Dialogs.
+    '''
+    def mostrarMensaje(self, mensaje, titulo):
+        msgBox = QtGui.QMessageBox(self)
+        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+        return msgBox.exec_()
         
 class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
     '''
@@ -82,7 +100,9 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         super(DialogDatosIngresoVehiculo, self).__init__(parent)
         self.setupUi(self)
         self.validacionesLineEdit()
-        
+        cadena = self.lineEditKilometraje.validator().regExp()
+        print cadena.pattern()
+#        QtCore.QRegExp.pattern()
         
     #Validación a medida que se escribe en el lineEdit
     def validacionesLineEdit(self):
@@ -107,11 +127,12 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
             self.registrarIngresoVehiculo()
             print 'Imprimiendo Orden-......'
             self.mostrarMensaje('Orden de Reparación Creada. :)', 'Creando Orden de Reparación')
+            self.accept()
         except AssertionError:
             return
         except ExcepcionPoseeOrdenReparacionEnCurso, e:
             self.mostrarMensaje(e.getMensaje(), 'ERROR!')
-        self.accept()
+            self.reject()
     
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -119,7 +140,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         @version: 
         @author: 
         '''
-        self.close()
+        self.reject()
     
     def registrarIngresoVehiculo(self):
         dominio = unicode(itemglobal.text())
