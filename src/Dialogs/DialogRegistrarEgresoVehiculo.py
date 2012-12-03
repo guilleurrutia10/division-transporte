@@ -34,7 +34,7 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
         @version: 
         @author: 
         '''
-        self.close()
+        self.reject()
     
     @QtCore.pyqtSlot()
     def on_pushButtonRegistrarEgreso_clicked(self):
@@ -76,4 +76,4 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         @version: 
         @author: 
         '''
-        self.close()
+        self.reject()

@@ -18,6 +18,7 @@ from TipoDeReparacion import *
 from TipoDocumento import *
 
 from MiZODB import ZopeDB, MiZODB
+from copy import deepcopy
 
 class Division_Transporte(Persistent):
     '''
@@ -85,11 +86,27 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        seccion = Seccion(nombreSeccion, empleados, encargado)
-#        seccion.setEncargado(encargado)
-        # Para cada x en empleados hacer seccion.agregarEmpleado(x)
+        pass
+        # Acordarse de de que vienen los documentos del empleados y el documento del encargado
+        # y sólo el nombre de la Sección.
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        empleadosSeccion = {}
+        for empleado in empleados:
+            empleadosSeccion[empleado] = deepcopy(zodb.get('empleados', empleado))
+        encargadoSeccion = deepcopy(zodb.get('empleados', encargado))
+        seccion = Seccion(nombreSeccion, empleadosSeccion, encargadoSeccion)
         seccion.save()
-        
+        zodb.remove('empleados', empleado)
+        zodb.remove('empleados', encargado)
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
+#        seccion = Seccion(nombreSeccion, empleados, encargado)
+##        seccion.setEncargado(encargado)
+#        # Para cada x en empleados hacer seccion.agregarEmpleado(x)
+#        for i in empleados:
+#            zodb.remove('empleados', empleados[i].documento)
+#        zodb.remove('empleados', encargado.documento)
+#        seccion.save()
+#        
     def getTipoDeDocumentos(self):
         '''
         @return: 
@@ -119,7 +136,19 @@ class Division_Transporte(Persistent):
         @author: 
         '''
         zodb = ZopeDB(MiZODB('zeo.conf'))
-        return zodb.getAlls('empleados')
+        empleados = zodb.getAlls('empleados').values()
+        secciones = zodb.getAlls('secciones').values()
+        empleadosAsignados = {}
+        for seccion in secciones:
+            p = seccion.empleados.values()
+            for empleado in p:
+                empleadosAsignados[empleado.documento] = empleado
+            empleadosAsignados[seccion.encargado.documento] = seccion.encargado
+    
+        for empleado in empleados:
+            empleadosAsignados[empleado.documento] = empleado
+        return empleadosAsignados
+#        return zodb.getAlls('empleados')
     
     def getEmpleadosSinAsignar(self):
         '''
@@ -128,18 +157,19 @@ class Division_Transporte(Persistent):
         '''
         zodb = ZopeDB(MiZODB('zeo.conf'))
         empleados = zodb.getAlls('empleados')
-        secciones = zodb.getAlls('secciones')
-        empleadosSinAsignar = {}
-        esta = False
-        for empleado  in empleados:
-            esta = False
-            for seccion in secciones:
-                    if ((empleados[empleado].documento in secciones[seccion].empleados)or(empleados[empleado] == secciones[seccion].encargado)):
-                        esta = True
-                        break
-            if not esta:
-                empleadosSinAsignar[empleados[empleado].documento] = empleados[empleado]
-        return empleadosSinAsignar
+        return empleados
+#        secciones = zodb.getAlls('secciones')
+#        empleadosSinAsignar = {}
+#        esta = False
+#        for empleado  in empleados:
+#            esta = False
+#            for seccion in secciones:
+#                    if ((empleados[empleado].documento in secciones[seccion].empleados)or(empleados[empleado] == secciones[seccion].encargado)):
+#                        esta = True
+#                        break
+#            if not esta:
+#                empleadosSinAsignar[empleados[empleado].documento] = empleados[empleado]
+#        return empleadosSinAsignar
             
     
     def getEmpleado(self, clave):
@@ -148,7 +178,7 @@ class Division_Transporte(Persistent):
         @author: 
         '''
         zodb = ZopeDB(MiZODB('zeo.conf'))
-        return zodb.get('empleados',clave)
+        return zodb.get('empleados', clave)
     
     '''
     @TODO: Tener en cuenta q la el módulo q manipula la BD lanzará una Excepción
@@ -161,7 +191,7 @@ class Division_Transporte(Persistent):
         '''
         zodb = ZopeDB(MiZODB('zeo.conf'))
 #        tipoDoc = zodb.get('tiposDocumentos',tipoDocumento)
-        empleado = Empleado(nombre,apellido, numeroDocumento, zodb.get('tiposDocumentos',tipoDocumento))
+        empleado = Empleado(nombre, apellido, numeroDocumento, zodb.get('tiposDocumentos', tipoDocumento))
         zodb.save('empleados', empleado.documento, empleado)
 #        empleado.save()
     
@@ -215,7 +245,7 @@ class Division_Transporte(Persistent):
         @author: 
         '''
         zodb = ZopeDB(MiZODB('zeo.conf'))
-        return zodb.get('vehiculos',clave)
+        return zodb.get('vehiculos', clave)
     
     def modificarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
         zodb = ZopeDB(MiZODB('zeo.conf'))
@@ -262,7 +292,7 @@ class Division_Transporte(Persistent):
         '''
         Sobrecarga del método que imprime una cadena que representa a la División Transporte.
         '''
-        return '%s, Id: %s'%(self.__class__, id(self))
+        return '%s, Id: %s' % (self.__class__, id(self))
     
     def getTipoReparaciones(self):
         zodb = ZopeDB(MiZODB('zeo.conf'))

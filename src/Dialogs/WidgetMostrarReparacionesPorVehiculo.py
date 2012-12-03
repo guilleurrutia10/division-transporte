@@ -19,4 +19,3 @@ class WidgetMostrarReparacionesPorVehiculo(QtGui.QWidget, Ui_WidgetMostrarRepara
         '''
         super(WidgetMostrarReparacionesPorVehiculo, self).__init__(parent)
         self.setupUi(self)
-        

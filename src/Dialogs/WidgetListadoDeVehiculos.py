@@ -21,16 +21,11 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         self.setupUi(self)
         #Para evitar que se modifique la información presentada por la grilla.
         self.tableWidgetListadoDeVehiculos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
-#        self.vehiculos = None
         self.cargarGrillaInicial()
     
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscar_textChanged(self, cadena):
-        filtro = unicode(self.lineEditBuscar.text())
-#        division = Division_Transporte()
-#        vehiculos = division.getVehiculos()
-#        values = vehiculos.values()
-        
+        filtro = unicode(self.lineEditBuscar.text())        
         coches = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.dominio)), self.vehiculos)
         #El método de comparación por igual está sobrecargado en la clase Legajo.
         coches.sort(cmp=lambda x,y : cmp(x, y))

@@ -53,6 +53,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         @author: 
         '''
         print 'Click sobre aceptar'
+        self.accept()
     
     @QtCore.pyqtSlot()
     def on_pushButtonRegistrarNuevoIngreso_clicked(self):

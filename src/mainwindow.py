@@ -23,10 +23,10 @@ class MyListado(QtGui.QWidget, Ui_Form):
     def __init__(self, parent = None):
         super(MyListado, self).__init__(parent)
         self.setupUi(self)
-        self.cargarGrilla()
+        self.cargarGrillaEmpleadosSinAsignar()
         self.connect(self.tableWidgetDatosEmpleados, QtCore.SIGNAL('cellDoubleClicked(int,int)'), self.celdaClick)    
     
-    def cargarGrilla(self):
+    def cargarGrillaEmpleadosSinAsignar(self):
         
         print "Cargando Grilla"
         from negocio import Division_Transporte

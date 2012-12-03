@@ -34,4 +34,4 @@ class DialogSeleccionarSeccion(QtGui.QDialog, Ui_Dialog_SeleccionarSeccion):
     
     @QtCore.pyqtSlot()
     def on_pushButton_Cancelar_clicked(self):
-        self.close()
+        self.reject()

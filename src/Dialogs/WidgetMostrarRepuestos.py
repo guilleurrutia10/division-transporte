@@ -32,7 +32,6 @@ class WidgetMostrarRepuestos(QtGui.QWidget, Ui_FormMostrarRepuestos):
         '''
         super(WidgetMostrarRepuestos, self).__init__(parent)
         self.setupUi(self)
-        #Conectamos el boton Modificar Repuesto...
         self.connect(self.pushButtonModificarRepuesto, QtCore.SIGNAL("pressed()"), self.abrirDialogModificarRepuesto)
         
     def abrirDialogModificarRepuesto(self):

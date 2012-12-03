@@ -30,13 +30,13 @@ class WidgetMostrarTiposDeReparaciones(QtGui.QWidget, Ui_WidgetMostrarTiposDeRep
         fila = 0
         for reparacion in tiposReparaciones:
             columna = 0
-            miItem1 = QtGui.QTableWidgetItem()
-            miItem1.setText(reparacion.getNombre())
-            self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, miItem1)
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(reparacion.getNombre())
+            self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, itemNombre)
             columna += 1
-            miItem2 = QtGui.QTableWidgetItem()
-            miItem2.setText(unicode(reparacion.getDescipcion()))
-            self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, miItem2)
+            itemDescripcion = QtGui.QTableWidgetItem()
+            itemDescripcion.setText(unicode(reparacion.getDescipcion()))
+            self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, itemDescripcion)
             fila += 1
             
     def cargarGrillaInicial(self):

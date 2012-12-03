@@ -12,9 +12,6 @@ from PyQt4 import QtGui
 from mainwindow import MyMainWindow
 from mainLogin import MyLogin
 
-#constante global que referencia a la aplicación.
-#APP = None
-
 class Aplicacion(QtGui.QApplication):
     
     def __init__(self):

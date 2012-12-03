@@ -14,7 +14,7 @@ class DialogMuestraLosRepuestos(QtGui.QDialog, Ui_Dialog):
     '''
     classdocs
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         '''
@@ -24,17 +24,18 @@ class DialogMuestraLosRepuestos(QtGui.QDialog, Ui_Dialog):
         self.tableWidgetDatosRepuestos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.repuestos = None
         self.cargarGrillaInicial()
+        self.tableWidgetDatosRepuestos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.tableWidgetDatosRepuestos.connect(self.tableWidgetDatosRepuestos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
-        self.close()
+        self.reject()
         
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscarNombre_textChanged(self, cadena):
         filtro = unicode(cadena)
         #refrescar Grilla
-        repuestos = filter( lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.getNombre())), self.repuestos)
+        repuestos = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.getNombre())), self.repuestos)
         self.cargarGrilla(repuestos)
         
     def cargarGrilla(self, repuestos):
@@ -43,20 +44,20 @@ class DialogMuestraLosRepuestos(QtGui.QDialog, Ui_Dialog):
         fila = 0
         for repuesto in repuestos:
             columna = 0
-            miItemc1 = QtGui.QTableWidgetItem()
-            miItemc1.setText(repuesto.getNombre())
-            self.tableWidgetDatosRepuestos.setItem(fila,columna,miItemc1)
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(repuesto.getNombre())
+            self.tableWidgetDatosRepuestos.setItem(fila, columna, itemNombre)
             columna += 1
-            miItemc2 = QtGui.QTableWidgetItem()
-            miItemc2.setText(repuesto.getDescripcion())
-            self.tableWidgetDatosRepuestos.setItem(fila,columna,miItemc2)
+            itemDescripcion = QtGui.QTableWidgetItem()
+            itemDescripcion.setText(repuesto.getDescripcion())
+            self.tableWidgetDatosRepuestos.setItem(fila, columna, itemDescripcion)
             fila += 1
                 
     def cargarGrillaInicial(self):
         division = Division_Transporte()
         rep = division.getRepuestos()
         self.repuestos = rep.values()
-        self.repuestos.sort(cmp=lambda x,y : cmp(x.getNombre, y.getNombre))
+        self.repuestos.sort(cmp=lambda x, y : cmp(x.getNombre, y.getNombre))
         self.cargarGrilla(self.repuestos)
         
     def seleccionarCelda(self, fila, columna):

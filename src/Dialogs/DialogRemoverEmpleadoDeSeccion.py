@@ -22,4 +22,4 @@ class DialogRemoverEmpleadoDeSeccion(QtGui.QDialog, Ui_Dialog):
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
-        self.close()
+        self.reject()

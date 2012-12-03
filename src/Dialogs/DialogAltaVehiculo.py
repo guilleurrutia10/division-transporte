@@ -47,14 +47,7 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
             assert self.testearDialogo() is True
         except AssertionError:
             return
-        '''TODO: Armar método cargar Vehiculo'''  
-        dominio = unicode(self.lineEditDominio.text())
-        marca = unicode(self.lineEditMarca.text())
-        registroInterno = unicode(self.lineEditRegistroInterno.text())
-        numeroChasis = unicode(self.lineEditChasisNro.text())
-        division = Division_Transporte()
-        division.addVehiculo(dominio, marca, registroInterno, numeroChasis)
-         
+        self.cargarVehiculo()
         if self.mostrarMensaje('El vehiculo se ha ingresado correctamente!!! :)', 'Ingresando Vehiculo'):
             self.accept()
     
@@ -92,3 +85,12 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
+    
+    def cargarVehiculo(self): 
+        dominio = unicode(self.lineEditDominio.text())
+        marca = unicode(self.lineEditMarca.text())
+        registroInterno = unicode(self.lineEditRegistroInterno.text())
+        numeroChasis = unicode(self.lineEditChasisNro.text())
+        #Se carga el Vehículo en el sistema.
+        division = Division_Transporte()
+        division.addVehiculo(dominio, marca, registroInterno, numeroChasis)
