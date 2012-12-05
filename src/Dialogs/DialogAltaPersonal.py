@@ -45,7 +45,7 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
     def on_pushButtonCancelar_clicked(self):
         '''
         '''
-        self.close()
+        self.reject()
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
@@ -55,16 +55,7 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
             assert self.testearDialogo() is True
         except AssertionError:
             return
-        '''
-        TODO: Armar métod cargarEmpleado.....
-        '''
-        nombre = unicode(self.lineEditNombre.text())
-        apellido = unicode(self.lineEditApellido.text())
-        nroDocumento = unicode(self.lineEditNroDocumento.text())
-        tipoDocumento = unicode(self.comboBoxTipoDocumento.currentText())
-        division = Division_Transporte()
-        division.agregarEmpleado(nombre, apellido, nroDocumento, tipoDocumento)
-        
+        self.cargarPersonal()
         if self.mostrarMensaje('El Empleado se ha cargado exitosamente!! :)', 'Cargando Empleado'):
             self.accept()
     
@@ -77,7 +68,7 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         '''
         msgBox = QtGui.QMessageBox(self)
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
-        msgBox.setWindowTitle(titulo)
+        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
         
     def testearDialogo(self):
@@ -100,3 +91,12 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
             self.lineEditNroDocumento.setFocus()
             return
         return True
+    
+    def cargarPersonal(self):
+        nombre = unicode(self.lineEditNombre.text())
+        apellido = unicode(self.lineEditApellido.text())
+        nroDocumento = unicode(self.lineEditNroDocumento.text())
+        tipoDocumento = unicode(self.comboBoxTipoDocumento.currentText())
+        #Se carga el empleado en el sistema. 
+        division = Division_Transporte()
+        division.agregarEmpleado(nombre, apellido, nroDocumento, tipoDocumento)

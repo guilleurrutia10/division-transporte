@@ -45,13 +45,13 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        pass
+        self.accept()
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         '''
         '''
-        self.close()
+        self.reject()
     
     @QtCore.pyqtSlot()
     def on_pushButtonModificarDatosDeVehiculo_clicked(self):
@@ -118,7 +118,7 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
     def on_pushButtonCancelar_clicked(self):
         '''
         '''
-        self.close()
+        self.reject()
     
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):

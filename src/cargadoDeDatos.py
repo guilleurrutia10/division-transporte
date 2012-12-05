@@ -75,6 +75,7 @@ objeto.imprime(objeto.valor)
 
 nuevaVariableDeInstancia = 2
 #En tiempo de Ejecución la instancia del objeto Clase1 adquiere una nueva variable de instancia.
+#print objeto.nuevaVariableDeInstancia
 objeto.nuevaVariableDeInstancia = nuevaVariableDeInstancia
 objeto.imprime(objeto.nuevaVariableDeInstancia)
 #    raiz = conexion

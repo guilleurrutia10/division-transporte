@@ -14,23 +14,17 @@ class Localidad(Persistent):
     @author: 
     '''
     
-    ''' ATTRIBUTES
-    
-       
+    ''' ATTRIBUTES       
     
     codigoPostal  (private)
-    
-       
-    
+        
     nombre  (private)
     
-    ''' 
-
-
+    '''
+    
     def __init__(self, nombre, codigoPostal):
         '''
         Constructor
-        @return: 
         @author: 
         '''
         self._nombre = nombre
@@ -56,7 +50,9 @@ class Localidad(Persistent):
     
     #===========================================================================
     # Para ir agragando provincias en tiempo de ejecucion
+    # Métodos estáticos.
     #===========================================================================
+    '''
     def agregarProvincia(self, provincia):
         try:
             self._localidades[provincia]
@@ -69,4 +65,4 @@ class Localidad(Persistent):
         except KeyError:
             provincia = self._localidades[provincia]
             provincia[codigoPostal] = localidad
-            self._localidades[provincia] = provincia
+            self._localidades[provincia] = provincia'''

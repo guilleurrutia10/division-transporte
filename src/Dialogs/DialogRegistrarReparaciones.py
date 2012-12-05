@@ -112,7 +112,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
-        self.close()
+        self.reject()
         
     @QtCore.pyqtSlot()
     def on_pushButtonBuscarVehiculo_clicked(self):

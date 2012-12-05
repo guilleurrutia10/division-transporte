@@ -28,15 +28,18 @@ class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto):
     
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
-        self.close()
+        self.reject()
         
+    '''
+    TODO: Se ha repetido este mismo método en varias de las clsase Dialogos.
+    '''
     def mostrarMensaje(self, mensaje, titulo):
         '''
         Función que muestra un pequeña ventana con información relevante.
         '''
         msgBox = QtGui.QMessageBox(self)
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
-        msgBox.setWindowTitle(titulo)
+        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
     
     @QtCore.pyqtSlot()

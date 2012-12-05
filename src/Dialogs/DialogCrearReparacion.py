@@ -38,7 +38,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
-        self.close()
+        self.reject()
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):

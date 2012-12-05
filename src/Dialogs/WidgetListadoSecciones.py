@@ -10,9 +10,10 @@ from formularios.WidgetListadoSecciones2 import Ui_FormListadoSecciones
 from negocio.Division_Transporte import Division_Transporte
 
 class ListadoSecciones(QtGui.QWidget, Ui_FormListadoSecciones):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(ListadoSecciones, self).__init__(parent)
         self.setupUi(self)
+        self.tableWidgetListadoSecciones.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.cargarGrillaInicial()
         
     def seleccionarSeccion(self):
@@ -22,22 +23,23 @@ class ListadoSecciones(QtGui.QWidget, Ui_FormListadoSecciones):
         division = Division_Transporte()
         secciones = division.getSecciones()
         sec = secciones.values()
-        sec.sort(cmp=lambda x,y : cmp(x.nombre, y.nombre))
-        self.cargarGrilla(sec)
+        sec.sort(cmp=lambda x, y : cmp(x.nombre, y.nombre))
+        self.cargarGrillaEmpleadosSinAsignar(sec)
         
-    def cargarGrilla(self, secciones):
+    def cargarGrillaEmpleadosSinAsignar(self, secciones):
         fila = 0
-        columna = 0
+        self.tableWidgetListadoSecciones.clearContents()
         self.tableWidgetListadoSecciones.setRowCount(len(secciones))
         for seccion in secciones:
-            miItem1 = QtGui.QTableWidgetItem()
-            miItem1.setText(seccion.nombre)
-            self.tableWidgetListadoSecciones.setItem(fila,columna,miItem1)
+            columna = 0
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(seccion.nombre)
+            self.tableWidgetListadoSecciones.setItem(fila, columna, itemNombre)
             columna += 1
-            miItem2 = QtGui.QTableWidgetItem()
-            miItem2.setText(unicode(seccion.cantidadEmpleados()))
-            self.tableWidgetListadoSecciones.setItem(fila,columna,miItem2)
+            itemCantidadEmpl = QtGui.QTableWidgetItem()
+            itemCantidadEmpl.setText(unicode(seccion.cantidadEmpleados()))
+            self.tableWidgetListadoSecciones.setItem(fila, columna, itemCantidadEmpl)
             columna += 1
-            miItem3 = QtGui.QTableWidgetItem()
-            miItem3.setText(seccion.encargado.nombre)
-            self.tableWidgetListadoSecciones.setItem(fila,columna,miItem3)
+            itemEncargado = QtGui.QTableWidgetItem()
+            itemEncargado.setText(seccion.encargado.nombre)
+            self.tableWidgetListadoSecciones.setItem(fila, columna, itemEncargado)

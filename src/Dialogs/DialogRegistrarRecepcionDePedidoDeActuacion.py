@@ -27,7 +27,7 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
-        self.close()
+        self.reject()
 
 class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignarFechaRecepcionPedidoActuacion):
     
@@ -41,4 +41,4 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
-        self.close()
+        self.reject()
