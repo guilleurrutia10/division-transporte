@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogAltaVehiculoPrueba.ui'
 #
-# Created: Sun Nov 25 16:33:20 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Dec 05 16:57:27 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -25,7 +25,6 @@ class Ui_DialogAltaVehiculo(object):
         DialogAltaVehiculo.setSizePolicy(sizePolicy)
         DialogAltaVehiculo.setMinimumSize(QtCore.QSize(300, 180))
         DialogAltaVehiculo.setMaximumSize(QtCore.QSize(300, 200))
-        DialogAltaVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogAltaVehiculo", "Alta Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogAltaVehiculo)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogAltaVehiculo)
@@ -34,35 +33,30 @@ class Ui_DialogAltaVehiculo(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
         self.groupBox.setSizePolicy(sizePolicy)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogAltaVehiculo", "Nuevo Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Dominio:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.lineEditDominio = QtGui.QLineEdit(self.groupBox)
         self.lineEditDominio.setObjectName(_fromUtf8("lineEditDominio"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEditDominio)
         self.label_2 = QtGui.QLabel(self.groupBox)
-        self.label_2.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Marca:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
         self.lineEditMarca = QtGui.QLineEdit(self.groupBox)
         self.lineEditMarca.setObjectName(_fromUtf8("lineEditMarca"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.lineEditMarca)
         self.label_3 = QtGui.QLabel(self.groupBox)
-        self.label_3.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Registro Interno:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_3)
         self.lineEditRegistroInterno = QtGui.QLineEdit(self.groupBox)
         self.lineEditRegistroInterno.setObjectName(_fromUtf8("lineEditRegistroInterno"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.lineEditRegistroInterno)
         self.label_4 = QtGui.QLabel(self.groupBox)
-        self.label_4.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Chasis Nro:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_4)
         self.lineEditChasisNro = QtGui.QLineEdit(self.groupBox)
@@ -89,7 +83,6 @@ class Ui_DialogAltaVehiculo(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pushButton_2Aceptar.sizePolicy().hasHeightForWidth())
         self.pushButton_2Aceptar.setSizePolicy(sizePolicy)
-        self.pushButton_2Aceptar.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_2Aceptar.setObjectName(_fromUtf8("pushButton_2Aceptar"))
         self.horizontalLayout.addWidget(self.pushButton_2Aceptar)
         self.pushButton_Cancelar = QtGui.QPushButton(self.groupBox_2)
@@ -98,7 +91,6 @@ class Ui_DialogAltaVehiculo(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pushButton_Cancelar.sizePolicy().hasHeightForWidth())
         self.pushButton_Cancelar.setSizePolicy(sizePolicy)
-        self.pushButton_Cancelar.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_Cancelar.setObjectName(_fromUtf8("pushButton_Cancelar"))
         self.horizontalLayout.addWidget(self.pushButton_Cancelar)
         self.verticalLayout.addWidget(self.groupBox_2)
@@ -107,7 +99,14 @@ class Ui_DialogAltaVehiculo(object):
         QtCore.QMetaObject.connectSlotsByName(DialogAltaVehiculo)
 
     def retranslateUi(self, DialogAltaVehiculo):
-        pass
+        DialogAltaVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogAltaVehiculo", "Alta Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogAltaVehiculo", "Nuevo Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Dominio:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Marca:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Registro Interno:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Chasis Nro:", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_2Aceptar.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_Cancelar.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
     '''
     classdocs
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         '''
@@ -61,13 +61,12 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
             global itemglobal
             assert not(itemglobal is None)
         except AssertionError:
-            self.mostrarMensaje('Debe seleccionar un Veehículo.', 'Ingresar Vehículo')
+            self.mostrarMensaje('Debe seleccionar un Vehículo.', 'Ingresar Vehículo')
             return
         dlgModificar = DialogModificarVehiculo()
-        if dlgModificar.exec_():
-            itemglobal = None
-            self.miWidget.cargarGrillaInicial()
-        return
+        dlgModificar.exec_()
+        itemglobal = None
+        self.miWidget.cargarGrillaInicial()
     
     '''
     TODO: Este método se repite en varios Dialogs.
@@ -90,7 +89,7 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
     '''
     classdocs
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         '''
@@ -101,13 +100,10 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
         self.item = itemglobal
         self.cargarLineEdit()
     
-    #===========================================================================
-    # Se cargan los LineEdit con la información del Vehícuo seleccionado
-    #===========================================================================
     def cargarLineEdit(self):
         division = Division_Transporte()
         self.auto = division.getVehiculo(unicode(self.item.text()))
-        # Se cargan.....
+        
         self.lineEditDominio.setText(self.auto.dominio)
         self.lineEditRegistroInterno.setText(self.auto.registroInterno)
         self.lineEditChasisNro.setText(self.auto.numeroChasis)
@@ -124,11 +120,9 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
     def on_pushButtonAceptar_clicked(self):
         print 'Click sobre aceptar'
         # Se comprueba burdamente que los haya cambiado al menos un LineEdit.
-        if (self.lineEditDominio.text() is self.auto.dominio):
-            if (self.lineEditRegistroInterno is self.auto.marca):
-                if (self.lineEditChasisNro is self.auto.numeroChasis):
-                    if (self.lineEditRegistroInterno is self.auto.registroInterno):
-                        return
+        if (self.lineEditDominio.text() == self.auto.dominio) and (self.lineEditMarca.text() == self.auto.marca) and (self.lineEditChasisNro.text() == self.auto.numeroChasis) and (self.lineEditRegistroInterno.text() == self.auto.registroInterno):
+            self.mostrarMensaje('No se modificó ningún atributo del vehículo', 'Modificación de Vehículo')
+            return
         else:
             '''TODO: Crear método ModificarVehiculo()'''
             division = Division_Transporte()
@@ -140,7 +134,6 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
             division.modificarVehiculo(dominio, marca, registroInterno, nroChasis)
             
             if self.mostrarMensaje('El vehiculo se ha modificado correctamente!!! :)', 'Ingresando Vehiculo'):
-                # Evento que lanza el ButtonBox, creo?
                 self.accept()
     
     '''

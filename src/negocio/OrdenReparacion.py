@@ -8,7 +8,7 @@ Created on 28/10/2012
 from persistent import Persistent
 
 from EstadoOrdenReparacion import *
-#from PedidoDeActuacion import *
+# from PedidoDeActuacion import *
 from Reparacion import *
 from EnRevision import *
 from EsperandoAprobacion import *
@@ -89,7 +89,7 @@ class OrdenReparacion(object):
         TODO: tener en cuenta los comentarios siguientes.
         '''
 #        self.codigoOrdenReparacion = incremental
-        #La primera vez debe instanciarse como EnRevision()
+        # La primera vez debe instanciarse como EnRevision()
 #        self.estado = EstadoOrdenReparacion(), self.estado =  EnRevision()
         self.codigoOrdenReparacion = codigoOrdenReparacion
         self.estado = EnRevision()
@@ -193,7 +193,7 @@ class OrdenReparacion(object):
     def getPlan(self):
         return self._plan
     
-    def setPlan(self,unPlan):
+    def setPlan(self, unPlan):
         self._plan = unPlan
         
     def __str__(self):
@@ -202,5 +202,9 @@ class OrdenReparacion(object):
     def setPedidoDeActuacion(self, pedidoDeActuacion):
         self._pedidoDeActuacion = pedidoDeActuacion
     
+    def getPedidoDeActuacionActual(self):
+        return self.estado.getPedidoActuacion(self)
+        
     def getPedidoDeActuacion(self):
         return self._pedidoDeActuacion
+#        return self._pedidoDeActuacion

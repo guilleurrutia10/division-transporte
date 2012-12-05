@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogRegistrarRecepcionDePedidoDeActuacion.ui'
 #
-# Created: Sun Nov 25 16:33:41 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Dec 05 16:57:34 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,21 +18,23 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
     def setupUi(self, DialogRegistrarRecepcionDePedidoDeActuacion):
         DialogRegistrarRecepcionDePedidoDeActuacion.setObjectName(_fromUtf8("DialogRegistrarRecepcionDePedidoDeActuacion"))
         DialogRegistrarRecepcionDePedidoDeActuacion.resize(572, 416)
-        DialogRegistrarRecepcionDePedidoDeActuacion.setWindowTitle(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Registrar Recepcion de Pedido de Actuacion", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogRegistrarRecepcionDePedidoDeActuacion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogRegistrarRecepcionDePedidoDeActuacion)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Pedidos deActuacion", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.gridLayout = QtGui.QGridLayout(self.groupBox)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.tableWidget = QtGui.QTableWidget(self.groupBox)
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
-        self.tableWidget.setColumnCount(0)
+        self.tableWidget.setColumnCount(2)
         self.tableWidget.setRowCount(0)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, item)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(150)
         self.gridLayout.addWidget(self.tableWidget, 1, 0, 1, 1)
         self.groupBox_2 = QtGui.QGroupBox(self.groupBox)
-        self.groupBox_2.setTitle(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Nro Pedido de Actuacion:  ", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.gridLayout_2 = QtGui.QGridLayout(self.groupBox_2)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
@@ -40,7 +42,6 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
         self.gridLayout_2.addWidget(self.lineEdit, 0, 0, 1, 1)
         self.pushButton_FiltroNroPedido = QtGui.QPushButton(self.groupBox_2)
-        self.pushButton_FiltroNroPedido.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Filtrar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_FiltroNroPedido.setObjectName(_fromUtf8("pushButton_FiltroNroPedido"))
         self.gridLayout_2.addWidget(self.pushButton_FiltroNroPedido, 0, 1, 1, 1)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -52,7 +53,6 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
         self.gridLayout_3 = QtGui.QGridLayout(self.groupBox_3)
         self.gridLayout_3.setObjectName(_fromUtf8("gridLayout_3"))
         self.pushButton_Registrar = QtGui.QPushButton(self.groupBox_3)
-        self.pushButton_Registrar.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Registrar Recepcion", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_Registrar.setObjectName(_fromUtf8("pushButton_Registrar"))
         self.gridLayout_3.addWidget(self.pushButton_Registrar, 0, 1, 1, 1)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -68,11 +68,9 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
         self.gridLayout_6.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_6.setObjectName(_fromUtf8("gridLayout_6"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_6.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_6.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -83,7 +81,17 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
         QtCore.QMetaObject.connectSlotsByName(DialogRegistrarRecepcionDePedidoDeActuacion)
 
     def retranslateUi(self, DialogRegistrarRecepcionDePedidoDeActuacion):
-        pass
+        DialogRegistrarRecepcionDePedidoDeActuacion.setWindowTitle(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Registrar Recepcion de Pedido de Actuacion", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Pedidos deActuacion", None, QtGui.QApplication.UnicodeUTF8))
+        item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Número Pedido", None, QtGui.QApplication.UnicodeUTF8))
+        item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Fecha de Realización", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Nro Pedido de Actuacion:  ", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_FiltroNroPedido.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Filtrar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_Registrar.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Registrar Recepcion", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

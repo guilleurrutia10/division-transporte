@@ -10,10 +10,13 @@ from PyQt4 import QtGui, QtCore
 from formularios.DialogRegistrarRecepcionDePedidoDeActuacion import Ui_DialogRegistrarRecepcionDePedidoDeActuacion 
 from formularios.DialogAsignarFechaRecepcionPedidoActuacion import Ui_DialogAsignarFechaRecepcionPedidoActuacion
 
+from negocio.Division_Transporte import Division_Transporte
+
 class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegistrarRecepcionDePedidoDeActuacion):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(DialogRegistrarRecepcionDePedidoDeActuacion, self).__init__(parent)
         self.setupUi(self)
+        self.cargarGrillaInicial()
         self.pushButtonCancelar
 
     @QtCore.pyqtSlot()
@@ -28,10 +31,16 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         self.reject()
+        
+    def cargarGrillaInicial(self):
+        division = Division_Transporte()
+        self.pedidosDeActuacion = division.getPedidoActuacionSinFechaRecepcion()
+        from pprint import pprint
+        pprint(self.pedidosDeActuacion)
 
 class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignarFechaRecepcionPedidoActuacion):
     
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(DialogAsignarFechaRecepcionPedidoActuacion, self).__init__(parent)
         self.setupUi(self)
     

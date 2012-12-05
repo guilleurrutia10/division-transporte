@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogModificarPersonal.ui'
 #
-# Created: Sun Nov 25 16:33:33 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Dec 05 16:57:31 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -20,28 +20,23 @@ class Ui_DialogModificarPersonal(object):
         DialogModificarPersonal.resize(300, 300)
         DialogModificarPersonal.setMinimumSize(QtCore.QSize(300, 300))
         DialogModificarPersonal.setMaximumSize(QtCore.QSize(300, 300))
-        DialogModificarPersonal.setWindowTitle(QtGui.QApplication.translate("DialogModificarPersonal", "Modificar Personal", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogModificarPersonal)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogModificarPersonal)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogModificarPersonal", "Modificar Empleado", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Nombre:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.label_2 = QtGui.QLabel(self.groupBox)
-        self.label_2.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Apellido:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
         self.lineEditNombre = QtGui.QLineEdit(self.groupBox)
         self.lineEditNombre.setObjectName(_fromUtf8("lineEditNombre"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEditNombre)
         self.label_3 = QtGui.QLabel(self.groupBox)
-        self.label_3.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Nro Documento:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_3)
         self.lineEditApellido = QtGui.QLineEdit(self.groupBox)
@@ -54,33 +49,26 @@ class Ui_DialogModificarPersonal(object):
         self.lineEditDomicilio.setObjectName(_fromUtf8("lineEditDomicilio"))
         self.formLayout.setWidget(5, QtGui.QFormLayout.FieldRole, self.lineEditDomicilio)
         self.label_4 = QtGui.QLabel(self.groupBox)
-        self.label_4.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Domicilio:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.formLayout.setWidget(5, QtGui.QFormLayout.LabelRole, self.label_4)
         self.label_5 = QtGui.QLabel(self.groupBox)
-        self.label_5.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Tipo de Documento:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_5)
         self.comboBoxTipoDocumento = QtGui.QComboBox(self.groupBox)
         self.comboBoxTipoDocumento.setObjectName(_fromUtf8("comboBoxTipoDocumento"))
         self.comboBoxTipoDocumento.addItem(_fromUtf8(""))
-        self.comboBoxTipoDocumento.setItemText(0, QtGui.QApplication.translate("DialogModificarPersonal", "L.C.", None, QtGui.QApplication.UnicodeUTF8))
         self.comboBoxTipoDocumento.addItem(_fromUtf8(""))
-        self.comboBoxTipoDocumento.setItemText(1, QtGui.QApplication.translate("DialogModificarPersonal", "D.N.I.", None, QtGui.QApplication.UnicodeUTF8))
         self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.comboBoxTipoDocumento)
         self.label_6 = QtGui.QLabel(self.groupBox)
-        self.label_6.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Fecha de Nacimiento:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setObjectName(_fromUtf8("label_6"))
         self.formLayout.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_6)
         self.dateEditFechaNacimiento = QtGui.QDateEdit(self.groupBox)
         self.dateEditFechaNacimiento.setObjectName(_fromUtf8("dateEditFechaNacimiento"))
         self.formLayout.setWidget(4, QtGui.QFormLayout.FieldRole, self.dateEditFechaNacimiento)
         self.label_7 = QtGui.QLabel(self.groupBox)
-        self.label_7.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Telefono:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setObjectName(_fromUtf8("label_7"))
         self.formLayout.setWidget(6, QtGui.QFormLayout.LabelRole, self.label_7)
         self.label_8 = QtGui.QLabel(self.groupBox)
-        self.label_8.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Email:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setObjectName(_fromUtf8("label_8"))
         self.formLayout.setWidget(7, QtGui.QFormLayout.LabelRole, self.label_8)
         self.lineEditTelefono = QtGui.QLineEdit(self.groupBox)
@@ -99,11 +87,9 @@ class Ui_DialogModificarPersonal(object):
         self.gridLayout_2.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_2.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_2.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -114,7 +100,20 @@ class Ui_DialogModificarPersonal(object):
         QtCore.QMetaObject.connectSlotsByName(DialogModificarPersonal)
 
     def retranslateUi(self, DialogModificarPersonal):
-        pass
+        DialogModificarPersonal.setWindowTitle(QtGui.QApplication.translate("DialogModificarPersonal", "Modificar Personal", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogModificarPersonal", "Modificar Empleado", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Nombre:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Apellido:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Nro Documento:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Domicilio:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_5.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Tipo de Documento:", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBoxTipoDocumento.setItemText(0, QtGui.QApplication.translate("DialogModificarPersonal", "L.C.", None, QtGui.QApplication.UnicodeUTF8))
+        self.comboBoxTipoDocumento.setItemText(1, QtGui.QApplication.translate("DialogModificarPersonal", "D.N.I.", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Fecha de Nacimiento:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_7.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Telefono:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_8.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Email:", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogModificarPersonal", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

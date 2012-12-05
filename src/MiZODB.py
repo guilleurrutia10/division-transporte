@@ -19,15 +19,17 @@ class MiZODB(object):
     @author: 
     '''
 
-    def __init__(self, url):
+#    def __init__(self, url):
+    def __init__(self):
         '''
         Constructor, se conecta al Servidor de la BD a través del archivo de configuracion zeo.conf
         en donde se indica la IP:PORT.
         @return: 
         @author: 
         '''
-        self.url = url
-        self.db = config.databaseFromURL(url)
+#        self.url = url
+        self.url = 'zeo.conf'
+        self.db = config.databaseFromURL(self.url)
         self.conexion = self.db.open()
         self.raiz = self.conexion.root()
         
@@ -145,11 +147,11 @@ class ZopeDB(object):
         from negocio import TipoDocumento
         raiz = self.zodb.raiz
         documentos = {}
-        siglas = ['D.N.I', 'C.I','L.E','L.C']
+        siglas = ['D.N.I', 'C.I', 'L.E', 'L.C']
         descripciones = ['Documento Nacional de Identidad', 'Cedula de Identidad',
                          'Libreta de Enrolamiento', 'Libreta civica']
         for i in xrange(len(siglas)):
-            tDoc = TipoDocumento.TipoDocumento(siglas[i],descripciones[i])
+            tDoc = TipoDocumento.TipoDocumento(siglas[i], descripciones[i])
             documentos[str(tDoc.get_codigo_tipo_documento())] = tDoc
         raiz['tiposDocumentos'] = documentos
         self.zodb._p_changed = True
@@ -196,9 +198,9 @@ class ZopeDB(object):
     def cargarTiposDeReparaciones(self):
         from negocio.TipoDeReparacion import TipoDeReparacion
         raiz = self.zodb.raiz
-        diccionario = {'Reacondicionamiento de motor':1, 
-                       'Afinado de motor':2, 
-                       'Ensayo de sistema de escape':3, 
+        diccionario = {'Reacondicionamiento de motor':1,
+                       'Afinado de motor':2,
+                       'Ensayo de sistema de escape':3,
                        'Reparacion de ejes':4,
                        'Reparacion de frenos':5,
                        'Reparacion del tanque de combustible':6,

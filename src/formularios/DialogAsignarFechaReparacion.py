@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogAsignarFechaReparacion.ui'
 #
-# Created: Sun Nov 25 16:33:23 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Dec 05 16:57:28 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -19,22 +19,18 @@ class Ui_AsignarFechaReparacion(object):
         AsignarFechaReparacion.setObjectName(_fromUtf8("AsignarFechaReparacion"))
         AsignarFechaReparacion.resize(294, 152)
         AsignarFechaReparacion.setMinimumSize(QtCore.QSize(293, 152))
-        AsignarFechaReparacion.setWindowTitle(QtGui.QApplication.translate("AsignarFechaReparacion", "Asignar Fecha", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(AsignarFechaReparacion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(AsignarFechaReparacion)
-        self.groupBox.setTitle(QtGui.QApplication.translate("AsignarFechaReparacion", "Planificar Reparacion", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label_3 = QtGui.QLabel(self.groupBox)
-        self.label_3.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Fecha Estimada Inicio:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label_3)
         self.label_4 = QtGui.QLabel(self.groupBox)
-        self.label_4.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Nro de Secuencia:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_4)
         self.lineEditNroSecuencia = QtGui.QLineEdit(self.groupBox)
@@ -51,11 +47,9 @@ class Ui_AsignarFechaReparacion(object):
         self.gridLayout.setContentsMargins(9, 9, 9, 8)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -66,7 +60,12 @@ class Ui_AsignarFechaReparacion(object):
         QtCore.QMetaObject.connectSlotsByName(AsignarFechaReparacion)
 
     def retranslateUi(self, AsignarFechaReparacion):
-        pass
+        AsignarFechaReparacion.setWindowTitle(QtGui.QApplication.translate("AsignarFechaReparacion", "Asignar Fecha", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("AsignarFechaReparacion", "Planificar Reparacion", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Fecha Estimada Inicio:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Nro de Secuencia:", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("AsignarFechaReparacion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

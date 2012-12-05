@@ -23,5 +23,5 @@ class EsperandoAprobacion(EstadoOrdenReparacion):
         '''
         super(EsperandoAprobacion, self).__init__()
         
-    
-    
+    def getPedidoActuacion(self, ordenReparacion):
+        return ordenReparacion.getPedidoDeActuacion()
