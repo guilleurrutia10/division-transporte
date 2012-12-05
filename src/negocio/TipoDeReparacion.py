@@ -30,7 +30,7 @@ class TipoDeReparacion(Persistent):
     
     '''
 
-    def __init__(self, nombre, descripcion):
+    def __init__(self, nombre, descripcion, repuestos=[]):
         '''
         Constructor
         @return: 
@@ -38,6 +38,21 @@ class TipoDeReparacion(Persistent):
         '''
         self._nombre = nombre
         self._descripcion = descripcion
+        self._repuestos = repuestos
+    
+    def getRepuestos(self):
+        return self._repuestos
+    
+    def getRepuesto(self, unNombreRepuesto):
+        repuestos = filter( lambda n: n.getNombre() == unNombreRepuesto, self.getRepuestos())
+        return repuestos[0]
+    
+    def setRepuestos(self, repuestos):
+        self._repuestos = repuestos
+    
+    def addRepuesto(self, unRepuesto):
+        self._repuestos.append(unRepuesto)
+        self._repuestos.sort( cmp = lambda x, y: cmp(x.getNombre(), y.getNombre()))
     
     def getNombre(self):
         return self._nombre

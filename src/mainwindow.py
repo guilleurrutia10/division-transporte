@@ -120,7 +120,8 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_actionVerificar_Reparaciones_Necesarias_del_Vehiculo_triggered(self):
         print 'abriendo dialogo Verificar_Reparaciones_Necesarias_del_Vehiculo'
-        dlgRegistrarReparaciones = DialogRegistrarReparaciones.DialogRegistrarReparaciones(self)
+        from Dialogs.DialogMostrarLosVehiculosParaAgregarReparacionesAOR import DialogMostrarLosVehiculosParaAgregarReparacionesAOR
+        dlgRegistrarReparaciones = DialogMostrarLosVehiculosParaAgregarReparacionesAOR(self)
         dlgRegistrarReparaciones.exec_()
     
     #Conectamos la accion Alta Personal...
