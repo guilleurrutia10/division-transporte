@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogRegistrarIngresoVehiculo.ui'
 #
-# Created: Sun Nov 25 16:33:40 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Dec 05 16:57:33 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,7 +18,6 @@ class Ui_DialogRegistrarIngresoVehiculo(object):
     def setupUi(self, DialogRegistrarIngresoVehiculo):
         DialogRegistrarIngresoVehiculo.setObjectName(_fromUtf8("DialogRegistrarIngresoVehiculo"))
         DialogRegistrarIngresoVehiculo.resize(815, 530)
-        DialogRegistrarIngresoVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogRegistrarIngresoVehiculo", "Registrar Ingreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogRegistrarIngresoVehiculo)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.widget = QtGui.QWidget(DialogRegistrarIngresoVehiculo)
@@ -44,7 +43,6 @@ class Ui_DialogRegistrarIngresoVehiculo(object):
         self.pushButtonRegistrarNuevoIngreso = QtGui.QPushButton(self.groupBox)
         self.pushButtonRegistrarNuevoIngreso.setMinimumSize(QtCore.QSize(100, 0))
         self.pushButtonRegistrarNuevoIngreso.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.pushButtonRegistrarNuevoIngreso.setText(QtGui.QApplication.translate("DialogRegistrarIngresoVehiculo", "Registrar Nuevo Ingreso", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonRegistrarNuevoIngreso.setObjectName(_fromUtf8("pushButtonRegistrarNuevoIngreso"))
         self.horizontalLayout.addWidget(self.pushButtonRegistrarNuevoIngreso)
         self.verticalLayout.addWidget(self.groupBox)
@@ -57,11 +55,9 @@ class Ui_DialogRegistrarIngresoVehiculo(object):
         self.gridLayout_5.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_5.setObjectName(_fromUtf8("gridLayout_5"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRegistrarIngresoVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_5.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRegistrarIngresoVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_5.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -72,7 +68,10 @@ class Ui_DialogRegistrarIngresoVehiculo(object):
         QtCore.QMetaObject.connectSlotsByName(DialogRegistrarIngresoVehiculo)
 
     def retranslateUi(self, DialogRegistrarIngresoVehiculo):
-        pass
+        DialogRegistrarIngresoVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogRegistrarIngresoVehiculo", "Registrar Ingreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonRegistrarNuevoIngreso.setText(QtGui.QApplication.translate("DialogRegistrarIngresoVehiculo", "Registrar Nuevo Ingreso", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRegistrarIngresoVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRegistrarIngresoVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

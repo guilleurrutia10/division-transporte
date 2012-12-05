@@ -17,7 +17,7 @@ class EstadoOrdenReparacion(Persistent):
     @author: 
     '''
 
-    #def __init__(self, estado)
+    # def __init__(self, estado)
     def __init__(self):
         '''
         Constructor
@@ -33,4 +33,7 @@ class EstadoOrdenReparacion(Persistent):
         NotImplemented
         
     def cambiarProximoEstado(self):
+        NotImplemented
+    
+    def getPedidoActuacion(self):
         NotImplemented

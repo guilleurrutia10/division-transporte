@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'WidgetPedidosDeActuacion.ui'
 #
-# Created: Sun Nov 25 16:34:02 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Dec 05 16:57:40 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,7 +18,6 @@ class Ui_FormPedidoDeActuacion(object):
     def setupUi(self, FormPedidoDeActuacion):
         FormPedidoDeActuacion.setObjectName(_fromUtf8("FormPedidoDeActuacion"))
         FormPedidoDeActuacion.resize(752, 593)
-        FormPedidoDeActuacion.setWindowTitle(QtGui.QApplication.translate("FormPedidoDeActuacion", "Form", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(FormPedidoDeActuacion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.tableWidget = QtGui.QTableWidget(FormPedidoDeActuacion)
@@ -26,14 +25,12 @@ class Ui_FormPedidoDeActuacion(object):
         self.tableWidget.setColumnCount(2)
         self.tableWidget.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormPedidoDeActuacion", "Número Pedido de Actuación", None, QtGui.QApplication.UnicodeUTF8))
         item.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
         font = QtGui.QFont()
         font.setStyleStrategy(QtGui.QFont.PreferDefault)
         item.setFont(font)
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormPedidoDeActuacion", "Fecha de Realización", None, QtGui.QApplication.UnicodeUTF8))
         item.setTextAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter|QtCore.Qt.AlignCenter)
         self.tableWidget.setHorizontalHeaderItem(1, item)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(150)
@@ -45,14 +42,12 @@ class Ui_FormPedidoDeActuacion(object):
         self.formLayout.setFormAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.pushButton_Registrar = QtGui.QPushButton(FormPedidoDeActuacion)
-        self.pushButton_Registrar.setText(QtGui.QApplication.translate("FormPedidoDeActuacion", "Registrar Fecha de Recepción", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_Registrar.setObjectName(_fromUtf8("pushButton_Registrar"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.pushButton_Registrar)
         self.pushButton_2_Cancelar = QtGui.QPushButton(FormPedidoDeActuacion)
         self.pushButton_2_Cancelar.setEnabled(True)
         self.pushButton_2_Cancelar.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.pushButton_2_Cancelar.setAutoFillBackground(False)
-        self.pushButton_2_Cancelar.setText(QtGui.QApplication.translate("FormPedidoDeActuacion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_2_Cancelar.setObjectName(_fromUtf8("pushButton_2_Cancelar"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.pushButton_2_Cancelar)
         self.verticalLayout.addLayout(self.formLayout)
@@ -63,8 +58,13 @@ class Ui_FormPedidoDeActuacion(object):
         QtCore.QMetaObject.connectSlotsByName(FormPedidoDeActuacion)
 
     def retranslateUi(self, FormPedidoDeActuacion):
+        FormPedidoDeActuacion.setWindowTitle(QtGui.QApplication.translate("FormPedidoDeActuacion", "Form", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(QtGui.QApplication.translate("FormPedidoDeActuacion", "Número Pedido de Actuación", None, QtGui.QApplication.UnicodeUTF8))
         item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(QtGui.QApplication.translate("FormPedidoDeActuacion", "Fecha de Realización", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_Registrar.setText(QtGui.QApplication.translate("FormPedidoDeActuacion", "Registrar Fecha de Recepción", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_2_Cancelar.setText(QtGui.QApplication.translate("FormPedidoDeActuacion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'DialogMostrarLosVehiculosParaAgregarReparacionesAOR.ui'
+# Form implementation generated from reading ui file 'DialogRegistrarRecepcionPedido.ui'
 #
-# Created: Wed Dec 05 16:57:31 2012
+# Created: Wed Dec 05 16:57:34 2012
 #      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!

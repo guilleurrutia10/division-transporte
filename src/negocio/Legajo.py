@@ -103,13 +103,13 @@ class Legajo(Persistent):
         @return: 
         @author: 
         '''
-        #ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstadoOrdenReparacion() != 'Finalizada', self.ordenesDeReparacion)
+        # ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstadoOrdenReparacion() != 'Finalizada', self.ordenesDeReparacion)
         ordenEnCurso = filter(lambda unaOrden: isinstance(unaOrden.getEstado(), EnRevision), self.ordenesDeReparacion)
 #        ordenEnCurso = filter(self.noEstaFinalizada, self.ordenesDeReparacion)
         try:
             return ordenEnCurso[0]
         except IndexError:
-            #return None
+            # return None
             from excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
             raise Excepcion_Orden_No_Esta_En_Revision('La Orden de Reparacion del vehiculo no se encuentra en revision')
         
@@ -118,7 +118,7 @@ class Legajo(Persistent):
         @return: 
         @author: 
         '''
-        #Antes de crear la orden, obtener orden en curso, si no existe(no tiene) crearla.
+        # Antes de crear la orden, obtener orden en curso, si no existe(no tiene) crearla.
         try:
             self.obtenerOrdenDeReparacionEnCurso()
             ordenReparacion = OrdenReparacion(self.dameNumeroOrden(), kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
@@ -148,3 +148,7 @@ class Legajo(Persistent):
     
     def getDominio(self):
         return self.dominio
+    
+    def getPedidoActuacionSinFechaRecepcion(self):
+        ordenEnCurso = self.dameOrdenDeReparacionEnCurso()
+        return ordenEnCurso.getPedidoDeActuacionActual()

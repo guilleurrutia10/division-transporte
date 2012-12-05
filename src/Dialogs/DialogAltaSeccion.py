@@ -173,31 +173,6 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.empleados.remove(empleado)
         self.cargarGrillaEmpleadosAsignados(self.empleadosAsignado)
         self.filaSeleccionadaSinAsignar = None
-#===============================================================================
-#        print 'Asignando empleado'
-#        try:
-#            assert not(self._filaEmpleadoSinAsignar is None)
-#        except AssertionError:
-#            self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar')
-#            return
-#        fila = self.tableWidgetEmpleadosAsignados.rowCount()
-#        col = 1
-#        cantFilas = self.tableWidgetEmpleadosAsignados.rowCount() + 1
-#        self.tableWidgetEmpleadosAsignados.setRowCount(cantFilas)
-#        for clave, valor in self._filaEmpleadoSinAsignar.iteritems():
-#            if clave is 'fila':
-#                self.tableWidgetEmpleadosSinAsignar.removeRow(valor)
-#                continue
-#            if clave is 'documento':
-#                self.tableWidgetEmpleadosAsignados.setItem(fila,0,valor)
-#            if clave is 'nombre':
-#                self.tableWidgetEmpleadosAsignados.setItem(fila,1,valor)
-# #            self.tableWidgetEmpleadosAsignados.setItem(fila,col,valor)
-#            col -= 1
-#        self._filaEmpleadoSinAsignar.clear()
-#        self._filaEmpleadoSinAsignar = None
-#        print self._filaEmpleadoSinAsignar
-#===============================================================================
     
     @QtCore.pyqtSlot()
     def on_pushButtonDesasignarEmpleado_clicked(self):
@@ -216,35 +191,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.filaSeleccionadaAsignados = None
         if self._encargado == empleado.documento:
             self._encargado = None
-#===============================================================================
-#        '''
-#        TODO: Mejorar la modularizacion.
-#        '''
-#        print 'Desasignando empleado'
-#        try:
-#            assert not(self._filaEmpleadoAsignados is None)
-#        except AssertionError:
-#            self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar')
-#            return
-#        fila = self.tableWidgetEmpleadosSinAsignar.rowCount()
-#        col = 0
-#        cantFilas = self.tableWidgetEmpleadosSinAsignar.rowCount() + 1
-#        self.tableWidgetEmpleadosSinAsignar.setRowCount(cantFilas)
-#        for clave, valor in self._filaEmpleadoAsignados.iteritems():
-#            if clave is 'fila':
-#                self.tableWidgetEmpleadosAsignados.removeRow(valor)
-#                continue
-#            if clave is 'documento':
-#                self.tableWidgetEmpleadosSinAsignar.setItem(fila,0,valor)
-#            if clave is 'nombre':
-#                self.tableWidgetEmpleadosSinAsignar.setItem(fila,1,valor)
-# #            self.tableWidgetEmpleadosSinAsignar.setItem(fila,col,valor)
-#            col +=1
-#        self._filaEmpleadoAsignados.clear() 
-#        self._filaEmpleadoAsignados = None
-#        print self._filaEmpleadoAsignados
-#===============================================================================
-        
+  
     @QtCore.pyqtSlot()
     def on_pushButtonAsignarComoEncargado_clicked(self):
         print 'Asignando Encargado'

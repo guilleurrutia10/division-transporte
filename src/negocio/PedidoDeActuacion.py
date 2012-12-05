@@ -46,12 +46,12 @@ class PedidoDeActuacion(Persistent):
         self._fechaRealizacion = datetime.datetime.now()
         self._fechaRecepcion = None 
         
-    def setRecepcionPedidoDeActuacion(self):
+    def setFechaRecepcion(self, fechaRecepcion):
         '''
         @return: 
         @author: 
         '''
-        pass
+        self._fechaRecepcion = fechaRecepcion
     
     def getRepuestosSolicitados(self):
         return self._repuestosSolicitados

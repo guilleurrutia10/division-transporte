@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogRegistrarEgresoVehiculo.ui'
 #
-# Created: Sun Nov 25 16:33:40 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Dec 05 16:57:33 2012
+#      by: PyQt4 UI code generator 4.9.5
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,7 +18,6 @@ class Ui_DialogRegistraEgresoVehiculo(object):
     def setupUi(self, DialogRegistraEgresoVehiculo):
         DialogRegistraEgresoVehiculo.setObjectName(_fromUtf8("DialogRegistraEgresoVehiculo"))
         DialogRegistraEgresoVehiculo.resize(793, 474)
-        DialogRegistraEgresoVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogRegistraEgresoVehiculo", "Registra Egreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogRegistraEgresoVehiculo)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.widget = QtGui.QWidget(DialogRegistraEgresoVehiculo)
@@ -44,7 +43,6 @@ class Ui_DialogRegistraEgresoVehiculo(object):
         self.pushButtonRegistrarEgreso = QtGui.QPushButton(self.groupBox)
         self.pushButtonRegistrarEgreso.setMinimumSize(QtCore.QSize(134, 0))
         self.pushButtonRegistrarEgreso.setMaximumSize(QtCore.QSize(150, 16777215))
-        self.pushButtonRegistrarEgreso.setText(QtGui.QApplication.translate("DialogRegistraEgresoVehiculo", "Registrar Egreso", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonRegistrarEgreso.setObjectName(_fromUtf8("pushButtonRegistrarEgreso"))
         self.horizontalLayout.addWidget(self.pushButtonRegistrarEgreso)
         self.verticalLayout.addWidget(self.groupBox)
@@ -57,11 +55,9 @@ class Ui_DialogRegistraEgresoVehiculo(object):
         self.gridLayout_4.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_4.setObjectName(_fromUtf8("gridLayout_4"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRegistraEgresoVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_4.addWidget(self.pushButtonAceptar, 0, 2, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRegistraEgresoVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_4.addWidget(self.pushButtonCancelar, 0, 3, 1, 1)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -72,7 +68,10 @@ class Ui_DialogRegistraEgresoVehiculo(object):
         QtCore.QMetaObject.connectSlotsByName(DialogRegistraEgresoVehiculo)
 
     def retranslateUi(self, DialogRegistraEgresoVehiculo):
-        pass
+        DialogRegistraEgresoVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogRegistraEgresoVehiculo", "Registra Egreso Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonRegistrarEgreso.setText(QtGui.QApplication.translate("DialogRegistraEgresoVehiculo", "Registrar Egreso", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRegistraEgresoVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRegistraEgresoVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
 
 
 if __name__ == "__main__":
