@@ -77,13 +77,41 @@ class Legajo(Persistent):
         @return: 
         @author: 
         '''
-        ordenEnCurso = filter(lambda unaOrden: unaOrden != 'Finalizada', self.ordenesDeReparacion)
+        ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstado() != 'Finalizada', self.ordenesDeReparacion)
 #        ordenEnCurso = filter(self.noEstaFinalizada, self.ordenesDeReparacion)
         try:
             ordenEnCurso[0]
             raise ExcepcionPoseeOrdenReparacionEnCurso('El vehículo ya posee una orden de Reparación en Curso.')
         except IndexError:
             return None
+    
+    def dameOrdenDeReparacionEnCurso(self):
+        '''
+        @return: 
+        @author: 
+        '''
+        ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstado() != 'Finalizada', self.ordenesDeReparacion)
+#        ordenEnCurso = filter(self.noEstaFinalizada, self.ordenesDeReparacion)
+        try:
+            return ordenEnCurso[0]
+        except IndexError:
+            from excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso import Excepcion_No_Posee_Orden_Reparacion_En_Curso
+            raise Excepcion_No_Posee_Orden_Reparacion_En_Curso('El vehículo no posee una Orden de Reparación en Curso.')
+    
+    def getOrdenDeReparacionEnCurso(self):
+        '''
+        @return: 
+        @author: 
+        '''
+        #ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstadoOrdenReparacion() != 'Finalizada', self.ordenesDeReparacion)
+        ordenEnCurso = filter(lambda unaOrden: isinstance(unaOrden.getEstado(), EnRevision), self.ordenesDeReparacion)
+#        ordenEnCurso = filter(self.noEstaFinalizada, self.ordenesDeReparacion)
+        try:
+            return ordenEnCurso[0]
+        except IndexError:
+            #return None
+            from excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
+            raise Excepcion_Orden_No_Esta_En_Revision('La Orden de Reparacion del vehiculo no se encuentra en revision')
         
     def crearOrdenDeReparacion(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
         '''
@@ -116,3 +144,6 @@ class Legajo(Persistent):
     
     def __str__(self):
         return 'Dominio: %s' % self.dominio
+    
+    def getDominio(self):
+        return self.dominio

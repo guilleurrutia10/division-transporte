@@ -41,7 +41,8 @@ USUARIOS = [
     ("guille", "1234", "jefeDivision"),
     ("leo", "1234", "inspector"),
     ("samuel", "1234", "administrativo"),
-    ("diego", "1234", "otro")
+    ("diego", "1234", "otro"),
+    ("l", "1", "jefeDivision")
 ]
 
 ROL = 2

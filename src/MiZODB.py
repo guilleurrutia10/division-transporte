@@ -204,8 +204,10 @@ class ZopeDB(object):
                        'Reparacion del tanque de combustible':6,
                        'Reparacion de radiador': 7}
         tiposReparaciones = {}
+        from negocio.TipoRepuesto import TipoRepuesto
+        unRepuesto = TipoRepuesto('Bujia', 'Bujia universal')
         for nombre in diccionario:
-            tRep = TipoDeReparacion(nombre, diccionario[nombre])
+            tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepuesto])
             tiposReparaciones[nombre] = tRep
         raiz['tiposReparaciones'] = tiposReparaciones
         self.zodb._p_changed = True

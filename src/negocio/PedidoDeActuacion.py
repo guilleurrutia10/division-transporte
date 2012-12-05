@@ -35,12 +35,16 @@ class PedidoDeActuacion(Persistent):
     '''
 
 
-    def __init__(self):
+    def __init__(self, repuestosSolicitados):
         '''
         Constructor
         @return: 
         @author: 
         '''
+        self._repuestosSolicitados = repuestosSolicitados
+        import datetime
+        self._fechaRealizacion = datetime.datetime.now()
+        self._fechaRecepcion = None 
         
     def setRecepcionPedidoDeActuacion(self):
         '''
@@ -48,3 +52,10 @@ class PedidoDeActuacion(Persistent):
         @author: 
         '''
         pass
+    
+    def getRepuestosSolicitados(self):
+        return self._repuestosSolicitados
+    
+    def getFechaRealizacion(self):
+        return self._fechaRealizacion
+    

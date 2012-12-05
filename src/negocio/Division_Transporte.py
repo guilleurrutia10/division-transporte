@@ -267,3 +267,25 @@ class Division_Transporte(Persistent):
     def getTipoReparaciones(self):
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('tiposReparaciones')
+    
+    def getTipoReparacion(self, claveTipoReparacion):
+        '''
+        @return: 
+        @author: 
+        '''
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        return zodb.get('tiposReparaciones',claveTipoReparacion)
+    
+    def registrarReparaciones(self, vehiculoSeleccionado):
+        #primero cambiamos el estado de la orden
+        #vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getEstadoOrdenReparacion().cambiarProximoEstado()
+        vehiculoSeleccionado.getOrdenDeReparacionEnCurso().generarPedidoDeActuacion()
+        from copy import deepcopy
+        unVehiculo = deepcopy(vehiculoSeleccionado)
+        
+        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb.remove('vehiculos', vehiculoSeleccionado.getDominio())
+        unVehiculo.save()
+        
+        
+    

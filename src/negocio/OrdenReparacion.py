@@ -90,10 +90,10 @@ class OrdenReparacion(object):
         '''
 #        self.codigoOrdenReparacion = incremental
         #La primera vez debe instanciarse como EnRevision()
-#        self.estadoOrden = EstadoOrdenReparacion(), self.estadoOrden =  EnRevision()
+#        self.estado = EstadoOrdenReparacion(), self.estado =  EnRevision()
         self.codigoOrdenReparacion = codigoOrdenReparacion
-        self.estadoOrden = EnRevision(self)
-        self.reparaciones = {}
+        self.estado = EnRevision()
+        self.reparaciones = []
         self._plan = None
         
         self.kilometrajeActual = kilometrajeActual
@@ -103,9 +103,36 @@ class OrdenReparacion(object):
         self.comisaria = comisaria
         self.localidad = localidad
         self.fecha = fecha
+        self.chofer = 'Jose Luis Barrionuevo'
+        
+        self._pedidoDeActuacion = None
+            
+    def getCodigoOrdenReparacion(self):
+        return self.codigoOrdenReparacion
     
-    def getEstadoOrdenReparacion(self):
-        return self.estadoOrden
+    def getFecha(self):
+        return self.fecha
+    
+    def getChofer(self):
+        return self.chofer
+    
+    def getKilometrajeActual(self):
+        return self.kilometrajeActual
+    
+    def getEquipamiento(self):
+        return self.equipamiento
+    
+    def getCombustibleActual(self):
+        return self.combustibleActual
+    
+    def getComisaria(self):
+        return self.comisaria
+    
+    def getEstado(self):
+        return self.estado
+    
+    def setEstado(self, estadoOrden):
+        self.estado = estadoOrden
     
     def getReparaciones(self):
         '''
@@ -128,37 +155,33 @@ class OrdenReparacion(object):
         '''
         pass
     
-    def getPedidoDeActuacion(self):
-        '''
-        @return: 
-        @author: 
-        '''
-        self.estadoOrden.getPedidoActuacion()
-    
     def generarPedidoDeActuacion(self):
         '''
         @return: 
         @author: 
         '''
-        self.estadoOrden = EsperandoAprobacion()
-        self.estadoOrdengenerarPedidoDeActuacion()
+        self.estado.generarPedidoDeActuacion(self)
+        self.estado = EsperandoAprobacion()
     
     def registrarOrdenDeReparacionPlanificada(self):
         '''
         @return: 
         @author: 
         '''
-        self.estadoOrden = Planificada()
+        self.estado = Planificada()
     
     '''
     TODO: este método debería estar en el EstadoOrden-->EnRevision.
     '''
-    def addReparacion(self):
+    def addReparacion(self, unaReparacion):
         '''
         @return: 
         @author: 
         '''
-        self.estadoOrden.addReparacion()
+        try:
+            self.estado.addReparacion(self, unaReparacion)
+        except AttributeError:
+            print 'No se pueden agregar reparaciones'
     
     def getreparacionesPendientes(self):
         '''
@@ -172,3 +195,12 @@ class OrdenReparacion(object):
     
     def setPlan(self,unPlan):
         self._plan = unPlan
+        
+    def __str__(self):
+        return 'En Revision'
+    
+    def setPedidoDeActuacion(self, pedidoDeActuacion):
+        self._pedidoDeActuacion = pedidoDeActuacion
+    
+    def getPedidoDeActuacion(self):
+        return self._pedidoDeActuacion

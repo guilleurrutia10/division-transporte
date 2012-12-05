@@ -15,19 +15,13 @@ class EsperandoAprobacion(EstadoOrdenReparacion):
     '''
 
 
-    def __init__(self, ordenReparacion):
+    def __init__(self):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        super(EsperandoAprobacion, self).__init__(ordenReparacion)
-        self.pedidoDeActuacion = None 
+        super(EsperandoAprobacion, self).__init__()
+        
     
-    def generarPedidoDeActuacion(self):
-        '''
-        @return: 
-        @author: 
-        '''
-        if self.pedidoDeActuacion is None:
-            self.pedidoDeActuacion = PedidoDeActuacion()
+    
