@@ -31,8 +31,9 @@ class Empleado(Persistent):
         
     def save(self):
         from MiZODB import ZopeDB, MiZODB
-        zodb = ZopeDB(MiZODB('zeo.conf'))
-        zodb.save('empleados',self.documento,self)
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb.save('empleados', self.documento, self)
         
     def __eq__(self, otro):
         return self.documento == otro.documento

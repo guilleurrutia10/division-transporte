@@ -104,8 +104,9 @@ class Legajo(Persistent):
     
     def save(self):
         from MiZODB import ZopeDB, MiZODB
-        zodb = ZopeDB(MiZODB('zeo.conf'))
-        zodb.save('vehiculos',self.dominio,self)
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb.save('vehiculos', self.dominio, self)
     
     def dameNumeroOrden(self):
         self.numeroOrden += 1

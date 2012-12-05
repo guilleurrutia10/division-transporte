@@ -17,7 +17,8 @@ from pprint import pprint
 
 if __name__ == '__main__':
     
-    bd = ZopeDB(MiZODB('zeo.conf'))
+    bd = ZopeDB(MiZODB())
+#    bd = ZopeDB(MiZODB('zeo.conf'))
     bd.cargarTiposDeDocumentos()
     bd.cargarTiposDeReparaciones()
     bd.zodb.close()

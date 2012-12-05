@@ -72,6 +72,8 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
                 dlgAsignarFecha.itemDocumento = self.itemDocumento
                 self.itemDocumento = None
                 dlgAsignarFecha.exec_()
+            else:
+                self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar Empleado')
         except AttributeError:
             self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar Empleado')
             

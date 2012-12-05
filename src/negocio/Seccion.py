@@ -17,16 +17,11 @@ class Seccion(Persistent):
     @author: 
     '''
     
-    ''' ATTRIBUTES
-    
-    
+    '''ATTRIBUTES
     
     codigoSeccion  (private)
     
-    
-    
     nombre  (private)
-    
     '''
 
 
@@ -75,7 +70,8 @@ class Seccion(Persistent):
         @author: 
         '''
         from MiZODB import ZopeDB, MiZODB
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         zodb.save('secciones', self.nombre, self)
     
     def cantidadEmpleados(self):

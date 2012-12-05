@@ -70,14 +70,15 @@ class Division_Transporte(Persistent):
         self.instance.vehiculos = {}
         self.instance.tiposDeDocumentos = {}
         self.instance.empleados = {}
-        self.bd = ZopeDB(MiZODB('zeo.conf'))
+#        self.bd = ZopeDB(MiZODB('zeo.conf'))
     
     def getSecciones(self):
         '''
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('secciones')
 #        return self.secciones
     
@@ -89,7 +90,8 @@ class Division_Transporte(Persistent):
         pass
         # Acordarse de de que vienen los documentos del empleados y el documento del encargado
         # y sólo el nombre de la Sección.
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         empleadosSeccion = {}
         for empleado in empleados:
             empleadosSeccion[empleado] = deepcopy(zodb.get('empleados', empleado))
@@ -112,7 +114,8 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('tiposDocumentos')
 #        return self.tiposDeDocumentos
     
@@ -135,7 +138,8 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         empleados = zodb.getAlls('empleados').values()
         secciones = zodb.getAlls('secciones').values()
         empleadosAsignados = {}
@@ -155,7 +159,8 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
         empleados = zodb.getAlls('empleados')
         return empleados
 #        secciones = zodb.getAlls('secciones')
@@ -177,7 +182,8 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.get('empleados', clave)
     
     '''
@@ -189,7 +195,8 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
 #        tipoDoc = zodb.get('tiposDocumentos',tipoDocumento)
         empleado = Empleado(nombre, apellido, numeroDocumento, zodb.get('tiposDocumentos', tipoDocumento))
         zodb.save('empleados', empleado.documento, empleado)
@@ -219,7 +226,8 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('tiposRepuestos')
         
     def getRepuesto(self, clave):
@@ -227,7 +235,8 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.get('tiposRepuestos', clave)
     
     def getVehiculos(self):
@@ -235,7 +244,8 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('vehiculos')
 #        return self.vehiculos
 
@@ -244,11 +254,13 @@ class Division_Transporte(Persistent):
         @return: 
         @author: 
         '''
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.get('vehiculos', clave)
     
     def modificarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         zodb.remove('vehiculos', dominio)
         vehiculo = Legajo(dominio, marca, registroInterno, numeroChasis)
         vehiculo.save()
@@ -295,5 +307,6 @@ class Division_Transporte(Persistent):
         return '%s, Id: %s' % (self.__class__, id(self))
     
     def getTipoReparaciones(self):
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('tiposReparaciones')

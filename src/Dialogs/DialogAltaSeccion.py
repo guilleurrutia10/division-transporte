@@ -23,18 +23,21 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.setupUi(self)
         self.tableWidgetEmpleadosAsignados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.tableWidgetEmpleadosSinAsignar.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
-        self._filaEmpleadoSinAsignar = None
-        self._filaEmpleadoAsignados = None
+#        self._filaEmpleadoSinAsignar = None
+#        self._filaEmpleadoAsignados = None
         self._encargado = None
         self.filaSeleccionadaAsignados = None
         self.filaSeleccionadaSinAsignar = None
         self.empleadosAsignado = []
         self.empleadosSinAsignar = []
         self.validacionesLineEdit()
+        self.conectarSignals()
         self.cargarGrillaInicial()
         
     def validacionesLineEdit(self):
         self.lineEditNombreSeccion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z]+'), self))
+    
+    def conectarSignals(self):
         self.tableWidgetEmpleadosSinAsignar.connect(self.tableWidgetEmpleadosSinAsignar, QtCore.SIGNAL('cellClicked(int,int)'), self.celdaClickeada_on_tableWidgetEmpleadosSinAsignar)
         self.tableWidgetEmpleadosAsignados.connect(self.tableWidgetEmpleadosAsignados, QtCore.SIGNAL('cellClicked(int,int)'), self.celdaClickeada_on_tableWidgetEmpleadosAsignados)
         
@@ -211,6 +214,8 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.empleadosAsignado.remove(empleado)
         self.cargarGrillaEmpleadosSinAsignar(self.empleados)
         self.filaSeleccionadaAsignados = None
+        if self._encargado == empleado.documento:
+            self._encargado = None
 #===============================================================================
 #        '''
 #        TODO: Mejorar la modularizacion.
