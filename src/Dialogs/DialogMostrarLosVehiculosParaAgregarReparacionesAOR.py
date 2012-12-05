@@ -47,6 +47,7 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         @author: 
         '''
         print 'Click sobre aceptar'
+        self.accept()
     
     @QtCore.pyqtSlot()
     def on_pushButtonAgregarReparacionesAOrden_clicked(self):

@@ -297,7 +297,7 @@ class Division_Transporte(Persistent):
     def getTipoReparaciones(self):
         zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('tiposReparaciones')
-<<<<<<< HEAD
+
     
     def getTipoReparacion(self, claveTipoReparacion):
         '''
@@ -318,7 +318,3 @@ class Division_Transporte(Persistent):
         zodb.remove('vehiculos', vehiculoSeleccionado.getDominio())
         unVehiculo.save()
         
-        
-    
-=======
->>>>>>> f3f5fdc9074a3a8a3417b7767b3c5954ff145c73

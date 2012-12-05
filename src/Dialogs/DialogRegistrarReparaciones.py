@@ -9,6 +9,7 @@ from formularios.DialogRegistrarReparaciones import Ui_DialogRegistrarReparacion
 from Dialogs import DialogCrearReparacion
 from negocio.Division_Transporte import Division_Transporte
 from excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
+from Dialogs.DialogMostrarPedidoDeActuacion import DialogMostrarPedidoDeActuacion
 
 class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones):
     '''
@@ -109,6 +110,12 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         print '\trepuesto:'
         for rep in unPedidoDeActuacion.getRepuestosSolicitados():
             print '\t\t%s' % rep.getTipoDeRepuesto()
+        
+        print 'abriendo dialogo Mostrar Pedido de actuacion'
+        dlgMostrarPedido = DialogMostrarPedidoDeActuacion()
+        dlgMostrarPedido.setPedidoDeActuacion(unPedidoDeActuacion)
+        dlgMostrarPedido.exec_()
+            
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
