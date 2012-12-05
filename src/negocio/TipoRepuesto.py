@@ -93,9 +93,10 @@ class TipoRepuesto(Persistent):
         pass
     
     def __str__(self):
-        return '%s: %s' %(self._nombre, self._descripcion)
+        return '%s: %s' % (self._nombre, self._descripcion)
     
     def save(self):
         from MiZODB import ZopeDB, MiZODB
-        zodb = ZopeDB(MiZODB('zeo.conf'))
-        zodb.save('tiposRepuestos',self.getNombre(),self)
+        zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb.save('tiposRepuestos', self.getNombre(), self)

@@ -18,7 +18,7 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
     @author: 
     '''
     
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         @version: 
@@ -26,7 +26,9 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
         '''
         super(DialogRegistrarEgresoVehiculo, self).__init__(parent)
         self.setupUi(self)
-        WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
+#        WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
+        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
+        self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
     
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -42,8 +44,29 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
         @version: 
         @author: 
         '''
-        dlgDatosIngreso = DialogDatosEgresoVehiculo()
-        dlgDatosIngreso.exec_()
+        try:
+            if self.itemDominio:
+                dlgDatosIngreso = DialogDatosEgresoVehiculo()
+                dlgDatosIngreso.itemDominio = self.itemDominio
+                dlgDatosIngreso.exec_()
+                self.itemDominio = None
+            else:
+                self.mostrarMensaje('Debe seleccionar un vehículo.', 'Seleccionar vehículo')
+        except AttributeError:
+            self.mostrarMensaje('Debe seleccionar un vehículo.', 'Seleccionar vehículo')
+            
+    def seleccionarCelda(self, fila, columna):
+        print 'Celda seleccionada: %s,%s' % (fila, columna)
+        self.itemDominio = self.miWidget.tableWidgetListadoDeVehiculos.item(fila, 0)
+        
+    '''
+    TODO: Este método se repite en varios Dialogs.
+    '''
+    def mostrarMensaje(self, mensaje, titulo):
+        msgBox = QtGui.QMessageBox(self)
+        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+        return msgBox.exec_()
         
 class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
     '''
@@ -52,7 +75,7 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
     @author: 
     '''
     
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         @version: 

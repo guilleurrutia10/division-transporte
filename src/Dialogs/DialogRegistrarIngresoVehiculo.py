@@ -25,7 +25,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
     @author: 
     '''
     
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         @version: 
@@ -65,9 +65,11 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         TODO: Obtener algún indicio de que el vehiculo seleccionado tiene Orden de
         Reparacion en Curso.
         '''
+        global itemglobal
         if itemglobal:
             dlgDatosIngreso = DialogDatosIngresoVehiculo()
             dlgDatosIngreso.exec_()
+            itemglobal = None
         else:
             self.mostrarMensaje('Debe seleccionar un Vehiculo.', 'Seleccionar Vehiculo')
         
@@ -92,7 +94,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
     @author: 
     '''
     
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         @version: 
@@ -107,12 +109,12 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         
     #Validación a medida que se escribe en el lineEdit
     def validacionesLineEdit(self):
-        self.lineEditKilometraje.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
-        self.lineEditCombustible.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
-        self.lineEditEquipamiento.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'),self))
-        self.lineEditReparacion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'),self))
-        self.lineEditComisaria.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'),self))
-        self.lineEditLocalidad.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'),self))
+        self.lineEditKilometraje.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'), self))
+        self.lineEditCombustible.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'), self))
+        self.lineEditEquipamiento.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
+        self.lineEditReparacion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
+        self.lineEditComisaria.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
+        self.lineEditLocalidad.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
             
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
@@ -164,7 +166,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
             self.lineEditKilometraje.setFocus()
             return
         if not match('[0-9]+', self.lineEditCombustible.text()):
-            self.mostrarMensaje('Debe ingresar el Combustible','Ingresar Combustible' )
+            self.mostrarMensaje('Debe ingresar el Combustible', 'Ingresar Combustible')
             self.lineEditCombustible.clear()
             self.lineEditCombustible.setFocus()
             return
