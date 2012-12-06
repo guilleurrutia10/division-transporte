@@ -20,7 +20,7 @@ class Aplicacion(QtGui.QApplication):
         self.usuarioActual = None
         self.lastWindowClosed.connect(self.exit)
     
-    def setUsuarioActual(self,usrActual):
+    def setUsuarioActual(self, usrActual):
         self.usuarioActual = usrActual
     
     

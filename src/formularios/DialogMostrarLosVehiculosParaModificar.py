@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogMostrarLosVehiculosParaModificar.ui'
 #
-# Created: Sun Nov 25 16:33:35 2012
+# Created: Wed Dec 05 21:19:06 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

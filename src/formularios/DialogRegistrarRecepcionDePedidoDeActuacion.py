@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogRegistrarRecepcionDePedidoDeActuacion.ui'
 #
-# Created: Sun Nov 25 16:33:41 2012
+# Created: Wed Dec 05 21:19:14 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -28,8 +28,15 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.tableWidget = QtGui.QTableWidget(self.groupBox)
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
-        self.tableWidget.setColumnCount(0)
+        self.tableWidget.setColumnCount(2)
         self.tableWidget.setRowCount(0)
+        item = QtGui.QTableWidgetItem()
+        item.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Número Pedido", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtGui.QTableWidgetItem()
+        item.setText(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Fecha de Realización", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidget.setHorizontalHeaderItem(1, item)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(150)
         self.gridLayout.addWidget(self.tableWidget, 1, 0, 1, 1)
         self.groupBox_2 = QtGui.QGroupBox(self.groupBox)
         self.groupBox_2.setTitle(QtGui.QApplication.translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Nro Pedido de Actuacion:  ", None, QtGui.QApplication.UnicodeUTF8))
@@ -83,7 +90,8 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
         QtCore.QMetaObject.connectSlotsByName(DialogRegistrarRecepcionDePedidoDeActuacion)
 
     def retranslateUi(self, DialogRegistrarRecepcionDePedidoDeActuacion):
-        pass
+        item = self.tableWidget.horizontalHeaderItem(0)
+        item = self.tableWidget.horizontalHeaderItem(1)
 
 
 if __name__ == "__main__":

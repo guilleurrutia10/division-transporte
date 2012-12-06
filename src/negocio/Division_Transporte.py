@@ -10,8 +10,8 @@ from persistent import Persistent
 from Empleado import *
 from Legajo import *
 from Localidad import *
-#Puedo obtenerlos a través de los Legajos. (1 a 1 con la Orden de Reparación)
-#from PedidoDeActuacion import *
+# Puedo obtenerlos a través de los Legajos. (1 a 1 con la Orden de Reparación)
+# from PedidoDeActuacion import *
 from TipoRepuesto import *
 from Seccion import *
 from TipoDeReparacion import *
@@ -67,7 +67,7 @@ class Division_Transporte(Persistent):
         self.instance.secciones = {}
         self.instance.ordenesDeReparacion = {}
         self.instance.tiposDeDocumentos = {}
-        self.instance.vehiculos = {}
+        self.instance.pedidosDeActuacion = {}
         self.instance.tiposDeDocumentos = {}
         self.instance.empleados = {}
 #        self.bd = ZopeDB(MiZODB('zeo.conf'))
@@ -102,7 +102,7 @@ class Division_Transporte(Persistent):
         zodb.remove('empleados', encargado)
 #        zodb = ZopeDB(MiZODB('zeo.conf'))
 #        seccion = Seccion(nombreSeccion, empleados, encargado)
-##        seccion.setEncargado(encargado)
+# #        seccion.setEncargado(encargado)
 #        # Para cada x en empleados hacer seccion.agregarEmpleado(x)
 #        for i in empleados:
 #            zodb.remove('empleados', empleados[i].documento)
@@ -162,20 +162,7 @@ class Division_Transporte(Persistent):
 #        zodb = ZopeDB(MiZODB('zeo.conf'))
         zodb = ZopeDB(MiZODB())
         empleados = zodb.getAlls('empleados')
-        return empleados
-#        secciones = zodb.getAlls('secciones')
-#        empleadosSinAsignar = {}
-#        esta = False
-#        for empleado  in empleados:
-#            esta = False
-#            for seccion in secciones:
-#                    if ((empleados[empleado].documento in secciones[seccion].empleados)or(empleados[empleado] == secciones[seccion].encargado)):
-#                        esta = True
-#                        break
-#            if not esta:
-#                empleadosSinAsignar[empleados[empleado].documento] = empleados[empleado]
-#        return empleadosSinAsignar
-            
+        return empleados            
     
     def getEmpleado(self, clave):
         '''
@@ -247,7 +234,7 @@ class Division_Transporte(Persistent):
         zodb = ZopeDB(MiZODB())
 #        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('vehiculos')
-#        return self.vehiculos
+#        return self.pedidosDeActuacion
 
     def getVehiculo(self, clave):
         '''
@@ -310,3 +297,40 @@ class Division_Transporte(Persistent):
         zodb = ZopeDB(MiZODB())
 #        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('tiposReparaciones')
+    
+    def getTipoReparacion(self, claveTipoReparacion):
+        '''
+        @return: 
+        @author: 
+        '''
+        zodb = ZopeDB(MiZODB())
+        return zodb.get('tiposReparaciones', claveTipoReparacion)
+    
+    def registrarReparaciones(self, vehiculoSeleccionado):
+        # primero cambiamos el estado de la orden
+        # vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getEstadoOrdenReparacion().cambiarProximoEstado()
+        vehiculoSeleccionado.getOrdenDeReparacionEnCurso().generarPedidoDeActuacion()
+        from copy import deepcopy
+        unVehiculo = deepcopy(vehiculoSeleccionado)
+        
+        zodb = ZopeDB(MiZODB())
+        zodb.remove('vehiculos', vehiculoSeleccionado.getDominio())
+        unVehiculo.save()
+
+
+    def getPedidoActuacionSinFechaRecepcion(self):
+        vehiculos = self.getVehiculos().values()
+        pedidosDeActuacion = []
+        for vehiculo in vehiculos:
+            pedido = vehiculo.getPedidoActuacionSinFechaRecepcion()
+            if pedido:
+                pedidosDeActuacion.append(pedido)
+        return pedidosDeActuacion
+    
+    def registrarRecepcionPedidoDeActuacion(self, numeroPedido, fechaRecepcion):
+        print 'Registrando Recepcion Pedido de Actuacion'
+        pedidosDeActuacion = self.getPedidoActuacionSinFechaRecepcion()
+        pedido = filter(lambda pedido: pedido.getNumeroPedido() == numeroPedido, pedidosDeActuacion)
+        if pedido:
+            fecha = fechaRecepcion
+            pedido.setFechaRecepcion(fecha)

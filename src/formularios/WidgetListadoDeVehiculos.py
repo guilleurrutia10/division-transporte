@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'WidgetListadoDeVehiculos.ui'
 #
-# Created: Sun Nov 25 16:33:52 2012
+# Created: Wed Dec 05 21:19:26 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -25,7 +25,7 @@ class Ui_FormListadoVehiculos(object):
         self.groupBox = QtGui.QGroupBox(FormListadoVehiculos)
         self.groupBox.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.groupBox.setTitle(QtGui.QApplication.translate("FormListadoVehiculos", "Filtrar por Dominio", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.groupBox.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
@@ -42,7 +42,7 @@ class Ui_FormListadoVehiculos(object):
         self.lineEditBuscar.setMinimumSize(QtCore.QSize(133, 20))
         self.lineEditBuscar.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.lineEditBuscar.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.lineEditBuscar.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.lineEditBuscar.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.lineEditBuscar.setObjectName(_fromUtf8("lineEditBuscar"))
         self.horizontalLayout.addWidget(self.lineEditBuscar)
         self.pushButtonRefrescar = QtGui.QPushButton(self.groupBox)
@@ -87,6 +87,8 @@ class Ui_FormListadoVehiculos(object):
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(2)
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(3)
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(4)
+
+#import resources_rc
 
 if __name__ == "__main__":
     import sys

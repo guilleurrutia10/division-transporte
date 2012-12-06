@@ -25,6 +25,8 @@ class Reparacion(Persistent):
     codigoReparacion  (private)
     
     
+    tipoDeReparacion (private)
+    
     
     descripcion  (private)
     
@@ -44,16 +46,19 @@ class Reparacion(Persistent):
     
     nroOrden  (private)
     
-    repuestosUtilizados
+    repuestosUtilizados (private)
     
     '''
 
-    def __init__(self):
+    def __init__(self, tipoDeReparacion, descripcion, repuestosUtilizados):
         '''
         Constructor
         @return: 
         @author: 
         '''
+        self._tipoDeReparacion = tipoDeReparacion
+        self._descripcion = descripcion
+        self._repuestosUtilizados = repuestosUtilizados
         
     def getDatos(self):
         '''
@@ -90,5 +95,11 @@ class Reparacion(Persistent):
         '''
         pass
     
+    def getTipoDeReparacion(self):
+        return self._tipoDeReparacion
     
-        
+    def getDescripcion(self):
+        return self._descripcion
+    
+    def getRepuestosUtilizados(self):
+        return self._repuestosUtilizados

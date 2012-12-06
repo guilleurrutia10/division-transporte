@@ -16,7 +16,7 @@ from negocio.Division_Transporte import Division_Transporte
 # ListadoVehiculosSinReparaciones para evitar grandes sentencias condicionales...
 #===============================================================================
 class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(ListadoVehiculos, self).__init__(parent)
         self.setupUi(self)
         #Para evitar que se modifique la información presentada por la grilla.
@@ -28,7 +28,7 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         filtro = unicode(self.lineEditBuscar.text())        
         coches = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.dominio)), self.vehiculos)
         #El método de comparación por igual está sobrecargado en la clase Legajo.
-        coches.sort(cmp=lambda x,y : cmp(x, y))
+        coches.sort(cmp=lambda x, y : cmp(x, y))
 #        coches.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
         self.cargarGrilla(coches)
             
@@ -40,32 +40,31 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
             columna = 0
             itemDominio = QtGui.QTableWidgetItem()
             itemDominio.setText(vehiculo.dominio)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemDominio)
+            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemDominio)
             columna += 1
             itemMarca = QtGui.QTableWidgetItem()
             itemMarca.setText(vehiculo.marca)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemMarca)
+            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemMarca)
             columna += 1
             itemRegistroInterno = QtGui.QTableWidgetItem()
             itemRegistroInterno.setText(vehiculo.registroInterno)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemRegistroInterno)
+            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemRegistroInterno)
             columna += 1
             itemNumeroChasis = QtGui.QTableWidgetItem()
             itemNumeroChasis.setText(vehiculo.numeroChasis)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemNumeroChasis)
+            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemNumeroChasis)
             columna += 1
             itemComisaria = QtGui.QTableWidgetItem()
             itemComisaria.setText(vehiculo.comisaria)
-            self.tableWidgetListadoDeVehiculos.setItem(fila,columna,itemComisaria)
+            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemComisaria)
             fila += 1
     
     def cargarGrillaInicial(self):
         division = Division_Transporte()
         vehiculos = division.getVehiculos()
         self.vehiculos = vehiculos.values()
-        self.vehiculos.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
+        self.vehiculos.sort(cmp=lambda x, y : cmp(x.dominio, y.dominio))
         self.cargarGrilla(self.vehiculos)
-    
     '''
     TODO: cambiar por un refrescar grilla.
     '''
@@ -75,31 +74,31 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         self.cargarGrillaInicial()
 
 class Listado_Vehiculos_en_reparacion_por_Seccion(QtGui.QWidget, Ui_FormListadoVehiculos):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(Listado_Vehiculos_en_reparacion_por_Seccion, self).__init__(parent)
         self.setupUi(self)
         
 class Listado_Vehiculos_con_Reparaciones_Planificadas(QtGui.QWidget, Ui_FormListadoVehiculos):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(Listado_Vehiculos_con_Reparaciones_Planificadas, self).__init__(parent)
         self.setupUi(self)
         
 class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_FormListadoVehiculos):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(Listado_Vehiculos_con_Reparaciones_no_Planificadas, self).__init__(parent)
         self.setupUi(self)
         
 class Listado_Vehiculos_de_la_Division_2(QtGui.QWidget, Ui_FormListadoVehiculos):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(Listado_Vehiculos_de_la_Division_2, self).__init__(parent)
         self.setupUi(self)
         
 class Listado_Vehiculos_con_Reparaciones_Planificadas_2(QtGui.QWidget, Ui_FormListadoVehiculos):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(ListadoVehiculos, self).__init__(parent)
         self.setupUi(self)
         
 class Listado_Vehiculos_Reparados_por_Seccion_2(QtGui.QWidget, Ui_FormListadoVehiculos):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(Listado_Vehiculos_Reparados_por_Seccion_2, self).__init__(parent)
         self.setupUi(self)

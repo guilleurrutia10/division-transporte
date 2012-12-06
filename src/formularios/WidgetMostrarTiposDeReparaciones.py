@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'WidgetMostrarTiposDeReparaciones.ui'
 #
-# Created: Sun Nov 25 16:34:00 2012
+# Created: Wed Dec 05 21:19:34 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

@@ -9,8 +9,6 @@ from PyQt4 import QtCore, QtGui
 from formularios.DialogAltaSeccion import Ui_DialogAltaSeccion
 from negocio.Division_Transporte import Division_Transporte
 
-from copy import deepcopy
-
 class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
     '''
     classdocs
@@ -23,8 +21,6 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.setupUi(self)
         self.tableWidgetEmpleadosAsignados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.tableWidgetEmpleadosSinAsignar.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
-#        self._filaEmpleadoSinAsignar = None
-#        self._filaEmpleadoAsignados = None
         self._encargado = None
         self.filaSeleccionadaAsignados = None
         self.filaSeleccionadaSinAsignar = None
@@ -62,25 +58,6 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.cargarSeccion(nombreSeccion)
         if self.mostrarMensaje('La Sección se ha cargado exitosamente! :)', 'Cargando'):
             self.accept()
-            
-    #===========================================================================
-    # def cargarSeccion(self, nombreSeccion):
-    #    division = Division_Transporte()
-    #    empleados = {}
-    #    encargado = None
-    #    #Armar un diccionario de empleados con las filas a excepción del encargado.
-    #    for fila in range(self.tableWidgetEmpleadosAsignados.rowCount()):
-    #        item = self.tableWidgetEmpleadosAsignados.item(fila, 0)
-    #        empleado = deepcopy(division.getEmpleado(unicode(item.text())))
-    #        if empleado == self._encargado:
-    #            encargado = empleado
-    #            continue
-    #        empleados[empleado.documento] = empleado
-    #        print empleado.documento
-    #    #Deepcopy xq el objeto que trataba de almacenar de nuevo ya se encontraba 
-    #    #en algún lugar de la BD.
-    #    division.agregarSecciones(nombreSeccion, empleados, encargado)
-    #===========================================================================
         
     def cargarSeccion(self, nombreSeccion):
         empleados = []
@@ -123,40 +100,9 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
     
     def celdaClickeada_on_tableWidgetEmpleadosSinAsignar(self, fila, columna):
         self.filaSeleccionadaSinAsignar = fila
-    #===========================================================================
-    # def celdaClickeada_on_tableWidgetEmpleadosSinAsignar(self, fila, columna):
-    #    print fila, ',' , columna
-    #    self._filaEmpleadoSinAsignar = {}
-    #    item1 = QtGui.QTableWidgetItem()
-    #    item = self.tableWidgetEmpleadosSinAsignar.item(fila, 0)
-    #    item1.setText(item.text())
-    #    self._filaEmpleadoSinAsignar['documento'] = item1
-    #    print item.text()
-    #    item2 = QtGui.QTableWidgetItem()
-    #    item = self.tableWidgetEmpleadosSinAsignar.item(fila, 1)
-    #    print item.text()
-    #    item2.setText(item.text())
-    #    self._filaEmpleadoSinAsignar['nombre'] = item2
-    #    self._filaEmpleadoSinAsignar['fila'] = fila
-    #===========================================================================
     
     def celdaClickeada_on_tableWidgetEmpleadosAsignados(self, fila, columna):
         self.filaSeleccionadaAsignados = fila
-        #=======================================================================
-        # print fila, ',' , columna
-        # self._filaEmpleadoAsignados = {}
-        # item1 = QtGui.QTableWidgetItem()
-        # item = self.tableWidgetEmpleadosAsignados.item(fila, 0)
-        # item1.setText(item.text())
-        # self._filaEmpleadoAsignados['documento'] = item1
-        # print item.text()
-        # item2 = QtGui.QTableWidgetItem()
-        # item = self.tableWidgetEmpleadosAsignados.item(fila, 1)
-        # print item.text()
-        # item2.setText(item.text())
-        # self._filaEmpleadoAsignados['nombre'] = item2
-        # self._filaEmpleadoAsignados['fila'] = fila
-        #=======================================================================
     
     @QtCore.pyqtSlot()
     def on_pushButtonAsignarEmpleado_clicked(self):
@@ -173,31 +119,6 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.empleados.remove(empleado)
         self.cargarGrillaEmpleadosAsignados(self.empleadosAsignado)
         self.filaSeleccionadaSinAsignar = None
-#===============================================================================
-#        print 'Asignando empleado'
-#        try:
-#            assert not(self._filaEmpleadoSinAsignar is None)
-#        except AssertionError:
-#            self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar')
-#            return
-#        fila = self.tableWidgetEmpleadosAsignados.rowCount()
-#        col = 1
-#        cantFilas = self.tableWidgetEmpleadosAsignados.rowCount() + 1
-#        self.tableWidgetEmpleadosAsignados.setRowCount(cantFilas)
-#        for clave, valor in self._filaEmpleadoSinAsignar.iteritems():
-#            if clave is 'fila':
-#                self.tableWidgetEmpleadosSinAsignar.removeRow(valor)
-#                continue
-#            if clave is 'documento':
-#                self.tableWidgetEmpleadosAsignados.setItem(fila,0,valor)
-#            if clave is 'nombre':
-#                self.tableWidgetEmpleadosAsignados.setItem(fila,1,valor)
-# #            self.tableWidgetEmpleadosAsignados.setItem(fila,col,valor)
-#            col -= 1
-#        self._filaEmpleadoSinAsignar.clear()
-#        self._filaEmpleadoSinAsignar = None
-#        print self._filaEmpleadoSinAsignar
-#===============================================================================
     
     @QtCore.pyqtSlot()
     def on_pushButtonDesasignarEmpleado_clicked(self):
@@ -216,35 +137,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.filaSeleccionadaAsignados = None
         if self._encargado == empleado.documento:
             self._encargado = None
-#===============================================================================
-#        '''
-#        TODO: Mejorar la modularizacion.
-#        '''
-#        print 'Desasignando empleado'
-#        try:
-#            assert not(self._filaEmpleadoAsignados is None)
-#        except AssertionError:
-#            self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar')
-#            return
-#        fila = self.tableWidgetEmpleadosSinAsignar.rowCount()
-#        col = 0
-#        cantFilas = self.tableWidgetEmpleadosSinAsignar.rowCount() + 1
-#        self.tableWidgetEmpleadosSinAsignar.setRowCount(cantFilas)
-#        for clave, valor in self._filaEmpleadoAsignados.iteritems():
-#            if clave is 'fila':
-#                self.tableWidgetEmpleadosAsignados.removeRow(valor)
-#                continue
-#            if clave is 'documento':
-#                self.tableWidgetEmpleadosSinAsignar.setItem(fila,0,valor)
-#            if clave is 'nombre':
-#                self.tableWidgetEmpleadosSinAsignar.setItem(fila,1,valor)
-# #            self.tableWidgetEmpleadosSinAsignar.setItem(fila,col,valor)
-#            col +=1
-#        self._filaEmpleadoAsignados.clear() 
-#        self._filaEmpleadoAsignados = None
-#        print self._filaEmpleadoAsignados
-#===============================================================================
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAsignarComoEncargado_clicked(self):
         print 'Asignando Encargado'
@@ -253,7 +146,6 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
                 self.mostrarMensaje('Ya seleccionó el encargado.', 'Selección de encargado')
                 return
             assert not((self.filaSeleccionadaAsignados is None))
-#            assert not(self._filaEmpleadoAsignados is None)
         except AssertionError:
             self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar')
             return
@@ -262,15 +154,6 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self._encargado = unicode(documento)
         self.filaSeleccionadaAsignados = None
         self.mostrarMensaje('El encargado %s se cargado correctamente. :)' % nombre, 'Cargando Encargado')
-        #=======================================================================
-        # itemDocumento = self._filaEmpleadoAsignados['documento']
-        # division = Division_Transporte()
-        # self._encargado = division.getEmpleado(unicode(itemDocumento.text()))
-        # self._filaEmpleadoAsignados.clear() 
-        # self._filaEmpleadoAsignados = None
-        # print self._filaEmpleadoAsignados
-        # self.mostrarMensaje('El encargado %s se cargado correctamente. :)'%self._encargado.nombre, 'Cargando Encargado')
-        #=======================================================================
         
     '''
     TODO: Este método se repite en varios Dialogs.

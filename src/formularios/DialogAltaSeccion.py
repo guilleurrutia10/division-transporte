@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogAltaSeccion.ui'
 #
-# Created: Sun Nov 25 16:33:18 2012
+# Created: Wed Dec 05 21:18:48 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

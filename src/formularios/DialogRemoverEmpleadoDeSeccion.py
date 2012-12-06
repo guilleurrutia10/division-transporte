@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogRemoverEmpleadoDeSeccion.ui'
 #
-# Created: Sun Nov 25 16:33:43 2012
+# Created: Wed Dec 05 21:19:17 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(659, 480)
+        Dialog.resize(621, 434)
         Dialog.setMinimumSize(QtCore.QSize(0, 0))
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
         self.gridLayout = QtGui.QGridLayout(Dialog)
@@ -68,6 +68,7 @@ class Ui_Dialog(object):
         self.pushButton_FiltroNombre.setObjectName(_fromUtf8("pushButton_FiltroNombre"))
         self.gridLayout.addWidget(self.groupBox_4, 2, 0, 1, 2)
         self.tableWidget = QtGui.QTableWidget(Dialog)
+        self.tableWidget.setMinimumSize(QtCore.QSize(603, 181))
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
         self.tableWidget.setColumnCount(6)
         self.tableWidget.setRowCount(0)

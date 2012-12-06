@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogCrearReparacion.ui'
 #
-# Created: Sun Nov 25 16:33:28 2012
+# Created: Wed Dec 05 21:18:58 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -102,7 +102,7 @@ class Ui_DialogCrearReparacion(object):
         self.horizontalLayout.addWidget(self.groupBox_4)
         self.tableWidgetRepuestosAsignados = QtGui.QTableWidget(self.groupBox_3)
         self.tableWidgetRepuestosAsignados.setObjectName(_fromUtf8("tableWidgetRepuestosAsignados"))
-        self.tableWidgetRepuestosAsignados.setColumnCount(2)
+        self.tableWidgetRepuestosAsignados.setColumnCount(3)
         self.tableWidgetRepuestosAsignados.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         item.setText(QtGui.QApplication.translate("DialogCrearReparacion", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
@@ -110,6 +110,9 @@ class Ui_DialogCrearReparacion(object):
         item = QtGui.QTableWidgetItem()
         item.setText(QtGui.QApplication.translate("DialogCrearReparacion", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestosAsignados.setHorizontalHeaderItem(1, item)
+        item = QtGui.QTableWidgetItem()
+        item.setText(QtGui.QApplication.translate("DialogCrearReparacion", "Cantidad", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidgetRepuestosAsignados.setHorizontalHeaderItem(2, item)
         self.horizontalLayout.addWidget(self.tableWidgetRepuestosAsignados)
         self.verticalLayout_3.addWidget(self.groupBox_3)
         self.verticalLayout.addWidget(self.groupBox)
@@ -141,6 +144,7 @@ class Ui_DialogCrearReparacion(object):
         item = self.tableWidgetRepuestosDisponibles.horizontalHeaderItem(1)
         item = self.tableWidgetRepuestosAsignados.horizontalHeaderItem(0)
         item = self.tableWidgetRepuestosAsignados.horizontalHeaderItem(1)
+        item = self.tableWidgetRepuestosAsignados.horizontalHeaderItem(2)
 
 
 if __name__ == "__main__":

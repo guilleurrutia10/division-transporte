@@ -18,13 +18,13 @@ from pprint import pprint
 if __name__ == '__main__':
     
     bd = ZopeDB(MiZODB())
-#    bd = ZopeDB(MiZODB('zeo.conf'))
     bd.cargarTiposDeDocumentos()
     bd.cargarTiposDeReparaciones()
     bd.zodb.close()
     
     bd.zodb.open()
-    pprint(bd.getAlls('tiposReparaciones'))
+    tiposReparaciones = bd.getAlls('tiposReparaciones')
+    pprint(tiposReparaciones)
     bd.zodb.close()
     
 #    bd = config.databaseFromURL('zeo.conf')
