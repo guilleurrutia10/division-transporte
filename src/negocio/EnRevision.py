@@ -62,6 +62,9 @@ class EnRevision(EstadoOrdenReparacion):
                     repuestosSolicitados.append(repuesto)
         #creamos el Pedido de Actuacion y se lo agregamos a la orden:
         from negocio.PedidoDeActuacion import PedidoDeActuacion
-        unaOrdenReparacion.setPedidoDeActuacion(PedidoDeActuacion(repuestosSolicitados))
+        pedidoActuacion = PedidoDeActuacion(repuestosSolicitados)
+        pedidoActuacion.setNumeroPedido(1)
+        unaOrdenReparacion.setPedidoDeActuacion(pedidoActuacion)
+#        unaOrdenReparacion.setPedidoDeActuacion(PedidoDeActuacion(repuestosSolicitados))
         
         print 'pedido generado'

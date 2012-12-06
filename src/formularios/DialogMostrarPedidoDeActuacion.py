@@ -3,6 +3,7 @@
 # Form implementation generated from reading ui file 'DialogMostrarPedidoDeActuacion.ui'
 #
 # Created: Thu Dec 06 14:49:20 2012
+# Created: Wed Dec 05 21:19:07 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!

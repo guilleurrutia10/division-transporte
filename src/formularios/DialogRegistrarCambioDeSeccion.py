@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogRegistrarCambioDeSeccion.ui'
 #
-# Created: Wed Dec 05 16:57:33 2012
-#      by: PyQt4 UI code generator 4.9.5
+# Created: Wed Dec 05 21:19:10 2012
+#      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,6 +18,7 @@ class Ui_DialogRegistrarCambioDeSeccion(object):
     def setupUi(self, DialogRegistrarCambioDeSeccion):
         DialogRegistrarCambioDeSeccion.setObjectName(_fromUtf8("DialogRegistrarCambioDeSeccion"))
         DialogRegistrarCambioDeSeccion.resize(928, 513)
+        DialogRegistrarCambioDeSeccion.setWindowTitle(QtGui.QApplication.translate("DialogRegistrarCambioDeSeccion", "Cambiar de Seccion a un Empleado", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogRegistrarCambioDeSeccion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.widget = QtGui.QWidget(DialogRegistrarCambioDeSeccion)
@@ -32,6 +33,7 @@ class Ui_DialogRegistrarCambioDeSeccion(object):
         spacerItem = QtGui.QSpacerItem(770, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButtonCambiarDeSeccion = QtGui.QPushButton(self.groupBox)
+        self.pushButtonCambiarDeSeccion.setText(QtGui.QApplication.translate("DialogRegistrarCambioDeSeccion", "Cambiar De Seccion", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCambiarDeSeccion.setObjectName(_fromUtf8("pushButtonCambiarDeSeccion"))
         self.horizontalLayout.addWidget(self.pushButtonCambiarDeSeccion)
         self.verticalLayout.addWidget(self.groupBox)
@@ -44,9 +46,11 @@ class Ui_DialogRegistrarCambioDeSeccion(object):
         self.gridLayout_7.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_7.setObjectName(_fromUtf8("gridLayout_7"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRegistrarCambioDeSeccion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_7.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRegistrarCambioDeSeccion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_7.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -57,10 +61,7 @@ class Ui_DialogRegistrarCambioDeSeccion(object):
         QtCore.QMetaObject.connectSlotsByName(DialogRegistrarCambioDeSeccion)
 
     def retranslateUi(self, DialogRegistrarCambioDeSeccion):
-        DialogRegistrarCambioDeSeccion.setWindowTitle(QtGui.QApplication.translate("DialogRegistrarCambioDeSeccion", "Cambiar de Seccion a un Empleado", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonCambiarDeSeccion.setText(QtGui.QApplication.translate("DialogRegistrarCambioDeSeccion", "Cambiar De Seccion", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogRegistrarCambioDeSeccion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogRegistrarCambioDeSeccion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
+        pass
 
 
 if __name__ == "__main__":

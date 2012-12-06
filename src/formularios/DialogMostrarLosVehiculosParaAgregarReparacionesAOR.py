@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogMostrarLosVehiculosParaAgregarReparacionesAOR.ui'
 #
-# Created: Wed Dec 05 16:57:31 2012
-#      by: PyQt4 UI code generator 4.9.5
+# Created: Wed Dec 05 21:19:06 2012
+#      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,6 +18,7 @@ class Ui_DialogMostrarLosVehiculosParaAgregarReparacionesAOR(object):
     def setupUi(self, DialogMostrarLosVehiculosParaAgregarReparacionesAOR):
         DialogMostrarLosVehiculosParaAgregarReparacionesAOR.setObjectName(_fromUtf8("DialogMostrarLosVehiculosParaAgregarReparacionesAOR"))
         DialogMostrarLosVehiculosParaAgregarReparacionesAOR.resize(702, 444)
+        DialogMostrarLosVehiculosParaAgregarReparacionesAOR.setWindowTitle(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaAgregarReparacionesAOR", "Agregar Reparaciones a Orden de Reparacion de Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8("../../recursos/Imagenes/logo.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         DialogMostrarLosVehiculosParaAgregarReparacionesAOR.setWindowIcon(icon)
@@ -46,6 +47,7 @@ class Ui_DialogMostrarLosVehiculosParaAgregarReparacionesAOR(object):
         self.pushButtonAgregarReparacionesAOrden = QtGui.QPushButton(self.groupBox)
         self.pushButtonAgregarReparacionesAOrden.setMinimumSize(QtCore.QSize(100, 0))
         self.pushButtonAgregarReparacionesAOrden.setMaximumSize(QtCore.QSize(163, 16777215))
+        self.pushButtonAgregarReparacionesAOrden.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaAgregarReparacionesAOR", "Agregar Reparaciones a Orden", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAgregarReparacionesAOrden.setObjectName(_fromUtf8("pushButtonAgregarReparacionesAOrden"))
         self.horizontalLayout.addWidget(self.pushButtonAgregarReparacionesAOrden)
         self.verticalLayout.addWidget(self.groupBox)
@@ -58,9 +60,11 @@ class Ui_DialogMostrarLosVehiculosParaAgregarReparacionesAOR(object):
         self.gridLayout_5.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_5.setObjectName(_fromUtf8("gridLayout_5"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaAgregarReparacionesAOR", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_5.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaAgregarReparacionesAOR", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_5.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -71,10 +75,7 @@ class Ui_DialogMostrarLosVehiculosParaAgregarReparacionesAOR(object):
         QtCore.QMetaObject.connectSlotsByName(DialogMostrarLosVehiculosParaAgregarReparacionesAOR)
 
     def retranslateUi(self, DialogMostrarLosVehiculosParaAgregarReparacionesAOR):
-        DialogMostrarLosVehiculosParaAgregarReparacionesAOR.setWindowTitle(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaAgregarReparacionesAOR", "Agregar Reparaciones a Orden de Reparacion de Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonAgregarReparacionesAOrden.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaAgregarReparacionesAOR", "Agregar Reparaciones a Orden", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaAgregarReparacionesAOR", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaAgregarReparacionesAOR", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
+        pass
 
 
 if __name__ == "__main__":

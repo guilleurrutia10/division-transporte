@@ -145,6 +145,7 @@ class Legajo(Persistent):
     
     def __str__(self):
         return 'Dominio: %s' % self.dominio
+        return 'Dominio: %s' % self.dominio
     
     def getDominio(self):
         return self.dominio

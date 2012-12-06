@@ -23,7 +23,8 @@ if __name__ == '__main__':
     bd.zodb.close()
     
     bd.zodb.open()
-    pprint(bd.getAlls('tiposReparaciones'))
+    tiposReparaciones = bd.getAlls('tiposReparaciones')
+    pprint(tiposReparaciones)
     bd.zodb.close()
     
 #    bd = config.databaseFromURL('zeo.conf')

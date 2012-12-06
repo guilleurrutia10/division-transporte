@@ -67,7 +67,7 @@ class Division_Transporte(Persistent):
         self.instance.secciones = {}
         self.instance.ordenesDeReparacion = {}
         self.instance.tiposDeDocumentos = {}
-        self.instance.vehiculos = {}
+        self.instance.pedidosDeActuacion = {}
         self.instance.tiposDeDocumentos = {}
         self.instance.empleados = {}
 #        self.bd = ZopeDB(MiZODB('zeo.conf'))
@@ -183,6 +183,7 @@ class Division_Transporte(Persistent):
         @author: 
         '''
         zodb = ZopeDB(MiZODB())
+#        zodb = ZopeDB(MiZODB('zeo.conf'))
 #        tipoDoc = zodb.get('tiposDocumentos',tipoDocumento)
         empleado = Empleado(nombre, apellido, numeroDocumento, zodb.get('tiposDocumentos', tipoDocumento))
         zodb.save('empleados', empleado.documento, empleado)
@@ -233,7 +234,7 @@ class Division_Transporte(Persistent):
         zodb = ZopeDB(MiZODB())
 #        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('vehiculos')
-#        return self.vehiculos
+#        return self.pedidosDeActuacion
 
     def getVehiculo(self, clave):
         '''
@@ -296,10 +297,6 @@ class Division_Transporte(Persistent):
         zodb = ZopeDB(MiZODB())
         return zodb.getAlls('tiposReparaciones')
 
-        zodb = ZopeDB(MiZODB())
-#        zodb = ZopeDB(MiZODB('zeo.conf'))
-        return zodb.getAlls('tiposReparaciones')
-    
     def getTipoReparacion(self, claveTipoReparacion):
         '''
         @return: 
@@ -319,6 +316,9 @@ class Division_Transporte(Persistent):
         zodb.remove('vehiculos', vehiculoSeleccionado.getDominio())
         unVehiculo.save()
         #unVehiculo.save()
+        #zodb.remove('vehiculos', vehiculoSeleccionado.getDominio())
+        #unVehiculo.save()
+
 
     def getPedidoActuacionSinFechaRecepcion(self):
         vehiculos = self.getVehiculos().values()
@@ -328,3 +328,11 @@ class Division_Transporte(Persistent):
             if pedido:
                 pedidosDeActuacion.append(pedido)
         return pedidosDeActuacion
+    
+    def registrarRecepcionPedidoDeActuacion(self, numeroPedido, fechaRecepcion):
+        print 'Registrando Recepcion Pedido de Actuacion'
+        pedidosDeActuacion = self.getPedidoActuacionSinFechaRecepcion()
+        pedido = filter(lambda pedido: pedido.getNumeroPedido() == numeroPedido, pedidosDeActuacion)
+        if pedido:
+            fecha = fechaRecepcion
+            pedido.setFechaRecepcion(fecha)

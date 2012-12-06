@@ -18,15 +18,9 @@ class PedidoDeActuacion(Persistent):
     
     ''' ATTRIBUTES
     
-    
-    
     numeroPedidoActuacion  (private)
     
-    
-    
     fechaDeRealizacion  (private)
-    
-    
     
     fechaDeRecepcion  (private)
     
@@ -44,7 +38,8 @@ class PedidoDeActuacion(Persistent):
         self._repuestosSolicitados = repuestosSolicitados
         import datetime
         self._fechaRealizacion = datetime.datetime.now()
-        self._fechaRecepcion = None 
+        self._fechaRecepcion = None
+        self._numeroPedido = None
         
     def setFechaRecepcion(self, fechaRecepcion):
         '''
@@ -58,4 +53,10 @@ class PedidoDeActuacion(Persistent):
     
     def getFechaRealizacion(self):
         return self._fechaRealizacion
+    
+    def setNumeroPedido(self, numero):
+        self._numeroPedido = numero
+        
+    def getNumeroPedido(self):
+        return self._numeroPedido
     

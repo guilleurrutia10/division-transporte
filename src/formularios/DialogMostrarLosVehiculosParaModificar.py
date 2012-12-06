@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'DialogMostrarLosVehiculosParaModificar.ui'
 #
-# Created: Wed Dec 05 16:57:32 2012
-#      by: PyQt4 UI code generator 4.9.5
+# Created: Wed Dec 05 21:19:06 2012
+#      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,6 +18,7 @@ class Ui_DialogMostrarLosVehiculosParaModificar(object):
     def setupUi(self, DialogMostrarLosVehiculosParaModificar):
         DialogMostrarLosVehiculosParaModificar.setObjectName(_fromUtf8("DialogMostrarLosVehiculosParaModificar"))
         DialogMostrarLosVehiculosParaModificar.resize(789, 597)
+        DialogMostrarLosVehiculosParaModificar.setWindowTitle(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaModificar", " Modificar Vehiculos", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogMostrarLosVehiculosParaModificar)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.widget = QtGui.QWidget(DialogMostrarLosVehiculosParaModificar)
@@ -44,6 +45,7 @@ class Ui_DialogMostrarLosVehiculosParaModificar(object):
         self.pushButtonModificarDatosDeVehiculo = QtGui.QPushButton(self.groupBox)
         self.pushButtonModificarDatosDeVehiculo.setMinimumSize(QtCore.QSize(100, 0))
         self.pushButtonModificarDatosDeVehiculo.setMaximumSize(QtCore.QSize(150, 16777215))
+        self.pushButtonModificarDatosDeVehiculo.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaModificar", "Modificar Datos De Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonModificarDatosDeVehiculo.setObjectName(_fromUtf8("pushButtonModificarDatosDeVehiculo"))
         self.horizontalLayout.addWidget(self.pushButtonModificarDatosDeVehiculo)
         self.verticalLayout.addWidget(self.groupBox)
@@ -56,9 +58,11 @@ class Ui_DialogMostrarLosVehiculosParaModificar(object):
         self.gridLayout_5.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_5.setObjectName(_fromUtf8("gridLayout_5"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaModificar", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_5.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaModificar", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_5.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -69,10 +73,7 @@ class Ui_DialogMostrarLosVehiculosParaModificar(object):
         QtCore.QMetaObject.connectSlotsByName(DialogMostrarLosVehiculosParaModificar)
 
     def retranslateUi(self, DialogMostrarLosVehiculosParaModificar):
-        DialogMostrarLosVehiculosParaModificar.setWindowTitle(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaModificar", " Modificar Vehiculos", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonModificarDatosDeVehiculo.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaModificar", "Modificar Datos De Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaModificar", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogMostrarLosVehiculosParaModificar", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
+        pass
 
 
 if __name__ == "__main__":
