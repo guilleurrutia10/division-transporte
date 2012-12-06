@@ -293,15 +293,12 @@ class Division_Transporte(Persistent):
         return '%s, Id: %s' % (self.__class__, id(self))
     
     def getTipoReparaciones(self):
-<<<<<<< HEAD
-        zodb = ZopeDB(MiZODB('zeo.conf'))
+        zodb = ZopeDB(MiZODB())
         return zodb.getAlls('tiposReparaciones')
 
-=======
         zodb = ZopeDB(MiZODB())
 #        zodb = ZopeDB(MiZODB('zeo.conf'))
         return zodb.getAlls('tiposReparaciones')
->>>>>>> 84e85968df8793f89cfbdd00a1b62008359424c6
     
     def getTipoReparacion(self, claveTipoReparacion):
         '''
@@ -320,11 +317,8 @@ class Division_Transporte(Persistent):
         
         zodb = ZopeDB(MiZODB())
         zodb.remove('vehiculos', vehiculoSeleccionado.getDominio())
-<<<<<<< HEAD
         unVehiculo.save()
-        
-=======
-        unVehiculo.save()
+        #unVehiculo.save()
 
     def getPedidoActuacionSinFechaRecepcion(self):
         vehiculos = self.getVehiculos().values()
@@ -334,4 +328,3 @@ class Division_Transporte(Persistent):
             if pedido:
                 pedidosDeActuacion.append(pedido)
         return pedidosDeActuacion
->>>>>>> 84e85968df8793f89cfbdd00a1b62008359424c6

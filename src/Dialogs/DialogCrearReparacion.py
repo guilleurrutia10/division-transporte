@@ -73,7 +73,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
             if not self.lineEditCantidadRepuesto.text():
                 QtGui.QMessageBox.critical(self, 'Error', 'Por favor ingrese la cantidad del repuesto seleccionado')
                 return
-            self.agregarRepuesto(repuestoSeleccionado, int(self.lineEditCantidadRepuesto.text()))
+            self.agregarRepuesto(repuestoSeleccionado.getTipoDeRepuesto(), int(self.lineEditCantidadRepuesto.text()))
         except AttributeError:
             QtGui.QMessageBox.critical(self, 'Error', 'Por favor seleccione un repuesto para agregar a la reparacion')
             return
@@ -81,6 +81,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     def on_comboBoxTipoDeReparacion_currentIndexChanged(self):
         print 'Cambio el combo: %s' % self.comboBoxTipoDeReparacion.currentText()
         self._tipoDeReparacionSeleccionado = self.buscarTipoReparacion(self.comboBoxTipoDeReparacion.currentText())
+        #Obtenemos los repuestos requeridos por la reparacion seleccionada
         repuestos = self._tipoDeReparacionSeleccionado.getRepuestos()
         
         self.tableWidgetRepuestosDisponibles.clearContents()
@@ -89,11 +90,11 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         for repuesto in repuestos:
             columna = 0
             itemNombreRepuesto = QtGui.QTableWidgetItem()
-            itemNombreRepuesto.setText(repuesto.getNombre())
+            itemNombreRepuesto.setText(repuesto.getTipoDeRepuesto().getNombre())
             self.tableWidgetRepuestosDisponibles.setItem(fila,columna,itemNombreRepuesto)
             columna += 1
             itemDescripcionRepuesto = QtGui.QTableWidgetItem()
-            itemDescripcionRepuesto.setText(repuesto.getDescripcion())
+            itemDescripcionRepuesto.setText(repuesto.getTipoDeRepuesto().getDescripcion())
             self.tableWidgetRepuestosDisponibles.setItem(fila,columna,itemDescripcionRepuesto)
             fila += 1
             
