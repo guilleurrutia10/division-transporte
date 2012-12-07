@@ -21,23 +21,13 @@ class Legajo(Persistent):
     
     ''' ATTRIBUTES
 
-   
-
       dominio  (private)
-    
-       
-    
+        
       modelo  (private)
-    
-       
     
       marca  (private)
     
-       
-    
       registroInterno  (private)
-    
-       
     
       numeroChasis  (private)
       

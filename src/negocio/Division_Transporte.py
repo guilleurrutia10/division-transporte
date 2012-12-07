@@ -248,8 +248,13 @@ class Division_Transporte(Persistent):
     def modificarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
         zodb = ZopeDB(MiZODB())
 #        zodb = ZopeDB(MiZODB('zeo.conf'))
+        vehiculo = deepcopy(zodb.get('vehiculos', dominio))
         zodb.remove('vehiculos', dominio)
-        vehiculo = Legajo(dominio, marca, registroInterno, numeroChasis)
+#        vehiculo = Legajo(dominio, marca, registroInterno, numeroChasis)
+        vehiculo.dominio = dominio
+        vehiculo.marca = marca
+        vehiculo.registroInterno = registroInterno
+        vehiculo.numeroChasis = numeroChasis
         vehiculo.save()
     
     '''
@@ -329,8 +334,14 @@ class Division_Transporte(Persistent):
     
     def registrarRecepcionPedidoDeActuacion(self, numeroPedido, fechaRecepcion):
         print 'Registrando Recepcion Pedido de Actuacion'
-        pedidosDeActuacion = self.getPedidoActuacionSinFechaRecepcion()
-        pedido = filter(lambda pedido: pedido.getNumeroPedido() == numeroPedido, pedidosDeActuacion)
-        if pedido:
-            fecha = fechaRecepcion
-            pedido.setFechaRecepcion(fecha)
+        vehiculo = self.obtenerVehiculo(numeroPedido)
+        vehiculo.registroInterno = '20'
+        from MiZODB import MiZODB, ZopeDB
+        zodb = ZopeDB(MiZODB())
+        zodb.remove('vehiculos', vehiculo.dominio)
+        vehiculo.save()
+            
+    def obtenerVehiculo(self, numeroPedido):
+        vehiculos = self.getVehiculos().values()
+        vehiculo = filter(lambda vehiculo: numeroPedido == vehiculo.dameOrdenDeReparacionEnCurso().getPedidoDeActuacionActual().getNumeroPedido(), vehiculos)
+        return vehiculo[0]
