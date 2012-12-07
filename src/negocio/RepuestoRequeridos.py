@@ -22,10 +22,10 @@ class RepuestoRequeridos(DetalleRepuesto):
     
     '''
 
-    def __init__(self):
+    def __init__(self, tipoDeRepuesto=None, cantidad=4):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        
+        super(RepuestoRequeridos, self).__init__(tipoDeRepuesto, cantidad)

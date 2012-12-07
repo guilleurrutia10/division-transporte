@@ -10,6 +10,7 @@ from persistent import Persistent
 from Empleado import *
 from RepuestoUtilizados import *
 from TipoDeReparacion import *
+from bsddb.test.test_compare import cmp
 
 class Reparacion(Persistent):
     '''
@@ -103,3 +104,11 @@ class Reparacion(Persistent):
     
     def getRepuestosUtilizados(self):
         return self._repuestosUtilizados
+    
+    def __cmp__(self, otro):
+        if self.getTipoDeReparacion().getNombre() == otro.getTipoDeReparacion().getNombre():
+            return 0
+        else:
+            return -1
+    
+        

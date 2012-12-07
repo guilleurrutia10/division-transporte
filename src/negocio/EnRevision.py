@@ -6,6 +6,7 @@ Created on 07/11/2012
 '''
 
 from EstadoOrdenReparacion import *
+from excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden_Posee_Reparacion
 
 class EnRevision(EstadoOrdenReparacion):
     '''
@@ -30,8 +31,12 @@ class EnRevision(EstadoOrdenReparacion):
         @author: 
         '''
         #reparaciones = self.getEstadoOrden().reparaciones
-        orden.getReparaciones().append(unaReparacion)
-        print 'Se agrego una nueva Reparación'
+        #TODO: Agregar la reparacion a la OR si no estaba en la reparacion...
+        if not unaReparacion in orden.getReparaciones():
+            orden.getReparaciones().append(unaReparacion)
+            print 'Se agrego una nueva Reparación'
+        else:
+            raise Excepcion_Orden_Posee_Reparacion('La Reparacion ya se encuentra en la Orden de Reparacion del Vehiculo')
         #reparacion[numero] = reparacion
         
     def cambiarProximoEstado(self):

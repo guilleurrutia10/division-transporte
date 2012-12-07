@@ -8,6 +8,7 @@ from PyQt4 import QtCore, QtGui
 
 from formularios.DialogCrearReparacion import Ui_DialogCrearReparacion
 from negocio.Division_Transporte import Division_Transporte
+from excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden_Posee_Reparacion
 
 class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     '''
@@ -40,15 +41,25 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     def on_pushButtonCancelar_clicked(self):
         self.reject()
         
+    def seleccionoAlgunRepuesto(self):
+        return self._repuestosSolicitados != []
+        
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         print 'Click sobre aceptar'
+        if not self.seleccionoAlgunRepuesto():
+            QtGui.QMessageBox.critical(self, 'Error', 'Debe seleccionar por lo menos un repuesto para crear una reparacion')
+            return
         #crear la reparacion
         from negocio.Reparacion import Reparacion
         unaReparacion = Reparacion(self._tipoDeReparacionSeleccionado, str(self.lineEditDescripcion.text()), self._repuestosSolicitados)
         #TODO: Aca me quede, por las dudas...
         #self._ordenDeReparacion.getReparaciones().append(unaReparacion)
-        self._ordenDeReparacion.addReparacion(unaReparacion)
+        try:
+            self._ordenDeReparacion.addReparacion(unaReparacion)
+        except Excepcion_Orden_Posee_Reparacion, e:
+            QtGui.QMessageBox.critical(self, 'Error. No se agrego la Reparacion', e.getMensaje())
+            return
         self.accept()
          
         
@@ -73,7 +84,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
             if not self.lineEditCantidadRepuesto.text():
                 QtGui.QMessageBox.critical(self, 'Error', 'Por favor ingrese la cantidad del repuesto seleccionado')
                 return
-            self.agregarRepuesto(repuestoSeleccionado, int(self.lineEditCantidadRepuesto.text()))
+            self.agregarRepuesto(repuestoSeleccionado.getTipoDeRepuesto(), int(self.lineEditCantidadRepuesto.text()))
         except AttributeError:
             QtGui.QMessageBox.critical(self, 'Error', 'Por favor seleccione un repuesto para agregar a la reparacion')
             return
@@ -81,6 +92,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     def on_comboBoxTipoDeReparacion_currentIndexChanged(self):
         print 'Cambio el combo: %s' % self.comboBoxTipoDeReparacion.currentText()
         self._tipoDeReparacionSeleccionado = self.buscarTipoReparacion(self.comboBoxTipoDeReparacion.currentText())
+        #Obtenemos los repuestos requeridos por la reparacion seleccionada
         repuestos = self._tipoDeReparacionSeleccionado.getRepuestos()
         
         self.tableWidgetRepuestosDisponibles.clearContents()
@@ -89,11 +101,11 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         for repuesto in repuestos:
             columna = 0
             itemNombreRepuesto = QtGui.QTableWidgetItem()
-            itemNombreRepuesto.setText(repuesto.getNombre())
+            itemNombreRepuesto.setText(repuesto.getTipoDeRepuesto().getNombre())
             self.tableWidgetRepuestosDisponibles.setItem(fila,columna,itemNombreRepuesto)
             columna += 1
             itemDescripcionRepuesto = QtGui.QTableWidgetItem()
-            itemDescripcionRepuesto.setText(repuesto.getDescripcion())
+            itemDescripcionRepuesto.setText(repuesto.getTipoDeRepuesto().getDescripcion())
             self.tableWidgetRepuestosDisponibles.setItem(fila,columna,itemDescripcionRepuesto)
             fila += 1
             

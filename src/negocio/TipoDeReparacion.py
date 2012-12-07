@@ -44,7 +44,7 @@ class TipoDeReparacion(Persistent):
         return self._repuestos
     
     def getRepuesto(self, unNombreRepuesto):
-        repuestos = filter( lambda n: n.getNombre() == unNombreRepuesto, self.getRepuestos())
+        repuestos = filter( lambda n: n.getTipoDeRepuesto().getNombre() == unNombreRepuesto, self.getRepuestos())
         return repuestos[0]
     
     def setRepuestos(self, repuestos):

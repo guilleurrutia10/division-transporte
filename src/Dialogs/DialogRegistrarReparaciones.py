@@ -95,6 +95,9 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         print 'Click sobre aceptar'
+        if self.ordenDeReparacion.getReparaciones() == []:
+            QtGui.QMessageBox.critical(self, 'Error', 'Debe agregar por lo menos una Reparacion al Vehiculo para generar un Pedido de Actuacion')
+            return
         division = Division_Transporte()
         division.registrarReparaciones(self.vehiculoSeleccionado)
         vehiculo = self.buscarVehiculo()
@@ -104,14 +107,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
     def mostrarPedidoDeActuacion(self, unPedidoDeActuacion):
         '''
         '''
-        #TODO: Aca ahora imprimimos algo, pero debemos mostrar un nuevo dialogo...
-        print 'PEDIDO DE ACTUACION'
-        print '\tfecha: %s' % unPedidoDeActuacion.getFechaRealizacion()
-        print '\trepuesto:'
-        for rep in unPedidoDeActuacion.getRepuestosSolicitados():
-            print '\t\t%s' % rep.getTipoDeRepuesto()
-        
-        print 'abriendo dialogo Mostrar Pedido de actuacion'
+        #TODO [ok]: Aca ahora imprimimos algo, pero debemos mostrar un nuevo dialogo...
         dlgMostrarPedido = DialogMostrarPedidoDeActuacion()
         dlgMostrarPedido.setPedidoDeActuacion(unPedidoDeActuacion)
         dlgMostrarPedido.exec_()
