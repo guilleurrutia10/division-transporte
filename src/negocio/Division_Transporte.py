@@ -287,10 +287,16 @@ class Division_Transporte(Persistent):
         si ese vehículo tiene o no orden Reparación, por lo tanto no debemos crearle otra hasta
         que esa haya sido finalizada.
         '''
-        import datetime
-        hoy = datetime.datetime.now()
-        vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
-        vehiculo.save()
+        if vehiculo.dameOrdenDeReparacionEnCurso():
+            import datetime
+            hoy = datetime.datetime.now()
+            from MiZODB import MiZODB, ZopeDB
+            zodb = ZopeDB(MiZODB())
+            zodb.remove('vehiculos', vehiculo.dominio)
+            vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
+            vehiculo.save()
+        else:
+            raise Exception
 
     def __str__(self):
         '''
