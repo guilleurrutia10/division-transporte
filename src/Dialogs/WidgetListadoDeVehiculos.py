@@ -57,7 +57,12 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
             itemComisaria = QtGui.QTableWidgetItem()
             itemComisaria.setText(vehiculo.comisaria)
             self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemComisaria)
+            #columna += 1
+            #itemModelo = QtGui.QTableWidgetItem()
+            #itemModelo.setText(vehiculo.marca)
+            #self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemModelo)
             fila += 1
+            
     
     def cargarGrillaInicial(self):
         division = Division_Transporte()

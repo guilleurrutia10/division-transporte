@@ -51,6 +51,8 @@ class Legajo(Persistent):
         @return: 
         @author: 
         '''
+        #def __init__(self, dominio, marca, registroInterno, numeroChasis, modelo = 'Corsa'):
+        #self.modelo = modelo
         self.dominio = dominio
         self.marca = marca
         self.registroInterno = registroInterno

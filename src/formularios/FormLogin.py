@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'FormLogin.ui'
 #
-# Created: Wed Dec 05 21:19:19 2012
+# Created: Thu Dec 06 21:36:38 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,6 +27,9 @@ class Ui_Dialog(object):
         Dialog.setMinimumSize(QtCore.QSize(270, 150))
         Dialog.setMaximumSize(QtCore.QSize(280, 152))
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Login", None, QtGui.QApplication.UnicodeUTF8))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("../imagenes/logoDivisionTransporte.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Dialog.setWindowIcon(icon)
         self.verticalLayout = QtGui.QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(Dialog)

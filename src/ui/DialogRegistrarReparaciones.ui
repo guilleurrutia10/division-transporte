@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>740</width>
+    <width>540</width>
     <height>570</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>740</width>
+    <width>540</width>
     <height>570</height>
    </size>
   </property>
@@ -187,26 +187,6 @@
            <column>
             <property name="text">
              <string>Descripcion</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Fecha Estimada de Inicio</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Fecha Inicio</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Fecha Fin</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Nro Orden</string>
             </property>
            </column>
           </widget>

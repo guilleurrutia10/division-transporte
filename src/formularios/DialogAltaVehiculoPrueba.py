@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogAltaVehiculoPrueba.ui'
 #
-# Created: Wed Dec 05 21:18:49 2012
+# Created: Fri Dec 07 11:21:26 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,14 +17,14 @@ except AttributeError:
 class Ui_DialogAltaVehiculo(object):
     def setupUi(self, DialogAltaVehiculo):
         DialogAltaVehiculo.setObjectName(_fromUtf8("DialogAltaVehiculo"))
-        DialogAltaVehiculo.resize(300, 200)
+        DialogAltaVehiculo.resize(300, 219)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(DialogAltaVehiculo.sizePolicy().hasHeightForWidth())
         DialogAltaVehiculo.setSizePolicy(sizePolicy)
-        DialogAltaVehiculo.setMinimumSize(QtCore.QSize(300, 180))
-        DialogAltaVehiculo.setMaximumSize(QtCore.QSize(300, 200))
+        DialogAltaVehiculo.setMinimumSize(QtCore.QSize(300, 219))
+        DialogAltaVehiculo.setMaximumSize(QtCore.QSize(300, 224))
         DialogAltaVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogAltaVehiculo", "Alta Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogAltaVehiculo)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -57,17 +57,24 @@ class Ui_DialogAltaVehiculo(object):
         self.label_3 = QtGui.QLabel(self.groupBox)
         self.label_3.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Registro Interno:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_3)
+        self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_3)
         self.lineEditRegistroInterno = QtGui.QLineEdit(self.groupBox)
         self.lineEditRegistroInterno.setObjectName(_fromUtf8("lineEditRegistroInterno"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.lineEditRegistroInterno)
+        self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.lineEditRegistroInterno)
         self.label_4 = QtGui.QLabel(self.groupBox)
         self.label_4.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Chasis Nro:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setObjectName(_fromUtf8("label_4"))
-        self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_4)
+        self.formLayout.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_4)
         self.lineEditChasisNro = QtGui.QLineEdit(self.groupBox)
         self.lineEditChasisNro.setObjectName(_fromUtf8("lineEditChasisNro"))
-        self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.lineEditChasisNro)
+        self.formLayout.setWidget(4, QtGui.QFormLayout.FieldRole, self.lineEditChasisNro)
+        self.label_5 = QtGui.QLabel(self.groupBox)
+        self.label_5.setText(QtGui.QApplication.translate("DialogAltaVehiculo", "Modelo:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_5.setObjectName(_fromUtf8("label_5"))
+        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_5)
+        self.lineEditModelo = QtGui.QLineEdit(self.groupBox)
+        self.lineEditModelo.setObjectName(_fromUtf8("lineEditModelo"))
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.lineEditModelo)
         self.verticalLayout.addWidget(self.groupBox)
         self.groupBox_2 = QtGui.QGroupBox(DialogAltaVehiculo)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -105,6 +112,12 @@ class Ui_DialogAltaVehiculo(object):
 
         self.retranslateUi(DialogAltaVehiculo)
         QtCore.QMetaObject.connectSlotsByName(DialogAltaVehiculo)
+        DialogAltaVehiculo.setTabOrder(self.lineEditDominio, self.lineEditMarca)
+        DialogAltaVehiculo.setTabOrder(self.lineEditMarca, self.lineEditModelo)
+        DialogAltaVehiculo.setTabOrder(self.lineEditModelo, self.lineEditRegistroInterno)
+        DialogAltaVehiculo.setTabOrder(self.lineEditRegistroInterno, self.lineEditChasisNro)
+        DialogAltaVehiculo.setTabOrder(self.lineEditChasisNro, self.pushButton_2Aceptar)
+        DialogAltaVehiculo.setTabOrder(self.pushButton_2Aceptar, self.pushButton_Cancelar)
 
     def retranslateUi(self, DialogAltaVehiculo):
         pass

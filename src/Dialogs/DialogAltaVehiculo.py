@@ -91,6 +91,8 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         marca = unicode(self.lineEditMarca.text())
         registroInterno = unicode(self.lineEditRegistroInterno.text())
         numeroChasis = unicode(self.lineEditChasisNro.text())
+        modelo = unicode(self.lineEditModelo.text())
         #Se carga el Vehículo en el sistema.
         division = Division_Transporte()
         division.addVehiculo(dominio, marca, registroInterno, numeroChasis)
+        #division.addVehiculo(dominio, marca, registroInterno, numeroChasis, modelo)

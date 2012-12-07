@@ -35,7 +35,7 @@ class Ui_DialogMostrarPedidoDeActuacion(object):
         self.formLayout.setContentsMargins(60, -1, -1, -1)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label_2 = QtGui.QLabel(self.groupBox)
-        self.label_2.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Fecha Ingreso:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Fecha Realizacion:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label_2)
         self.labelFechaPedido = QtGui.QLabel(self.groupBox)

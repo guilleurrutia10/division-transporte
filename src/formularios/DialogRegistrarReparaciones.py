@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogRegistrarReparaciones.ui'
 #
-# Created: Wed Dec 05 21:19:16 2012
+# Created: Fri Dec 07 02:13:56 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,8 +17,8 @@ except AttributeError:
 class Ui_DialogRegistrarReparaciones(object):
     def setupUi(self, DialogRegistrarReparaciones):
         DialogRegistrarReparaciones.setObjectName(_fromUtf8("DialogRegistrarReparaciones"))
-        DialogRegistrarReparaciones.resize(740, 570)
-        DialogRegistrarReparaciones.setMinimumSize(QtCore.QSize(740, 570))
+        DialogRegistrarReparaciones.resize(540, 570)
+        DialogRegistrarReparaciones.setMinimumSize(QtCore.QSize(540, 570))
         DialogRegistrarReparaciones.setWindowTitle(QtGui.QApplication.translate("DialogRegistrarReparaciones", "Registrar Reparaciones de Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogRegistrarReparaciones)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -104,7 +104,7 @@ class Ui_DialogRegistrarReparaciones(object):
         self.tableWidgetReparaciones = QtGui.QTableWidget(self.verticalGroupBox)
         self.tableWidgetReparaciones.setMaximumSize(QtCore.QSize(16777215, 150))
         self.tableWidgetReparaciones.setObjectName(_fromUtf8("tableWidgetReparaciones"))
-        self.tableWidgetReparaciones.setColumnCount(6)
+        self.tableWidgetReparaciones.setColumnCount(2)
         self.tableWidgetReparaciones.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         item.setText(QtGui.QApplication.translate("DialogRegistrarReparaciones", "Tipo de Reparacion", None, QtGui.QApplication.UnicodeUTF8))
@@ -112,18 +112,6 @@ class Ui_DialogRegistrarReparaciones(object):
         item = QtGui.QTableWidgetItem()
         item.setText(QtGui.QApplication.translate("DialogRegistrarReparaciones", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetReparaciones.setHorizontalHeaderItem(1, item)
-        item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogRegistrarReparaciones", "Fecha Estimada de Inicio", None, QtGui.QApplication.UnicodeUTF8))
-        self.tableWidgetReparaciones.setHorizontalHeaderItem(2, item)
-        item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogRegistrarReparaciones", "Fecha Inicio", None, QtGui.QApplication.UnicodeUTF8))
-        self.tableWidgetReparaciones.setHorizontalHeaderItem(3, item)
-        item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogRegistrarReparaciones", "Fecha Fin", None, QtGui.QApplication.UnicodeUTF8))
-        self.tableWidgetReparaciones.setHorizontalHeaderItem(4, item)
-        item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogRegistrarReparaciones", "Nro Orden", None, QtGui.QApplication.UnicodeUTF8))
-        self.tableWidgetReparaciones.setHorizontalHeaderItem(5, item)
         self.tableWidgetReparaciones.horizontalHeader().setDefaultSectionSize(140)
         self.verticalLayout_2.addWidget(self.tableWidgetReparaciones)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
@@ -166,10 +154,6 @@ class Ui_DialogRegistrarReparaciones(object):
     def retranslateUi(self, DialogRegistrarReparaciones):
         item = self.tableWidgetReparaciones.horizontalHeaderItem(0)
         item = self.tableWidgetReparaciones.horizontalHeaderItem(1)
-        item = self.tableWidgetReparaciones.horizontalHeaderItem(2)
-        item = self.tableWidgetReparaciones.horizontalHeaderItem(3)
-        item = self.tableWidgetReparaciones.horizontalHeaderItem(4)
-        item = self.tableWidgetReparaciones.horizontalHeaderItem(5)
 
 
 if __name__ == "__main__":

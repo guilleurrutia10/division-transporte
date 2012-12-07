@@ -210,9 +210,24 @@ class ZopeDB(object):
         unTipoRepuesto = TipoRepuesto('Bujia', 'Bujia universal')
         from negocio.RepuestoRequeridos import RepuestoRequeridos
         unRepRequerido = RepuestoRequeridos(unTipoRepuesto, 4)
+        
         for nombre in diccionario:
-            tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepRequerido])
+            if nombre == 'Reparacion de frenos':
+                otroTipoRepuesto = TipoRepuesto('Pastilla de Freno', 'Siempre frena p77')
+                otroRepRequerido = RepuestoRequeridos(otroTipoRepuesto, 4)
+                tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepRequerido, otroRepRequerido])
+                print 'cargue rep frenos'
+            elif nombre == 'Reparacion de radiador':
+                otroTipoRepuesto = TipoRepuesto('Radiador', 'RAD ULTRA 7500')
+                otroRepRequerido = RepuestoRequeridos(otroTipoRepuesto, 4)
+                tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepRequerido, otroRepRequerido])
+                print 'cargue Reparacion de radiador'
+            else:
+                tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepRequerido])
+                print 'cargue Reparacion Normal'
+                
             tiposReparaciones[nombre] = tRep
+        
         raiz['tiposReparaciones'] = tiposReparaciones
         self.zodb._p_changed = True
         transaction.commit()
