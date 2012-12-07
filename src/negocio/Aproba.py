@@ -15,10 +15,10 @@ class Aprobada(EstadoOrdenReparacion):
     '''
 
 
-    def __init__(self, ordenReparacion):
+    def __init__(self):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        super(Aprobada, self).__init__(ordenReparacion)
+        super(Aprobada, self).__init__()

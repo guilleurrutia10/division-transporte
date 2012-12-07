@@ -34,6 +34,6 @@ class EstadoOrdenReparacion(Persistent):
         
     def cambiarProximoEstado(self):
         NotImplemented
-    
-    def getPedidoActuacion(self):
+        
+    def getPedidoDeActuacionActual(self):
         NotImplemented
