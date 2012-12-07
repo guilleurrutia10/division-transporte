@@ -23,5 +23,9 @@ class EsperandoAprobacion(EstadoOrdenReparacion):
         '''
         super(EsperandoAprobacion, self).__init__()
         
-    def getPedidoActuacion(self, ordenReparacion):
+    def getPedidoDeActuacion(self, ordenReparacion):
         return ordenReparacion.getPedidoDeActuacion()
+    
+    def registrarRecepcionPedidoActuacion(self, ordenReparacion, fechaRecepcion):
+        pedidoActuacion = ordenReparacion.getPedidoDeActuacion()
+        pedidoActuacion.setFechaRecepcion(fechaRecepcion)

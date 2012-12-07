@@ -11,6 +11,7 @@ from Localidad import *
 from OrdenReparacion import *
 
 from excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso 
+import excepciones
 
 class Legajo(Persistent):
     '''
@@ -21,23 +22,13 @@ class Legajo(Persistent):
     
     ''' ATTRIBUTES
 
-   
-
       dominio  (private)
-    
-       
-    
+        
       modelo  (private)
-    
-       
     
       marca  (private)
     
-       
-    
       registroInterno  (private)
-    
-       
     
       numeroChasis  (private)
       
@@ -63,14 +54,6 @@ class Legajo(Persistent):
         self.ordenesDeReparacion = []
         self.numeroOrden = 0
     
-    def datosLegajo(self):
-        '''
-        @return: 
-        @author: 
-        '''
-        # Probar devolviendo vars(Legajo)
-        return [self.dominio, self.marca, self.registroInterno, self.numeroChasis, self.comisaria, self.localidad, self.ordenesDeReparacion]
-    
     def noEstaFinalizada(self, ordenReparacion):
         return ordenReparacion.getEstadoOrdenReparacion() != 'Finalizada'
     
@@ -80,7 +63,6 @@ class Legajo(Persistent):
         @author: 
         '''
         ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstado() != 'Finalizada', self.ordenesDeReparacion)
-#        ordenEnCurso = filter(self.noEstaFinalizada, self.ordenesDeReparacion)
         try:
             ordenEnCurso[0]
             raise ExcepcionPoseeOrdenReparacionEnCurso('El vehículo ya posee una orden de Reparación en Curso.')
@@ -93,7 +75,6 @@ class Legajo(Persistent):
         @author: 
         '''
         ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstado() != 'Finalizada', self.ordenesDeReparacion)
-#        ordenEnCurso = filter(self.noEstaFinalizada, self.ordenesDeReparacion)
         try:
             return ordenEnCurso[0]
         except IndexError:
@@ -127,15 +108,10 @@ class Legajo(Persistent):
             self.ordenesDeReparacion.append(ordenReparacion)
         except ExcepcionPoseeOrdenReparacionEnCurso, e:
             raise ExcepcionPoseeOrdenReparacionEnCurso(e.getMensaje())
-#        ordenReparacion.addReparacion()
-#        self.ordenesDeReparacion[1] = ordenReparacion
-#        self.ordenesDeReparacion.append(ordenReparacion)
-#        print ordenReparacion.codigoOrdenReparacion
     
     def save(self):
         from MiZODB import ZopeDB, MiZODB
         zodb = ZopeDB(MiZODB())
-#        zodb = ZopeDB(MiZODB('zeo.conf'))
         zodb.save('vehiculos', self.dominio, self)
     
     def dameNumeroOrden(self):
@@ -153,5 +129,13 @@ class Legajo(Persistent):
         return self.dominio
     
     def getPedidoActuacionSinFechaRecepcion(self):
-        ordenEnCurso = self.dameOrdenDeReparacionEnCurso()
-        return ordenEnCurso.getPedidoDeActuacionActual()
+        from excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso import Excepcion_No_Posee_Orden_Reparacion_En_Curso
+        try:
+            ordenEnCurso = self.dameOrdenDeReparacionEnCurso()
+            return ordenEnCurso.getPedidoDeActuacionActual()
+        except Excepcion_No_Posee_Orden_Reparacion_En_Curso:
+            pass
+        
+    def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
+        ordenReparacion = self.dameOrdenDeReparacionEnCurso()
+        ordenReparacion.registrarRecepcionPedidoActuacion(fechaRecepcion)

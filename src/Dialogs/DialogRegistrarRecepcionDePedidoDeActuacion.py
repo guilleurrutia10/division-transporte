@@ -26,7 +26,9 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
             if self.itemNumeroPedido:
                 dlgAsignarFecha = DialogAsignarFechaRecepcionPedidoActuacion()
                 dlgAsignarFecha.itemNumeroPedido = self.itemNumeroPedido
-                dlgAsignarFecha.exec_()
+                if dlgAsignarFecha.exec_():
+                    self.cargarGrillaInicial()
+                    self.mostrarMensaje('La fecha se ha cargado correctamente. ;)', 'Fecha cargada')
                 self.itemNumeroPedido = None
             else:
                 self.mostrarMensaje('Debe Seleccionar el Pedido.', 'Seleccionar Pedido')
@@ -36,6 +38,7 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         print 'Click sobre aceptar'
+        self.accept()
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -97,6 +100,7 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
         print unaFecha, type(fecha.toPyDate())
         division = Division_Transporte()
         division.registrarRecepcionPedidoDeActuacion(int(self.itemNumeroPedido), unaFecha)
+        self.accept()
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):

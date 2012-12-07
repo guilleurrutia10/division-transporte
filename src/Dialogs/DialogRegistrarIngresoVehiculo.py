@@ -14,6 +14,7 @@ import WidgetListadoDeVehiculos
 
 from negocio.Division_Transporte import Division_Transporte
 from excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
+import excepciones
 
 global itemglobal
 itemglobal = None
@@ -67,9 +68,16 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         '''
         global itemglobal
         if itemglobal:
-            dlgDatosIngreso = DialogDatosIngresoVehiculo()
-            dlgDatosIngreso.exec_()
-            itemglobal = None
+            dominio = unicode(itemglobal.text())
+            division = Division_Transporte()
+            vehiculo = division.getVehiculo(dominio)
+            try:
+                vehiculo.dameOrdenDeReparacionEnCurso()
+                self.mostrarMensaje('El vehículo selecciona ya cuenta con una Orde de Reparación en Curso.', 'Orden en Curso')
+            except excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso.Excepcion_No_Posee_Orden_Reparacion_En_Curso:
+                dlgDatosIngreso = DialogDatosIngresoVehiculo()
+                dlgDatosIngreso.exec_()
+                itemglobal = None
         else:
             self.mostrarMensaje('Debe seleccionar un Vehiculo.', 'Seleccionar Vehiculo')
         
@@ -158,6 +166,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         localidad = unicode(self.lineEditLocalidad.text())
         
         division.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
+
         
     def testearDialogo(self):
         if not match('[0-9]+', self.lineEditKilometraje.text()):

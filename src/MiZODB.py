@@ -10,6 +10,7 @@ import transaction
 from persistent.mapping import PersistentMapping
 
 from MyExceptions import ObjeNoExiste
+from copy import deepcopy
 
 class MiZODB(object):
     '''
@@ -77,6 +78,7 @@ class ZopeDB(object):
             @author: 
         '''
         try:
+            self.zodb.open()
             dictionary = PersistentMapping(self.zodb.raiz[lista])
         except KeyError, AttributeError:
             self.zodb.raiz[lista] = {}
@@ -93,14 +95,18 @@ class ZopeDB(object):
         finally:
             self.zodb.commiting()
             transaction.abort()
+            self.zodb.close()
             
     def get(self, lista, clave):
         try:
+            self.zodb.open()
             raiz = self.zodb.raiz[lista]
-            return raiz[clave]
+            return deepcopy(raiz[clave])
 #            objeto = raiz[clave]
         except KeyError:
             raise ObjeNoExiste('El elemento no se encuentra.')
+        finally:
+            self.zodb.close()
 #        return objeto
     
     def modify(self, lista, clave, objeto):
@@ -110,35 +116,43 @@ class ZopeDB(object):
         @param objeto: objeto que se trata de modificar en el diccionario.
         '''
         try:
+            self.zodb.open()
             dictionary = PersistentMapping(self.zodb.raiz[lista])
         except KeyError:
             self.zodb.raiz[lista] = {}
             dictionary = PersistentMapping(self.zodb.raiz[lista])
         try:
-            objeto = dictionary[clave]
+#            objeto = dictionary[clave]
+            dictionary[clave] = objeto
             self.zodb.commiting()
         except KeyError:
             raise ObjeNoExiste('El elemento no Existe')
         finally:
             self.zodb.commiting()
-            transaction.abort()
+#            transaction.abort()
+            self.zodb.close()
             
     def getAlls(self, lista):
         try:
-            dictionary = self.zodb.raiz[lista]
+            self.zodb.open()
+            dictionary = deepcopy(self.zodb.raiz[lista])
         except KeyError:
             self.zodb.raiz[lista] = {}
             self.zodb.commiting()
-            dictionary = self.zodb.raiz[lista]
+            dictionary = deepcopy(self.zodb.raiz[lista])
             #Lanzar excepcion que dicho diccionario con esa clave no existe.
+        finally:
+            self.zodb.close()
         return dictionary
     
     def remove(self, lista, clave):
         try:
+            self.zodb.open()
             raiz = self.zodb.raiz[lista]
             del raiz[clave]
             self.zodb.raiz[lista] = raiz
             transaction.commit()
+            self.zodb.close()
 #            self.zodb.commiting()
         except KeyError:
             raise ObjeNoExiste('El elemento no se encuentra.')

@@ -13,6 +13,7 @@ from Reparacion import *
 from EnRevision import *
 from EsperandoAprobacion import *
 from Planificada import *
+from negocio.Aproba import Aprobada
 
 class OrdenReparacion(object):
     '''
@@ -23,51 +24,27 @@ class OrdenReparacion(object):
     
     ''' ATTRIBUTES
     
-    
-    
     Fecha_de_Ingreso  (private)
-    
-    
-    
+
     FechaDe_Ingreso  (private)
-    
-    
-    
+        
     choferAsignado  (private)
-    
-    
     
     kilometrajeIngresado  (private)
     
-    
-    
     kilometrajeEgreso  (private)
-    
-    
     
     equipamiento  (private)
     
-    
-    
     reparacionSolicitada  (private)
-    
-    
     
     combustibleIngreso  (private)
     
-    
-    
     combustibleEgreso  (private)
-    
-    
     
     comisaria  (private)
     
-    
-    
     revisada  (private)
-    
-    
     
     aprobada  (private)
     
@@ -203,8 +180,14 @@ class OrdenReparacion(object):
         self._pedidoDeActuacion = pedidoDeActuacion
     
     def getPedidoDeActuacionActual(self):
-        return self.estado.getPedidoActuacion(self)
+        try:
+            return self.estado.getPedidoDeActuacion(self)
+        except AttributeError:
+            pass
         
     def getPedidoDeActuacion(self):
         return self._pedidoDeActuacion
-#        return self._pedidoDeActuacion
+    
+    def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
+        self.estado.registrarRecepcionPedidoActuacion(self, fechaRecepcion)
+        self.estado = Aprobada()

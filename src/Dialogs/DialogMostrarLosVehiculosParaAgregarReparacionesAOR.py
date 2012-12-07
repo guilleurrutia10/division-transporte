@@ -20,7 +20,7 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
     @author: 
     '''
     
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         @version: 
@@ -58,6 +58,7 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         if self.dominioVehiculo:
             dlgRegistrarReparacionesVehiculo = DialogRegistrarReparaciones.DialogRegistrarReparaciones()
             dlgRegistrarReparacionesVehiculo.setDominioVehiculo(self.dominioVehiculo)
+            self.dominioVehiculo = None
             try:
                 dlgRegistrarReparacionesVehiculo.exec_()
             except Excepcion_Orden_No_Esta_En_Revision, e:
