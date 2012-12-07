@@ -8,6 +8,7 @@ from PyQt4 import QtCore, QtGui
 
 from formularios.DialogCrearReparacion import Ui_DialogCrearReparacion
 from negocio.Division_Transporte import Division_Transporte
+from excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden_Posee_Reparacion
 
 class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     '''
@@ -40,15 +41,25 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     def on_pushButtonCancelar_clicked(self):
         self.reject()
         
+    def seleccionoAlgunRepuesto(self):
+        return self._repuestosSolicitados != []
+        
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         print 'Click sobre aceptar'
+        if not self.seleccionoAlgunRepuesto():
+            QtGui.QMessageBox.critical(self, 'Error', 'Debe seleccionar por lo menos un repuesto para crear una reparacion')
+            return
         #crear la reparacion
         from negocio.Reparacion import Reparacion
         unaReparacion = Reparacion(self._tipoDeReparacionSeleccionado, str(self.lineEditDescripcion.text()), self._repuestosSolicitados)
         #TODO: Aca me quede, por las dudas...
         #self._ordenDeReparacion.getReparaciones().append(unaReparacion)
-        self._ordenDeReparacion.addReparacion(unaReparacion)
+        try:
+            self._ordenDeReparacion.addReparacion(unaReparacion)
+        except Excepcion_Orden_Posee_Reparacion, e:
+            QtGui.QMessageBox.critical(self, 'Error. No se agrego la Reparacion', e.getMensaje())
+            return
         self.accept()
          
         

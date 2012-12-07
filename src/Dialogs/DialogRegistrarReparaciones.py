@@ -95,6 +95,9 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         print 'Click sobre aceptar'
+        if self.ordenDeReparacion.getReparaciones() == []:
+            QtGui.QMessageBox.critical(self, 'Error', 'Debe agregar por lo menos una Reparacion al Vehiculo para generar un Pedido de Actuacion')
+            return
         division = Division_Transporte()
         division.registrarReparaciones(self.vehiculoSeleccionado)
         vehiculo = self.buscarVehiculo()
