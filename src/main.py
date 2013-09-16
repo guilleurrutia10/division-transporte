@@ -34,7 +34,7 @@ class Aplicacion(QtGui.QApplication):
         #si se presionó Aceptar del Login, abrimos la Ventana Principal...
         if myLogin.exec_() == QtGui.QDialog.Accepted:
             mainWindow = MyMainWindow()
-            listaPermisos = self.usuarioActual.getPermisos()
+            listaPermisos = self.usuarioActual.getPermisos() #Recordar: el usr actual lo seteó el mainDialog!
             mainWindow.habilitarMenues(listaPermisos)
             mainWindow.show()
             super(Aplicacion, self).exec_()

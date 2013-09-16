@@ -14,3 +14,10 @@ git commit -m 'Subo un cambio a tal cosa"
 
 #subimos...
 git push "origin master"
+
+
+
+
+
+#Para correr el servidor
+python runzeo.py -f <archivoBasedeDatos> -a localhost:9999

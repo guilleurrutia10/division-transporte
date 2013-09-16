@@ -42,16 +42,17 @@ USUARIOS = [
     ("leo", "1234", "inspector"),
     ("samuel", "1234", "administrativo"),
     ("diego", "1234", "otro"),
-    ("l", "1", "jefeDivision")
+    ("pepe1", "7800524dada57a4caf0f1cc37a13a881c3af5e88", "jefeDivision")
 ]
 
 ROL = 2
 
 class Usuario():
-    def __init__(self, name):
+    def __init__(self, name, password):
         self.name = name
         self.rol = None
         self.permisos = []
+        self.validar(password)
         
     def validar(self, password):
         """
@@ -62,8 +63,8 @@ class Usuario():
         if not usrs:
             raise Excepcion_usrInvalido(self.name)
         usr = usrs[0]
-        self.rol = usr[ROL]
-        self.permisos = PERMISOS[usr[ROL]]
+        self.rol = usr[ROL] #Cargando rol...
+        self.permisos = PERMISOS[usr[ROL]]  #Cargando permisos...
         return True
     
     def es_anonimo(self):
@@ -78,26 +79,3 @@ class Usuario():
     def getPermisos(self):
         return self.permisos
         
-def main():
-    username = "leo"
-    password = "1234"
-    usuario = Usuario(username)
-    if not usuario.validar(password):
-        print "%s nombre o clave incorrecta" % username
-    
-    if usuario.puede("alta_repuesto"):
-        print "puede hacer alta repuesto"    
-
-    if usuario.puede("alta_seccion"):
-        print "puede hacer alta seccion"
-        
-    if usuario.puede("verificar_reparacion"):
-        print "puede hacer verificar reparacion"
-        
-    if usuario.es_anonimo():
-        print "es un usuario anonimo"   
-    
-    print 'Permisos de %s : %s' % (username,usuario.getPermisos())
-    
-if __name__ == "__main__":
-    main()
