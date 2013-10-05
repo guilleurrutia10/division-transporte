@@ -12,6 +12,7 @@ var
 sdist
 develop-eggs
 .installed.cfg
+Thumbs.db
 
 # Installer logs
 pip-log.txt
