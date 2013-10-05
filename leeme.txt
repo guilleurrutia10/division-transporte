@@ -20,4 +20,4 @@ git push "origin master"
 
 
 #Para correr el servidor
-python runzeo.py -f <archivoBasedeDatos> -a localhost:9999
+python runzeo.py -C <archivo.config>
