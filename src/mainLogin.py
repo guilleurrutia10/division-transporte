@@ -69,9 +69,17 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
         password = str(self.linePassword.text())
         
         #creamos un usuario con el nombre que ingresó
-        usr = Usuario(username)
+        #usr = Usuario(username)
         
         #y lo validamos...
-        usr.validar(password)
+        #usr.validar(password)
+        
+        #return usr
+    
+        import hashlib
+        hash_password = hashlib.sha1(username + password).hexdigest()
+    
+        #creamos un usuario con el nombre que ingresó y el password para que se valide...
+        usr = Usuario(username, hash_password)
         
         return usr

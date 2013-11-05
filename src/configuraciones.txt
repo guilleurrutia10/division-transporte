@@ -1,6 +1,6 @@
 <zodb>
     <zeoclient>
-    server 10.0.9.43:9999
+    server localhost:9999
     </zeoclient>
 </zodb>
 
