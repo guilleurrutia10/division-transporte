@@ -59,12 +59,16 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
         
         
     def validarUsr(self):
-        #como necesitamos crear un usuario:
+        """
+            Retorna un nuevo usuario con el nombre y la contrasena ingresados al login.
+            El usuario creado se valida, es decir se verifica que los datos ingresados existen (esta registrado),
+            en la misma creacion del usuario.
+             
+        """
         from usuarios import Usuario
         
         #tomamos el nombre ingresado por el usuario:
         username = str(self.lineEditUser.text())
-        
         #tomamos el password ingresado por el usuario:
         password = str(self.linePassword.text())
         
@@ -79,7 +83,7 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
         import hashlib
         hash_password = hashlib.sha1(username + password).hexdigest()
     
-        #creamos un usuario con el nombre que ingresó y el password para que se valide...
+        #creamos un usuario con el nombre que ingresó y el password, en la misma creacion se valida el usuario.
         usr = Usuario(username, hash_password)
         
         return usr

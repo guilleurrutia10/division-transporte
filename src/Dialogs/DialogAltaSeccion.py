@@ -47,12 +47,12 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         try:
             assert not(self.tableWidgetEmpleadosAsignados.rowCount() < 2)
         except AssertionError:
-            self.mostrarMensaje('No se han cargado empleados a la Seccion. Debe cargar al menos dos.', 'Cargar Empleados')
+            self.mostrarMensaje('No se han cargado empleados a la Seccion. Debe cargar al menos dos.', 'Error al cargar empleados')
             return
         try:
             assert not(self._encargado is None)
         except AssertionError:
-            self.mostrarMensaje('No se ha asignado el Encargado de la Seccion.', 'Cargar encargados')
+            self.mostrarMensaje('No se ha asignado el Encargado de la Seccion.', 'Error al cargar encargado')
             return
         print 'Cargando Seccion.... Realizar todavía'
         self.cargarSeccion(nombreSeccion)

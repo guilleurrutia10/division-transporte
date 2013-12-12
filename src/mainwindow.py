@@ -8,8 +8,16 @@ from formularios.WidgetListadoEmpleados import Ui_Form
 #===============================================================================
 # Import Dialogos
 #===============================================================================
-from Dialogs import DialogModificarVehiculo,DialogAltaPersonal,DialogRegistrarReparaciones,DialogAltaRepuesto,DialogAltaSeccion, DialogModificarPersonal, DialogMuestraLosRepuestos
-from Dialogs import DialogSeleccionarSeccion, DialogRegistrarIngresoVehiculo, DialogAltaVehiculo
+from Dialogs import DialogModificarVehiculo, \
+                    DialogAltaPersonal,\
+                    DialogRegistrarReparaciones,\
+                    DialogAltaRepuesto,\
+                    DialogAltaSeccion,\
+                    DialogModificarPersonal,\
+                    DialogMuestraLosRepuestos,\
+                    DialogSeleccionarSeccion,\
+                    DialogRegistrarIngresoVehiculo,\
+                    DialogAltaVehiculo
 #===============================================================================
 # import widgets
 #===============================================================================
@@ -58,7 +66,7 @@ class MyListado(QtGui.QWidget, Ui_Form):
 MyOtroListado = MyListado
 
 class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
-    def __init__(self, parent = None):
+    def __init__(self, usuario, parent = None):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
         self.menues = {'actionAlta_de_Vehiculo': self.actionAlta_de_Vehiculo,
@@ -89,8 +97,13 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                        'actionAsignar_Reparacion': self.actionAsignar_Reparacion,
                        'actionRegistrar_Finalizacion_de_Reparacion': self.actionRegistrar_Finalizacion_de_Reparacion,
                        'actionListados_de_Seccion': self.actionListados_de_Seccion}
+        
+        #TODO: validar 12/12/13
+        self.usuario = usuario
+        self.habilitarMenues() 
     
-    def habilitarMenues(self,permisos):
+    def habilitarMenues(self):
+        permisos = self.usuario.getPermisos()
         for permiso in permisos:
             self.menues[permiso].setEnabled(True)
 
@@ -137,7 +150,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         dlgAltaRepuesto = DialogAltaRepuesto.DialogAltaRepuesto(self)
         dlgAltaRepuesto.exec_()
     
-    #Conectamos la accion Alta Repuesto...
+    #Conectamos la accion Alta Seccion...
     @QtCore.pyqtSlot()
     def on_actionAlta_de_Seccion_triggered(self):
         dlgAltaSeccion = DialogAltaSeccion.DialogAltaSeccion(self)

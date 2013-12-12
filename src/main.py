@@ -33,9 +33,10 @@ class Aplicacion(QtGui.QApplication):
         myLogin = MyLogin()
         #si se presionó Aceptar del Login, abrimos la Ventana Principal...
         if myLogin.exec_() == QtGui.QDialog.Accepted:
-            mainWindow = MyMainWindow()
-            listaPermisos = self.usuarioActual.getPermisos() #Recordar: el usr actual lo seteó el mainDialog!
-            mainWindow.habilitarMenues(listaPermisos)
+            mainWindow = MyMainWindow(self.usuarioActual) #Recordar: el usr actual lo seteó el mainDialog!
+            #listaPermisos = self.usuarioActual.getPermisos() 
+            #mainWindow.habilitarMenues(listaPermisos)
+            #TODO: [ok]: reemplazar las dos lineas anteriores. Lo correcto seria que mainWindow reciba en su constructor a usuarioActual y ella misma se encargue de habilitar los menues
             mainWindow.show()
             super(Aplicacion, self).exec_()
             
