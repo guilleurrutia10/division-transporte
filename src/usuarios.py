@@ -42,9 +42,10 @@ USUARIOS = [
     ("leo", "1234", "inspector"),
     ("samuel", "1234", "administrativo"),
     ("diego", "1234", "otro"),
-    ("pepe1", "7800524dada57a4caf0f1cc37a13a881c3af5e88", "jefeDivision")
+    ("pepe1", "7800524dada57a4caf0f1cc37a13a881c3af5e88", "inspector")
 ]
 
+#password de pepe1 -> 1234
 ROL = 2
 
 class Usuario():

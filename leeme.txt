@@ -21,3 +21,6 @@ git push "origin master"
 
 #Para correr el servidor
 python runzeo.py -C <archivo.config>
+
+#Para utilizar el archivo recursos:
+C:\Python27\Lib\site-packages\PyQt4\pyrcc4 [archivo_recursos.qrc] -o [archivo_recursos_rc.py]

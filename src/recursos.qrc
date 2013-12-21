@@ -1,0 +1,23 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>recursos/iconos/logoDivisionTransporte.png</file>
+    <file>recursos/iconos/list1-icon.png</file>
+    <file>recursos/iconos/add_seccion.png</file>
+    <file>recursos/iconos/salir-icon.png</file>
+    <file>recursos/iconos/car/list_reparaciones-icon.png</file>
+    <file>recursos/iconos/car/list_car-icon.png</file>
+    <file>recursos/iconos/car/reparaciones_car-icon.png</file>
+    <file>recursos/iconos/car/egreso_car-icon.png</file>
+    <file>recursos/iconos/car/edit_car-icon.png</file>
+    <file>recursos/iconos/car/ingreso_car-icon.png</file>
+    <file>recursos/iconos/car/new_car-icon.png</file>
+    <file>recursos/iconos/car/planificar-icon.png</file>
+    <file>recursos/iconos/personal/list_personal-icon.png</file>
+    <file>recursos/iconos/personal/remove_de_seccion-icon.png</file>
+    <file>recursos/iconos/personal/cambiar_encargado-icon.png</file>
+    <file>recursos/iconos/personal/change_person-icon.png</file>
+    <file>recursos/iconos/personal/modificar_persona-icon.png</file>
+    <file>recursos/iconos/personal/remove_person-icon.png</file>
+    <file>recursos/iconos/personal/add_person-icon.png</file>
+</qresource>
+</RCC>

@@ -20,8 +20,8 @@
    <string>Division Transporte</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../imagenes/logoDivisionTransporte.png</normaloff>../imagenes/logoDivisionTransporte.png</iconset>
+   <iconset resource="../recursos.qrc">
+    <normaloff>:/recursos/iconos/logoDivisionTransporte.png</normaloff>:/recursos/iconos/logoDivisionTransporte.png</iconset>
   </property>
   <property name="iconSize">
    <size>
@@ -60,6 +60,10 @@
      <property name="title">
       <string>&amp;Listados de Vehiculos</string>
      </property>
+     <property name="icon">
+      <iconset resource="../recursos.qrc">
+       <normaloff>:/recursos/iconos/car/list_car-icon.png</normaloff>:/recursos/iconos/car/list_car-icon.png</iconset>
+     </property>
      <addaction name="actionListado_Vehiculos_de_la_Division_2"/>
      <addaction name="actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2"/>
      <addaction name="separator"/>
@@ -88,6 +92,10 @@
      <property name="title">
       <string>&amp;Listados Personal</string>
      </property>
+     <property name="icon">
+      <iconset resource="../recursos.qrc">
+       <normaloff>:/recursos/iconos/personal/list_personal-icon.png</normaloff>:/recursos/iconos/personal/list_personal-icon.png</iconset>
+     </property>
      <addaction name="actionListado_de_Personal_de_la_Division"/>
     </widget>
     <addaction name="actionAlta_de_Personal"/>
@@ -107,6 +115,10 @@
     <widget class="QMenu" name="menuListados_de_Repuestos">
      <property name="title">
       <string>&amp;Listados de Repuestos</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../recursos.qrc">
+       <normaloff>:/recursos/iconos/list1-icon.png</normaloff>:/recursos/iconos/list1-icon.png</iconset>
      </property>
      <addaction name="actionListado_de_Repuestos_de_la_Division"/>
     </widget>
@@ -149,9 +161,51 @@
    <addaction name="menuAyuda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAlta_de_Vehiculo"/>
+   <addaction name="actionModificacion_de_Vehiculo"/>
+   <addaction name="actionRegistrar_Ingreso_de_Vehiculo"/>
+   <addaction name="actionRegistrar_Egreso"/>
+   <addaction name="actionPlanificar_Reparaciones_de_Vehiculo"/>
+   <addaction name="separator"/>
+   <addaction name="actionAlta_de_Personal"/>
+   <addaction name="actionBaja_de_Personal"/>
+   <addaction name="actionModificacion_de_Personal"/>
+   <addaction name="actionCambiar_de_Seccion_a_un_Empleado"/>
+   <addaction name="actionCambiar_el_Encargado_de_una_Seccion"/>
+   <addaction name="actionRemover_Empleado_de_Seccion"/>
+   <addaction name="separator"/>
+   <addaction name="actionSalir"/>
+  </widget>
   <action name="actionSalir">
+   <property name="icon">
+    <iconset>
+     <normalon>:/recursos/iconos/salir-icon.png</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>&amp;Salir</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para cerrar la aplicación</string>
+   </property>
+   <property name="statusTip">
+    <string>Cierra la aplicación</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para cerrar la aplicación</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionListado">
@@ -176,48 +230,129 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/car/new_car-icon.png</normaloff>:/recursos/iconos/car/new_car-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Alta de Vehiculo</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para crear un nuevo vehículo</string>
+   </property>
+   <property name="statusTip">
+    <string>Crea un nuevo vehículo</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para crear un nuevo vehículo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
    </property>
   </action>
   <action name="actionModificacion_de_Vehiculo">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/car/edit_car-icon.png</normaloff>:/recursos/iconos/car/edit_car-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Modificacion de Vehiculo</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para modificar los datos de un vehículo</string>
+   </property>
+   <property name="statusTip">
+    <string>Modifica los datos de un vehículo</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para modificar los datos de un vehículo</string>
    </property>
   </action>
   <action name="actionRegistrar_Ingreso_de_Vehiculo">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/car/ingreso_car-icon.png</normaloff>:/recursos/iconos/car/ingreso_car-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Registrar Ingreso de Vehiculo</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para registrar el ingreso de un vehículo existente</string>
+   </property>
+   <property name="statusTip">
+    <string>Registra el ingreso de un vehículo existente</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para registrar el ingreso de vehículo existente</string>
    </property>
   </action>
   <action name="actionVerificar_Reparaciones_Necesarias_del_Vehiculo">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/car/reparaciones_car-icon.png</normaloff>:/recursos/iconos/car/reparaciones_car-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Registrar Reparaciones necesarias del Vehiculo</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para  registrar las reparaciones necesarias del vehículo</string>
+   </property>
+   <property name="statusTip">
+    <string>Registrar las reparaciones necesarias del vehículo</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para  registrar las reparaciones necesarias del vehículo</string>
    </property>
   </action>
   <action name="actionRegistrar_Egreso">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/car/egreso_car-icon.png</normaloff>:/recursos/iconos/car/egreso_car-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Registrar Egreso Vehiculo</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para registrar el egreso de un vehículo</string>
+   </property>
+   <property name="statusTip">
+    <string>Registra el egreso de un vehículo</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para registrar el egreso de un vehículo</string>
    </property>
   </action>
   <action name="actionPlanificar_Reparaciones_de_Vehiculo">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/car/planificar-icon.png</normaloff>:/recursos/iconos/car/planificar-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Planificar Reparaciones de Vehiculo</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para  planificar las reparaciones de un vehículo </string>
+   </property>
+   <property name="statusTip">
+    <string>Permite planificar las reparaciones de un vehículo </string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para  planificar las reparaciones de un vehículo </string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_en_reparacion_por_Seccion">
@@ -297,48 +432,129 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/personal/add_person-icon.png</normaloff>:/recursos/iconos/personal/add_person-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Alta de Personal</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para dar de alta a un empleado</string>
+   </property>
+   <property name="statusTip">
+    <string>Da de alta a un empleado</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para dar de alta a un empleado</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
   <action name="actionBaja_de_Personal">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/personal/remove_person-icon.png</normaloff>:/recursos/iconos/personal/remove_person-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Baja de Personal</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para dar de baja a un empleado</string>
+   </property>
+   <property name="statusTip">
+    <string>Da de baja a un empleado</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para dar de baja a un empleado</string>
    </property>
   </action>
   <action name="actionModificacion_de_Personal">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/personal/modificar_persona-icon.png</normaloff>:/recursos/iconos/personal/modificar_persona-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Modificacion de Personal</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para modificar los datos de un empleado</string>
+   </property>
+   <property name="statusTip">
+    <string>Modifica los datos de un empleado</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para modificar los datos de un empleado</string>
    </property>
   </action>
   <action name="actionCambiar_de_Seccion_a_un_Empleado">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/personal/change_person-icon.png</normaloff>:/recursos/iconos/personal/change_person-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Cambiar de Seccion a un Empleado</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para cambiar de sección a un empleado</string>
+   </property>
+   <property name="statusTip">
+    <string>Permite cambiar de sección a un empleado</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para cambiar de sección a un empleado</string>
    </property>
   </action>
   <action name="actionCambiar_el_Encargado_de_una_Seccion">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/personal/cambiar_encargado-icon.png</normaloff>:/recursos/iconos/personal/cambiar_encargado-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Cambiar el Encargado de una Seccion</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para cambiar el encargado de una sección</string>
+   </property>
+   <property name="statusTip">
+    <string>Permite cambiar el encargado de una sección</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para cambiar el encargado de una sección</string>
    </property>
   </action>
   <action name="actionRemover_Empleado_de_Seccion">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/personal/remove_de_seccion-icon.png</normaloff>:/recursos/iconos/personal/remove_de_seccion-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Remover Empleado de Seccion</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para remover un empleado de una sección</string>
+   </property>
+   <property name="statusTip">
+    <string>Permite remover un empleado de una sección</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para remover un empleado de una sección</string>
    </property>
   </action>
   <action name="actionListado_de_Personal_de_la_Division">
@@ -361,6 +577,18 @@
    <property name="text">
     <string>&amp;Alta de Repuesto</string>
    </property>
+   <property name="toolTip">
+    <string>Haga click aquí para dar de alta un repuesto</string>
+   </property>
+   <property name="statusTip">
+    <string>Permite dar de alta un repuesto</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para dar de alta un repuesto</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
   </action>
   <action name="actionModificacion_de_Repuesto">
    <property name="enabled">
@@ -369,6 +597,15 @@
    <property name="text">
     <string>&amp;Modificacion de Repuesto</string>
    </property>
+   <property name="toolTip">
+    <string>Haga click aquí para modificar los datos de un repuesto</string>
+   </property>
+   <property name="statusTip">
+    <string>Permite modificar los datos de un repuesto</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para modificar los datos de un repuesto</string>
+   </property>
   </action>
   <action name="actionRegistrar_Recepcion_de_Pedido_de_Actuacion">
    <property name="enabled">
@@ -376,6 +613,15 @@
    </property>
    <property name="text">
     <string>&amp;Registrar Recepcion de Pedido de Actuacion</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para registrar la recepción de un pedido de actuación</string>
+   </property>
+   <property name="statusTip">
+    <string>Permite registrar la recepción de un pedido de actuación</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para registrar la recepción de un pedido de actuación</string>
    </property>
   </action>
   <action name="actionListado_de_Repuestos_de_la_Division">
@@ -390,8 +636,21 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/add_seccion.png</normaloff>:/recursos/iconos/add_seccion.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Alta de Seccion</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para dar de alta una sección</string>
+   </property>
+   <property name="statusTip">
+    <string>Permite dar de alta una sección</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para dar de alta una sección</string>
    </property>
   </action>
   <action name="actionAsignar_Reparacion">
@@ -414,6 +673,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/list1-icon.png</normaloff>:/recursos/iconos/list1-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Listados de Seccion</string>
    </property>
@@ -427,8 +690,21 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../recursos.qrc">
+     <normaloff>:/recursos/iconos/car/list_reparaciones-icon.png</normaloff>:/recursos/iconos/car/list_reparaciones-icon.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Listado de Tipos de Reparaciones de la Division</string>
+   </property>
+   <property name="toolTip">
+    <string>Haga click aquí para listar los tipos de reparaciones de la División</string>
+   </property>
+   <property name="statusTip">
+    <string>Lista los tipos de reparaciones de la División</string>
+   </property>
+   <property name="whatsThis">
+    <string>Haga click aquí para listar los tipos de reparaciones de la División</string>
    </property>
   </action>
   <action name="actionAcerca_de_Division_de_Transporte">
@@ -442,7 +718,9 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../recursos.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionSalir</sender>
