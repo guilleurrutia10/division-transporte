@@ -38,6 +38,9 @@ class Empleado(Persistent):
     def __eq__(self, otro):
         return self.documento == otro.documento
     
+    def nombreCompleto(self):
+        return '%s %s' %(self.nombre, self.apellido)
+    
     '''     ATTRIBUTES
 
         numeroDocumento  (private)
