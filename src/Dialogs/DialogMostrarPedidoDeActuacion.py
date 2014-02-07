@@ -9,7 +9,7 @@ from formularios.DialogMostrarPedidoDeActuacion import Ui_DialogMostrarPedidoDeA
 
 from Dialogs import DialogCrearReparacion
 from negocio.Division_Transporte import Division_Transporte
-from excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
+from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
 from PyQt4.Qwt5.qplt import QString
 
 class DialogMostrarPedidoDeActuacion(QtGui.QDialog, Ui_DialogMostrarPedidoDeActuacion):

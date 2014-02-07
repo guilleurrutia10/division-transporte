@@ -13,8 +13,8 @@ from formularios.DialogDatosIngresoVehiculo import Ui_DialogIngresoVehiculo
 import WidgetListadoDeVehiculos
 
 from negocio.Division_Transporte import Division_Transporte
-from excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
-import excepciones
+from negocio.excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
+import negocio.excepciones
 
 global itemglobal
 itemglobal = None

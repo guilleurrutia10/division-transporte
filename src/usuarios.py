@@ -4,7 +4,7 @@ Created on 02/11/2012
 
 @author: alum
 '''
-from excepciones.Excepcion_usrInvalido import Excepcion_usrInvalido
+from negocio.excepciones.Excepcion_usrInvalido import Excepcion_usrInvalido
 
 PERMISOS = {"jefeDivision": ['actionAlta_de_Vehiculo','actionRegistrar_Ingreso_de_Vehiculo',
                              'actionRegistrar_Egreso','actionModificacion_de_Vehiculo',

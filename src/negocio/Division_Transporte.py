@@ -21,7 +21,8 @@ from ZODB import config
 from ZEO.Exceptions import ClientDisconnected
 import transaction
 from copy import deepcopy
-import MyExceptions
+from excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
+from excepciones.ExcepcionObjetoNoExiste import ExcepcionObjeNoExiste
 
 class MiZODB(object):
     '''
@@ -74,9 +75,46 @@ class MiZODB(object):
         @return: 
         @author: 
         '''
-        self.db._p_changed = True # The object has been changed.
+        self.raiz._p_changed = True # The object has been changed.
         transaction.commit()
+    
+    def getDiccionarioElementos(self, clave):
+        '''
+            Retorna el valor del diccionario de elementos en la clave, 
+            si el diccionario no tiene elemento, crea y devuelve un diccionario vacio (con la clave 'clave').
+        '''
+        try:
+            return self.raiz[clave]
+        except KeyError:
+            self.raiz[clave] = {}
+            return self.raiz[clave]
         
+    def save(self, claveElementos, clave, objeto):
+        '''
+        Agrega un nuevo objeto en la del claveDiccionario.
+        El objeto no debe existir en el diccionario.
+        Confirma la transaccion.
+        @raise exception: ObjetoExiste
+        '''
+        try:
+            diccionario = self.getDiccionarioElementos(claveElementos)
+            unObjeto = diccionario[clave]
+            raise ExcepcionObjetoExiste
+        except KeyError, e:
+            diccionario[clave] = objeto
+            self.commiting()
+        
+    def remove(self, claveDiccionario, clave):
+        '''
+        @raise exception: ObjetoNoExiste
+        '''
+        try:
+            diccionario = self.getDiccionarioElementos(claveDiccionario)
+            del diccionario[clave]
+            self.commiting()
+        except KeyError, e:
+            raise ExcepcionObjeNoExiste
+                
         
 class Division_Transporte(Persistent):
     '''
@@ -140,11 +178,12 @@ class Division_Transporte(Persistent):
         @author: 
         '''
         self.zodb.conexion.sync()
-        try:
-            return self.zodb.raiz['secciones']
-        except KeyError:
-            self.zodb.raiz['secciones'] = {}
-            return self.zodb.raiz['secciones']
+        return self.zodb.getDiccionarioElementos('secciones')
+#        try:
+#            return self.zodb.raiz['secciones']
+#        except KeyError:
+#            self.zodb.raiz['secciones'] = {}
+#            return self.zodb.raiz['secciones']
     
     def agregarSecciones(self, nombreSeccion, empleados, encargado):
         '''
@@ -183,7 +222,8 @@ class Division_Transporte(Persistent):
         @author: 
         '''
         self.zodb.conexion.sync()
-        return self.zodb.raiz['tiposDocumentos']
+        return self.zodb.getDiccionarioElementos('tiposDocumentos')
+#        return self.zodb.raiz['tiposDocumentos']
     
 #    def getOrdenesDeReparacion(self):
 #        '''
@@ -252,19 +292,13 @@ class Division_Transporte(Persistent):
     @TODO: Tener en cuenta q la el m�dulo q manipula la BD lanzar� una Excepci�n
     si el repuesto con las caracter�stcas q se intentan ingresar y existe.
     '''
-    def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento):
+    def agregarEmpleadoTwo(self, nombre, apellido, numeroDocumento, tipoDocumento):
         '''
         @return: 
         @author: 
         '''
         tiposDocumentos = self.zodb.raiz['tiposDocumentos']
         empleado = Empleado(nombre, apellido, numeroDocumento, tiposDocumentos[tipoDocumento])
-#        try:
-#            self.zodb.raiz['empleados'][numeroDocumento]
-#            raise MyExceptions.ObjetoExiste
-#        except:
-#            self.zodb.raiz['empleados'][numeroDocumento] = empleado
-#            transaction.commit()
         try:
             self.zodb.raiz['empleados'][numeroDocumento]
             raise MyExceptions.ObjetoExiste
@@ -277,6 +311,11 @@ class Division_Transporte(Persistent):
             self.zodb.raiz._p_changed = True
             transaction.commit()
     
+    def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento):
+        tiposDocumentos = self.zodb.raiz['tiposDocumentos']
+        empleado = Empleado(nombre, apellido, numeroDocumento, tiposDocumentos[tipoDocumento])
+        self.zodb.save('empleados', empleado.getDocumento(), empleado)
+        
 #    def darDeBajaEmpleado(self):
 #        '''
 #        @return: 

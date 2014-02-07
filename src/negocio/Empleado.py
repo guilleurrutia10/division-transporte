@@ -41,6 +41,9 @@ class Empleado(Persistent):
     def nombreCompleto(self):
         return '%s %s' %(self.nombre, self.apellido)
     
+    def getDocumento(self):
+        return self.documento
+    
     '''     ATTRIBUTES
 
         numeroDocumento  (private)

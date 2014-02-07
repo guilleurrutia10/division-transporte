@@ -8,7 +8,7 @@ from PyQt4 import QtCore, QtGui
 
 from formularios.DialogCrearReparacion import Ui_DialogCrearReparacion
 from negocio.Division_Transporte import Division_Transporte
-from excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden_Posee_Reparacion
+from negocio.excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden_Posee_Reparacion
 
 class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     '''
