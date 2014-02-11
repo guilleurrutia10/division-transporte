@@ -123,25 +123,6 @@ class Division_Transporte(Persistent):
     :author:
     '''
     
-    ''' 
-    ATTRIBUTES
-        
-    legajos
-    
-    localidades
-    
-    empleados
-    
-    tiposDocumentos
-    
-    repuestos
-    
-    tiposDeReparacion
-    
-    secciones
-        
-    '''
-    
     instance = None
     
     def __new__(cls, *args, **kargs):
@@ -157,7 +138,15 @@ class Division_Transporte(Persistent):
     def inicialize(self):
         '''
         @return: 
-        @author: 
+        @author:
+        Atributos: 
+            legajos
+            localidades
+            empleados
+            tiposDeDocumentos
+            tiposDeRepuestos
+            tiposDeReparacion
+            secciones
         '''
         self.instance.id = 1
 #        self.instance.secciones = {}
@@ -169,8 +158,22 @@ class Division_Transporte(Persistent):
         #TODO: try: ... ClientDisconnected -> Error en BD
         self.zodb = MiZODB()
         print self.zodb.raiz
+        self.legajos = []
+        self.localidades = []
+        self.empleados = []
+        self.tiposDeDocumentos = []
+        self.tiposDeRepuestos = []
+        self.tiposDeReparacion =[]
+        self.secciones = []
+
         
 #    def verificar_bd(self):
+
+    def __init__(self):
+        '''
+        ATTRIBUTES
+        '''
+        pass
         
     def getSecciones(self):
         '''
@@ -185,10 +188,34 @@ class Division_Transporte(Persistent):
 #            self.zodb.raiz['secciones'] = {}
 #            return self.zodb.raiz['secciones']
     
-    def agregarSecciones(self, nombreSeccion, empleados, encargado):
+    def agregarSeccion(self, nombreSeccion, empleados, encargado):
         '''
         @return: 
-        @author: 
+        @author:
+        Recibe el nombre de la nueva Seccion y los objetos empleados y encargados que ya fueron recuperados en el
+        dialogo de cracion de la Seccion. 
+        '''
+        self.zodb.conexion.sync()
+        empleadosSeccion = {}
+        for empleado in empleados:
+            empleadosSeccion[empleado.getDocumento()] = empleado
+            self.zodb.remove('empleados', empleado.getDocumento())
+        
+        self.zodb.remove('empleados', encargado.getDocumento())
+        codigoDeSeccion = len(self.secciones)
+        seccion = Seccion(codigoDeSeccion, nombreSeccion, empleadosSeccion, encargado)
+        
+        #TODO: Esto respeta el modelo, seguimos de esta forma?
+        self.secciones.append(seccion)
+        
+        self.zodb.save('secciones', seccion.getNombre(), seccion)
+
+
+    def agregarSeccionesTwo(self, nombreSeccion, empleados, encargado):
+        '''
+        @return: 
+        @author:
+        Recibe el nombre de la nueva Seccion. 
         '''
 #        pass
 #        # Acordarse de de que vienen los documentos del empleados y el documento del encargado

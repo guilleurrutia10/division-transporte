@@ -74,7 +74,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
             try:
                 vehiculo.dameOrdenDeReparacionEnCurso()
                 self.mostrarMensaje('El vehículo selecciona ya cuenta con una Orde de Reparación en Curso.', 'Orden en Curso')
-            except excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso.Excepcion_No_Posee_Orden_Reparacion_En_Curso:
+            except negocio.excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso.Excepcion_No_Posee_Orden_Reparacion_En_Curso:
                 dlgDatosIngreso = DialogDatosIngresoVehiculo()
                 dlgDatosIngreso.exec_()
                 itemglobal = None

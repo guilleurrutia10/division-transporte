@@ -10,6 +10,8 @@ from persistent import Persistent
 from Empleado import *
 from TipoDeReparacion import *
 
+SECCIONES_CREADAS = 0
+
 class Seccion(Persistent):
     '''
     classdocs
@@ -25,16 +27,17 @@ class Seccion(Persistent):
     '''
 
 
-    def __init__(self, nombre, empleados, encargado):
+    def __init__(self, codigoSeccion, nombre, empleados, encargado):
         '''
         Constructor
         @return: 
         @author: 
         '''
+        self.codigoSeccion = codigoSeccion
         self.nombre = nombre
         self.empleados = empleados
         self.encargado = encargado
-    
+           
     
     def setEncargado(self, encargado):
         '''
@@ -63,6 +66,9 @@ class Seccion(Persistent):
         @author: 
         '''
         pass
+    
+    def getNombre(self):
+        return self.nombre
     
     def save(self):
         '''
