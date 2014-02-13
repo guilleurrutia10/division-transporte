@@ -9,7 +9,7 @@ from formularios.DialogMostrarLosVehiculosParaAgregarReparacionesAOR import Ui_D
 import DialogRegistrarReparaciones
 import WidgetListadoDeVehiculos
 from negocio.Division_Transporte import Division_Transporte
-from excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
+from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
 
 class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_DialogMostrarLosVehiculosParaAgregarReparacionesAOR):
     '''
@@ -28,7 +28,7 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         '''
         super(DialogMostrarLosVehiculosParaAgregarReparacionesAOR, self).__init__(parent)
         self.setupUi(self)
-        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
+        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculos().values(), self.widget)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.dominioVehiculo = None    
         

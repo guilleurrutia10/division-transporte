@@ -15,6 +15,9 @@ git commit -m 'Subo un cambio a tal cosa"
 #subimos...
 git push "origin master"
 
+#cambiar de rama
+git checkout --track -b nueva_bd origin/nueva_bd
+
 
 
 

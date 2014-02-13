@@ -16,12 +16,15 @@ from negocio.Division_Transporte import Division_Transporte
 # ListadoVehiculosSinReparaciones para evitar grandes sentencias condicionales...
 #===============================================================================
 class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
-    def __init__(self, parent=None):
+    def __init__(self, vehiculosParaListar, parent=None):
         super(ListadoVehiculos, self).__init__(parent)
         self.setupUi(self)
         #Para evitar que se modifique la información presentada por la grilla.
         self.tableWidgetListadoDeVehiculos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
-        self.cargarGrillaInicial()
+        self.vehiculos = vehiculosParaListar
+        self.cargarGrilla(self.vehiculos)
+#        self.cargarGrillaInicial(self.vehiculos)
+
     
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscar_textChanged(self, cadena):
@@ -33,6 +36,7 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         self.cargarGrilla(coches)
             
     def cargarGrilla(self, vehiculos):
+        vehiculos.sort(cmp=lambda x, y : cmp(x.dominio, y.dominio))
         self.tableWidgetListadoDeVehiculos.clearContents()
         self.tableWidgetListadoDeVehiculos.setRowCount(len(vehiculos))
         fila = 0
@@ -64,19 +68,19 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
             fila += 1
             
     
-    def cargarGrillaInicial(self):
-        division = Division_Transporte()
-        vehiculos = division.getVehiculos()
-        self.vehiculos = vehiculos.values()
-        self.vehiculos.sort(cmp=lambda x, y : cmp(x.dominio, y.dominio))
-        self.cargarGrilla(self.vehiculos)
-    '''
-    TODO: cambiar por un refrescar grilla.
-    '''
-    @QtCore.pyqtSlot()
-    def on_pushButtonRefrescar_clicked(self):
-        self.lineEditBuscar.clear()
-        self.cargarGrillaInicial()
+#    def cargarGrillaInicial(self):
+#        division = Division_Transporte()
+#        vehiculos = division.getVehiculos()
+#        self.vehiculos = vehiculos.values()
+#        self.vehiculos.sort(cmp=lambda x, y : cmp(x.dominio, y.dominio))
+#        self.cargarGrilla(self.vehiculos)
+#    '''
+#    TODO: cambiar por un refrescar grilla.
+#    '''
+#    @QtCore.pyqtSlot()
+#    def on_pushButtonRefrescar_clicked(self):
+#        self.lineEditBuscar.clear()
+#        self.cargarGrillaInicial()
 
 class Listado_Vehiculos_en_reparacion_por_Seccion(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):

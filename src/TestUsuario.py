@@ -5,7 +5,7 @@ Created on 15/09/2013
 '''
 import unittest
 from usuarios import Usuario
-from excepciones.Excepcion_usrInvalido import Excepcion_usrInvalido
+from negocio.excepciones.Excepcion_usrInvalido import Excepcion_usrInvalido
 import hashlib
 
 class TestUsuario(unittest.TestCase):

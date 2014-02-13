@@ -37,3 +37,6 @@ class EstadoOrdenReparacion(Persistent):
         
     def getPedidoDeActuacionActual(self):
         NotImplemented
+        
+    def noEstoyFinalizada(self):
+        return True

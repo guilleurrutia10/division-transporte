@@ -34,7 +34,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         '''
         super(DialogRegistrarIngresoVehiculo, self).__init__(parent)
         self.setupUi(self)
-        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
+        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculosSinOrdenEnCurso(), self.widget)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellEntered(int,int)'), self.seleccionarCelda)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellPressed(int,int)'), self.seleccionarCelda)
@@ -68,16 +68,21 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         '''
         global itemglobal
         if itemglobal:
-            dominio = unicode(itemglobal.text())
-            division = Division_Transporte()
-            vehiculo = division.getVehiculo(dominio)
-            try:
-                vehiculo.dameOrdenDeReparacionEnCurso()
-                self.mostrarMensaje('El vehículo selecciona ya cuenta con una Orde de Reparación en Curso.', 'Orden en Curso')
-            except excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso.Excepcion_No_Posee_Orden_Reparacion_En_Curso:
-                dlgDatosIngreso = DialogDatosIngresoVehiculo()
-                dlgDatosIngreso.exec_()
-                itemglobal = None
+            dlgDatosIngreso = DialogDatosIngresoVehiculo()
+            dlgDatosIngreso.exec_()
+            itemglobal = None
+            self.miWidget.cargarGrilla(Division_Transporte().getVehiculosSinOrdenEnCurso())
+#        if itemglobal:
+#            dominio = unicode(itemglobal.text())
+#            division = Division_Transporte()
+#            vehiculo = division.getVehiculo(dominio)
+#            try:
+#                vehiculo.dameOrdenDeReparacionEnCurso()
+#                self.mostrarMensaje('El vehículo selecciona ya cuenta con una Orde de Reparación en Curso.', 'Orden en Curso')
+#            except negocio.excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso.Excepcion_No_Posee_Orden_Reparacion_En_Curso:
+#                dlgDatosIngreso = DialogDatosIngresoVehiculo()
+#                dlgDatosIngreso.exec_()
+#                itemglobal = None
         else:
             self.mostrarMensaje('Debe seleccionar un Vehiculo.', 'Seleccionar Vehiculo')
         

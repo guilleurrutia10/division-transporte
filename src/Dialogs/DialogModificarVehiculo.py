@@ -25,7 +25,7 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
         '''
         super(DialogMostrarLosVehiculosParaModificar, self).__init__(parent)
         self.setupUi(self)
-        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
+        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculos().values(), self.widget)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.itemParaModificar = None
     
@@ -36,7 +36,7 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
     #===========================================================================
     def seleccionarCelda(self, row, column):
         print row, ',' , column
-        item = QtGui.QTableWidgetItem()
+#        item = QtGui.QTableWidgetItem()
         item = self.miWidget.tableWidgetListadoDeVehiculos.item(row, 0)
         print item.text()
         self.itemParaModificar = item
@@ -66,7 +66,8 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
         dlgModificar = DialogModificarVehiculo()
         dlgModificar.exec_()
         itemglobal = None
-        self.miWidget.cargarGrillaInicial()
+        self.miWidget.cargarGrilla(Division_Transporte().getVehiculos().values())
+#        self.miWidget.cargarGrillaInicial()
     
     '''
     TODO: Este método se repite en varios Dialogs.
@@ -105,6 +106,9 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
         self.auto = division.getVehiculo(unicode(self.item.text()))
         
         self.lineEditDominio.setText(self.auto.dominio)
+        #TODO: El dominio es el único que no puede cambiar????
+        self.lineEditDominio.setReadOnly (True)
+        self.lineEditDominio.setModified(False)
         self.lineEditRegistroInterno.setText(self.auto.registroInterno)
         self.lineEditChasisNro.setText(self.auto.numeroChasis)
         self.lineEditMarca.setText(self.auto.marca)
