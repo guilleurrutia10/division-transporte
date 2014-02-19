@@ -2,9 +2,12 @@
 '''
 Created on 02/11/2012
 
-@author: alum
+@author: LeoMorales
 '''
-from negocio.excepciones.Excepcion_usrInvalido import Excepcion_usrInvalido
+import hashlib
+
+from Division_Transporte import Division_Transporte
+from excepciones.Excepcion_usrInvalido import Excepcion_usrInvalido
 
 PERMISOS = {"jefeDivision": ['actionAlta_de_Vehiculo','actionRegistrar_Ingreso_de_Vehiculo',
                              'actionRegistrar_Egreso','actionModificacion_de_Vehiculo',
@@ -31,41 +34,63 @@ PERMISOS = {"jefeDivision": ['actionAlta_de_Vehiculo','actionRegistrar_Ingreso_d
                              'actionAsignar_Reparacion',
                              'actionRegistrar_Finalizacion_de_Reparacion',
                              'actionListados_de_Seccion'],
-            "jefeSeccion": ["finalizar_reparacion", "asiganr_reparacion"],
-            "inspector": ['actionAlta_de_Seccion'],
+            "jefeSeccion":   ['actionRegistrar_Finalizacion_de_Reparacion',
+                            'actionAsignar_Reparacion'],
+            "inspector":    ['actionAlta_de_Seccion'],
             "administrativo": ["alta_repuesto"],
             "otro": []
             }
 
-USUARIOS = [
-    ("guille", "e96ff3826368162ce83d6aa3aec79ed3b2f99291", "jefeDivision"),
-    ("leo", "1234", "inspector"),
-    ("samuel", "1234", "administrativo"),
-    ("diego", "1234", "otro"),
-    ("pepe1", "7800524dada57a4caf0f1cc37a13a881c3af5e88", "inspector")
-]
+#USUARIOS = [
+#    ("guille", "e96ff3826368162ce83d6aa3aec79ed3b2f99291", "jefeDivision"),
+#    ("leo", "1234", "inspector"),
+#    ("samuel", "1234", "administrativo"),
+#    ("diego", "1234", "otro"),
+#    ("pepe1", "7800524dada57a4caf0f1cc37a13a881c3af5e88", "inspector")
+#]
+
+ROLES_DISPONIBLES = ['jefeDivision','administrativo', 'jefeSeccion']
 
 #password de pepe1 -> 1234
 ROL = 2
 
 class Usuario():
     def __init__(self, name, password):
+        """
+        @precondition: name y password deben ser unicode.
+        """
+        
         self.name = name
         self.rol = None
         self.permisos = []
-        self.validar(password)
+        self.password = password
+        #self.validar(password)
         
+    def registrar(self, rol):
+        hash_password = hashlib.sha1(self.name + self.password).hexdigest()
+        usrParaRegistrar = (self.name, unicode(hash_password), rol)
+        Division_Transporte().registrarUsuario(usrParaRegistrar)
+                
     def validar(self, password):
         """
         Valida si la contrasena ingresada pertenece al usuario.
-        Ademas carga al usuario el rol y los permisos que posee. 
+        Ademas carga al usuario el rol y los permisos que posee.
+        @precondition: Password debe ser unicode.
+        
+        @raise Excepcion_usrInvalido:  
         """
-        usrs = filter(lambda (n, p, r): self.name == n and p == password, USUARIOS)
+        hash_password = hashlib.sha1(self.name + password).hexdigest()
+        hash_password = unicode(hash_password)
+        
+        #usrs = filter(lambda (n, p, r): self.name == n and p == password, USUARIOS)
+        usrs = filter(lambda (n, p, r): self.name == n and p == hash_password, Division_Transporte().getUsuarios())
         if not usrs:
+            print "Usuario no valido!!!!!!!!"
             raise Excepcion_usrInvalido(self.name)
         usr = usrs[0]
         self.rol = usr[ROL] #Cargando rol...
         self.permisos = PERMISOS[usr[ROL]]  #Cargando permisos...
+        print 'Usuario valido, cargando permisos...'
         return True
     
     def es_anonimo(self):
@@ -79,4 +104,4 @@ class Usuario():
     
     def getPermisos(self):
         return self.permisos
-        
+    

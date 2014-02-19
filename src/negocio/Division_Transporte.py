@@ -103,6 +103,16 @@ class MiZODB(object):
         except KeyError, e:
             diccionario[clave] = objeto
             self.commiting()
+
+    def saveUsr(self, usr):
+        '''
+        Agrega un nuevo Usuario (tupla: nombre-pass-rol) en la lista de Usuarios
+        Confirma la transaccion.
+        
+        '''
+        lista_de_usrs = self.getDiccionarioElementos('USUARIOS')
+        lista_de_usrs.append(usr) #USUARIOS.append((self.name, hash_password, rol))
+        self.commiting()
         
     def remove(self, claveDiccionario, clave):
         '''
@@ -196,6 +206,13 @@ class Division_Transporte(Persistent):
         dialogo de cracion de la Seccion. 
         '''
         self.zodb.conexion.sync()
+        
+        #Antes de guardar, creamos el Usuario del Encargado, para que pueda loguearse luego
+        from usuario import Usuario
+        usrNew = Usuario(unicode(encargado.nombreCompletoUsr()), unicode(encargado.getPassword()))
+        usrNew.registrar('jefeSeccion')
+
+        #Armar un diccionario de empleados (bien podria hacerlo la misma seccion, tmb):
         empleadosSeccion = {}
         for empleado in empleados:
             empleadosSeccion[empleado.getDocumento()] = empleado
@@ -555,3 +572,15 @@ class Division_Transporte(Persistent):
         Sobrecarga del m�todo que imprime una cadena que representa a la Divisi�n Transporte.
         '''
         return '%s, Id: %s' % (self.__class__, id(self))
+
+    def getUsuarios(self):
+        '''
+        @return: 
+        @author: 
+        '''
+        self.zodb.conexion.sync()
+        return self.zodb.getDiccionarioElementos('USUARIOS')
+    
+    def registrarUsuario(self, nuevoUsr):
+        self.zodb.saveUsr(nuevoUsr)
+

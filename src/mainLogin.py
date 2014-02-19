@@ -65,12 +65,12 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
             en la misma creacion del usuario.
              
         """
-        from usuarios import Usuario
+        from negocio.usuario import Usuario
         
         #tomamos el nombre ingresado por el usuario:
-        username = str(self.lineEditUser.text())
+        username = unicode(self.lineEditUser.text())
         #tomamos el password ingresado por el usuario:
-        password = str(self.linePassword.text())
+        password = unicode(self.linePassword.text())
         
         #creamos un usuario con el nombre que ingresó
         #usr = Usuario(username)
@@ -80,10 +80,11 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
         
         #return usr
     
-        import hashlib
-        hash_password = hashlib.sha1(username + password).hexdigest()
-    
+        #import hashlib
+        #hash_password = hashlib.sha1(username + password).hexdigest()
+        #hash_password = password
         #creamos un usuario con el nombre que ingresó y el password, en la misma creacion se valida el usuario.
-        usr = Usuario(username, hash_password)
+        usr = Usuario(username, password)
+        usr.validar(password)
         
         return usr

@@ -171,6 +171,20 @@ class ZopeDB(object):
         self.zodb._p_changed = True
         transaction.commit()
     
+    def cargarUsuarios(self):
+         
+        raiz = self.zodb.raiz
+        USUARIOS = [("guille", "e96ff3826368162ce83d6aa3aec79ed3b2f99291", "jefeDivision"),
+                    ("leo", "1234", "inspector"),
+                    ("samuel", "1234", "administrativo"),
+                    ("diego", "1234", "otro"),
+                    ("pepe1", "7800524dada57a4caf0f1cc37a13a881c3af5e88", "inspector")
+                    ]
+
+        raiz['USUARIOS'] = USUARIOS
+        self.zodb._p_changed = True
+        transaction.commit()
+        
     def addTiposDeDocumentos(self, clave, documento):
         '''
         @param documento: argumento de TipoDeDocumento.

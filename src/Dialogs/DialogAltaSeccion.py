@@ -8,6 +8,7 @@ from PyQt4 import QtCore, QtGui
 
 from formularios.DialogAltaSeccion import Ui_DialogAltaSeccion
 from negocio.Division_Transporte import Division_Transporte
+from FormContrasenaEncargado import DialogCrearUsuarioEncargado
 
 from Utiles_Dialogo import mostrarMensaje
 
@@ -63,11 +64,31 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
             return
         print 'Cargando la nueva Seccion...'
         
+        self._encargado.setPassword('') #Seteamos una variable dinamica en el encargado
+        self.pedirPassEncargado()
+        if self._encargado.getPassword() == '': return
+        #while self._encargado.getPassword() == '':
+        #    self.pedirPassEncargado()
+        
+        #agregarSeccion se va a encargar tmb de registrar el Usuario del encargado y registrarlo...
         Division_Transporte().agregarSeccion(nombreSeccion, self.empleadosAsignados , self._encargado)
         
         if mostrarMensaje(self, 'La Sección se ha cargado exitosamente! :)', 'Cargando'):
             self.accept()
+    
+    def pedirPassEncargado(self):
+        '''
+            Crea un Usuario nuevo para que el Encargado de la Seccion pueda logearse como tal.
+            @precondition: self._encargado != None.
+        '''
+        dialog = DialogCrearUsuarioEncargado(self._encargado.nombreCompletoUsr())
         
+        if dialog.exec_() == QtGui.QDialog.Accepted:
+            self._encargado.setPassword(dialog.getPassEncargado())
+            print 'Pass Encargado: %s' % (dialog.getPassEncargado())
+        
+         
+    
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         self.reject()

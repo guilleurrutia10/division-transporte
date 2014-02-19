@@ -4,7 +4,7 @@ Created on 15/09/2013
 @author: Usuario
 '''
 import unittest
-from usuarios import Usuario
+from negocio.usuario import Usuario
 from excepciones.Excepcion_usrInvalido import Excepcion_usrInvalido
 import hashlib
 
