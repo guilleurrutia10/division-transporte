@@ -204,13 +204,13 @@ class Division_Transporte(Persistent):
         Recibe el nombre de la nueva Seccion y los objetos empleados y encargados que ya fueron recuperados en el
         dialogo de cracion de la Seccion. 
         '''
-        self.zodb.conexion.sync()
-        
         #Antes de guardar, creamos el Usuario del Encargado, para que pueda loguearse luego
         from usuario import Usuario
         usrNew = Usuario(unicode(encargado.nombreCompletoUsr()), unicode(encargado.getPassword()))
         usrNew.registrar('jefeSeccion')
 
+        self.zodb.conexion.sync()
+        
         #Armar un diccionario de empleados (bien podria hacerlo la misma seccion, tmb):
         empleadosSeccion = {}
         for empleado in empleados:

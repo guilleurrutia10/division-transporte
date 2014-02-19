@@ -6,7 +6,6 @@ Created on 15/09/2013
 import unittest
 from negocio.usuario import Usuario
 from excepciones.Excepcion_usrInvalido import Excepcion_usrInvalido
-from usuarios import Usuario
 from negocio.excepciones.Excepcion_usrInvalido import Excepcion_usrInvalido
 import hashlib
 

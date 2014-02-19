@@ -83,7 +83,7 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
         #import hashlib
         #hash_password = hashlib.sha1(username + password).hexdigest()
         #hash_password = password
-        #creamos un usuario con el nombre que ingresó y el password, en la misma creacion se valida el usuario.
+        #creamos un usuario con el nombre que ingresó y el password.
         usr = Usuario(username, password)
         usr.validar(password)
         

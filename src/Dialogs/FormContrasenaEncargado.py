@@ -22,7 +22,7 @@ class DialogCrearUsuarioEncargado(QtGui.QDialog, Ui_DialogCrearUsuarioEncargado)
         self.label_nombreUsrEncargado.setText(nombreUsr)
         
     def getPassEncargado(self):
-        return str(self.linePassword.text())
+        return unicode(self.linePassword.text())
 
 if __name__ == '__main__':        
     print 'Hola'

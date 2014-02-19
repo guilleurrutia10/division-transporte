@@ -64,7 +64,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
             return
         print 'Cargando la nueva Seccion...'
         
-        self._encargado.setPassword('') #Seteamos una variable dinamica en el encargado
+        #self._encargado.setPassword('') #Seteamos una variable dinamica en el encargado
         self.pedirPassEncargado()
         if self._encargado.getPassword() == '': return
         #while self._encargado.getPassword() == '':

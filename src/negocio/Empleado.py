@@ -67,7 +67,7 @@ class Empleado(Persistent):
         return '%s%s' %(self.apellido, self.nombre)
     
     def setPassword(self, unaPass):
-        self.password = str(unaPass)
+        self.password = unaPass
     
     def getPassword(self):
         return self.password
