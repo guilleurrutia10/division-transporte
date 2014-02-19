@@ -23,3 +23,6 @@ class Finalizda(object):
         
     def __str__(self):
         return 'Finalizada'
+    
+    def noEstoyFinalizada(self):
+        return False

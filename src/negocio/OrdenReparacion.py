@@ -191,3 +191,6 @@ class OrdenReparacion(object):
     def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
         self.estado.registrarRecepcionPedidoActuacion(self, fechaRecepcion)
         self.estado = Aprobada()
+        
+    def noEstaFinalizada(self):
+        return self.getEstado().noEstoyFinalizada()

@@ -3,7 +3,7 @@ from PyQt4 import QtCore, QtGui
 
 from formularios.MainWindowExample import Ui_MainWindow
 from formularios.WidgetListadoEmpleados import Ui_Form
-
+from negocio.Division_Transporte import Division_Transporte
 
 #===============================================================================
 # Import Dialogos
@@ -175,11 +175,12 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_actionListado_de_Personal_de_la_Division_triggered(self):
         self.setCentralWidget(WidgetListadoEmpleados.WidgetListadoEmpleados(self))
-        
+    
+    #Agregada la lista de vehículos a listar
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_de_la_Division_2_triggered(self):
         print 'agregando widget listado Vehiculos'
-        self.setCentralWidget(WidgetListadoDeVehiculos.ListadoVehiculos(self))
+        self.setCentralWidget(WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculos().values(), self))
 
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_en_Reparacion_por_Seccion_triggered(self):

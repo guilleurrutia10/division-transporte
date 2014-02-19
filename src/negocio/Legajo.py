@@ -139,3 +139,9 @@ class Legajo(Persistent):
     def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
         ordenReparacion = self.dameOrdenDeReparacionEnCurso()
         ordenReparacion.registrarRecepcionPedidoActuacion(fechaRecepcion)
+        
+    def puedeRegistrarIngreso(self):
+        ordenEnCurso = filter(lambda unaOrden: unaOrden.noEstaFinalizada(), self.ordenesDeReparacion)
+        if len(ordenEnCurso)!=0:
+            return False
+        return True
