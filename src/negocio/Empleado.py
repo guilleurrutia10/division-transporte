@@ -7,10 +7,6 @@ Created on 28/10/2012
 
 from persistent import Persistent
 
-from Localidad import *
-from Reparacion import *
-from TipoDocumento import *
-
 class Empleado(Persistent):
     '''
     classdocs
@@ -39,7 +35,7 @@ class Empleado(Persistent):
     
     '''
     
-    def __init__(self, nombre, apellido, documento, tipoDocumento):
+    def __init__(self, nombre, apellido, documento, tipoDocumento, fechaNacimiento = None, domicilio = None, telefono = None, email = None, localidad = None):
         '''
         Constructor
         :version:
@@ -50,12 +46,12 @@ class Empleado(Persistent):
         self.documento = documento
         self.tipoDocumento = tipoDocumento
         self.password = ''
-        
-    def save(self):
-        from MiZODB import ZopeDB, MiZODB
-        zodb = ZopeDB(MiZODB())
-#        zodb = ZopeDB(MiZODB('zeo.conf'))
-        zodb.save('empleados', self.documento, self)
+        self.fechaNacimiento = fechaNacimiento 
+        self.domicilio = domicilio 
+        self.telefono = telefono 
+        self.email = email
+        self.localidad = localidad
+    
         
     def __eq__(self, otro):
         return self.documento == otro.documento
@@ -72,7 +68,36 @@ class Empleado(Persistent):
     def getPassword(self):
         return self.password
     
+    def getNombre(self):
+        return self.nombre
+
+    def getApellido(self):
+        return self.apellido
+    
     def getDocumento(self):
         return self.documento
     
+    def getTipoDocumento(self):
+        return self.tipoDocumento
+
+    def getFechaNacimiento(self):
+        return self.fechaNacimiento
     
+    def getDomicilio(self):
+        return self.domicilio
+    
+    def getTelefono(self):
+        return self.telefono
+    
+    def getEmail(self):
+        return self.email
+    
+    def getLocalidad(self):
+        return self.localidad
+    
+    def tieneReparacionesPendientes(self):
+        #TODO: Implementar!
+        return False
+    
+    def quienSos(self):
+        return 'Soy %s %s, %s nro: %s' %(self.getNombre(), self.getApellido(), self.getTipoDocumento(), self.getDocumento())

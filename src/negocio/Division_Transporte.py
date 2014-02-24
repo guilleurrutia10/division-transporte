@@ -7,20 +7,20 @@ Created on 28/10/2012
 
 from persistent import Persistent
 
-from Empleado import *
-from Legajo import *
-from Localidad import *
+from Empleado import Empleado
+from Legajo import Legajo
+#from Localidad import *
 # Puedo obtenerlos a trav�s de los Legajos. (1 a 1 con la Orden de Reparaci�n)
 # from PedidoDeActuacion import *
-from TipoRepuesto import *
-from Seccion import *
-from TipoDeReparacion import *
-from TipoDocumento import *
+from TipoRepuesto import TipoRepuesto
+from Seccion import Seccion
+#from TipoDeReparacion import *
+#from TipoDocumento import *
 
 from ZODB import config
 from ZEO.Exceptions import ClientDisconnected
 import transaction
-from copy import deepcopy
+#from copy import deepcopy
 from excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
 from excepciones.ExcepcionObjetoNoExiste import ExcepcionObjeNoExiste
 
@@ -227,38 +227,6 @@ class Division_Transporte(Persistent):
         self.zodb.save('secciones', seccion.getNombre(), seccion)
 
 
-    def agregarSeccionesTwo(self, nombreSeccion, empleados, encargado):
-        '''
-        @return: 
-        @author:
-        Recibe el nombre de la nueva Seccion. 
-        '''
-#        pass
-#        # Acordarse de de que vienen los documentos del empleados y el documento del encargado
-#        # y s�lo el nombre de la Secci�n.
-        self.zodb.conexion.sync()
-        empleadosSeccion = {}
-        for empleado in empleados:
-#            empleadosSeccion[empleado] = deepcopy(zodb.get('empleados', empleado))
-            empleadosSeccion[empleado] = self.zodb.raiz['empleados'][empleado]
-#            del self.zodb.raiz['empleados'][empleado]
-#        encargadoSeccion = deepcopy(zodb.get('empleados', encargado))
-        encargadoSeccion = self.zodb.raiz['empleados'][encargado]
-#        del self.zodb.raiz['empleados'][encargado]
-        seccion = Seccion(nombreSeccion, empleadosSeccion, encargadoSeccion)
-        # TODO: Tener en cuenta de q la seccion puede existir....
-        try:
-            self.zodb.raiz['secciones'][nombreSeccion] = seccion
-        except KeyError:
-            self.zodb.raiz['secciones'] = {}
-            self.zodb.raiz['secciones'][nombreSeccion] = seccion
-        #Problem solve...
-        self.zodb.raiz._p_changed = True
-        transaction.commit()
-#        seccion.save()
-#        zodb.remove('empleados', empleado)
-#        zodb.remove('empleados', encargado)
-        
     def getTipoDeDocumentos(self):
         '''
         @return: 
@@ -266,20 +234,6 @@ class Division_Transporte(Persistent):
         '''
         self.zodb.conexion.sync()
         return self.zodb.getDiccionarioElementos('tiposDocumentos')
-    
-#    def getOrdenesDeReparacion(self):
-#        '''
-#        @return: 
-#        @author: 
-#        '''
-#        pass
-#    
-#    def getOrdenDeReparacionDeVehiculo(self, dominio):
-#        '''
-#        @return: 
-#        @author: 
-#        '''
-#        pass
     
     def getEmpleados(self):
         '''
@@ -576,4 +530,48 @@ class Division_Transporte(Persistent):
     
     def registrarUsuario(self, nuevoUsr):
         self.zodb.saveUsr(nuevoUsr)
+        
+    def getSeccionesQuePuedenTransferir(self):
+        '''
+        @return: una lista con todas las Secciones que cumplen las condiciones para tranferir empleados.
+        @author: 
+        '''
+        self.zodb.conexion.sync()
+        #todasLasSecciones = self.zodb.raiz['secciones'].values() #para mejor visibilidad
+        todasLasSecciones = self.getSecciones().values() #para mejor visibilidad
+        return filter(lambda unaSeccion: unaSeccion.puedeTransferir(), todasLasSecciones)
+    
+    def getSeccionesParaCambiarEmpleado(self, unEmpleado):
+        '''
+            Retorna todas las secciones a las que unEmpleado puede ser transferido
+        '''
+        return filter(lambda unaSeccion: unaSeccion != self.getSeccionDeEmpleado(unEmpleado), self.getSecciones().values())
+        
+    def getSeccionDeEmpleado(self, empleado):
+        '''
+            Retorna la seccion en la que se encuentra el empleado.
+            En caso de no encontrarse en ninguna seccion, retorna None.
+        '''
+        seccion_del_empleado = None
+        for seccion in self.getSecciones().values():
+            if seccion.poseeAEmpleado(empleado): 
+                seccion_del_empleado = seccion
+                break
+        #print 'La seccion del empleado: %s, es: %s' %(empleado.quienSos(), seccion_del_empleado.getNombre())
+        return seccion_del_empleado
+    
+    def cambiarDeSeccionAEmpleado(self, unEmpleado, seccionNueva):
+        '''
+        Remueve al empleado de su Seccion actual y lo ubica en la nueva Seccion
+        @precondition: unEmpleado no se encuentra en la nuevaSeccion
+        '''
+        #Recuperamos la seccione del empleado:
+        seccionVieja = self.getSeccionDeEmpleado(unEmpleado)
+        #Removemos
+        seccionVieja.removerEmpleado(unEmpleado)
+        #Agregamos a la nueva:
+        seccionNueva.agregarEmpleado(unEmpleado)
+        
+        
+        
 

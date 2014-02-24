@@ -37,7 +37,7 @@ class ListadoSecciones(QtGui.QWidget, Ui_FormListadoSecciones):
             self.tableWidgetListadoSecciones.setItem(fila, columna, itemNombre)
             columna += 1
             itemCantidadEmpl = QtGui.QTableWidgetItem()
-            itemCantidadEmpl.setText(unicode(seccion.cantidadEmpleados()))
+            itemCantidadEmpl.setText(unicode(seccion.cantidadEmpleadosTotales()))
             self.tableWidgetListadoSecciones.setItem(fila, columna, itemCantidadEmpl)
             columna += 1
             itemEncargado = QtGui.QTableWidgetItem()

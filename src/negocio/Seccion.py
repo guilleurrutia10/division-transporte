@@ -7,26 +7,22 @@ Created on 28/10/2012
 
 from persistent import Persistent
 
-from Empleado import *
-from TipoDeReparacion import *
-
-SECCIONES_CREADAS = 0
+CANTIDAD_MIN_PARA_TRANFERIR = 3
 
 class Seccion(Persistent):
     '''
     classdocs
     @version: 
-    @author: 
+    @author:
+        
+        ATTRIBUTES:
+        
+        - codigoSeccion  (private)
+        - nombre  (private)
+        - empleados
+        - encargado        
+ 
     '''
-    
-    '''ATTRIBUTES
-    
-    codigoSeccion  (private)
-    
-    nombre  (private)
-    '''
-
-
     def __init__(self, codigoSeccion, nombre, empleados, encargado):
         '''
         Constructor
@@ -70,18 +66,48 @@ class Seccion(Persistent):
     def getNombre(self):
         return self.nombre
     
-    def save(self):
-        '''
-        @return: 
-        @author: 
-        '''
-        from MiZODB import ZopeDB, MiZODB
-        zodb = ZopeDB(MiZODB())
-#        zodb = ZopeDB(MiZODB('zeo.conf'))
-        zodb.save('secciones', self.nombre, self)
-    
     def cantidadEmpleados(self):
         '''
         Devuelve la cantidad de empleados que tiene la Sección.
+        (Cantidad de empleados sin contar el encargado)
+        '''
+        return len(self.empleados)
+    
+    def cantidadEmpleadosTotales(self):
+        '''
+        Devuelve la cantidad de empleados que tiene la Sección.
+        (Cantidad de empleados mas el encargado)
         '''
         return len(self.empleados) + 1
+    
+    def puedeTransferir(self):
+        '''
+        Una Seccion puede tranferir a un empleado si:
+            - Ninguno de sus empleados tiene reparaciones pendientes.
+            - Posee mas de dos empleados (un empleado y el encargado).
+        Util para un listado de solo Secciones que pueden transferir empleados.
+        '''
+        empleadosConReparacionesPendientes = filter(lambda unEmpleado: unEmpleado.tieneReparacionesPendientes() , self.getEmpleados().values())
+        return len(empleadosConReparacionesPendientes) == 0 and self.cantidadEmpleadosTotales() >= CANTIDAD_MIN_PARA_TRANFERIR 
+    
+    def getEmpleados(self):
+        '''
+            Retorna un diccionario con:
+                - k = dni del empleado 
+                - v = Objeto Empleado.
+        '''
+        return self.empleados
+    
+    def poseeAEmpleado(self, unEmpleado):
+        return unEmpleado in self.getEmpleados().values()
+        
+    def getEncargado(self):
+        return self.encargado
+    
+    def getCodigo(self):
+        return 'codigo'
+    
+    def removerEmpleado(self, empleadoARemover):
+        del self.getEmpleados()[empleadoARemover.getDocumento()]
+        
+    

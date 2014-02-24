@@ -90,6 +90,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         itemVehiculo = self.miWidget.tableWidgetListadoDeVehiculos.item(fila, 0)
         global itemglobal
         itemglobal = itemVehiculo
+        print 'Presionando: %d ; %d' %(fila, columna)
         
     '''
     TODO: Este método se repite en varios Dialogs.
