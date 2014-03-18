@@ -267,8 +267,8 @@ class Division_Transporte(Persistent):
     
     def getEmpleadosSinAsignar(self):
         '''
-        @return: 
-        @author: 
+            @return: Devuelve un diccionario con todos los empleados de la Division que no estan asiganados a ninguna Seccion. 
+             
         '''
         self.zodb.conexion.sync()
         return self.zodb.raiz['empleados']
@@ -308,6 +308,9 @@ class Division_Transporte(Persistent):
             transaction.commit()
     
     def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento):
+        '''
+            Crea un empleado nuevo con los datos recibidos y lo guarda en la BD.
+        '''
         tiposDocumentos = self.zodb.raiz['tiposDocumentos']
         empleado = Empleado(nombre, apellido, numeroDocumento, tiposDocumentos[tipoDocumento])
         self.zodb.save('empleados', empleado.getDocumento(), empleado)
@@ -571,7 +574,16 @@ class Division_Transporte(Persistent):
         seccionVieja.removerEmpleado(unEmpleado)
         #Agregamos a la nueva:
         seccionNueva.agregarEmpleado(unEmpleado)
+        #TODO: Guardamos, esto es todo?
+        self.zodb.commiting()
         
+    def asignarNuevoEncargadoDeSeccion(self, seccion, nuevoEncargado):
+        encargadoAnterior = seccion.asignarNuevoEncargado(nuevoEncargado)
+        #TODO: Verificar!
+        self.agregarEmpleadoDisponible(encargadoAnterior)
         
-        
-
+    def agregarEmpleadoDisponible(self, empleado):
+        '''
+            Asigna al empleado recibido a la 'lista' de empleados disponibles.
+        '''
+        self.zodb.save('empleados', empleado.getDocumento(), empleado)

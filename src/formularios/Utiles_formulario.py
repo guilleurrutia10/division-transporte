@@ -13,40 +13,6 @@ QtGui.QTableWidget
 '''
 from PyQt4 import QtGui, QtCore
 
-
-class TablaSuper(QtGui.QTableWidget):
-    
-    def cargarGrilla(self, lista_empleados):
-        fila = 0
-        self.clearContents()
-        self.setRowCount(len(lista_empleados))
-        for empleado in lista_empleados:
-            columna = 0
-            itemDocumento = QtGui.QTableWidgetItem()
-            itemDocumento.setText(unicode(empleado.documento))
-            self.setItem(fila, columna, itemDocumento)
-            columna += 1
-            itemNombre = QtGui.QTableWidgetItem()
-            itemNombre.setText(unicode(empleado.nombre))
-            self.setItem(fila, columna, itemNombre)
-            fila += 1
-            
-    def cargarGrillaTwo(self, lista_empleados):
-        fila = 0
-        self.clearContents()
-        self.setRowCount(len(lista_empleados))
-        for empleado in lista_empleados:
-            print empleado.nombreCompleto()
-            columna = 0
-            infoEmpleado = empleado.getInfo() 
-            for clave in infoEmpleado.keys():
-                unItem = QtGui.QTableWidgetItem()
-                unItem.setText(unicode(infoEmpleado[clave]))
-                print infoEmpleado[clave]
-                self.setItem(fila, columna, unItem)
-                columna += 1
-            fila += 1
-
 class SuperTabla(QtGui.QTableWidget):
 
     def inicializarTabla(self):
@@ -82,6 +48,68 @@ class SuperTabla(QtGui.QTableWidget):
 
 
 class TablaEmpleadosSeccion(SuperTabla):
+    '''
+        Tabla que lista empleados.
+        Puede: 
+            - cargar con empleados recibidos
+            - cargar con empleados de secciones recibidas
+    '''
+    
+    def cargarConEmpleados(self, empleados):
+        '''
+            Recibe una lista de empleados para listar.
+            Columnas:
+                - nombre
+                - apellido
+                - tipo de documento
+                - nro de documento
+                - fecha de nacimiento
+                - email
+                - seccion
+            
+            Ademas, mientras lista los empleados, va armando un diccionario para mantener un correlacion empleado-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        self.setRowCount(len(empleados))
+        
+        itemSeccionIgualParaTodos = QtGui.QTableWidgetItem()
+        itemSeccionIgualParaTodos.setText(unicode('-'))
+        
+        for empleado in empleados:
+            columna = 0
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(unicode(empleado.getNombre()))
+            self.setItem(fila, columna, itemNombre)
+            columna += 1
+            itemApellido = QtGui.QTableWidgetItem()
+            itemApellido.setText(unicode(empleado.getApellido()))
+            self.setItem(fila, columna, itemApellido)
+            columna += 1
+            itemTipoDoc = QtGui.QTableWidgetItem()
+            itemTipoDoc.setText(unicode(empleado.getTipoDocumento()))
+            self.setItem(fila, columna, itemTipoDoc)
+            columna += 1
+            itemDocumento = QtGui.QTableWidgetItem()
+            itemDocumento.setText(unicode(empleado.getDocumento()))
+            self.setItem(fila, columna, itemDocumento)
+            columna += 1
+            itemFechaNac = QtGui.QTableWidgetItem()
+            itemFechaNac.setText(unicode('empleado.getFechaNacimiento()'))
+            self.setItem(fila, columna, itemFechaNac)
+            columna += 1
+            itemEmail = QtGui.QTableWidgetItem()
+            itemEmail.setText(unicode('empleado.getEmail()'))
+            self.setItem(fila, columna, itemEmail)
+            columna += 1
+            
+            self.setItem(fila, columna, itemSeccionIgualParaTodos)
+            columna += 1
+            
+            self.agregarAlDiccionario(fila, empleado)
+            fila += 1
+
     
     def cargarConEmpleadosDeSecciones(self, secciones):
         '''
@@ -197,3 +225,41 @@ class TablaSecciones(SuperTabla):
             self.agregarAlDiccionario(fila, seccion)
             
             fila += 1
+            
+    def getSeccionSeleccionada(self):
+        return self.getElementoSeleccionado()
+
+
+class TablaSuper(QtGui.QTableWidget):
+    
+    def cargarGrilla(self, lista_empleados):
+        fila = 0
+        self.clearContents()
+        self.setRowCount(len(lista_empleados))
+        for empleado in lista_empleados:
+            columna = 0
+            itemDocumento = QtGui.QTableWidgetItem()
+            itemDocumento.setText(unicode(empleado.documento))
+            self.setItem(fila, columna, itemDocumento)
+            columna += 1
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(unicode(empleado.nombre))
+            self.setItem(fila, columna, itemNombre)
+            fila += 1
+            
+    def cargarGrillaTwo(self, lista_empleados):
+        fila = 0
+        self.clearContents()
+        self.setRowCount(len(lista_empleados))
+        for empleado in lista_empleados:
+            print empleado.nombreCompleto()
+            columna = 0
+            infoEmpleado = empleado.getInfo() 
+            for clave in infoEmpleado.keys():
+                unItem = QtGui.QTableWidgetItem()
+                unItem.setText(unicode(infoEmpleado[clave]))
+                print infoEmpleado[clave]
+                self.setItem(fila, columna, unItem)
+                columna += 1
+            fila += 1
+

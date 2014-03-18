@@ -110,4 +110,11 @@ class Seccion(Persistent):
     def removerEmpleado(self, empleadoARemover):
         del self.getEmpleados()[empleadoARemover.getDocumento()]
         
-    
+    def asignarNuevoEncargado(self, nuevoEncargado):
+        '''
+            Asigna un nuevo encargado a la Seccion.
+            @return: El encargado anterior.
+        '''
+        encargadoAnterior = self.getEncargado()
+        self.setEncargado(nuevoEncargado)
+        return encargadoAnterior

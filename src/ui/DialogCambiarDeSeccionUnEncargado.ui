@@ -6,256 +6,376 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>623</width>
-    <height>406</height>
+    <width>979</width>
+    <height>625</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>623</width>
-    <height>0</height>
+    <width>979</width>
+    <height>625</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Cambia de Seccion un Encargado</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="minimumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="title">
-      <string>Buscar por Sección</string>
-     </property>
-     <widget class="QListView" name="listView">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>211</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>20</y>
-        <width>75</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Filtrar</string>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="minimumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="title">
-      <string>Buscar por Nº Documento</string>
-     </property>
-     <widget class="QListView" name="listView_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>211</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>20</y>
-        <width>75</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Filtrar</string>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox_4">
-     <property name="minimumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="title">
-      <string>Buscar por Nombre</string>
-     </property>
-     <widget class="QListView" name="listView_7">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>211</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_5">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>20</y>
-        <width>75</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Filtrar</string>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QTableWidget" name="tableWidget">
-     <column>
-      <property name="text">
-       <string>Nombre</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Tipo de Documento</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Nº Documento</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Sección</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Fecha de Nac.</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Email</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>164</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="4" column="1">
-    <widget class="QWidget" name="widget" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>431</width>
-       <height>41</height>
-      </size>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QGroupBox" name="groupBox_9">
+       <property name="title">
+        <string>Empleados</string>
+       </property>
+       <widget class="QWidget" name="verticalLayoutWidget_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>461</width>
+          <height>511</height>
+         </rect>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>303</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_Asignar">
-        <property name="text">
-         <string>Asignar nuevo Jefe</string>
-        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QGroupBox" name="groupBox_10">
+           <property name="minimumSize">
+            <size>
+             <width>331</width>
+             <height>41</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>331</width>
+             <height>41</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Buscar empleado</string>
+           </property>
+           <widget class="QPushButton" name="pushButton_filtroEmpleado">
+            <property name="geometry">
+             <rect>
+              <x>250</x>
+              <y>20</y>
+              <width>75</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Filtrar</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="lineEdit_filtroEmpleado">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>231</width>
+              <height>16</height>
+             </rect>
+            </property>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="tableWidget_empleados">
+           <column>
+            <property name="text">
+             <string>Nombre</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Apellido</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Tipo de Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Nº Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Fecha de Nac.</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Email</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Sección</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_botonera">
+           <item>
+            <widget class="QPushButton" name="pushButton_elegirEmpleado">
+             <property name="text">
+              <string>Elegir empleado</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_removerEmpleado">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Remover empleado</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Empleado seleccionado:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="tableWidget_empleadoSeleccionado">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>60</height>
+            </size>
+           </property>
+           <column>
+            <property name="text">
+             <string>Nombre</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Apellido</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Tipo de Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Nº Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Fecha de Nac.</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Email</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Sección</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
        </widget>
-      </item>
-     </layout>
-    </widget>
+       <zorder>verticalLayoutWidget_5</zorder>
+       <zorder>groupBox_11</zorder>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_11">
+       <property name="title">
+        <string>Secciones</string>
+       </property>
+       <widget class="QWidget" name="verticalLayoutWidget_6">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>451</width>
+          <height>511</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <widget class="QGroupBox" name="groupBox_12">
+           <property name="minimumSize">
+            <size>
+             <width>331</width>
+             <height>41</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>331</width>
+             <height>41</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Buscar seccion</string>
+           </property>
+           <widget class="QPushButton" name="pushButton_filtroSeccion">
+            <property name="geometry">
+             <rect>
+              <x>250</x>
+              <y>20</y>
+              <width>75</width>
+              <height>16</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Filtrar</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="lineEdit_filtroSeccion">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>231</width>
+              <height>16</height>
+             </rect>
+            </property>
+           </widget>
+           <zorder>pushButton_filtroSeccion</zorder>
+           <zorder>groupBox_9</zorder>
+           <zorder>lineEdit_filtroSeccion</zorder>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="tableWidget_secciones">
+           <column>
+            <property name="text">
+             <string>Nombre</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Apellido</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Tipo de Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Nº Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Fecha de Nac.</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Email</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Sección</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <item>
+            <widget class="QPushButton" name="pushButton_elegirSeccion">
+             <property name="text">
+              <string>Elegir seccion</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_removerSeccion">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Remover seccion</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Seccion seleccionada:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="tableWidget_seccionSeleccionada">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>60</height>
+            </size>
+           </property>
+           <column>
+            <property name="text">
+             <string>Nombre</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Apellido</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Tipo de Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Nº Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Fecha de Nac.</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Email</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Sección</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="5" column="0" colspan="2">
+   <item>
     <widget class="QGroupBox" name="groupBoxButtonBox">
      <property name="minimumSize">
       <size>
@@ -318,5 +438,38 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButtonAceptar</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogCambiaDeSeccionUnEncargado</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>841</x>
+     <y>595</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>489</x>
+     <y>312</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonCancelar</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogCambiaDeSeccionUnEncargado</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>922</x>
+     <y>595</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>489</x>
+     <y>312</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

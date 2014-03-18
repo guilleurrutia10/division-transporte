@@ -76,7 +76,7 @@ class DialogSeleccionarSeccionParaCambiarEmpleado(QtGui.QDialog, Ui_DialogSelecc
             - lineEditFiltro
             - pushButtonFiltrar
             - pushButtonSeleccionar
-            - tableWidgetSecciones
+            - tableWidgetSecciones --> de tipo TablaSecciones!
             - pushButtonCancelar
             
         Vars:
