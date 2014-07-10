@@ -30,3 +30,7 @@ pip-log.txt
 .pydevproject
 .settings
 .metadata
+
+# My Files
+zeo.conf
+.conf
