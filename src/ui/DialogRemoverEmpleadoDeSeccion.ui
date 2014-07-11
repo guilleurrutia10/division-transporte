@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>DialogRemoverEmpleadoDeSeccion</class>
+ <widget class="QDialog" name="DialogRemoverEmpleadoDeSeccion">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>621</width>
-    <height>434</height>
+    <width>720</width>
+    <height>411</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>720</width>
     <height>0</height>
    </size>
   </property>
@@ -35,31 +35,9 @@
       </size>
      </property>
      <property name="title">
-      <string>Buscar por Sección</string>
+      <string>Buscar</string>
      </property>
-     <widget class="QListView" name="listView">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>211</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_FiltroSeccion">
+     <widget class="QPushButton" name="pushButton_filtroSeccion">
       <property name="geometry">
        <rect>
         <x>240</x>
@@ -70,120 +48,22 @@
       </property>
       <property name="text">
        <string>Filtrar</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_condicionDeFiltro">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
       </property>
      </widget>
     </widget>
    </item>
    <item row="1" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="minimumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="title">
-      <string>Buscar por Nº Documento</string>
-     </property>
-     <widget class="QListView" name="listView_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>211</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_FiltroDocumento">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>20</y>
-        <width>75</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Filtrar</string>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox_4">
-     <property name="minimumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>331</width>
-       <height>41</height>
-      </size>
-     </property>
-     <property name="title">
-      <string>Buscar por Nombre</string>
-     </property>
-     <widget class="QListView" name="listView_7">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>20</y>
-        <width>211</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>211</width>
-        <height>16</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_FiltroNombre">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>20</y>
-        <width>75</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Filtrar</string>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="QTableWidget" name="tableWidget_empleados">
      <property name="minimumSize">
       <size>
        <width>603</width>
@@ -193,6 +73,11 @@
      <column>
       <property name="text">
        <string>Nombre</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Apellido</string>
       </property>
      </column>
      <column>
@@ -207,12 +92,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Sección</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Fecha de Nac</string>
+       <string>Fecha de nacimiento</string>
       </property>
      </column>
      <column>
@@ -220,9 +100,14 @@
        <string>Email</string>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string>Sección</string>
+      </property>
+     </column>
     </widget>
    </item>
-   <item row="4" column="0">
+   <item row="2" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -235,7 +120,7 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="1">
+   <item row="2" column="1">
     <widget class="QWidget" name="widget" native="true">
      <property name="minimumSize">
       <size>
@@ -264,7 +149,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_Remover">
+       <widget class="QPushButton" name="pushButton_removerEmpleados">
         <property name="text">
          <string>Remover Empleado</string>
         </property>
@@ -273,7 +158,7 @@
      </layout>
     </widget>
    </item>
-   <item row="5" column="0" colspan="2">
+   <item row="3" column="0" colspan="2">
     <widget class="QGroupBox" name="groupBoxButtonBox">
      <property name="minimumSize">
       <size>
@@ -336,5 +221,38 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButtonAceptar</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogRemoverEmpleadoDeSeccion</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>582</x>
+     <y>381</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>359</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonCancelar</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogRemoverEmpleadoDeSeccion</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>663</x>
+     <y>381</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>359</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

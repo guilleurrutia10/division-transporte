@@ -22,6 +22,8 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         super(DialogAltaVehiculo, self).__init__(parent)
         self.setupUi(self)
         self.validacionesLineEdit()
+        #self.DIVISION = Division_Transporte.divisionTransporte()
+        self.DIVISION = Division_Transporte()
 
     def validacionesLineEdit(self):
         '''
@@ -93,6 +95,6 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         numeroChasis = unicode(self.lineEditChasisNro.text())
         modelo = unicode(self.lineEditModelo.text())
         #Se carga el Vehículo en el sistema.
-        division = Division_Transporte()
-        division.addVehiculo(dominio, marca, registroInterno, numeroChasis)
+        #division = Division_Transporte()
+        self.DIVISION.addVehiculo(dominio, marca, registroInterno, numeroChasis)
         #division.addVehiculo(dominio, marca, registroInterno, numeroChasis, modelo)

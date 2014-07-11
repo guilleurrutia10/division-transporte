@@ -6,8 +6,8 @@ Created on 26/09/2012
 '''
 from PyQt4 import QtCore, QtGui
 
-from formularios.FormLogin import Ui_Dialog
-
+from Dialogs.formularios.FormLogin import Ui_Dialog
+from Dialogs.negocio.usuario import Usuario
 
 class MyLogin(QtGui.QDialog, Ui_Dialog):
     '''
@@ -65,7 +65,7 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
             en la misma creacion del usuario.
              
         """
-        from negocio.usuario import Usuario
+
         
         #tomamos el nombre ingresado por el usuario:
         username = unicode(self.lineEditUser.text())

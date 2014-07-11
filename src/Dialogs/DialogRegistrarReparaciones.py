@@ -6,10 +6,13 @@ Created on 03/10/2012
 '''
 from PyQt4 import QtCore, QtGui
 from formularios.DialogRegistrarReparaciones import Ui_DialogRegistrarReparaciones
-from Dialogs import DialogCrearReparacion
+#from Dialogs import DialogCrearReparacion
+import DialogCrearReparacion
+#from negocio.Division_Transporte import Division_Transporte
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
-from Dialogs.DialogMostrarPedidoDeActuacion import DialogMostrarPedidoDeActuacion
+#from Dialogs.DialogMostrarPedidoDeActuacion 
+import DialogMostrarPedidoDeActuacion
 
 class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones):
     '''
@@ -20,8 +23,10 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
     En tiempo de ejecucion, el dialogo posee una nueva variable:
     Mejor seteamos...
         - dominioVehiculo.
+        
+    Recibe como parametro el objeto vehiculo con el cual se va a trabajar
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent = None, vehiculoSeleccionado = None):
         '''
         Constructor
         '''
@@ -29,16 +34,20 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.setupUi(self)
         #Conectamos el boton Agregar Reparaciones...
         self.connect(self.pushButtonAgregarReparacion, QtCore.SIGNAL("pressed()"), self.abrirDialogCrearReparacion)
-        self.vehiculoSeleccionado = None
-        self.dominioVehiculo = None
+        self.vehiculoSeleccionado = vehiculoSeleccionado
+#        self.dominioVehiculo = None
+        self.DIVISION = Division_Transporte()
+        
     
-    def setDominioVehiculo(self, unDominio):
-        self.dominioVehiculo = unDominio
+#    def setDominioVehiculo(self, unDominio):
+#        self.dominioVehiculo = unDominio
             
     def exec_(self, *args, **kwargs):
         self.completarLabelsOR()
         #TODO: Quitar de aca
-        self.cargarListaReparaciones(self.ordenDeReparacion.getReparaciones())
+        #self.cargarListaReparaciones(self.ordenDeReparacion.getReparaciones())
+        self.cargarListaReparaciones(self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones())
+        
         return QtGui.QDialog.exec_(self, *args, **kwargs)
         
     def cargarListaReparaciones(self, reparaciones):
@@ -58,8 +67,8 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
     
         
     def completarLabelsOR(self):
-        print self.dominioVehiculo.text()
-        self.vehiculoSeleccionado = self.buscarVehiculo()
+        #print self.dominioVehiculo.text()
+        #self.vehiculoSeleccionado = self.buscarVehiculo()
         try:
             ordenDeReparacion = self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso()
         except Excepcion_Orden_No_Esta_En_Revision, e:
@@ -75,33 +84,38 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.labelCombustible.setText(unicode(ordenDeReparacion.getCombustibleActual()))
         self.labelComisaria.setText(ordenDeReparacion.getComisaria())
         
-        self.ordenDeReparacion = ordenDeReparacion
+        #self.ordenDeReparacion = ordenDeReparacion
         
     def buscarVehiculo(self):
-        division = Division_Transporte()
-        return division.getVehiculo(unicode(self.dominioVehiculo.text()))
+        #division = Division_Transporte()
+        #return division.getVehiculo(unicode(self.dominioVehiculo.text()))
+        return self.DIVISION.getVehiculo(self.dominioVehiculo)
     
     def abrirDialogCrearReparacion(self):
         print 'abriendo dialogo Crear Reparacion'
-        dlgCrearReparacion = DialogCrearReparacion.DialogCrearReparacion(self)
+        dlgCrearReparacion = DialogCrearReparacion.DialogCrearReparacion(self, self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso())
         #A partir de esta sentencia, dlgCrearReparacion posee una OR:
-        dlgCrearReparacion.setOrdenDeReparacion(self.ordenDeReparacion)
+#        dlgCrearReparacion.setOrdenDeReparacion(self.ordenDeReparacion)
         if dlgCrearReparacion.exec_():
             #Toma la variable ordenDeReparacion generada en tiempo de ejecucion
             #por el metodo completarLabelsOR()
-            self.cargarListaReparaciones(self.ordenDeReparacion.getReparaciones())
+#            self.cargarListaReparaciones(self.ordenDeReparacion.getReparaciones())
+            self.cargarListaReparaciones(self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones()) # Este dialogo trabaja con VEHICULO!!
         
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         print 'Click sobre aceptar'
-        if self.ordenDeReparacion.getReparaciones() == []:
+        #if not self.ordenDeReparacion.getReparaciones():
+        if not self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones():
             QtGui.QMessageBox.critical(self, 'Error', 'Debe agregar por lo menos una Reparacion al Vehiculo para generar un Pedido de Actuacion')
             return
-        division = Division_Transporte()
-        division.registrarReparaciones(self.vehiculoSeleccionado)
-        vehiculo = self.buscarVehiculo()
-        self.mostrarPedidoDeActuacion(vehiculo.dameOrdenDeReparacionEnCurso().getPedidoDeActuacion())
+#        division = Division_Transporte()
+#        division.registrarReparaciones(self.vehiculoSeleccionado)
+        
+        #self.mostrarPedidoDeActuacion(vehiculo.dameOrdenDeReparacionEnCurso().getPedidoDeActuacion())
+        #1ro Recuperamos el vehiculo
+        self.vehiculoSeleccionado.generarPedidoDeActuacion()
         self.accept()
     
     def mostrarPedidoDeActuacion(self, unPedidoDeActuacion):

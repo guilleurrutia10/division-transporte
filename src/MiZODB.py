@@ -9,7 +9,9 @@ from ZODB import config
 import transaction
 from persistent.mapping import PersistentMapping
 
-from MyExceptions import ObjeNoExiste
+#from MyExceptions import ObjeNoExiste
+from Dialogs.negocio.excepciones import ExcepcionObjetoNoExiste
+from Dialogs.negocio.Division_Transporte import Division_Transporte
 from copy import deepcopy
 
 class MiZODB(object):
@@ -104,7 +106,8 @@ class ZopeDB(object):
             return deepcopy(raiz[clave])
 #            objeto = raiz[clave]
         except KeyError:
-            raise ObjeNoExiste('El elemento no se encuentra.')
+#            raise ObjeNoExiste('El elemento no se encuentra.')
+            raise ExcepcionObjetoNoExiste('El elemento no se encuentra.')
         finally:
             self.zodb.close()
 #        return objeto
@@ -126,13 +129,14 @@ class ZopeDB(object):
             dictionary[clave] = objeto
             self.zodb.commiting()
         except KeyError:
-            raise ObjeNoExiste('El elemento no Existe')
+#            raise ObjeNoExiste('El elemento no Existe')
+            raise ExcepcionObjetoNoExiste('El elemento no Existe')        
         finally:
             self.zodb.commiting()
 #            transaction.abort()
             self.zodb.close()
             
-    def getAlls(self, lista):
+    def getAlls2(self, lista):
         try:
             self.zodb.open()
             dictionary = deepcopy(self.zodb.raiz[lista])
@@ -144,6 +148,13 @@ class ZopeDB(object):
         finally:
             self.zodb.close()
         return dictionary
+
+    def getAlls(self, lista):
+        self.zodb.open()
+        v = self.zodb.raiz[lista]
+        self.zodb.close()
+        return v
+        
     
     def remove(self, lista, clave):
         try:
@@ -155,10 +166,11 @@ class ZopeDB(object):
             self.zodb.close()
 #            self.zodb.commiting()
         except KeyError:
-            raise ObjeNoExiste('El elemento no se encuentra.')
+#            raise ObjeNoExiste('El elemento no se encuentra.')
+            raise ExcepcionObjetoNoExiste('El elemento no se encuentra.')        
             
     def cargarTiposDeDocumentos(self):
-        from negocio import TipoDocumento
+        from Dialogs.negocio import TipoDocumento
         raiz = self.zodb.raiz
         documentos = {}
         siglas = ['D.N.I', 'C.I', 'L.E', 'L.C']
@@ -183,6 +195,12 @@ class ZopeDB(object):
 
         raiz['USUARIOS'] = USUARIOS
         self.zodb._p_changed = True
+        transaction.commit()
+
+    def cargarDivision(self):
+         
+        raiz = self.zodb.raiz
+        raiz['DIVISION'] = Division_Transporte()
         transaction.commit()
         
     def addTiposDeDocumentos(self, clave, documento):
@@ -224,7 +242,7 @@ class ZopeDB(object):
         transaction.commit()
         
     def cargarTiposDeReparaciones(self):
-        from negocio.TipoDeReparacion import TipoDeReparacion
+        from Dialogs.negocio.TipoDeReparacion import TipoDeReparacion
         raiz = self.zodb.raiz
         diccionario = {'Reacondicionamiento de motor':1,
                        'Afinado de motor':2,
@@ -234,9 +252,9 @@ class ZopeDB(object):
                        'Reparacion del tanque de combustible':6,
                        'Reparacion de radiador': 7}
         tiposReparaciones = {}
-        from negocio.TipoRepuesto import TipoRepuesto
+        from Dialogs.negocio.TipoRepuesto import TipoRepuesto
         unTipoRepuesto = TipoRepuesto('Bujia', 'Bujia universal')
-        from negocio.RepuestoRequeridos import RepuestoRequeridos
+        from Dialogs.negocio.RepuestoRequeridos import RepuestoRequeridos
         unRepRequerido = RepuestoRequeridos(unTipoRepuesto, 4)
         
         for nombre in diccionario:

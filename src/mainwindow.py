@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from PyQt4 import QtCore, QtGui
 
-from formularios.MainWindowExample import Ui_MainWindow
-from formularios.WidgetListadoEmpleados import Ui_Form
-from negocio.Division_Transporte import Division_Transporte
+#from formularios.MainWindowExample import Ui_MainWindow
+from Dialogs.formularios.MainWindowExample import Ui_MainWindow
+#from formularios.WidgetListadoEmpleados import Ui_Form
+#from negocio.Division_Transporte import Division_Transporte
+from Dialogs.formularios.WidgetListadoEmpleados import Ui_Form
+from Dialogs.negocio.Division_Transporte import Division_Transporte
 
 #===============================================================================
 # Import Dialogos
@@ -37,7 +40,7 @@ class MyListado(QtGui.QWidget, Ui_Form):
     def cargarGrillaEmpleadosSinAsignar(self):
         
         print "Cargando Grilla"
-        from negocio import Division_Transporte
+        from Dialogs.negocio import Division_Transporte
         division = Division_Transporte.Division_Transporte()
         p = division.getEmpleados()
         
@@ -100,7 +103,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         #TODO: validar 12/12/13
         self.usuario = usuario
-        self.habilitarMenues() 
+        self.habilitarMenues()
     
     def habilitarMenues(self):
         permisos = self.usuario.getPermisos()

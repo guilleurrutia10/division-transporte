@@ -34,7 +34,10 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         '''
         super(DialogRegistrarIngresoVehiculo, self).__init__(parent)
         self.setupUi(self)
-        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculosSinOrdenEnCurso(), self.widget)
+        #self.DIVISION = Division_Transporte.divisionTransporte()
+        self.DIVISION = Division_Transporte()
+        #self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculosSinOrdenEnCurso(), self.widget)
+        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(self.DIVISION.getVehiculosSinOrdenEnCurso(), self.widget)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellEntered(int,int)'), self.seleccionarCelda)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellPressed(int,int)'), self.seleccionarCelda)
@@ -71,7 +74,8 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
             dlgDatosIngreso = DialogDatosIngresoVehiculo()
             dlgDatosIngreso.exec_()
             itemglobal = None
-            self.miWidget.cargarGrilla(Division_Transporte().getVehiculosSinOrdenEnCurso())
+            #self.miWidget.cargarGrilla(Division_Transporte().getVehiculosSinOrdenEnCurso())
+            self.miWidget.cargarGrilla(self.DIVISION.getVehiculosSinOrdenEnCurso())
 #        if itemglobal:
 #            dominio = unicode(itemglobal.text())
 #            division = Division_Transporte()
@@ -120,6 +124,8 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         cadena = self.lineEditKilometraje.validator().regExp()
         print cadena.pattern()
 #        QtCore.QRegExp.pattern()
+        #self.DIVISION = Division_Transporte.divisionTransporte()
+        self.DIVISION = Division_Transporte()
         
     #Validación a medida que se escribe en el lineEdit
     def validacionesLineEdit(self):
@@ -161,8 +167,9 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
     
     def registrarIngresoVehiculo(self):
         dominio = unicode(itemglobal.text())
-        division = Division_Transporte()
-        vehiculo = division.getVehiculo(dominio)
+        #division = Division_Transporte()
+        #vehiculo = division.getVehiculo(dominio)
+        vehiculo = self.DIVISION.getVehiculo(dominio)
         
         kilometrajeActual = unicode(self.lineEditKilometraje.text())
         combustibleActual = unicode(self.lineEditCombustible.text())
@@ -171,7 +178,8 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         comisaria = unicode(self.lineEditComisaria.text())
         localidad = unicode(self.lineEditLocalidad.text())
         
-        division.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
+        #division.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
+        self.DIVISION.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
 
         
     def testearDialogo(self):

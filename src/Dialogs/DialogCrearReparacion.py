@@ -9,6 +9,8 @@ from PyQt4 import QtCore, QtGui
 from formularios.DialogCrearReparacion import Ui_DialogCrearReparacion
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden_Posee_Reparacion
+from negocio.Reparacion import Reparacion
+from negocio.RepuestoUtilizados import RepuestoUtilizados
 
 class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     '''
@@ -17,7 +19,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     _tipoDeReparacionSeleccionado
     _repuestosSolicitados
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent = None, ordenDeReparacion = None):
         '''
         Constructor
         '''
@@ -26,7 +28,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         self.llenarComboBoxTiposReparacion()
         self._tipoDeReparacionSeleccionado = None
         self._repuestosSolicitados = []
-        self._ordenDeReparacion = None
+        self._ordenDeReparacion = ordenDeReparacion
     
     def llenarComboBoxTiposReparacion(self):
         '''
@@ -46,15 +48,19 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        print 'Click sobre aceptar'
+        '''
+        Se acepta el dialogo:
+        Creamos una nueva reaparacion con los datos ingresados:
+            - Tipo de reparacion
+            - Descripcion
+            - Lista de repuestos.
+        Esta reparacion creada, la agregamos a la orden de reparacion con la que el dialogo está trabajando
+        '''
         if not self.seleccionoAlgunRepuesto():
             QtGui.QMessageBox.critical(self, 'Error', 'Debe seleccionar por lo menos un repuesto para crear una reparacion')
             return
         #crear la reparacion
-        from negocio.Reparacion import Reparacion
         unaReparacion = Reparacion(self._tipoDeReparacionSeleccionado, str(self.lineEditDescripcion.text()), self._repuestosSolicitados)
-        #TODO: Aca me quede, por las dudas...
-        #self._ordenDeReparacion.getReparaciones().append(unaReparacion)
         try:
             self._ordenDeReparacion.addReparacion(unaReparacion)
         except Excepcion_Orden_Posee_Reparacion, e:
@@ -64,7 +70,9 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
          
         
     def agregarRepuesto(self, unTipoDeRepuesto, cantidad):
-        from negocio.RepuestoUtilizados import RepuestoUtilizados
+        '''
+        Crea un repuesto utilizado y lo agrega a una lista local del dialogo, para luego crear la reparacion
+        '''
         nuevoRepuesto = RepuestoUtilizados(unTipoDeRepuesto, cantidad)
         if nuevoRepuesto in self._repuestosSolicitados:
             # si ya existia hacemos un pop, lo modificamos y lo volvemos a agregar...
@@ -75,12 +83,13 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         
     @QtCore.pyqtSlot()
     def on_pushButtonAgregarRepuesto_clicked(self):
-        print 'Agregando repuesto.....'
+        '''
+        Agrega repuestos a la lista local (intercambio de lugar en tablas en las tablas)
+        '''
         try:
             nombreRepuestoSeleccionado = self.tableWidgetRepuestosDisponibles.item(self.tableWidgetRepuestosDisponibles.currentItem().row(), 0).text() 
             repuestoSeleccionado = self._tipoDeReparacionSeleccionado.getRepuesto(nombreRepuestoSeleccionado)
-                # la var _tipoDeReparacionSeleccionado posee el TdeRep seleccionado en el combo box.
-            print repuestoSeleccionado
+            # la var _tipoDeReparacionSeleccionado posee el TdeRep seleccionado en el combo box.
             if not self.lineEditCantidadRepuesto.text():
                 QtGui.QMessageBox.critical(self, 'Error', 'Por favor ingrese la cantidad del repuesto seleccionado')
                 return
@@ -133,5 +142,5 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         division = Division_Transporte()
         return division.getTipoReparacion(unicode(unTipoDeReparacion))
     
-    def setOrdenDeReparacion(self, unaOrden):
-        self._ordenDeReparacion = unaOrden
+#    def setOrdenDeReparacion(self, unaOrden):
+#        self._ordenDeReparacion = unaOrden

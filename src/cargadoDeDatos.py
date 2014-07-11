@@ -9,8 +9,8 @@ from ZODB import config
 import transaction
 from persistent.mapping import PersistentMapping
 
-from negocio.Empleado import Empleado
-from negocio.TipoDocumento import TipoDocumento
+from Dialogs.negocio.Empleado import Empleado
+from Dialogs.negocio.TipoDocumento import TipoDocumento
 
 from MiZODB import ZopeDB, MiZODB
 from pprint import pprint
@@ -20,12 +20,20 @@ if __name__ == '__main__':
     bd = ZopeDB(MiZODB())
     bd.cargarTiposDeDocumentos()
     bd.cargarTiposDeReparaciones()
+    bd.cargarUsuarios()
     bd.zodb.close()
     
     bd.zodb.open()
     tiposReparaciones = bd.getAlls('tiposReparaciones')
     pprint(tiposReparaciones)
+    
+
+    #bd.cargarDivision()
+    usrs = bd.getAlls('USUARIOS')
+    pprint(usrs)
+    #pprint(bd.getAlls('DIVISION'))
     bd.zodb.close()
+
     
 #    bd = config.databaseFromURL('zeo.conf')
 #    conexion = bd.open()

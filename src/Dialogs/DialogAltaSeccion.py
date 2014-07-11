@@ -37,6 +37,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self._encargado = None
         #Desactivado al principio!
         self.pushButtonDesasignarEncargado.setDisabled(True)
+        self.DIVISION = Division_Transporte()
         
     def validacionesLineEdit(self):
         self.lineEditNombreSeccion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z]+'), self))
@@ -71,7 +72,8 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         #    self.pedirPassEncargado()
         
         #agregarSeccion se va a encargar tmb de registrar el Usuario del encargado y registrarlo...
-        Division_Transporte().agregarSeccion(nombreSeccion, self.empleadosAsignados , self._encargado)
+        #Division_Transporte().agregarSeccion(nombreSeccion, self.empleadosAsignados , self._encargado)
+        self.DIVISION.agregarSeccion(nombreSeccion, self.empleadosAsignados , self._encargado)
         
         if mostrarMensaje(self, 'La Sección se ha cargado exitosamente! :)', 'Cargando'):
             self.accept()
@@ -99,8 +101,9 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.tableWidgetEmpleadosSinAsignar.cargarGrilla(self.empleadosSinSeccion)
         
     def obtenerListaEmpleadosSinAsignar(self):
-        division = Division_Transporte()
-        personal = division.getEmpleadosSinAsignar()
+        #division = Division_Transporte()
+        #personal = division.getEmpleadosSinAsignar()
+        personal = self.DIVISION.getEmpleadosSinAsignar()
         return personal.values()
     
     def celdaClickeada_on_tableWidgetEmpleadosSinAsignar(self, fila, columna):
@@ -118,8 +121,8 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
             return
         documento = self.tableWidgetEmpleadosSinAsignar.item(self.filaSeleccionadaSinAsignar, COLUMNA_DNI).text()
         self.tableWidgetEmpleadosSinAsignar.removeRow(self.filaSeleccionadaSinAsignar)
-        division = Division_Transporte()
-        empleado = division.getEmpleado(unicode(documento))
+        #division = Division_Transporte()
+        empleado = self.DIVISION.getEmpleado(unicode(documento))
         self.empleadosAsignados.append(empleado)
         self.empleadosSinSeccion.remove(empleado)
         self.tableWidgetEmpleadosAsignados.cargarGrilla(self.empleadosAsignados)
