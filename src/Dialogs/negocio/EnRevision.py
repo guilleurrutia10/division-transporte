@@ -17,15 +17,15 @@ class EnRevision(EstadoOrdenReparacion):
     '''
 
 
-    def __init__(self):
+    def __init__(self, orden_de_reparacion):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        super(EnRevision, self).__init__()
+        super(EnRevision, self).__init__(orden_de_reparacion)
     
-    def addReparacion(self, orden, unaReparacion):
+    def addReparacion(self,unaReparacion):
         '''
         Agrega reparaciones a la Orden de Reparación.
         @return: 
@@ -33,8 +33,8 @@ class EnRevision(EstadoOrdenReparacion):
         '''
         #reparaciones = self.getEstadoOrden().reparaciones
         #TODO: Agregar la reparacion a la OR si no estaba en la reparacion...
-        if not unaReparacion in orden.getReparaciones():
-            orden.getReparaciones().append(unaReparacion)
+        if not unaReparacion in self._orden_de_reparacion.getReparaciones():
+            self._orden_de_reparacion.getReparaciones().append(unaReparacion)
             print 'Se agrego una nueva Reparación'
         else:
             raise Excepcion_Orden_Posee_Reparacion('La Reparacion ya se encuentra en la Orden de Reparacion del Vehiculo')
@@ -48,7 +48,7 @@ class EnRevision(EstadoOrdenReparacion):
 #        
 #        self.getEstadoOrden().setEstadoOrdenReparacion(EsperandoAprobacion(self.getEstadoOrden()))
         
-    def generarPedidoDeActuacion(self, unaOrdenReparacion):
+    def generarPedidoDeActuacion_deprecated(self, unaOrdenReparacion):
         '''
         Genera un pedido de actuacion con todos los repuestos de todas las reparaciones de la 
         orden de reparacion recibida.
@@ -71,5 +71,31 @@ class EnRevision(EstadoOrdenReparacion):
         self.pedidoActuacion = PedidoDeActuacion(repuestosSolicitados)
         #unaOrdenReparacion.setPedidoDeActuacion(pedidoActuacion)
 #        unaOrdenReparacion.setPedidoDeActuacion(PedidoDeActuacion(repuestosSolicitados))
+
+    def generarPedidoDeActuacion(self):
+        '''
+        Genera un pedido de actuacion con todos los repuestos de todas las reparaciones de la 
+        orden de reparacion.
+        '''
+        #recolectamos todos los repuestos solicitados...
+        repuestosSolicitados = []
+        for reparacion in self._orden_de_reparacion.getReparaciones():
+            for repuesto in reparacion.getRepuestosUtilizados():
+                if repuesto in repuestosSolicitados:
+                    # si ya existia:
+                    # guardamos la cantidad solicitada:
+                    cantRepuesto = repuesto.getCantidad()
+                    # y se la agregamos al repuesto...
+                    repuestosSolicitados[repuestosSolicitados.index(repuesto)].incrementarCantidad(cantRepuesto)
+                else:
+                    #si no existia lo agregamos...
+                    repuestosSolicitados.append(repuesto)
+        #creamos el Pedido de Actuacion y se lo agregamos a la orden:
+
+        self._orden_de_reparacion.setPedidoDeActuacion(PedidoDeActuacion(repuestosSolicitados))
+        print "PEDIDO DE ACTUACION GENERADO Y ASIGNADO A LA ORDEN"
+
+    def __str__(self):
+        return 'En Revision'
         
         

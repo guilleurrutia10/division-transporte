@@ -14,7 +14,6 @@ import WidgetListadoDeVehiculos
 
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
-import negocio.excepciones
 
 global itemglobal
 itemglobal = None
@@ -36,11 +35,11 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         self.setupUi(self)
         #self.DIVISION = Division_Transporte.divisionTransporte()
         self.DIVISION = Division_Transporte()
-        #self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculosSinOrdenEnCurso(), self.widget)
-        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(self.DIVISION.getVehiculosSinOrdenEnCurso(), self.widget)
-        self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
-        self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellEntered(int,int)'), self.seleccionarCelda)
-        self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellPressed(int,int)'), self.seleccionarCelda)
+        #self.listaDeVehiculos = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculosSinOrdenEnCurso(), self.widget)
+        self.listaDeVehiculos = WidgetListadoDeVehiculos.ListadoVehiculos(self.DIVISION.getVehiculosSinOrdenEnCurso(), self.widget)
+        self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
+        self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellEntered(int,int)'), self.seleccionarCelda)
+        self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellPressed(int,int)'), self.seleccionarCelda)
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -74,8 +73,8 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
             dlgDatosIngreso = DialogDatosIngresoVehiculo()
             dlgDatosIngreso.exec_()
             itemglobal = None
-            #self.miWidget.cargarGrilla(Division_Transporte().getVehiculosSinOrdenEnCurso())
-            self.miWidget.cargarGrilla(self.DIVISION.getVehiculosSinOrdenEnCurso())
+            #self.mlistaDeVehiculoscargarGrilla(Division_Transporte().getVehiculosSinOrdenEnCurso())
+            self.listaDeVehiculos.cargarGrilla(self.DIVISION.getVehiculosSinOrdenEnCurso())
 #        if itemglobal:
 #            dominio = unicode(itemglobal.text())
 #            division = Division_Transporte()
@@ -91,7 +90,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
             self.mostrarMensaje('Debe seleccionar un Vehiculo.', 'Seleccionar Vehiculo')
         
     def seleccionarCelda(self, fila, columna):
-        itemVehiculo = self.miWidget.tableWidgetListadoDeVehiculos.item(fila, 0)
+        itemVehiculo = self.listaDeVehiculos.tableWidgetListadoDeVehiculos.item(fila, 0)
         global itemglobal
         itemglobal = itemVehiculo
         print 'Presionando: %d ; %d' %(fila, columna)

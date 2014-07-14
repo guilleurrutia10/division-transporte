@@ -5,8 +5,6 @@ Created on 07/11/2012
 @author: urrutia
 '''
 from EstadoOrdenReparacion import EstadoOrdenReparacion
-from Plan import *
-
 
 class Planificada(EstadoOrdenReparacion):
     '''
@@ -19,16 +17,17 @@ class Planificada(EstadoOrdenReparacion):
     '''
 
 
-    def __init__(self):
+    def __init__(self, orden_de_reparacion):
         '''
         Constructor
         @return: 
         @author: 
         '''
-#        self._plan = None
-#        
-#    def getPlan(self):
-#        return self._plan
-#    
-#    def setPlan(self,unPlan):
-#        self._plan = unPlan
+        super(Planificada, self).__init__(orden_de_reparacion)
+        
+    def __str__(self):
+        return 'Planificada'
+    
+    def turnosSinAtender(self):
+        #return self._plan.getTurnos()
+        return self._orden_de_reparacion.getPlan().getTurnos()

@@ -6,11 +6,7 @@ Created on 28/10/2012
 '''
 
 from persistent import Persistent
-
-from Empleado import *
-from RepuestoUtilizados import *
-from TipoDeReparacion import *
-from bsddb.test.test_compare import cmp
+from persistent.list import PersistentList
 
 class Reparacion(Persistent):
     '''
@@ -59,7 +55,10 @@ class Reparacion(Persistent):
         '''
         self._tipoDeReparacion = tipoDeReparacion
         self._descripcion = descripcion
-        self._repuestosUtilizados = repuestosUtilizados
+        self._repuestosUtilizados = PersistentList()
+        self._repuestosUtilizados.extend(repuestosUtilizados)
+        
+        self._finalizada = False
         
     def getDatos(self):
         '''
@@ -111,4 +110,13 @@ class Reparacion(Persistent):
         else:
             return -1
     
+    def finalizar(self):    
+        self._finalizada = True
         
+    def estaFinalizada(self):
+        return self._finalizada
+    
+    def estado(self):
+        if self.estaFinalizada():
+            return 'Finalizada'
+        return 'Sin finalizar'

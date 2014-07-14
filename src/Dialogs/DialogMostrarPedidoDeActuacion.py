@@ -7,45 +7,38 @@ Created on 03/10/2012
 from PyQt4 import QtCore, QtGui
 from formularios.DialogMostrarPedidoDeActuacion import Ui_DialogMostrarPedidoDeActuacion
 
-from Dialogs import DialogCrearReparacion
-from negocio.Division_Transporte import Division_Transporte
-from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
-from PyQt4.Qwt5.qplt import QString
 
 class DialogMostrarPedidoDeActuacion(QtGui.QDialog, Ui_DialogMostrarPedidoDeActuacion):
     '''
     Atributos:
     
-    - vehiculoSeleccionado
+    - pedidoDeActuacion
     
-    En tiempo de ejecucion, el dialogo posee una nueva variable:
-    Mejor seteamos...
-        - dominioVehiculo.
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent = None, pedidoDeActuacion = None):
         '''
         Constructor
         '''
-        super(DialogMostrarPedidoDeActuacion, self).__init__(parent)
+        super(DialogMostrarPedidoDeActuacion, self).__init__()
         self.setupUi(self)
-        self._pedidoDeActuacion = None
+        self._pedidoDeActuacion = pedidoDeActuacion
     
     def setPedidoDeActuacion(self, pedidoDeActuacion):
         self._pedidoDeActuacion = pedidoDeActuacion
         
     def exec_(self, *args, **kwargs):
-        self.cargarDatos(self._pedidoDeActuacion)
+        self.cargarDatos()
         return QtGui.QDialog.exec_(self, *args, **kwargs)
     
-    def cargarDatos(self, unPedidoDeActuacion):
+    def cargarDatos(self):
         '''
         '''
-        self.labelFechaPedido.setText(str(unPedidoDeActuacion.getFechaRealizacion()))
+        self.labelFechaPedido.setText(str(self._pedidoDeActuacion.getFechaRealizacion()))
         
         self.tableWidgetRepuestos.clearContents()
-        self.tableWidgetRepuestos.setRowCount(len(unPedidoDeActuacion.getRepuestosSolicitados()))
+        self.tableWidgetRepuestos.setRowCount(len(self._pedidoDeActuacion.getRepuestosSolicitados()))
         fila = 0
-        for repuesto in unPedidoDeActuacion.getRepuestosSolicitados():
+        for repuesto in self._pedidoDeActuacion.getRepuestosSolicitados():
             columna = 0
             itemNombreTipoRepuesto = QtGui.QTableWidgetItem()
             itemNombreTipoRepuesto.setText(repuesto.getTipoDeRepuesto().getNombre())

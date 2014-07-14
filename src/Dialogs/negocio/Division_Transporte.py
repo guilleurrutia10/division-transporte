@@ -5,8 +5,6 @@ Created on 28/10/2012
 @author: urrutia
 '''
 
-#from persistent import Persistent
-#import persistent
 from persistent import Persistent
 from persistent.list import PersistentList
 
@@ -271,7 +269,11 @@ class Division_Transporte(Persistent):
              
         '''
         self.zodb.conexion.sync()
-        return self.zodb.raiz['empleados']
+        try:
+            return self.zodb.raiz['empleados']
+        except KeyError:
+            return {}
+
     
     def getEmpleado(self, clave):
         '''
@@ -588,6 +590,12 @@ class Division_Transporte(Persistent):
     def getProximoNroPedidoActuacion(self):
         self.NRO_PEDIDO_DE_ACTUACION += 1
         return self.NRO_PEDIDO_DE_ACTUACION
+    
+    def getVehiculosEnRevision(self):
+        return filter(lambda unVehiculo: unVehiculo.estaEnRevision(), self.getVehiculos().values())
+
+    def getVehiculosEnAprobada(self):
+        return filter(lambda unVehiculo: unVehiculo.estaEnAprobada(), self.getVehiculos().values())
     
 ##############################################################################
 ########################## TEST DIVISION #####################################

@@ -4,6 +4,7 @@ Created on 03/10/2012
 
 @author: Usuario
 '''
+import transaction
 from PyQt4 import QtCore, QtGui
 from formularios.DialogRegistrarReparaciones import Ui_DialogRegistrarReparaciones
 #from Dialogs import DialogCrearReparacion
@@ -12,7 +13,8 @@ import DialogCrearReparacion
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
 #from Dialogs.DialogMostrarPedidoDeActuacion 
-import DialogMostrarPedidoDeActuacion
+from DialogMostrarPedidoDeActuacion import DialogMostrarPedidoDeActuacion
+
 
 class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones):
     '''
@@ -47,7 +49,6 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         #TODO: Quitar de aca
         #self.cargarListaReparaciones(self.ordenDeReparacion.getReparaciones())
         self.cargarListaReparaciones(self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones())
-        
         return QtGui.QDialog.exec_(self, *args, **kwargs)
         
     def cargarListaReparaciones(self, reparaciones):
@@ -93,7 +94,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
     
     def abrirDialogCrearReparacion(self):
         print 'abriendo dialogo Crear Reparacion'
-        dlgCrearReparacion = DialogCrearReparacion.DialogCrearReparacion(self, self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso())
+        dlgCrearReparacion = DialogCrearReparacion.DialogCrearReparacion(self, self.vehiculoSeleccionado)
         #A partir de esta sentencia, dlgCrearReparacion posee una OR:
 #        dlgCrearReparacion.setOrdenDeReparacion(self.ordenDeReparacion)
         if dlgCrearReparacion.exec_():
@@ -112,18 +113,19 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
             return
 #        division = Division_Transporte()
 #        division.registrarReparaciones(self.vehiculoSeleccionado)
-        
-        #self.mostrarPedidoDeActuacion(vehiculo.dameOrdenDeReparacionEnCurso().getPedidoDeActuacion())
-        #1ro Recuperamos el vehiculo
+        #1ro Recuperamos el vehiculo, ok, el dialogo ya trabaja con un vehiculo
+        #directamente le decimos que genere el pedido
         self.vehiculoSeleccionado.generarPedidoDeActuacion()
+        self.mostrarPedidoDeActuacion(self.vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion())
+        transaction.commit()
         self.accept()
     
     def mostrarPedidoDeActuacion(self, unPedidoDeActuacion):
         '''
         '''
         #TODO [ok]: Aca ahora imprimimos algo, pero debemos mostrar un nuevo dialogo...
-        dlgMostrarPedido = DialogMostrarPedidoDeActuacion()
-        dlgMostrarPedido.setPedidoDeActuacion(unPedidoDeActuacion)
+        dlgMostrarPedido = DialogMostrarPedidoDeActuacion(self, unPedidoDeActuacion)
+        #dlgMostrarPedido.setPedidoDeActuacion(unPedidoDeActuacion)
         dlgMostrarPedido.exec_()
             
         

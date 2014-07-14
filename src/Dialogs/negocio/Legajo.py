@@ -13,6 +13,8 @@ from excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrden
 from excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso import Excepcion_No_Posee_Orden_Reparacion_En_Curso
 from excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision 
 from excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso import Excepcion_No_Posee_Orden_Reparacion_En_Curso
+from Aprobada import Aprobada
+
 
 class Legajo(Persistent):
     '''
@@ -65,7 +67,7 @@ class Legajo(Persistent):
         '''
         ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstado() != 'Finalizada', self.ordenesDeReparacion)
         try:
-            ordenEnCurso[0]
+            return ordenEnCurso[0]
             raise ExcepcionPoseeOrdenReparacionEnCurso('El vehículo ya posee una orden de Reparación en Curso.')
         except IndexError:
             return None
@@ -134,8 +136,8 @@ class Legajo(Persistent):
             pass
         
     def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
-        ordenReparacion = self.dameOrdenDeReparacionEnCurso()
-        ordenReparacion.registrarRecepcionPedidoActuacion(fechaRecepcion)
+        recepcion_exitosa = self.obtenerOrdenDeReparacionEnCurso().registrarRecepcionPedidoActuacion(fechaRecepcion)
+        return recepcion_exitosa
         
     def puedeRegistrarIngreso(self):
         ordenEnCurso = filter(lambda unaOrden: unaOrden.noEstaFinalizada(), self.ordenesDeReparacion)
@@ -145,10 +147,52 @@ class Legajo(Persistent):
         return True
 
     def generarPedidoDeActuacion(self):
-        self.getOrdenDeReparacionEnCurso().generarPedidoDeActuacion()
+        '''
+        Genera un pedido de actuacion con los repuestos que tienen las reparaciones
+        de la OR.
+        @return: True si la operacion fue realizada con exito. False en caso contrario
+        '''
+        generacion_exitosa = self.obtenerOrdenDeReparacionEnCurso().generarPedidoDeActuacion()
+        return generacion_exitosa
+        
+    def registrarNuevoIngreso(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
+        if self.obtenerOrdenDeReparacionEnCurso() == None:
+            ordenReparacion = OrdenReparacion(self.dameNumeroOrden(), kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
+            self.ordenesDeReparacion.append(ordenReparacion)
+            return True
+        else:
+            print 'El vehiculo ya posee una OR en curso. No se registro el ingreso'
+            return False
+
+    def registrarReparaciones(self, reparaciones):
+        '''
+        Recibe una lista de reparaciones, las cuales agrega a la OR en curso
+        '''
+        #agregar las reparaciones a la OR en curso...
+        for reparacion in reparaciones:
+            self.obtenerOrdenDeReparacionEnCurso().addReparacion(reparacion)
         
         
+    
+    def agregarTurnoAlPlan(self, turno):
+        self.obtenerOrdenDeReparacionEnCurso().agregarTurnoAlPlan(turno)
         
+    def planificacionFinalizada(self):
+        finalizacion_exitosa = self.obtenerOrdenDeReparacionEnCurso().planificacionFinalizada()
+        return finalizacion_exitosa
+    
+    def getTurnosSinAtender(self):
+        '''
+        Esta accion solo es realizable en estado 'Planificada' 
+        '''
+        return self.obtenerOrdenDeReparacionEnCurso().getTurnosSinAtender()
+        
+    def estaEnRevision(self):
+        return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), EnRevision)
+
+    def estaEnAprobada(self):
+        return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), Aprobada)
+
 ##############################################################################
 ########################## TEST LEGAJO #######################################
 ##############################################################################
@@ -166,4 +210,8 @@ class TddLegajo(unittest.TestCase):
     def test_patente_correcta(self):
         patente = self.legajo.getDominio()
         self.assertEqual('ERR333', patente)
+    
+    def test_registrar_ingreso(self):
+        sePudo = self.legajo.registrarNuevoIngreso()
+        self.assertEqual(sePudo, True)
         

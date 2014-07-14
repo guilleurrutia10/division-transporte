@@ -14,13 +14,18 @@ class EstadoOrdenReparacion(Persistent):
     @author: 
     '''
 
-    def __init__(self):
+    def __init__(self, orden_de_reparacion):
         '''
         Constructor
         @return: 
         @author:
+        
+        El estado ahora recibe la referencia a la OR para poder realizar modificaciones sobre ella
         '''
-        self.pedidoDeActuacion = None
+        #self.pedidoDeActuacion = None
+        
+        #Referencia a la orden duena de este estado
+        self._orden_de_reparacion = orden_de_reparacion
     
     '''
     TODO: implementado sólo estado EnRevision()

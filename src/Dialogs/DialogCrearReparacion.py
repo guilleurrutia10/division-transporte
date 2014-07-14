@@ -11,6 +11,7 @@ from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden_Posee_Reparacion
 from negocio.Reparacion import Reparacion
 from negocio.RepuestoUtilizados import RepuestoUtilizados
+import transaction
 
 class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     '''
@@ -19,7 +20,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     _tipoDeReparacionSeleccionado
     _repuestosSolicitados
     '''
-    def __init__(self, parent = None, ordenDeReparacion = None):
+    def __init__(self, parent = None, vehiculoSeleccionado = None):
         '''
         Constructor
         '''
@@ -28,7 +29,8 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         self.llenarComboBoxTiposReparacion()
         self._tipoDeReparacionSeleccionado = None
         self._repuestosSolicitados = []
-        self._ordenDeReparacion = ordenDeReparacion
+#        self._ordenDeReparacion = ordenDeReparacion
+        self._vehiculoSeleccionado = vehiculoSeleccionado
     
     def llenarComboBoxTiposReparacion(self):
         '''
@@ -62,7 +64,9 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         #crear la reparacion
         unaReparacion = Reparacion(self._tipoDeReparacionSeleccionado, str(self.lineEditDescripcion.text()), self._repuestosSolicitados)
         try:
-            self._ordenDeReparacion.addReparacion(unaReparacion)
+#            self._ordenDeReparacion.addReparacion(unaReparacion)
+            self._vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso().addReparacion(unaReparacion)
+            transaction.commit()
         except Excepcion_Orden_Posee_Reparacion, e:
             QtGui.QMessageBox.critical(self, 'Error. No se agrego la Reparacion', e.getMensaje())
             return

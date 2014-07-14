@@ -15,19 +15,22 @@ class EsperandoAprobacion(EstadoOrdenReparacion):
     '''
 
 
-    def __init__(self, pedidoDeActuacion):
+    def __init__(self, orden_de_reparacion):
         '''
         Constructor
         @return: 
         @author: 
         '''
-        super(EsperandoAprobacion, self).__init__()
-        self.pedidoDeActuacion = pedidoDeActuacion
+        super(EsperandoAprobacion, self).__init__(orden_de_reparacion)
+        self.pedidoDeActuacion = orden_de_reparacion.getPedidoDeActuacion()
         
     def getPedidoDeActuacion(self, ordenReparacion):
         #return ordenReparacion.getPedidoDeActuacion()
         return self.pedidoDeActuacion
         
-    def registrarRecepcionPedidoActuacion(self, ordenReparacion, fechaRecepcion):
-        pedidoActuacion = ordenReparacion.getPedidoDeActuacion()
-        pedidoActuacion.setFechaRecepcion(fechaRecepcion)
+    def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
+        #pedidoActuacion = ordenReparacion.getPedidoDeActuacion()
+        self.pedidoDeActuacion.setFechaRecepcion(fechaRecepcion)
+
+    def __str__(self):
+        return 'Esperando Aprobacion del Pedido de Actuacion'

@@ -96,6 +96,8 @@ class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_FormL
     def __init__(self, parent=None):
         super(Listado_Vehiculos_con_Reparaciones_no_Planificadas, self).__init__(parent)
         self.setupUi(self)
+        self.listaDeVehiculos = ListadoVehiculos(Division_Transporte().getVehiculosEnAprobada(), self)
+        
         
 class Listado_Vehiculos_de_la_Division_2(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):

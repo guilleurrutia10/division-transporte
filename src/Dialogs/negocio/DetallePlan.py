@@ -4,7 +4,6 @@ Created on 13/11/2012
 @author: Usuario
 '''
 from persistent import Persistent
-import Reparacion
 
 class DetallePlan(Persistent):
     '''
@@ -40,4 +39,7 @@ class DetallePlan(Persistent):
         return self._fechaFin
     
     def setFechaFin(self, fechaInicio):
-        self._fechaInicio = fechaInicio    
+        self._fechaInicio = fechaInicio
+        
+    def __str__(self):
+        return 'Reparacion: %s | fecha inicio: %s' %(self._reparacion, self._fechaInicio)    

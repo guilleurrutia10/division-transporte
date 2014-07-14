@@ -15,10 +15,11 @@ from EnRevision import EnRevision
 from EsperandoAprobacion import EsperandoAprobacion
 from Planificada import Planificada
 #from negocio.Aproba import Aprobada
-from Aproba import Aprobada
+from Aprobada import Aprobada
+from Plan import Plan
 
-#class OrdenReparacion(Persistent):
-class OrdenReparacion(object):
+class OrdenReparacion(Persistent):
+#class OrdenReparacion(object):
     '''
     La Orden de Reparacion se crea cuando se registra un ingreso de un vehiculo.
     
@@ -73,9 +74,9 @@ class OrdenReparacion(object):
         # La primera vez debe instanciarse como EnRevision()
 #        self.estado = EstadoOrdenReparacion(), self.estado =  EnRevision()
         self.codigoOrdenReparacion = codigoOrdenReparacion
-        self.estado = EnRevision()
+        
+        self.estado = EnRevision(self)#para que el estado pueda realizarlemodificaciones
         self.reparaciones = PersistentList()
-        self._plan = None
         
         self.kilometrajeActual = kilometrajeActual
         self.combustibleActual = combustibleActual
@@ -87,6 +88,7 @@ class OrdenReparacion(object):
         self.chofer = 'Jose Luis Barrionuevo'
         
         self._pedidoDeActuacion = None
+        self._plan = Plan() #Sera utilizado a partir de Aprobada
             
     def getCodigoOrdenReparacion(self):
         return self.codigoOrdenReparacion
@@ -138,30 +140,39 @@ class OrdenReparacion(object):
     
     def generarPedidoDeActuacion(self):
         '''
-        @return: 
+        Generar el pedido de actuacion para las reparaciones que la OR tiene cargadas
+        es realizable si esta OR se encuentra el el estado 'En Revision', por lo cual 
+        le delegamos al estado actual la realizacion de esta accion de ser posible.
+        @return: True si la operacion salio exitosa. False en caso contrario 
         @author: 
         '''
-        self.estado.generarPedidoDeActuacion(self)
-        #cambiando a proximo estado:
-        self.estado = EsperandoAprobacion(self.estado.pedidoActuacion)
-    
+        try:
+            self.estado.generarPedidoDeActuacion()
+            #cambiando a proximo estado:
+            self.estado = EsperandoAprobacion(self)
+            return True
+        except AttributeError:
+            print 'No se pueden generar el pedido de actuacion'
+            return False
+        
     def registrarOrdenDeReparacionPlanificada(self):
         '''
         @return: 
         @author: 
         '''
-        self.estado = Planificada()
+        self.estado = Planificada(self)
     
     '''
     TODO: este método debería estar en el EstadoOrden-->EnRevision.
     '''
     def addReparacion(self, unaReparacion):
         '''
-        @return: 
-        @author: 
+        Para agregar una reparacion a la lista de reparaciones,
+        la OR debe estar en estado 'En Revision', por lo cual le encomendamos
+        al estado de la OR realizar esta tarea, si pudiese. 
         '''
         try:
-            self.estado.addReparacion(self, unaReparacion)
+            self.estado.addReparacion(unaReparacion)
         except AttributeError:
             print 'No se pueden agregar reparaciones'
     
@@ -179,10 +190,10 @@ class OrdenReparacion(object):
         self._plan = unPlan
         
     def __str__(self):
-        return 'En Revision'
+        return 'Orden de Reparacion | Estado: %s' %self.getEstado()
     
-#    def setPedidoDeActuacion(self, pedidoDeActuacion):
-#        self._pedidoDeActuacion = pedidoDeActuacion
+    def setPedidoDeActuacion(self, pedidoDeActuacion):
+        self._pedidoDeActuacion = pedidoDeActuacion
     
     def getPedidoDeActuacionActual(self):
         try:
@@ -194,8 +205,59 @@ class OrdenReparacion(object):
         return self._pedidoDeActuacion
     
     def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
-        self.estado.registrarRecepcionPedidoActuacion(self, fechaRecepcion)
-        self.estado = Aprobada()
-        
+        '''
+        Para registrar la recepcion de un pedido de actuacion referido a una OR,
+        la OR debe estar en estado 'EsperandoAprobacion', por lo cual le encomendamos
+        al estado de la OR realizar esta tarea, si pudiese.
+        @return: True si la operacion fue exitosa. False en caso contrario. 
+ 
+        '''
+        try: 
+            self.estado.registrarRecepcionPedidoActuacion(fechaRecepcion)
+            self.estado = Aprobada(self)
+            return True
+        except AttributeError:
+            return False
+ 
     def noEstaFinalizada(self):
         return self.getEstado().noEstoyFinalizada()
+
+    def agregarTurnoAlPlan(self, turno):
+        '''
+        Para agregar un turno al plan de una OR,
+        la OR debe estar en estado 'Aprobada', por lo cual le encomendamos
+        al estado de la OR realizar esta tarea, si pudiese.
+        @return: True si la operacion fue exitosa. False en caso contrario. 
+        '''
+        try: 
+            self.estado.agregarTurnoAlPlan(turno)
+            return True
+        except AttributeError:
+            return False
+
+    def planificacionFinalizada(self):
+        '''
+        Para finalizar la planificacion de las reparaciones de una OR,
+        la OR debe estar en estado 'Aprobada'.
+        @return: True si la operacion fue exitosa. False en caso contrario. 
+        '''       
+        if isinstance(self.estado, Aprobada):
+            #self.estado = Planificada(self, self.estado.plan)
+            self.estado = Planificada(self)
+            return True
+        else:
+            return False
+        
+    def getTurnosSinAtender(self):
+        '''
+        Para devolver los turnos que todavia no han sido atendidos de una OR,
+        la OR debe estar en estado 'Planificada', por lo cual le encomendamos
+        al estado de la OR realizar esta tarea, si pudiese.
+        @return: None en caso fallido. 
+        '''
+        try: 
+            return self.estado.turnosSinAtender()
+        except AttributeError:
+            return None
+        
+    

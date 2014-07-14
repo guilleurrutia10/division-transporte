@@ -24,6 +24,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         '''
         super(DialogAltaSeccion, self).__init__(parent)
         self.setupUi(self)
+        self.DIVISION = Division_Transporte()
         self.tableWidgetEmpleadosAsignados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.tableWidgetEmpleadosSinAsignar.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.filaSeleccionadaAsignados = None
@@ -37,7 +38,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self._encargado = None
         #Desactivado al principio!
         self.pushButtonDesasignarEncargado.setDisabled(True)
-        self.DIVISION = Division_Transporte()
+        
         
     def validacionesLineEdit(self):
         self.lineEditNombreSeccion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z]+'), self))
