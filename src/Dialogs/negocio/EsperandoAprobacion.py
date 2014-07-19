@@ -30,7 +30,8 @@ class EsperandoAprobacion(EstadoOrdenReparacion):
         
     def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
         #pedidoActuacion = ordenReparacion.getPedidoDeActuacion()
-        self.pedidoDeActuacion.setFechaRecepcion(fechaRecepcion)
+#        self.pedidoDeActuacion.setFechaRecepcion(fechaRecepcion)
+        self._orden_de_reparacion.getPedidoDeActuacion().setFechaRecepcion(fechaRecepcion)
 
     def __str__(self):
         return 'Esperando Aprobacion del Pedido de Actuacion'

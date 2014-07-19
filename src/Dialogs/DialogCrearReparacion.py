@@ -26,8 +26,11 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         '''
         super(DialogCrearReparacion, self).__init__(parent)
         self.setupUi(self)
+        self.DIVISION = Division_Transporte()
+        self._tiposDeReparaciones = self.DIVISION.getTipoReparaciones()
         self.llenarComboBoxTiposReparacion()
-        self._tipoDeReparacionSeleccionado = None
+#        self._tipoDeReparacionSeleccionado = None
+        self._tipoDeReparacionSeleccionado = self._tiposDeReparaciones[0]
         self._repuestosSolicitados = []
 #        self._ordenDeReparacion = ordenDeReparacion
         self._vehiculoSeleccionado = vehiculoSeleccionado
@@ -37,9 +40,9 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         Solicita al controlador Division_Transporte todos los tipos de Reparaciones
         disponibles para ofrecerlos al ususario en un hermoso comboBox.
         '''
-        dvTrans = Division_Transporte()
-        for i in dvTrans.getTipoReparaciones():
-            self.comboBoxTipoDeReparacion.addItems(QtCore.QStringList(i))
+        self.comboBoxTipoDeReparacion.clear()
+        for tipoDeReparacion in self._tiposDeReparaciones:
+            self.comboBoxTipoDeReparacion.addItems(QtCore.QStringList(tipoDeReparacion.getNombre()))
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -62,7 +65,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
             QtGui.QMessageBox.critical(self, 'Error', 'Debe seleccionar por lo menos un repuesto para crear una reparacion')
             return
         #crear la reparacion
-        unaReparacion = Reparacion(self._tipoDeReparacionSeleccionado, str(self.lineEditDescripcion.text()), self._repuestosSolicitados)
+        unaReparacion = Reparacion(self._tipoDeReparacionSeleccionado, unicode(self.lineEditDescripcion.text()), self._repuestosSolicitados)
         try:
 #            self._ordenDeReparacion.addReparacion(unaReparacion)
             self._vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso().addReparacion(unaReparacion)
@@ -103,8 +106,15 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
             return
         
     def on_comboBoxTipoDeReparacion_currentIndexChanged(self):
-        print 'Cambio el combo: %s' % self.comboBoxTipoDeReparacion.currentText()
-        self._tipoDeReparacionSeleccionado = self.buscarTipoReparacion(self.comboBoxTipoDeReparacion.currentText())
+        try:
+            print 'Cambio el combo: %s' % self.comboBoxTipoDeReparacion.currentText()
+        except IndexError:
+            print "Cualquiera"
+            return
+#        self._tipoDeReparacionSeleccionado = self.buscarTipoReparacion(self.comboBoxTipoDeReparacion.currentText())
+        nombre_tReparacion_selecionado = unicode(self.comboBoxTipoDeReparacion.currentText())
+        self._tipoDeReparacionSeleccionado = filter(lambda tR: tR.getNombre() == nombre_tReparacion_selecionado, self._tiposDeReparaciones)
+        self._tipoDeReparacionSeleccionado = self._tipoDeReparacionSeleccionado[0]
         #Obtenemos los repuestos requeridos por la reparacion seleccionada
         repuestos = self._tipoDeReparacionSeleccionado.getRepuestos()
         

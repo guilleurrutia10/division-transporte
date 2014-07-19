@@ -17,7 +17,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Division Transporte</string>
+   <string>División Transporte</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../recursos.qrc">
@@ -46,19 +46,18 @@
     <property name="title">
      <string>&amp;Archivo</string>
     </property>
-    <addaction name="actionSobre"/>
-    <addaction name="actionListado"/>
+    <addaction name="actionCambiarDeUsuario"/>
     <addaction name="actionAyuda"/>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
    <widget class="QMenu" name="menuVerificacion_y_Reparacion">
     <property name="title">
-     <string>&amp;Verificacion y Reparacion</string>
+     <string>&amp;Verificación y Reparación</string>
     </property>
     <widget class="QMenu" name="menuListados_de_Vehiculos">
      <property name="title">
-      <string>&amp;Listados de Vehiculos</string>
+      <string>&amp;Listados de Vehículos</string>
      </property>
      <property name="icon">
       <iconset resource="../recursos.qrc">
@@ -135,6 +134,7 @@
     </property>
     <addaction name="actionAlta_de_Seccion"/>
     <addaction name="separator"/>
+    <addaction name="actionAlta_Tipo_de_Reparacion"/>
     <addaction name="actionAsignar_Reparacion"/>
     <addaction name="actionRegistrar_Finalizacion_de_Reparacion"/>
     <addaction name="separator"/>
@@ -142,7 +142,7 @@
    </widget>
    <widget class="QMenu" name="menuConfiguracion">
     <property name="title">
-     <string>&amp;Configuracion</string>
+     <string>&amp;Configuración</string>
     </property>
     <addaction name="actionPreferencias"/>
    </widget>
@@ -208,9 +208,9 @@
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionListado">
+  <action name="actionCambiarDeUsuario">
    <property name="text">
-    <string>&amp;Listado</string>
+    <string>&amp;Cambiar de Usuario</string>
    </property>
   </action>
   <action name="actionSobre">
@@ -235,7 +235,7 @@
      <normaloff>:/recursos/iconos/car/new_car-icon.png</normaloff>:/recursos/iconos/car/new_car-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Alta de Vehiculo</string>
+    <string>&amp;Alta de Vehículo</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para crear un nuevo vehículo</string>
@@ -259,7 +259,7 @@
      <normaloff>:/recursos/iconos/car/edit_car-icon.png</normaloff>:/recursos/iconos/car/edit_car-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Modificacion de Vehiculo</string>
+    <string>&amp;Modificación de Vehículo</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para modificar los datos de un vehículo</string>
@@ -280,7 +280,7 @@
      <normaloff>:/recursos/iconos/car/ingreso_car-icon.png</normaloff>:/recursos/iconos/car/ingreso_car-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Registrar Ingreso de Vehiculo</string>
+    <string>&amp;Registrar Ingreso de Vehículo</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para registrar el ingreso de un vehículo existente</string>
@@ -301,7 +301,7 @@
      <normaloff>:/recursos/iconos/car/reparaciones_car-icon.png</normaloff>:/recursos/iconos/car/reparaciones_car-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Registrar Reparaciones necesarias del Vehiculo</string>
+    <string>&amp;Registrar Reparaciones necesarias del Vehículo</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para  registrar las reparaciones necesarias del vehículo</string>
@@ -322,7 +322,7 @@
      <normaloff>:/recursos/iconos/car/egreso_car-icon.png</normaloff>:/recursos/iconos/car/egreso_car-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Registrar Egreso Vehiculo</string>
+    <string>&amp;Registrar Egreso Vehículo</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para registrar el egreso de un vehículo</string>
@@ -343,7 +343,7 @@
      <normaloff>:/recursos/iconos/car/planificar-icon.png</normaloff>:/recursos/iconos/car/planificar-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Planificar Reparaciones de Vehiculo</string>
+    <string>&amp;Planificar Reparaciones de Vehículo</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para  planificar las reparaciones de un vehículo </string>
@@ -385,7 +385,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Listado Vehiculos de la Division</string>
+    <string>&amp;Listado Vehículos de la División</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_con_Reparaciones_Planificadas_2">
@@ -393,7 +393,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Listado Vehiculos con Reparaciones Planificadas</string>
+    <string>&amp;Listado Vehículos con Reparaciones Planificadas</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_en_Reparacion_por_Seccion">
@@ -401,7 +401,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Listado Vehiculos en Reparacion por Seccion</string>
+    <string>&amp;Listado Vehículos en Reparación por Sección</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_Reparados_por_Seccion_2">
@@ -409,7 +409,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Listado Vehiculos Reparados por Seccion</string>
+    <string>&amp;Listado Vehículos Reparados por Sección</string>
    </property>
   </action>
   <action name="actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2">
@@ -417,7 +417,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Listado de Reparaciones Realizadas a un Vehiculos</string>
+    <string>&amp;Listado de Reparaciones Realizadas a un Vehículos</string>
    </property>
   </action>
   <action name="actionListado_Vehiculos_con_Reparaciones_no_Planificadas_2">
@@ -425,7 +425,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Listado Vehiculos con Reparaciones no Planificadas</string>
+    <string>&amp;Listado Vehículos con Reparaciones no Planificadas</string>
    </property>
   </action>
   <action name="actionAlta_de_Personal">
@@ -482,7 +482,7 @@
      <normaloff>:/recursos/iconos/personal/modificar_persona-icon.png</normaloff>:/recursos/iconos/personal/modificar_persona-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Modificacion de Personal</string>
+    <string>&amp;Modificación de Personal</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para modificar los datos de un empleado</string>
@@ -503,7 +503,7 @@
      <normaloff>:/recursos/iconos/personal/change_person-icon.png</normaloff>:/recursos/iconos/personal/change_person-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Cambiar de Seccion a un Empleado</string>
+    <string>&amp;Cambiar de Sección a un Empleado</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para cambiar de sección a un empleado</string>
@@ -524,7 +524,7 @@
      <normaloff>:/recursos/iconos/personal/cambiar_encargado-icon.png</normaloff>:/recursos/iconos/personal/cambiar_encargado-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Cambiar el Encargado de una Seccion</string>
+    <string>&amp;Cambiar el Encargado de una Sección</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para cambiar el encargado de una sección</string>
@@ -545,7 +545,7 @@
      <normaloff>:/recursos/iconos/personal/remove_de_seccion-icon.png</normaloff>:/recursos/iconos/personal/remove_de_seccion-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Remover Empleado de Seccion</string>
+    <string>&amp;Remover Empleado de Sección</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para remover un empleado de una sección</string>
@@ -562,7 +562,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Listado de Personal de la Division</string>
+    <string>&amp;Listado de Personal de la División</string>
    </property>
   </action>
   <action name="actionListado_de_Personal_sin_Asignar_a_Secciones">
@@ -595,7 +595,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Modificacion de Repuesto</string>
+    <string>&amp;Modificación de Repuesto</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para modificar los datos de un repuesto</string>
@@ -612,7 +612,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Registrar Recepcion de Pedido de Actuacion</string>
+    <string>&amp;Registrar Recepción de Pedido de Actuación</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para registrar la recepción de un pedido de actuación</string>
@@ -641,7 +641,7 @@
      <normaloff>:/recursos/iconos/add_seccion.png</normaloff>:/recursos/iconos/add_seccion.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Alta de Seccion</string>
+    <string>&amp;Alta de Sección</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para dar de alta una sección</string>
@@ -658,7 +658,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Asignar Reparacion</string>
+    <string>&amp;Asignar Reparación</string>
    </property>
   </action>
   <action name="actionRegistrar_Finalizacion_de_Reparacion">
@@ -666,7 +666,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Registrar Finalizacion de Reparacion</string>
+    <string>&amp;Registrar Finalización de Reparación</string>
    </property>
   </action>
   <action name="actionListados_de_Seccion">
@@ -678,7 +678,7 @@
      <normaloff>:/recursos/iconos/list1-icon.png</normaloff>:/recursos/iconos/list1-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Listados de Seccion</string>
+    <string>&amp;Listados de Sección</string>
    </property>
   </action>
   <action name="actionListado_de_Tipos_de_Reparaciones_de_la_Division">
@@ -695,7 +695,7 @@
      <normaloff>:/recursos/iconos/car/list_reparaciones-icon.png</normaloff>:/recursos/iconos/car/list_reparaciones-icon.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;Listado de Tipos de Reparaciones de la Division</string>
+    <string>&amp;Listado de Tipos de Reparaciones de la División</string>
    </property>
    <property name="toolTip">
     <string>Haga click aquí para listar los tipos de reparaciones de la División</string>
@@ -709,12 +709,20 @@
   </action>
   <action name="actionAcerca_de_Division_de_Transporte">
    <property name="text">
-    <string>&amp;Acerca de &quot;Division de Transporte&quot;</string>
+    <string>&amp;Acerca de &quot;División de Transporte&quot;</string>
    </property>
   </action>
   <action name="actionPreferencias">
    <property name="text">
     <string>&amp;Preferencias</string>
+   </property>
+  </action>
+  <action name="actionAlta_Tipo_de_Reparacion">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Alta Tipo de Reparación</string>
    </property>
   </action>
  </widget>

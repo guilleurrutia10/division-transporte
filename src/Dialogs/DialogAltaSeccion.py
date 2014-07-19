@@ -27,17 +27,24 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.DIVISION = Division_Transporte()
         self.tableWidgetEmpleadosAsignados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.tableWidgetEmpleadosSinAsignar.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
-        self.filaSeleccionadaAsignados = None
-        self.filaSeleccionadaSinAsignar = None
+#        self.filaSeleccionadaAsignados = None
+#        self.filaSeleccionadaSinAsignar = None
         self.empleadosAsignados = [] #Lista que contendra todos los objetos Empleado que estan siendo asignados a la nueva seccion,
         self.empleadosSinSeccion = [] #Lista que contendra todos los objetos Empleado que estan disponibles para la nueva seccion,
         self.validacionesLineEdit()
-        self.conectarSignals()
+        #self.conectarSignals()
         self.cargarGrillaInicial()
         #objeto Empleado asignado como Encargado de la nueva Seccion
         self._encargado = None
         #Desactivado al principio!
         self.pushButtonDesasignarEncargado.setDisabled(True)
+        
+        #seteo de nombres de los Labels para el estilo 
+        self.label.setObjectName("label")
+        self.label_2.setObjectName("label")
+        self.label_3.setObjectName("label")
+        self.label_4.setObjectName("label")
+        
         
         
     def validacionesLineEdit(self):
@@ -99,7 +106,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
     def cargarGrillaInicial(self):
         self.empleadosSinSeccion = self.obtenerListaEmpleadosSinAsignar()
         self.empleadosSinSeccion = sorted(self.empleadosSinSeccion, cmp=lambda x, y : cmp(x.documento, y.documento))
-        self.tableWidgetEmpleadosSinAsignar.cargarGrilla(self.empleadosSinSeccion)
+        self.tableWidgetEmpleadosSinAsignar.cargarConEmpleados(self.empleadosSinSeccion)
         
     def obtenerListaEmpleadosSinAsignar(self):
         #division = Division_Transporte()
@@ -115,55 +122,42 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
     
     @QtCore.pyqtSlot()
     def on_pushButtonAsignarEmpleado_clicked(self):
-        try:
-            assert not self.filaSeleccionadaSinAsignar is None
-        except AssertionError:
+        if not self.tableWidgetEmpleadosSinAsignar.getEmpleadoSeleccionado():
             mostrarMensaje(self, 'Debe Seleccionar un Empleado.', 'Seleccionar')
             return
-        documento = self.tableWidgetEmpleadosSinAsignar.item(self.filaSeleccionadaSinAsignar, COLUMNA_DNI).text()
-        self.tableWidgetEmpleadosSinAsignar.removeRow(self.filaSeleccionadaSinAsignar)
-        #division = Division_Transporte()
-        empleado = self.DIVISION.getEmpleado(unicode(documento))
-        self.empleadosAsignados.append(empleado)
-        self.empleadosSinSeccion.remove(empleado)
-        self.tableWidgetEmpleadosAsignados.cargarGrilla(self.empleadosAsignados)
-        self.filaSeleccionadaSinAsignar = None
+        
+        self.empleadosSinSeccion.remove(self.tableWidgetEmpleadosSinAsignar.getEmpleadoSeleccionado())
+        self.empleadosAsignados.append(self.tableWidgetEmpleadosSinAsignar.getEmpleadoSeleccionado())
+        self.tableWidgetEmpleadosAsignados.cargarConEmpleados(self.empleadosAsignados)
+        self.tableWidgetEmpleadosSinAsignar.cargarConEmpleados(self.empleadosSinSeccion)
     
     @QtCore.pyqtSlot()
     def on_pushButtonDesasignarEmpleado_clicked(self):
-        try:
-            assert not self.filaSeleccionadaAsignados is None
-        except AssertionError:
+        if not self.tableWidgetEmpleadosAsignados.getEmpleadoSeleccionado():
             mostrarMensaje(self, 'Debe Seleccionar un Empleado.', 'Seleccionar')
             return
-        documento = self.tableWidgetEmpleadosAsignados.item(self.filaSeleccionadaAsignados, COLUMNA_DNI).text()
-        self.tableWidgetEmpleadosAsignados.removeRow(self.filaSeleccionadaAsignados)
-        division = Division_Transporte()
-        empleado = division.getEmpleado(unicode(documento))
-        self.empleadosSinSeccion.append(empleado)
-        self.empleadosAsignados.remove(empleado)
-        self.tableWidgetEmpleadosSinAsignar.cargarGrilla(self.empleadosSinSeccion)
-        self.filaSeleccionadaAsignados = None
+        self.empleadosAsignados.remove(self.tableWidgetEmpleadosAsignados.getEmpleadoSeleccionado())
+        self.empleadosSinSeccion.append(self.tableWidgetEmpleadosAsignados.getEmpleadoSeleccionado())
+        self.tableWidgetEmpleadosAsignados.cargarConEmpleados(self.empleadosAsignados)
+        self.tableWidgetEmpleadosSinAsignar.cargarConEmpleados(self.empleadosSinSeccion)
 
     @QtCore.pyqtSlot()
     def on_pushButtonAsignarComoEncargado_clicked(self):
-        print 'Asignando Encargado'
-        try:
-            #El boton directamente esta desactivado cuando ya se asigno un encargado!
-            assert not((self.filaSeleccionadaSinAsignar is None))
-        except AssertionError:
+        if not self.tableWidgetEmpleadosSinAsignar.getEmpleadoSeleccionado(): 
             mostrarMensaje(self, 'Debe Seleccionar un Empleado.', 'Seleccionar')
             return
         #documentoDelEncargado = self.tableWidgetEmpleadosAsignados.item(self.filaSeleccionadaSinAsignar, 0).text()
-        documentoDelEncargado = self.tableWidgetEmpleadosSinAsignar.item(self.filaSeleccionadaSinAsignar, 0).text()
+#        documentoDelEncargado = self.tableWidgetEmpleadosSinAsignar.item(self.filaSeleccionadaSinAsignar, 0).text()
         #Paso1, setear el encargado de la seccion
-        self._encargado = Division_Transporte().getEmpleado(unicode(documentoDelEncargado))
+#        self._encargado = Division_Transporte().getEmpleado(unicode(documentoDelEncargado))
+        self._encargado = self.tableWidgetEmpleadosSinAsignar.getEmpleadoSeleccionado()
         #Paso2, refrescar la grilla del encargado
         #self.cargarGrillaEmpleados(self.tableWidgetEncargadoAsignado, [self._encargado])
-        self.tableWidgetEncargadoAsignado.cargarGrilla([self._encargado])
+        self.tableWidgetEncargadoAsignado.cargarConEmpleados([self._encargado])
         #Paso3, remover al encargados de los empleados disponibles y de la grilla
         self.empleadosSinSeccion.remove(self._encargado)
-        self.tableWidgetEmpleadosSinAsignar.removeRow(self.filaSeleccionadaSinAsignar)
+#        self.tableWidgetEmpleadosSinAsignar.removeRow(self.filaSeleccionadaSinAsignar)
+        self.tableWidgetEmpleadosSinAsignar.cargarConEmpleados(self.empleadosSinSeccion)
         #Paso4, desactivar el boton de asignar encargado y activar el de desasignacion
         self.pushButtonAsignarComoEncargado.setDisabled(True)
         self.pushButtonDesasignarEncargado.setDisabled(False)
@@ -177,12 +171,12 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         self.empleadosSinSeccion.append(self._encargado)
         #Paso2, Refrescar grilla empleados disponibles
         #self.cargarGrillaEmpleados(self.tableWidgetEmpleadosSinAsignar, self.empleados)
-        self.tableWidgetEmpleadosSinAsignar.cargarGrilla(self.empleadosSinSeccion)
+        self.tableWidgetEmpleadosSinAsignar.cargarConEmpleados(self.empleadosSinSeccion)
         #Paso3, setear el encargado de la seccion
         self._encargado = None
         #Paso4, refrescar la grilla del encargado
         #self.cargarGrillaEmpleados(self.tableWidgetEncargadoAsignado, [])
-        self.tableWidgetEncargadoAsignado.cargarGrilla([])
+        self.tableWidgetEncargadoAsignado.cargarConEmpleados([])
         
         #Paso5, desactivar el boton de desasignar encargado y activar el de asignacion
         self.pushButtonAsignarComoEncargado.setDisabled(False)

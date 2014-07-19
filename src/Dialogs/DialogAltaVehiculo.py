@@ -24,6 +24,12 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         self.validacionesLineEdit()
         #self.DIVISION = Division_Transporte.divisionTransporte()
         self.DIVISION = Division_Transporte()
+        #seteo de nombres de los Labels para el estilo
+        self.label.setObjectName("label")
+        self.label_2.setObjectName("label")
+        self.label_3.setObjectName("label")
+        self.label_4.setObjectName("label")
+        self.label_5.setObjectName("label")
 
     def validacionesLineEdit(self):
         '''

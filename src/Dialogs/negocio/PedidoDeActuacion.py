@@ -38,7 +38,7 @@ class PedidoDeActuacion(Persistent):
 
         self._fechaRealizacion = datetime.datetime.now()
         self._fechaRecepcion = None
-        self._numeroPedido = None
+#        self._numeroPedido = None
         
     def setFechaRecepcion(self, fechaRecepcion):
         '''
@@ -59,3 +59,16 @@ class PedidoDeActuacion(Persistent):
     def getNumeroPedido(self):
         return self._numeroPedido
     
+    def __str__(self):
+        return 'Pedido de Actuacion | Nro: %s | Fecha: %s' %(self._numeroPedido, 
+                                                             self._fechaRealizacion
+                                                             )
+    
+    def __cmp__(self, other):
+        if self._fechaRealizacion == other._fechaRealizacion:
+            return 0
+        elif self._fechaRealizacion > other._fechaRealizacion:
+            return 1
+        else:
+            return -1
+        

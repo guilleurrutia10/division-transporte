@@ -101,3 +101,11 @@ class Empleado(Persistent):
     
     def quienSos(self):
         return 'Soy %s %s, %s nro: %s' %(self.getNombre(), self.getApellido(), self.getTipoDocumento(), self.getDocumento())
+
+    def __cmp__(self, other):
+        if self.documento == other.documento:
+            return 0
+        elif self.documento > other.documento:
+            return 1
+        else:
+            return -1

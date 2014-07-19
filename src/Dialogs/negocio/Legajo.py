@@ -191,7 +191,21 @@ class Legajo(Persistent):
         return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), EnRevision)
 
     def estaEnAprobada(self):
-        return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), Aprobada)
+        #return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), Aprobada)
+        return self.obtenerOrdenDeReparacionEnCurso().estaAprobada()
+    
+    def estaEsperandoAprobacion(self):
+        return self.obtenerOrdenDeReparacionEnCurso().estaEsperandoAprobacion()
+    
+    def getPedidoDeActuacion(self):
+        return self.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion()
+    
+    def pedidoDeActuacionTePertenece(self, unPedidoDeActuacion):
+        return unPedidoDeActuacion == self.getPedidoDeActuacion()
+    
+    def tieneReparacionesMecanicas(self):
+        pass
+    
 
 ##############################################################################
 ########################## TEST LEGAJO #######################################

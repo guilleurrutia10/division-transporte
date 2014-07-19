@@ -14,7 +14,6 @@ from persistent.list import PersistentList
 from EnRevision import EnRevision
 from EsperandoAprobacion import EsperandoAprobacion
 from Planificada import Planificada
-#from negocio.Aproba import Aprobada
 from Aprobada import Aprobada
 from Plan import Plan
 
@@ -210,7 +209,8 @@ class OrdenReparacion(Persistent):
         la OR debe estar en estado 'EsperandoAprobacion', por lo cual le encomendamos
         al estado de la OR realizar esta tarea, si pudiese.
         @return: True si la operacion fue exitosa. False en caso contrario. 
- 
+        
+        Es una operacion que hace cambiar el estado de la OR!
         '''
         try: 
             self.estado.registrarRecepcionPedidoActuacion(fechaRecepcion)
@@ -259,5 +259,12 @@ class OrdenReparacion(Persistent):
             return self.estado.turnosSinAtender()
         except AttributeError:
             return None
-        
     
+    def estaAprobada(self):
+        return isinstance(self.estado, Aprobada)
+    
+    def estaEsperandoAprobacion(self):
+        return isinstance(self.estado, EsperandoAprobacion)
+
+
+        

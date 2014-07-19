@@ -455,13 +455,20 @@ class Division_Transporte(Persistent):
         return filter(lambda unVehiculo: unVehiculo.puedeRegistrarIngreso(), self.getVehiculos().values())
         
 
-    def getTipoReparaciones(self):
+    def getTipoReparaciones_deprecated(self):
         self.zodb.conexion.sync()
         try:
             return self.zodb.raiz['tiposReparaciones']
         except KeyError:
             self.zodb.raiz['tiposReparaciones'] = {}
             return self.zodb.raiz['tiposReparaciones']
+
+    def getTipoReparaciones(self):
+        todas_las_reparaciones_de_la_div = []
+        for seccion in self.getSecciones().values():
+            todas_las_reparaciones_de_la_div.extend(seccion.getTiposDeReparaciones())
+        
+        return todas_las_reparaciones_de_la_div
 
     def getTipoReparacion(self, claveTipoReparacion):
         '''
@@ -574,6 +581,7 @@ class Division_Transporte(Persistent):
         #Agregamos a la nueva:
         seccionNueva.agregarEmpleado(unEmpleado)
         #TODO: Guardamos, esto es todo?
+        transaction.commit()
         self.zodb.commiting()
         
     def asignarNuevoEncargadoDeSeccion(self, seccion, nuevoEncargado):
@@ -596,6 +604,17 @@ class Division_Transporte(Persistent):
 
     def getVehiculosEnAprobada(self):
         return filter(lambda unVehiculo: unVehiculo.estaEnAprobada(), self.getVehiculos().values())
+    
+    def getVehiculosEsperandoAprobacion(self):
+        return filter(lambda unVehiculo: unVehiculo.estaEsperandoAprobacion(), self.getVehiculos().values())
+    
+    def getTipoRepuestos(self):
+        '''
+        @return: 
+        @author: 
+        '''
+        self.zodb.conexion.sync()
+        return self.zodb.getDiccionarioElementos('tiposRepuestos')
     
 ##############################################################################
 ########################## TEST DIVISION #####################################

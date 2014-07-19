@@ -23,6 +23,17 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         self.validacionesLineEdit()
         self.llenarComboBoxTipoDocumentos()
         
+        #seteo de nombres de los Labels para el estilo
+        self.label.setObjectName("label")
+        self.label_2.setObjectName("label")
+        self.label_3.setObjectName("label")
+        self.label_4.setObjectName("label")
+        self.label_5.setObjectName("label")
+        self.label_6.setObjectName("label")
+        self.label_7.setObjectName("label")
+        self.label_8.setObjectName("label")
+
+        
             
     def validacionesLineEdit(self):
         '''

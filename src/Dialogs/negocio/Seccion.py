@@ -6,8 +6,10 @@ Created on 28/10/2012
 '''
 
 from persistent import Persistent
+from persistent.list import PersistentList
 from BTrees.OOBTree import OOBTree
 from Turno import Turno
+import transaction
 
 CANTIDAD_MIN_PARA_TRANFERIR = 3
 TURNOS_DEL_DIA_VACIA = {8:None, 9:None,10:None, 11:None,12:None, 16:None,17:None, 18:None,19:None, 20:None}
@@ -35,10 +37,11 @@ class Seccion(Persistent):
         '''
         self.codigoSeccion = codigoSeccion
         self.nombre = nombre
-        self.empleados = empleados
+        self.empleados = PersistentList()
+        self.empleados.extend(empleados)
         self.encargado = encargado
-        
         self.tablaDeTurnos = OOBTree()
+        self.tiposDeReparaciones = PersistentList()
     
     def setEncargado(self, encargado):
         '''
@@ -92,19 +95,19 @@ class Seccion(Persistent):
             - Posee mas de dos empleados (un empleado y el encargado).
         Util para un listado de solo Secciones que pueden transferir empleados.
         '''
-        empleadosConReparacionesPendientes = filter(lambda unEmpleado: unEmpleado.tieneReparacionesPendientes() , self.getEmpleados().values())
+#        empleadosConReparacionesPendientes = filter(lambda unEmpleado: unEmpleado.tieneReparacionesPendientes() , self.getEmpleados().values())
+        empleadosConReparacionesPendientes = filter(lambda unEmpleado: unEmpleado.tieneReparacionesPendientes() , self.getEmpleados())
         return len(empleadosConReparacionesPendientes) == 0 and self.cantidadEmpleadosTotales() >= CANTIDAD_MIN_PARA_TRANFERIR 
     
     def getEmpleados(self):
         '''
-            Retorna un diccionario con:
-                - k = dni del empleado 
-                - v = Objeto Empleado.
+            Retorna una lista de empleados
         '''
         return self.empleados
     
     def poseeAEmpleado(self, unEmpleado):
-        return unEmpleado in self.getEmpleados().values()
+#        return unEmpleado in self.getEmpleados().values()
+        return unEmpleado in self.getEmpleados()
         
     def getEncargado(self):
         return self.encargado
@@ -114,6 +117,7 @@ class Seccion(Persistent):
     
     def removerEmpleado(self, empleadoARemover):
         del self.getEmpleados()[empleadoARemover.getDocumento()]
+        transaction.commit()
         
     def asignarNuevoEncargado(self, nuevoEncargado):
         '''
@@ -205,6 +209,18 @@ class Seccion(Persistent):
     def getTurnoDeFechaHora(self, queDia, queHora):
         return self.tablaDeTurnos.get(queDia).get(queHora)
 
+    def __str__(self):
+        return '%s | %s' %(self.codigoSeccion, self.nombre)
+    
+    def agregarTipoDeReparacion(self, reparacion):
+        '''
+        Agrega la reaparacion ingresada como una nueva reparacion que la seccion es capaz de realizar
+        '''
+        self.tiposDeReparaciones.append(reparacion)
+
+    def getTiposDeReparaciones(self):
+        return self.tiposDeReparaciones
+    
 ##############################################################################
 ########################## TEST SECCION ######################################
 ##############################################################################

@@ -10,6 +10,8 @@ QtGui.QTableWidget
     |_TablaEmpleadosSeccion
     |
     |_TablaSecciones
+    |
+    |_TablaVehiculos **new**
 '''
 from PyQt4 import QtGui, QtCore
 
@@ -43,7 +45,7 @@ class SuperTabla(QtGui.QTableWidget):
         self.diccionarioFilaElemento [posicion] = elemento
         
     def getElementoSeleccionado(self):
-        return self.diccionarioFilaElemento .get(self.getFilaSeleccionada())
+        return self.diccionarioFilaElemento.get(self.getFilaSeleccionada())
 
 
 
@@ -76,7 +78,7 @@ class TablaEmpleadosSeccion(SuperTabla):
         
         itemSeccionIgualParaTodos = QtGui.QTableWidgetItem()
         itemSeccionIgualParaTodos.setText(unicode('-'))
-        
+        empleados.sort()
         for empleado in empleados:
             columna = 0
             itemNombre = QtGui.QTableWidgetItem()
@@ -229,6 +231,148 @@ class TablaSecciones(SuperTabla):
     def getSeccionSeleccionada(self):
         return self.getElementoSeleccionado()
 
+
+class TablaVehiculos(SuperTabla):
+    
+    def cargarConVehiculos(self, vehiculos):
+        '''
+            Recibe una lista de vehiculos para listar.
+            Columnas:
+                - dominio
+                - marca
+                - registro interno
+                - chasis
+                - comisaria
+            
+            Ademas, mientras lista los vehiculos, va armando un diccionario para mantener un correlacion vehiculo-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        self.setRowCount(len(vehiculos))
+
+        for vehiculo in vehiculos:
+            #Crear items y setearlos
+            columna = 0
+            itemDominio = QtGui.QTableWidgetItem()
+            itemDominio.setText(vehiculo.dominio)
+            self.setItem(fila, columna, itemDominio)
+            columna += 1
+            itemMarca = QtGui.QTableWidgetItem()
+            itemMarca.setText(vehiculo.marca)
+            self.setItem(fila, columna, itemMarca)
+            columna += 1
+            itemRegistroInterno = QtGui.QTableWidgetItem()
+            itemRegistroInterno.setText(vehiculo.registroInterno)
+            self.setItem(fila, columna, itemRegistroInterno)
+            columna += 1
+            itemNumeroChasis = QtGui.QTableWidgetItem()
+            itemNumeroChasis.setText(vehiculo.numeroChasis)
+            self.setItem(fila, columna, itemNumeroChasis)
+            columna += 1
+            itemComisaria = QtGui.QTableWidgetItem()
+            itemComisaria.setText(vehiculo.comisaria)
+            self.setItem(fila, columna, itemComisaria)
+            
+            self.agregarAlDiccionario(fila, vehiculo)
+            fila += 1
+        
+    def getVehiculoEn(self, index):
+        return self.diccionarioFilaElemento[index]
+
+class TablaTiposDeRepuestos(SuperTabla):
+    '''
+        Tabla que lista repuestos.
+        Puede: 
+            - cargar con tipos de repuestos recibidos
+    '''
+    
+    def cargarConRepuestos(self, repuestos):
+        '''
+            Recibe una lista de repuestos para listar.
+            Columnas:
+                - codigo
+                - nombre
+                - descripcion
+                
+            Ademas, mientras lista los repuestos, va armando un diccionario para mantener un correlacion repuestos-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        repuestos.sort()
+        self.setRowCount(len(repuestos))
+        
+        for repuesto in repuestos:
+            columna = 0
+            itemCodigo = QtGui.QTableWidgetItem()
+            itemCodigo.setText(unicode(repuesto.getCodigo()))
+            self.setItem(fila, columna, itemCodigo)
+            columna += 1
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(unicode(repuesto.getNombre()))
+            self.setItem(fila, columna, itemNombre)
+            columna += 1
+            itemDescripcion = QtGui.QTableWidgetItem()
+            itemDescripcion.setText(unicode(repuesto.getDescripcion()))
+            self.setItem(fila, columna, itemDescripcion)
+            
+            self.agregarAlDiccionario(fila, repuesto)
+            fila += 1
+
+
+    def getRepuestoSeleccionado(self):
+        #return self.diccionario_empleados.get(self.getFilaSeleccionada())
+        return self.getElementoSeleccionado()
+
+class TablaRepuestosRequeridos(SuperTabla):
+    '''
+        Tabla que lista repuestos.
+        Puede: 
+            - cargar con tipos de repuestos recibidos
+    '''
+    
+    def cargarConRepuestos(self, repuestos):
+        '''
+            Recibe una lista de repuestos para listar.
+            Columnas:
+                - codigo
+                - nombre
+                - descripcion
+                
+            Ademas, mientras lista los repuestos, va armando un diccionario para mantener un correlacion repuestos-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        repuestos.sort()
+        self.setRowCount(len(repuestos))
+        
+        for repuesto in repuestos:
+            columna = 0
+            itemCodigo = QtGui.QTableWidgetItem()
+            itemCodigo.setText(unicode(repuesto.getTipoDeRepuesto().getCodigo()))
+            self.setItem(fila, columna, itemCodigo)
+            columna += 1
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(unicode(repuesto.getTipoDeRepuesto().getNombre()))
+            self.setItem(fila, columna, itemNombre)
+            columna += 1
+            itemDescripcion = QtGui.QTableWidgetItem()
+            itemDescripcion.setText(unicode(repuesto.getTipoDeRepuesto().getDescripcion()))
+            self.setItem(fila, columna, itemDescripcion)
+            columna += 1
+            itemCantidad = QtGui.QTableWidgetItem()
+            itemCantidad.setText(unicode(repuesto.getCantidad()))
+            self.setItem(fila, columna, itemCantidad)
+            
+            self.agregarAlDiccionario(fila, repuesto)
+            fila += 1
+
+
+    def getRepuestoSeleccionado(self):
+        #return self.diccionario_empleados.get(self.getFilaSeleccionada())
+        return self.getElementoSeleccionado()
 
 class TablaSuper(QtGui.QTableWidget):
     

@@ -6,6 +6,9 @@ Created on 10/10/2012
 '''
 
 from PyQt4 import QtGui, QtCore
+from pprint import pprint
+from datetime import date
+import transaction
 
 from formularios.DialogRegistrarRecepcionDePedidoDeActuacion import Ui_DialogRegistrarRecepcionDePedidoDeActuacion 
 from formularios.DialogAsignarFechaRecepcionPedidoActuacion import Ui_DialogAsignarFechaRecepcionPedidoActuacion
@@ -14,27 +17,20 @@ from negocio.Division_Transporte import Division_Transporte
 
 class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegistrarRecepcionDePedidoDeActuacion):
     def __init__(self, parent=None):
+        '''
+        Este dialogo va a manejar pedidos de actuacion.
+        Se los va a pedir a la DIvision a traves de los vehiculos que estan esperando aprobacion.
+        '''
         super(DialogRegistrarRecepcionDePedidoDeActuacion, self).__init__(parent)
         self.setupUi(self)
-        self.cargarGrillaInicial()
-        self.pushButtonCancelar
+#        self.pushButtonCancelar
         self.tableWidget.connect(self.tableWidget, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
-
-    @QtCore.pyqtSlot()
-    def on_pushButton_Registrar_clicked(self):
-        try:
-            if self.itemNumeroPedido:
-                dlgAsignarFecha = DialogAsignarFechaRecepcionPedidoActuacion()
-                dlgAsignarFecha.itemNumeroPedido = self.itemNumeroPedido
-                if dlgAsignarFecha.exec_():
-                    self.cargarGrillaInicial()
-                    self.mostrarMensaje('La fecha se ha cargado correctamente. ;)', 'Fecha cargada')
-                self.itemNumeroPedido = None
-            else:
-                self.mostrarMensaje('Debe Seleccionar el Pedido.', 'Seleccionar Pedido')
-        except AttributeError:
-            self.mostrarMensaje('Debe Seleccionar el Pedido.', 'Seleccionar Pedido')
-            
+        self.DIVISION = Division_Transporte()
+        self._pedidosDeActuacion = [vehiculo.getPedidoDeActuacion() for vehiculo in self.DIVISION.getVehiculosEsperandoAprobacion()] 
+        self.cargarGrillaInicial()
+        self._pedidoSeleccionado = None
+        self._vehiculoDuenioPedido = None
+        
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         print 'Click sobre aceptar'
@@ -45,21 +41,22 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
         self.reject()
         
     def cargarGrillaInicial(self):
-        division = Division_Transporte()
-        self.pedidosDeActuacion = division.getPedidoActuacionSinFechaRecepcion()
-        from pprint import pprint
-        pprint(self.pedidosDeActuacion)
+#        pprint(self._pedidosDeActuacion)
+        self._pedidosDeActuacion.sort()
+#        pprint(self._pedidosDeActuacion)
         num = 1
-        for i in self.pedidosDeActuacion:
-            i.setNumeroPedido(num)
+        for pda in self._pedidosDeActuacion:
+            pda.setNumeroPedido(num)
             num += 1
-        self.cargarGrilla(self.pedidosDeActuacion)
+        transaction.commit()
+        #self.cargarGrilla(self.pedidosDeActuacion)
+        self.cargarGrilla()
         
-    def cargarGrilla(self, pedidosDeActuacion):
+    def cargarGrilla(self):
         self.tableWidget.clearContents()
-        self.tableWidget.setRowCount(len(pedidosDeActuacion))
+        self.tableWidget.setRowCount(len(self._pedidosDeActuacion))
         fila = 0
-        for pedido in pedidosDeActuacion:
+        for pedido in self._pedidosDeActuacion:
             columna = 0
             itemNumeroPedido = QtGui.QTableWidgetItem()
             itemNumeroPedido.setText(str(pedido.getNumeroPedido()))
@@ -72,8 +69,29 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
             
     def seleccionarCelda(self, fila, columna):
         item = self.tableWidget.item(fila, 0)
-        self.itemNumeroPedido = unicode(item.text())
+#        self.itemNumeroPedido = unicode(item.text())
+        self._pedidoSeleccionado = self._pedidosDeActuacion[fila]
+        print 'PEDIDO: ', self._pedidoSeleccionado
         print item.text(), '(fila %s,col %s)' % (fila, columna)
+
+    @QtCore.pyqtSlot()
+    def on_pushButton_Registrar_clicked(self):
+        try:
+            if self._pedidoSeleccionado:
+                #dlgAsignarFecha = DialogAsignarFechaRecepcionPedidoActuacion(self, self._pedidoSeleccionado)
+                self._vehiculoDuenioPedido = filter(lambda vehiculo: vehiculo.pedidoDeActuacionTePertenece(self._pedidoSeleccionado), self.DIVISION.getVehiculosEsperandoAprobacion())
+                self._vehiculoDuenioPedido = self._vehiculoDuenioPedido[0]
+                #print 'Pertenece al vehiculo ', self._vehiculoDuenioPedido.getDominio() 
+                dlgAsignarFecha = DialogAsignarFechaRecepcionPedidoActuacion(self, self._vehiculoDuenioPedido)
+                if dlgAsignarFecha.exec_():
+                    self._pedidosDeActuacion = [vehiculo.getPedidoDeActuacion() for vehiculo in self.DIVISION.getVehiculosEsperandoAprobacion()]
+                    self.cargarGrillaInicial()
+                    self.mostrarMensaje('La fecha se ha cargado correctamente. ;)', 'Fecha cargada')
+                self._pedidoSeleccionado = None
+            else:
+                self.mostrarMensaje('Debe Seleccionar el Pedido.', 'Seleccionar Pedido')
+        except AttributeError:
+            self.mostrarMensaje('Debe Seleccionar el Pedido.', 'Seleccionar Pedido')
         
     '''
     TODO: Este método se repite en varios Dialogs.
@@ -86,20 +104,25 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
 
 class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignarFechaRecepcionPedidoActuacion):
     
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, vehiculo = None):
         super(DialogAsignarFechaRecepcionPedidoActuacion, self).__init__(parent)
         self.setupUi(self)
+        self._vehiculo = vehiculo
+        #seteo de nombres de los Labels para el estilo
+        self.label.setObjectName("label")
+        self.label_3.setObjectName("label")
+        self.label_5.setObjectName("label")
+        self.label_6.setObjectName("label")
     
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        # itemNumeroPedido, variable recibida por el Dialog anterior...
-        print 'Click sobre aceptar'
+        #ahora recibe un objeto pedido de actuacion!
         fecha = self.dateEditFechaRecepcioPedido.date()
-        from datetime import date
         unaFecha = date(day=fecha.toPyDate().day, month=fecha.toPyDate().month, year=fecha.toPyDate().year)
         print unaFecha, type(fecha.toPyDate())
-        division = Division_Transporte()
-        division.registrarRecepcionPedidoDeActuacion(int(self.itemNumeroPedido), unaFecha)
+        resu= self._vehiculo.registrarRecepcionPedidoActuacion(unaFecha)
+#        print "Exitosa? ", resu
+        transaction.commit()
         self.accept()
         
     @QtCore.pyqtSlot()

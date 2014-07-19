@@ -30,3 +30,6 @@ class RepuestoRequeridos(DetalleRepuesto):
         @author: 
         '''
         super(RepuestoRequeridos, self).__init__(tipoDeRepuesto, cantidad)
+        
+    def __cmp__(self, other):
+        return self.getTipoDeRepuesto().__cmp__(other.getTipoDeRepuesto())

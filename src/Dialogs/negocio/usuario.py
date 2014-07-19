@@ -31,6 +31,7 @@ PERMISOS = {"jefeDivision": ['actionAlta_de_Vehiculo','actionRegistrar_Ingreso_d
                              'actionRegistrar_Recepcion_de_Pedido_de_Actuacion',
                              'actionListado_de_Repuestos_de_la_Division',
                              'actionAlta_de_Seccion',
+                             'actionAlta_Tipo_de_Reparacion',
                              'actionAsignar_Reparacion',
                              'actionRegistrar_Finalizacion_de_Reparacion',
                              'actionListados_de_Seccion'],

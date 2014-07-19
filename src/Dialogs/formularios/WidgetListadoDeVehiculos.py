@@ -14,6 +14,8 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
+from Utiles_formulario import TablaVehiculos
+
 class Ui_FormListadoVehiculos(object):
     def setupUi(self, FormListadoVehiculos):
         FormListadoVehiculos.setObjectName(_fromUtf8("FormListadoVehiculos"))
@@ -56,7 +58,8 @@ class Ui_FormListadoVehiculos(object):
         self.labelListadoVehiculos.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Listado de Vehículos", None, QtGui.QApplication.UnicodeUTF8))
         self.labelListadoVehiculos.setObjectName(_fromUtf8("labelListadoVehiculos"))
         self.verticalLayout.addWidget(self.labelListadoVehiculos)
-        self.tableWidgetListadoDeVehiculos = QtGui.QTableWidget(FormListadoVehiculos)
+#        self.tableWidgetListadoDeVehiculos = QtGui.QTableWidget(FormListadoVehiculos)
+        self.tableWidgetListadoDeVehiculos = TablaVehiculos(FormListadoVehiculos)
         self.tableWidgetListadoDeVehiculos.setObjectName(_fromUtf8("tableWidgetListadoDeVehiculos"))
         self.tableWidgetListadoDeVehiculos.setColumnCount(5)
         self.tableWidgetListadoDeVehiculos.setRowCount(0)

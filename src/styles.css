@@ -1,0 +1,20 @@
+QMainWindow#window
+{
+	background-color: #blue;
+}
+QLabel#label
+{
+    background-color: #4075CC;
+    border-radius: 0.5em;
+    color: #FFFFFF;
+    margin-left: 2px;
+}
+QPushButton#button
+{
+    font-size: 14px;
+    color: #A0184B;
+}
+QLineEdit#line_edit 
+{
+	border: 2px solid #3232C0;
+}

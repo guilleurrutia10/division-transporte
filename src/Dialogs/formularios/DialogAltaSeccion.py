@@ -9,6 +9,7 @@
 
 from PyQt4 import QtCore, QtGui
 from Utiles_formulario import TablaSuper
+from Utiles_formulario import TablaEmpleadosSeccion
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -94,7 +95,8 @@ class Ui_DialogAltaSeccion(object):
         self.verticalLayout_3.addLayout(self.verticalLayout_5)
         self.gridLayout.addWidget(self.groupBox_4, 1, 1, 1, 1)
         #self.tableWidgetEmpleadosSinAsignar = QtGui.QTableWidget(self.groupBox_2)
-        self.tableWidgetEmpleadosSinAsignar = TablaSuper(self.groupBox_2)
+#        self.tableWidgetEmpleadosSinAsignar = TablaSuper(self.groupBox_2)
+        self.tableWidgetEmpleadosSinAsignar = TablaEmpleadosSeccion(self.groupBox_2)
         self.tableWidgetEmpleadosSinAsignar.setObjectName(_fromUtf8("tableWidgetEmpleadosSinAsignar"))
         self.tableWidgetEmpleadosSinAsignar.setColumnCount(2)
         self.tableWidgetEmpleadosSinAsignar.setRowCount(0)
@@ -113,7 +115,8 @@ class Ui_DialogAltaSeccion(object):
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.verticalLayout_4.addWidget(self.label_2)
         #self.tableWidgetEncargadoAsignado = QtGui.QTableWidget(self.groupBox_2)
-        self.tableWidgetEncargadoAsignado = TablaSuper(self.groupBox_2)
+#        self.tableWidgetEncargadoAsignado = TablaSuper(self.groupBox_2)
+        self.tableWidgetEncargadoAsignado = TablaEmpleadosSeccion(self.groupBox_2)
         self.tableWidgetEncargadoAsignado.setMaximumSize(QtCore.QSize(16777215, 52))
         self.tableWidgetEncargadoAsignado.setObjectName(_fromUtf8("tableWidgetEncargadoAsignado"))
         self.tableWidgetEncargadoAsignado.setColumnCount(2)
@@ -132,7 +135,8 @@ class Ui_DialogAltaSeccion(object):
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.verticalLayout_4.addWidget(self.label_3)
         #self.tableWidgetEmpleadosAsignados = QtGui.QTableWidget(self.groupBox_2)
-        self.tableWidgetEmpleadosAsignados = TablaSuper(self.groupBox_2)
+#        self.tableWidgetEmpleadosAsignados = TablaSuper(self.groupBox_2)
+        self.tableWidgetEmpleadosAsignados = TablaEmpleadosSeccion(self.groupBox_2)
         self.tableWidgetEmpleadosAsignados.setObjectName(_fromUtf8("tableWidgetEmpleadosAsignados"))
         self.tableWidgetEmpleadosAsignados.setColumnCount(2)
         self.tableWidgetEmpleadosAsignados.setRowCount(0)

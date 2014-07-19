@@ -6,8 +6,7 @@ Created on 28/10/2012
 '''
 
 from persistent import Persistent
-
-from RepuestoRequeridos import *
+from persistent.list import PersistentList
 
 class TipoDeReparacion(Persistent):
     '''
@@ -38,7 +37,8 @@ class TipoDeReparacion(Persistent):
         '''
         self._nombre = nombre
         self._descripcion = descripcion
-        self._repuestos = repuestos
+        self._repuestos = PersistentList()
+        self._repuestos.extend(repuestos)
     
     def getRepuestos(self):
         return self._repuestos

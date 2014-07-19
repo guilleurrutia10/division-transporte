@@ -30,6 +30,8 @@ from Dialogs import WidgetListadoSecciones, WidgetListadoDeRepuestosUtilizados, 
 from Dialogs import DialogCambiarDeSeccionUnEmpleado, DialogCambiarDeSeccionUnEncargado, DialogRegistrarEgresoVehiculo, DialogRemoverEmpleadoDeSeccion
 from Dialogs import DialogRegistrarRecepcionDePedidoDeActuacion, DialogBajaPersonal
 
+from Dialogs.DialogoAltaTipoReparacion import DialogoAltaTipoReparacion
+
 class MyListado(QtGui.QWidget, Ui_Form):
     def __init__(self, parent = None):
         super(MyListado, self).__init__(parent)
@@ -72,6 +74,10 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self, usuario, parent = None):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
+        #CSS:
+        self.setObjectName("window")
+        with open("styles.css") as f:
+            self.setStyleSheet(f.read())
         self.menues = {'actionAlta_de_Vehiculo': self.actionAlta_de_Vehiculo,
                        'actionRegistrar_Ingreso_de_Vehiculo': self.actionRegistrar_Ingreso_de_Vehiculo,
                        'actionRegistrar_Egreso': self.actionRegistrar_Egreso,
@@ -97,6 +103,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                        'actionRegistrar_Recepcion_de_Pedido_de_Actuacion': self.actionRegistrar_Recepcion_de_Pedido_de_Actuacion,
                        'actionListado_de_Repuestos_de_la_Division': self.actionListado_de_Repuestos_de_la_Division,
                        'actionAlta_de_Seccion': self.actionAlta_de_Seccion,
+                       'actionAlta_Tipo_de_Reparacion': self.actionAlta_Tipo_de_Reparacion,
                        'actionAsignar_Reparacion': self.actionAsignar_Reparacion,
                        'actionRegistrar_Finalizacion_de_Reparacion': self.actionRegistrar_Finalizacion_de_Reparacion,
                        'actionListados_de_Seccion': self.actionListados_de_Seccion}
@@ -159,6 +166,11 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         dlgAltaSeccion = DialogAltaSeccion.DialogAltaSeccion(self)
         dlgAltaSeccion.exec_()
     
+    #Conectamos la accion Alta Tipo de Reparacion...
+    @QtCore.pyqtSlot()
+    def on_actionAlta_Tipo_de_Reparacion_triggered(self):
+        dlgAltaTipoReparacion = DialogoAltaTipoReparacion(self)
+        dlgAltaTipoReparacion.exec_()
         
     @QtCore.pyqtSlot(bool)
     def on_actionAyuda_triggered(self, check):
@@ -222,8 +234,10 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_actionPlanificar_Reparaciones_de_Vehiculo_triggered(self):
         print 'agregando widget listado Vehiculos'
-        self.setCentralWidget(WidgetMostrarVehiculosSinPlanificar.WidgetMostrarVehiculosSinPlanificar(self))
-    
+#        self.setCentralWidget(WidgetMostrarVehiculosSinPlanificar.WidgetMostrarVehiculosSinPlanificar(self))
+        vehiculos_sin_planificar = Division_Transporte().getVehiculosEnAprobada()
+        self.setCentralWidget(WidgetListadoDeVehiculos.ListadoVehiculos(vehiculos_sin_planificar, self))
+            
     @QtCore.pyqtSlot()
     def on_actionBaja_de_Personal_triggered(self):
         print 'agregando Dialog baja personal'

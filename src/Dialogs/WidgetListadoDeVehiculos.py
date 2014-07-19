@@ -9,6 +9,7 @@ from PyQt4 import QtGui, QtCore
 
 from formularios.WidgetListadoDeVehiculos import Ui_FormListadoVehiculos
 from negocio.Division_Transporte import Division_Transporte
+from pyfits.util import deprecated
 
 '''TODO: lo que sigue............ ;p'''
 #===============================================================================
@@ -22,10 +23,20 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         #Para evitar que se modifique la información presentada por la grilla.
         self.tableWidgetListadoDeVehiculos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.vehiculos = vehiculosParaListar
-        self.cargarGrilla(self.vehiculos)
-#        self.cargarGrillaInicial(self.vehiculos)
+        #self.cargarGrilla(self.vehiculos)
+        self.tableWidgetListadoDeVehiculos.cargarConVehiculos(self.vehiculos)
+        #Reaccionamos al doble clic:
+        self.tableWidgetListadoDeVehiculos.connect(self.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellDoubleClicked(int , int)'), self.planificarVehiculo)
 
-    
+    def planificarVehiculo(self, fila, columna):
+        '''
+        Planificar vehiculo
+ 
+        '''
+        print 'selecciono el vehiculo: %d\n Coordenadas: (%d, %d)' %(fila, fila, columna)
+        print self.tableWidgetListadoDeVehiculos.getVehiculoEn(fila).getDominio()
+        
+        
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscar_textChanged(self, cadena):
         filtro = unicode(self.lineEditBuscar.text())        
@@ -33,8 +44,10 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         #El método de comparación por igual está sobrecargado en la clase Legajo.
         coches.sort(cmp=lambda x, y : cmp(x, y))
 #        coches.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
-        self.cargarGrilla(coches)
+#        self.cargarGrilla(coches)
+        self.tableWidgetListadoDeVehiculos.cargarConVehiculos(coches)
             
+    @deprecated
     def cargarGrilla(self, vehiculos):
         vehiculos.sort(cmp=lambda x, y : cmp(x.dominio, y.dominio))
         self.tableWidgetListadoDeVehiculos.clearContents()
@@ -66,21 +79,28 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
             #itemModelo.setText(vehiculo.marca)
             #self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemModelo)
             fila += 1
+
+from formularios.DlgPlanificar_1 import Ui_DlgPlanificar_1
             
+class DialogPlanificar_1(QtGui.QDialog, Ui_DlgPlanificar_1):
+    '''
+    Atributos:
     
-#    def cargarGrillaInicial(self):
-#        division = Division_Transporte()
-#        vehiculos = division.getVehiculos()
-#        self.vehiculos = vehiculos.values()
-#        self.vehiculos.sort(cmp=lambda x, y : cmp(x.dominio, y.dominio))
-#        self.cargarGrilla(self.vehiculos)
-#    '''
-#    TODO: cambiar por un refrescar grilla.
-#    '''
-#    @QtCore.pyqtSlot()
-#    def on_pushButtonRefrescar_clicked(self):
-#        self.lineEditBuscar.clear()
-#        self.cargarGrillaInicial()
+        _vehiculo: al cual vamos a planificar
+    
+    '''
+    def __init__(self, parent = None, vehiculoSeleccionado = None):
+        '''
+        Constructor
+        '''
+        super(DialogPlanificar_1, self).__init__(parent)
+        self.setupUi(self)
+        self._vehiculo = vehiculoSeleccionado
+        print 'Vehiculo', self._vehiculo.getDominio()
+        print 'Mecanica? ', self._vehiculo.tieneReparacionesMecanicas()
+#        print 'Electronica? ', self._vehiculo.tieneReparacionesElectricas()
+#        print 'Chapa? ', self._vehiculo.tieneReparacionesChapa()
+#        print 'Gomeria? ', self._vehiculo.tieneReparacionesGomeria()
 
 class Listado_Vehiculos_en_reparacion_por_Seccion(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):

@@ -277,3 +277,36 @@ class ZopeDB(object):
         raiz['tiposReparaciones'] = tiposReparaciones
         self.zodb._p_changed = True
         transaction.commit()
+
+    def cargarTiposDeRepuestos(self):
+        from Dialogs.negocio.TipoRepuesto import TipoRepuesto
+        
+        raiz = self.zodb.raiz
+        infoRepuestos = [('1001', 'Bujia Universal 2', 'Bujia Universal Mejorada'),
+                         ('1002', 'Neumatico Universales', 'Neumaticos Universales con el mejor agarre'),
+                         ('1003', 'Llanta Universal 2', 'Llanta mas linda'),
+                         ('1004', 'Espejo Universal', 'Espejos retovision maxima'),
+                         ('1005', 'Tubo de Escape Universal', 'Tubo super'),
+                         ('1006', 'Amortiguador Universal 2', 'Amortiguador'),
+                         ('1007', 'Embrague 7000', 'Embragues Universal 2'),
+                         ('1008', 'Correas 4900', 'Correa Universal 2'),
+                         ('1009', 'Volante Super2', 'Volante Universal 2'),
+                         ('1010', 'Freno de mano F2', 'Freno de mano Universal 2'),
+                         ('1011', 'Filtros Fil7657', 'Filtros Universal 2'),
+                         ('1012', 'Silenciador 409', 'Silenciadores Universal 2'),
+                         ('1013', 'Pastillas de freno r700', 'Pastillas de freno Universal 2'),
+                         ('1014', 'Bomba de agua 298', 'Bomba de agua Universal'),
+                         ('1015', 'Aceite LubriMax', 'Aceite LubriMax Universal 2'),
+                         ('1016', 'Anticongelante AntiMax2', 'Anticongelante Universal Mejorada'),
+                         ('1017', 'Faro WQ200', 'Faro Universal Mejorada')
+                         ]
+
+        tiposRepuestos = {}
+        for codigo, nombre, descripcion in infoRepuestos:
+            tRepuesto = TipoRepuesto(codigo, nombre, descripcion)
+            tiposRepuestos[codigo] = tRepuesto
+        
+        raiz['tiposRepuestos'] = tiposRepuestos
+        self.zodb._p_changed = True
+        transaction.commit()
+        print "Tipos de Repuestos cargados con exito!"

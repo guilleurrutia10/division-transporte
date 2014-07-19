@@ -7,8 +7,6 @@ Created on 28/10/2012
 
 from persistent import Persistent
 
-from DetalleRepuesto import *
-
 class TipoRepuesto(Persistent):
     '''
     classdocs
@@ -26,15 +24,16 @@ class TipoRepuesto(Persistent):
     
     '''
 
-    def __init__(self, nombre, descripcion):
+    def __init__(self, codigo = None, nombre =None, descripcion= None):
         '''
         Constructor
         @return: 
         @author: 
         '''
+        self._codigo = codigo
         self._nombre = nombre
         self._descripcion = descripcion
-        self._codigo = None
+        
         
     def setCodigo(self, codigo):
         '''
@@ -95,8 +94,10 @@ class TipoRepuesto(Persistent):
     def __str__(self):
         return '%s: %s' % (self._nombre, self._descripcion)
     
-    def save(self):
-        from MiZODB import ZopeDB, MiZODB
-        zodb = ZopeDB(MiZODB())
-#        zodb = ZopeDB(MiZODB('zeo.conf'))
-        zodb.save('tiposRepuestos', self.getNombre(), self)
+    def __cmp__(self, other):
+        if self._codigo == other._codigo:
+            return 0
+        elif self._codigo > other._codigo:
+            return 1
+        else:
+            return -1

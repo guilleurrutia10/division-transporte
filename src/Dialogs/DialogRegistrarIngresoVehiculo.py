@@ -119,6 +119,13 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         '''
         super(DialogDatosIngresoVehiculo, self).__init__(parent)
         self.setupUi(self)
+        #seteo de nombres de los Labels para el estilo
+        self.label.setObjectName("label")
+        self.label_2.setObjectName("label")
+        self.label_3.setObjectName("label")
+        self.label_4.setObjectName("label")
+        self.label_5.setObjectName("label")
+        self.label_6.setObjectName("label")
         self.validacionesLineEdit()
         cadena = self.lineEditKilometraje.validator().regExp()
         print cadena.pattern()

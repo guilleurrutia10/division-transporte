@@ -21,6 +21,7 @@ if __name__ == '__main__':
     bd.cargarTiposDeDocumentos()
     bd.cargarTiposDeReparaciones()
     bd.cargarUsuarios()
+    bd.cargarTiposDeRepuestos()
     bd.zodb.close()
     
     bd.zodb.open()
