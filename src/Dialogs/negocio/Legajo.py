@@ -206,6 +206,14 @@ class Legajo(Persistent):
     def tieneReparacionesMecanicas(self):
         pass
     
+    def getReparacionesSinPlanificarDeLaSeccion(self, nombre_seccion):
+        try:
+            return self.obtenerOrdenDeReparacionEnCurso().getReparacionesClasificadas()[nombre_seccion]
+        except KeyError:
+            return []
+        
+    def tieneTodasLasReparacionesPlanificadas(self):
+        return self.obtenerOrdenDeReparacionEnCurso().getReparacionesSinPlanificar() == []
 
 ##############################################################################
 ########################## TEST LEGAJO #######################################

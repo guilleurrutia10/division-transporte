@@ -29,6 +29,9 @@ class Aplicacion(QtGui.QApplication):
         @version: 
         @author: 
         '''
+        with open("styles.css") as f:
+            self.setStyleSheet(f.read())
+
         #abrimos el Dialog de Login principal...
         myLogin = MyLogin()
         #si se presionó Aceptar del Login, abrimos la Ventana Principal...

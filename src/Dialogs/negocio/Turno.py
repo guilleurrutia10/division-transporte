@@ -5,6 +5,7 @@ Created on 11/07/2014
 '''
 from persistent import Persistent
 from persistent.list import PersistentList
+import transaction
 
 class Turno(Persistent):
     '''
@@ -15,7 +16,7 @@ class Turno(Persistent):
     '''
 
 
-    def __init__(self, seccion, vehiculo, fecha, hora = None):
+    def __init__(self, seccion, vehiculo, fecha, hora = None, reparaciones = []):
         '''
         Constructor
         '''
@@ -24,9 +25,11 @@ class Turno(Persistent):
         self._fecha = fecha
         self._hora = hora
         
-        self._detallesPlan = PersistentList()
+        self._detallesPlan = PersistentList()#Detalle --> Reparaciones, hacer un objeto detalle no agrega nada a la logica...
+        self._detallesPlan.extend([reparacion.planificada() for reparacion in reparaciones])
         self._finalizado = False
         self._empleadosAsignados = PersistentList()
+        transaction.commit()#Para guardar reparaciones en estado planificada
         
     def getHora(self):
         return self._hora

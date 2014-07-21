@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'WidgetListadoDeVehiculos.ui'
 #
-# Created: Sun Jul 20 21:56:06 2014
+# Created: Wed Dec 05 21:19:26 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,15 +26,15 @@ class Ui_FormListadoVehiculos(object):
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(FormListadoVehiculos)
         self.groupBox.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.groupBox.setTitle(_fromUtf8(""))
-        self.groupBox.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.groupBox.setTitle(QtGui.QApplication.translate("FormListadoVehiculos", "Filtrar por Dominio", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.labelDominio = QtGui.QLabel(self.groupBox)
-        self.labelDominio.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Filtrar:", None, QtGui.QApplication.UnicodeUTF8))
-        self.labelDominio.setObjectName(_fromUtf8("labelDominio"))
-        self.horizontalLayout.addWidget(self.labelDominio)
+        self.label = QtGui.QLabel(self.groupBox)
+        self.label.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Dominio", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setObjectName(_fromUtf8("label"))
+        self.horizontalLayout.addWidget(self.label)
         self.lineEditBuscar = QtGui.QLineEdit(self.groupBox)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
@@ -44,9 +44,13 @@ class Ui_FormListadoVehiculos(object):
         self.lineEditBuscar.setMinimumSize(QtCore.QSize(133, 20))
         self.lineEditBuscar.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.lineEditBuscar.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.lineEditBuscar.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.lineEditBuscar.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.lineEditBuscar.setObjectName(_fromUtf8("lineEditBuscar"))
         self.horizontalLayout.addWidget(self.lineEditBuscar)
+        self.pushButtonRefrescar = QtGui.QPushButton(self.groupBox)
+        self.pushButtonRefrescar.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Refrescar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonRefrescar.setObjectName(_fromUtf8("pushButtonRefrescar"))
+        self.horizontalLayout.addWidget(self.pushButtonRefrescar)
         spacerItem = QtGui.QSpacerItem(513, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.verticalLayout.addWidget(self.groupBox)
@@ -76,15 +80,6 @@ class Ui_FormListadoVehiculos(object):
         self.tableWidgetListadoDeVehiculos.setHorizontalHeaderItem(4, item)
         self.tableWidgetListadoDeVehiculos.horizontalHeader().setDefaultSectionSize(150)
         self.verticalLayout.addWidget(self.tableWidgetListadoDeVehiculos)
-        self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem1)
-        self.pushButtonSeleccionar = QtGui.QPushButton(FormListadoVehiculos)
-        self.pushButtonSeleccionar.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Seleccionar", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonSeleccionar.setObjectName(_fromUtf8("pushButtonSeleccionar"))
-        self.horizontalLayout_2.addWidget(self.pushButtonSeleccionar)
-        self.verticalLayout.addLayout(self.horizontalLayout_2)
 
         self.retranslateUi(FormListadoVehiculos)
         QtCore.QMetaObject.connectSlotsByName(FormListadoVehiculos)
@@ -96,6 +91,7 @@ class Ui_FormListadoVehiculos(object):
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(3)
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(4)
 
+#import resources_rc
 
 if __name__ == "__main__":
     import sys

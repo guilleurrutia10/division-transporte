@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'FormLogin.ui'
 #
-# Created: Mon Jul 21 15:23:27 2014
+# Created: Thu Dec 06 21:36:38 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -28,7 +28,7 @@ class Ui_Dialog(object):
         Dialog.setMaximumSize(QtCore.QSize(280, 152))
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Login", None, QtGui.QApplication.UnicodeUTF8))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/logoDivisionTransporte.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("../imagenes/logoDivisionTransporte.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Dialog.setWindowIcon(icon)
         self.verticalLayout = QtGui.QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -43,24 +43,22 @@ class Ui_Dialog(object):
         self.label = QtGui.QLabel(self.groupBox)
         self.label.setText(QtGui.QApplication.translate("Dialog", "Usuario:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
-        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label)
+        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.lineEditUser = QtGui.QLineEdit(self.groupBox)
         self.lineEditUser.setObjectName(_fromUtf8("lineEditUser"))
-        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.lineEditUser)
+        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEditUser)
         self.label_3 = QtGui.QLabel(self.groupBox)
         self.label_3.setText(QtGui.QApplication.translate("Dialog", "Password:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_3)
+        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_3)
         self.linePassword = QtGui.QLineEdit(self.groupBox)
         self.linePassword.setObjectName(_fromUtf8("linePassword"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.linePassword)
-        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
-        self.formLayout.setItem(0, QtGui.QFormLayout.LabelRole, spacerItem)
+        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.linePassword)
         self.verticalLayout.addWidget(self.groupBox)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
         self.pushButtonOk = QtGui.QPushButton(Dialog)
         self.pushButtonOk.setText(QtGui.QApplication.translate("Dialog", "Ok", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonOk.setObjectName(_fromUtf8("pushButtonOk"))
@@ -77,7 +75,6 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         pass
 
-import recursos_rc
 
 if __name__ == "__main__":
     import sys

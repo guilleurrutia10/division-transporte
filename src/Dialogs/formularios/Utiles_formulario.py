@@ -77,7 +77,7 @@ class TablaEmpleadosSeccion(SuperTabla):
         self.setRowCount(len(empleados))
         
         itemSeccionIgualParaTodos = QtGui.QTableWidgetItem()
-        itemSeccionIgualParaTodos.setText(unicode('-'))
+        itemSeccionIgualParaTodos.setText(unicode('.'))
         empleados.sort()
         for empleado in empleados:
             columna = 0
@@ -106,8 +106,8 @@ class TablaEmpleadosSeccion(SuperTabla):
             self.setItem(fila, columna, itemEmail)
             columna += 1
             
-            self.setItem(fila, columna, itemSeccionIgualParaTodos)
-            columna += 1
+#            self.setItem(fila, columna, itemSeccionIgualParaTodos)
+#            columna += 1
             
             self.agregarAlDiccionario(fila, empleado)
             fila += 1
@@ -280,6 +280,9 @@ class TablaVehiculos(SuperTabla):
     def getVehiculoEn(self, index):
         return self.diccionarioFilaElemento[index]
 
+    def getVehiculoSeleccionado(self):
+        return self.getElementoSeleccionado()
+        
 class TablaTiposDeRepuestos(SuperTabla):
     '''
         Tabla que lista repuestos.
@@ -323,6 +326,50 @@ class TablaTiposDeRepuestos(SuperTabla):
 
     def getRepuestoSeleccionado(self):
         #return self.diccionario_empleados.get(self.getFilaSeleccionada())
+        return self.getElementoSeleccionado()
+
+class TablaReparaciones(SuperTabla):
+    '''
+        Tabla que lista reparaciones.
+        Puede: 
+            - cargar con reparaciones recibidas
+    '''
+    
+    def cargarConReparaciones(self, reparaciones):
+        '''
+            Recibe una lista de reparaciones para listar.
+            Columnas:
+                - codigo
+                - nombre
+                - descripcion
+                
+            Ademas, mientras lista los reparaciones, va armando un diccionario para mantener un correlacion reparaciones-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        reparaciones.sort()
+        self.setRowCount(len(reparaciones))
+        
+        for repuesto in reparaciones:
+            columna = 0
+            itemCodigo = QtGui.QTableWidgetItem()
+            itemCodigo.setText(unicode('repuesto.getCodigo()'))
+            self.setItem(fila, columna, itemCodigo)
+            columna += 1
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(unicode(repuesto.getNombre()))
+            self.setItem(fila, columna, itemNombre)
+            columna += 1
+            itemDescripcion = QtGui.QTableWidgetItem()
+            itemDescripcion.setText(unicode(repuesto.getDescripcion()))
+            self.setItem(fila, columna, itemDescripcion)
+            
+            self.agregarAlDiccionario(fila, repuesto)
+            fila += 1
+
+
+    def getReparacionSeleccionada(self):
         return self.getElementoSeleccionado()
 
 class TablaRepuestosRequeridos(SuperTabla):
