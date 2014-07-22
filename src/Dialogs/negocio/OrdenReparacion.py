@@ -15,6 +15,7 @@ from EnRevision import EnRevision
 from EsperandoAprobacion import EsperandoAprobacion
 from Planificada import Planificada
 from Aprobada import Aprobada
+from Finalizada import Finalizada
 from Plan import Plan
 
 class OrdenReparacion(Persistent):
@@ -266,5 +267,7 @@ class OrdenReparacion(Persistent):
     def estaEsperandoAprobacion(self):
         return isinstance(self.estado, EsperandoAprobacion)
 
+    def estaFinalizada(self):
+        return isinstance(self.estado, Finalizada)
 
         

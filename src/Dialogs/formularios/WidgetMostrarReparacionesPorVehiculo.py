@@ -13,6 +13,8 @@ try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
     _fromUtf8 = lambda s: s
+    
+from Utiles_formulario import TablaVehiculos, TablaReparaciones
 
 class Ui_WidgetMostrarReparacionesPorVehiculo(object):
     def setupUi(self, WidgetMostrarReparacionesPorVehiculo):
@@ -60,7 +62,8 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.gridLayout = QtGui.QGridLayout(self.groupBox_2)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.tableWidgetReparaciones = QtGui.QTableWidget(self.groupBox_2)
+#         self.tableWidgetReparaciones = QtGui.QTableWidget(self.groupBox_2)
+        self.tableWidgetReparaciones = TablaReparaciones(WidgetMostrarReparacionesPorVehiculo)
         self.tableWidgetReparaciones.setObjectName(_fromUtf8("tableWidgetReparaciones"))
         self.tableWidgetReparaciones.setColumnCount(4)
         self.tableWidgetReparaciones.setRowCount(0)
@@ -77,7 +80,8 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Nro Orden", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetReparaciones.setHorizontalHeaderItem(3, item)
         self.gridLayout.addWidget(self.tableWidgetReparaciones, 1, 2, 1, 1)
-        self.tableWidgetVehiculos = QtGui.QTableWidget(self.groupBox_2)
+#         self.tableWidgetVehiculos = QtGui.QTableWidget(self.groupBox_2)
+        self.tableWidgetVehiculos = TablaVehiculos(WidgetMostrarReparacionesPorVehiculo)
         self.tableWidgetVehiculos.setMinimumSize(QtCore.QSize(500, 0))
         self.tableWidgetVehiculos.setMaximumSize(QtCore.QSize(550, 16777215))
         self.tableWidgetVehiculos.setObjectName(_fromUtf8("tableWidgetVehiculos"))

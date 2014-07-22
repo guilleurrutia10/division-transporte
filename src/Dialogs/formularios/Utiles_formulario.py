@@ -407,3 +407,49 @@ class TablaSuper(QtGui.QTableWidget):
                 columna += 1
             fila += 1
 
+
+class TablaReparaciones(SuperTabla):
+    '''
+        Tabla que lista reparaciones.
+        Puede: 
+            - cargar con reparaciones recibidos
+    '''
+    
+    def cargarConReparaciones(self, reparaciones):
+        '''
+            Recibe una lista de reparaciones para listar.
+            Columnas: 
+                - descripcion
+                - fechaInicio
+                - fechaFin
+                - nroOrden
+                
+            Ademas, mientras lista las reparaciones, va armando un diccionario para mantener un correlacion reparacion-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        reparaciones.sort()
+        self.setRowCount(len(reparaciones))
+        
+        for reparacion in reparaciones:
+            columna = 0
+            itemDescripcion = QtGui.QTableWidgetItem()
+            itemDescripcion.setText(unicode(reparacion.getDescripcion()))
+            self.setItem(fila, columna, itemDescripcion)
+            columna += 1
+            itemFechaInicio = QtGui.QTableWidgetItem()
+            itemFechaInicio.setText(unicode(reparacion.getFechaInicio()))
+            self.setItem(fila, columna, itemFechaInicio)
+            columna += 1
+            itemFechaFin = QtGui.QTableWidgetItem()
+            itemFechaFin.setText(unicode(reparacion.getFechaFin()))
+            self.setItem(fila, columna, itemFechaFin)
+            
+            self.agregarAlDiccionario(fila, reparacion)
+            fila += 1
+
+
+    def getReparacionSeleccionada(self):
+        #return self.diccionario_empleados.get(self.getFilaSeleccionada())
+        return self.getElementoSeleccionado()

@@ -196,6 +196,8 @@ class Legajo(Persistent):
     
     def estaEsperandoAprobacion(self):
         return self.obtenerOrdenDeReparacionEnCurso().estaEsperandoAprobacion()
+    def estaFinalizado(self):
+        return self.obtenerOrdenDeReparacionEnCurso().estaFinalizada()
     
     def getPedidoDeActuacion(self):
         return self.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion()
@@ -205,6 +207,14 @@ class Legajo(Persistent):
     
     def tieneReparacionesMecanicas(self):
         pass
+    
+    def getReparacionesFinalizadas(self):
+        ordenesDeReparacion = filter(lambda ordenReparacion: ordenReparacion.estaFinalizada(), self.getOrdenesDeReparacion())
+        reparaciones = [orden.getReparaciones() for orden in ordenesDeReparacion]
+        return reparaciones
+    
+    def getOrdenesDeReparacion(self):
+        return self.ordenesDeReparacion
     
 
 ##############################################################################
