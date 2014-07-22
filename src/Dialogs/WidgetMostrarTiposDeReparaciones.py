@@ -41,8 +41,9 @@ class WidgetMostrarTiposDeReparaciones(QtGui.QWidget, Ui_WidgetMostrarTiposDeRep
             
     def cargarGrillaInicial(self):
         division = Division_Transporte()
-        tiposReparaciones = division.getTipoReparaciones()
-        self.tiposReparaciones = tiposReparaciones.values()
+        #TODO: Tener en cuenta si alguna seccion no posee tiposDeReparaciones asignadas.
+        self.tiposReparaciones = division.getTipoReparaciones()
+#         self.tiposReparaciones = tiposReparaciones.values()
         self.tiposReparaciones.sort(cmp=lambda x,y : cmp(x, y))
         self.cargarGrilla(self.tiposReparaciones)
         
