@@ -63,7 +63,7 @@ class Seccion(Persistent):
         @return: 
         @author: 
         '''
-        self.empleados[empleado.documento] = empleado
+        self.empleados[empleado.getDocumento()] = empleado
     
     def quitarEmpleado(self):
         '''
