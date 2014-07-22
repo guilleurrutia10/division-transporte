@@ -9,7 +9,7 @@ from PyQt4 import QtCore, QtGui
 
 from formularios.DialogMostrarLosVehiculosParaModificar import Ui_DialogMostrarLosVehiculosParaModificar
 from formularios.DialogModificarVehiculo import Ui_DialogModificarVehiculo
-import WidgetListadoDeVehiculos
+from WidgetListadoDeVehiculos import ListadoVehiculos
 from negocio.Division_Transporte import Division_Transporte
 
 #global item, x ahora para contener información del vehículo seleccionado.
@@ -25,7 +25,7 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
         '''
         super(DialogMostrarLosVehiculosParaModificar, self).__init__(parent)
         self.setupUi(self)
-        self.miWidget = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculos().values(), self.widget)
+        self.miWidget = ListadoVehiculos(Division_Transporte().getVehiculos().values(), self.widget)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.itemParaModificar = None
     

@@ -18,6 +18,7 @@ from Aprobada import Aprobada
 from Finalizada import Finalizada
 from Plan import Plan
 
+
 class OrdenReparacion(Persistent):
 #class OrdenReparacion(object):
     '''
@@ -266,8 +267,39 @@ class OrdenReparacion(Persistent):
     
     def estaEsperandoAprobacion(self):
         return isinstance(self.estado, EsperandoAprobacion)
+    
+    def getReparacionesClasificadas(self):
+        from Division_Transporte import Division_Transporte
+        reparaciones_por_seccion = {}
+#        for reparacion in self.reparaciones:
+        for reparacion in self.getReparacionesSinPlanificar():
+            for seccion in Division_Transporte().getSecciones().values():
+                if seccion.realiza(reparacion):
+                    if not reparaciones_por_seccion.has_key(seccion.getNombre()):
+                        reparaciones_por_seccion.update({seccion.getNombre():[]})
+                    reparaciones_por_seccion[seccion.getNombre()].append(reparacion)
+                    break#Analizar la siguiente reparacion
 
+        return reparaciones_por_seccion
+    
     def estaFinalizada(self):
         return isinstance(self.estado, Finalizada)
+    
+    def getReparacionesSinPlanificar(self):
+        return filter(lambda rep: not rep.estaPlanificada(), self.reparaciones)
+    
+    def getSeccionesDeLasReparaciones(self):
+        ''''
+        Retorna las secciones por las que debe pasar el vehiculo para 
+        realizar sus reparaciones
+        '''
+        from Division_Transporte import Division_Transporte
+        secciones = []
+#        for reparacion in self.reparaciones:
+        for reparacion in self.getReparacionesSinPlanificar():
+            for seccion in Division_Transporte().getSecciones().values():
+                if seccion.realiza(reparacion):
+                    if not seccion in secciones:
+                        secciones.append(seccion)
 
-        
+        return secciones

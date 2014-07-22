@@ -188,16 +188,29 @@ class Legajo(Persistent):
         return self.obtenerOrdenDeReparacionEnCurso().getTurnosSinAtender()
         
     def estaEnRevision(self):
-        return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), EnRevision)
+        try:
+            return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), EnRevision)
+        except AttributeError:
+            return False
 
     def estaEnAprobada(self):
         #return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), Aprobada)
-        return self.obtenerOrdenDeReparacionEnCurso().estaAprobada()
+        try:
+            return self.obtenerOrdenDeReparacionEnCurso().estaAprobada()
+        except AttributeError:
+            return False
     
     def estaEsperandoAprobacion(self):
-        return self.obtenerOrdenDeReparacionEnCurso().estaEsperandoAprobacion()
+        try:
+            return self.obtenerOrdenDeReparacionEnCurso().estaEsperandoAprobacion()
+        except AttributeError:
+            return False
+    
     def estaFinalizado(self):
-        return self.obtenerOrdenDeReparacionEnCurso().estaFinalizada()
+        try:
+            return self.obtenerOrdenDeReparacionEnCurso().estaFinalizada()
+        except AttributeError:
+            return False
     
     def getPedidoDeActuacion(self):
         return self.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion()
@@ -216,6 +229,14 @@ class Legajo(Persistent):
     def getOrdenesDeReparacion(self):
         return self.ordenesDeReparacion
     
+    def getReparacionesSinPlanificarDeLaSeccion(self, nombre_seccion):
+        try:
+            return self.obtenerOrdenDeReparacionEnCurso().getReparacionesClasificadas()[nombre_seccion]
+        except KeyError:
+            return []
+        
+    def tieneTodasLasReparacionesPlanificadas(self):
+        return self.obtenerOrdenDeReparacionEnCurso().getReparacionesSinPlanificar() == []
 
 ##############################################################################
 ########################## TEST LEGAJO #######################################

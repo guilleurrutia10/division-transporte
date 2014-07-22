@@ -28,6 +28,7 @@ class Seccion(Persistent):
         - encargado        
         
         - tablaDeTurnos
+        - tiposDeReparaciones
     '''
     def __init__(self, codigoSeccion, nombre, empleados, encargado):
         '''
@@ -134,9 +135,18 @@ class Seccion(Persistent):
         '''
         return self.tablaDeTurnos.has_key(queDia) != 0
 
-    def crearRegistroParaElDia(self, queDia):
+    def crearRegistroParaElDia_deprecated(self, queDia):
         if not self.tablaDeTurnos.has_key(queDia):
             self.tablaDeTurnos.update({queDia: TURNOS_DEL_DIA_VACIA})
+            transaction.commit()
+            print "El dia se ha registrado en la tabla de turnos exitosamente!"
+
+    def crearRegistroParaElDia(self, queDia):
+        if not self.tablaDeTurnos.has_key(queDia):
+            horas_turno = OOBTree()
+            horas_turno.update(TURNOS_DEL_DIA_VACIA)
+            self.tablaDeTurnos.update({queDia: horas_turno})
+            transaction.commit()
             print "El dia se ha registrado en la tabla de turnos exitosamente!"
             
     def tieneTurnoLibreParaElDia(self, queDia):
@@ -198,6 +208,7 @@ class Seccion(Persistent):
         
         #Creacion y asignacion del Turno:
         self.tablaDeTurnos.get(turno.getFecha())[turno.getHora()] = turno
+#        transaction.commit()
                     
     def getAgendaDelDia(self, queDia):
         if self.tieneRegistroParaElDia(queDia):
@@ -205,6 +216,17 @@ class Seccion(Persistent):
         else:
             self.crearRegistroParaElDia(queDia)
             return self.tablaDeTurnos.get(queDia)
+        
+    def getHorasSinTurnoParaElDia(self, dia):
+        '''
+        Retorna una lista con todas las horas en las que la seccion
+        no tiene registrado un turno
+        '''
+        list_retorno = []
+        for hora, turno in self.getAgendaDelDia(dia).iteritems():
+            if not turno:
+                list_retorno.append(hora)
+        return list_retorno
     
     def getTurnoDeFechaHora(self, queDia, queHora):
         return self.tablaDeTurnos.get(queDia).get(queHora)
@@ -221,6 +243,8 @@ class Seccion(Persistent):
     def getTiposDeReparaciones(self):
         return self.tiposDeReparaciones
     
+    def realiza(self, unaReparacion):
+        return unaReparacion.getTipoDeReparacion() in self.tiposDeReparaciones
 ##############################################################################
 ########################## TEST SECCION ######################################
 ##############################################################################

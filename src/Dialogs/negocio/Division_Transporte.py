@@ -446,7 +446,7 @@ class Division_Transporte(Persistent):
 #        except excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso.Excepcion_No_Posee_Orden_Reparacion_En_Curso:
 #            import datetime
 #            hoy = datetime.datetime.now()
-#            vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
+#            vehiculo.crearDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
 #            transaction.commit()
 
     def getVehiculosSinOrdenEnCurso(self):

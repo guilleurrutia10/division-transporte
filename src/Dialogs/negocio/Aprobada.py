@@ -6,7 +6,7 @@ Created on 28/11/2012
 '''
 
 from EstadoOrdenReparacion import EstadoOrdenReparacion
-from persistent.list import PersistentList
+import transaction
 
 class Aprobada(EstadoOrdenReparacion):
     '''
@@ -29,3 +29,4 @@ class Aprobada(EstadoOrdenReparacion):
     
     def agregarTurnoAlPlan(self, turno):
         self._orden_de_reparacion.getPlan().addTurno(turno)
+#        transaction.commit()

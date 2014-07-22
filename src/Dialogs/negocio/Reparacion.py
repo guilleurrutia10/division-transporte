@@ -47,12 +47,13 @@ class Reparacion(Persistent):
     
     '''
 
-    def __init__(self, tipoDeReparacion, descripcion, repuestosUtilizados):
+    def __init__(self, tipoDeReparacion, descripcion, repuestosUtilizados, codigo = None):
         '''
         Constructor
         @return: 
         @author: 
         '''
+        self._codigo = codigo
         self._tipoDeReparacion = tipoDeReparacion
         self._descripcion = descripcion
         self._repuestosUtilizados = PersistentList()
@@ -61,6 +62,13 @@ class Reparacion(Persistent):
         self.fechaFin = None
         
         self._finalizada = False
+        self._planificada = False
+        
+    def getCodigo(self):
+        return self._codigo
+    
+    def getNombre(self):
+        return self._tipoDeReparacion.getNombre()
         
     def getDatos(self):
         '''
@@ -128,3 +136,9 @@ class Reparacion(Persistent):
     
     def getFechaFin(self):
         return self.fechaFin
+
+    def planificada(self):
+        self._planificada = True
+        
+    def estaPlanificada(self):
+        return self._planificada

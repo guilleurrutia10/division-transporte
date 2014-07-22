@@ -9,7 +9,7 @@ from PyQt4 import QtGui, QtCore
 
 from formularios.WidgetListadoDeVehiculos import Ui_FormListadoVehiculos
 from negocio.Division_Transporte import Division_Transporte
-from pyfits.util import deprecated
+# from pyfits.util import deprecated
 
 '''TODO: lo que sigue............ ;p'''
 #===============================================================================
@@ -47,7 +47,7 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
 #        self.cargarGrilla(coches)
         self.tableWidgetListadoDeVehiculos.cargarConVehiculos(coches)
             
-    @deprecated
+#     @deprecated
     def cargarGrilla(self, vehiculos):
         vehiculos.sort(cmp=lambda x, y : cmp(x.dominio, y.dominio))
         self.tableWidgetListadoDeVehiculos.clearContents()
@@ -115,8 +115,10 @@ class Listado_Vehiculos_con_Reparaciones_Planificadas(QtGui.QWidget, Ui_FormList
 class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):
         super(Listado_Vehiculos_con_Reparaciones_no_Planificadas, self).__init__(parent)
+        print "AAAAAAAAAAAAAAAAACKLJHJHKJHJKKJHKJGHGHGHHGHGHGHJ"
         self.setupUi(self)
-        self.listaDeVehiculos = ListadoVehiculos(Division_Transporte().getVehiculosEnAprobada(), self)
+        self.widgetCentral = ListadoVehiculos(Division_Transporte().getVehiculosEnAprobada(), self)
+        
         
         
 class Listado_Vehiculos_de_la_Division_2(QtGui.QWidget, Ui_FormListadoVehiculos):

@@ -17,6 +17,8 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
     def __init__(self, parent = None):
         super(MyLogin, self).__init__(parent)
         self.setupUi(self)
+        self.label.setObjectName('label')
+        self.label_3.setObjectName('label')
         self.puedoAbrirVentanaPrincipal = False
         
         self.lineEditUser.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9|a-z|A-z]+'),self))
