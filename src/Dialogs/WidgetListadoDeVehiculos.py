@@ -8,6 +8,8 @@ Created on 10/10/2012
 from PyQt4 import QtGui, QtCore
 
 from formularios.WidgetListadoDeVehiculos import Ui_FormListadoVehiculos
+from formularios.WidgetMostrarReparacionesVehiculo import Ui_WidgetMostrarReparacionesPorVehiculo
+
 from negocio.Division_Transporte import Division_Transporte
 # from pyfits.util import deprecated
 
@@ -112,13 +114,23 @@ class Listado_Vehiculos_con_Reparaciones_Planificadas(QtGui.QWidget, Ui_FormList
         super(Listado_Vehiculos_con_Reparaciones_Planificadas, self).__init__(parent)
         self.setupUi(self)
         
-class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_FormListadoVehiculos):
+        
+# class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_FormListadoVehiculos):
+class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_WidgetMostrarReparacionesPorVehiculo):
     def __init__(self, parent=None):
         super(Listado_Vehiculos_con_Reparaciones_no_Planificadas, self).__init__(parent)
-        print "AAAAAAAAAAAAAAAAACKLJHJHKJHJKKJHKJGHGHGHHGHGHGHJ"
         self.setupUi(self)
-        self.widgetCentral = ListadoVehiculos(Division_Transporte().getVehiculosEnAprobada(), self)
+#         self.widgetCentral = ListadoVehiculos(Division_Transporte().getVehiculosEnAprobada(), self)
+        self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculosEnAprobada())
+        self.tableWidgetVehiculos.connect(self.tableWidgetVehiculos, QtCore.SIGNAL('cellClicked(int , int)'), self.mostrarReparaciones)
+    
+    def mostrarReparaciones(self, fila, columna):
+        vehiculoSeleccionado = self.tableWidgetVehiculos.getVehiculoEn(fila)
+        print 'Vehiculo seleccionado: ', vehiculoSeleccionado.getDominio()
+        self.cargarConReparaciones(vehiculoSeleccionado.getReparacionesSinPlanificar())
         
+    def cargarConReparaciones(self, reparaciones):
+        self.tableWidgetReparaciones.cargarConReparaciones(reparaciones)
         
         
 class Listado_Vehiculos_de_la_Division_2(QtGui.QWidget, Ui_FormListadoVehiculos):
