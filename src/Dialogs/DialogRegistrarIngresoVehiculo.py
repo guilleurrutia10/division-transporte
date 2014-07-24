@@ -10,7 +10,7 @@ from re import match
 
 from formularios.DialogRegistrarIngresoVehiculo import Ui_DialogRegistrarIngresoVehiculo
 from formularios.DialogDatosIngresoVehiculo import Ui_DialogIngresoVehiculo 
-import WidgetListadoDeVehiculos
+from WidgetListadoDeVehiculos import ListadoVehiculos
 
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
@@ -36,7 +36,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         #self.DIVISION = Division_Transporte.divisionTransporte()
         self.DIVISION = Division_Transporte()
         #self.listaDeVehiculos = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculosSinOrdenEnCurso(), self.widget)
-        self.listaDeVehiculos = WidgetListadoDeVehiculos.ListadoVehiculos(self.DIVISION.getVehiculosSinOrdenEnCurso(), self.widget)
+        self.listaDeVehiculos = ListadoVehiculos(self.DIVISION.getVehiculosSinOrdenEnCurso(), self.widget)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellEntered(int,int)'), self.seleccionarCelda)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellPressed(int,int)'), self.seleccionarCelda)

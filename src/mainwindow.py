@@ -226,7 +226,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def on_actionListado_Vehiculos_con_Reparaciones_no_Planificadas_2_triggered(self):
         print 'PLANIFICAR: agregando widget listado de Vehiculos'
         self.setCentralWidget(WidgetListadoDeVehiculos.Listado_Vehiculos_con_Reparaciones_no_Planificadas(self))
-        self.centralWidget().labelListadoVehiculos.setText(QtCore.QString.fromUtf8("Listado de Vehiculos con Reparaciones no Planificadas"))
+#         self.centralWidget().labelListadoVehiculos.setText(QtCore.QString.fromUtf8("Listado de Vehiculos con Reparaciones no Planificadas"))
         
     @QtCore.pyqtSlot()
     def on_actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2_triggered(self):

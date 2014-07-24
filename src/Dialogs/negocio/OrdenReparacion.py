@@ -15,6 +15,7 @@ from EnRevision import EnRevision
 from EsperandoAprobacion import EsperandoAprobacion
 from Planificada import Planificada
 from Aprobada import Aprobada
+from Finalizada import Finalizada
 from Plan import Plan
 
 
@@ -280,6 +281,9 @@ class OrdenReparacion(Persistent):
                     break#Analizar la siguiente reparacion
 
         return reparaciones_por_seccion
+    
+    def estaFinalizada(self):
+        return isinstance(self.estado, Finalizada)
     
     def getReparacionesSinPlanificar(self):
         return filter(lambda rep: not rep.estaPlanificada(), self.reparaciones)

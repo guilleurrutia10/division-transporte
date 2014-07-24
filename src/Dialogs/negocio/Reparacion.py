@@ -58,6 +58,8 @@ class Reparacion(Persistent):
         self._descripcion = descripcion
         self._repuestosUtilizados = PersistentList()
         self._repuestosUtilizados.extend(repuestosUtilizados)
+        self.fechaInicio = None
+        self.fechaFin = None
         
         self._finalizada = False
         self._planificada = False
@@ -129,6 +131,12 @@ class Reparacion(Persistent):
             return 'Finalizada'
         return 'Sin finalizar'
     
+    def getFechaInicio(self):
+        return self.fechaInicio
+    
+    def getFechaFin(self):
+        return self.fechaFin
+
     def planificada(self):
         self._planificada = True
         

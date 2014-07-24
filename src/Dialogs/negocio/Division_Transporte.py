@@ -210,14 +210,14 @@ class Division_Transporte(Persistent):
         self.zodb.conexion.sync()
         
         #Armar un diccionario de empleados (bien podria hacerlo la misma seccion, tmb):
-        empleadosSeccion = {}
+#         empleadosSeccion = {}
         for empleado in empleados:
-            empleadosSeccion[empleado.getDocumento()] = empleado
+#             empleadosSeccion[empleado.getDocumento()] = empleado
             self.zodb.remove('empleados', empleado.getDocumento())
         
         self.zodb.remove('empleados', encargado.getDocumento())
         codigoDeSeccion = len(self.secciones)
-        seccion = Seccion(codigoDeSeccion, nombreSeccion, empleadosSeccion, encargado)
+        seccion = Seccion(codigoDeSeccion, nombreSeccion, empleados, encargado)
         
         #TODO: Esto respeta el modelo, seguimos de esta forma?
         self.secciones.append(seccion)
@@ -254,13 +254,14 @@ class Division_Transporte(Persistent):
             
         empleadosAsignados = {}
         for seccion in secciones:
-            empleadosSeccion = seccion.empleados.values()
+#             empleadosSeccion = seccion.empleados.values()
+            empleadosSeccion = seccion.getEmpleados()
             for empleado in empleadosSeccion:
-                empleadosAsignados[empleado.documento] = empleado
-            empleadosAsignados[seccion.encargado.documento] = seccion.encargado
+                empleadosAsignados[empleado.getDocumento()] = empleado
+            empleadosAsignados[seccion.getEncargado().getDocumento()] = seccion.getEncargado()
     
         for empleado in empleados:
-            empleadosAsignados[empleado.documento] = empleado
+            empleadosAsignados[empleado.getDocumento()] = empleado
         return empleadosAsignados
     
     def getEmpleadosSinAsignar(self):
@@ -607,6 +608,9 @@ class Division_Transporte(Persistent):
     
     def getVehiculosEsperandoAprobacion(self):
         return filter(lambda unVehiculo: unVehiculo.estaEsperandoAprobacion(), self.getVehiculos().values())
+    
+    def getVehiculosEnFinalizada(self):
+        return filter(lambda unVehiculo: unVehiculo.estaFinalizado(), self.getVehiculos().values())
     
     def getTipoRepuestos(self):
         '''

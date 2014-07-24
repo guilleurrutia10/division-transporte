@@ -188,14 +188,29 @@ class Legajo(Persistent):
         return self.obtenerOrdenDeReparacionEnCurso().getTurnosSinAtender()
         
     def estaEnRevision(self):
-        return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), EnRevision)
+        try:
+            return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), EnRevision)
+        except AttributeError:
+            return False
 
     def estaEnAprobada(self):
         #return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), Aprobada)
-        return self.obtenerOrdenDeReparacionEnCurso().estaAprobada()
+        try:
+            return self.obtenerOrdenDeReparacionEnCurso().estaAprobada()
+        except AttributeError:
+            return False
     
     def estaEsperandoAprobacion(self):
-        return self.obtenerOrdenDeReparacionEnCurso().estaEsperandoAprobacion()
+        try:
+            return self.obtenerOrdenDeReparacionEnCurso().estaEsperandoAprobacion()
+        except AttributeError:
+            return False
+    
+    def estaFinalizado(self):
+        try:
+            return self.obtenerOrdenDeReparacionEnCurso().estaFinalizada()
+        except AttributeError:
+            return False
     
     def getPedidoDeActuacion(self):
         return self.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion()
@@ -206,6 +221,14 @@ class Legajo(Persistent):
     def tieneReparacionesMecanicas(self):
         pass
     
+    def getReparacionesFinalizadas(self):
+        ordenesDeReparacion = filter(lambda ordenReparacion: ordenReparacion.estaFinalizada(), self.getOrdenesDeReparacion())
+        reparaciones = [orden.getReparaciones() for orden in ordenesDeReparacion]
+        return reparaciones
+    
+    def getOrdenesDeReparacion(self):
+        return self.ordenesDeReparacion
+    
     def getReparacionesSinPlanificarDeLaSeccion(self, nombre_seccion):
         try:
             return self.obtenerOrdenDeReparacionEnCurso().getReparacionesClasificadas()[nombre_seccion]
@@ -214,6 +237,9 @@ class Legajo(Persistent):
         
     def tieneTodasLasReparacionesPlanificadas(self):
         return self.obtenerOrdenDeReparacionEnCurso().getReparacionesSinPlanificar() == []
+    
+    def getReparacionesSinPlanificar(self):
+        return self.obtenerOrdenDeReparacionEnCurso().getReparacionesSinPlanificar()
 
 ##############################################################################
 ########################## TEST LEGAJO #######################################

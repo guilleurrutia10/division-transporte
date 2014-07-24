@@ -90,7 +90,7 @@ class TablaEmpleadosSeccion(SuperTabla):
             self.setItem(fila, columna, itemApellido)
             columna += 1
             itemTipoDoc = QtGui.QTableWidgetItem()
-            itemTipoDoc.setText(unicode(empleado.getTipoDocumento()))
+            itemTipoDoc.setText(str(empleado.getTipoDocumento()))
             self.setItem(fila, columna, itemTipoDoc)
             columna += 1
             itemDocumento = QtGui.QTableWidgetItem()
@@ -453,50 +453,3 @@ class TablaSuper(QtGui.QTableWidget):
                 self.setItem(fila, columna, unItem)
                 columna += 1
             fila += 1
-
-class TablaDatos(QtGui.QTableWidget):
-    '''
-    Data de la tabla es del tipo
-    data_table = {'col1':['1','2','3'], 'col2':['4','5','6'], 'col3':['7','8','9']}
-    
-    Data es del tipo:
-    data= [objeto1, objeto2, ..., objetoN]
-    
-    como_armar el del tipo:
-    [('Nombre de columna 1', funcionParaObtenerDato(objeto1)),
-     ('Nombre de columna 2', funcionParaObtenerDato(objeto2)),
-     ...
-     ('Nombre de columna N', funcionParaObtenerDato(objetoN)),
-    ]
-     
-    un ejemplo:
-    [('Nombre', lambda v: v.getNombre()),
-     ('Dominio', lambda v: v.getDominio())]
-    '''
-    def __init__(self, *args):
-        QtGui.QTableWidget.__init__(self, *args)
-
-    def inicializar(self, data, como_armar):
-        self.data = data
-        self.lista_como_llenar_tabla = como_armar
-        self.data_table = self.getDataTable() 
-        self.setData()
-        self.resizeColumnsToContents()
-        self.resizeRowsToContents()
-
-    def getDataTable(self):
-        data_table = {}
-        for nombreColum, obtenerDato in self.lista_como_llenar_tabla:
-#            data_table.update({nombreColum: [eval(obtenerDato.format(elemento)) for elemento in self.data]})
-            data_table.update({nombreColum: [obtenerDato(elemento) for elemento in self.data]})
-        return data_table    
-    
-    def setData(self):
-
-        horHeaders = []
-        for n, key in enumerate(sorted(self.data_table.keys())):
-            horHeaders.append(key)
-            for m, item in enumerate(self.data_table[key]):
-                newitem = QtGui.QTableWidgetItem(item)
-                self.setItem(m, n, newitem)
-        self.setHorizontalHeaderLabels(horHeaders)
