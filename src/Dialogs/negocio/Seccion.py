@@ -10,6 +10,7 @@ from persistent.list import PersistentList
 from BTrees.OOBTree import OOBTree
 from Turno import Turno
 import transaction
+from persistent.mapping import PersistentMapping
 
 CANTIDAD_MIN_PARA_TRANFERIR = 3
 TURNOS_DEL_DIA_VACIA = {8:None, 9:None,10:None, 11:None,12:None, 16:None,17:None, 18:None,19:None, 20:None}
@@ -38,8 +39,8 @@ class Seccion(Persistent):
         '''
         self.codigoSeccion = codigoSeccion
         self.nombre = nombre
-        self.empleados = PersistentList()
-        self.empleados.extend(empleados)
+        self.empleados = PersistentMapping(empleados)
+#        self.empleados.extend(empleados)
         self.encargado = encargado
         self.tablaDeTurnos = OOBTree()
         self.tiposDeReparaciones = PersistentList()
@@ -102,7 +103,8 @@ class Seccion(Persistent):
     
     def getEmpleados(self):
         '''
-            Retorna una lista de empleados
+            Retorna una lista de empleados.No
+            Retorna un diccionario de empelados.
         '''
         return self.empleados
     
@@ -229,6 +231,9 @@ class Seccion(Persistent):
         return list_retorno
     
     def getTurnoDeFechaHora(self, queDia, queHora):
+        '''
+        queDia: string <<10/10/2014>>
+        queHora: int in [8,9,10,11,12,16,17,18,19,20]'''
         return self.tablaDeTurnos.get(queDia).get(queHora)
 
     def __str__(self):
@@ -245,6 +250,35 @@ class Seccion(Persistent):
     
     def realiza(self, unaReparacion):
         return unaReparacion.getTipoDeReparacion() in self.tiposDeReparaciones
+    
+    def getDiasEnLosQueHayTurno(self):
+        '''
+        Retorna una lista con todos los dias en los cuales se ha asignado un turno
+        '''
+        dias = []
+        for dia in self.tablaDeTurnos.keys():
+            if self.getHorasEnLosQueHayTurno(dia):
+                dias.append(dia)
+        return dias
+    
+    def getDiasEnLosQueHayTurno_deprecated(self):
+        '''
+        Retorna una lista con todos los dias en los cuales se ha asignado un turno
+        '''
+        return self.tablaDeTurnos.keys()
+
+    def getHorasEnLosQueHayTurno(self, dia):
+        '''
+        Retorna una lista con todas las horas en las que la seccion
+        tiene registrado un turno que no tenga empleados asignados.
+        '''
+        list_retorno = []
+        for hora, turno in self.getAgendaDelDia(dia).iteritems():
+            if turno:
+                if turno.noEstaAsignado():
+                    list_retorno.append(hora)
+        return list_retorno
+        
 ##############################################################################
 ########################## TEST SECCION ######################################
 ##############################################################################
@@ -289,4 +323,5 @@ class TddSeccion(unittest.TestCase):
         agendaDelDia = self.seccion.getAgendaDelDia(self.hoy)
         print 'Agenda del dia ', self.hoy, ': ', agendaDelDia
         self.assertNotEqual(None, agendaDelDia)
-        
+    
+    

@@ -32,6 +32,8 @@ from Dialogs import DialogRegistrarRecepcionDePedidoDeActuacion, DialogBajaPerso
 
 from Dialogs.DialogoAltaTipoReparacion import DialogoAltaTipoReparacion
 from Dialogs.DialogoPlanificar import DialogoPlanificar 
+from Dialogs.DialogoAsignarReparaciones import DialogoAsignarReparaciones
+from Dialogs.negocio.excepciones.SinTurnosException import SinTurnosException
 
 class MyListado(QtGui.QWidget, Ui_Form):
     def __init__(self, parent = None):
@@ -285,10 +287,15 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     
     @QtCore.pyqtSlot()
     def on_actionAsignar_Reparacion_triggered(self):
-        print 'agregando widget Seleccionar Sección'
-        dlgSelecSec = DialogSeleccionarSeccion.DialogSeleccionarSeccion()
-        dlgSelecSec.exec_()
-        
+        #Tomar la seccion correspondiente y abrir el dialogo
+        seccion = filter(lambda s: self.usuario.esJefeDeSeccion(s), Division_Transporte().getSecciones().values())
+        try: 
+            dlgAsignarReparaciones = DialogoAsignarReparaciones(self, seccion[0])
+            dlgAsignarReparaciones.exec_()
+        except SinTurnosException:
+            print 'Ok'
+        except IndexError:
+            print 'No sos jefe de seccion'
     @QtCore.pyqtSlot()
     def on_actionRegistrar_Ingreso_de_Vehiculo_triggered(self):
         dlgRegIngVehiculo = DialogRegistrarIngresoVehiculo.DialogRegistrarIngresoVehiculo()

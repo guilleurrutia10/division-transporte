@@ -1,0 +1,148 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'DlgAsignarReparaciones.ui'
+#
+# Created: Tue Jul 22 18:02:34 2014
+#      by: PyQt4 UI code generator 4.8.6
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
+from Utiles_formulario import TablaReparaciones, TablaEmpleadosSeccion
+class Ui_DialogoAsignarReparaciones(object):
+    def setupUi(self, DialogoAsignarReparaciones):
+        DialogoAsignarReparaciones.setObjectName(_fromUtf8("DialogoAsignarReparaciones"))
+        DialogoAsignarReparaciones.resize(822, 600)
+        DialogoAsignarReparaciones.setWindowTitle(QtGui.QApplication.translate("DialogoAsignarReparaciones", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        self.verticalLayout = QtGui.QVBoxLayout(DialogoAsignarReparaciones)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
+        self.groupBox = QtGui.QGroupBox(DialogoAsignarReparaciones)
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogoAsignarReparaciones", "Seleccionar turno de la Sección", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setObjectName(_fromUtf8("groupBox"))
+        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.groupBox)
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.verticalLayout_3 = QtGui.QVBoxLayout()
+        self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
+        self.formLayout = QtGui.QFormLayout()
+        self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
+        self.formLayout.setObjectName(_fromUtf8("formLayout"))
+        self.labelFecha = QtGui.QLabel(self.groupBox)
+        self.labelFecha.setText(QtGui.QApplication.translate("DialogoAsignarReparaciones", "Fecha:", None, QtGui.QApplication.UnicodeUTF8))
+        self.labelFecha.setObjectName(_fromUtf8("labelFecha"))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.labelFecha)
+        self.comboBoxFecha = QtGui.QComboBox(self.groupBox)
+        self.comboBoxFecha.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.comboBoxFecha.setObjectName(_fromUtf8("comboBoxFecha"))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.comboBoxFecha)
+        self.labelHora = QtGui.QLabel(self.groupBox)
+        self.labelHora.setText(QtGui.QApplication.translate("DialogoAsignarReparaciones", "Hora:", None, QtGui.QApplication.UnicodeUTF8))
+        self.labelHora.setObjectName(_fromUtf8("labelHora"))
+        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.labelHora)
+        self.comboBoxHora = QtGui.QComboBox(self.groupBox)
+        self.comboBoxHora.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.comboBoxHora.setObjectName(_fromUtf8("comboBoxHora"))
+        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.comboBoxHora)
+        self.labelVehiculo = QtGui.QLabel(self.groupBox)
+        self.labelVehiculo.setText(QtGui.QApplication.translate("DialogoAsignarReparaciones", "Vehículo:", None, QtGui.QApplication.UnicodeUTF8))
+        self.labelVehiculo.setObjectName(_fromUtf8("labelVehiculo"))
+        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.labelVehiculo)
+        self.labelDominio = QtGui.QLabel(self.groupBox)
+        self.labelDominio.setText(QtGui.QApplication.translate("DialogoAsignarReparaciones", "DOMINIO", None, QtGui.QApplication.UnicodeUTF8))
+        self.labelDominio.setObjectName(_fromUtf8("labelDominio"))
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.labelDominio)
+        self.verticalLayout_3.addLayout(self.formLayout)
+        self.labelReparaciones = QtGui.QLabel(self.groupBox)
+        self.labelReparaciones.setText(QtGui.QApplication.translate("DialogoAsignarReparaciones", "Reparaciones:", None, QtGui.QApplication.UnicodeUTF8))
+        self.labelReparaciones.setObjectName(_fromUtf8("labelReparaciones"))
+        self.verticalLayout_3.addWidget(self.labelReparaciones)
+#        self.tableWidgetReparaciones = QtGui.QTableWidget(self.groupBox)
+#        self.tableWidgetReparaciones = TablaDatos(self.groupBox)
+        self.tableWidgetReparaciones = TablaReparaciones(self.groupBox)
+        self.tableWidgetReparaciones.setObjectName(_fromUtf8("tableWidgetReparaciones"))
+        self.tableWidgetReparaciones.setColumnCount(0)
+        self.tableWidgetReparaciones.setRowCount(0)
+        self.verticalLayout_3.addWidget(self.tableWidgetReparaciones)
+        self.horizontalLayout_2.addLayout(self.verticalLayout_3)
+        self.verticalLayout.addWidget(self.groupBox)
+        self.groupBox_2 = QtGui.QGroupBox(DialogoAsignarReparaciones)
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("DialogoAsignarReparaciones", "Empleados", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
+        self.horizontalLayout_3 = QtGui.QHBoxLayout(self.groupBox_2)
+        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.verticalLayout_4 = QtGui.QVBoxLayout()
+        self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
+        self.labelEmpleados = QtGui.QLabel(self.groupBox_2)
+        self.labelEmpleados.setText(QtGui.QApplication.translate("DialogoAsignarReparaciones", "Empleados de la Sección:", None, QtGui.QApplication.UnicodeUTF8))
+        self.labelEmpleados.setObjectName(_fromUtf8("labelEmpleados"))
+        self.verticalLayout_4.addWidget(self.labelEmpleados)
+#        self.tableWidgetEmpleadosDisponibles = QtGui.QTableWidget(self.groupBox_2)
+#        self.tableWidgetEmpleadosDisponibles = TablaDatos(self.groupBox_2)
+        self.tableWidgetEmpleadosDisponibles = TablaEmpleadosSeccion(self.groupBox_2)
+        self.tableWidgetEmpleadosDisponibles.setObjectName(_fromUtf8("tableWidgetEmpleadosDisponibles"))
+        self.tableWidgetEmpleadosDisponibles.setColumnCount(0)
+        self.tableWidgetEmpleadosDisponibles.setRowCount(0)
+        self.verticalLayout_4.addWidget(self.tableWidgetEmpleadosDisponibles)
+        self.horizontalLayout.addLayout(self.verticalLayout_4)
+        self.verticalLayout_2 = QtGui.QVBoxLayout()
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
+        spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem)
+        self.pushButtonDesasignar = QtGui.QPushButton(self.groupBox_2)
+        self.pushButtonDesasignar.setText(QtGui.QApplication.translate("DialogoAsignarReparaciones", ">>", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonDesasignar.setObjectName(_fromUtf8("pushButtonDesasignar"))
+        self.verticalLayout_2.addWidget(self.pushButtonDesasignar)
+        self.pushButtonAsignar = QtGui.QPushButton(self.groupBox_2)
+        self.pushButtonAsignar.setText(QtGui.QApplication.translate("DialogoAsignarReparaciones", "<<", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonAsignar.setObjectName(_fromUtf8("pushButtonAsignar"))
+        self.verticalLayout_2.addWidget(self.pushButtonAsignar)
+        spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem1)
+        self.horizontalLayout.addLayout(self.verticalLayout_2)
+        self.verticalLayout_5 = QtGui.QVBoxLayout()
+        self.verticalLayout_5.setObjectName(_fromUtf8("verticalLayout_5"))
+        self.labelAsignados = QtGui.QLabel(self.groupBox_2)
+        self.labelAsignados.setText(QtGui.QApplication.translate("DialogoAsignarReparaciones", "Asignados al turno:", None, QtGui.QApplication.UnicodeUTF8))
+        self.labelAsignados.setObjectName(_fromUtf8("labelAsignados"))
+        self.verticalLayout_5.addWidget(self.labelAsignados)
+#        self.tableWidgetEmpleadosAsignados = QtGui.QTableWidget(self.groupBox_2)
+#        self.tableWidgetEmpleadosAsignados = TablaDatos(self.groupBox_2)
+        self.tableWidgetEmpleadosAsignados = TablaEmpleadosSeccion(self.groupBox_2)
+        self.tableWidgetEmpleadosAsignados.setObjectName(_fromUtf8("tableWidgetEmpleadosAsignados"))
+        self.tableWidgetEmpleadosAsignados.setColumnCount(0)
+        self.tableWidgetEmpleadosAsignados.setRowCount(0)
+        self.verticalLayout_5.addWidget(self.tableWidgetEmpleadosAsignados)
+        self.horizontalLayout.addLayout(self.verticalLayout_5)
+        self.horizontalLayout_3.addLayout(self.horizontalLayout)
+        self.verticalLayout.addWidget(self.groupBox_2)
+        self.buttonBox = QtGui.QDialogButtonBox(DialogoAsignarReparaciones)
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+        self.verticalLayout.addWidget(self.buttonBox)
+
+        self.retranslateUi(DialogoAsignarReparaciones)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), DialogoAsignarReparaciones.accept)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), DialogoAsignarReparaciones.reject)
+        QtCore.QMetaObject.connectSlotsByName(DialogoAsignarReparaciones)
+
+    def retranslateUi(self, DialogoAsignarReparaciones):
+        pass
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    DialogoAsignarReparaciones = QtGui.QDialog()
+    ui = Ui_DialogoAsignarReparaciones()
+    ui.setupUi(DialogoAsignarReparaciones)
+    DialogoAsignarReparaciones.show()
+    sys.exit(app.exec_())
+

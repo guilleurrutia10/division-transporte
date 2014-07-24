@@ -206,7 +206,7 @@ class Division_Transporte(Persistent):
         from usuario import Usuario
         usrNew = Usuario(unicode(encargado.nombreCompletoUsr()), unicode(encargado.getPassword()))
         usrNew.registrar('jefeSeccion')
-
+        encargado.setUsuario(usrNew)
         self.zodb.conexion.sync()
         
         #Armar un diccionario de empleados (bien podria hacerlo la misma seccion, tmb):

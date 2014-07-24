@@ -6,6 +6,7 @@ Created on 28/10/2012
 '''
 
 from persistent import Persistent
+import transaction
 
 class Empleado(Persistent):
     '''
@@ -51,6 +52,7 @@ class Empleado(Persistent):
         self.telefono = telefono 
         self.email = email
         self.localidad = localidad
+        self._usuario = None #Se setea si el usuario termina siendo encargado...
     
         
     def __eq__(self, otro):
@@ -109,3 +111,13 @@ class Empleado(Persistent):
             return 1
         else:
             return -1
+        
+    def setUsuario(self, usr):
+        self._usuario = usr
+        transaction.commit()
+        
+    def getUsuario(self):
+        try:
+            return self._usuario
+        except AttributeError:
+            return None

@@ -106,3 +106,16 @@ class Usuario():
     def getPermisos(self):
         return self.permisos
     
+    def es_jefeSeccion(self):
+        return self.rol == 'jefeSeccion'
+    
+    def esJefeDeSeccion(self, unaSeccion):
+        try:
+            return unaSeccion.getEncargado().getUsuario().name == self.name
+        except AttributeError:
+            return False 
+    
+    def __cmp__(self, other):
+        if self.name == other.name:
+            return 0
+        

@@ -26,7 +26,10 @@ class Turno(Persistent):
         self._hora = hora
         
         self._detallesPlan = PersistentList()#Detalle --> Reparaciones, hacer un objeto detalle no agrega nada a la logica...
-        self._detallesPlan.extend([reparacion.planificada() for reparacion in reparaciones])
+        for reparacion in reparaciones:
+            reparacion.planificada()
+        self._detallesPlan.extend(reparaciones)
+        transaction.commit()#Para guardar reparaciones en estado planificada
         self._finalizado = False
         self._empleadosAsignados = PersistentList()
         transaction.commit()#Para guardar reparaciones en estado planificada
@@ -73,4 +76,13 @@ class Turno(Persistent):
         Recibe una lista de empleados y los asigna al turno
         '''
         self._empleadosAsignados.extend(empleados)
-            
+        transaction.commit()
+
+    def getReparaciones(self):
+        return self._detallesPlan
+    
+    def getVehiculo(self):
+        return self._vehiculo
+    
+    def noEstaAsignado(self):
+        return self._empleadosAsignados == []

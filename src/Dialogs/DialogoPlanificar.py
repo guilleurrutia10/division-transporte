@@ -128,7 +128,6 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         
     @QtCore.pyqtSlot()
     def on_pushButtonAsignarReparacion_clicked(self):
-        
         if not self.tableWidgetReparacionesSinAsignar.getReparacionSeleccionada():
             mostrarMensaje(self, 'Debe seleccionar un repuesto.', 'Seleccionar')
             return
