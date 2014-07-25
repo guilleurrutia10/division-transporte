@@ -16,6 +16,10 @@ QtGui.QTableWidget
 from PyQt4 import QtGui, QtCore
 
 class SuperTabla(QtGui.QTableWidget):
+    
+    '''
+    TODO: Seria bueno implementar TemplateMethod
+    '''
 
     def inicializarTabla(self):
         '''
@@ -48,6 +52,16 @@ class SuperTabla(QtGui.QTableWidget):
         return self.diccionarioFilaElemento.get(self.getFilaSeleccionada())
 
 
+    #===========================================================================
+    # def cargarCon(self, lista):
+    #     self.inicializarTabla()
+    #     self.clearContents()
+    #     self.setRowCount(len(lista))
+    #     self.cargar(lista)
+    #     
+    # def cargar(self):
+    #     NotImplemented
+    #===========================================================================
 
 class TablaEmpleadosSeccion(SuperTabla):
     '''
@@ -351,21 +365,21 @@ class TablaReparaciones(SuperTabla):
         reparaciones.sort()
         self.setRowCount(len(reparaciones))
         
-        for repuesto in reparaciones:
+        for reparacion in reparaciones:
             columna = 0
             itemCodigo = QtGui.QTableWidgetItem()
             itemCodigo.setText(unicode('repuesto.getCodigo()'))
             self.setItem(fila, columna, itemCodigo)
             columna += 1
             itemNombre = QtGui.QTableWidgetItem()
-            itemNombre.setText(unicode(repuesto.getNombre()))
+            itemNombre.setText(unicode(reparacion.getNombre()))
             self.setItem(fila, columna, itemNombre)
             columna += 1
             itemDescripcion = QtGui.QTableWidgetItem()
-            itemDescripcion.setText(unicode(repuesto.getDescripcion()))
+            itemDescripcion.setText(unicode(reparacion.getDescripcion()))
             self.setItem(fila, columna, itemDescripcion)
             
-            self.agregarAlDiccionario(fila, repuesto)
+            self.agregarAlDiccionario(fila, reparacion)
             fila += 1
 
 
@@ -453,3 +467,52 @@ class TablaSuper(QtGui.QTableWidget):
                 self.setItem(fila, columna, unItem)
                 columna += 1
             fila += 1
+
+class TablaReparacionesNoPlanificadas(SuperTabla):
+    '''
+        Tabla que lista reparaciones.
+        Puede: 
+            - cargar con reparaciones recibidas
+    '''
+    
+    def cargarConReparaciones(self, orden):
+        '''
+            Recibe una lista de reparaciones para listar.
+            Columnas:
+                - codigo
+                - nombre
+                - descripcion
+                
+            Ademas, mientras lista los reparaciones, va armando un diccionario para mantener un correlacion reparaciones-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        reparaciones = orden.getReparaciones()
+        reparaciones.sort()
+        self.setRowCount(len(reparaciones))
+        
+        for reparacion in reparaciones:
+            columna = 0
+            itemCodigo = QtGui.QTableWidgetItem()
+            itemCodigo.setText(unicode(orden.getCodigoOrdenReparacion()))
+            self.setItem(fila, columna, itemCodigo)
+            columna += 1
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(unicode(reparacion.getTipoDeReparacion().getDescipcion()))
+            self.setItem(fila, columna, itemNombre)
+            columna += 1
+            itemCodigo = QtGui.QTableWidgetItem()
+            itemCodigo.setText(unicode(reparacion.getCodigo()))
+            self.setItem(fila, columna, itemCodigo)
+            columna += 1
+            itemDescripcion = QtGui.QTableWidgetItem()
+            itemDescripcion.setText(unicode(reparacion.getDescripcion()))
+            self.setItem(fila, columna, itemDescripcion)
+            
+            self.agregarAlDiccionario(fila, reparacion)
+            fila += 1
+
+
+    def getReparacionSeleccionada(self):
+        return self.getElementoSeleccionado()
