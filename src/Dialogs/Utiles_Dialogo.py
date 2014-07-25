@@ -20,3 +20,10 @@ def mostrarMensajeParaConfirmarTwo(aplicacion, mensaje, titulo):
 def mostrarMensajeParaConfirmar(aplicacion, mensaje, titulo):
     print 'Aca va un dialogo!' + mensaje
     return 'Ok'
+
+def mostrarMensajeOk(aplicacion, mensaje, titulo):
+    msgBox = QtGui.QMessageBox(aplicacion)
+    msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+    msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+    msgBox.setStandardButtons(QtGui.QMessageBox.Ok);
+    return msgBox.exec_()    
