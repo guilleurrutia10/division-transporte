@@ -281,7 +281,7 @@ class TablaVehiculos(SuperTabla):
             self.setItem(fila, columna, itemRegistroInterno)
             columna += 1
             itemNumeroChasis = QtGui.QTableWidgetItem()
-            itemNumeroChasis.setText(vehiculo.numeroChasis)
+            itemNumeroChasis.setText(vehiculo.getNumeroChasis())
             self.setItem(fila, columna, itemNumeroChasis)
             columna += 1
             itemComisaria = QtGui.QTableWidgetItem()
@@ -342,6 +342,7 @@ class TablaTiposDeRepuestos(SuperTabla):
         #return self.diccionario_empleados.get(self.getFilaSeleccionada())
         return self.getElementoSeleccionado()
 
+
 class TablaReparaciones(SuperTabla):
     '''
         Tabla que lista reparaciones.
@@ -385,6 +386,7 @@ class TablaReparaciones(SuperTabla):
 
     def getReparacionSeleccionada(self):
         return self.getElementoSeleccionado()
+
 
 class TablaRepuestosRequeridos(SuperTabla):
     '''
@@ -509,6 +511,51 @@ class TablaReparacionesNoPlanificadas(SuperTabla):
             itemDescripcion = QtGui.QTableWidgetItem()
             itemDescripcion.setText(unicode(reparacion.getDescripcion()))
             self.setItem(fila, columna, itemDescripcion)
+            
+            self.agregarAlDiccionario(fila, reparacion)
+            fila += 1
+
+
+    def getReparacionSeleccionada(self):
+        return self.getElementoSeleccionado()
+    
+    
+class TablaReparacionesPlanificadas(SuperTabla):
+    '''
+        Tabla que lista reparaciones.
+        Puede: 
+            - cargar con reparaciones recibidas
+    '''
+    
+    def cargarConReparaciones(self, reparaciones):
+        '''
+            Recibe una lista de reparaciones para listar.
+            Columnas:
+                - descripcion
+                - fecha de inicio
+                - fecha de finalizacion
+                
+            Ademas, mientras lista los reparaciones, va armando un diccionario para mantener un correlacion reparaciones-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        reparaciones.sort()
+        self.setRowCount(len(reparaciones))
+        
+        for reparacion in reparaciones:
+            columna = 0
+            itemDescripcion = QtGui.QTableWidgetItem()
+            itemDescripcion.setText(unicode(reparacion.getDescripcion()))
+            self.setItem(fila, columna, itemDescripcion)
+#             columna += 1
+#             itemFechaInicio = QtGui.QTableWidgetItem()
+#             itemFechaInicio.setText(unicode(reparacion.getFechaInicio()))
+#             self.setItem(fila, columna, itemFechaInicio)
+#             columna += 1
+#             itemFechaFin = QtGui.QTableWidgetItem()
+#             itemFechaFin.setText(unicode(reparacion.getFechaFin()))
+#             self.setItem(fila, columna, itemFechaFin)
             
             self.agregarAlDiccionario(fila, reparacion)
             fila += 1

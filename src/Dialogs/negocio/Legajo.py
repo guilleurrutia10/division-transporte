@@ -127,6 +127,9 @@ class Legajo(Persistent):
     def getDominio(self):
         return self.dominio
     
+    def getNumeroChasis(self):
+        return self.numeroChasis
+    
     def getPedidoActuacionSinFechaRecepcion(self):
         
         try:
@@ -186,7 +189,9 @@ class Legajo(Persistent):
         Esta accion solo es realizable en estado 'Planificada' 
         '''
         return self.obtenerOrdenDeReparacionEnCurso().getTurnosSinAtender()
-        
+    
+    #Los try and except de los estaEn.... se deben a que el vehiculo puede no tener
+    #orden en curso.
     def estaEnRevision(self):
         try:
             return isinstance(self.obtenerOrdenDeReparacionEnCurso().getEstado(), EnRevision)
@@ -209,6 +214,12 @@ class Legajo(Persistent):
     def estaFinalizado(self):
         try:
             return self.obtenerOrdenDeReparacionEnCurso().estaFinalizada()
+        except AttributeError:
+            return False
+        
+    def estaPlanificado(self):
+        try:
+            return self.obtenerOrdenDeReparacionEnCurso().estaPlanificada()
         except AttributeError:
             return False
     
@@ -242,7 +253,9 @@ class Legajo(Persistent):
     
     def getReparacionesSinPlanificar(self):
         return self.obtenerOrdenDeReparacionEnCurso().getReparacionesSinPlanificar()
-
+    
+    def getReparaciones(self):
+        return self.obtenerOrdenDeReparacionEnCurso().getReparaciones()
 ##############################################################################
 ########################## TEST LEGAJO #######################################
 ##############################################################################

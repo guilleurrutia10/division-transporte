@@ -15,7 +15,7 @@ class WidgetMostrarReparacionesPorVehiculo(QtGui.QWidget, Ui_WidgetMostrarRepara
     '''
 
 
-    def __init__(self, parent = None):
+    def __init__(self, vehiculos, parent = None):
         '''
         Constructor
         '''
@@ -27,7 +27,8 @@ class WidgetMostrarReparacionesPorVehiculo(QtGui.QWidget, Ui_WidgetMostrarRepara
         self.tableWidgetVehiculos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.tableWidgetReparaciones.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         
-        self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculosEnFinalizada())
+        self.tableWidgetVehiculos.cargarConVehiculos(vehiculos)
+#         self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculosEnFinalizada())
 #         self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculos().values())
         
         self.tableWidgetVehiculos.connect(self.tableWidgetVehiculos, QtCore.SIGNAL('cellClicked(int , int)'), self.mostrarReparaciones)
@@ -39,4 +40,5 @@ class WidgetMostrarReparacionesPorVehiculo(QtGui.QWidget, Ui_WidgetMostrarRepara
         print 'Debo mostrar las reparaciones para el vehiculo: '
         print self.tableWidgetVehiculos.getVehiculoEn(fila).getDominio()
         vehiculo = self.tableWidgetVehiculos.getVehiculoEn(fila)
-        self.tableWidgetReparaciones.cargarConReparaciones(vehiculo.getReparacionesFinalizadas())
+        self.tableWidgetReparaciones.cargarConReparaciones(vehiculo.getReparaciones())
+#         self.tableWidgetReparaciones.cargarConReparaciones(vehiculo.getReparacionesFinalizadas())

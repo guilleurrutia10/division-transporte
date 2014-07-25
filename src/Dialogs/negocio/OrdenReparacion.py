@@ -285,6 +285,9 @@ class OrdenReparacion(Persistent):
     def estaFinalizada(self):
         return isinstance(self.estado, Finalizada)
     
+    def estaPlanificada(self):
+        return isinstance(self.estado, Planificada)
+    
     def getReparacionesSinPlanificar(self):
         return filter(lambda rep: not rep.estaPlanificada(), self.reparaciones)
     

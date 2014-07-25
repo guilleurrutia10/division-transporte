@@ -108,7 +108,8 @@ class Listado_Vehiculos_en_reparacion_por_Seccion(QtGui.QWidget, Ui_FormListadoV
     def __init__(self, parent=None):
         super(Listado_Vehiculos_en_reparacion_por_Seccion, self).__init__(parent)
         self.setupUi(self)
-        
+    
+#TODO: Deprecated
 class Listado_Vehiculos_con_Reparaciones_Planificadas(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):
         super(Listado_Vehiculos_con_Reparaciones_Planificadas, self).__init__(parent)
@@ -122,12 +123,16 @@ class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_Widge
         self.setupUi(self)
 #         self.widgetCentral = ListadoVehiculos(Division_Transporte().getVehiculosEnAprobada(), self)
         self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculosEnAprobada())
+        self._ultimoVehiculoSeleccionado = None
+        
         self.tableWidgetVehiculos.connect(self.tableWidgetVehiculos, QtCore.SIGNAL('cellClicked(int , int)'), self.mostrarReparaciones)
     
     def mostrarReparaciones(self, fila, columna):
         vehiculoSeleccionado = self.tableWidgetVehiculos.getVehiculoEn(fila)
         print 'Vehiculo seleccionado: ', vehiculoSeleccionado.getDominio()
-        self.cargarConReparaciones(vehiculoSeleccionado.dameOrdenDeReparacionEnCurso())
+        if vehiculoSeleccionado != self._ultimoVehiculoSeleccionado:
+            self._ultimoVehiculoSeleccionado = vehiculoSeleccionado
+            self.cargarConReparaciones(vehiculoSeleccionado.dameOrdenDeReparacionEnCurso())
         
     def cargarConReparaciones(self, reparaciones):
         self.tableWidgetReparaciones.cargarConReparaciones(reparaciones)

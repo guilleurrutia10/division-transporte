@@ -612,6 +612,9 @@ class Division_Transporte(Persistent):
     def getVehiculosEnFinalizada(self):
         return filter(lambda unVehiculo: unVehiculo.estaFinalizado(), self.getVehiculos().values())
     
+    def getVehiculosEnPlanificacion(self):
+        return filter(lambda unVehiculo: unVehiculo.estaPlanificado(), self.getVehiculos().values())
+    
     def getTipoRepuestos(self):
         '''
         @return: 
