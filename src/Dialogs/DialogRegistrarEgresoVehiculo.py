@@ -11,6 +11,8 @@ from formularios.DialogRegistrarEgresoVehiculo import Ui_DialogRegistraEgresoVeh
 from formularios.DialogDatosEgresoVehiculo import Ui_DialogDatosEgresoVehiculo
 from WidgetListadoDeVehiculos import ListadoVehiculos 
 
+from negocio.Division_Transporte import Division_Transporte
+
 class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehiculo):
     '''
     classdocs
@@ -27,7 +29,8 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
         super(DialogRegistrarEgresoVehiculo, self).__init__(parent)
         self.setupUi(self)
 #        WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
-        self.miWidget = ListadoVehiculos(self.widget)
+#         self.miWidget = ListadoVehiculos(self.widget)
+        self.miWidget = ListadoVehiculos(Division_Transporte().getVehiculos().values())
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
     
     @QtCore.pyqtSlot()
