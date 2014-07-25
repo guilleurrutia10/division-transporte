@@ -27,8 +27,8 @@ class WidgetMostrarReparacionesPorVehiculo(QtGui.QWidget, Ui_WidgetMostrarRepara
         self.tableWidgetVehiculos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.tableWidgetReparaciones.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         
-        #self.cargarConVehiculos(Division_Transporte().getVehiculosEnFinalizada())
-        self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculos().values())
+        self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculosEnFinalizada())
+#         self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculos().values())
         
         self.tableWidgetVehiculos.connect(self.tableWidgetVehiculos, QtCore.SIGNAL('cellClicked(int , int)'), self.mostrarReparaciones)
         

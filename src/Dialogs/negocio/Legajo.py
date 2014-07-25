@@ -221,9 +221,11 @@ class Legajo(Persistent):
     def tieneReparacionesMecanicas(self):
         pass
     
+    def getOrdenesDeReparacionFinalizadas(self):
+        return filter(lambda ordenReparacion: ordenReparacion.estaFinalizada(), self.getOrdenesDeReparacion())
+    
     def getReparacionesFinalizadas(self):
-        ordenesDeReparacion = filter(lambda ordenReparacion: ordenReparacion.estaFinalizada(), self.getOrdenesDeReparacion())
-        reparaciones = [orden.getReparaciones() for orden in ordenesDeReparacion]
+        reparaciones = [orden.getReparaciones() for orden in self.getOrdenesDeReparacionFinalizadas()]
         return reparaciones
     
     def getOrdenesDeReparacion(self):

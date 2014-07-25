@@ -23,7 +23,7 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-from Utiles_formulario import TablaReparaciones, TablaVehiculos
+from Utiles_formulario import TablaReparacionesNoPlanificadas, TablaVehiculos
 
 class Ui_WidgetMostrarReparacionesPorVehiculo(object):
     def setupUi(self, WidgetMostrarReparacionesPorVehiculo):
@@ -67,7 +67,7 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         self.gridLayout = QtGui.QGridLayout(self.groupBox_2)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
 #         self.tableWidgetReparaciones = QtGui.QTableWidget(self.groupBox_2)
-        self.tableWidgetReparaciones = TablaReparaciones(self.groupBox_2)
+        self.tableWidgetReparaciones = TablaReparacionesNoPlanificadas(self.groupBox_2)
         self.tableWidgetReparaciones.setObjectName(_fromUtf8("tableWidgetReparaciones"))
         self.tableWidgetReparaciones.setColumnCount(4)
         self.tableWidgetReparaciones.setRowCount(0)
