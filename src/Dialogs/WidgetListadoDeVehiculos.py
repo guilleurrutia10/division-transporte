@@ -127,7 +127,7 @@ class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_Widge
     def mostrarReparaciones(self, fila, columna):
         vehiculoSeleccionado = self.tableWidgetVehiculos.getVehiculoEn(fila)
         print 'Vehiculo seleccionado: ', vehiculoSeleccionado.getDominio()
-        self.cargarConReparaciones(vehiculoSeleccionado.getReparacionesSinPlanificar())
+        self.cargarConReparaciones(vehiculoSeleccionado.dameOrdenDeReparacionEnCurso())
         
     def cargarConReparaciones(self, reparaciones):
         self.tableWidgetReparaciones.cargarConReparaciones(reparaciones)
