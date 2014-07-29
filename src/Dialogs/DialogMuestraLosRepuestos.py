@@ -10,6 +10,9 @@ from PyQt4 import QtCore, QtGui
 from formularios.DialogMuestraLosRepuestos import Ui_Dialog
 from negocio.Division_Transporte import Division_Transporte
 
+from WidgetMostrarRepuestos import DialogModificarRepuesto
+from Utiles_Dialogo import mostrarMensaje
+
 class DialogMuestraLosRepuestos(QtGui.QDialog, Ui_Dialog):
     '''
     classdocs
@@ -27,23 +30,30 @@ class DialogMuestraLosRepuestos(QtGui.QDialog, Ui_Dialog):
         self.tableWidgetDatosRepuestos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.tableWidgetDatosRepuestos.connect(self.tableWidgetDatosRepuestos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         
+        self.repuestoSeleccionado = None
+        
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         self.reject()
         
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscarNombre_textChanged(self, cadena):
-        filtro = unicode(cadena)
+        filtro = unicode(cadena).lower()
+        #Se aplica un filtro sobre los campos Nombre, Descripcion y codigo
+        repuestos = filter(lambda p: filtro in unicode.lower(unicode(p.getNombre())) or filtro in unicode.lower(unicode(p.getDescripcion())) or filtro in unicode.lower(unicode(p.getCodigo())), self.repuestos)
         #refrescar Grilla
-        repuestos = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.getNombre())), self.repuestos)
         self.cargarGrilla(repuestos)
-        
+         
     def cargarGrilla(self, repuestos):
         self.tableWidgetDatosRepuestos.clearContents()
         self.tableWidgetDatosRepuestos.setRowCount(len(repuestos))
         fila = 0
         for repuesto in repuestos:
             columna = 0
+            itemCodigo = QtGui.QTableWidgetItem()
+            itemCodigo.setText(repuesto.getCodigo())
+            self.tableWidgetDatosRepuestos.setItem(fila, columna, itemCodigo)
+            columna += 1
             itemNombre = QtGui.QTableWidgetItem()
             itemNombre.setText(repuesto.getNombre())
             self.tableWidgetDatosRepuestos.setItem(fila, columna, itemNombre)
@@ -52,14 +62,14 @@ class DialogMuestraLosRepuestos(QtGui.QDialog, Ui_Dialog):
             itemDescripcion.setText(repuesto.getDescripcion())
             self.tableWidgetDatosRepuestos.setItem(fila, columna, itemDescripcion)
             fila += 1
-                
+                 
     def cargarGrillaInicial(self):
         division = Division_Transporte()
         rep = division.getRepuestos()
         self.repuestos = rep.values()
         self.repuestos.sort(cmp=lambda x, y : cmp(x.getNombre, y.getNombre))
         self.cargarGrilla(self.repuestos)
-        
+         
     def seleccionarCelda(self, fila, columna):
         print 'Celda Seleccionada fila %s columna %s' % (fila, columna)
         itemSeleccionado = self.tableWidgetDatosRepuestos.item(fila, 0)
@@ -69,4 +79,9 @@ class DialogMuestraLosRepuestos(QtGui.QDialog, Ui_Dialog):
         
     @QtCore.pyqtSlot()
     def on_pushButtonModificarRepuesto_clicked(self):
-        print 'Modificar repuesto'
+        if self.repuestoSeleccionado:
+            dlgModificarRepuesto = DialogModificarRepuesto(self.repuestoSeleccionado)
+            dlgModificarRepuesto.exec_()
+            self.cargarGrilla(Division_Transporte().getRepuestos().values())
+        else:
+            mostrarMensaje(self, 'Debe seleccionar un Tipo de Repuesto', 'Tipo de Repuesto')

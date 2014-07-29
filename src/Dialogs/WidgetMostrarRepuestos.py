@@ -9,16 +9,39 @@ from PyQt4 import QtCore, QtGui
 from formularios.WidgetMostrarRepuestos import Ui_FormMostrarRepuestos
 from formularios.DialogModificarRepuesto import Ui_DialogMoficarRepuesto
 
+from Utiles_Dialogo import mostrarMensajeOk
+from negocio.Division_Transporte import Division_Transporte
+
 class DialogModificarRepuesto(QtGui.QDialog, Ui_DialogMoficarRepuesto):
     '''
     classdocs
     '''
-    def __init__(self, parent = None):
+    def __init__(self, tipoRepuesto, parent = None):
         '''
         Constructor
         '''
         super(DialogModificarRepuesto, self).__init__(parent)
         self.setupUi(self)
+        self.cargarDatosTipoRepuesto(tipoRepuesto)
+
+    def cargarDatosTipoRepuesto(self, tipoRepuesto):
+        self.lineEditCodigo.setModified(False)
+        self.lineEditCodigo.setText(tipoRepuesto.getCodigo())
+        self.lineEditNombreRepuesto.setText(tipoRepuesto.getNombre())
+        self.plainTextEditDescripcion.setPlainText(tipoRepuesto.getDescripcion())
+        
+        
+    @QtCore.pyqtSlot()
+    def on_pushButtonAceptar_clicked(self):
+        print 'Aceptaradsasdsa'
+        codigo = unicode(self.lineEditCodigo.text())
+        nombre = unicode(self.lineEditNombreRepuesto.text())
+        descripcion = unicode(self.plainTextEditDescripcion.toPlainText())
+        print codigo, ' ', nombre, ' ', descripcion
+        Division_Transporte().modificarRepuesto(codigo, nombre, descripcion)
+        mostrarMensajeOk(self, 'El repuesto ha sido modificado exitosamente', 'Tipo de Repuesto')
+        self.accept()
+
 
 class WidgetMostrarRepuestos(QtGui.QWidget, Ui_FormMostrarRepuestos):
     '''

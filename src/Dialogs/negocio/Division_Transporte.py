@@ -623,6 +623,17 @@ class Division_Transporte(Persistent):
         self.zodb.conexion.sync()
         return self.zodb.getDiccionarioElementos('tiposRepuestos')
     
+    def modificarRepuesto(self, clave, nombre, descripcion):
+        try:
+            repuesto = self.getRepuesto(clave)
+            repuesto.setNombre(nombre)
+            repuesto.setDescripcion(descripcion)
+            
+            transaction.commit()
+        except KeyError:
+            pass
+    
+    
 ##############################################################################
 ########################## TEST DIVISION #####################################
 ##############################################################################

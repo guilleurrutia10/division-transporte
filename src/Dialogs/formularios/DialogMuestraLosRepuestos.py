@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'DialogMuestraLosRepuestos.ui'
+# Form implementation generated from reading ui file 'src/ui/DialogMuestraLosRepuestos.ui'
 #
-# Created: Wed Dec 05 21:19:08 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Mon Jul 28 21:08:55 2014
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,13 +12,22 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(933, 605)
-        Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Repuestos de la Division", None, QtGui.QApplication.UnicodeUTF8))
+        Dialog.resize(800, 600)
+        Dialog.setMinimumSize(QtCore.QSize(800, 600))
         self.verticalLayout = QtGui.QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(Dialog)
@@ -39,7 +48,6 @@ class Ui_Dialog(object):
         self.groupBox_2.setSizePolicy(sizePolicy)
         self.groupBox_2.setMinimumSize(QtCore.QSize(150, 70))
         self.groupBox_2.setMaximumSize(QtCore.QSize(200, 70))
-        self.groupBox_2.setTitle(QtGui.QApplication.translate("Dialog", "Buscar Nombre", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.groupBox_2)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
@@ -53,21 +61,23 @@ class Ui_Dialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pushButtonBuscar.sizePolicy().hasHeightForWidth())
         self.pushButtonBuscar.setSizePolicy(sizePolicy)
-        self.pushButtonBuscar.setWhatsThis(QtGui.QApplication.translate("Dialog", "Buscar segun el criterio elegido", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonBuscar.setText(QtGui.QApplication.translate("Dialog", "Buscar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonBuscar.setObjectName(_fromUtf8("pushButtonBuscar"))
         self.verticalLayout_2.addWidget(self.pushButtonBuscar)
         self.verticalLayout.addWidget(self.groupBox)
         self.tableWidgetDatosRepuestos = QtGui.QTableWidget(Dialog)
         self.tableWidgetDatosRepuestos.setObjectName(_fromUtf8("tableWidgetDatosRepuestos"))
-        self.tableWidgetDatosRepuestos.setColumnCount(2)
+        self.tableWidgetDatosRepuestos.setColumnCount(3)
         self.tableWidgetDatosRepuestos.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("Dialog", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetDatosRepuestos.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("Dialog", "Descripcion", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetDatosRepuestos.setHorizontalHeaderItem(1, item)
+        item = QtGui.QTableWidgetItem()
+        self.tableWidgetDatosRepuestos.setHorizontalHeaderItem(2, item)
+        self.tableWidgetDatosRepuestos.horizontalHeader().setCascadingSectionResizes(True)
+        self.tableWidgetDatosRepuestos.horizontalHeader().setDefaultSectionSize(200)
+        self.tableWidgetDatosRepuestos.horizontalHeader().setMinimumSectionSize(100)
+        self.tableWidgetDatosRepuestos.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout.addWidget(self.tableWidgetDatosRepuestos)
         self.groupBox_3 = QtGui.QGroupBox(Dialog)
         self.groupBox_3.setMinimumSize(QtCore.QSize(50, 50))
@@ -78,7 +88,6 @@ class Ui_Dialog(object):
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButtonModificarRepuesto = QtGui.QPushButton(self.groupBox_3)
-        self.pushButtonModificarRepuesto.setText(QtGui.QApplication.translate("Dialog", "Modificar Repuesto", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonModificarRepuesto.setObjectName(_fromUtf8("pushButtonModificarRepuesto"))
         self.horizontalLayout.addWidget(self.pushButtonModificarRepuesto)
         self.verticalLayout.addWidget(self.groupBox_3)
@@ -91,11 +100,9 @@ class Ui_Dialog(object):
         self.gridLayout_2.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("Dialog", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_2.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("Dialog", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_2.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -106,16 +113,17 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
+        Dialog.setWindowTitle(_translate("Dialog", "Repuestos de la Division", None))
+        self.groupBox_2.setTitle(_translate("Dialog", "Buscar Nombre", None))
+        self.pushButtonBuscar.setWhatsThis(_translate("Dialog", "Buscar segun el criterio elegido", None))
+        self.pushButtonBuscar.setText(_translate("Dialog", "Buscar", None))
         item = self.tableWidgetDatosRepuestos.horizontalHeaderItem(0)
+        item.setText(_translate("Dialog", "Código", None))
         item = self.tableWidgetDatosRepuestos.horizontalHeaderItem(1)
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    Dialog = QtGui.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
+        item.setText(_translate("Dialog", "Nombre", None))
+        item = self.tableWidgetDatosRepuestos.horizontalHeaderItem(2)
+        item.setText(_translate("Dialog", "Descripción", None))
+        self.pushButtonModificarRepuesto.setText(_translate("Dialog", "Modificar Repuesto", None))
+        self.pushButtonAceptar.setText(_translate("Dialog", "Aceptar", None))
+        self.pushButtonCancelar.setText(_translate("Dialog", "Cancelar", None))
 
