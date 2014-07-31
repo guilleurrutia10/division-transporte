@@ -633,6 +633,8 @@ class Division_Transporte(Persistent):
         except KeyError:
             pass
     
+    def getVehiculosParaEgreso(self):
+        return filter(lambda unVehiculo: unVehiculo.puedeEgresar(), self.getVehiculos().values())
     
 ##############################################################################
 ########################## TEST DIVISION #####################################

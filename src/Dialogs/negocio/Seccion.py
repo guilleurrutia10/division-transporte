@@ -39,8 +39,9 @@ class Seccion(Persistent):
         '''
         self.codigoSeccion = codigoSeccion
         self.nombre = nombre
-        self.empleados = PersistentMapping(empleados)
-#        self.empleados.extend(empleados)
+#        self.empleados = PersistentMapping(empleados)
+        self.empleados = PersistentList(empleados)
+        self.empleados.extend(empleados)
         self.encargado = encargado
         self.tablaDeTurnos = OOBTree()
         self.tiposDeReparaciones = PersistentList()
@@ -64,7 +65,9 @@ class Seccion(Persistent):
         @return: 
         @author: 
         '''
-        self.empleados[empleado.getDocumento()] = empleado
+#        self.empleados[empleado.getDocumento()] = empleado
+        self.empleados.append(empleado)
+        transaction.commit()
     
     def quitarEmpleado(self):
         '''
@@ -103,8 +106,8 @@ class Seccion(Persistent):
     
     def getEmpleados(self):
         '''
-            Retorna una lista de empleados.No
-            Retorna un diccionario de empelados.
+            Retorna una lista de empleados.Si
+            Antes: Retorna un diccionario de empelados.
         '''
         return self.empleados
     
@@ -119,7 +122,8 @@ class Seccion(Persistent):
         return 'codigo'
     
     def removerEmpleado(self, empleadoARemover):
-        del self.getEmpleados()[empleadoARemover.getDocumento()]
+#        del self.getEmpleados()[empleadoARemover.getDocumento()]
+        self.empleados.remove(empleadoARemover)
         transaction.commit()
         
     def asignarNuevoEncargado(self, nuevoEncargado):
@@ -251,13 +255,14 @@ class Seccion(Persistent):
     def realiza(self, unaReparacion):
         return unaReparacion.getTipoDeReparacion() in self.tiposDeReparaciones
     
-    def getDiasEnLosQueHayTurno(self):
+    def getDiasEnLosQueHayTurnoSinAsignar(self):
         '''
         Retorna una lista con todos los dias en los cuales se ha asignado un turno
+        pero no dse han asignado empleados encargados de dichos turnos.
         '''
         dias = []
         for dia in self.tablaDeTurnos.keys():
-            if self.getHorasEnLosQueHayTurno(dia):
+            if self.getHorasEnLosQueHayTurnoSinAsignar(dia):
                 dias.append(dia)
         return dias
     
@@ -267,7 +272,7 @@ class Seccion(Persistent):
         '''
         return self.tablaDeTurnos.keys()
 
-    def getHorasEnLosQueHayTurno(self, dia):
+    def getHorasEnLosQueHayTurnoSinAsignar(self, dia):
         '''
         Retorna una lista con todas las horas en las que la seccion
         tiene registrado un turno que no tenga empleados asignados.
@@ -276,6 +281,29 @@ class Seccion(Persistent):
         for hora, turno in self.getAgendaDelDia(dia).iteritems():
             if turno:
                 if turno.noEstaAsignado():
+                    list_retorno.append(hora)
+        return list_retorno
+        
+    def getDiasEnLosQueHayTurnoAsignado(self):
+        '''
+        Retorna una lista con todos los dias en los cuales se ha asignado un turno
+        y al que ya se le han asignado empleados encargados de dichos turnos.
+        '''
+        dias = []
+        for dia in self.tablaDeTurnos.keys():
+            if self.getHorasEnLosQueHayTurnoAsignados(dia):
+                dias.append(dia)
+        return dias
+
+    def getHorasEnLosQueHayTurnoAsignados(self, dia):
+        '''
+        Retorna una lista con todas las horas en las que la seccion
+        tiene registrado un turno que tenga empleados asignados.
+        '''
+        list_retorno = []
+        for hora, turno in self.getAgendaDelDia(dia).iteritems():
+            if turno:
+                if turno.estaAsignado() and not turno.estaFinalizado():
                     list_retorno.append(hora)
         return list_retorno
         

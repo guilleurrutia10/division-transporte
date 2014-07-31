@@ -4,8 +4,9 @@ Created on 28/11/2012
 
 @author: alum
 '''
+from EstadoOrdenReparacion import EstadoOrdenReparacion
 
-class Finalizada(object):
+class Finalizada(EstadoOrdenReparacion):
     '''
     classdocs
     @version: 
@@ -26,3 +27,11 @@ class Finalizada(object):
     
     def noEstoyFinalizada(self):
         return False
+    
+    def puedeEgresar(self):
+        return self._orden_de_reparacion.getFechaEgreso() == None
+    
+    def registrarEgreso(self, kilometraje, combustible, fecha):
+        self._orden_de_reparacion.setKilometrajeEgreso(kilometraje)
+        self._orden_de_reparacion.setCombustibleEgreso(combustible)
+        self._orden_de_reparacion.setFechaEgreso(fecha)

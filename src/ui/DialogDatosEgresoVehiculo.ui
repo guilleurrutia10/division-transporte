@@ -6,24 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>311</width>
-    <height>160</height>
+    <width>320</width>
+    <height>192</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>310</width>
-    <height>160</height>
+    <height>192</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Datos Egreso Vehiculo</string>
+   <string>Datos egreso de vehículo</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Registrar Ingreso Vehiculo</string>
+      <string>Registrar egreso</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <property name="fieldGrowthPolicy">
@@ -32,35 +32,49 @@
       <property name="labelAlignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
-      <item row="0" column="0">
+      <item row="1" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Kilometraje Egreso:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditKilometraje"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Nivel De Combustible Egreso:</string>
+         <string>Kilometraje egreso:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEditCombustible"/>
+       <widget class="QLineEdit" name="lineEditKilometraje"/>
       </item>
       <item row="2" column="0">
-       <widget class="QLabel" name="label_3">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Fecha Egreso</string>
+         <string>Nivel de combustible egreso:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEditEquipamiento"/>
+       <widget class="QLineEdit" name="lineEditCombustible"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Fecha egreso</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Vehículo:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="labelDominio">
+        <property name="text">
+         <string>DOMINIO</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QDateEdit" name="dateEditFechaEgreso"/>
       </item>
      </layout>
     </widget>

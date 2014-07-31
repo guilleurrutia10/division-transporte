@@ -32,6 +32,7 @@ class Turno(Persistent):
         transaction.commit()#Para guardar reparaciones en estado planificada
         self._finalizado = False
         self._empleadosAsignados = PersistentList()
+        self._observaciones = ''
         transaction.commit()#Para guardar reparaciones en estado planificada
         
     def getHora(self):
@@ -57,9 +58,14 @@ class Turno(Persistent):
     def getDetalles(self):
         return self._detallesPlan
     
-    def finalizar(self):
+    def finalizar(self, observaciones= ''):
+        self._observaciones = observaciones
         self._finalizado = True
-        
+        #yo era el ultimo turno que faltaba?
+        if self._vehiculo.tieneTodosLosTurnosFinalizados():
+            #SI
+            self._vehiculo.finalizarVerificacionReparacion()
+            
     def estaFinalizado(self):
         return self._finalizado
     
@@ -86,3 +92,10 @@ class Turno(Persistent):
     
     def noEstaAsignado(self):
         return self._empleadosAsignados == []
+    
+    def estaAsignado(self):
+        return self._empleadosAsignados != []
+    
+    def getEmpleadosAsignados(self):
+        return self._empleadosAsignados
+

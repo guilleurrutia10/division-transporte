@@ -34,6 +34,8 @@ from Dialogs.DialogoAltaTipoReparacion import DialogoAltaTipoReparacion
 from Dialogs.DialogoPlanificar import DialogoPlanificar 
 from Dialogs.DialogoAsignarReparaciones import DialogoAsignarReparaciones
 from Dialogs.negocio.excepciones.SinTurnosException import SinTurnosException
+from Dialogs.DialogoRegistrarFinTurno import DialogoRegistrarFinTurno
+from Dialogs.DialogRegistrarEgresoVehiculo import DialogDatosEgresoVehiculo
 
 class MyListado(QtGui.QWidget, Ui_Form):
     def __init__(self, parent = None):
@@ -296,6 +298,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             print 'Ok'
         except IndexError:
             print 'No sos jefe de seccion'
+            
     @QtCore.pyqtSlot()
     def on_actionRegistrar_Ingreso_de_Vehiculo_triggered(self):
         dlgRegIngVehiculo = DialogRegistrarIngresoVehiculo.DialogRegistrarIngresoVehiculo()
@@ -324,11 +327,29 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         dlgCambiarSeccionEmpleado.exec_()
         
     @QtCore.pyqtSlot()
-    def on_actionRegistrar_Egreso_triggered(self):
-        dlgRegistrarEgreso = DialogRegistrarEgresoVehiculo.DialogRegistrarEgresoVehiculo()
-        dlgRegistrarEgreso.exec_()
-        
-    @QtCore.pyqtSlot()
     def on_actionRemover_Empleado_de_Seccion_triggered(self):
         dlgRemoverEmpleado = DialogRemoverEmpleadoDeSeccion.DialogRemoverEmpleadoDeSeccion()
         dlgRemoverEmpleado.exec_()
+        
+    @QtCore.pyqtSlot()
+    def on_actionRegistrar_Finalizacion_de_Reparacion_triggered(self):
+        seccion = filter(lambda s: self.usuario.esJefeDeSeccion(s), Division_Transporte().getSecciones().values())
+        try: 
+            dlgFinTurno = DialogoRegistrarFinTurno(self, seccion[0])
+            dlgFinTurno.exec_()
+        except SinTurnosException:
+            print 'Ok'
+        except IndexError:
+            print 'No sos jefe de seccion'
+
+    @QtCore.pyqtSlot()
+    def on_actionRegistrar_Egreso_triggered(self):
+        vehiculos_para_egresar = Division_Transporte().getVehiculosParaEgreso()
+        self.setCentralWidget(WidgetListadoDeVehiculos.ListadoVehiculos(vehiculos_para_egresar, self))
+        self.centralWidget().pushButtonSeleccionar.connect(self.centralWidget().pushButtonSeleccionar, QtCore.SIGNAL('clicked()'), self.egresar)
+    
+    def egresar(self):
+        if self.centralWidget().tableWidgetListadoDeVehiculos.getVehiculoSeleccionado():
+            dlgEgresar = DialogDatosEgresoVehiculo(self, self.centralWidget().tableWidgetListadoDeVehiculos.getVehiculoSeleccionado()) 
+            dlgEgresar.exec_()
+            self.centralWidget().tableWidgetListadoDeVehiculos.cargarConVehiculos(Division_Transporte().getVehiculosParaEgreso())

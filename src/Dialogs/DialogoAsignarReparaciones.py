@@ -9,31 +9,8 @@ from PyQt4 import QtCore, QtGui
 from formularios.DlgAsignarReparaciones import Ui_DialogoAsignarReparaciones
 from negocio.Division_Transporte import Division_Transporte
 from PyQt4.Qwt5.qplt import QString
-from Utiles_Dialogo import mostrarMensaje
+from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
 from negocio.excepciones.SinTurnosException import SinTurnosException
-
-def compara_fechas_en_cadenas(fecha1, fecha2):
-    dia1, mes1, anio1 = [int(n) for n in fecha1.split('/')]
-    dia2, mes2, anio2 = [int(n) for n in fecha2.split('/')]
-    
-    if dia1 == dia2 and mes1 == mes2 and anio1 ==anio2:
-        return 0
-    if anio1 == anio2:
-        if mes1 == mes2:
-            if dia1 == dia2:
-                return 0
-            elif dia1 > dia2:
-                return 1
-            else:
-                return -1
-        if mes1 > mes2:
-            return 1
-        else:
-            return -1
-    elif anio1 > anio2:
-        return 1
-    else:
-        return -1
 
 class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
     '''
@@ -48,7 +25,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         self.buttonBox.connect(self, QtCore.SIGNAL('accepted()'), self.aceptar)
         self.buttonBox.connect(self, QtCore.SIGNAL('rejected()'), self.cancelar)
         self._seccion = seccion
-        dias_con_turnos = list(self._seccion.getDiasEnLosQueHayTurno())
+        dias_con_turnos = list(self._seccion.getDiasEnLosQueHayTurnoSinAsignar())
         dias_con_turnos.sort(cmp=compara_fechas_en_cadenas)
         for dia in dias_con_turnos:
             self.comboBoxFecha.addItems(QtCore.QStringList(dia))
@@ -61,7 +38,8 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         self._turnoSeleccionado = self._seccion.getTurnoDeFechaHora(self._fechaSeleccionada,self._horaSeleccionada )
         self.refrescarDatosTurno()
 #        self.refrescarReparaciones()
-        self._empleadosSinAsignar = self._seccion.getEmpleados().values()
+#        self._empleadosSinAsignar = self._seccion.getEmpleados().values()
+        self._empleadosSinAsignar = self._seccion.getEmpleados()
         self._empleadosAsignados = []
         self.refrescarTablasEmpleados()
     
@@ -72,7 +50,8 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         self.refrescarDatosTurno()
 
     def on_comboBoxHora_currentIndexChanged(self):
-        self._horaSeleccionada = int(self.comboBoxHora.currentText())
+#        self._horaSeleccionada = int(self.comboBoxHora.currentText())
+        self._horaSeleccionada = self.comboBoxHora.currentText().toInt()
         self._turnoSeleccionado = self._seccion.getTurnoDeFechaHora(self._fechaSeleccionada,self._horaSeleccionada)
         self.refrescarDatosTurno()
         
@@ -80,22 +59,11 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         '''
         Refresca el combo y ademas devuelve el primer valor de la lista de sus valores'''
         self.comboBoxHora.clear()
-        horas = self._seccion.getHorasEnLosQueHayTurno(self._fechaSeleccionada)
+        horas = self._seccion.getHorasEnLosQueHayTurnoSinAsignar(self._fechaSeleccionada)
         for hora in horas:
             self.comboBoxHora.addItems(QtCore.QStringList(str(hora)))
         return horas[0]
 
-#    def refrescarReparaciones(self):
-#        como_armar = [('Codigo', '{0}.getCodigo()'),
-#                      ('Nombre', '{0}.getNombre()'),
-#                      ('Descripcion', '{0}.getDescripcion()')
-#                      ]
-#        como_armar = [('Codigo', getCodigoReparacion),
-#                      ('Nombre', getNombreReparacion),
-#                      ('Descripcion', getDescripcionReparacion)
-#                      ]
-#        self.tableWidgetReparaciones.inicializar(self._reparacionesTurno, como_armar)
-        
     def refrescarTablasEmpleados(self):
         '''
         Modo de uso:

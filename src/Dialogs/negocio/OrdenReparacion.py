@@ -90,6 +90,10 @@ class OrdenReparacion(Persistent):
         
         self._pedidoDeActuacion = None
         self._plan = Plan() #Sera utilizado a partir de Aprobada
+        self._fechaEgreso = None
+        self._kilometrajeEgreso = None
+        self._combustibleEgreso = None
+
             
     def getCodigoOrdenReparacion(self):
         return self.codigoOrdenReparacion
@@ -306,3 +310,57 @@ class OrdenReparacion(Persistent):
                         secciones.append(seccion)
 
         return secciones
+
+    def tieneTodosLosTurnosFinalizados(self):
+        '''
+        Lo sabe el estado Planificada
+        '''
+        try:
+            return self.estado.tieneTodosLosTurnosFinalizados()
+        except AttributeError:
+            return False
+        
+    def finalizarVerificacionReparacion(self):
+        '''
+        Lo sabe el estado Planificada
+        '''
+        try:
+            self.estado.finalizarVerificacionReparacion()
+        except AttributeError:
+            return False
+        
+    def puedeEgresar(self):
+        '''
+        Lo sabe el estado Finalizada
+        '''
+        try:
+            #si la orden de reparacion esta finalizada pero en curso, retornara True
+            #si la orden de reparacion es una del historial de ordenes, retornara False
+            return self.estado.puedeEgresar()
+        except AttributeError:
+            #si no estoy en el estado, false
+            return False
+        
+    def getFechaEgreso(self):
+        return self._fechaEgreso
+    
+    def registrarEgreso(self, kilometraje, combustible, fecha):
+        '''
+        Lo sabe el estado Finalizada
+        '''
+        try:
+            return self.estado.registrarEgreso(kilometraje, combustible, fecha)
+        except AttributeError:
+            #si no estoy en el estado, false
+            return False
+
+    def setFechaEgreso(self, value):
+        self._fechaEgreso = value
+
+
+    def setKilometrajeEgreso(self, value):
+        self._kilometrajeEgreso = value
+
+
+    def setCombustibleEgreso(self, value):
+        self._combustibleEgreso = value

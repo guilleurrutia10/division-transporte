@@ -12,6 +12,9 @@ from formularios.DialogDatosEgresoVehiculo import Ui_DialogDatosEgresoVehiculo
 from WidgetListadoDeVehiculos import ListadoVehiculos 
 
 from negocio.Division_Transporte import Division_Transporte
+from PyQt4.Qwt5.qplt import QString
+import transaction
+from Utiles_Dialogo import mostrarMensaje
 
 class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehiculo):
     '''
@@ -78,7 +81,7 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
     @author: 
     '''
     
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, vehiculo= None):
         '''
         Constructor
         @version: 
@@ -86,7 +89,13 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         '''
         super(DialogDatosEgresoVehiculo, self).__init__(parent)
         self.setupUi(self)
-        self.pushButtonCancelar
+        self._vehiculo = vehiculo
+        self.labelDominio.setText(QString(self._vehiculo.getDominio()))
+        #Css
+        self.label.setObjectName('label')
+        self.label_2.setObjectName('label')
+        self.label_3.setObjectName('label')
+        self.label_4.setObjectName('label')
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
@@ -95,6 +104,14 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         @author: 
         '''
         print 'Click sobre aceptar'
+        kilometraje = int(self.lineEditKilometraje.text())
+        combustible = int(self.lineEditCombustible.text())
+        f = self.dateEditFechaEgreso.date()
+        fecha = '%s/%s/%s' %(f.day(), f.month(), f.year())
+        self._vehiculo.registrarEgreso(kilometraje, combustible, fecha)
+        transaction.commit()
+        mostrarMensaje(self, 'Egreso del vehículo %s registrado con exito'%(self._vehiculo.getDominio()), 'Egreso exitoso')
+        self.accept()
     
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):

@@ -5,6 +5,7 @@ Created on 07/11/2012
 @author: urrutia
 '''
 from EstadoOrdenReparacion import EstadoOrdenReparacion
+from Finalizada import Finalizada
 
 class Planificada(EstadoOrdenReparacion):
     '''
@@ -31,3 +32,9 @@ class Planificada(EstadoOrdenReparacion):
     def turnosSinAtender(self):
         #return self._plan.getTurnos()
         return self._orden_de_reparacion.getPlan().getTurnos()
+    
+    def tieneTodosLosTurnosFinalizados(self):
+        return filter(lambda t: not t.estaFinalizado(), self._orden_de_reparacion.getPlan().getTurnos()) == []
+    
+    def finalizarVerificacionReparacion(self):
+        self._orden_de_reparacion.setEstado(Finalizada(self._orden_de_reparacion))

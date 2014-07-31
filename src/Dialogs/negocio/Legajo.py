@@ -256,6 +256,27 @@ class Legajo(Persistent):
     
     def getReparaciones(self):
         return self.obtenerOrdenDeReparacionEnCurso().getReparaciones()
+    
+    def tieneTodosLosTurnosFinalizados(self):
+        return self.obtenerOrdenDeReparacionEnCurso().tieneTodosLosTurnosFinalizados()
+
+    def finalizarVerificacionReparacion(self):
+        return self.obtenerOrdenDeReparacionEnCurso().finalizarVerificacionReparacion()
+    
+    def puedeEgresar(self):
+        return self.getOrdenParaEgreso() != None
+        
+    def getOrdenParaEgreso(self):
+        orden = filter(lambda unaOrden: unaOrden.puedeEgresar(), self.ordenesDeReparacion)
+        try:
+            orden = orden[0]
+            return orden
+        except IndexError:
+            return None
+        
+    def registrarEgreso(self, kilometraje, combustible, fecha):
+        self.getOrdenParaEgreso().registrarEgreso(kilometraje, combustible, fecha)
+        
 ##############################################################################
 ########################## TEST LEGAJO #######################################
 ##############################################################################
