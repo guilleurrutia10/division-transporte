@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'DialogMostrarPedidoDeActuacion.ui'
+# Form implementation generated from reading ui file 'src/ui/DialogMostrarPedidoDeActuacion.ui'
 #
-# Created: Thu Dec 06 14:49:20 2012
-# Created: Wed Dec 05 21:19:07 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Thu Jul 31 21:36:47 2014
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -13,18 +12,25 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_DialogMostrarPedidoDeActuacion(object):
     def setupUi(self, DialogMostrarPedidoDeActuacion):
         DialogMostrarPedidoDeActuacion.setObjectName(_fromUtf8("DialogMostrarPedidoDeActuacion"))
-        DialogMostrarPedidoDeActuacion.resize(589, 356)
-        DialogMostrarPedidoDeActuacion.setMinimumSize(QtCore.QSize(0, 0))
-        DialogMostrarPedidoDeActuacion.setWindowTitle(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Pedido de Actuacion Generado", None, QtGui.QApplication.UnicodeUTF8))
+        DialogMostrarPedidoDeActuacion.resize(800, 400)
+        DialogMostrarPedidoDeActuacion.setMinimumSize(QtCore.QSize(800, 400))
         self.verticalLayout = QtGui.QVBoxLayout(DialogMostrarPedidoDeActuacion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogMostrarPedidoDeActuacion)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Datos Pedido de Actuacion  ", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
@@ -35,15 +41,12 @@ class Ui_DialogMostrarPedidoDeActuacion(object):
         self.formLayout.setContentsMargins(60, -1, -1, -1)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label_2 = QtGui.QLabel(self.groupBox)
-        self.label_2.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Fecha Realizacion:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label_2)
         self.labelFechaPedido = QtGui.QLabel(self.groupBox)
-        self.labelFechaPedido.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "<<Fecha Pedido>>", None, QtGui.QApplication.UnicodeUTF8))
         self.labelFechaPedido.setObjectName(_fromUtf8("labelFechaPedido"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.labelFechaPedido)
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Repuestos:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label)
         self.tableWidgetRepuestos = QtGui.QTableWidget(self.groupBox)
@@ -52,15 +55,14 @@ class Ui_DialogMostrarPedidoDeActuacion(object):
         self.tableWidgetRepuestos.setColumnCount(3)
         self.tableWidgetRepuestos.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Nombre Tipo de Repuesto", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestos.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Descripcion Tipo de Repuesto", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestos.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Cantidad", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestos.setHorizontalHeaderItem(2, item)
-        self.tableWidgetRepuestos.horizontalHeader().setDefaultSectionSize(165)
+        self.tableWidgetRepuestos.horizontalHeader().setCascadingSectionResizes(True)
+        self.tableWidgetRepuestos.horizontalHeader().setDefaultSectionSize(200)
+        self.tableWidgetRepuestos.horizontalHeader().setStretchLastSection(True)
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.tableWidgetRepuestos)
         self.horizontalLayout.addLayout(self.formLayout)
         self.verticalLayout.addWidget(self.groupBox)
@@ -73,11 +75,9 @@ class Ui_DialogMostrarPedidoDeActuacion(object):
         self.gridLayout_7.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_7.setObjectName(_fromUtf8("gridLayout_7"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_7.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogMostrarPedidoDeActuacion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_7.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -88,17 +88,17 @@ class Ui_DialogMostrarPedidoDeActuacion(object):
         QtCore.QMetaObject.connectSlotsByName(DialogMostrarPedidoDeActuacion)
 
     def retranslateUi(self, DialogMostrarPedidoDeActuacion):
+        DialogMostrarPedidoDeActuacion.setWindowTitle(_translate("DialogMostrarPedidoDeActuacion", "Pedido de Actuacion Generado", None))
+        self.groupBox.setTitle(_translate("DialogMostrarPedidoDeActuacion", "Datos Pedido de Actuacion  ", None))
+        self.label_2.setText(_translate("DialogMostrarPedidoDeActuacion", "Fecha Ingreso:", None))
+        self.labelFechaPedido.setText(_translate("DialogMostrarPedidoDeActuacion", "<<Fecha Pedido>>", None))
+        self.label.setText(_translate("DialogMostrarPedidoDeActuacion", "Repuestos:", None))
         item = self.tableWidgetRepuestos.horizontalHeaderItem(0)
+        item.setText(_translate("DialogMostrarPedidoDeActuacion", "Nombre", None))
         item = self.tableWidgetRepuestos.horizontalHeaderItem(1)
+        item.setText(_translate("DialogMostrarPedidoDeActuacion", "Descripcion", None))
         item = self.tableWidgetRepuestos.horizontalHeaderItem(2)
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    DialogMostrarPedidoDeActuacion = QtGui.QDialog()
-    ui = Ui_DialogMostrarPedidoDeActuacion()
-    ui.setupUi(DialogMostrarPedidoDeActuacion)
-    DialogMostrarPedidoDeActuacion.show()
-    sys.exit(app.exec_())
+        item.setText(_translate("DialogMostrarPedidoDeActuacion", "Cantidad", None))
+        self.pushButtonAceptar.setText(_translate("DialogMostrarPedidoDeActuacion", "Aceptar", None))
+        self.pushButtonCancelar.setText(_translate("DialogMostrarPedidoDeActuacion", "Cancelar", None))
 

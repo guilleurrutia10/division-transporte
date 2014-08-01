@@ -7,7 +7,7 @@ Created on 10/10/2012
 
 from PyQt4 import QtGui, QtCore
 from pprint import pprint
-from datetime import date
+from datetime import date, datetime
 import transaction
 
 from formularios.DialogRegistrarRecepcionDePedidoDeActuacion import Ui_DialogRegistrarRecepcionDePedidoDeActuacion 
@@ -113,7 +113,7 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
         self.label_3.setObjectName("label")
         self.label_5.setObjectName("label")
         self.label_6.setObjectName("label")
-    
+           
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         #ahora recibe un objeto pedido de actuacion!

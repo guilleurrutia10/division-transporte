@@ -6,6 +6,7 @@ Created on 03/10/2012
 '''
 from PyQt4 import QtCore, QtGui
 from re import match
+from datetime import date
 
 from formularios.DialogAltaPersonal import Ui_DialogAltaPersonal
 from negocio.Division_Transporte import Division_Transporte
@@ -108,6 +109,9 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         apellido = unicode(self.lineEditApellido.text())
         nroDocumento = unicode(self.lineEditNroDocumento.text())
         tipoDocumento = unicode(self.comboBoxTipoDocumento.currentText())
+        
+        fechaNac = self.dateEditFechaNacimiento.date().toPyDate()
+        print fechaNac
         #Se carga el empleado en el sistema. 
         division = Division_Transporte()
         division.agregarEmpleado(nombre, apellido, nroDocumento, tipoDocumento)
