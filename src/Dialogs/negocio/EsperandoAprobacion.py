@@ -5,31 +5,31 @@ Created on 07/11/2012
 @author: urrutia
 '''
 
-from EstadoOrdenReparacion import *
+from EstadoOrdenReparacion import EstadoOrdenReparacion
+
 
 class EsperandoAprobacion(EstadoOrdenReparacion):
     '''
     classdocs
-    @version: 
-    @author: 
+    @version:
+    @author:
     '''
-
 
     def __init__(self, orden_de_reparacion):
         '''
         Constructor
-        @return: 
-        @author: 
+        @return:
+        @author:
         '''
         super(EsperandoAprobacion, self).__init__(orden_de_reparacion)
         self.pedidoDeActuacion = orden_de_reparacion.getPedidoDeActuacion()
-        
+
     def getPedidoDeActuacion(self, ordenReparacion):
-        #return ordenReparacion.getPedidoDeActuacion()
+        # return ordenReparacion.getPedidoDeActuacion()
         return self.pedidoDeActuacion
-        
+
     def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
-        #pedidoActuacion = ordenReparacion.getPedidoDeActuacion()
+        # pedidoActuacion = ordenReparacion.getPedidoDeActuacion()
 #        self.pedidoDeActuacion.setFechaRecepcion(fechaRecepcion)
         self._orden_de_reparacion.getPedidoDeActuacion().setFechaRecepcion(fechaRecepcion)
 

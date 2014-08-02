@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'src/ui/DialogAsignarFechaRecepcionPedidoActuacion.ui'
 #
-# Created: Thu Jul 31 21:31:13 2014
+# Created: Fri Aug  1 02:10:12 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -52,10 +52,11 @@ class Ui_DialogAsignarFechaRecepcionPedidoActuacion(object):
         self.label_5 = QtGui.QLabel(self.groupBox)
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_5)
-        self.listWidgetRepuestosDelPedido = QtGui.QListWidget(self.groupBox)
-        self.listWidgetRepuestosDelPedido.setMinimumSize(QtCore.QSize(400, 200))
-        self.listWidgetRepuestosDelPedido.setObjectName(_fromUtf8("listWidgetRepuestosDelPedido"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.listWidgetRepuestosDelPedido)
+        self.listWidget = QtGui.QListWidget(self.groupBox)
+        self.listWidget.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.listWidget.setResizeMode(QtGui.QListView.Adjust)
+        self.listWidget.setObjectName(_fromUtf8("listWidget"))
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.listWidget)
         self.verticalLayout.addWidget(self.groupBox)
         self.groupBox_2 = QtGui.QGroupBox(DialogAsignarFechaRecepcionPedidoActuacion)
         self.groupBox_2.setTitle(_fromUtf8(""))

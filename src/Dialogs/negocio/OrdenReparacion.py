@@ -208,17 +208,17 @@ class OrdenReparacion(Persistent):
         
     def getPedidoDeActuacion(self):
         return self._pedidoDeActuacion
-    
+
     def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
         '''
         Para registrar la recepcion de un pedido de actuacion referido a una OR,
         la OR debe estar en estado 'EsperandoAprobacion', por lo cual le encomendamos
         al estado de la OR realizar esta tarea, si pudiese.
-        @return: True si la operacion fue exitosa. False en caso contrario. 
-        
+        @return: True si la operacion fue exitosa. False en caso contrario.
+
         Es una operacion que hace cambiar el estado de la OR!
         '''
-        try: 
+        try:
             self.estado.registrarRecepcionPedidoActuacion(fechaRecepcion)
             self.estado = Aprobada(self)
             return True

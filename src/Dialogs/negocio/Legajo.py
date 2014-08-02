@@ -129,23 +129,23 @@ class Legajo(Persistent):
     
     def getNumeroChasis(self):
         return self.numeroChasis
-    
+
     def getPedidoActuacionSinFechaRecepcion(self):
-        
+
         try:
             ordenEnCurso = self.dameOrdenDeReparacionEnCurso()
             return ordenEnCurso.getPedidoDeActuacionActual()
         except Excepcion_No_Posee_Orden_Reparacion_En_Curso:
             pass
-        
+
     def registrarRecepcionPedidoActuacion(self, fechaRecepcion):
         recepcion_exitosa = self.obtenerOrdenDeReparacionEnCurso().registrarRecepcionPedidoActuacion(fechaRecepcion)
         return recepcion_exitosa
-        
+
     def puedeRegistrarIngreso(self):
         ordenEnCurso = filter(lambda unaOrden: unaOrden.noEstaFinalizada(), self.ordenesDeReparacion)
         #Si el vehiculo posee una orden en curso, es decir, una orden que no este finalizada, no puede registrar el ingreso.
-        if len(ordenEnCurso)!=0:
+        if len(ordenEnCurso) != 0:
             return False
         return True
 

@@ -10,21 +10,22 @@ from re import match
 from formularios.DialogAltaVehiculoPrueba import Ui_DialogAltaVehiculo
 
 from negocio.Division_Transporte import Division_Transporte
+from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
+
 
 class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
     '''
         Classdocs
     '''
 
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         '''
         super(DialogAltaVehiculo, self).__init__(parent)
         self.setupUi(self)
         self.validacionesLineEdit()
-        #self.DIVISION = Division_Transporte.divisionTransporte()
         self.DIVISION = Division_Transporte()
-        #seteo de nombres de los Labels para el estilo
+        # seteo de nombres de los Labels para el estilo
         self.label.setObjectName("label")
         self.label_2.setObjectName("label")
         self.label_3.setObjectName("label")
@@ -38,13 +39,13 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         self.lineEditMarca.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Z|a-z]+'),self))
         self.lineEditRegistroInterno.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
         self.lineEditChasisNro.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
-        
+
     @QtCore.pyqtSlot()
     def on_pushButton_Cancelar_pressed(self):
         '''
         '''
         self.reject()
-        
+
     @QtCore.pyqtSlot()
     def on_pushButton_2Aceptar_pressed(self):
         '''
@@ -58,7 +59,7 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         self.cargarVehiculo()
         if self.mostrarMensaje('El vehiculo se ha ingresado correctamente!!! :)', 'Ingresando Vehiculo'):
             self.accept()
-    
+
     def testearDialogo(self):
         '''
         TODO: Cambiar el nombre si no es significativo.
@@ -84,7 +85,7 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
             self.lineEditChasisNro.setFocus()
             return
         return True
-    
+
     '''
     TODO: Este método se repite en varios Dialogs.
     '''
@@ -93,14 +94,20 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
-    
-    def cargarVehiculo(self): 
+
+    def cargarVehiculo(self):
         dominio = unicode(self.lineEditDominio.text())
         marca = unicode(self.lineEditMarca.text())
         registroInterno = unicode(self.lineEditRegistroInterno.text())
         numeroChasis = unicode(self.lineEditChasisNro.text())
         modelo = unicode(self.lineEditModelo.text())
-        #Se carga el Vehículo en el sistema.
-        #division = Division_Transporte()
-        self.DIVISION.addVehiculo(dominio, marca, registroInterno, numeroChasis)
-        #division.addVehiculo(dominio, marca, registroInterno, numeroChasis, modelo)
+        # Se carga el Vehículo en el sistema.
+        # TODO: falta mandar el modelo del vehículo.
+        # Tmb, falta atrapar si ya se encuentra cargado.
+        try:
+            self.DIVISION.agregarVehiculo(dominio, marca, registroInterno, numeroChasis)
+        except ExcepcionObjetoExiste:
+            self.mostrarMensaje(
+                                 mensaje='El vehiculo con el dominio %s ya se encuentra cargado en el sitema' % (dominio),
+                                 titulo='Error Alta Vehículo')
+        # division.addVehiculo(dominio, marca, registroInterno, numeroChasis, modelo)

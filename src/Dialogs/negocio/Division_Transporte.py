@@ -90,7 +90,7 @@ class MiZODB(object):
         except KeyError:
             self.raiz[clave] = {}
             return self.raiz[clave]
-        
+
     def save(self, claveElementos, clave, objeto):
         '''
         Agrega un nuevo objeto en la del claveDiccionario.
@@ -101,8 +101,8 @@ class MiZODB(object):
         try:
             diccionario = self.getDiccionarioElementos(claveElementos)
             unObjeto = diccionario[clave]
-            raise ExcepcionObjetoExiste
-        except KeyError, e:
+            raise ExcepcionObjetoExiste(clave)
+        except KeyError:
             diccionario[clave] = objeto
             self.commiting()
 
@@ -110,12 +110,11 @@ class MiZODB(object):
         '''
         Agrega un nuevo Usuario (tupla: nombre-pass-rol) en la lista de Usuarios
         Confirma la transaccion.
-        
         '''
         lista_de_usrs = self.getDiccionarioElementos('USUARIOS')
         lista_de_usrs.append(usr) #USUARIOS.append((self.name, hash_password, rol))
         self.commiting()
-        
+
     def remove(self, claveDiccionario, clave):
         '''
         @raise exception: ObjetoNoExiste
@@ -124,10 +123,10 @@ class MiZODB(object):
             diccionario = self.getDiccionarioElementos(claveDiccionario)
             del diccionario[clave]
             self.commiting()
-        except KeyError, e:
+        except KeyError:
             raise ExcepcionObjeNoExiste
-                
-        
+
+
 class Division_Transporte(Persistent):
     '''
     Clase que representa a la Divisi�n de Transporte.
@@ -402,21 +401,19 @@ class Division_Transporte(Persistent):
             transaction.commit()
         except KeyError:
             raise ExcepcionObjeNoExiste
-    
-    '''
-    @TODO: Tener en cuenta q la el m�dulo q manipula la BD lanzar� una Excepci�n
-    si el repuesto con las caracter�stcas q se intentan ingresar y existe.
-    '''
-    def addVehiculo(self, dominio, marca, registroInterno, numeroChasis):
+
+    def agregarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
         '''
-        @return: 
-        @author: 
+        @return:
+        @author:
         '''
         vehiculo = Legajo(dominio, marca, registroInterno, numeroChasis)
         self.zodb.conexion.sync()
         self.zodb.save('vehiculos', dominio, vehiculo)
-        #TODO: Atrapar la excepcion y avisar al usuario...
-    
+        # TODO: Atrapar la excepcion de VehiculoExiste y avisar al usuario...
+        # Falta manejar el tema del R.I, es autonumérico o
+        # se debe avisar al usr que ya existe un móvil con ese R.I.
+
 #    def registrarEgresoDeVehiculo(self, dominio, kilometrajeEgreso, CombustibleEgreso, fechaEgreso):
 #        '''
 #        @return: 
@@ -614,7 +611,7 @@ class Division_Transporte(Persistent):
     
     def getVehiculosEnPlanificacion(self):
         return filter(lambda unVehiculo: unVehiculo.estaPlanificado(), self.getVehiculos().values())
-    
+
     def getTipoRepuestos(self):
         '''
         @return: 
@@ -622,20 +619,19 @@ class Division_Transporte(Persistent):
         '''
         self.zodb.conexion.sync()
         return self.zodb.getDiccionarioElementos('tiposRepuestos')
-    
+
     def modificarRepuesto(self, clave, nombre, descripcion):
         try:
             repuesto = self.getRepuesto(clave)
             repuesto.setNombre(nombre)
             repuesto.setDescripcion(descripcion)
-            
             transaction.commit()
         except KeyError:
             pass
-    
+
     def getVehiculosParaEgreso(self):
         return filter(lambda unVehiculo: unVehiculo.puedeEgresar(), self.getVehiculos().values())
-    
+
 ##############################################################################
 ########################## TEST DIVISION #####################################
 ##############################################################################
