@@ -22,23 +22,18 @@ class Legajo(Persistent):
     @version: 
     @author: 
     '''
-    
+
     ''' ATTRIBUTES
 
-      dominio  (private)
-        
-      modelo  (private)
-    
-      marca  (private)
-    
-      registroInterno  (private)
-    
-      numeroChasis  (private)
-      
-      ordenesReparacion
+      - dominio  (private)
+      - modelo  (private)
+      - marca  (private)
+      - registroInterno  (private)
+      - numeroChasis  (private)
+      - ordenesReparacion
 
     '''
-    
+
     def __init__(self, dominio, marca, registroInterno, numeroChasis, comisaria=''):
         '''
         Constructor
@@ -238,34 +233,34 @@ class Legajo(Persistent):
     def getReparacionesFinalizadas(self):
         reparaciones = [orden.getReparaciones() for orden in self.getOrdenesDeReparacionFinalizadas()]
         return reparaciones
-    
+
     def getOrdenesDeReparacion(self):
         return self.ordenesDeReparacion
-    
+
     def getReparacionesSinPlanificarDeLaSeccion(self, nombre_seccion):
         try:
             return self.obtenerOrdenDeReparacionEnCurso().getReparacionesClasificadas()[nombre_seccion]
         except KeyError:
             return []
-        
+
     def tieneTodasLasReparacionesPlanificadas(self):
         return self.obtenerOrdenDeReparacionEnCurso().getReparacionesSinPlanificar() == []
-    
+
     def getReparacionesSinPlanificar(self):
         return self.obtenerOrdenDeReparacionEnCurso().getReparacionesSinPlanificar()
-    
+
     def getReparaciones(self):
         return self.obtenerOrdenDeReparacionEnCurso().getReparaciones()
-    
+
     def tieneTodosLosTurnosFinalizados(self):
         return self.obtenerOrdenDeReparacionEnCurso().tieneTodosLosTurnosFinalizados()
 
     def finalizarVerificacionReparacion(self):
         return self.obtenerOrdenDeReparacionEnCurso().finalizarVerificacionReparacion()
-    
+
     def puedeEgresar(self):
         return self.getOrdenParaEgreso() != None
-        
+
     def getOrdenParaEgreso(self):
         orden = filter(lambda unaOrden: unaOrden.puedeEgresar(), self.ordenesDeReparacion)
         try:
@@ -273,10 +268,10 @@ class Legajo(Persistent):
             return orden
         except IndexError:
             return None
-        
+
     def registrarEgreso(self, kilometraje, combustible, fecha):
         self.getOrdenParaEgreso().registrarEgreso(kilometraje, combustible, fecha)
-        
+
 ##############################################################################
 ########################## TEST LEGAJO #######################################
 ##############################################################################

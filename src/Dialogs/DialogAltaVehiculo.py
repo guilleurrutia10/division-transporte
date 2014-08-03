@@ -2,7 +2,7 @@
 '''
 Created on 10/11/2012
 
-@author: urrutia
+@author: urrutia, morales
 '''
 from PyQt4 import QtGui, QtCore
 from re import match
@@ -11,11 +11,19 @@ from formularios.DialogAltaVehiculoPrueba import Ui_DialogAltaVehiculo
 
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
+from Utiles_Dialogo import Mensaje
 
 
 class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
     '''
-        Classdocs
+        Elementos:
+            lineEditDominio
+            lineEditMarca
+            lineEditModelo
+            lineEditRegistroInterno
+            lineEditChasisNro
+            pushButtonAceptar
+            pushButtonCancelar
     '''
 
     def __init__(self, parent=None):
@@ -31,14 +39,27 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         self.label_3.setObjectName("label")
         self.label_4.setObjectName("label")
         self.label_5.setObjectName("label")
+        # El único diálogo para mostrar alertas
+        self._mensaje = Mensaje(self)
+        self._mensaje.setTitle('Alta Vehículo')
 
     def validacionesLineEdit(self):
         '''
+        Se cargan las expresiones regulares para validar
+        la entrada de los diferentes lineEdits del diálogo.
         '''
-        self.lineEditDominio.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Z|a-z]{3}[0-9]{3}'),self))
-        self.lineEditMarca.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Z|a-z]+'),self))
-        self.lineEditRegistroInterno.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
-        self.lineEditChasisNro.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
+        dominioRegExp = QtCore.QRegExp('[A-Z|a-z]{3}[0-9]{3}')
+        validadorRegExp = QtGui.QRegExpValidator(dominioRegExp, self)
+        self.lineEditDominio.setValidator(validadorRegExp)
+        marcaRegExp = QtCore.QRegExp('[A-Z|a-z]+')
+        validadorRegExp = QtGui.QRegExpValidator(marcaRegExp, self)
+        self.lineEditMarca.setValidator(validadorRegExp)
+        registroInternoRegExp = QtCore.QRegExp('[0-9]+')
+        validadorRegExp = QtGui.QRegExpValidator(registroInternoRegExp, self)
+        self.lineEditRegistroInterno.setValidator(validadorRegExp)
+        numChasisRegExp = QtCore.QRegExp('[0-9]+')
+        validadorRegExp = QtGui.QRegExpValidator(numChasisRegExp, self)
+        self.lineEditChasisNro.setValidator(validadorRegExp)
 
     @QtCore.pyqtSlot()
     def on_pushButton_Cancelar_pressed(self):
@@ -46,54 +67,83 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         '''
         self.reject()
 
+    @QtCore.pyqtSlot('QString')
+    def on_lineEditDominio_textChanged(self, cadena):
+        '''
+        Al ingresar algún caracter en el lineEditDominio se lo
+        convierte a mayúscula.
+        '''
+        mayusculas = cadena.toUpper()
+        self.lineEditDominio.setText(mayusculas)
+
     @QtCore.pyqtSlot()
     def on_pushButton_2Aceptar_pressed(self):
         '''
         Acciones que se deben llevar a cabo al presionar el botón aceptar.
         Validar los lineEdit, y más....
         '''
-        try:
-            assert self.testearDialogo() is True
-        except AssertionError:
+#         try:
+#             assert self.testearDialogo() is True
+#         except AssertionError:
+#             return
+#         self.cargarVehiculo()
+#         if self.mostrarMensaje('El vehiculo se ha ingresado correctamente!!! :)', 'Ingresando Vehiculo'):
+#             self.accept()
+        if not self.testearDialogo():
+            self._mensaje.exec_()
             return
-        self.cargarVehiculo()
-        if self.mostrarMensaje('El vehiculo se ha ingresado correctamente!!! :)', 'Ingresando Vehiculo'):
-            self.accept()
+        else:
+            if self.cargarVehiculo():
+                self._mensaje.setMensaje('El vehiculo se ha ingresado correctamente!!! :)')
+                self._mensaje.setInformative()
+                self.accept()
+                # Si se presionó Ok...
+#                 if self._mensaje.exec_() == self._mensaje.messageBox.Ok:
+#                     self.accept()
+            else:
+#                 self._mensaje.exec_()
+                print 'No se pudo cargar......'
+        self._mensaje.exec_()
 
     def testearDialogo(self):
         '''
         TODO: Cambiar el nombre si no es significativo.
         '''
+        self._mensaje.setWarning()
         if not match('([A-Z|a-z]{3})([0-9]{3})', self.lineEditDominio.text()):
-            self.mostrarMensaje('Debe ingresar el dominio del vehículo. Debe ser alfanumérico.', 'Ingresar Dominio')
+            self._mensaje.setMensaje('Debe ingresar el dominio del vehículo. Debe ser alfanumérico.')
+#             self.mostrarMensaje('Debe ingresar el dominio del vehículo. Debe ser alfanumérico.', 'Ingresar Dominio')
             self.lineEditDominio.clear()
             self.lineEditDominio.setFocus()
             return
         if not match('[a-z|A-Z]+', self.lineEditMarca.text()):
-            self.mostrarMensaje('Debe ingresar la Marca del vehículo.Debe ser alfabético.', 'Ingresar Marca')
+            self._mensaje.setMensaje('Debe ingresar la Marca del vehículo.Debe ser alfabético.')
+#             self.mostrarMensaje('Debe ingresar la Marca del vehículo.Debe ser alfabético.', 'Ingresar Marca')
             self.lineEditMarca.clear()
             self.lineEditMarca.setFocus()
             return
         if not match('[0-9]+', self.lineEditRegistroInterno.text()):
-            self.mostrarMensaje('Debe ingresar el Registro Interno del vehículo.Debe ser numérico.', 'Ingresar Registro Interno')
+            self._mensaje.setMensaje('Debe ingresar el Registro Interno del vehículo.Debe ser numérico.')
+#             self.mostrarMensaje('Debe ingresar el Registro Interno del vehículo.Debe ser numérico.', 'Ingresar Registro Interno')
             self.lineEditRegistroInterno.clear()
             self.lineEditRegistroInterno.setFocus()
             return
         if not match('[0-9]+', self.lineEditChasisNro.text()):
-            self.mostrarMensaje('Debe ingresar el Número de Chasis del vehículo.Debe ser numérico.', 'Ingresar Número de Chasis')
+            self._mensaje.setMensaje('Debe ingresar el Número de Chasis del vehículo.Debe ser numérico.')
+#             self.mostrarMensaje('Debe ingresar el Número de Chasis del vehículo.Debe ser numérico.', 'Ingresar Número de Chasis')
             self.lineEditChasisNro.clear()
             self.lineEditChasisNro.setFocus()
             return
         return True
 
-    '''
-    TODO: Este método se repite en varios Dialogs.
-    '''
-    def mostrarMensaje(self, mensaje, titulo):
-        msgBox = QtGui.QMessageBox(self)
-        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
-        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
-        return msgBox.exec_()
+#     '''
+#     TODO: Este método se repite en varios Dialogs.
+#     '''
+#     def mostrarMensaje(self, mensaje, titulo):
+#         msgBox = QtGui.QMessageBox(self)
+#         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+#         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+#         return msgBox.exec_()
 
     def cargarVehiculo(self):
         dominio = unicode(self.lineEditDominio.text())
@@ -107,7 +157,13 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         try:
             self.DIVISION.agregarVehiculo(dominio, marca, registroInterno, numeroChasis)
         except ExcepcionObjetoExiste:
-            self.mostrarMensaje(
-                                 mensaje='El vehiculo con el dominio %s ya se encuentra cargado en el sitema' % (dominio),
-                                 titulo='Error Alta Vehículo')
+            self._mensaje.setCritical()
+            mensaje = 'El vehiculo con el dominio %s ya se encuentra cargado en el sistema' % (dominio)
+            self._mensaje.setMensaje(mensaje)
+            self.lineEditDominio.setFocus()
+            return False
+        return True
+#             self.mostrarMensaje(
+#                                  mensaje='El vehiculo con el dominio %s ya se encuentra cargado en el sitema' % (dominio),
+#                                  titulo='Error Alta Vehículo')
         # division.addVehiculo(dominio, marca, registroInterno, numeroChasis, modelo)

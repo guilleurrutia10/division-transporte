@@ -21,17 +21,14 @@ from Seccion import Seccion
 from ZODB import config
 from ZEO.Exceptions import ClientDisconnected
 import transaction
-#from copy import deepcopy
 from excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
 from excepciones.ExcepcionObjetoNoExiste import ExcepcionObjeNoExiste
 
 
 class MiZODB(object):
     '''
-    Clase que representa la ZODB.
-    classdocs
-    @version: 
-    @author: 
+    Clase que representa la conexión con la ZODB (Zope Object Data Base).
+    @author: urrutia
     '''
 
 #    def __init__(self, url):
@@ -39,8 +36,6 @@ class MiZODB(object):
         '''
         Constructor, se conecta al Servidor de la BD a través del archivo de configuracion zeo.conf
         en donde se indica la IP:PORT.
-        @return: 
-        @author: 
         '''
 #        self.url = url
         self.url = 'zeo.conf'
@@ -50,7 +45,7 @@ class MiZODB(object):
             self.raiz = self.conexion.root()
         except ClientDisconnected:
             print 'El cliente se ha desconectado debido a que el Servidor no corre...'
-        
+
     def open(self):
         '''
         Abre la conexion con la base de datos.
@@ -60,26 +55,27 @@ class MiZODB(object):
         self.db = config.databaseFromURL(self.url)
         self.conexion = self.db.open()
         self.raiz = self.conexion.root()
-        
+
     def close(self):
         '''
         Cierra la conexion con la base de datos.
-        @return: 
-        @author: 
+        @return:
+        @author:
         '''
         self.conexion.close()
         self.db.close()
-        self.raiz = None 
-        
+        self.raiz = None
+
     def commiting(self):
         '''
         Realiza una confirmación en la base de datos.
         @return: 
         @author: 
         '''
-        self.raiz._p_changed = True # The object has been changed.
+        # The object has been changed.
+        self.raiz._p_changed = True
         transaction.commit()
-    
+
     def getDiccionarioElementos(self, clave):
         '''
             Retorna el valor del diccionario de elementos en la clave, 
@@ -133,26 +129,26 @@ class Division_Transporte(Persistent):
     :version:
     :author:
     '''
-    
+
     instance = None
-    
+
     def __new__(cls, *args, **kargs):
         '''
         @return: Division_Transporte
-        @author: 
+        @author:
         '''
         if cls.instance is None:
             cls.instance = Persistent.__new__(cls, *args, **kargs)
             cls.instance.inicialize()
         return cls.instance
-    
+
     @classmethod
     def divisionTransporte(cls):
         zodb = MiZODB()
         dbroot = zodb.raiz
         div = dbroot['DIVISION']
         return div
-        
+
     def inicialize(self):
         '''
         @return: 
@@ -167,7 +163,7 @@ class Division_Transporte(Persistent):
             secciones
         '''
         self.instance.id = 1
-        #TODO: try: ... ClientDisconnected -> Error en BD
+        # TODO: try: ... ClientDisconnected -> Error en BD
         self.zodb = MiZODB()
         self.legajos = PersistentList()
         self.localidades = PersistentList()
@@ -185,7 +181,7 @@ class Division_Transporte(Persistent):
         ATTRIBUTES
         '''
         pass
-        
+
     def getSecciones(self):
         '''
         @return: 
@@ -193,7 +189,7 @@ class Division_Transporte(Persistent):
         '''
         self.zodb.conexion.sync()
         return self.zodb.getDiccionarioElementos('secciones')
-    
+
     def agregarSeccion(self, nombreSeccion, empleados, encargado):
         '''
         @return: 
@@ -207,20 +203,20 @@ class Division_Transporte(Persistent):
         usrNew.registrar('jefeSeccion')
         encargado.setUsuario(usrNew)
         self.zodb.conexion.sync()
-        
+
         #Armar un diccionario de empleados (bien podria hacerlo la misma seccion, tmb):
 #         empleadosSeccion = {}
         for empleado in empleados:
 #             empleadosSeccion[empleado.getDocumento()] = empleado
             self.zodb.remove('empleados', empleado.getDocumento())
-        
+
         self.zodb.remove('empleados', encargado.getDocumento())
         codigoDeSeccion = len(self.secciones)
         seccion = Seccion(codigoDeSeccion, nombreSeccion, empleados, encargado)
-        
+
         #TODO: Esto respeta el modelo, seguimos de esta forma?
         self.secciones.append(seccion)
-        
+
         self.zodb.save('secciones', seccion.getNombre(), seccion)
 
 
@@ -231,7 +227,7 @@ class Division_Transporte(Persistent):
         '''
         self.zodb.conexion.sync()
         return self.zodb.getDiccionarioElementos('tiposDocumentos')
-    
+
     def getEmpleados(self):
         '''
         @return: 
@@ -250,7 +246,7 @@ class Division_Transporte(Persistent):
         except KeyError:
             self.zodb.raiz['secciones'] = {}
             secciones = self.zodb.raiz['secciones'].values()
-            
+
         empleadosAsignados = {}
         for seccion in secciones:
 #             empleadosSeccion = seccion.empleados.values()
@@ -258,15 +254,15 @@ class Division_Transporte(Persistent):
             for empleado in empleadosSeccion:
                 empleadosAsignados[empleado.getDocumento()] = empleado
             empleadosAsignados[seccion.getEncargado().getDocumento()] = seccion.getEncargado()
-    
+
         for empleado in empleados:
             empleadosAsignados[empleado.getDocumento()] = empleado
         return empleadosAsignados
-    
+
     def getEmpleadosSinAsignar(self):
         '''
             @return: Devuelve un diccionario con todos los empleados de la Division que no estan asiganados a ninguna Seccion. 
-             
+
         '''
         self.zodb.conexion.sync()
         try:
@@ -274,7 +270,7 @@ class Division_Transporte(Persistent):
         except KeyError:
             return {}
 
-    
+
     def getEmpleado(self, clave):
         '''
         @return: 
@@ -383,7 +379,7 @@ class Division_Transporte(Persistent):
             return vehiculos[clave]
         except KeyError:
             raise ExcepcionObjeNoExiste
-    
+
     def modificarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
         '''
         @raise exception: ExcepcionObjeNoExiste (el vehiculo con el dominio....)
@@ -451,7 +447,6 @@ class Division_Transporte(Persistent):
         #print '#'*20
         #print self.getVehiculos().values()
         return filter(lambda unVehiculo: unVehiculo.puedeRegistrarIngreso(), self.getVehiculos().values())
-        
 
     def getTipoReparaciones_deprecated(self):
         self.zodb.conexion.sync()
@@ -465,7 +460,7 @@ class Division_Transporte(Persistent):
         todas_las_reparaciones_de_la_div = []
         for seccion in self.getSecciones().values():
             todas_las_reparaciones_de_la_div.extend(seccion.getTiposDeReparaciones())
-        
+
         return todas_las_reparaciones_de_la_div
 
     def getTipoReparacion(self, claveTipoReparacion):
@@ -479,12 +474,12 @@ class Division_Transporte(Persistent):
             return tiposReparaciones[claveTipoReparacion]
         except KeyError:
             raise ExcepcionObjeNoExiste
-    
+
     def registrarReparaciones(self, vehiculoSeleccionado):
         # primero cambiamos el estado de la orden
         # vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getEstadoOrdenReparacion().cambiarProximoEstado()
         vehiculoSeleccionado.getOrdenDeReparacionEnCurso().generarPedidoDeActuacion()
-        
+
 
 #    def getPedidoActuacionSinFechaRecepcion(self):
 #        vehiculos = self.getVehiculos().values()
@@ -507,7 +502,7 @@ class Division_Transporte(Persistent):
 #        zodb = ZopeDB(MiZODB())
 #        zodb.remove('vehiculos', vehiculo.dominio)
 #        vehiculo.save()
-            
+
     def obtenerVehiculo(self, numeroPedido):
         self.zodb.conexion.sync()
         vehiculos =  self.zodb.raiz['vehiculos'].values()
@@ -534,10 +529,10 @@ class Division_Transporte(Persistent):
         '''
         self.zodb.conexion.sync()
         return self.zodb.getDiccionarioElementos('USUARIOS')
-    
+
     def registrarUsuario(self, nuevoUsr):
         self.zodb.saveUsr(nuevoUsr)
-        
+
     def getSeccionesQuePuedenTransferir(self):
         '''
         @return: una lista con todas las Secciones que cumplen las condiciones para tranferir empleados.
@@ -547,13 +542,13 @@ class Division_Transporte(Persistent):
         #todasLasSecciones = self.zodb.raiz['secciones'].values() #para mejor visibilidad
         todasLasSecciones = self.getSecciones().values() #para mejor visibilidad
         return filter(lambda unaSeccion: unaSeccion.puedeTransferir(), todasLasSecciones)
-    
+
     def getSeccionesParaCambiarEmpleado(self, unEmpleado):
         '''
             Retorna todas las secciones a las que unEmpleado puede ser transferido
         '''
         return filter(lambda unaSeccion: unaSeccion != self.getSeccionDeEmpleado(unEmpleado), self.getSecciones().values())
-        
+
     def getSeccionDeEmpleado(self, empleado):
         '''
             Retorna la seccion en la que se encuentra el empleado.
@@ -566,7 +561,7 @@ class Division_Transporte(Persistent):
                 break
         #print 'La seccion del empleado: %s, es: %s' %(empleado.quienSos(), seccion_del_empleado.getNombre())
         return seccion_del_empleado
-    
+
     def cambiarDeSeccionAEmpleado(self, unEmpleado, seccionNueva):
         '''
         Remueve al empleado de su Seccion actual y lo ubica en la nueva Seccion
@@ -581,12 +576,12 @@ class Division_Transporte(Persistent):
         #TODO: Guardamos, esto es todo?
         transaction.commit()
         self.zodb.commiting()
-        
+
     def asignarNuevoEncargadoDeSeccion(self, seccion, nuevoEncargado):
         encargadoAnterior = seccion.asignarNuevoEncargado(nuevoEncargado)
         #TODO: Verificar!
         self.agregarEmpleadoDisponible(encargadoAnterior)
-        
+
     def agregarEmpleadoDisponible(self, empleado):
         '''
             Asigna al empleado recibido a la 'lista' de empleados disponibles.
@@ -596,19 +591,19 @@ class Division_Transporte(Persistent):
     def getProximoNroPedidoActuacion(self):
         self.NRO_PEDIDO_DE_ACTUACION += 1
         return self.NRO_PEDIDO_DE_ACTUACION
-    
+
     def getVehiculosEnRevision(self):
         return filter(lambda unVehiculo: unVehiculo.estaEnRevision(), self.getVehiculos().values())
 
     def getVehiculosEnAprobada(self):
         return filter(lambda unVehiculo: unVehiculo.estaEnAprobada(), self.getVehiculos().values())
-    
+
     def getVehiculosEsperandoAprobacion(self):
         return filter(lambda unVehiculo: unVehiculo.estaEsperandoAprobacion(), self.getVehiculos().values())
-    
+
     def getVehiculosEnFinalizada(self):
         return filter(lambda unVehiculo: unVehiculo.estaFinalizado(), self.getVehiculos().values())
-    
+
     def getVehiculosEnPlanificacion(self):
         return filter(lambda unVehiculo: unVehiculo.estaPlanificado(), self.getVehiculos().values())
 
