@@ -83,7 +83,8 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
             fila += 1
 
 from formularios.DlgPlanificar_1 import Ui_DlgPlanificar_1
-            
+
+
 class DialogPlanificar_1(QtGui.QDialog, Ui_DlgPlanificar_1):
     '''
     Atributos:
