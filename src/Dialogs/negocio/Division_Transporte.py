@@ -281,16 +281,17 @@ class Division_Transporte(Persistent):
     def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento):
         '''
             Crea un empleado nuevo con los datos recibidos y lo guarda en la BD.
-            Se comprueba si el número de documento y el tipo de documento son 
+            Se comprueba si el número de documento y el tipo de documento son
             iguales.
         '''
-        # Se comprueba si el número de documento y el tipo de documento son iguales.
         tiposDocumentos = self.zodb.raiz['tiposDocumentos']
         tipoDocSeleccionado = tiposDocumentos[tipoDocumento]
         empleado = Empleado(nombre, apellido, numeroDocumento, tipoDocSeleccionado)
         # Se obtienen todos los empleados de la División.
         empleados = self.getEmpleados().values()
         # Se comprueba si el empleado se encuentra en la División.
+        # Se verifica si el número de documento y el tipo de documento son
+        # iguales.
         for e in empleados:
             if empleado.comparar(e):
                 raise ExcepcionObjetoExiste
@@ -358,8 +359,7 @@ class Division_Transporte(Persistent):
 
     def getVehiculo(self, clave):
         '''
-        @return: 
-        @author: 
+        @return:
         '''
         self.zodb.conexion.sync()
         # TODO: try-except KeyError, No existe el dict de vehiculos
@@ -367,7 +367,7 @@ class Division_Transporte(Persistent):
         try:
             return vehiculos[clave]
         except KeyError:
-            raise ExcepcionObjeNoExiste
+            raise ExcepcionObjeNoExiste(clave)
 
     def modificarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
         '''
