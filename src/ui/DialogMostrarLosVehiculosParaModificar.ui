@@ -132,16 +132,9 @@
        <number>8</number>
       </property>
       <item row="0" column="1">
-       <widget class="QPushButton" name="pushButtonAceptar">
+       <widget class="QPushButton" name="pushButtonHecho">
         <property name="text">
-         <string>Aceptar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="pushButtonCancelar">
-        <property name="text">
-         <string>Cancelar</string>
+         <string>Hecho</string>
         </property>
        </widget>
       </item>
@@ -164,5 +157,38 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButtonHecho</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogMostrarLosVehiculosParaModificar</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>728</x>
+     <y>574</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>394</x>
+     <y>298</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonHecho</sender>
+   <signal>pressed()</signal>
+   <receiver>DialogMostrarLosVehiculosParaModificar</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>728</x>
+     <y>574</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>394</x>
+     <y>298</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

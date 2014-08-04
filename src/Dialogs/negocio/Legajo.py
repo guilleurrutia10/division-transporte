@@ -129,6 +129,18 @@ class Legajo(Persistent):
     def getModelo(self):
         return self.modelo
 
+    def getMarca(self):
+        return self.marca
+
+    def setMarca(self, marca):
+        self.marca = marca
+
+    def getRegistroInterno(self):
+        return self.registroInterno
+
+    def setRegistroInterno(self, registroInterno):
+        self.registroInterno = registroInterno
+
     def getPedidoActuacionSinFechaRecepcion(self):
 
         try:
