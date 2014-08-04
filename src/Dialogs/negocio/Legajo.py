@@ -40,8 +40,7 @@ class Legajo(Persistent):
         @return: 
         @author: 
         '''
-        #def __init__(self, dominio, marca, registroInterno, numeroChasis, modelo = 'Corsa'):
-        #self.modelo = modelo
+        self.modelo = 'None'
         self.dominio = dominio
         self.marca = marca
         self.registroInterno = registroInterno
@@ -51,10 +50,10 @@ class Legajo(Persistent):
         self.localidad = ''
         self.ordenesDeReparacion = []
         self.numeroOrden = 0
-    
+
     def noEstaFinalizada(self, ordenReparacion):
         return ordenReparacion.getEstadoOrdenReparacion() != 'Finalizada'
-    
+
     def obtenerOrdenDeReparacionEnCurso(self):
         '''
         @return: 
@@ -66,7 +65,7 @@ class Legajo(Persistent):
             raise ExcepcionPoseeOrdenReparacionEnCurso('El vehículo ya posee una orden de Reparación en Curso.')
         except IndexError:
             return None
-    
+
     def dameOrdenDeReparacionEnCurso(self):
         '''
         @return: 
@@ -76,9 +75,9 @@ class Legajo(Persistent):
         try:
             return ordenEnCurso[0]
         except IndexError:
-            
+
             raise Excepcion_No_Posee_Orden_Reparacion_En_Curso('El vehículo no posee una Orden de Reparación en Curso.')
-    
+
     def getOrdenDeReparacionEnCurso(self):
         '''
         @return: 
@@ -91,9 +90,9 @@ class Legajo(Persistent):
             return ordenEnCurso[0]
         except IndexError:
             # return None
-            
+
             raise Excepcion_Orden_No_Esta_En_Revision('La Orden de Reparacion del vehiculo no se encuentra en revision')
-        
+
     def crearOrdenDeReparacion(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
         '''
         @return: 
@@ -106,24 +105,29 @@ class Legajo(Persistent):
             self.ordenesDeReparacion.append(ordenReparacion)
         except ExcepcionPoseeOrdenReparacionEnCurso, e:
             raise ExcepcionPoseeOrdenReparacionEnCurso(e.getMensaje())
-    
-  
+
     def dameNumeroOrden(self):
         self.numeroOrden += 1
         return self.numeroOrden
-    
+
     def __eq__(self, otro):
         return (self.dominio == otro.dominio)
-    
+
     def __str__(self):
         return 'Dominio: %s' % self.dominio
         return 'Dominio: %s' % self.dominio
-    
+
     def getDominio(self):
         return self.dominio
-    
+
     def getNumeroChasis(self):
         return self.numeroChasis
+
+    def setModelo(self, modelo):
+        self.modelo = modelo
+
+    def getModelo(self):
+        return self.modelo
 
     def getPedidoActuacionSinFechaRecepcion(self):
 

@@ -21,7 +21,7 @@ from Seccion import Seccion
 from ZODB import config
 from ZEO.Exceptions import ClientDisconnected
 import transaction
-from excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
+from excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste, ExcepcionVehiculoExiste, ExcepcionEmpleadoExiste
 from excepciones.ExcepcionObjetoNoExiste import ExcepcionObjeNoExiste
 
 
@@ -219,23 +219,21 @@ class Division_Transporte(Persistent):
 
         self.zodb.save('secciones', seccion.getNombre(), seccion)
 
-
     def getTipoDeDocumentos(self):
         '''
-        @return: 
-        @author: 
+        Devuelve los tipos de documentos.
+        @return: TipoDocumento
         '''
         self.zodb.conexion.sync()
         return self.zodb.getDiccionarioElementos('tiposDocumentos')
 
     def getEmpleados(self):
         '''
-        @return: 
-        @author: 
+        Devuelve todos los empleados que se encuentran en la División.
+        Asignados y no asignados.
+        @return: diccionario de empleados.
         '''
         self.zodb.conexion.sync()
-        #TODO: debemos comprobar en c/u de los metodos que precisen trabajar con la
-        #zodb si existe el dict solicitado o comprobarlos una sola vez al abrir la bd???
         try:
             empleados = self.zodb.raiz['empleados'].values()
         except KeyError:
@@ -249,7 +247,6 @@ class Division_Transporte(Persistent):
 
         empleadosAsignados = {}
         for seccion in secciones:
-#             empleadosSeccion = seccion.empleados.values()
             empleadosSeccion = seccion.getEmpleados()
             for empleado in empleadosSeccion:
                 empleadosAsignados[empleado.getDocumento()] = empleado
@@ -261,8 +258,8 @@ class Division_Transporte(Persistent):
 
     def getEmpleadosSinAsignar(self):
         '''
-            @return: Devuelve un diccionario con todos los empleados de la Division que no estan asiganados a ninguna Seccion. 
-
+            @return: Devuelve un diccionario con todos los empleados de la
+            Division que no estan asiganados a ninguna Seccion.
         '''
         self.zodb.conexion.sync()
         try:
@@ -270,56 +267,48 @@ class Division_Transporte(Persistent):
         except KeyError:
             return {}
 
-
     def getEmpleado(self, clave):
         '''
-        @return: 
-        @author: 
+        Devuelve un objeto del tipo Empleado.
+        @return: empleado
         '''
         self.zodb.conexion.sync()
         try:
             return self.zodb.raiz['empleados'][clave]
         except KeyError:
             raise ExcepcionObjeNoExiste
-    
-    '''
-    @TODO: Tener en cuenta q la el m�dulo q manipula la BD lanzar� una Excepci�n
-    si el repuesto con las caracter�stcas q se intentan ingresar y existe.
-    '''
-    def agregarEmpleadoTwo(self, nombre, apellido, numeroDocumento, tipoDocumento):
-        '''
-        @return: 
-        @author: 
-        '''
-        tiposDocumentos = self.zodb.raiz['tiposDocumentos']
-        empleado = Empleado(nombre, apellido, numeroDocumento, tiposDocumentos[tipoDocumento])
-        try:
-            self.zodb.raiz['empleados'][numeroDocumento]
-            raise ExcepcionObjetoExiste
-        except KeyError, e:
-            if e.message == 'empleados':
-                self.zodb.raiz['empleados'] = {}
-            # El objeto no existe en la bd
-            self.zodb.raiz['empleados'][numeroDocumento] = empleado
-            #Problem solve...
-            self.zodb.raiz._p_changed = True
-            transaction.commit()
-    
+
     def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento):
         '''
             Crea un empleado nuevo con los datos recibidos y lo guarda en la BD.
+            Se comprueba si el número de documento y el tipo de documento son 
+            iguales.
         '''
+        # Se comprueba si el número de documento y el tipo de documento son iguales.
         tiposDocumentos = self.zodb.raiz['tiposDocumentos']
-        empleado = Empleado(nombre, apellido, numeroDocumento, tiposDocumentos[tipoDocumento])
+        tipoDocSeleccionado = tiposDocumentos[tipoDocumento]
+        empleado = Empleado(nombre, apellido, numeroDocumento, tipoDocSeleccionado)
+        # Se obtienen todos los empleados de la División.
+        empleados = self.getEmpleados().values()
+        # Se comprueba si el empleado se encuentra en la División.
+        for e in empleados:
+            if empleado.comparar(e):
+                raise ExcepcionObjetoExiste
+#         try:
         self.zodb.save('empleados', empleado.getDocumento(), empleado)
-        
+#         except ExcepcionObjetoExiste:
+#             empleadoExcepcion = ExcepcionEmpleadoExiste(numeroDocumento)
+#             codigo = tiposDocumentos[tipoDocumento].get_codigo_tipo_documento()
+#             empleadoExcepcion.setTipoDocumento(codigo)
+#             raise empleadoExcepcion
+
 #    def darDeBajaEmpleado(self):
 #        '''
 #        @return: 
 #        @author: 
 #        '''
 #        pass
-    
+
     '''
     TODO: Tener en cuenta q la el m�dulo q manipula la BD lanzar� una Excepci�n
     si el repuesto con las caracter�stcas q se intentan ingresar y existe.
@@ -398,17 +387,24 @@ class Division_Transporte(Persistent):
         except KeyError:
             raise ExcepcionObjeNoExiste
 
-    def agregarVehiculo(self, dominio, marca, registroInterno, numeroChasis):
+    def agregarVehiculo(self, dominio, marca, registroInterno, numeroChasis, modelo):
         '''
+        Crea un Legajo nuevo con los datos recibidos y lo guarda en la BD.
+        Se comprueba si el dominio ya se encuentra cargado.
         @return:
         @author:
         '''
         vehiculo = Legajo(dominio, marca, registroInterno, numeroChasis)
+        vehiculo.setModelo(modelo)
         self.zodb.conexion.sync()
-        self.zodb.save('vehiculos', dominio, vehiculo)
-        # TODO: Atrapar la excepcion de VehiculoExiste y avisar al usuario...
+        # TODO: Se debería comprobar si el dominio y el registro interno son iguales.
+        try:
+            self.zodb.save('vehiculos', dominio, vehiculo)
+        except ExcepcionObjetoExiste:
+            raise ExcepcionVehiculoExiste(dominio)
+        # TODO:
         # Falta manejar el tema del R.I, es autonumérico o
-        # se debe avisar al usr que ya existe un móvil con ese R.I.
+        # se debe avisar al usr que ya existe un móvil con ese R.I?
 
 #    def registrarEgresoDeVehiculo(self, dominio, kilometrajeEgreso, CombustibleEgreso, fechaEgreso):
 #        '''

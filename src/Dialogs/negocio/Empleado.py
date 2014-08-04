@@ -111,13 +111,18 @@ class Empleado(Persistent):
             return 1
         else:
             return -1
-        
+
     def setUsuario(self, usr):
         self._usuario = usr
         transaction.commit()
-        
+
     def getUsuario(self):
         try:
             return self._usuario
         except AttributeError:
             return None
+
+    def comparar(self, other):
+        if self.documento == other.documento and self.tipoDocumento == other.tipoDocumento:
+            return True
+        return False

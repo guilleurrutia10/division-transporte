@@ -10,7 +10,7 @@ from re import match
 from formularios.DialogAltaVehiculoPrueba import Ui_DialogAltaVehiculo
 
 from negocio.Division_Transporte import Division_Transporte
-from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
+from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionVehiculoExiste
 from Utiles_Dialogo import Mensaje
 
 
@@ -136,15 +136,6 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
             return
         return True
 
-#     '''
-#     TODO: Este método se repite en varios Dialogs.
-#     '''
-#     def mostrarMensaje(self, mensaje, titulo):
-#         msgBox = QtGui.QMessageBox(self)
-#         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
-#         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
-#         return msgBox.exec_()
-
     def cargarVehiculo(self):
         dominio = unicode(self.lineEditDominio.text())
         marca = unicode(self.lineEditMarca.text())
@@ -153,12 +144,12 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         modelo = unicode(self.lineEditModelo.text())
         # Se carga el Vehículo en el sistema.
         # TODO: falta mandar el modelo del vehículo.
-        # Tmb, falta atrapar si ya se encuentra cargado.
         try:
-            self.DIVISION.agregarVehiculo(dominio, marca, registroInterno, numeroChasis)
-        except ExcepcionObjetoExiste:
+            self.DIVISION.agregarVehiculo(dominio, marca, registroInterno, numeroChasis, modelo)
+        except ExcepcionVehiculoExiste, e:
             self._mensaje.setCritical()
-            mensaje = 'El vehiculo con el dominio %s ya se encuentra cargado en el sistema' % (dominio)
+            mensaje = e.__str__()
+#             mensaje = 'El vehiculo con el dominio %s ya se encuentra cargado en el sistema' % (dominio)
             self._mensaje.setMensaje(mensaje)
             self.lineEditDominio.setFocus()
             return False
@@ -166,4 +157,3 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
 #             self.mostrarMensaje(
 #                                  mensaje='El vehiculo con el dominio %s ya se encuentra cargado en el sitema' % (dominio),
 #                                  titulo='Error Alta Vehículo')
-        # division.addVehiculo(dominio, marca, registroInterno, numeroChasis, modelo)

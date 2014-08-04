@@ -6,16 +6,18 @@ Created on 03/10/2012
 '''
 from PyQt4 import QtCore, QtGui
 from re import match
-from datetime import date
 
 from formularios.DialogAltaPersonal import Ui_DialogAltaPersonal
 from negocio.Division_Transporte import Division_Transporte
+
+from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
+
 
 class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
     '''
     classdocs
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         '''
@@ -23,8 +25,8 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         self.setupUi(self)
         self.validacionesLineEdit()
         self.llenarComboBoxTipoDocumentos()
-        
-        #seteo de nombres de los Labels para el estilo
+
+        # seteo de nombres de los Labels para el estilo
         self.label.setObjectName("label")
         self.label_2.setObjectName("label")
         self.label_3.setObjectName("label")
@@ -34,31 +36,40 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         self.label_7.setObjectName("label")
         self.label_8.setObjectName("label")
 
-        
-            
     def validacionesLineEdit(self):
         '''
         '''
-        #Validación a medida que se escribe en el lineEdit
-        self.lineEditNombre.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z|\s]+'),self))
-        self.lineEditNroDocumento.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
-        self.lineEditDomicilio.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z\s]+[0-9]+'),self))
-        self.lineEditTelefono.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'),self))
-        self.lineEditEmail.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$'),self))
-    
+        # Validación a medida que se escribe en el lineEdit
+        nombreRegExp = QtCore.QRegExp('[A-Za-z|\s]+')
+        validadorRegExp = QtGui.QRegExpValidator(nombreRegExp, self)
+        self.lineEditNombre.setValidator(validadorRegExp)
+        numDocumentoRegExp = QtCore.QRegExp('[0-9]+')
+        validadorRegExp = QtGui.QRegExpValidator(numDocumentoRegExp, self)
+        self.lineEditNroDocumento.setValidator(validadorRegExp)
+        domicilioRegExp = QtCore.QRegExp('[A-Za-z\s]+[0-9]+')
+        validadorRegExp = QtGui.QRegExpValidator(domicilioRegExp, self)
+        self.lineEditDomicilio.setValidator(validadorRegExp)
+        telefonoRegExp = QtCore.QRegExp('[0-9]+')
+        validadorRegExp = QtGui.QRegExpValidator(telefonoRegExp, self)
+        self.lineEditTelefono.setValidator(validadorRegExp)
+        mailRegExp = QtCore.QRegExp('^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$')
+        validadorRegExp = QtGui.QRegExpValidator(mailRegExp, self)
+        self.lineEditEmail.setValidator(validadorRegExp)
+
     def llenarComboBoxTipoDocumentos(self):
         '''
         '''
         dvTrans = Division_Transporte()
         for i in dvTrans.getTipoDeDocumentos():
-            self.comboBoxTipoDocumento.addItems(QtCore.QStringList(i))
-            
+            item = QtCore.QStringList(i)
+            self.comboBoxTipoDocumento.addItems(item)
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         '''
         '''
         self.reject()
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         '''
@@ -70,7 +81,7 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         self.cargarPersonal()
         if self.mostrarMensaje('El Empleado se ha cargado exitosamente!! :)', 'Cargando Empleado'):
             self.accept()
-    
+
     '''
     TODO: Se ha repetido este mismo método en varias de las clsase Dialogos.
     '''
@@ -82,10 +93,11 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
-        
+
     def testearDialogo(self):
         '''
-        Función que se encarga de comprobar que los campos obligatorios se completaron y correctamente.
+        Función que se encarga de comprobar que los campos obligatorios se
+        completaron y correctamente.
         '''
         if not match('[A-Za-z|\s]', self.lineEditNombre.text()):
             self.mostrarMensaje('Debe ingresar el nombre.', 'Ingreso')
@@ -103,15 +115,19 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
             self.lineEditNroDocumento.setFocus()
             return
         return True
-    
+
     def cargarPersonal(self):
         nombre = unicode(self.lineEditNombre.text())
         apellido = unicode(self.lineEditApellido.text())
         nroDocumento = unicode(self.lineEditNroDocumento.text())
         tipoDocumento = unicode(self.comboBoxTipoDocumento.currentText())
-        
+
         fechaNac = self.dateEditFechaNacimiento.date().toPyDate()
         print fechaNac
-        #Se carga el empleado en el sistema. 
+        # Se carga el empleado en el sistema.
         division = Division_Transporte()
-        division.agregarEmpleado(nombre, apellido, nroDocumento, tipoDocumento)
+        try:
+            division.agregarEmpleado(nombre, apellido, nroDocumento, tipoDocumento)
+        except ExcepcionObjetoExiste:
+            mensaje = u'El Empleado con Tipo de Documento %s y número %s ya se encuentra cargado.' % (tipoDocumento, nroDocumento)
+            self.mostrarMensaje(mensaje, 'Alta Personal')
