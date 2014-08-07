@@ -141,6 +141,12 @@ class Legajo(Persistent):
     def setRegistroInterno(self, registroInterno):
         self.registroInterno = registroInterno
 
+    def getComisaria(self):
+        return self.comisaria
+
+    def setComisaria(self, comisaria):
+        self.comisaria = comisaria
+
     def getPedidoActuacionSinFechaRecepcion(self):
 
         try:

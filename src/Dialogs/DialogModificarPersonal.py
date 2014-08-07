@@ -12,8 +12,19 @@ from formularios.DialogModificarPersonal import Ui_DialogModificarPersonal
 class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
     '''
     classdocs
+    Elementos:
+        - lineEditNombre
+        - lineEditApellido
+        - comboBoxTipoDocumento
+        - lineEditNroDocumento
+        - dateEditFechaNacimiento
+        - lineEditDomicilio
+        - lineEditTelefono
+        - lineEditEmail
+        - pushButtonAceptar
+        - pushButtonCancelar
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         '''

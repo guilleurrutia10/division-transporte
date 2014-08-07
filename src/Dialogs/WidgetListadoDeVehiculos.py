@@ -12,6 +12,9 @@ from formularios.WidgetMostrarReparacionesVehiculo import Ui_WidgetMostrarRepara
 
 from negocio.Division_Transporte import Division_Transporte
 # from pyfits.util import deprecated
+from reportes import imprimirListadoVehiculos
+from Utiles_Dialogo import Mensaje
+
 
 '''TODO: lo que sigue............ ;p'''
 #===============================================================================
@@ -22,12 +25,12 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, vehiculosParaListar, parent=None):
         super(ListadoVehiculos, self).__init__(parent)
         self.setupUi(self)
-        #Para evitar que se modifique la información presentada por la grilla.
+        # Para evitar que se modifique la información presentada por la grilla.
         self.tableWidgetListadoDeVehiculos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.vehiculos = vehiculosParaListar
-        #self.cargarGrilla(self.vehiculos)
+        # self.cargarGrilla(self.vehiculos)
         self.tableWidgetListadoDeVehiculos.cargarConVehiculos(self.vehiculos)
-        #Reaccionamos al doble clic:
+        # Reaccionamos al doble clic:
         self.tableWidgetListadoDeVehiculos.connect(self.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellDoubleClicked(int , int)'), self.planificarVehiculo)
 
     def planificarVehiculo(self, fila, columna):
@@ -37,50 +40,39 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         '''
         print 'selecciono el vehiculo: %d\n Coordenadas: (%d, %d)' %(fila, fila, columna)
         print self.tableWidgetListadoDeVehiculos.getVehiculoEn(fila).getDominio()
-        
-        
+        self.pushButtonToPdf
+
+    @QtCore.pyqtSlot()
+    def on_pushButtonToPdf_clicked(self):
+        cabeceraVehiculos = ['',
+                             'Dominio',
+                             'Marca',
+                             'Registro Interno',
+                             u'Número de Chasis',
+                             u'Comisaría'
+                             ]
+        imprimirListadoVehiculos(cabeceraVehiculos, self.vehiculos)
+        m = Mensaje(self)
+        m.setTitle('PDF')
+        m.setMensaje('El archivo pdf ha sido generado con éxito. Se encuentra en la carpeta src.')
+        m.setInformative()
+        m.exec_()
+
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscar_textChanged(self, cadena):
-        filtro = unicode(self.lineEditBuscar.text())        
-        coches = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.dominio)), self.vehiculos)
+        filtro = unicode(self.lineEditBuscar.text()).lower()
+        coches = filter(lambda v: filtro in unicode.lower(unicode(v.getDominio()))
+                        or filtro in unicode.lower(unicode(v.getMarca()))
+                        or filtro in unicode.lower(unicode(v.getRegistroInterno()))
+                        or filtro in unicode.lower(unicode(v.getNumeroChasis())),
+                        self.vehiculos)
+#         coches = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.dominio)), self.vehiculos)
         #El método de comparación por igual está sobrecargado en la clase Legajo.
         coches.sort(cmp=lambda x, y : cmp(x, y))
 #        coches.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
 #        self.cargarGrilla(coches)
         self.tableWidgetListadoDeVehiculos.cargarConVehiculos(coches)
-            
-#     @deprecated
-    def cargarGrilla(self, vehiculos):
-        vehiculos.sort(cmp=lambda x, y : cmp(x.dominio, y.dominio))
-        self.tableWidgetListadoDeVehiculos.clearContents()
-        self.tableWidgetListadoDeVehiculos.setRowCount(len(vehiculos))
-        fila = 0
-        for vehiculo in vehiculos:
-            columna = 0
-            itemDominio = QtGui.QTableWidgetItem()
-            itemDominio.setText(vehiculo.dominio)
-            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemDominio)
-            columna += 1
-            itemMarca = QtGui.QTableWidgetItem()
-            itemMarca.setText(vehiculo.marca)
-            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemMarca)
-            columna += 1
-            itemRegistroInterno = QtGui.QTableWidgetItem()
-            itemRegistroInterno.setText(vehiculo.registroInterno)
-            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemRegistroInterno)
-            columna += 1
-            itemNumeroChasis = QtGui.QTableWidgetItem()
-            itemNumeroChasis.setText(vehiculo.numeroChasis)
-            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemNumeroChasis)
-            columna += 1
-            itemComisaria = QtGui.QTableWidgetItem()
-            itemComisaria.setText(vehiculo.comisaria)
-            self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemComisaria)
-            #columna += 1
-            #itemModelo = QtGui.QTableWidgetItem()
-            #itemModelo.setText(vehiculo.marca)
-            #self.tableWidgetListadoDeVehiculos.setItem(fila, columna, itemModelo)
-            fila += 1
+
 
 from formularios.DlgPlanificar_1 import Ui_DlgPlanificar_1
 

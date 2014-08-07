@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'src/ui/DialogAltaPersonal.ui'
 #
-# Created: Thu Jul 31 21:15:02 2014
+# Created: Tue Aug  5 01:41:39 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -123,13 +123,13 @@ class Ui_DialogAltaPersonal(object):
     def retranslateUi(self, DialogAltaPersonal):
         DialogAltaPersonal.setWindowTitle(_translate("DialogAltaPersonal", "Alta Personal", None))
         self.groupBox.setTitle(_translate("DialogAltaPersonal", "Nuevo Empleado", None))
-        self.label.setText(_translate("DialogAltaPersonal", "Nombre:", None))
-        self.label_2.setText(_translate("DialogAltaPersonal", "Apellido:", None))
-        self.label_3.setText(_translate("DialogAltaPersonal", "Nro Documento:", None))
+        self.label.setText(_translate("DialogAltaPersonal", "Nombre*:", None))
+        self.label_2.setText(_translate("DialogAltaPersonal", "Apellido*:", None))
+        self.label_3.setText(_translate("DialogAltaPersonal", "Nro Documento*:", None))
         self.label_4.setText(_translate("DialogAltaPersonal", "Domicilio:", None))
         self.label_5.setText(_translate("DialogAltaPersonal", "Tipo de Documento:", None))
-        self.label_6.setText(_translate("DialogAltaPersonal", "Fecha de Nacimiento:", None))
-        self.label_7.setText(_translate("DialogAltaPersonal", "Telefono:", None))
+        self.label_6.setText(_translate("DialogAltaPersonal", "Fecha de Nacimiento*:", None))
+        self.label_7.setText(_translate("DialogAltaPersonal", "Teléfono:", None))
         self.label_8.setText(_translate("DialogAltaPersonal", "Email:", None))
         self.pushButtonAceptar.setText(_translate("DialogAltaPersonal", "Aceptar", None))
         self.pushButtonCancelar.setText(_translate("DialogAltaPersonal", "Cancelar", None))

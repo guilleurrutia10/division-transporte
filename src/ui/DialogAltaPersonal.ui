@@ -44,14 +44,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Nombre:</string>
+         <string>Nombre*:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Apellido:</string>
+         <string>Apellido*:</string>
         </property>
        </widget>
       </item>
@@ -61,7 +61,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Nro Documento:</string>
+         <string>Nro Documento*:</string>
         </property>
        </widget>
       </item>
@@ -94,7 +94,7 @@
       <item row="4" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Fecha de Nacimiento:</string>
+         <string>Fecha de Nacimiento*:</string>
         </property>
        </widget>
       </item>
@@ -114,7 +114,7 @@
       <item row="6" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Telefono:</string>
+         <string>Teléfono:</string>
         </property>
        </widget>
       </item>

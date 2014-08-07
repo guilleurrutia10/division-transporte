@@ -1,5 +1,6 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource>
+<RCC>
+  <qresource>
+    <file>recursos/iconos/pdf.png</file>
     <file>recursos/iconos/logoDivisionTransporte.png</file>
     <file>recursos/iconos/list1-icon.png</file>
     <file>recursos/iconos/add_seccion.png</file>
@@ -19,5 +20,5 @@
     <file>recursos/iconos/personal/modificar_persona-icon.png</file>
     <file>recursos/iconos/personal/remove_person-icon.png</file>
     <file>recursos/iconos/personal/add_person-icon.png</file>
-</qresource>
+  </qresource>
 </RCC>

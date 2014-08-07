@@ -35,7 +35,7 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
         self.itemParaModificar = None
         # Se oculta.
         self.miWidget.pushButtonSeleccionar.hide()
-    
+
     #===========================================================================
     # Tratando de agarrar el evento de Seleccionar un Vehiculos de la grilla
     # y utilizarlo para retomar sus datos de la BD para mostrarlos en el 
@@ -121,6 +121,7 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
         self.lineEditRegistroInterno.setText(self.auto.registroInterno)
         self.lineEditChasisNro.setText(self.auto.numeroChasis)
         self.lineEditMarca.setText(self.auto.marca)
+        self.lineEditMarca.setFocus()
         return
 
     # Se agrega la validación al completar los campos.
