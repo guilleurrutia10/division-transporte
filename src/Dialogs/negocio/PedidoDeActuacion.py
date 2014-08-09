@@ -31,7 +31,7 @@ class PedidoDeActuacion(Persistent):
         self._nroDePedido = 1
         self._repuestosSolicitados = repuestosSolicitados
 
-        self._fechaRealizacion = datetime.datetime.now()
+        self._fechaRealizacion = datetime.date.today()
         self._fechaRecepcion = None
 #        self._numeroPedido = None
 

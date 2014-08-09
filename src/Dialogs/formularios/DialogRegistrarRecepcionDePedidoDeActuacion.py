@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'src/ui/DialogRegistrarRecepcionDePedidoDeActuacion.ui'
 #
-# Created: Thu Jul 31 21:39:09 2014
+# Created: Fri Aug  8 20:01:04 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -79,29 +79,27 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
         self.gridLayout_6 = QtGui.QGridLayout(self.groupBoxButtonBox)
         self.gridLayout_6.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_6.setObjectName(_fromUtf8("gridLayout_6"))
-        self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
-        self.gridLayout_6.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
-        self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
-        self.gridLayout_6.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
+        self.pushButtonHecho = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonHecho.setObjectName(_fromUtf8("pushButtonHecho"))
+        self.gridLayout_6.addWidget(self.pushButtonHecho, 0, 1, 1, 1)
         spacerItem2 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.gridLayout_6.addItem(spacerItem2, 0, 0, 1, 1)
         self.verticalLayout.addWidget(self.groupBoxButtonBox)
 
         self.retranslateUi(DialogRegistrarRecepcionDePedidoDeActuacion)
+        QtCore.QObject.connect(self.pushButtonHecho, QtCore.SIGNAL(_fromUtf8("clicked()")), DialogRegistrarRecepcionDePedidoDeActuacion.accept)
+        QtCore.QObject.connect(self.pushButtonHecho, QtCore.SIGNAL(_fromUtf8("pressed()")), DialogRegistrarRecepcionDePedidoDeActuacion.accept)
         QtCore.QMetaObject.connectSlotsByName(DialogRegistrarRecepcionDePedidoDeActuacion)
 
     def retranslateUi(self, DialogRegistrarRecepcionDePedidoDeActuacion):
         DialogRegistrarRecepcionDePedidoDeActuacion.setWindowTitle(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Registrar Recepcion de Pedido de Actuacion", None))
-        self.groupBox.setTitle(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Pedidos deActuacion", None))
+        self.groupBox.setTitle(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Pedidos deActuación", None))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Número Pedido", None))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Fecha de Realización", None))
-        self.groupBox_2.setTitle(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Nro Pedido de Actuacion:  ", None))
+        self.groupBox_2.setTitle(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Nro Pedido de Actuación:  ", None))
         self.pushButton_FiltroNroPedido.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Filtrar", None))
-        self.pushButton_Registrar.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Registrar Recepcion", None))
-        self.pushButtonAceptar.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Aceptar", None))
-        self.pushButtonCancelar.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Cancelar", None))
+        self.pushButton_Registrar.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Registrar Recepción", None))
+        self.pushButtonHecho.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Hecho", None))
 

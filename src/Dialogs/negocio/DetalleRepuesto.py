@@ -7,36 +7,35 @@ Created on 07/11/2012
 
 from persistent import Persistent
 
+
 class DetalleRepuesto(Persistent):
     '''
     classdocs
-    @version: 
-    @author: 
-    
+    @author:
+
     Atributos:
-    
+
     tipoDeRepuesto
     cantidad
     '''
 
-
     def __init__(self, tipoDeRepuesto=None, cantidad=None):
         ''''
         Constructor
-        @return: 
-        @author: 
+        @return:
+        @author:
         '''
         self._tipoDeRepuesto = tipoDeRepuesto
         self._cantidad = cantidad
-        
+
     def getTipoDeRepuesto(self):
         return self._tipoDeRepuesto
-    
+
     def setTipoDeRepuesto(self, tipoDeRepuesto):
-        self._tipoDeRepuesto = tipoDeRepuesto        
-        
+        self._tipoDeRepuesto = tipoDeRepuesto
+
     def setCantidad(self, cantidad):
         self._cantidad = cantidad
-        
+
     def getCantidad(self):
         return self._cantidad

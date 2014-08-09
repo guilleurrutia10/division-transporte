@@ -23,7 +23,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Pedidos deActuacion</string>
+      <string>Pedidos deActuación</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="1" column="0">
@@ -52,7 +52,7 @@
       <item row="0" column="0">
        <widget class="QGroupBox" name="groupBox_2">
         <property name="title">
-         <string>Nro Pedido de Actuacion:  </string>
+         <string>Nro Pedido de Actuación:  </string>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
@@ -90,7 +90,7 @@
          <item row="0" column="1">
           <widget class="QPushButton" name="pushButton_Registrar">
            <property name="text">
-            <string>Registrar Recepcion</string>
+            <string>Registrar Recepción</string>
            </property>
           </widget>
          </item>
@@ -144,16 +144,9 @@
        <number>8</number>
       </property>
       <item row="0" column="1">
-       <widget class="QPushButton" name="pushButtonAceptar">
+       <widget class="QPushButton" name="pushButtonHecho">
         <property name="text">
-         <string>Aceptar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="pushButtonCancelar">
-        <property name="text">
-         <string>Cancelar</string>
+         <string>Hecho</string>
         </property>
        </widget>
       </item>
@@ -176,5 +169,38 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButtonHecho</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogRegistrarRecepcionDePedidoDeActuacion</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>377</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonHecho</sender>
+   <signal>pressed()</signal>
+   <receiver>DialogRegistrarRecepcionDePedidoDeActuacion</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>377</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

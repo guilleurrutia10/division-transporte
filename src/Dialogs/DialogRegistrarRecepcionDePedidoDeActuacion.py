@@ -99,9 +99,10 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
 
+
 class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignarFechaRecepcionPedidoActuacion):
 
-    def __init__(self, parent=None, vehiculo = None):
+    def __init__(self, parent=None, vehiculo=None):
         super(DialogAsignarFechaRecepcionPedidoActuacion, self).__init__(parent)
         self.setupUi(self)
         self._vehiculo = vehiculo
@@ -112,14 +113,21 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
         self.label_6.setObjectName("label")
         # Por defecto se establece el campo Fecha con la fecha actual del sistema
         self.dateEditFechaRecepcioPedido.setDate(QtCore.QDate.currentDate())
-        self.cargarRepuestos()
+        self.cargarDatosPedido()
 
-    def cargarRepuestos(self):
+    def cargarDatosPedido(self):
+        pedido = self._vehiculo.getPedidoActuacionSinFechaRecepcion()
+        self.labelNroPedido.setText(str(pedido.getNumeroPedido()))
+        fechaRealizacion = QtCore.QString(pedido.getFechaRealizacion().ctime())
+        self.labelFechaRealizacionPedido.setText(fechaRealizacion)
         # Provisorio, seguro es un tableWidget
         for reparacion in self._vehiculo.getReparaciones():
             for r in reparacion.getRepuestosUtilizados():
                 repuesto = QtGui.QListWidgetItem()
-                repuesto.setText(r.getTipoDeRepuesto().getNombre())
+                cantidad = r.getCantidad()
+                nombre = r.getTipoDeRepuesto().getNombre()
+                informacion = '%s (%s)' % (nombre, cantidad)
+                repuesto.setText(informacion)
                 repuesto.setTextAlignment(4)
                 self.listWidget.addItem(repuesto)
 

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'src/ui/DialogAsignarFechaRecepcionPedidoActuacion.ui'
 #
-# Created: Fri Aug  1 02:10:12 2014
+# Created: Fri Aug  8 19:55:08 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -95,13 +95,13 @@ class Ui_DialogAsignarFechaRecepcionPedidoActuacion(object):
 
     def retranslateUi(self, DialogAsignarFechaRecepcionPedidoActuacion):
         DialogAsignarFechaRecepcionPedidoActuacion.setWindowTitle(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Asignar Fecha de Recepcion a Pedido de Actuacion", None))
-        self.groupBox.setTitle(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Informacion de Pedido de Actuacion:   ", None))
-        self.label.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Nro Pedido Actuacion:", None))
+        self.groupBox.setTitle(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Información de Pedido de Actuación:   ", None))
+        self.label.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Nro Pedido Actuación:", None))
         self.labelNroPedido.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "<nro pedido de actuacion>", None))
-        self.label_3.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Fecha de Realizacion:", None))
+        self.label_3.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Fecha de Realización:", None))
         self.labelFechaRealizacionPedido.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "<fecha de realizacion>", None))
         self.label_5.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Repuestos Solicitados:", None))
-        self.label_6.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Fecha de Recepcion:", None))
+        self.label_6.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Fecha de Recepción:", None))
         self.pushButtonAceptar.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Aceptar", None))
         self.pushButtonCancelar.setText(_translate("DialogAsignarFechaRecepcionPedidoActuacion", "Cancelar", None))
 
