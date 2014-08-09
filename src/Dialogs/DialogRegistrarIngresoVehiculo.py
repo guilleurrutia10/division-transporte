@@ -24,7 +24,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
     @version: 
     @author: 
     '''
-    
+
     def __init__(self, parent=None):
         '''
         Constructor
@@ -40,7 +40,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellEntered(int,int)'), self.seleccionarCelda)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellPressed(int,int)'), self.seleccionarCelda)
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         '''
@@ -48,7 +48,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         @author: 
         '''
         self.reject()
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         '''
@@ -57,7 +57,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         '''
         print 'Click sobre aceptar'
         self.accept()
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonRegistrarNuevoIngreso_clicked(self):
         '''
@@ -73,8 +73,9 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
             dlgDatosIngreso = DialogDatosIngresoVehiculo()
             dlgDatosIngreso.exec_()
             itemglobal = None
-            #self.mlistaDeVehiculoscargarGrilla(Division_Transporte().getVehiculosSinOrdenEnCurso())
-            self.listaDeVehiculos.cargarGrilla(self.DIVISION.getVehiculosSinOrdenEnCurso())
+#             self.listaDeVehiculos.cargarGrilla(self.DIVISION.getVehiculosSinOrdenEnCurso())
+            vehiculosSinOrden = self.DIVISION.getVehiculosSinOrdenEnCurso()
+            self.listaDeVehiculos.tableWidgetListadoDeVehiculos.cargarConVehiculos(vehiculosSinOrden)
 #        if itemglobal:
 #            dominio = unicode(itemglobal.text())
 #            division = Division_Transporte()
@@ -88,13 +89,13 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
 #                itemglobal = None
         else:
             self.mostrarMensaje('Debe seleccionar un Vehiculo.', 'Seleccionar Vehiculo')
-        
+
     def seleccionarCelda(self, fila, columna):
         itemVehiculo = self.listaDeVehiculos.tableWidgetListadoDeVehiculos.item(fila, 0)
         global itemglobal
         itemglobal = itemVehiculo
         print 'Presionando: %d ; %d' %(fila, columna)
-        
+
     '''
     TODO: Este método se repite en varios Dialogs.
     '''

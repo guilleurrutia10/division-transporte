@@ -110,7 +110,7 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         fecha = '%s/%s/%s' %(f.day(), f.month(), f.year())
         self._vehiculo.registrarEgreso(kilometraje, combustible, fecha)
         transaction.commit()
-        mostrarMensaje(self, 'Egreso del vehículo %s registrado con exito'%(self._vehiculo.getDominio()), 'Egreso exitoso')
+        mostrarMensaje(self, u'Egreso del vehículo %s registrado con exito'%(self._vehiculo.getDominio()), 'Egreso exitoso')
         self.accept()
     
     @QtCore.pyqtSlot()

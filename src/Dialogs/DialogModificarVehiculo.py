@@ -77,7 +77,9 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
         dlgModificar = DialogModificarVehiculo()
         dlgModificar.exec_()
         itemglobal = None
-        self.miWidget.cargarGrilla(Division_Transporte().getVehiculos().values())
+#         self.miWidget.cargarGrilla(Division_Transporte().getVehiculos().values())
+        vehiculos = Division_Transporte().getVehiculos().values()
+        self.miWidget.tableWidgetListadoDeVehiculos.cargarConVehiculos(vehiculos)
 #        self.miWidget.cargarGrillaInicial()
 
     '''
