@@ -14,6 +14,7 @@ from excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso import Excepcion_N
 from excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision 
 from excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso import Excepcion_No_Posee_Orden_Reparacion_En_Curso
 from Aprobada import Aprobada
+from Finalizada import Finalizada
 
 
 class Legajo(Persistent):
@@ -59,7 +60,8 @@ class Legajo(Persistent):
         @return: 
         @author: 
         '''
-        ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstado() != 'Finalizada', self.ordenesDeReparacion)
+#         ordenEnCurso = filter(lambda unaOrden: unaOrden.getEstado() != 'Finalizada', self.ordenesDeReparacion)
+        ordenEnCurso = filter(lambda unaOrden: not isinstance(unaOrden.getEstado(), Finalizada), self.ordenesDeReparacion)
         try:
             return ordenEnCurso[0]
             raise ExcepcionPoseeOrdenReparacionEnCurso('El vehículo ya posee una orden de Reparación en Curso.')
@@ -161,7 +163,7 @@ class Legajo(Persistent):
 
     def puedeRegistrarIngreso(self):
         ordenEnCurso = filter(lambda unaOrden: unaOrden.noEstaFinalizada(), self.ordenesDeReparacion)
-        #Si el vehiculo posee una orden en curso, es decir, una orden que no este finalizada, no puede registrar el ingreso.
+        # Si el vehiculo posee una orden en curso, es decir, una orden que no este finalizada, no puede registrar el ingreso.
         if len(ordenEnCurso) != 0:
             return False
         return True
@@ -174,7 +176,7 @@ class Legajo(Persistent):
         '''
         generacion_exitosa = self.obtenerOrdenDeReparacionEnCurso().generarPedidoDeActuacion()
         return generacion_exitosa
-        
+
     def registrarNuevoIngreso(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
         if self.obtenerOrdenDeReparacionEnCurso() == None:
             ordenReparacion = OrdenReparacion(self.dameNumeroOrden(), kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
@@ -188,25 +190,23 @@ class Legajo(Persistent):
         '''
         Recibe una lista de reparaciones, las cuales agrega a la OR en curso
         '''
-        #agregar las reparaciones a la OR en curso...
+        # agregar las reparaciones a la OR en curso...
         for reparacion in reparaciones:
             self.obtenerOrdenDeReparacionEnCurso().addReparacion(reparacion)
-        
-        
-    
+
     def agregarTurnoAlPlan(self, turno):
         self.obtenerOrdenDeReparacionEnCurso().agregarTurnoAlPlan(turno)
-        
+
     def planificacionFinalizada(self):
         finalizacion_exitosa = self.obtenerOrdenDeReparacionEnCurso().planificacionFinalizada()
         return finalizacion_exitosa
-    
+
     def getTurnosSinAtender(self):
         '''
-        Esta accion solo es realizable en estado 'Planificada' 
+        Esta accion solo es realizable en estado 'Planificada'
         '''
         return self.obtenerOrdenDeReparacionEnCurso().getTurnosSinAtender()
-    
+
     #Los try and except de los estaEn.... se deben a que el vehiculo puede no tener
     #orden en curso.
     def estaEnRevision(self):

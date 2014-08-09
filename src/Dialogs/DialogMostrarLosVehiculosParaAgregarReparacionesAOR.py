@@ -62,7 +62,9 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
             dlgRegistrarReparacionesVehiculo = DialogRegistrarReparaciones(self, self.DIVISION.getVehiculo(self.dominioVehiculo))
             try:
                 dlgRegistrarReparacionesVehiculo.exec_()
-                self.listaDeVehiculos.cargarGrilla(self.DIVISION.getVehiculosEnRevision())
+#                 self.listaDeVehiculos.cargarGrilla(self.DIVISION.getVehiculosEnRevision())
+                vehiculosEnRevision = self.DIVISION.getVehiculosEnRevision()
+                self.listaDeVehiculos.tableWidgetListadoDeVehiculos.cargarConVehiculos(vehiculosEnRevision)
             except Excepcion_Orden_No_Esta_En_Revision, e:
                 QtGui.QMessageBox.critical(self, 'Error', e.getMensaje())
         else:
