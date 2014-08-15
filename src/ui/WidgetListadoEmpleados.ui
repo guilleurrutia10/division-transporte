@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>948</width>
-    <height>412</height>
+    <width>991</width>
+    <height>607</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -23,10 +23,16 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>130</height>
+      </size>
      </property>
      <property name="maximumSize">
       <size>
@@ -94,10 +100,18 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QDateEdit" name="dateEditFechaInicio"/>
+          <widget class="QDateEdit" name="dateEditFechaInicio">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="dateEditFechaFin"/>
+          <widget class="QDateEdit" name="dateEditFechaFin">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -144,6 +158,9 @@
      <attribute name="horizontalHeaderDefaultSectionSize">
       <number>150</number>
      </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
      <column>
       <property name="text">
        <string>Nombre</string>
@@ -161,12 +178,12 @@
      </column>
      <column>
       <property name="text">
-       <string>Numero Documento</string>
+       <string>Número Documento</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Seccion</string>
+       <string>Sección</string>
       </property>
      </column>
      <column>
@@ -186,7 +203,7 @@
      </column>
      <column>
       <property name="text">
-       <string>Telefono</string>
+       <string>Teléfono</string>
       </property>
      </column>
      <column>
