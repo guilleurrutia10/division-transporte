@@ -10,20 +10,21 @@ from PyQt4 import QtCore, QtGui
 from formularios.WidgetListadoEmpleados import Ui_Form
 from negocio.Division_Transporte import Division_Transporte
 
+
 class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
-    
+
     def __init__(self, parent=None):
         super(WidgetListadoEmpleados, self).__init__(parent)
         self.setupUi(self)
-        #Para evitar que se modifique la información presentada por la grilla.
+        # Para evitar que se modifique la información presentada por la grilla.
         self.tableWidgetDatosEmpleados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.empleados = None
         self.cargarGrillaInicial()
-        
+
     def cargarGrillaEmpleadosSinAsignar(self, empleados):
         self.tableWidgetDatosEmpleados.clearContents()
         self.tableWidgetDatosEmpleados.setRowCount(len(empleados))
-        #Indica la cantidad de columnas a llenar.
+        # Indica la cantidad de columnas a llenar.
         print self.tableWidgetDatosEmpleados.horizontalHeader().count()
         fila = 0
         for empleado in empleados:
@@ -44,7 +45,7 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
             itemDocumento.setText(empleado.documento)
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemDocumento)
             fila = fila + 1
-    
+
     #===========================================================================
     # Por ahora la única vez que se consulta la BD es al cargar la grilla por
     # primera vez.
@@ -53,19 +54,23 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         division = Division_Transporte()
         p = division.getEmpleados()
         self.empleados = p.values()
-        self.empleados.sort(cmp=lambda x, y : cmp(x.nombre, y.nombre))
+        self.empleados.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
         self.cargarGrillaEmpleadosSinAsignar(self.empleados)
-    
-    @QtCore.pyqtSlot('QString')        
+
+    @QtCore.pyqtSlot('QString')
     def on_lineEditFiltroNombre_textChanged(self, cadena):
-        filtro = unicode(cadena)        
+        filtro = unicode(cadena)
         personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), self.empleados)
-        personal.sort(cmp=lambda x, y : cmp(x.nombre, y.nombre))
+        personal.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
         self.cargarGrillaEmpleadosSinAsignar(personal)
-        
+
+    # De esta manera queda un solo filtro para los strings...
     @QtCore.pyqtSlot('QString')        
     def on_lineEditBuscarDocumento_textChanged(self, cadena):
-        filtro = unicode(cadena)        
-        personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.documento)), self.empleados)
-        personal.sort(cmp=lambda x, y : cmp(x.documento, y.documento))
+        filtro = unicode(cadena).lower()
+        personal = filter(lambda p: filtro in unicode(p.getDocumento()).lower()
+                          or filtro in unicode(p.getNombre()).lower()
+                          or filtro in unicode(p.getApellido()).lower(),
+                          self.empleados)
+        personal.sort(cmp=lambda x, y: cmp(x, y))
         self.cargarGrillaEmpleadosSinAsignar(personal)

@@ -36,7 +36,6 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
     def planificarVehiculo(self, fila, columna):
         '''
         Planificar vehiculo
- 
         '''
         print 'selecciono el vehiculo: %d\n Coordenadas: (%d, %d)' %(fila, fila, columna)
         print self.tableWidgetListadoDeVehiculos.getVehiculoEn(fila).getDominio()
@@ -44,6 +43,18 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
 
     @QtCore.pyqtSlot()
     def on_pushButtonToPdf_clicked(self):
+        fileDialog = QtGui.QFileDialog()
+        fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave)
+        if fileDialog.exec_() == QtGui.QFileDialog.AcceptSave:
+            for filename in fileDialog.selectedFiles():
+                print 'Imprimiendo: %s' % filename
+        else:
+            return
+#         filedDialog = QtGui.QFileDialog()
+#         filename = filedDialog.getSaveFileName(parent=self)
+#         if filename.isEmpty():
+#             return
+#         print filename
         cabeceraVehiculos = ['',
                              'Dominio',
                              'Marca',
@@ -51,10 +62,10 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
                              u'Número de Chasis',
                              u'Comisaría'
                              ]
-        imprimirListadoVehiculos(cabeceraVehiculos, self.vehiculos)
+        imprimirListadoVehiculos(cabeceraVehiculos, self.vehiculos, filename=unicode(filename))
         m = Mensaje(self)
         m.setTitle('PDF')
-        m.setMensaje('El archivo pdf ha sido generado con éxito. Se encuentra en la carpeta src.')
+        m.setMensaje(u'El archivo pdf ha sido generado con éxito. Se encuentra ubicado en %s.pdf' % filename)
         m.setInformative()
         m.exec_()
 
@@ -66,11 +77,8 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
                         or filtro in unicode.lower(unicode(v.getRegistroInterno()))
                         or filtro in unicode.lower(unicode(v.getNumeroChasis())),
                         self.vehiculos)
-#         coches = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.dominio)), self.vehiculos)
-        #El método de comparación por igual está sobrecargado en la clase Legajo.
-        coches.sort(cmp=lambda x, y : cmp(x, y))
-#        coches.sort(cmp=lambda x,y : cmp(x.dominio, y.dominio))
-#        self.cargarGrilla(coches)
+        # El método de comparación por igual está sobrecargado en la clase Legajo.
+        coches.sort(cmp=lambda x, y: cmp(x, y))
         self.tableWidgetListadoDeVehiculos.cargarConVehiculos(coches)
 
 
@@ -80,11 +88,11 @@ from formularios.DlgPlanificar_1 import Ui_DlgPlanificar_1
 class DialogPlanificar_1(QtGui.QDialog, Ui_DlgPlanificar_1):
     '''
     Atributos:
-    
+
         _vehiculo: al cual vamos a planificar
-    
+
     '''
-    def __init__(self, parent = None, vehiculoSeleccionado = None):
+    def __init__(self, parent=None, vehiculoSeleccionado=None):
         '''
         Constructor
         '''
@@ -97,18 +105,20 @@ class DialogPlanificar_1(QtGui.QDialog, Ui_DlgPlanificar_1):
 #        print 'Chapa? ', self._vehiculo.tieneReparacionesChapa()
 #        print 'Gomeria? ', self._vehiculo.tieneReparacionesGomeria()
 
+
 class Listado_Vehiculos_en_reparacion_por_Seccion(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):
         super(Listado_Vehiculos_en_reparacion_por_Seccion, self).__init__(parent)
         self.setupUi(self)
-    
+
+
 #TODO: Deprecated
 class Listado_Vehiculos_con_Reparaciones_Planificadas(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):
         super(Listado_Vehiculos_con_Reparaciones_Planificadas, self).__init__(parent)
         self.setupUi(self)
-        
-        
+
+
 # class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_FormListadoVehiculos):
 class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_WidgetMostrarReparacionesPorVehiculo):
     def __init__(self, parent=None):
@@ -117,30 +127,32 @@ class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_Widge
 #         self.widgetCentral = ListadoVehiculos(Division_Transporte().getVehiculosEnAprobada(), self)
         self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculosEnAprobada())
         self._ultimoVehiculoSeleccionado = None
-        
+
         self.tableWidgetVehiculos.connect(self.tableWidgetVehiculos, QtCore.SIGNAL('cellClicked(int , int)'), self.mostrarReparaciones)
-    
+
     def mostrarReparaciones(self, fila, columna):
         vehiculoSeleccionado = self.tableWidgetVehiculos.getVehiculoEn(fila)
         print 'Vehiculo seleccionado: ', vehiculoSeleccionado.getDominio()
         if vehiculoSeleccionado != self._ultimoVehiculoSeleccionado:
             self._ultimoVehiculoSeleccionado = vehiculoSeleccionado
             self.cargarConReparaciones(vehiculoSeleccionado.dameOrdenDeReparacionEnCurso())
-        
+
     def cargarConReparaciones(self, reparaciones):
         self.tableWidgetReparaciones.cargarConReparaciones(reparaciones)
-        
-        
+
+
 class Listado_Vehiculos_de_la_Division_2(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):
         super(Listado_Vehiculos_de_la_Division_2, self).__init__(parent)
         self.setupUi(self)
-        
+
+
 class Listado_Vehiculos_con_Reparaciones_Planificadas_2(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):
         super(ListadoVehiculos, self).__init__(parent)
         self.setupUi(self)
-        
+
+
 class Listado_Vehiculos_Reparados_por_Seccion_2(QtGui.QWidget, Ui_FormListadoVehiculos):
     def __init__(self, parent=None):
         super(Listado_Vehiculos_Reparados_por_Seccion_2, self).__init__(parent)

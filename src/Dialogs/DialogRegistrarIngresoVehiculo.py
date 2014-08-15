@@ -6,6 +6,7 @@ Created on 03/11/2012
 '''
 
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtGui import QFileDialog
 from re import match
 
 from formularios.DialogRegistrarIngresoVehiculo import Ui_DialogRegistrarIngresoVehiculo
@@ -14,9 +15,11 @@ from WidgetListadoDeVehiculos import ListadoVehiculos
 
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
+from reportes import imprimirOrden
 
 global itemglobal
 itemglobal = None
+
 
 class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVehiculo):
     '''
@@ -104,14 +107,15 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
-        
+
+
 class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
     '''
     classdocs
     @version: 
     @author: 
     '''
-    
+
     def __init__(self, parent=None):
         '''
         Constructor
@@ -120,7 +124,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         '''
         super(DialogDatosIngresoVehiculo, self).__init__(parent)
         self.setupUi(self)
-        #seteo de nombres de los Labels para el estilo
+        # seteo de nombres de los Labels para el estilo
         self.label.setObjectName("label")
         self.label_2.setObjectName("label")
         self.label_3.setObjectName("label")
@@ -133,8 +137,8 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
 #        QtCore.QRegExp.pattern()
         #self.DIVISION = Division_Transporte.divisionTransporte()
         self.DIVISION = Division_Transporte()
-        
-    #Validación a medida que se escribe en el lineEdit
+
+    # Validación a medida que se escribe en el lineEdit
     def validacionesLineEdit(self):
         self.lineEditKilometraje.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'), self))
         self.lineEditCombustible.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'), self))
@@ -142,7 +146,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         self.lineEditReparacion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
         self.lineEditComisaria.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
         self.lineEditLocalidad.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
-            
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         '''
@@ -163,7 +167,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         except ExcepcionPoseeOrdenReparacionEnCurso, e:
             self.mostrarMensaje(e.getMensaje(), 'ERROR!')
             self.reject()
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         '''
@@ -171,24 +175,28 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         @author: 
         '''
         self.reject()
-    
+
     def registrarIngresoVehiculo(self):
         dominio = unicode(itemglobal.text())
         #division = Division_Transporte()
         #vehiculo = division.getVehiculo(dominio)
         vehiculo = self.DIVISION.getVehiculo(dominio)
-        
+
         kilometrajeActual = unicode(self.lineEditKilometraje.text())
         combustibleActual = unicode(self.lineEditCombustible.text())
         equipamiento = unicode(self.lineEditEquipamiento.text())
         reparacion = unicode(self.lineEditReparacion.text())
         comisaria = unicode(self.lineEditComisaria.text())
         localidad = unicode(self.lineEditLocalidad.text())
-        
+
         #division.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
         self.DIVISION.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
 
-        
+        filename = QFileDialog().getSaveFileName(parent=self)
+#         if filename.isEmpty():
+#             return
+        self.imprimirOrdenReparacion(filename)
+
     def testearDialogo(self):
         if not match('[0-9]+', self.lineEditKilometraje.text()):
             self.mostrarMensaje('Debe ingresar el kilometraje.', 'Ingresar Kilometraje')
@@ -213,7 +221,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
             self.lineEditLocalidad.clear()
             self.lineEditLocalidad.setFocus()
         return True
-            
+
     '''
     TODO: Este método se repite en varios Dialogs.
     '''
@@ -222,3 +230,22 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
+
+    def imprimirOrdenReparacion(self, filename):
+        dominio = unicode(itemglobal.text())
+#         dominio = 'AAA111'
+        vehiculo = Division_Transporte().getVehiculo(dominio)
+        ordenReparacion = vehiculo.obtenerOrdenDeReparacionEnCurso()
+        datosOrdenReparacion = []
+        fecha = '%s/%s/%s' % (ordenReparacion.getFecha().day, ordenReparacion.getFecha().month, ordenReparacion.getFecha().year)
+        datosOrdenReparacion.append(fecha)
+        datosOrdenReparacion.append(vehiculo.getRegistroInterno())
+        datosOrdenReparacion.append(vehiculo.getModelo())
+        datosOrdenReparacion.append(ordenReparacion.getKilometrajeActual())
+        datosOrdenReparacion.append(ordenReparacion.getChofer())
+        datosOrdenReparacion.append(ordenReparacion.getEquipamiento())
+        datosOrdenReparacion.append(ordenReparacion.reparacion)
+        titulo = 'Orden de Reparación N°: %s' % ordenReparacion.getCodigoOrdenReparacion()
+        if filename.isEmpty():
+            filename = '%s.pdf' % ordenReparacion.getCodigoOrdenReparacion()
+        imprimirOrden(datosOrdenReparacion, titulo, filename=unicode(filename))

@@ -232,6 +232,51 @@ def imprimirListadoVehiculos(cabecera, vehiculos, titulo='Listado de Vehículos'
     imprimir(Elements, filename)
 
 
+def imprimirOrden(ordenReparacion, titulo='Listado de Vehículos',
+                             filename='example.pdf'):
+    '''
+    TODO: Se pueden armar Templates para diferentes vistas...
+
+    Arma tabla de Flowables datos vehículos.
+    @params:
+        - ordenReparacion: lista con los datos para conformar reporte de
+        una Orden de Reparación.
+        - titulo: nombre del título para el listado.
+        - filename: nombre del archivo a generar.
+    '''
+    # Se arma el título del listado.
+    title = Paragraph(titulo, style=styles['Heading4'])
+    fechaDeEntrada = 'Fecha de Entrada %s' % ordenReparacion[0]
+    registroInterno = u'R.I N°: %s' % ordenReparacion[1]
+    modelo = 'Modelo %s' % ordenReparacion[2]
+    kilometros = 'Kilometros %s' % ordenReparacion[3]
+    heading = [[Paragraph(fechaDeEntrada, style=styles['Heading4'])],
+               [Paragraph(registroInterno, style=styles["Heading4"])],
+               [Paragraph(modelo, style=styles["Heading4"])],
+               [Paragraph(kilometros, style=styles["Heading4"])]
+               ]
+    asignadoCon = 'ASIGNADO A: %s' % ordenReparacion[4]
+    equipadoCon = 'EQUIPADO CON: %s' % ordenReparacion[5]
+    reparacionSolicitada = u'REPARACIÓN SOLICITADA: %s' % ordenReparacion[6]
+    data = [[Paragraph(asignadoCon, style=styles['Normal'])],
+            [Paragraph(equipadoCon, style=styles['Normal'])],
+            [Paragraph(reparacionSolicitada, style=styles['Normal'])]
+            ]
+    datos_tabla = []
+    datos_tabla.append(heading)
+    datos_tabla.extend(data)
+    table = Table(datos_tabla, colWidths=1.5*inch,
+                  style=[('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+                         ('SPAN', (0, 1), (-1, 1)),
+                         ('SPAN', (0, 2), (-1, 2)),
+                         ('SPAN', (0, 3), (-1, 3))
+                         ])
+    Elements = []
+    Elements.append(title)
+    Elements.append(table)
+#     Elements.append(PageBreak())
+    imprimir(Elements, filename)
+
 if __name__ == '__main__':
     division = Division_Transporte()
     vehiculos = division.getVehiculos().values()
