@@ -19,13 +19,13 @@ from DialogMostrarPedidoDeActuacion import DialogMostrarPedidoDeActuacion
 class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones):
     '''
     Atributos:
-    
+
     - vehiculoSeleccionado
-    
+
     En tiempo de ejecucion, el dialogo posee una nueva variable:
     Mejor seteamos...
         - dominioVehiculo.
-        
+
     Recibe como parametro el objeto vehiculo con el cual se va a trabajar
     '''
     def __init__(self, parent = None, vehiculoSeleccionado = None):
@@ -39,18 +39,14 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.vehiculoSeleccionado = vehiculoSeleccionado
 #        self.dominioVehiculo = None
         self.DIVISION = Division_Transporte()
-        
-    
-#    def setDominioVehiculo(self, unDominio):
-#        self.dominioVehiculo = unDominio
-            
+
     def exec_(self, *args, **kwargs):
         self.completarLabelsOR()
         #TODO: Quitar de aca
         #self.cargarListaReparaciones(self.ordenDeReparacion.getReparaciones())
         self.cargarListaReparaciones(self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones())
         return QtGui.QDialog.exec_(self, *args, **kwargs)
-        
+
     def cargarListaReparaciones(self, reparaciones):
         self.tableWidgetReparaciones.clearContents()
         self.tableWidgetReparaciones.setRowCount(len(reparaciones))
@@ -65,8 +61,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
             itemDescripcion.setText(reparacion.getDescripcion())
             self.tableWidgetReparaciones.setItem(fila,columna,itemDescripcion)
             fila += 1
-    
-        
+
     def completarLabelsOR(self):
         #print self.dominioVehiculo.text()
         #self.vehiculoSeleccionado = self.buscarVehiculo()
@@ -74,8 +69,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
             ordenDeReparacion = self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso()
         except Excepcion_Orden_No_Esta_En_Revision, e:
             raise Excepcion_Orden_No_Esta_En_Revision(e.getMensaje())
-            
-        
+
         #Completar los labels:
         self.labelChoferAsignado.setText(ordenDeReparacion.getChofer())
         self.labelIdOrden.setText(unicode(ordenDeReparacion.getCodigoOrdenReparacion()))
@@ -84,14 +78,14 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.labelEquipamiento.setText(ordenDeReparacion.getEquipamiento())
         self.labelCombustible.setText(unicode(ordenDeReparacion.getCombustibleActual()))
         self.labelComisaria.setText(ordenDeReparacion.getComisaria())
-        
+
         #self.ordenDeReparacion = ordenDeReparacion
-        
+
     def buscarVehiculo(self):
         #division = Division_Transporte()
         #return division.getVehiculo(unicode(self.dominioVehiculo.text()))
         return self.DIVISION.getVehiculo(self.dominioVehiculo)
-    
+
     def abrirDialogCrearReparacion(self):
         print 'abriendo dialogo Crear Reparacion'
         dlgCrearReparacion = DialogCrearReparacion.DialogCrearReparacion(self, self.vehiculoSeleccionado)
@@ -102,8 +96,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
             #por el metodo completarLabelsOR()
 #            self.cargarListaReparaciones(self.ordenDeReparacion.getReparaciones())
             self.cargarListaReparaciones(self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones()) # Este dialogo trabaja con VEHICULO!!
-        
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         print 'Click sobre aceptar'
@@ -117,9 +110,10 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         #directamente le decimos que genere el pedido
         self.vehiculoSeleccionado.generarPedidoDeActuacion()
         self.mostrarPedidoDeActuacion(self.vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion())
-        transaction.commit()
+        self.imprimirPedidoActuacion()
+#         transaction.commit()
         self.accept()
-    
+
     def mostrarPedidoDeActuacion(self, unPedidoDeActuacion):
         '''
         '''
@@ -127,12 +121,36 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         dlgMostrarPedido = DialogMostrarPedidoDeActuacion(self, unPedidoDeActuacion)
         #dlgMostrarPedido.setPedidoDeActuacion(unPedidoDeActuacion)
         dlgMostrarPedido.exec_()
-            
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         self.reject()
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonBuscarVehiculo_clicked(self):
         print 'Buscando............'
+
+    def imprimirPedidoActuacion(self):
+        orden = self.vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso()
+        pedido = orden.getPedidoDeActuacion()
+        repuestosSolicitados = pedido.getRepuestosSolicitados()
+        repuestosImprimir = []
+        for rep in repuestosSolicitados:
+            tipoRepuesto = rep.getTipoDeRepuesto()
+            repuestosImprimir.append([str(repuestosSolicitados.index(rep)) ,str(rep.getCantidad()), tipoRepuesto.getDescripcion()])
+        print repuestosImprimir
+        fileDialog = QtGui.QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Pedido de Actuación'))
+        fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave)
+        if fileDialog.exec_() == QtGui.QFileDialog.AcceptSave:
+            for filename in fileDialog.selectedFiles():
+                print 'Imprimiendo: %s' % filename
+        else:
+            return
+        from reportes import imprimirPedidoDeActuacion
+        from Utiles_Dialogo import Mensaje
+        imprimirPedidoDeActuacion(pedido._nroDePedido, repuestosImprimir, unicode(filename))
+        m = Mensaje(self)
+        m.setTitle('PDF')
+        m.setMensaje(u'El archivo pdf ha sido generado con éxito. Se encuentra ubicado en %s.pdf' % filename)
+        m.setInformative()
+        m.exec_()

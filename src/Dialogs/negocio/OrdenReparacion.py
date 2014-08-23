@@ -196,16 +196,16 @@ class OrdenReparacion(Persistent):
         
     def __str__(self):
         return 'Orden de Reparacion | Estado: %s' %self.getEstado()
-    
+
     def setPedidoDeActuacion(self, pedidoDeActuacion):
         self._pedidoDeActuacion = pedidoDeActuacion
-    
+
     def getPedidoDeActuacionActual(self):
         try:
             return self.estado.getPedidoDeActuacion(self)
         except AttributeError:
             pass
-        
+
     def getPedidoDeActuacion(self):
         return self._pedidoDeActuacion
 

@@ -62,39 +62,6 @@ def headerOrdenReparacion(canvas, doc):
     canvas.restoreState()
 
 
-def imprimirListadoVehiculos1():
-    '''
-    Armar la cabecera del Listado de Vehiculos...
-    Arma tabla de Flowables datos vehículos.
-    '''
-    doc = BaseDocTemplate('mi_basedoc.pdf', showBoundary=1)
-    # normal frame as for SimpleFlowDocument
-    frameT = Frame(doc.leftMargin, doc.bottomMargin,
-                   doc.width, doc.height, id='normal')
-    # Two Columns
-#    frame1 = Frame(doc.leftMargin, doc.bottomMargin,
-#     doc.width/2-6, doc.height, id='col1')
-
-    heading = [[' ', Paragraph('Dominio', style=styles['Heading4']),
-                Paragraph('Marca', style=styles["Heading4"]),
-                Paragraph('Registro Interno', style=styles["Heading4"]),
-                Paragraph('Número de Chasis', style=styles["Heading4"]),
-                Paragraph('Comisaría', style=styles["Heading4"])]]
-    data = [['1', 'aaa111', 'Renault', '123', '2314', 'Alguna'],
-            ['2', 'aaa222', 'Renault', '123', '2314', 'Alguna']] * 30
-    heading.extend(data)
-    table = Table(heading, colWidths=inch,
-                  style=[('GRID', (0, 0), (-1, -1), 0.5, colors.grey)])
-    Elements.append(Paragraph('Listado de Vehículos', style=styles['Title']))
-    Elements.append(table)
-    Elements.append(PageBreak())
-#     Elements.append(NextPageTemplate('OneCol'))
-    doc.addPageTemplates([PageTemplate(frames=frameT, onPage=header,
-                                       pagesize=A4, onPageEnd=footer)])
-    # start the construction of the pdf
-    doc.build(Elements)
-
-
 def imprimirOrdenDeReparacion():
     doc = BaseDocTemplate('mi_basedoc1.pdf', showBoundary=1)
     # normal frame as for SimpleFlowDocument
@@ -274,17 +241,68 @@ def imprimirOrden(ordenReparacion, titulo='Listado de Vehículos',
     Elements = []
     Elements.append(title)
     Elements.append(table)
-#     Elements.append(PageBreak())
+    imprimir(Elements, filename)
+
+
+def imprimirPedidoDeActuacion(numeroPedido='', repuestosSolicitados='', filename='example.pdf'):
+    '''
+    TODO: Se pueden armar Templates para diferentes vistas...
+
+    Arma tabla de Flowables datos vehículos.
+    @params:
+
+        - filename: nombre del archivo a generar.
+    '''
+    heading = []
+    # Se Arma la cabecera del Listado de Vehiculos.
+    heading.append([Paragraph(u'Renglon', style=styles['Heading4'])])
+    heading.append([Paragraph(u'Cantidad', style=styles['Heading4'])])
+    heading.append([Paragraph(u'DESCRIPCION', style=styles['Heading4'])])
+    heading.append('')
+    heading.append('')
+    heading.append('')
+
+    data = []
+    table_style = [('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+                   ('SPAN', (2, 0), (-1, 0))]
+    # Se Arma los datos de los vehiculos del Listado de Vehiculos.
+    for rep in repuestosSolicitados:
+        repuesto = []
+        for item in rep:
+            repuesto.append([Paragraph(item, style=styles['Normal'])])
+        repuesto.append('')
+        repuesto.append('')
+        repuesto.append('')
+        data.append(repuesto)
+        i = repuestosSolicitados.index(rep) + 1
+        table_style.append(('SPAN', (2, i), (-1, i)))
+
+    # Se arma el título del listado.
+    t = 'PEDIDO DE ACTUACION N°: %s' % numeroPedido
+    title = Paragraph(t, style=styles['Title'])
+    par = 'Atento a las necesidades de esta Sección, División, Área, Solicito\
+    a Ud., tenga bien dar curso al siguiente pedido para adquirir los\
+    elementos que a continuación se detallan con destino a la División\
+    Transporte Dependiente del Área Logística.-'
+    relato = Paragraph(par, style=styles['Heading4'])
+    datos_tabla = []
+    datos_tabla.append(heading)
+    datos_tabla.extend(data)
+    table = Table(datos_tabla, colWidths=inch,
+                  style=table_style)
+    Elements = []
+    Elements.append(title)
+    Elements.append(Spacer(inch, 0.2*inch))
+    Elements.append(relato)
+    Elements.append(Spacer(inch, 0.2*inch))
+    Elements.append(table)
     imprimir(Elements, filename)
 
 if __name__ == '__main__':
-    division = Division_Transporte()
-    vehiculos = division.getVehiculos().values()
-    cabeceraVehiculos = ['',
-                         'Dominio',
-                         'Marca',
-                         'Registro Interno',
-                         u'Número de Chasis',
-                         u'Comisaría'
-                         ]
-    imprimirListadoVehiculos(cabeceraVehiculos, vehiculos)
+#     division = Division_Transporte()
+#     vehiculos = division.getVehiculos().values()
+    repuestosSolicitados = [['02', '01', 'Juego de juntas descarbonizacion'],
+                            ['03', '01', 'Juego de botadores'],
+                            ['04', '01', 'Juego de balancines'],
+                            ['05', '01', 'kit de distribucion']]
+    imprimirPedidoDeActuacion('002', repuestosSolicitados=repuestosSolicitados)
