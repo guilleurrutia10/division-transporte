@@ -43,18 +43,13 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
 
     @QtCore.pyqtSlot()
     def on_pushButtonToPdf_clicked(self):
-        fileDialog = QtGui.QFileDialog()
+        fileDialog = QtGui.QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Listado de Vehículos'))
         fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave)
         if fileDialog.exec_() == QtGui.QFileDialog.AcceptSave:
             for filename in fileDialog.selectedFiles():
                 print 'Imprimiendo: %s' % filename
         else:
             return
-#         filedDialog = QtGui.QFileDialog()
-#         filename = filedDialog.getSaveFileName(parent=self)
-#         if filename.isEmpty():
-#             return
-#         print filename
         cabeceraVehiculos = ['',
                              'Dominio',
                              'Marca',
