@@ -15,7 +15,15 @@ from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
 
 class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
     '''
-    classdocs
+    Atributos:
+        - self.lineEditNombre
+        - self.lineEditApellido
+        - self.lineEditNroDocumento
+        - self.comboBoxTipoDocumento
+        - self.dateEditFechaNacimiento
+        - self.lineEditDomicilio
+        - self.lineEditTelefono
+        - self.lineEditEmail
     '''
     def __init__(self, parent=None):
         '''
@@ -38,7 +46,10 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
 
     def validacionesLineEdit(self):
         '''
+        Se establecen las validaciones que se realizarán a medida que
+        se llenan los campos.
         '''
+        # TODO: Establecer modulo con las expresiones regulares a utilizar.
         # Validación a medida que se escribe en el lineEdit
         nombreRegExp = QtCore.QRegExp('[A-Za-z|\s]+')
         validadorRegExp = QtGui.QRegExpValidator(nombreRegExp, self)
@@ -58,6 +69,8 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
 
     def llenarComboBoxTipoDocumentos(self):
         '''
+        Obtiene los tipos de documentos de la base de datos
+        y llena un comboBox para listarlos.
         '''
         dvTrans = Division_Transporte()
         for i in dvTrans.getTipoDeDocumentos():
@@ -77,6 +90,8 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         try:
             assert self.testearDialogo() is True
         except AssertionError:
+            return
+        if not self.testearDialogo():
             return
         self.cargarPersonal()
         if self.mostrarMensaje('El Empleado se ha cargado exitosamente!! :)', 'Cargando Empleado'):
@@ -114,6 +129,11 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
             self.lineEditNroDocumento.clear()
             self.lineEditNroDocumento.setFocus()
             return
+        if not match('^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$', self.lineEditEmail.text()):
+            self.mostrarMensaje('Debe ingresar un mail valido.', 'Ingreso')
+            self.lineEditNroDocumento.clear()
+            self.lineEditNroDocumento.setFocus()
+            return
         return True
 
     def cargarPersonal(self):
@@ -123,11 +143,14 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         tipoDocumento = unicode(self.comboBoxTipoDocumento.currentText())
 
         fechaNac = self.dateEditFechaNacimiento.date().toPyDate()
-        print fechaNac
+        domicilio = unicode(self.lineEditDomicilio.text())
+        telefono = unicode(self.lineEditTelefono.text())
+        email = unicode(self.lineEditEmail.text())
         # Se carga el empleado en el sistema.
         division = Division_Transporte()
         try:
-            division.agregarEmpleado(nombre, apellido, nroDocumento, tipoDocumento)
+            division.agregarEmpleado(nombre, apellido, nroDocumento, tipoDocumento,
+                                     fechaNac, domicilio, telefono, email)
         except ExcepcionObjetoExiste:
             mensaje = u'El Empleado con Tipo de Documento %s y número %s ya se encuentra cargado.' % (tipoDocumento, nroDocumento)
             self.mostrarMensaje(mensaje, 'Alta Personal')

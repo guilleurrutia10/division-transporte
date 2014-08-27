@@ -278,7 +278,8 @@ class Division_Transporte(Persistent):
         except KeyError:
             raise ExcepcionObjeNoExiste
 
-    def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento):
+    def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento,
+                        fechaNac, domicilio, telefono, email):
         '''
             Crea un empleado nuevo con los datos recibidos y lo guarda en la BD.
             Se comprueba si el número de documento y el tipo de documento son
@@ -286,7 +287,8 @@ class Division_Transporte(Persistent):
         '''
         tiposDocumentos = self.zodb.raiz['tiposDocumentos']
         tipoDocSeleccionado = tiposDocumentos[tipoDocumento]
-        empleado = Empleado(nombre, apellido, numeroDocumento, tipoDocSeleccionado)
+        empleado = Empleado(nombre, apellido, numeroDocumento, tipoDocSeleccionado,
+                            fechaNac, domicilio, telefono, email)
         # Se obtienen todos los empleados de la División.
         empleados = self.getEmpleados().values()
         # Se comprueba si el empleado se encuentra en la División.
@@ -295,13 +297,7 @@ class Division_Transporte(Persistent):
         for e in empleados:
             if empleado.comparar(e):
                 raise ExcepcionObjetoExiste
-#         try:
         self.zodb.save('empleados', empleado.getDocumento(), empleado)
-#         except ExcepcionObjetoExiste:
-#             empleadoExcepcion = ExcepcionEmpleadoExiste(numeroDocumento)
-#             codigo = tiposDocumentos[tipoDocumento].get_codigo_tipo_documento()
-#             empleadoExcepcion.setTipoDocumento(codigo)
-#             raise empleadoExcepcion
 
 #    def darDeBajaEmpleado(self):
 #        '''
@@ -316,8 +312,8 @@ class Division_Transporte(Persistent):
     '''
     def agregarRepuestos(self, nombre, descripcion):
         '''
-        @return: 
-        @author: 
+        @return:
+        @author:
         '''
         repuesto = TipoRepuesto(nombre, descripcion)
         self.zodb.conexion.sync()
@@ -328,31 +324,30 @@ class Division_Transporte(Persistent):
                 self.zodb.raiz['tiposRepuestos'] = {}
             tiposRepuestos[nombre] = repuesto
             transaction.commit()
-                
-    
+
     def getRepuestos(self):
         '''
-        @return: 
-        @author: 
+        @return:
+        @author:
         '''
         self.zodb.conexion.sync()
         return self.zodb.raiz['tiposRepuestos']
 
     def getRepuesto(self, clave):
         '''
-        @return: 
-        @author: 
+        @return:
+        @author:
         '''
         self.zodb.conexion.sync()
         try:
             return self.zodb.raiz['tiposRepuestos'][clave]
         except KeyError:
             raise ExcepcionObjeNoExiste
-    
+
     def getVehiculos(self):
         '''
-        @return: 
-        @author: 
+        @return:
+        @author:
         '''
         self.zodb.conexion.sync()
         return self.zodb.getDiccionarioElementos('vehiculos')

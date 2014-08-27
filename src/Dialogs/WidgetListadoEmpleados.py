@@ -21,11 +21,12 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         self.empleados = None
         self.cargarGrillaInicial()
 
+    # TODO: Utilizar utilies_formularios para la tabla de empleados.
     def cargarGrillaEmpleadosSinAsignar(self, empleados):
         self.tableWidgetDatosEmpleados.clearContents()
         self.tableWidgetDatosEmpleados.setRowCount(len(empleados))
         # Indica la cantidad de columnas a llenar.
-        print self.tableWidgetDatosEmpleados.horizontalHeader().count()
+        self.tableWidgetDatosEmpleados.horizontalHeader().count()
         fila = 0
         for empleado in empleados:
             columna = 0
@@ -44,6 +45,29 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
             itemDocumento = QtGui.QTableWidgetItem()
             itemDocumento.setText(empleado.documento)
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemDocumento)
+            columna += 1
+            itemSeccion = QtGui.QTableWidgetItem()
+            itemSeccion.setText('empleado.seccion')
+            self.tableWidgetDatosEmpleados.setItem(fila, columna, itemSeccion)
+            columna += 1
+            itemFechaNac = QtGui.QTableWidgetItem()
+            # TODO: Crear metodo para el string de fecha.
+            # Para que imprima lindo.
+            itemFechaNac.setText(empleado.imprimirFechaNacimiento())
+            self.tableWidgetDatosEmpleados.setItem(fila, columna, itemFechaNac)
+            columna += 1
+            itemDomicilio = QtGui.QTableWidgetItem()
+            itemDomicilio.setText(empleado.getDomicilio())
+            self.tableWidgetDatosEmpleados.setItem(fila, columna, itemDomicilio)
+            columna += 1
+            itemEmail = QtGui.QTableWidgetItem()
+            itemEmail.setText(empleado.getEmail())
+            self.tableWidgetDatosEmpleados.setItem(fila, columna, itemEmail)
+            columna += 1
+            itemtelefono = QtGui.QTableWidgetItem()
+            itemtelefono.setText(empleado.getTelefono())
+            self.tableWidgetDatosEmpleados.setItem(fila, columna, itemtelefono)
+
             fila = fila + 1
 
     #===========================================================================
@@ -57,20 +81,36 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         self.empleados.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
         self.cargarGrillaEmpleadosSinAsignar(self.empleados)
 
-    @QtCore.pyqtSlot('QString')
-    def on_lineEditFiltroNombre_textChanged(self, cadena):
-        filtro = unicode(cadena)
-        personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), self.empleados)
-        personal.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
-        self.cargarGrillaEmpleadosSinAsignar(personal)
+#     @QtCore.pyqtSlot('QString')
+#     def on_lineEditFiltroNombre_textChanged(self, cadena):
+#         filtro = unicode(cadena)
+#         personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), self.empleados)
+#         personal.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
+#         self.cargarGrillaEmpleadosSinAsignar(personal)
 
     # De esta manera queda un solo filtro para los strings...
-    @QtCore.pyqtSlot('QString')        
+    @QtCore.pyqtSlot('QString')
     def on_lineEditBuscarDocumento_textChanged(self, cadena):
         filtro = unicode(cadena).lower()
         personal = filter(lambda p: filtro in unicode(p.getDocumento()).lower()
                           or filtro in unicode(p.getNombre()).lower()
                           or filtro in unicode(p.getApellido()).lower(),
+                          self.empleados)
+        personal.sort(cmp=lambda x, y: cmp(x, y))
+        self.cargarGrillaEmpleadosSinAsignar(personal)
+
+    @QtCore.pyqtSlot('QDate')
+    def on_dateEditFechaInicio_dateChanged(self, date):
+        self.filtrarFechaNacimiento()
+
+    @QtCore.pyqtSlot('QDate')
+    def on_dateEditFechaFin_dateChanged(self, date):
+        self.filtrarFechaNacimiento()
+
+    # TODO: Falta tener en cuenta la fecha de baja y alta.
+    def filtrarFechaNacimiento(self):
+        personal = filter(lambda p: self.dateEditFechaInicio.date().toPyDate() <= p.getFechaNacimiento()
+                          and self.dateEditFechaFin.date().toPyDate() >= p.getFechaNacimiento(),
                           self.empleados)
         personal.sort(cmp=lambda x, y: cmp(x, y))
         self.cargarGrillaEmpleadosSinAsignar(personal)
