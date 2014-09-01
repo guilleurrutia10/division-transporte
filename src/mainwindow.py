@@ -204,7 +204,9 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_de_la_Division_2_triggered(self):
         print 'DIV 2: agregando widget listado Vehiculos'
-        self.setCentralWidget(WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculos().values(), self))
+        widgetListadoVehiculos = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculos().values(), self)
+        widgetListadoVehiculos.pushButtonSeleccionar.hide()
+        self.setCentralWidget(widgetListadoVehiculos)
 
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_en_Reparacion_por_Seccion_triggered(self):
@@ -234,6 +236,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def on_actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2_triggered(self):
         print 'Reparaciones realizadas: agregando widget listado Vehiculos'
         self.setCentralWidget(WidgetMostrarReparacionesPorVehiculo.WidgetMostrarReparacionesPorVehiculo(Division_Transporte().getVehiculosEnFinalizada(), self))
+#         self.setCentralWidget(WidgetMostrarReparacionesPorVehiculo.WidgetMostrarReparacionesPorVehiculo(Division_Transporte().getVehiculosEnFinalizada(), self))
     
     @QtCore.pyqtSlot()
     def on_actionListado_de_Tipos_de_Reparaciones_de_la_Division_2_triggered(self):

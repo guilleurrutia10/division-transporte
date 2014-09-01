@@ -43,14 +43,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellEntered(int,int)'), self.seleccionarCelda)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellPressed(int,int)'), self.seleccionarCelda)
-
-    @QtCore.pyqtSlot()
-    def on_pushButtonCancelar_clicked(self):
-        '''
-        @version: 
-        @author: 
-        '''
-        self.reject()
+        self.listaDeVehiculos.pushButtonSeleccionar.hide()
 
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
@@ -131,19 +124,17 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         self.label_4.setObjectName("label")
         self.label_5.setObjectName("label")
         self.label_6.setObjectName("label")
+        self.label_7.setObjectName("label")
         self.validacionesLineEdit()
-        cadena = self.lineEditKilometraje.validator().regExp()
-        print cadena.pattern()
-#        QtCore.QRegExp.pattern()
         #self.DIVISION = Division_Transporte.divisionTransporte()
         self.DIVISION = Division_Transporte()
 
     # Validación a medida que se escribe en el lineEdit
     def validacionesLineEdit(self):
         self.lineEditKilometraje.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'), self))
-        self.lineEditCombustible.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'), self))
-        self.lineEditEquipamiento.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
-        self.lineEditReparacion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
+#         self.lineEditCombustible.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9]+'), self))
+#         self.lineEditEquipamiento.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
+#         self.lineEditReparacion.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
         self.lineEditComisaria.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
         self.lineEditLocalidad.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[a-zA-Z]+'), self))
 
@@ -183,14 +174,16 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         vehiculo = self.DIVISION.getVehiculo(dominio)
 
         kilometrajeActual = unicode(self.lineEditKilometraje.text())
-        combustibleActual = unicode(self.lineEditCombustible.text())
-        equipamiento = unicode(self.lineEditEquipamiento.text())
-        reparacion = unicode(self.lineEditReparacion.text())
+        combustibleActual = unicode(self.comboBoxCombustible.currentText())
+        equipamiento = unicode(self.plainTextEditEquipamiento.toPlainText())
+#         reparacion = unicode(self.lineEditReparacion.text())
+        reparacion = unicode(self.plainTextEditReparacion.toPlainText())
         comisaria = unicode(self.lineEditComisaria.text())
         localidad = unicode(self.lineEditLocalidad.text())
+        chofer = unicode(self.lineEditChoferAsignado.text())
 
         #division.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
-        self.DIVISION.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
+        self.DIVISION.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, chofer)
 
         filename = QFileDialog().getSaveFileName(parent=self)
 #         if filename.isEmpty():
@@ -203,23 +196,25 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
             self.lineEditKilometraje.clear()
             self.lineEditKilometraje.setFocus()
             return
-        if not match('[0-9]+', self.lineEditCombustible.text()):
-            self.mostrarMensaje('Debe ingresar el Combustible', 'Ingresar Combustible')
-            self.lineEditCombustible.clear()
-            self.lineEditCombustible.setFocus()
-            return
-        if not match('[a-zA-Z]+', self.lineEditReparacion.text()):
-            self.mostrarMensaje('Debe ingresar la reparacion solicitada', 'Ingresar reparacion')
-            self.lineEditReparacion.clear()
-            self.lineEditReparacion.setFocus()
+#         if not match('[0-9]+', self.lineEditCombustible.text()):
+#             self.mostrarMensaje('Debe ingresar el Combustible', 'Ingresar Combustible')
+#             self.lineEditCombustible.clear()
+#             self.lineEditCombustible.setFocus()
+#             return
+#         if not match('[a-zA-Z]+', self.lineEditReparacion.text()):
+#             self.mostrarMensaje('Debe ingresar la reparacion solicitada', 'Ingresar reparacion')
+#             self.lineEditReparacion.clear()
+#             self.lineEditReparacion.setFocus()
         if not match('[a-zA-Z]+', self.lineEditComisaria.text()):
             self.mostrarMensaje('Debe ingresar la Comisaria solicitada', 'Ingresar Comisaria')
             self.lineEditComisaria.clear()
             self.lineEditComisaria.setFocus()
+            return
         if not match('[a-zA-Z]+', self.lineEditLocalidad.text()):
             self.mostrarMensaje('Debe ingresar la Localidad solicitada', 'Ingresar Localidad')
             self.lineEditLocalidad.clear()
             self.lineEditLocalidad.setFocus()
+            return
         return True
 
     '''

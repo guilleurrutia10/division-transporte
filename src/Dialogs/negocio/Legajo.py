@@ -95,7 +95,7 @@ class Legajo(Persistent):
 
             raise Excepcion_Orden_No_Esta_En_Revision('La Orden de Reparacion del vehiculo no se encuentra en revision')
 
-    def crearOrdenDeReparacion(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha):
+    def crearOrdenDeReparacion(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha, chofer):
         '''
         @return: 
         @author: 
@@ -104,6 +104,7 @@ class Legajo(Persistent):
         try:
             self.obtenerOrdenDeReparacionEnCurso()
             ordenReparacion = OrdenReparacion(self.dameNumeroOrden(), kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
+            ordenReparacion.setChofer(chofer)
             self.ordenesDeReparacion.append(ordenReparacion)
         except ExcepcionPoseeOrdenReparacionEnCurso, e:
             raise ExcepcionPoseeOrdenReparacionEnCurso(e.getMensaje())
@@ -116,7 +117,6 @@ class Legajo(Persistent):
         return (self.dominio == otro.dominio)
 
     def __str__(self):
-        return 'Dominio: %s' % self.dominio
         return 'Dominio: %s' % self.dominio
 
     def getDominio(self):
@@ -221,37 +221,47 @@ class Legajo(Persistent):
             return self.obtenerOrdenDeReparacionEnCurso().estaAprobada()
         except AttributeError:
             return False
-    
+
     def estaEsperandoAprobacion(self):
         try:
             return self.obtenerOrdenDeReparacionEnCurso().estaEsperandoAprobacion()
         except AttributeError:
             return False
-    
+
     def estaFinalizado(self):
         try:
             return self.obtenerOrdenDeReparacionEnCurso().estaFinalizada()
         except AttributeError:
             return False
-        
+
+    def tieneOrdenesReparacionFinalizadas(self):
+        '''
+        Verifica si el vehículo tiene al menos una orden de reparación
+        en Finalizada.
+        @return: True si tiene al menos una orden finalizada, False en
+        caso contrario.
+        '''
+        ordenes = filter(lambda orden: orden.estaFinalizada(), self.getOrdenesDeReparacion())
+        return len(ordenes) > 0
+
     def estaPlanificado(self):
         try:
             return self.obtenerOrdenDeReparacionEnCurso().estaPlanificada()
         except AttributeError:
             return False
-    
+
     def getPedidoDeActuacion(self):
         return self.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion()
-    
+
     def pedidoDeActuacionTePertenece(self, unPedidoDeActuacion):
         return unPedidoDeActuacion == self.getPedidoDeActuacion()
-    
+
     def tieneReparacionesMecanicas(self):
         pass
-    
+
     def getOrdenesDeReparacionFinalizadas(self):
         return filter(lambda ordenReparacion: ordenReparacion.estaFinalizada(), self.getOrdenesDeReparacion())
-    
+
     def getReparacionesFinalizadas(self):
         reparaciones = [orden.getReparaciones() for orden in self.getOrdenesDeReparacionFinalizadas()]
         return reparaciones

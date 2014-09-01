@@ -526,7 +526,7 @@ class TablaReparacionesPlanificadas(SuperTabla):
         Puede: 
             - cargar con reparaciones recibidas
     '''
-    
+
     def cargarConReparaciones(self, reparaciones):
         '''
             Recibe una lista de reparaciones para listar.
@@ -534,7 +534,6 @@ class TablaReparacionesPlanificadas(SuperTabla):
                 - descripcion
                 - fecha de inicio
                 - fecha de finalizacion
-                
             Ademas, mientras lista los reparaciones, va armando un diccionario para mantener un correlacion reparaciones-fila_en_la_que_se_encuentra
         '''
         self.inicializarTabla()
@@ -542,7 +541,7 @@ class TablaReparacionesPlanificadas(SuperTabla):
         self.clearContents()
         reparaciones.sort()
         self.setRowCount(len(reparaciones))
-        
+
         for reparacion in reparaciones:
             columna = 0
             itemDescripcion = QtGui.QTableWidgetItem()
@@ -556,10 +555,9 @@ class TablaReparacionesPlanificadas(SuperTabla):
 #             itemFechaFin = QtGui.QTableWidgetItem()
 #             itemFechaFin.setText(unicode(reparacion.getFechaFin()))
 #             self.setItem(fila, columna, itemFechaFin)
-            
+
             self.agregarAlDiccionario(fila, reparacion)
             fila += 1
-
 
     def getReparacionSeleccionada(self):
         return self.getElementoSeleccionado()

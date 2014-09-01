@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>300</height>
+    <width>584</width>
+    <height>464</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -26,6 +26,9 @@
       <string>Registrar Ingreso Vehiculo</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
       <property name="labelAlignment">
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
@@ -46,38 +49,15 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEditCombustible"/>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEditEquipamiento"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEditReparacion"/>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEditComisaria"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Equipamiento:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Reparacion solicitada:</string>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Comisaria:</string>
+         <string>Comisaría:</string>
         </property>
        </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineEditComisaria"/>
       </item>
       <item row="5" column="0">
        <widget class="QLabel" name="label_6">
@@ -88,6 +68,68 @@
       </item>
       <item row="5" column="1">
        <widget class="QLineEdit" name="lineEditLocalidad"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Chofer asignado</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="lineEditChoferAsignado"/>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Reparación solicitada:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QPlainTextEdit" name="plainTextEditReparacion"/>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Equipamiento:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QPlainTextEdit" name="plainTextEditEquipamiento"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="comboBoxCombustible">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Indica la cantidad de combustible en el vehículo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>V</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1/4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1/2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>3/4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>LL</string>
+         </property>
+        </item>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -154,6 +196,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEditKilometraje</tabstop>
+  <tabstop>lineEditComisaria</tabstop>
+  <tabstop>lineEditLocalidad</tabstop>
+  <tabstop>lineEditChoferAsignado</tabstop>
+  <tabstop>plainTextEditEquipamiento</tabstop>
+  <tabstop>plainTextEditReparacion</tabstop>
+  <tabstop>pushButtonAceptar</tabstop>
+  <tabstop>pushButtonCancelar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

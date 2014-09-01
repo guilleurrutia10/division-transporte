@@ -410,7 +410,7 @@ class Division_Transporte(Persistent):
 #        # Obtener orden reparacion
 #        # si finalizada, Ok egreso sino pa' tras
 
-    def registrarIngresoDeVehiculo(self, dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad):
+    def registrarIngresoDeVehiculo(self, dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, chofer):
         '''
         @return: 
         @author: 
@@ -424,15 +424,8 @@ class Division_Transporte(Persistent):
         '''
         import datetime
         hoy = datetime.datetime.now()
-        vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
+        vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy, chofer)
         transaction.commit()
-#        try:
-#            vehiculo.dameOrdenDeReparacionEnCurso()
-#        except excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso.Excepcion_No_Posee_Orden_Reparacion_En_Curso:
-#            import datetime
-#            hoy = datetime.datetime.now()
-#            vehiculo.crearDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
-#            transaction.commit()
 
     def getVehiculosSinOrdenEnCurso(self):
         #print '#'*20
@@ -593,7 +586,7 @@ class Division_Transporte(Persistent):
         return filter(lambda unVehiculo: unVehiculo.estaEsperandoAprobacion(), self.getVehiculos().values())
 
     def getVehiculosEnFinalizada(self):
-        return filter(lambda unVehiculo: unVehiculo.estaFinalizado(), self.getVehiculos().values())
+        return filter(lambda unVehiculo: unVehiculo.tieneOrdenesReparacionFinalizadas(), self.getVehiculos().values())
 
     def getVehiculosEnPlanificacion(self):
         return filter(lambda unVehiculo: unVehiculo.estaPlanificado(), self.getVehiculos().values())
