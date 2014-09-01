@@ -40,5 +40,8 @@ class WidgetMostrarReparacionesPorVehiculo(QtGui.QWidget, Ui_WidgetMostrarRepara
         print 'Debo mostrar las reparaciones para el vehiculo: '
         print self.tableWidgetVehiculos.getVehiculoEn(fila).getDominio()
         vehiculo = self.tableWidgetVehiculos.getVehiculoEn(fila)
-        self.tableWidgetReparaciones.cargarConReparaciones(vehiculo.getReparaciones())
+        reparaciones = []
+        for rep in vehiculo.getReparacionesFinalizadas():
+            reparaciones.extend(rep)
+        self.tableWidgetReparaciones.cargarConReparaciones(reparaciones)
 #         self.tableWidgetReparaciones.cargarConReparaciones(vehiculo.getReparacionesFinalizadas())
