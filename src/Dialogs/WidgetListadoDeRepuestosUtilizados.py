@@ -11,3 +11,6 @@ class ListadoRepustosUtilizados(QtGui.QWidget, Ui_FormRepuestosUtilizados):
     def __init__(self, parent = None):
         super(ListadoRepustosUtilizados, self).__init__(parent)
         self.setupUi(self)
+#         division = Division_Transporte()
+#         self.vehiculos = division.getVehiculosEnFinalizada()
+#         self.tableWidget.cargarRepuestoUtilizados(self.vehiculos)

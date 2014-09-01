@@ -23,11 +23,17 @@
       <item>
        <widget class="QTableWidget" name="tableWidget">
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>150</number>
+         <number>210</number>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
         </attribute>
         <column>
          <property name="text">
-          <string>Codigo</string>
+          <string>Código</string>
          </property>
          <property name="textAlignment">
           <set>AlignHCenter|AlignVCenter|AlignCenter</set>
@@ -51,7 +57,7 @@
         </column>
         <column>
          <property name="text">
-          <string>Número Pedido de Actuacion</string>
+          <string>Número Pedido de Actuación</string>
          </property>
          <property name="textAlignment">
           <set>AlignHCenter|AlignVCenter|AlignCenter</set>
@@ -71,11 +77,6 @@
          </property>
          <property name="textAlignment">
           <set>AlignHCenter|AlignVCenter|AlignCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string/>
          </property>
         </column>
        </widget>
