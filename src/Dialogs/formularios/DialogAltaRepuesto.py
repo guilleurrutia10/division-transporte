@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'DialogAltaRepuesto.ui'
+# Form implementation generated from reading ui file 'ui/DialogAltaRepuesto.ui'
 #
-# Created: Wed Dec 05 21:18:47 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Sep 10 22:00:17 2014
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,33 +12,38 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_DialogAltaRepuesto(object):
     def setupUi(self, DialogAltaRepuesto):
         DialogAltaRepuesto.setObjectName(_fromUtf8("DialogAltaRepuesto"))
-        DialogAltaRepuesto.resize(300, 140)
+        DialogAltaRepuesto.resize(495, 200)
         DialogAltaRepuesto.setMinimumSize(QtCore.QSize(300, 140))
-        DialogAltaRepuesto.setMaximumSize(QtCore.QSize(300, 140))
-        DialogAltaRepuesto.setWindowTitle(QtGui.QApplication.translate("DialogAltaRepuesto", "Alta Repuesto", None, QtGui.QApplication.UnicodeUTF8))
+        DialogAltaRepuesto.setMaximumSize(QtCore.QSize(600, 200))
         self.verticalLayout = QtGui.QVBoxLayout(DialogAltaRepuesto)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogAltaRepuesto)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogAltaRepuesto", "Nuevo Repuesto", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setText(QtGui.QApplication.translate("DialogAltaRepuesto", "Nombre Repuesto:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.lineEditNombreRepuesto = QtGui.QLineEdit(self.groupBox)
         self.lineEditNombreRepuesto.setObjectName(_fromUtf8("lineEditNombreRepuesto"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEditNombreRepuesto)
         self.label_2 = QtGui.QLabel(self.groupBox)
-        self.label_2.setText(QtGui.QApplication.translate("DialogAltaRepuesto", "Descripcion Repuesto:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
         self.lineEditDescRepuesto = QtGui.QLineEdit(self.groupBox)
@@ -54,11 +59,9 @@ class Ui_DialogAltaRepuesto(object):
         self.gridLayout_2.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogAltaRepuesto", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_2.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogAltaRepuesto", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_2.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -69,15 +72,12 @@ class Ui_DialogAltaRepuesto(object):
         QtCore.QMetaObject.connectSlotsByName(DialogAltaRepuesto)
 
     def retranslateUi(self, DialogAltaRepuesto):
-        pass
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    DialogAltaRepuesto = QtGui.QDialog()
-    ui = Ui_DialogAltaRepuesto()
-    ui.setupUi(DialogAltaRepuesto)
-    DialogAltaRepuesto.show()
-    sys.exit(app.exec_())
+        DialogAltaRepuesto.setWindowTitle(_translate("DialogAltaRepuesto", "Alta Repuesto", None))
+        self.groupBox.setTitle(_translate("DialogAltaRepuesto", "Nuevo Repuesto", None))
+        self.label.setText(_translate("DialogAltaRepuesto", "Nombre Repuesto:", None))
+        self.lineEditNombreRepuesto.setToolTip(_translate("DialogAltaRepuesto", "Indica el nombre del repuesto", None))
+        self.label_2.setText(_translate("DialogAltaRepuesto", "Descripción Repuesto:", None))
+        self.lineEditDescRepuesto.setToolTip(_translate("DialogAltaRepuesto", "Indica la descripción del repuesto", None))
+        self.pushButtonAceptar.setText(_translate("DialogAltaRepuesto", "Aceptar", None))
+        self.pushButtonCancelar.setText(_translate("DialogAltaRepuesto", "Cancelar", None))
 

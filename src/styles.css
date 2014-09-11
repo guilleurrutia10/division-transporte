@@ -147,3 +147,9 @@ QMenuBar::item:pressed {
      /*background: #888888;*/
      background: MidnightBlue;
 }
+
+/* FormLogin Border */
+#Dialog{
+    border: 3px solid RoyalBlue;
+    border-radius: 1px;
+}

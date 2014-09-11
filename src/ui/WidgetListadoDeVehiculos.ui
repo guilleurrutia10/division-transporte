@@ -50,7 +50,13 @@
         <property name="minimumSize">
          <size>
           <width>133</width>
-          <height>20</height>
+          <height>10</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
          </size>
         </property>
         <property name="contextMenuPolicy">
@@ -79,13 +85,15 @@
       </item>
       <item>
        <widget class="QPushButton" name="pushButtonToPdf">
+        <property name="toolTip">
+         <string>Haga click para exportar el listado como pdf</string>
+        </property>
         <property name="text">
-         <string>PDF</string>
+         <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normalon>:/recursos/iconos/pdf.png</normalon>
-         </iconset>
+         <iconset resource="../recursos.qrc">
+          <normaloff>:/recursos/iconos/pdf.png</normaloff>:/recursos/iconos/pdf.png</iconset>
         </property>
         <property name="iconSize">
          <size>

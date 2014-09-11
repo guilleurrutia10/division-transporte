@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/WidgetListadoEmpleados.ui'
 #
-# Created: Wed Aug 27 03:08:05 2014
+# Created: Wed Sep 10 22:25:43 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -82,6 +82,10 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pushButtonToPDF.sizePolicy().hasHeightForWidth())
         self.pushButtonToPDF.setSizePolicy(sizePolicy)
+        self.pushButtonToPDF.setText(_fromUtf8(""))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/pdf.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pushButtonToPDF.setIcon(icon)
         self.pushButtonToPDF.setObjectName(_fromUtf8("pushButtonToPDF"))
         self.horizontalLayout.addWidget(self.pushButtonToPDF)
         self.verticalLayout.addWidget(self.groupBox)
@@ -122,8 +126,8 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form", None))
         self.groupBox_5.setTitle(_translate("Form", "Buscar Documento", None))
         self.groupBox_4.setTitle(_translate("Form", "Filtrar por Fecha", None))
+        self.pushButtonToPDF.setToolTip(_translate("Form", "Haga click para exportar el listado como pdf", None))
         self.pushButtonToPDF.setWhatsThis(_translate("Form", "Buscar segun el criterio elegido", None))
-        self.pushButtonToPDF.setText(_translate("Form", "PDF", None))
         item = self.tableWidgetDatosEmpleados.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Nombre", None))
         item = self.tableWidgetDatosEmpleados.horizontalHeaderItem(1)
@@ -147,3 +151,4 @@ class Ui_Form(object):
         item = self.tableWidgetDatosEmpleados.horizontalHeaderItem(10)
         item.setText(_translate("Form", "Fecha Baja", None))
 
+import recursos_rc

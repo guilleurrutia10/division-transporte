@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>140</height>
+    <width>495</width>
+    <height>200</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -18,8 +18,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>300</width>
-    <height>140</height>
+    <width>600</width>
+    <height>200</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -46,17 +46,25 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditNombreRepuesto"/>
+       <widget class="QLineEdit" name="lineEditNombreRepuesto">
+        <property name="toolTip">
+         <string>Indica el nombre del repuesto</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Descripcion Repuesto:</string>
+         <string>Descripción Repuesto:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEditDescRepuesto"/>
+       <widget class="QLineEdit" name="lineEditDescRepuesto">
+        <property name="toolTip">
+         <string>Indica la descripción del repuesto</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

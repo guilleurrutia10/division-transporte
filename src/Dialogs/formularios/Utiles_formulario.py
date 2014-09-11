@@ -247,7 +247,7 @@ class TablaSecciones(SuperTabla):
 
 
 class TablaVehiculos(SuperTabla):
-    
+
     def cargarConVehiculos(self, vehiculos):
         '''
             Recibe una lista de vehiculos para listar.
@@ -257,7 +257,7 @@ class TablaVehiculos(SuperTabla):
                 - registro interno
                 - chasis
                 - comisaria
-            
+
             Ademas, mientras lista los vehiculos, va armando un diccionario para mantener un correlacion vehiculo-fila_en_la_que_se_encuentra
         '''
         self.inicializarTabla()
@@ -287,7 +287,7 @@ class TablaVehiculos(SuperTabla):
             itemComisaria = QtGui.QTableWidgetItem()
             itemComisaria.setText(vehiculo.comisaria)
             self.setItem(fila, columna, itemComisaria)
-            
+
             self.agregarAlDiccionario(fila, vehiculo)
             fila += 1
         
