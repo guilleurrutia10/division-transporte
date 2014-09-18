@@ -13,20 +13,23 @@ from negocio.Reparacion import Reparacion
 from negocio.RepuestoUtilizados import RepuestoUtilizados
 import transaction
 
+
 class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     '''
     Atributos:
-    
     _tipoDeReparacionSeleccionado
     _repuestosSolicitados
     '''
-    def __init__(self, parent = None, vehiculoSeleccionado = None):
+    def __init__(self, parent=None, vehiculoSeleccionado=None):
         '''
         Constructor
         '''
         super(DialogCrearReparacion, self).__init__(parent)
         self.setupUi(self)
         self.DIVISION = Division_Transporte()
+        # TODO: cuando se vuelven a pedir las reparaciones se sincroniza de
+        # nuevo la zodb con el servidor. Esto provoca que los cambios
+        # realizados sobre la lista de reparaciones se pierda.
         self._tiposDeReparaciones = self.DIVISION.getTipoReparaciones()
         self.llenarComboBoxTiposReparacion()
 #        self._tipoDeReparacionSeleccionado = None
@@ -34,7 +37,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         self._repuestosSolicitados = []
 #        self._ordenDeReparacion = ordenDeReparacion
         self._vehiculoSeleccionado = vehiculoSeleccionado
-    
+
     def llenarComboBoxTiposReparacion(self):
         '''
         Solicita al controlador Division_Transporte todos los tipos de Reparaciones
@@ -43,14 +46,14 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         self.comboBoxTipoDeReparacion.clear()
         for tipoDeReparacion in self._tiposDeReparaciones:
             self.comboBoxTipoDeReparacion.addItems(QtCore.QStringList(tipoDeReparacion.getNombre()))
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         self.reject()
-        
+
     def seleccionoAlgunRepuesto(self):
         return self._repuestosSolicitados != []
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         '''
@@ -74,8 +77,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
             QtGui.QMessageBox.critical(self, 'Error. No se agrego la Reparacion', e.getMensaje())
             return
         self.accept()
-         
-        
+
     def agregarRepuesto(self, unTipoDeRepuesto, cantidad):
         '''
         Crea un repuesto utilizado y lo agrega a una lista local del dialogo, para luego crear la reparacion
@@ -87,7 +89,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         self._repuestosSolicitados.append(nuevoRepuesto)
         self.refrescarRepuestosSolicitados()
         self.comboBoxTipoDeReparacion.setEnabled(False)
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAgregarRepuesto_clicked(self):
         '''
@@ -104,8 +106,12 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         except AttributeError:
             QtGui.QMessageBox.critical(self, 'Error', 'Por favor seleccione un repuesto para agregar a la reparacion')
             return
-        
-    def on_comboBoxTipoDeReparacion_currentIndexChanged(self):
+
+    @QtCore.pyqtSlot('QString')
+    def on_comboBoxTipoDeReparacion_currentIndexChanged(self, cadena):
+#     def on_comboBoxTipoDeReparacion_editTextChanged(self):
+        if not len(cadena):
+            return
         try:
             print 'Cambio el combo: %s' % self.comboBoxTipoDeReparacion.currentText()
         except IndexError:
@@ -114,10 +120,12 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
 #        self._tipoDeReparacionSeleccionado = self.buscarTipoReparacion(self.comboBoxTipoDeReparacion.currentText())
         nombre_tReparacion_selecionado = unicode(self.comboBoxTipoDeReparacion.currentText())
         self._tipoDeReparacionSeleccionado = filter(lambda tR: tR.getNombre() == nombre_tReparacion_selecionado, self._tiposDeReparaciones)
+        if not len(self._tipoDeReparacionSeleccionado):
+            return
         self._tipoDeReparacionSeleccionado = self._tipoDeReparacionSeleccionado[0]
         #Obtenemos los repuestos requeridos por la reparacion seleccionada
         repuestos = self._tipoDeReparacionSeleccionado.getRepuestos()
-        
+
         self.tableWidgetRepuestosDisponibles.clearContents()
         self.tableWidgetRepuestosDisponibles.setRowCount(len(repuestos))
         fila = 0
@@ -131,7 +139,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
             itemDescripcionRepuesto.setText(repuesto.getTipoDeRepuesto().getDescripcion())
             self.tableWidgetRepuestosDisponibles.setItem(fila,columna,itemDescripcionRepuesto)
             fila += 1
-            
+
     def refrescarRepuestosSolicitados(self):
         self.tableWidgetRepuestosAsignados.clearContents()
         self.tableWidgetRepuestosAsignados.setRowCount(len(self._repuestosSolicitados))
@@ -150,11 +158,8 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
             itemCantidadRepuesto.setText(str(repuesto.getCantidad()))
             self.tableWidgetRepuestosAsignados.setItem(fila,columna,itemCantidadRepuesto)
             fila += 1
-        
-            
+
     def buscarTipoReparacion(self, unTipoDeReparacion):
         division = Division_Transporte()
         return division.getTipoReparacion(unicode(unTipoDeReparacion))
-    
-#    def setOrdenDeReparacion(self, unaOrden):
-#        self._ordenDeReparacion = unaOrden
+

@@ -7,6 +7,8 @@ Created on 28/10/2012
 
 from persistent import Persistent
 from persistent.list import PersistentList
+from sys import maxint
+from time import mktime
 
 from Empleado import Empleado
 from Legajo import Legajo
@@ -122,6 +124,39 @@ class MiZODB(object):
         except KeyError:
             raise ExcepcionObjeNoExiste
 
+    def setFechaMinimaDeshacer(self, fecha):
+        '''
+        Se utiliza para indicar la mínima fecha a tener en cuenta para
+        deshacer los commits realizados en bd.
+        fecha: a time tuple expressing local time.
+            More information see time.localtime()
+        '''
+        # time.mktime(tuple)
+        self.fechaMinima = mktime(fecha)
+
+    def getFechaMinimaDeshacer(self):
+        return self.fechaMinima
+
+    def deshacerCommits(self):
+        '''
+        Elimina todos los commits realizados hasta la fecha mínima
+        establecida.
+        '''
+        lista_deshacer = []
+        # maxint -> Se lo pedimos a sys
+        for item in self.db.undoLog(0, maxint):
+            # Formato del diccionario que representa el commit.
+            # {'description': '', 'id': 'A6mkrSvMssw=', 'size': 163,
+            # 'time': 1411014550.265532, 'user_name': ''}
+            # Se obtiene el campo time de la transacción.
+            if item['time'] >= self.fechaMinima:
+                lista_deshacer.append(item)
+        for item in lista_deshacer:
+            # Se obtiene el id de la transacción.
+            tid = item['id']
+            self.db.undo(tid)
+            transaction.commit()
+
 
 class Division_Transporte(Persistent):
     '''
@@ -165,6 +200,7 @@ class Division_Transporte(Persistent):
         self.instance.id = 1
         # TODO: try: ... ClientDisconnected -> Error en BD
         self.zodb = MiZODB()
+        print "La base soporta undo: %s" % self.zodb.db.supportsUndo()
         self.legajos = PersistentList()
         self.localidades = PersistentList()
         self.empleados = PersistentList()
