@@ -12,8 +12,8 @@ from Dialogs.negocio.usuario import Usuario
 
 class MyLogin(QtGui.QDialog, Ui_Dialog):
     '''
-    @version: 
-    @author: 
+    :version: 
+    :author: 
     '''
     def __init__(self, parent = None):
         super(MyLogin, self).__init__(parent)
@@ -33,8 +33,8 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
     def on_pushButtonOk_clicked(self):
         '''
         Función que permite al usuario ingresar a la aplicación.
-        @version: 
-        @author:  
+        :version: 
+        :author:  
         '''
         try:
             usr = self.validarUsr()
@@ -49,8 +49,8 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
     def on_pushButtonCancel_clicked(self):
         '''
             Función que define que se hace al cerrar el login.
-            @version: 
-            @author:
+            :version: 
+            :author:
         '''
         self.reject()
 
@@ -61,12 +61,12 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
         msgBox = QtGui.QMessageBox.critical(self, titulo, mensaje)
 
     def validarUsr(self):
-        """
+        '''
             Retorna un nuevo usuario con el nombre y la contrasena ingresados al login.
             El usuario creado se valida, es decir se verifica que los datos ingresados existen (esta registrado),
             en la misma creacion del usuario.
 
-        """
+        '''
 
 
         #tomamos el nombre ingresado por el usuario:
@@ -93,8 +93,28 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
 
     def keyPressEvent(self, keyEvent):
         """
-        Se sobreescribe el método para atrapar el evento al presionar
+        Se sobreescribe el método para atrapar el evento de presionar
         alguna tecla.
+        Según la tecla presionada se lleva a cabo la acción requerida.
         """
+        # Atrapar el evento de teclear F1
         if keyEvent.key() == QtCore.Qt.Key_F1:
             print 'Se presiono la tecla F1 en Login'
+            qlanguage = QtCore.QLocale().language()
+            language = QtCore.QLocale.languageToString(qlanguage)
+            # Para mostrar internacionalización
+            print 'Mostrar ayuda para idioma: %s' % (language)
+            path = QtCore.QDir.currentPath()
+            # Se arma la URL para caragr en el Browser
+            urlString = 'file:///%s/Help/%s/topics/Login.htm' % (path, language)
+            url = QtCore.QUrl(urlString)
+            print url.path()
+            # Solicitamos que se abra el Browser con la url indicada
+#             QtGui.QDesktopServices.openUrl(url)
+        # Para agilizar la entrada del usuario
+        if keyEvent.key() == QtCore.Qt.Key_Enter or keyEvent.key() == QtCore.Qt.Key_Return:
+            print 'Se presiono Enter'
+            self.on_pushButtonOk_clicked()
+        # Para salir rápidamente
+        if keyEvent.key() == QtCore.Qt.Key_Escape:
+            self.on_pushButtonCancel_clicked()
