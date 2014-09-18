@@ -10,6 +10,7 @@ from negocio.excepciones.SinTurnosException import SinTurnosException
 from PyQt4.Qwt5.qplt import QString
 import transaction
 
+
 class DialogoRegistrarFinTurno(QtGui.QDialog, Ui_DialogoFinalizarTurno):
     '''
     Atributos:
@@ -27,7 +28,7 @@ class DialogoRegistrarFinTurno(QtGui.QDialog, Ui_DialogoFinalizarTurno):
         self._seccion = seccion
         self._todoCargado = False #Variable para ignorar los cambios en los combo en el momento de carga de los mismos...
         self.inicializar()
-        
+
     def inicializar(self):
         #comboBoxFecha:
         dias_con_turnos = list(self._seccion.getDiasEnLosQueHayTurnoAsignado())
@@ -42,28 +43,31 @@ class DialogoRegistrarFinTurno(QtGui.QDialog, Ui_DialogoFinalizarTurno):
 
         #comboBoxHora:
         self._horaSeleccionada = self.refrescarComboHora()
-        
+
         #Inicializar turno:
         self._turnoSeleccionado = self._seccion.getTurnoDeFechaHora(self._fechaSeleccionada,self._horaSeleccionada)
-        
+
         #Label dominio:
         self.labelDominio.setText(QString(self._turnoSeleccionado.getVehiculo().getDominio()))
-        
+
         #Tabla de reparaciones:
         self.tableWidgetReparaciones.cargarConReparaciones(self._turnoSeleccionado.getReparaciones())
-        
+
         #Tabla de empleados asignados:
         self.tableWidgetEmpleados.cargarConEmpleados(self._turnoSeleccionado.getEmpleadosAsignados())
-        
+
+        self.tableWidgetReparaciones.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+        self.tableWidgetEmpleados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+
         #Css:
         self.labelFecha.setObjectName('label')
         self.labelHora.setObjectName('label')
         self.labelVehiculo.setObjectName('label')
         self.label_2.setObjectName('label')
         self.labelReparaciones.setObjectName('label')
-        
+
         self._todoCargado = True
-        
+
     def refrescarComboHora(self):
         '''
         @precondition: self._fechaSeleccionada esta cargada.

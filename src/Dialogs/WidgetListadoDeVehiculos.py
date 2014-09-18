@@ -32,6 +32,7 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         self.tableWidgetListadoDeVehiculos.cargarConVehiculos(self.vehiculos)
         # Reaccionamos al doble clic:
         self.tableWidgetListadoDeVehiculos.connect(self.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellDoubleClicked(int , int)'), self.planificarVehiculo)
+        self.pushButtonToPdf.setObjectName('iconButton')
 
     def planificarVehiculo(self, fila, columna):
         '''

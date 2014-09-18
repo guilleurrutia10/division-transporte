@@ -35,6 +35,8 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
         self.itemParaModificar = None
         # Se oculta.
         self.miWidget.pushButtonSeleccionar.hide()
+        # Layout que contiene el widget central
+        self.verticalLayout_2.addWidget(self.miWidget)
 
     #===========================================================================
     # Tratando de agarrar el evento de Seleccionar un Vehiculos de la grilla
@@ -112,6 +114,8 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
         global itemglobal
         self.item = itemglobal
         self.cargarLineEdit()
+        for label in self.findChildren(QtGui.QLabel):
+            label.setObjectName('label')
 
     def cargarLineEdit(self):
         division = Division_Transporte()

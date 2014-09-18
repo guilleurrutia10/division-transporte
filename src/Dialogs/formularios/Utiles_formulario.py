@@ -15,8 +15,9 @@ QtGui.QTableWidget
 '''
 from PyQt4 import QtGui, QtCore
 
+
 class SuperTabla(QtGui.QTableWidget):
-    
+
     '''
     TODO: Seria bueno implementar TemplateMethod
     '''
@@ -70,7 +71,7 @@ class TablaEmpleadosSeccion(SuperTabla):
             - cargar con empleados recibidos
             - cargar con empleados de secciones recibidas
     '''
-    
+
     def cargarConEmpleados(self, empleados):
         '''
             Recibe una lista de empleados para listar.
@@ -82,14 +83,14 @@ class TablaEmpleadosSeccion(SuperTabla):
                 - fecha de nacimiento
                 - email
                 - seccion
-            
+
             Ademas, mientras lista los empleados, va armando un diccionario para mantener un correlacion empleado-fila_en_la_que_se_encuentra
         '''
         self.inicializarTabla()
         fila = 0
         self.clearContents()
         self.setRowCount(len(empleados))
-        
+
         itemSeccionIgualParaTodos = QtGui.QTableWidgetItem()
         itemSeccionIgualParaTodos.setText(unicode('.'))
         empleados.sort()
@@ -104,7 +105,7 @@ class TablaEmpleadosSeccion(SuperTabla):
             self.setItem(fila, columna, itemApellido)
             columna += 1
             itemTipoDoc = QtGui.QTableWidgetItem()
-            itemTipoDoc.setText(str(empleado.getTipoDocumento()))
+            itemTipoDoc.setText(str(empleado.getTipoDocumento().get_codigo_tipo_documento()))
             self.setItem(fila, columna, itemTipoDoc)
             columna += 1
             itemDocumento = QtGui.QTableWidgetItem()
@@ -112,21 +113,21 @@ class TablaEmpleadosSeccion(SuperTabla):
             self.setItem(fila, columna, itemDocumento)
             columna += 1
             itemFechaNac = QtGui.QTableWidgetItem()
-            itemFechaNac.setText(unicode('empleado.getFechaNacimiento()'))
+#             itemFechaNac.setText(unicode('empleado.getFechaNacimiento()'))
+            itemFechaNac.setText(unicode(empleado.imprimirFechaNacimiento()))
             self.setItem(fila, columna, itemFechaNac)
             columna += 1
             itemEmail = QtGui.QTableWidgetItem()
-            itemEmail.setText(unicode('empleado.getEmail()'))
+            itemEmail.setText(unicode(empleado.getEmail()))
             self.setItem(fila, columna, itemEmail)
             columna += 1
-            
+
 #            self.setItem(fila, columna, itemSeccionIgualParaTodos)
 #            columna += 1
-            
+
             self.agregarAlDiccionario(fila, empleado)
             fila += 1
 
-    
     def cargarConEmpleadosDeSecciones(self, secciones):
         '''
             Recibe una lista de secciones, la cual recorre para listar, por cada seccion, los empleados que posee.
@@ -138,7 +139,7 @@ class TablaEmpleadosSeccion(SuperTabla):
                 - fecha de nacimiento
                 - email
                 - seccion
-            
+
             Ademas, mientras lista los empleados, va armando un diccionario para mantener un correlacion empleado-fila_en_la_que_se_encuentra
         '''
         #self.diccionario_empleados = {}
@@ -159,7 +160,8 @@ class TablaEmpleadosSeccion(SuperTabla):
                 self.setItem(fila, columna, itemApellido)
                 columna += 1
                 itemTipoDoc = QtGui.QTableWidgetItem()
-                itemTipoDoc.setText(unicode(empleado.getTipoDocumento()))
+#                 itemTipoDoc.setText(unicode(empleado.getTipoDocumento()))
+                itemTipoDoc.setText(unicode(empleado.getTipoDocumento().get_codigo_tipo_documento()))
                 self.setItem(fila, columna, itemTipoDoc)
                 columna += 1
                 itemDocumento = QtGui.QTableWidgetItem()
@@ -167,23 +169,24 @@ class TablaEmpleadosSeccion(SuperTabla):
                 self.setItem(fila, columna, itemDocumento)
                 columna += 1
                 itemFechaNac = QtGui.QTableWidgetItem()
-                itemFechaNac.setText(unicode('empleado.getFechaNacimiento()'))
+#                 itemFechaNac.setText(unicode('empleado.getFechaNacimiento()'))
+                itemFechaNac.setText(unicode(empleado.imprimirFechaNacimiento()))
                 self.setItem(fila, columna, itemFechaNac)
                 columna += 1
                 itemEmail = QtGui.QTableWidgetItem()
-                itemEmail.setText(unicode('empleado.getEmail()'))
+                itemEmail.setText(unicode(empleado.getEmail()))
                 self.setItem(fila, columna, itemEmail)
                 columna += 1
                 itemSeccion = QtGui.QTableWidgetItem()
                 itemSeccion.setText(unicode(seccion.getNombre()))
                 self.setItem(fila, columna, itemSeccion)
                 columna += 1
-                
+
                 #Cargamos el objeto Empleado al diccionario:
                 #self.diccionario_empleados[fila] = empleado
                 self.agregarAlDiccionario(fila, empleado)
                 fila += 1
-    
+
     def calcularCantEmpleados(self, secciones):
         '''
         Calcula y retorna la cantidad total de empleados de las secciones.
@@ -200,7 +203,7 @@ class TablaEmpleadosSeccion(SuperTabla):
 
 
 class TablaSecciones(SuperTabla):
-    
+
     def cargarConSecciones(self, secciones):
         '''
             Recibe una lista de secciones para listar.
@@ -209,7 +212,7 @@ class TablaSecciones(SuperTabla):
                 - nombre
                 - nombre encargado
                 - cantidad de empleados
-                
+
             Ademas, mientras lista las secciones, va armando un diccionario para mantener un correlacion secciones-fila_en_la_que_se_encuentra
         '''
         #self.diccionario_secciones = {}

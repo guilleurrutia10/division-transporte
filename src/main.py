@@ -28,8 +28,8 @@ class Aplicacion(QtGui.QApplication):
         '''
         @author: morales
         '''
-        # with open("styles.css") as f:
-        #     self.setStyleSheet(f.read())
+        with open("styles.css") as f:
+            self.setStyleSheet(f.read())
 
         # abrimos el Dialog de Login principal...
         myLogin = MyLogin()

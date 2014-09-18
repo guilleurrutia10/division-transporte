@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogRegistrarIngresoVehiculo</class>
- <widget class="QDialog" name="DialogRegistrarIngresoVehiculo">
+ <class>DialogMostrarLosVehiculosParaModificar</class>
+ <widget class="QDialog" name="DialogMostrarLosVehiculosParaModificar">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -89,7 +89,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButtonRegistrarNuevoIngreso">
+       <widget class="QPushButton" name="pushButtonModificarDatosDeVehiculo">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -103,7 +103,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Registrar Nuevo Ingreso</string>
+         <string>Modificar Datos De Vehiculo</string>
         </property>
        </widget>
       </item>
@@ -170,7 +170,7 @@
   <connection>
    <sender>pushButtonAceptar</sender>
    <signal>clicked()</signal>
-   <receiver>DialogRegistrarIngresoVehiculo</receiver>
+   <receiver>DialogMostrarLosVehiculosParaModificar</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -186,7 +186,7 @@
   <connection>
    <sender>pushButtonAceptar</sender>
    <signal>pressed()</signal>
-   <receiver>DialogRegistrarIngresoVehiculo</receiver>
+   <receiver>DialogMostrarLosVehiculosParaModificar</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -20,6 +20,7 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         self.tableWidgetDatosEmpleados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.empleados = None
         self.cargarGrillaInicial()
+        self.pushButtonToPDF.setObjectName('iconButton')
 
     # TODO: Utilizar utilies_formularios para la tabla de empleados.
     def cargarGrillaEmpleadosSinAsignar(self, empleados):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'src/ui/DialogModificarRepuesto.ui'
+# Form implementation generated from reading ui file 'ui/DialogModificarRepuesto.ui'
 #
-# Created: Mon Jul 28 21:46:29 2014
+# Created: Thu Sep 11 23:02:59 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -84,8 +84,8 @@ class Ui_DialogMoficarRepuesto(object):
     def retranslateUi(self, DialogMoficarRepuesto):
         DialogMoficarRepuesto.setWindowTitle(_translate("DialogMoficarRepuesto", "Modificar Repuesto", None))
         self.groupBox.setTitle(_translate("DialogMoficarRepuesto", "Modificar Repuesto", None))
-        self.label_2.setText(_translate("DialogMoficarRepuesto", "Descripcion Repuesto:", None))
-        self.label.setText(_translate("DialogMoficarRepuesto", "Nombre Repuesto:", None))
+        self.label_2.setText(_translate("DialogMoficarRepuesto", "Descripción:", None))
+        self.label.setText(_translate("DialogMoficarRepuesto", "Nombre:", None))
         self.label_3.setText(_translate("DialogMoficarRepuesto", "Código:", None))
         self.pushButtonAceptar.setText(_translate("DialogMoficarRepuesto", "Aceptar", None))
         self.pushButtonCancelar.setText(_translate("DialogMoficarRepuesto", "Cancelar", None))

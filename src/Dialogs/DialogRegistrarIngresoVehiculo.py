@@ -44,6 +44,8 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellEntered(int,int)'), self.seleccionarCelda)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellPressed(int,int)'), self.seleccionarCelda)
         self.listaDeVehiculos.pushButtonSeleccionar.hide()
+        # Layout que contiene al widget central
+        self.verticalLayout_2.addWidget(self.listaDeVehiculos)
 
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):

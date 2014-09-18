@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'DialogModificarVehiculo.ui'
+# Form implementation generated from reading ui file 'src/ui/DialogModificarVehiculo.ui'
 #
-# Created: Wed Dec 05 21:19:05 2012
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Thu Sep 11 02:39:52 2014
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,36 +12,40 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_DialogModificarVehiculo(object):
     def setupUi(self, DialogModificarVehiculo):
         DialogModificarVehiculo.setObjectName(_fromUtf8("DialogModificarVehiculo"))
-        DialogModificarVehiculo.resize(300, 180)
+        DialogModificarVehiculo.resize(545, 254)
         DialogModificarVehiculo.setMinimumSize(QtCore.QSize(300, 180))
-        DialogModificarVehiculo.setMaximumSize(QtCore.QSize(300, 180))
-        DialogModificarVehiculo.setWindowTitle(QtGui.QApplication.translate("DialogModificarVehiculo", "Modificar Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
+        DialogModificarVehiculo.setMaximumSize(QtCore.QSize(800, 600))
         self.verticalLayout = QtGui.QVBoxLayout(DialogModificarVehiculo)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogModificarVehiculo)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogModificarVehiculo", "Modificar Vehiculo", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setText(QtGui.QApplication.translate("DialogModificarVehiculo", "Dominio:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.label_2 = QtGui.QLabel(self.groupBox)
-        self.label_2.setText(QtGui.QApplication.translate("DialogModificarVehiculo", "Marca:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_2)
         self.lineEditDominio = QtGui.QLineEdit(self.groupBox)
         self.lineEditDominio.setObjectName(_fromUtf8("lineEditDominio"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEditDominio)
         self.label_3 = QtGui.QLabel(self.groupBox)
-        self.label_3.setText(QtGui.QApplication.translate("DialogModificarVehiculo", "Registro Interno:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_3)
         self.lineEditMarca = QtGui.QLineEdit(self.groupBox)
@@ -54,7 +58,6 @@ class Ui_DialogModificarVehiculo(object):
         self.lineEditChasisNro.setObjectName(_fromUtf8("lineEditChasisNro"))
         self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.lineEditChasisNro)
         self.label_4 = QtGui.QLabel(self.groupBox)
-        self.label_4.setText(QtGui.QApplication.translate("DialogModificarVehiculo", "Chasis Nro:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_4)
         self.verticalLayout.addWidget(self.groupBox)
@@ -67,11 +70,9 @@ class Ui_DialogModificarVehiculo(object):
         self.gridLayout_2.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogModificarVehiculo", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_2.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogModificarVehiculo", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_2.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -82,15 +83,12 @@ class Ui_DialogModificarVehiculo(object):
         QtCore.QMetaObject.connectSlotsByName(DialogModificarVehiculo)
 
     def retranslateUi(self, DialogModificarVehiculo):
-        pass
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    DialogModificarVehiculo = QtGui.QDialog()
-    ui = Ui_DialogModificarVehiculo()
-    ui.setupUi(DialogModificarVehiculo)
-    DialogModificarVehiculo.show()
-    sys.exit(app.exec_())
+        DialogModificarVehiculo.setWindowTitle(_translate("DialogModificarVehiculo", "Modificar Vehiculo", None))
+        self.groupBox.setTitle(_translate("DialogModificarVehiculo", "Modificar Vehículo", None))
+        self.label.setText(_translate("DialogModificarVehiculo", "Dominio:", None))
+        self.label_2.setText(_translate("DialogModificarVehiculo", "Marca:", None))
+        self.label_3.setText(_translate("DialogModificarVehiculo", "Registro Interno:", None))
+        self.label_4.setText(_translate("DialogModificarVehiculo", "Número de Chasis:", None))
+        self.pushButtonAceptar.setText(_translate("DialogModificarVehiculo", "Aceptar", None))
+        self.pushButtonCancelar.setText(_translate("DialogModificarVehiculo", "Cancelar", None))
 

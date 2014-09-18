@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'DlgFinalizarTurno.ui'
+# Form implementation generated from reading ui file 'ui/DlgFinalizarTurno.ui'
 #
-# Created: Wed Jul 30 19:08:32 2014
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Thu Sep 18 02:10:27 2014
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,19 +12,27 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
-    
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+
 from Utiles_formulario import TablaReparaciones, TablaEmpleadosSeccion
+
 
 class Ui_DialogoFinalizarTurno(object):
     def setupUi(self, DialogoFinalizarTurno):
         DialogoFinalizarTurno.setObjectName(_fromUtf8("DialogoFinalizarTurno"))
         DialogoFinalizarTurno.resize(822, 600)
-        DialogoFinalizarTurno.setWindowTitle(QtGui.QApplication.translate("DialogoFinalizarTurno", "Finalizar reparaciones del turno", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogoFinalizarTurno)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogoFinalizarTurno)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogoFinalizarTurno", "Seleccionar turno de la Sección", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.groupBox)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
@@ -34,7 +42,6 @@ class Ui_DialogoFinalizarTurno(object):
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.labelFecha = QtGui.QLabel(self.groupBox)
-        self.labelFecha.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "Fecha:", None, QtGui.QApplication.UnicodeUTF8))
         self.labelFecha.setObjectName(_fromUtf8("labelFecha"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.labelFecha)
         self.comboBoxFecha = QtGui.QComboBox(self.groupBox)
@@ -42,7 +49,6 @@ class Ui_DialogoFinalizarTurno(object):
         self.comboBoxFecha.setObjectName(_fromUtf8("comboBoxFecha"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.comboBoxFecha)
         self.labelHora = QtGui.QLabel(self.groupBox)
-        self.labelHora.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "Hora:", None, QtGui.QApplication.UnicodeUTF8))
         self.labelHora.setObjectName(_fromUtf8("labelHora"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.labelHora)
         self.comboBoxHora = QtGui.QComboBox(self.groupBox)
@@ -50,65 +56,53 @@ class Ui_DialogoFinalizarTurno(object):
         self.comboBoxHora.setObjectName(_fromUtf8("comboBoxHora"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.comboBoxHora)
         self.labelVehiculo = QtGui.QLabel(self.groupBox)
-        self.labelVehiculo.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "Vehículo:", None, QtGui.QApplication.UnicodeUTF8))
         self.labelVehiculo.setObjectName(_fromUtf8("labelVehiculo"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.labelVehiculo)
         self.labelDominio = QtGui.QLabel(self.groupBox)
-        self.labelDominio.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "DOMINIO", None, QtGui.QApplication.UnicodeUTF8))
         self.labelDominio.setObjectName(_fromUtf8("labelDominio"))
         self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.labelDominio)
         self.verticalLayout_3.addLayout(self.formLayout)
         self.labelReparaciones = QtGui.QLabel(self.groupBox)
-        self.labelReparaciones.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "Reparaciones:", None, QtGui.QApplication.UnicodeUTF8))
         self.labelReparaciones.setObjectName(_fromUtf8("labelReparaciones"))
         self.verticalLayout_3.addWidget(self.labelReparaciones)
-#        self.tableWidgetReparaciones = QtGui.QTableWidget(self.groupBox)
+#         self.tableWidgetReparaciones = QtGui.QTableWidget(self.groupBox)
         self.tableWidgetReparaciones = TablaReparaciones(self.groupBox)
         self.tableWidgetReparaciones.setObjectName(_fromUtf8("tableWidgetReparaciones"))
         self.tableWidgetReparaciones.setColumnCount(3)
         self.tableWidgetReparaciones.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "CODIGO", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetReparaciones.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "NOMBRE", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetReparaciones.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "DESCRIPCION", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetReparaciones.setHorizontalHeaderItem(2, item)
+        self.tableWidgetReparaciones.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_3.addWidget(self.tableWidgetReparaciones)
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "Empleados asignados", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.verticalLayout_3.addWidget(self.label)
-#        self.tableWidgetEmpleados = QtGui.QTableWidget(self.groupBox)
+#         self.tableWidgetEmpleados = QtGui.QTableWidget(self.groupBox)
         self.tableWidgetEmpleados = TablaEmpleadosSeccion(self.groupBox)
         self.tableWidgetEmpleados.setObjectName(_fromUtf8("tableWidgetEmpleados"))
         self.tableWidgetEmpleados.setColumnCount(6)
         self.tableWidgetEmpleados.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "NOMBRE", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetEmpleados.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "APELLIDO", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetEmpleados.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "T.DOC", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetEmpleados.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "N.DOC", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetEmpleados.setHorizontalHeaderItem(3, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "F.NAC", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetEmpleados.setHorizontalHeaderItem(4, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "EMAIL", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetEmpleados.setHorizontalHeaderItem(5, item)
+        self.tableWidgetEmpleados.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_3.addWidget(self.tableWidgetEmpleados)
         self.horizontalLayout_2.addLayout(self.verticalLayout_3)
         self.verticalLayout.addWidget(self.groupBox)
         self.groupBox_2 = QtGui.QGroupBox(DialogoFinalizarTurno)
-        self.groupBox_2.setTitle(QtGui.QApplication.translate("DialogoFinalizarTurno", "Finalizar", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.horizontalLayout_3 = QtGui.QHBoxLayout(self.groupBox_2)
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
@@ -117,7 +111,6 @@ class Ui_DialogoFinalizarTurno(object):
         self.verticalLayout_6 = QtGui.QVBoxLayout()
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
         self.label_2 = QtGui.QLabel(self.groupBox_2)
-        self.label_2.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "Observaciones", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
         self.verticalLayout_6.addWidget(self.label_2)
         self.plainTextEditObservaciones = QtGui.QPlainTextEdit(self.groupBox_2)
@@ -128,11 +121,9 @@ class Ui_DialogoFinalizarTurno(object):
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem)
         self.pushButtonFinalizar = QtGui.QPushButton(self.groupBox_2)
-        self.pushButtonFinalizar.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "Finalizar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonFinalizar.setObjectName(_fromUtf8("pushButtonFinalizar"))
         self.horizontalLayout_4.addWidget(self.pushButtonFinalizar)
         self.pushButtonSalir = QtGui.QPushButton(self.groupBox_2)
-        self.pushButtonSalir.setText(QtGui.QApplication.translate("DialogoFinalizarTurno", "Salir", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonSalir.setObjectName(_fromUtf8("pushButtonSalir"))
         self.horizontalLayout_4.addWidget(self.pushButtonSalir)
         self.verticalLayout_6.addLayout(self.horizontalLayout_4)
@@ -144,23 +135,34 @@ class Ui_DialogoFinalizarTurno(object):
         QtCore.QMetaObject.connectSlotsByName(DialogoFinalizarTurno)
 
     def retranslateUi(self, DialogoFinalizarTurno):
+        DialogoFinalizarTurno.setWindowTitle(_translate("DialogoFinalizarTurno", "Finalizar reparaciones del turno", None))
+        self.groupBox.setTitle(_translate("DialogoFinalizarTurno", "Seleccionar turno de la Sección", None))
+        self.labelFecha.setText(_translate("DialogoFinalizarTurno", "Fecha:", None))
+        self.labelHora.setText(_translate("DialogoFinalizarTurno", "Hora:", None))
+        self.labelVehiculo.setText(_translate("DialogoFinalizarTurno", "Vehículo:", None))
+        self.labelDominio.setText(_translate("DialogoFinalizarTurno", "DOMINIO", None))
+        self.labelReparaciones.setText(_translate("DialogoFinalizarTurno", "Reparaciones:", None))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(0)
+        item.setText(_translate("DialogoFinalizarTurno", "CÓDIGO", None))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(1)
+        item.setText(_translate("DialogoFinalizarTurno", "NOMBRE", None))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(2)
+        item.setText(_translate("DialogoFinalizarTurno", "DESCRIPCIÓN", None))
+        self.label.setText(_translate("DialogoFinalizarTurno", "Empleados asignados", None))
         item = self.tableWidgetEmpleados.horizontalHeaderItem(0)
+        item.setText(_translate("DialogoFinalizarTurno", "NOMBRE", None))
         item = self.tableWidgetEmpleados.horizontalHeaderItem(1)
+        item.setText(_translate("DialogoFinalizarTurno", "APELLIDO", None))
         item = self.tableWidgetEmpleados.horizontalHeaderItem(2)
+        item.setText(_translate("DialogoFinalizarTurno", "T.DOC", None))
         item = self.tableWidgetEmpleados.horizontalHeaderItem(3)
+        item.setText(_translate("DialogoFinalizarTurno", "N.DOC", None))
         item = self.tableWidgetEmpleados.horizontalHeaderItem(4)
+        item.setText(_translate("DialogoFinalizarTurno", "F.NAC", None))
         item = self.tableWidgetEmpleados.horizontalHeaderItem(5)
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    DialogoFinalizarTurno = QtGui.QDialog()
-    ui = Ui_DialogoFinalizarTurno()
-    ui.setupUi(DialogoFinalizarTurno)
-    DialogoFinalizarTurno.show()
-    sys.exit(app.exec_())
+        item.setText(_translate("DialogoFinalizarTurno", "EMAIL", None))
+        self.groupBox_2.setTitle(_translate("DialogoFinalizarTurno", "Finalizar", None))
+        self.label_2.setText(_translate("DialogoFinalizarTurno", "Observaciones", None))
+        self.pushButtonFinalizar.setText(_translate("DialogoFinalizarTurno", "Finalizar", None))
+        self.pushButtonSalir.setText(_translate("DialogoFinalizarTurno", "Salir", None))
 

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'src/ui/DialogRegistrarReparaciones.ui'
 #
-# Created: Thu Jul 31 21:40:18 2014
+# Created: Thu Sep 11 02:44:37 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -112,7 +112,7 @@ class Ui_DialogRegistrarReparaciones(object):
         self.horizontalLayout_2.addItem(spacerItem)
         self.pushButtonAgregarReparacion = QtGui.QPushButton(self.verticalGroupBox)
         self.pushButtonAgregarReparacion.setMinimumSize(QtCore.QSize(100, 0))
-        self.pushButtonAgregarReparacion.setMaximumSize(QtCore.QSize(150, 16777215))
+        self.pushButtonAgregarReparacion.setMaximumSize(QtCore.QSize(170, 16777215))
         self.pushButtonAgregarReparacion.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.pushButtonAgregarReparacion.setObjectName(_fromUtf8("pushButtonAgregarReparacion"))
         self.horizontalLayout_2.addWidget(self.pushButtonAgregarReparacion)
@@ -142,8 +142,8 @@ class Ui_DialogRegistrarReparaciones(object):
 
     def retranslateUi(self, DialogRegistrarReparaciones):
         DialogRegistrarReparaciones.setWindowTitle(_translate("DialogRegistrarReparaciones", "Registrar Reparaciones de Vehiculo", None))
-        self.groupBox.setTitle(_translate("DialogRegistrarReparaciones", "Datos Orden de Reparacion  ", None))
-        self.label.setText(_translate("DialogRegistrarReparaciones", "ID Orden de Reparacion:", None))
+        self.groupBox.setTitle(_translate("DialogRegistrarReparaciones", "Datos Orden de Reparación  ", None))
+        self.label.setText(_translate("DialogRegistrarReparaciones", "ID Orden de Reparación:", None))
         self.label_2.setText(_translate("DialogRegistrarReparaciones", "Fecha Ingreso:", None))
         self.labelIdOrden.setText(_translate("DialogRegistrarReparaciones", "<<Id Orden>>", None))
         self.labelFechaOrden.setText(_translate("DialogRegistrarReparaciones", "<<Fecha Orden>>", None))
@@ -153,15 +153,15 @@ class Ui_DialogRegistrarReparaciones(object):
         self.labelKilometraje.setText(_translate("DialogRegistrarReparaciones", "<<Kilometraje>>", None))
         self.label_10.setText(_translate("DialogRegistrarReparaciones", "Equipamiento:", None))
         self.label_11.setText(_translate("DialogRegistrarReparaciones", "Combustible Ingreso:", None))
-        self.label_12.setText(_translate("DialogRegistrarReparaciones", "Comisaria:", None))
+        self.label_12.setText(_translate("DialogRegistrarReparaciones", "Comisaría:", None))
         self.labelEquipamiento.setText(_translate("DialogRegistrarReparaciones", "<<Equipamiento>>", None))
         self.labelCombustible.setText(_translate("DialogRegistrarReparaciones", "<<Combustible>>", None))
         self.labelComisaria.setText(_translate("DialogRegistrarReparaciones", "<<Comisaria>>", None))
         self.label_3.setText(_translate("DialogRegistrarReparaciones", "Reparaciones:", None))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(0)
-        item.setText(_translate("DialogRegistrarReparaciones", "Tipo de Reparacion", None))
+        item.setText(_translate("DialogRegistrarReparaciones", "Tipo de Reparación", None))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(1)
-        item.setText(_translate("DialogRegistrarReparaciones", "Descripcion", None))
+        item.setText(_translate("DialogRegistrarReparaciones", "Descripción", None))
         self.pushButtonAgregarReparacion.setText(_translate("DialogRegistrarReparaciones", "Agregar una Reparacion", None))
         self.pushButtonAceptar.setText(_translate("DialogRegistrarReparaciones", "Aceptar", None))
         self.pushButtonCancelar.setText(_translate("DialogRegistrarReparaciones", "Cancelar", None))
