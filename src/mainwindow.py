@@ -356,3 +356,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             dlgEgresar = DialogDatosEgresoVehiculo(self, self.centralWidget().tableWidgetListadoDeVehiculos.getVehiculoSeleccionado()) 
             dlgEgresar.exec_()
             self.centralWidget().tableWidgetListadoDeVehiculos.cargarConVehiculos(Division_Transporte().getVehiculosParaEgreso())
+
+    @QtCore.pyqtSlot()
+    def on_actionAcerca_de_Division_de_Transporte_triggered(self):
+        QtGui.QMessageBox.about(self, "Acerca de DivT", QtCore.QString.fromUtf8('<h1>DivT</h1><p>Aplicación desarrollada para Desarrollo de Software</p>'));
