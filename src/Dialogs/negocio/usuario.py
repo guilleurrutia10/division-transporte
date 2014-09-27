@@ -68,6 +68,11 @@ class Usuario():
         #self.validar(password)
         
     def registrar(self, rol):
+        '''
+        Metodo que registra en la base de datos al Usuario.
+        En la base de datos la informacion de usuarios se mantiene en tuplas!
+        Crea la tupla de informacion del nuevo usuario y le indica a la Division que la registre.
+        '''
         hash_password = hashlib.sha1(self.name + self.password).hexdigest()
         usrParaRegistrar = (self.name, unicode(hash_password), rol)
         Division_Transporte().registrarUsuario(usrParaRegistrar)

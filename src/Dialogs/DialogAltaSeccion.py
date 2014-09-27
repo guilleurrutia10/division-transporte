@@ -92,11 +92,20 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
             @precondition: self._encargado != None.
         '''
         dialog = DialogCrearUsuarioEncargado(self._encargado.nombreCompletoUsr())
-        
-        if dialog.exec_() == QtGui.QDialog.Accepted:
-            self._encargado.setPassword(dialog.getPassEncargado())
-            print 'Pass Encargado: %s' % (dialog.getPassEncargado())
-        
+        while True:
+            if dialog.exec_() == QtGui.QDialog.Accepted:
+                if dialog.contrasenasValidas():
+                    self._encargado.setPassword(dialog.getPassEncargado())
+                    print 'Pass Encargado: %s' % (dialog.getPassEncargado())
+                    break
+                else:
+#                    dialog.lineEditPassword.clear()
+#                    dialog.lineEditPassword2.clear()
+#                    dialog.lineEditPassword.setFocus()
+#                    dialog.labelMsgError.setText("Las claves no coinciden, ingrese nuevamente")
+                    dialog.preparar_para_volver_a_pedir()
+            else:
+                break
          
     
     @QtCore.pyqtSlot()

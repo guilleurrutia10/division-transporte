@@ -195,7 +195,7 @@ class Division_Transporte(Persistent):
         @return: 
         @author:
         Recibe el nombre de la nueva Seccion y los objetos empleados y encargados que ya fueron recuperados en el
-        dialogo de cracion de la Seccion. 
+        dialogo de creacion de la Seccion. 
         '''
         #Antes de guardar, creamos el Usuario del Encargado, para que pueda loguearse luego
         from usuario import Usuario
@@ -298,7 +298,22 @@ class Division_Transporte(Persistent):
             if empleado.comparar(e):
                 raise ExcepcionObjetoExiste
         self.zodb.save('empleados', empleado.getDocumento(), empleado)
+        
+    def agregarEmpleadoDisponible(self, empleado):
+        '''
+        Mejorable!
+        '''
+        # Se obtienen todos los empleados de la División.
+        empleados = self.getEmpleados().values()
+        # Se comprueba si el empleado se encuentra en la División.
+        # Se verifica si el número de documento y el tipo de documento son
+        # iguales.
+        for e in empleados:
+            if empleado.comparar(e):
+                raise ExcepcionObjetoExiste
+        self.zodb.save('empleados', empleado.getDocumento(), empleado)
 
+        
 #    def darDeBajaEmpleado(self):
 #        '''
 #        @return: 
@@ -467,6 +482,11 @@ class Division_Transporte(Persistent):
             raise ExcepcionObjeNoExiste
 
     def registrarReparaciones(self, vehiculoSeleccionado):
+        '''
+        Una vez que las reparaciones han sido asignadas, este metodo sirve para generar el 
+        pedido de actuacion al vehiculo seleccionado.
+        Por <<insert_alguna_razon_aqui>> se penso que esto era responsabilidad de la DT.
+        '''
         # primero cambiamos el estado de la orden
         # vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getEstadoOrdenReparacion().cambiarProximoEstado()
         vehiculoSeleccionado.getOrdenDeReparacionEnCurso().generarPedidoDeActuacion()
@@ -495,6 +515,10 @@ class Division_Transporte(Persistent):
 #        vehiculo.save()
 
     def obtenerVehiculo(self, numeroPedido):
+        '''
+        Retorna el vehiculo que posee el nro de pedido con el 
+        numeroPedido
+        '''
         self.zodb.conexion.sync()
         vehiculos =  self.zodb.raiz['vehiculos'].values()
 #        vehiculo = filter(lambda vehiculo: numeroPedido == vehiculo.dameOrdenDeReparacionEnCurso().getPedidoDeActuacionActual().getNumeroPedido(), vehiculos)
@@ -572,12 +596,6 @@ class Division_Transporte(Persistent):
         encargadoAnterior = seccion.asignarNuevoEncargado(nuevoEncargado)
         #TODO: Verificar!
         self.agregarEmpleadoDisponible(encargadoAnterior)
-
-    def agregarEmpleadoDisponible(self, empleado):
-        '''
-            Asigna al empleado recibido a la 'lista' de empleados disponibles.
-        '''
-        self.zodb.save('empleados', empleado.getDocumento(), empleado)
 
     def getProximoNroPedidoActuacion(self):
         self.NRO_PEDIDO_DE_ACTUACION += 1

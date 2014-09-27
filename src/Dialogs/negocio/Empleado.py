@@ -123,6 +123,10 @@ class Empleado(Persistent):
             return -1
 
     def setUsuario(self, usr):
+        '''
+        Setea un usr al empleado. Sirve para transformar al empleado en un encargado
+        @postcondition: Esta accion hace un commit en la base de datos.
+        '''
         self._usuario = usr
         transaction.commit()
 
