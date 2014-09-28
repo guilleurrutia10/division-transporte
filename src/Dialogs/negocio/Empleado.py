@@ -7,6 +7,7 @@ Created on 28/10/2012
 
 from persistent import Persistent
 import transaction
+#import Division_Transporte
 
 
 class Empleado(Persistent):
@@ -127,6 +128,7 @@ class Empleado(Persistent):
         Setea un usr al empleado. Sirve para transformar al empleado en un encargado
         @postcondition: Esta accion hace un commit en la base de datos.
         '''
+        #Division_Transporte().borraUsuario(self)
         self._usuario = usr
         transaction.commit()
 
@@ -141,3 +143,12 @@ class Empleado(Persistent):
 
     def imprimirFechaNacimiento(self):
         return '%s/%s/%s' % (self.getFechaNacimiento().day, self.getFechaNacimiento().month, self.getFechaNacimiento().year)
+    
+    def desregistrarUsuario(self):
+        '''
+        Borra el usuario del empleado. 
+        @postcondition: Esta accion hace un commit en la base de datos.
+        '''
+        #Division_Transporte.Division_Transporte().borraUsuario(self)
+        self._usuario = None
+        transaction.commit()

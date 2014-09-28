@@ -13,23 +13,26 @@ class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto):
     '''
     classdocs
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         '''
         super(DialogAltaRepuesto, self).__init__(parent)
         self.setupUi(self)
-        self.validacionesLineEdit()        
-    
+        self.validacionesLineEdit()
+#         labels = self.findChildren(QtGui.QLabel)
+        for label in self.findChildren(QtGui.QLabel):
+            label.setObjectName('label')
+
     def validacionesLineEdit(self):
         #Validación a medida que se escribe en el lineEdit        
         self.lineEditDescRepuesto.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z\s]+'),self))
         self.lineEditNombreRepuesto.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[A-Za-z\s]+'),self))
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         self.reject()
-        
+
     '''
     TODO: Se ha repetido este mismo método en varias de las clsase Dialogos.
     '''

@@ -23,6 +23,8 @@ class DialogModificarRepuesto(QtGui.QDialog, Ui_DialogMoficarRepuesto):
         super(DialogModificarRepuesto, self).__init__(parent)
         self.setupUi(self)
         self.cargarDatosTipoRepuesto(tipoRepuesto)
+        for label in self.findChildren(QtGui.QLabel):
+            label.setObjectName('label')
 
     def cargarDatosTipoRepuesto(self, tipoRepuesto):
         self.lineEditCodigo.setModified(False)

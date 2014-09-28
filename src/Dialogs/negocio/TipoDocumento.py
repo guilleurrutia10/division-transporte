@@ -48,14 +48,13 @@ class TipoDocumento(Persistent):
     # sus variables de instancias, así como sus métodos y guardarlos sin 
     # problemas.....
     #===========================================================================
-        
+
     def get_codigo_tipo_documento(self):
         '''
         @return: 
         @author: 
         '''
         return self.__codigoTipoDocumento
-
 
     def get_descripcion(self):
         '''
@@ -64,14 +63,12 @@ class TipoDocumento(Persistent):
         '''
         return self.__descripcion
 
-
     def set_codigo_tipo_documento(self, value):
         '''
         @return: 
         @author: 
         '''
         self.__codigoTipoDocumento = value
-
 
     def set_descripcion(self, value):
         '''
@@ -80,14 +77,12 @@ class TipoDocumento(Persistent):
         '''
         self.__descripcion = value
 
-
     def del_codigo_tipo_documento(self):
         '''
         @return: 
         @author: 
         '''
         del self.__codigoTipoDocumento
-
 
     def del_descripcion(self):
         '''
@@ -98,14 +93,14 @@ class TipoDocumento(Persistent):
 
     codigoTipoDocumento = property(get_codigo_tipo_documento, set_codigo_tipo_documento, del_codigo_tipo_documento, "codigoTipoDocumento's docstring")
     descripcion = property(get_descripcion, set_descripcion, del_descripcion, "descripcion's docstring")
-    
+
     def __str__(self):
         '''
         @return: 
         @author: 
         '''
         return 'Tipo de Documento: %s, descripción: %s' %(self.get_codigo_tipo_documento(),self.get_descripcion())
-    
+
     def __eq__(self, tipoDocumento):
         '''
         @return: 

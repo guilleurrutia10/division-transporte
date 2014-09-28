@@ -7,6 +7,8 @@ Created on 28/10/2012
 
 from persistent import Persistent
 from persistent.list import PersistentList
+from sys import maxint
+from time import mktime
 
 from Empleado import Empleado
 from Legajo import Legajo
@@ -111,6 +113,17 @@ class MiZODB(object):
         lista_de_usrs.append(usr) #USUARIOS.append((self.name, hash_password, rol))
         self.commiting()
 
+    def borraUsuario(self, empleado):
+        '''
+        Borra Usuario (tupla: nombre-pass-rol) en la lista de Usuarios
+        Confirma la transaccion.
+        '''
+        lista_de_usrs = self.getDiccionarioElementos('USUARIOS')
+        usuario_a_eliminar = filter(lambda tupla: tupla[0] == empleado.nombreCompletoUsr(), lista_de_usrs)
+        usuario_a_eliminar = usuario_a_eliminar[0]
+        lista_de_usrs.remove(usuario_a_eliminar)
+        self.commiting()
+
     def remove(self, claveDiccionario, clave):
         '''
         @raise exception: ObjetoNoExiste
@@ -121,6 +134,39 @@ class MiZODB(object):
             self.commiting()
         except KeyError:
             raise ExcepcionObjeNoExiste
+
+    def setFechaMinimaDeshacer(self, fecha):
+        '''
+        Se utiliza para indicar la mínima fecha a tener en cuenta para
+        deshacer los commits realizados en bd.
+        fecha: a time tuple expressing local time.
+            More information see time.localtime()
+        '''
+        # time.mktime(tuple)
+        self.fechaMinima = mktime(fecha)
+
+    def getFechaMinimaDeshacer(self):
+        return self.fechaMinima
+
+    def deshacerCommits(self):
+        '''
+        Elimina todos los commits realizados hasta la fecha mínima
+        establecida.
+        '''
+        lista_deshacer = []
+        # maxint -> Se lo pedimos a sys
+        for item in self.db.undoLog(0, maxint):
+            # Formato del diccionario que representa el commit.
+            # {'description': '', 'id': 'A6mkrSvMssw=', 'size': 163,
+            # 'time': 1411014550.265532, 'user_name': ''}
+            # Se obtiene el campo time de la transacción.
+            if item['time'] >= self.fechaMinima:
+                lista_deshacer.append(item)
+        for item in lista_deshacer:
+            # Se obtiene el id de la transacción.
+            tid = item['id']
+            self.db.undo(tid)
+            transaction.commit()
 
 
 class Division_Transporte(Persistent):
@@ -165,6 +211,7 @@ class Division_Transporte(Persistent):
         self.instance.id = 1
         # TODO: try: ... ClientDisconnected -> Error en BD
         self.zodb = MiZODB()
+        print "La base soporta undo: %s" % self.zodb.db.supportsUndo()
         self.legajos = PersistentList()
         self.localidades = PersistentList()
         self.empleados = PersistentList()
@@ -425,7 +472,7 @@ class Division_Transporte(Persistent):
 #        # Obtener orden reparacion
 #        # si finalizada, Ok egreso sino pa' tras
 
-    def registrarIngresoDeVehiculo(self, dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad):
+    def registrarIngresoDeVehiculo(self, dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, chofer):
         '''
         @return: 
         @author: 
@@ -439,15 +486,8 @@ class Division_Transporte(Persistent):
         '''
         import datetime
         hoy = datetime.datetime.now()
-        vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
+        vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy, chofer)
         transaction.commit()
-#        try:
-#            vehiculo.dameOrdenDeReparacionEnCurso()
-#        except excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso.Excepcion_No_Posee_Orden_Reparacion_En_Curso:
-#            import datetime
-#            hoy = datetime.datetime.now()
-#            vehiculo.crearDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy)
-#            transaction.commit()
 
     def getVehiculosSinOrdenEnCurso(self):
         #print '#'*20
@@ -611,7 +651,7 @@ class Division_Transporte(Persistent):
         return filter(lambda unVehiculo: unVehiculo.estaEsperandoAprobacion(), self.getVehiculos().values())
 
     def getVehiculosEnFinalizada(self):
-        return filter(lambda unVehiculo: unVehiculo.estaFinalizado(), self.getVehiculos().values())
+        return filter(lambda unVehiculo: unVehiculo.tieneOrdenesReparacionFinalizadas(), self.getVehiculos().values())
 
     def getVehiculosEnPlanificacion(self):
         return filter(lambda unVehiculo: unVehiculo.estaPlanificado(), self.getVehiculos().values())
@@ -635,6 +675,12 @@ class Division_Transporte(Persistent):
 
     def getVehiculosParaEgreso(self):
         return filter(lambda unVehiculo: unVehiculo.puedeEgresar(), self.getVehiculos().values())
+    
+    def borraUsuario(self, viejoUsr):
+        self.zodb.borraUsuario(viejoUsr)
+    
+    def eliminarEmpleadoDisponible(self, empleado):
+        self.zodb.remove('empleados', empleado.getDocumento())
 
 ##############################################################################
 ########################## TEST DIVISION #####################################

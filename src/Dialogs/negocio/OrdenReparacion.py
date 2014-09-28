@@ -23,40 +23,39 @@ class OrdenReparacion(Persistent):
 #class OrdenReparacion(object):
     '''
     La Orden de Reparacion se crea cuando se registra un ingreso de un vehiculo.
-    
+
     @version: 
     @author: 
     '''
-    
+
     ''' ATTRIBUTES
-    
+
     Fecha_de_Ingreso  (private)
 
     FechaDe_Ingreso  (private)
-        
+
     choferAsignado  (private)
-    
+
     kilometrajeIngresado  (private)
-    
+
     kilometrajeEgreso  (private)
-    
+
     equipamiento  (private)
-    
+
     reparacionSolicitada  (private)
-    
+
     combustibleIngreso  (private)
-    
+
     combustibleEgreso  (private)
-    
+
     comisaria  (private)
-    
+
     revisada  (private)
-    
+
     aprobada  (private)
-    
+
     '''
-  
-    
+
     '''
     TODO: falta migrar comportamiento a las clases EstadoOrden y según dicho estado se 
     podrán realizar algunas operaciones y otras no.
@@ -67,7 +66,7 @@ class OrdenReparacion(Persistent):
         @return: 
         @author: 
         '''
-        
+
         '''
         TODO: tener en cuenta los comentarios siguientes.
         '''
@@ -75,10 +74,10 @@ class OrdenReparacion(Persistent):
         # La primera vez debe instanciarse como EnRevision()
 #        self.estado = EstadoOrdenReparacion(), self.estado =  EnRevision()
         self.codigoOrdenReparacion = codigoOrdenReparacion
-        
+
         self.estado = EnRevision(self)#para que el estado pueda realizarlemodificaciones
         self.reparaciones = PersistentList()
-        
+
         self.kilometrajeActual = kilometrajeActual
         self.combustibleActual = combustibleActual
         self.equipamiento = equipamiento
@@ -87,62 +86,64 @@ class OrdenReparacion(Persistent):
         self.localidad = localidad
         self.fecha = fecha
         self.chofer = 'Jose Luis Barrionuevo'
-        
+
         self._pedidoDeActuacion = None
         self._plan = Plan() #Sera utilizado a partir de Aprobada
         self._fechaEgreso = None
         self._kilometrajeEgreso = None
         self._combustibleEgreso = None
 
-            
     def getCodigoOrdenReparacion(self):
         return self.codigoOrdenReparacion
-    
+
     def getFecha(self):
         return self.fecha
-    
+
     def getChofer(self):
         return self.chofer
-    
+
+    def setChofer(self, chofer):
+        self.chofer = chofer
+
     def getKilometrajeActual(self):
         return self.kilometrajeActual
-    
+
     def getEquipamiento(self):
         return self.equipamiento
-    
+
     def getCombustibleActual(self):
         return self.combustibleActual
-    
+
     def getComisaria(self):
         return self.comisaria
-    
+
     def getEstado(self):
         return self.estado
-    
+
     def setEstado(self, estadoOrden):
         self.estado = estadoOrden
-    
+
     def getReparaciones(self):
         '''
         @return: 
         @author: 
         '''
         return self.reparaciones
-    
+
     def getReparacionesDeSeccion(self):
         '''
         @return: 
         @author: 
         '''
         pass
-    
+
     def siguienteSeccion(self):
         '''
         @return: 
         @author: 
         '''
         pass
-    
+
     def generarPedidoDeActuacion(self):
         '''
         Generar el pedido de actuacion para las reparaciones que la OR tiene cargadas
@@ -159,14 +160,14 @@ class OrdenReparacion(Persistent):
         except AttributeError:
             print 'No se pueden generar el pedido de actuacion'
             return False
-        
+
     def registrarOrdenDeReparacionPlanificada(self):
         '''
         @return: 
         @author: 
         '''
         self.estado = Planificada(self)
-    
+
     '''
     TODO: este método debería estar en el EstadoOrden-->EnRevision.
     '''
@@ -180,20 +181,20 @@ class OrdenReparacion(Persistent):
             self.estado.addReparacion(unaReparacion)
         except AttributeError:
             print 'No se pueden agregar reparaciones'
-    
+
     def getreparacionesPendientes(self):
         '''
         @return: 
         @author: 
         '''
         pass
-    
+
     def getPlan(self):
         return self._plan
-    
+
     def setPlan(self, unPlan):
         self._plan = unPlan
-        
+
     def __str__(self):
         return 'Orden de Reparacion | Estado: %s' %self.getEstado()
 
@@ -253,7 +254,7 @@ class OrdenReparacion(Persistent):
             return True
         else:
             return False
-        
+
     def getTurnosSinAtender(self):
         '''
         Para devolver los turnos que todavia no han sido atendidos de una OR,
@@ -265,13 +266,13 @@ class OrdenReparacion(Persistent):
             return self.estado.turnosSinAtender()
         except AttributeError:
             return None
-    
+
     def estaAprobada(self):
         return isinstance(self.estado, Aprobada)
-    
+
     def estaEsperandoAprobacion(self):
         return isinstance(self.estado, EsperandoAprobacion)
-    
+
     def getReparacionesClasificadas(self):
         from Division_Transporte import Division_Transporte
         reparaciones_por_seccion = {}
@@ -285,16 +286,16 @@ class OrdenReparacion(Persistent):
                     break#Analizar la siguiente reparacion
 
         return reparaciones_por_seccion
-    
+
     def estaFinalizada(self):
         return isinstance(self.estado, Finalizada)
-    
+
     def estaPlanificada(self):
         return isinstance(self.estado, Planificada)
-    
+
     def getReparacionesSinPlanificar(self):
         return filter(lambda rep: not rep.estaPlanificada(), self.reparaciones)
-    
+
     def getSeccionesDeLasReparaciones(self):
         ''''
         Retorna las secciones por las que debe pasar el vehiculo para 
@@ -319,7 +320,7 @@ class OrdenReparacion(Persistent):
             return self.estado.tieneTodosLosTurnosFinalizados()
         except AttributeError:
             return False
-        
+
     def finalizarVerificacionReparacion(self):
         '''
         Lo sabe el estado Planificada
@@ -328,7 +329,7 @@ class OrdenReparacion(Persistent):
             self.estado.finalizarVerificacionReparacion()
         except AttributeError:
             return False
-        
+
     def puedeEgresar(self):
         '''
         Lo sabe el estado Finalizada
@@ -340,10 +341,10 @@ class OrdenReparacion(Persistent):
         except AttributeError:
             #si no estoy en el estado, false
             return False
-        
+
     def getFechaEgreso(self):
         return self._fechaEgreso
-    
+
     def registrarEgreso(self, kilometraje, combustible, fecha):
         '''
         Lo sabe el estado Finalizada
@@ -357,10 +358,8 @@ class OrdenReparacion(Persistent):
     def setFechaEgreso(self, value):
         self._fechaEgreso = value
 
-
     def setKilometrajeEgreso(self, value):
         self._kilometrajeEgreso = value
-
 
     def setCombustibleEgreso(self, value):
         self._combustibleEgreso = value

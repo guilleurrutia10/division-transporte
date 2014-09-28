@@ -118,11 +118,24 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="toolTip">
+         <string>Haga click para exportar el listado como pdf</string>
+        </property>
         <property name="whatsThis">
          <string>Buscar segun el criterio elegido</string>
         </property>
         <property name="text">
-         <string>PDF</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../recursos.qrc">
+          <normaloff>:/recursos/iconos/pdf.png</normaloff>:/recursos/iconos/pdf.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -196,6 +209,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>

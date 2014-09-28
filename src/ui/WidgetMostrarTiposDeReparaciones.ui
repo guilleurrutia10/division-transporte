@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>816</width>
-    <height>449</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Mostrar Tipos de Reparacion</string>
@@ -36,7 +42,7 @@
        <widget class="QGroupBox" name="groupBox_4">
         <property name="minimumSize">
          <size>
-          <width>300</width>
+          <width>400</width>
           <height>0</height>
          </size>
         </property>
@@ -56,12 +62,19 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Nombre Tipo de Reparacion</string>
+            <string>Nombre Tipo de Reparación</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEditNombreTipoReparacion"/>
+          <widget class="QLineEdit" name="lineEditNombreTipoReparacion">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
@@ -89,6 +102,9 @@
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -124,21 +140,19 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>816</width>
+          <width>16777215</width>
           <height>16777215</height>
          </size>
         </property>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>150</number>
+         <number>180</number>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
         </attribute>
         <column>
          <property name="text">
           <string>Nombre</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Descripcion</string>
          </property>
         </column>
         <column>
@@ -148,7 +162,12 @@
         </column>
         <column>
          <property name="text">
-          <string>Realizada en Seccion</string>
+          <string>Realizada en Sección</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Descripción</string>
          </property>
         </column>
        </widget>

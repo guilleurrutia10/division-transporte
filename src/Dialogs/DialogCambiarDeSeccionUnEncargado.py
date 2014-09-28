@@ -12,6 +12,7 @@ from negocio.Division_Transporte import Division_Transporte
 from FormContrasenaEncargado import DialogCrearUsuarioEncargado
 from negocio.usuario import Usuario
 import transaction
+from time import localtime
 
 class DialogCambiarDeSeccionUnEncargado(QtGui.QDialog, Ui_DialogCambiaDeSeccionUnEncargado):
     '''
@@ -40,10 +41,14 @@ class DialogCambiarDeSeccionUnEncargado(QtGui.QDialog, Ui_DialogCambiaDeSeccionU
         super(DialogCambiarDeSeccionUnEncargado, self).__init__(parent)
         self.setupUi(self)
         self.tableWidget_secciones.cargarConSecciones(Division_Transporte().getSecciones().values())
-        self.tableWidget_empleados.cargarConEmpleados(Division_Transporte().getEmpleadosSinAsignar().values()) 
+        self.tableWidget_empleados.cargarConEmpleados(Division_Transporte().getEmpleadosSinAsignar().values())
+        fecha = localtime()
+        self.DIVISION = Division_Transporte()
+        self.DIVISION.zodb.setFechaMinimaDeshacer(fecha) 
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
+        self.DIVISION.zodb.deshacerCommits()
         self.reject()
 
     @QtCore.pyqtSlot()
@@ -62,8 +67,11 @@ class DialogCambiarDeSeccionUnEncargado(QtGui.QDialog, Ui_DialogCambiaDeSeccionU
         seccion_seleccionada = self.tableWidget_seccionSeleccionada.getPrimeraSeccion()
         #5)Decirle a la seccion seleccionada, reemplazarEncargado
         encargado_anterior = seccion_seleccionada.asignarNuevoEncargado(empleado_que_va_a_ser_encargado)
+        Division_Transporte().eliminarEmpleadoDisponible(empleado_que_va_a_ser_encargado)
         #6)Devolver el encargado anterior a empleado disponible
-        encargado_anterior.setUsuario(None)
+        #encargado_anterior.setUsuario(None)
+        Division_Transporte().borraUsuario(encargado_anterior)
+        encargado_anterior.desregistrarUsuario()
         Division_Transporte().agregarEmpleadoDisponible(encargado_anterior)
         #7)Commitear
         transaction.commit()

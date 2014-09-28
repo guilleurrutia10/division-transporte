@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>refresh(1).png</file>
     <file>recursos/iconos/pdf.png</file>
     <file>recursos/iconos/logoDivisionTransporte.png</file>
     <file>recursos/iconos/list1-icon.png</file>

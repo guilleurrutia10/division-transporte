@@ -23,7 +23,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Datos Orden de Reparacion  </string>
+      <string>Datos Orden de Reparación  </string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
@@ -43,7 +43,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>ID Orden de Reparacion:</string>
+           <string>ID Orden de Reparación:</string>
           </property>
          </widget>
         </item>
@@ -113,7 +113,7 @@
         <item row="6" column="0">
          <widget class="QLabel" name="label_12">
           <property name="text">
-           <string>Comisaria:</string>
+           <string>Comisaría:</string>
           </property>
          </widget>
         </item>
@@ -187,12 +187,12 @@
            </attribute>
            <column>
             <property name="text">
-             <string>Tipo de Reparacion</string>
+             <string>Tipo de Reparación</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Descripcion</string>
+             <string>Descripción</string>
             </property>
            </column>
           </widget>
@@ -222,7 +222,7 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>150</width>
+               <width>170</width>
                <height>16777215</height>
               </size>
              </property>

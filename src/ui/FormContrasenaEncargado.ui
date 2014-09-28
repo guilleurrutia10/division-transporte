@@ -76,7 +76,11 @@
        </widget>
       </item>
       <item row="1" column="1">
+<<<<<<< HEAD
        <widget class="QLineEdit" name="lineEditPassword">
+=======
+       <widget class="QLineEdit" name="linePassword">
+>>>>>>> 753aba3476d02826674e672ba7ec5eb065a9e75e
         <property name="echoMode">
          <enum>QLineEdit::Password</enum>
         </property>

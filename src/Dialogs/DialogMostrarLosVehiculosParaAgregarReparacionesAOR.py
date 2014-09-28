@@ -11,15 +11,16 @@ from WidgetListadoDeVehiculos import ListadoVehiculos
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
 
+
 class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_DialogMostrarLosVehiculosParaAgregarReparacionesAOR):
     '''
     Dialogo que muestra todos los vehiculos de la Division y brinda
     la posibilidad de registrarle sus reparaciones.
-    
+
     @version: 
     @author: 
     '''
-    
+
     def __init__(self, parent=None):
         '''
         Constructor
@@ -32,8 +33,11 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         #self.listaDeVehiculos = WidgetListadoDeVehiculos.ListadoVehiculos(self.DIVISION.getVehiculos().values(), self.widget)
         self.listaDeVehiculos = ListadoVehiculos(self.DIVISION.getVehiculosEnRevision(), self.widget)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
-        self.dominioVehiculo = None    
-        
+        self.dominioVehiculo = None
+        self.listaDeVehiculos.pushButtonSeleccionar.hide()
+        # Layout que contiene el widget central
+        self.verticalLayout_2.addWidget(self.listaDeVehiculos)
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         '''
@@ -41,7 +45,7 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         @author: 
         '''
         self.close()
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         '''
@@ -50,7 +54,7 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         '''
         print 'Click sobre aceptar'
         self.accept()
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonAgregarReparacionesAOrden_clicked(self):
         '''
@@ -70,7 +74,6 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         else:
             QtGui.QMessageBox.critical(self, 'Atencion', 'Debe seleccionar un Vehiculo para poder agregarle reparaciones')
             return
-        
+
     def seleccionarCelda(self, fila, columna):
         self.dominioVehiculo = unicode(self.listaDeVehiculos.tableWidgetListadoDeVehiculos.item(fila, 0).text())
-        

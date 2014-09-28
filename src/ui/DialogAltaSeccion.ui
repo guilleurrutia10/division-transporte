@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1221</width>
-    <height>541</height>
+    <width>1024</width>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Nueva Seccion</string>
+      <string>Nueva Sección</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -35,7 +35,7 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Nombre Seccion:</string>
+            <string>Nombre Sección:</string>
            </property>
           </widget>
          </item>
@@ -105,7 +105,7 @@
                <widget class="QPushButton" name="pushButtonAsignarComoEncargado">
                 <property name="maximumSize">
                  <size>
-                  <width>150</width>
+                  <width>16777215</width>
                   <height>16777215</height>
                  </size>
                 </property>
@@ -121,7 +121,7 @@
                <widget class="QPushButton" name="pushButtonDesasignarEncargado">
                 <property name="maximumSize">
                  <size>
-                  <width>150</width>
+                  <width>16777215</width>
                   <height>16777215</height>
                  </size>
                 </property>
@@ -193,7 +193,10 @@
          <item row="1" column="0">
           <widget class="QTableWidget" name="tableWidgetEmpleadosSinAsignar">
            <attribute name="horizontalHeaderDefaultSectionSize">
-            <number>150</number>
+            <number>200</number>
+           </attribute>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>true</bool>
            </attribute>
            <column>
             <property name="text">
@@ -225,11 +228,14 @@
               </size>
              </property>
              <attribute name="horizontalHeaderDefaultSectionSize">
-              <number>150</number>
+              <number>200</number>
+             </attribute>
+             <attribute name="horizontalHeaderStretchLastSection">
+              <bool>true</bool>
              </attribute>
              <column>
               <property name="text">
-               <string>Numero de Documento</string>
+               <string>Número de Documento</string>
               </property>
               <property name="textAlignment">
                <set>AlignJustify|AlignVCenter</set>
@@ -252,7 +258,10 @@
            <item>
             <widget class="QTableWidget" name="tableWidgetEmpleadosAsignados">
              <attribute name="horizontalHeaderDefaultSectionSize">
-              <number>150</number>
+              <number>200</number>
+             </attribute>
+             <attribute name="horizontalHeaderStretchLastSection">
+              <bool>true</bool>
              </attribute>
              <column>
               <property name="text">

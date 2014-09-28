@@ -2,14 +2,12 @@
 
 # Form implementation generated from reading ui file 'src/ui/WidgetListadoDeVehiculos.ui'
 #
-# Created: Thu Aug  7 02:07:23 2014
+# Created: Wed Sep 10 21:47:42 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-
-from Utiles_formulario import TablaVehiculos
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -24,6 +22,8 @@ try:
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
+
+from Utiles_formulario import TablaVehiculos
 
 class Ui_FormListadoVehiculos(object):
     def setupUi(self, FormListadoVehiculos):
@@ -48,7 +48,8 @@ class Ui_FormListadoVehiculos(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lineEditBuscar.sizePolicy().hasHeightForWidth())
         self.lineEditBuscar.setSizePolicy(sizePolicy)
-        self.lineEditBuscar.setMinimumSize(QtCore.QSize(133, 20))
+        self.lineEditBuscar.setMinimumSize(QtCore.QSize(133, 10))
+        self.lineEditBuscar.setMaximumSize(QtCore.QSize(16777215, 30))
         self.lineEditBuscar.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.lineEditBuscar.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.lineEditBuscar.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
@@ -57,8 +58,9 @@ class Ui_FormListadoVehiculos(object):
         spacerItem = QtGui.QSpacerItem(513, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButtonToPdf = QtGui.QPushButton(self.groupBox)
+        self.pushButtonToPdf.setText(_fromUtf8(""))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/pdf.png")), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/pdf.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButtonToPdf.setIcon(icon)
         self.pushButtonToPdf.setIconSize(QtCore.QSize(32, 32))
         self.pushButtonToPdf.setObjectName(_fromUtf8("pushButtonToPdf"))
@@ -68,7 +70,6 @@ class Ui_FormListadoVehiculos(object):
         self.labelListadoVehiculos.setObjectName(_fromUtf8("labelListadoVehiculos"))
         self.verticalLayout.addWidget(self.labelListadoVehiculos)
         self.tableWidgetListadoDeVehiculos = TablaVehiculos(FormListadoVehiculos)
-#         self.tableWidgetListadoDeVehiculos = QtGui.QTableWidget(FormListadoVehiculos)
         self.tableWidgetListadoDeVehiculos.setObjectName(_fromUtf8("tableWidgetListadoDeVehiculos"))
         self.tableWidgetListadoDeVehiculos.setColumnCount(5)
         self.tableWidgetListadoDeVehiculos.setRowCount(0)
@@ -100,7 +101,7 @@ class Ui_FormListadoVehiculos(object):
     def retranslateUi(self, FormListadoVehiculos):
         FormListadoVehiculos.setWindowTitle(_translate("FormListadoVehiculos", "Form", None))
         self.labelDominio.setText(_translate("FormListadoVehiculos", "Filtrar:", None))
-        self.pushButtonToPdf.setText(_translate("FormListadoVehiculos", "PDF", None))
+        self.pushButtonToPdf.setToolTip(_translate("FormListadoVehiculos", "Haga click para exportar el listado como pdf", None))
         self.labelListadoVehiculos.setText(_translate("FormListadoVehiculos", "Listado de Vehículos", None))
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(0)
         item.setText(_translate("FormListadoVehiculos", "Dominio", None))

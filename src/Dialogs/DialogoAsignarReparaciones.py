@@ -12,6 +12,7 @@ from PyQt4.Qwt5.qplt import QString
 from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
 from negocio.excepciones.SinTurnosException import SinTurnosException
 
+
 class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
     '''
     classdocs
@@ -41,8 +42,13 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
 #        self._empleadosSinAsignar = self._seccion.getEmpleados().values()
         self._empleadosSinAsignar = self._seccion.getEmpleados()
         self._empleadosAsignados = []
+
+        self.tableWidgetEmpleadosAsignados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+        self.tableWidgetEmpleadosDisponibles.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+        self.tableWidgetReparaciones.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+
         self.refrescarTablasEmpleados()
-    
+
     def on_comboBoxFecha_currentIndexChanged(self):
         self._fechaSeleccionada = unicode(self.comboBoxFecha.currentText())
         self._horaSeleccionada = self.refrescarComboHora()
@@ -54,7 +60,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         self._horaSeleccionada = self.comboBoxHora.currentText().toInt()
         self._turnoSeleccionado = self._seccion.getTurnoDeFechaHora(self._fechaSeleccionada,self._horaSeleccionada)
         self.refrescarDatosTurno()
-        
+
     def refrescarComboHora(self):
         '''
         Refresca el combo y ademas devuelve el primer valor de la lista de sus valores'''
@@ -78,7 +84,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
             self.pushButtonAsignar.setEnabled(False)
         self.tableWidgetEmpleadosAsignados.cargarConEmpleados(self._empleadosAsignados)
         self.tableWidgetEmpleadosDisponibles.cargarConEmpleados(self._empleadosSinAsignar)
-    
+
     def refrescarDatosTurno(self):
         '''
         Primero setear el turno y luego llamar a este metodo
@@ -95,17 +101,17 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         self._empleadosAsignados.append(self.tableWidgetEmpleadosDisponibles.getEmpleadoSeleccionado())
         self._empleadosSinAsignar.remove(self.tableWidgetEmpleadosDisponibles.getEmpleadoSeleccionado())        
         self.refrescarTablasEmpleados()
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonDesasignar_clicked(self):
-        
+
         if not self.tableWidgetEmpleadosAsignados.getEmpleadoSeleccionado():
             mostrarMensaje(self, 'Debe seleccionar un empleado.', 'Seleccionar')
             return
         self._empleadosSinAsignar.append(self.tableWidgetEmpleadosAsignados.getEmpleadoSeleccionado())
         self._empleadosAsignados.remove(self.tableWidgetEmpleadosAsignados.getEmpleadoSeleccionado())        
         self.refrescarTablasEmpleados()
-        
+
     def aceptar(self):
         mostrarMensaje(self,
                        'Turno: %s %dhs.\nSe asignaron los siguientes empleados:\n%s'%(self._fechaSeleccionada,
@@ -120,4 +126,3 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         #Y ademas:
         #alvehiculo.decirleQuePongaTodasSusReparacionesCOmoNoPlanificadas!
         pass
-    

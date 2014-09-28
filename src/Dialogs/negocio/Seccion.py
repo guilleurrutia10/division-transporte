@@ -10,24 +10,24 @@ from persistent.list import PersistentList
 from BTrees.OOBTree import OOBTree
 from Turno import Turno
 import transaction
-from persistent.mapping import PersistentMapping
 
 CANTIDAD_MIN_PARA_TRANFERIR = 3
 TURNOS_DEL_DIA_VACIA = {8:None, 9:None,10:None, 11:None,12:None, 16:None,17:None, 18:None,19:None, 20:None}
+
 
 class Seccion(Persistent):
     '''
     classdocs
     @version: 
     @author:
-        
+
         ATTRIBUTES:
-        
+
         - codigoSeccion  (private)
         - nombre  (private)
         - empleados
-        - encargado        
-        
+        - encargado
+
         - tablaDeTurnos
         - tiposDeReparaciones
     '''
@@ -41,25 +41,25 @@ class Seccion(Persistent):
         self.nombre = nombre
 #        self.empleados = PersistentMapping(empleados)
         self.empleados = PersistentList(empleados)
-        self.empleados.extend(empleados)
+#         self.empleados.extend(empleados)
         self.encargado = encargado
         self.tablaDeTurnos = OOBTree()
         self.tiposDeReparaciones = PersistentList()
-    
+
     def setEncargado(self, encargado):
         '''
         @return: 
         @author: 
         '''
         self.encargado = encargado
-    
+
     def setNombre(self):
         '''
         @return: 
         @author: 
         '''
         pass
-    
+
     def agregarEmpleado(self, empleado):
         '''
         @return: 
@@ -68,7 +68,7 @@ class Seccion(Persistent):
 #        self.empleados[empleado.getDocumento()] = empleado
         self.empleados.append(empleado)
         transaction.commit()
-    
+
     def quitarEmpleado(self):
         '''
         @return: 
@@ -103,29 +103,29 @@ class Seccion(Persistent):
 #        empleadosConReparacionesPendientes = filter(lambda unEmpleado: unEmpleado.tieneReparacionesPendientes() , self.getEmpleados().values())
         empleadosConReparacionesPendientes = filter(lambda unEmpleado: unEmpleado.tieneReparacionesPendientes() , self.getEmpleados())
         return len(empleadosConReparacionesPendientes) == 0 and self.cantidadEmpleadosTotales() >= CANTIDAD_MIN_PARA_TRANFERIR 
-    
+
     def getEmpleados(self):
         '''
             Retorna una lista de empleados.Si
             Antes: Retorna un diccionario de empelados.
         '''
         return self.empleados
-    
+
     def poseeAEmpleado(self, unEmpleado):
 #        return unEmpleado in self.getEmpleados().values()
         return unEmpleado in self.getEmpleados()
-        
+
     def getEncargado(self):
         return self.encargado
-    
+
     def getCodigo(self):
         return 'codigo'
-    
+
     def removerEmpleado(self, empleadoARemover):
 #        del self.getEmpleados()[empleadoARemover.getDocumento()]
         self.empleados.remove(empleadoARemover)
         transaction.commit()
-        
+
     def asignarNuevoEncargado(self, nuevoEncargado):
         '''
             Asigna un nuevo encargado a la Seccion.
@@ -134,7 +134,7 @@ class Seccion(Persistent):
         encargadoAnterior = self.getEncargado()
         self.setEncargado(nuevoEncargado)
         return encargadoAnterior
-    
+
     def tieneRegistroParaElDia(self, queDia):
         '''
             OOBTree.has_key(una_clave_que_no_tiene) devuelve 0!
@@ -154,7 +154,7 @@ class Seccion(Persistent):
             self.tablaDeTurnos.update({queDia: horas_turno})
             transaction.commit()
             print "El dia se ha registrado en la tabla de turnos exitosamente!"
-            
+
     def tieneTurnoLibreParaElDia(self, queDia):
         if not self.tieneRegistroParaElDia(queDia):
             self.crearRegistroParaElDia(queDia)
@@ -164,7 +164,7 @@ class Seccion(Persistent):
         if not self.tieneRegistroParaElDia(queDia):
             self.crearRegistroParaElDia(queDia)
         return self.tablaDeTurnos.get(queDia).get(queHora) is None#[Turno, Turno, None, Turno] por ejemplo...
-             
+
     def getPrimerTurnoLibreParaElDia(self, queDia):
         '''
         Devuelve la hora del primer turno libre.
@@ -182,7 +182,7 @@ class Seccion(Persistent):
         for hora, turno in horarios.iteritems():
             if turno == None:
                 return hora
-    
+
     def crearTurnoParaElDia(self, vehiculo, queDia, hora= None):
         '''
         Crea un turno para el dia indicado.
@@ -190,12 +190,12 @@ class Seccion(Persistent):
         '''
         if not self.tieneRegistroParaElDia(queDia):
             self.crearRegistroParaElDia(queDia)
-            
+
         #si no viene con una hora indicada:
         if hora == None:
             print 'El turno se creara en el primer turno libre disponible'
             hora = self.getPrimerTurnoLibreParaElDia(queDia)
-        
+
         #Creacion y asignacion del Turno:
         self.tablaDeTurnos.get(queDia)[hora] = Turno(self, vehiculo, queDia, hora)
 
@@ -206,23 +206,23 @@ class Seccion(Persistent):
         '''
         if not self.tieneRegistroParaElDia(turno.getFecha()):
             self.crearRegistroParaElDia(turno.getFecha())
-            
+
         #si no viene con una hora indicada:
         if turno.getHora()== None:
             print 'El turno se creara en el primer turno libre disponible'
             turno.setHora(self.getPrimerTurnoLibreParaElDia(turno.getFecha()))
-        
+
         #Creacion y asignacion del Turno:
         self.tablaDeTurnos.get(turno.getFecha())[turno.getHora()] = turno
 #        transaction.commit()
-                    
+
     def getAgendaDelDia(self, queDia):
         if self.tieneRegistroParaElDia(queDia):
             return self.tablaDeTurnos.get(queDia)
         else:
             self.crearRegistroParaElDia(queDia)
             return self.tablaDeTurnos.get(queDia)
-        
+
     def getHorasSinTurnoParaElDia(self, dia):
         '''
         Retorna una lista con todas las horas en las que la seccion
@@ -233,7 +233,7 @@ class Seccion(Persistent):
             if not turno:
                 list_retorno.append(hora)
         return list_retorno
-    
+
     def getTurnoDeFechaHora(self, queDia, queHora):
         '''
         queDia: string <<10/10/2014>>
@@ -242,7 +242,7 @@ class Seccion(Persistent):
 
     def __str__(self):
         return '%s | %s' %(self.codigoSeccion, self.nombre)
-    
+
     def agregarTipoDeReparacion(self, reparacion):
         '''
         Agrega la reaparacion ingresada como una nueva reparacion que la seccion es capaz de realizar
@@ -251,10 +251,10 @@ class Seccion(Persistent):
 
     def getTiposDeReparaciones(self):
         return self.tiposDeReparaciones
-    
+
     def realiza(self, unaReparacion):
         return unaReparacion.getTipoDeReparacion() in self.tiposDeReparaciones
-    
+
     def getDiasEnLosQueHayTurnoSinAsignar(self):
         '''
         Retorna una lista con todos los dias en los cuales se ha asignado un turno
@@ -265,7 +265,7 @@ class Seccion(Persistent):
             if self.getHorasEnLosQueHayTurnoSinAsignar(dia):
                 dias.append(dia)
         return dias
-    
+
     def getDiasEnLosQueHayTurno_deprecated(self):
         '''
         Retorna una lista con todos los dias en los cuales se ha asignado un turno
@@ -283,7 +283,7 @@ class Seccion(Persistent):
                 if turno.noEstaAsignado():
                     list_retorno.append(hora)
         return list_retorno
-        
+
     def getDiasEnLosQueHayTurnoAsignado(self):
         '''
         Retorna una lista con todos los dias en los cuales se ha asignado un turno
@@ -306,7 +306,7 @@ class Seccion(Persistent):
                 if turno.estaAsignado() and not turno.estaFinalizado():
                     list_retorno.append(hora)
         return list_retorno
-        
+
 ##############################################################################
 ########################## TEST SECCION ######################################
 ##############################################################################
@@ -351,5 +351,3 @@ class TddSeccion(unittest.TestCase):
         agendaDelDia = self.seccion.getAgendaDelDia(self.hoy)
         print 'Agenda del dia ', self.hoy, ': ', agendaDelDia
         self.assertNotEqual(None, agendaDelDia)
-    
-    

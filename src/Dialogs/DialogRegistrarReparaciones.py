@@ -6,6 +6,8 @@ Created on 03/10/2012
 '''
 import transaction
 from PyQt4 import QtCore, QtGui
+from time import localtime
+
 from formularios.DialogRegistrarReparaciones import Ui_DialogRegistrarReparaciones
 #from Dialogs import DialogCrearReparacion
 import DialogCrearReparacion
@@ -39,6 +41,10 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.vehiculoSeleccionado = vehiculoSeleccionado
 #        self.dominioVehiculo = None
         self.DIVISION = Division_Transporte()
+        # Cargamos la mínima fecha a tener en cuenta.
+        # A partir de esta fecha podemos deshacer commits.
+        fecha = localtime()
+        self.DIVISION.zodb.setFechaMinimaDeshacer(fecha)
 
     def exec_(self, *args, **kwargs):
         self.completarLabelsOR()
@@ -111,7 +117,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.vehiculoSeleccionado.generarPedidoDeActuacion()
         self.mostrarPedidoDeActuacion(self.vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion())
         self.imprimirPedidoActuacion()
-#         transaction.commit()
+        transaction.commit()
         self.accept()
 
     def mostrarPedidoDeActuacion(self, unPedidoDeActuacion):
@@ -124,6 +130,8 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
 
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
+        # Deshacemos los commits realizados.
+        self.DIVISION.zodb.deshacerCommits()
         self.reject()
 
     @QtCore.pyqtSlot()

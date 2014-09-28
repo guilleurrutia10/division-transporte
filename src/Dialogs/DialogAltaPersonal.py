@@ -125,14 +125,14 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
             self.lineEditApellido.setFocus()
             return
         if not match('[0-9]+', self.lineEditNroDocumento.text()):
-            self.mostrarMensaje('Debe ingresar el numero de Documento.', 'Ingreso')
+            self.mostrarMensaje('Debe ingresar el número de Documento.', 'Ingreso')
             self.lineEditNroDocumento.clear()
             self.lineEditNroDocumento.setFocus()
             return
         if not match('^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$', self.lineEditEmail.text()):
-            self.mostrarMensaje('Debe ingresar un mail valido.', 'Ingreso')
-            self.lineEditNroDocumento.clear()
-            self.lineEditNroDocumento.setFocus()
+            self.mostrarMensaje('Debe ingresar un mail válido. Ejemplo: "pepe@pepe.com"', 'Ingreso')
+            self.lineEditEmail.clear()
+            self.lineEditEmail.setFocus()
             return
         return True
 
