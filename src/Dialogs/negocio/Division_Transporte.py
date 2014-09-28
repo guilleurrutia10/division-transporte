@@ -113,6 +113,17 @@ class MiZODB(object):
         lista_de_usrs.append(usr) #USUARIOS.append((self.name, hash_password, rol))
         self.commiting()
 
+    def borraUsuario(self, empleado):
+        '''
+        Borra Usuario (tupla: nombre-pass-rol) en la lista de Usuarios
+        Confirma la transaccion.
+        '''
+        lista_de_usrs = self.getDiccionarioElementos('USUARIOS')
+        usuario_a_eliminar = filter(lambda tupla: tupla[0] == empleado.nombreCompletoUsr(), lista_de_usrs)
+        usuario_a_eliminar = usuario_a_eliminar[0]
+        lista_de_usrs.remove(usuario_a_eliminar)
+        self.commiting()
+
     def remove(self, claveDiccionario, clave):
         '''
         @raise exception: ObjetoNoExiste
@@ -231,7 +242,7 @@ class Division_Transporte(Persistent):
         @return: 
         @author:
         Recibe el nombre de la nueva Seccion y los objetos empleados y encargados que ya fueron recuperados en el
-        dialogo de cracion de la Seccion. 
+        dialogo de creacion de la Seccion. 
         '''
         #Antes de guardar, creamos el Usuario del Encargado, para que pueda loguearse luego
         from usuario import Usuario
@@ -334,7 +345,22 @@ class Division_Transporte(Persistent):
             if empleado.comparar(e):
                 raise ExcepcionObjetoExiste
         self.zodb.save('empleados', empleado.getDocumento(), empleado)
+        
+    def agregarEmpleadoDisponible(self, empleado):
+        '''
+        Mejorable!
+        '''
+        # Se obtienen todos los empleados de la División.
+        empleados = self.getEmpleados().values()
+        # Se comprueba si el empleado se encuentra en la División.
+        # Se verifica si el número de documento y el tipo de documento son
+        # iguales.
+        for e in empleados:
+            if empleado.comparar(e):
+                raise ExcepcionObjetoExiste
+        self.zodb.save('empleados', empleado.getDocumento(), empleado)
 
+        
 #    def darDeBajaEmpleado(self):
 #        '''
 #        @return: 
@@ -496,6 +522,11 @@ class Division_Transporte(Persistent):
             raise ExcepcionObjeNoExiste
 
     def registrarReparaciones(self, vehiculoSeleccionado):
+        '''
+        Una vez que las reparaciones han sido asignadas, este metodo sirve para generar el 
+        pedido de actuacion al vehiculo seleccionado.
+        Por <<insert_alguna_razon_aqui>> se penso que esto era responsabilidad de la DT.
+        '''
         # primero cambiamos el estado de la orden
         # vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getEstadoOrdenReparacion().cambiarProximoEstado()
         vehiculoSeleccionado.getOrdenDeReparacionEnCurso().generarPedidoDeActuacion()
@@ -524,6 +555,10 @@ class Division_Transporte(Persistent):
 #        vehiculo.save()
 
     def obtenerVehiculo(self, numeroPedido):
+        '''
+        Retorna el vehiculo que posee el nro de pedido con el 
+        numeroPedido
+        '''
         self.zodb.conexion.sync()
         vehiculos =  self.zodb.raiz['vehiculos'].values()
 #        vehiculo = filter(lambda vehiculo: numeroPedido == vehiculo.dameOrdenDeReparacionEnCurso().getPedidoDeActuacionActual().getNumeroPedido(), vehiculos)
@@ -602,12 +637,6 @@ class Division_Transporte(Persistent):
         #TODO: Verificar!
         self.agregarEmpleadoDisponible(encargadoAnterior)
 
-    def agregarEmpleadoDisponible(self, empleado):
-        '''
-            Asigna al empleado recibido a la 'lista' de empleados disponibles.
-        '''
-        self.zodb.save('empleados', empleado.getDocumento(), empleado)
-
     def getProximoNroPedidoActuacion(self):
         self.NRO_PEDIDO_DE_ACTUACION += 1
         return self.NRO_PEDIDO_DE_ACTUACION
@@ -646,6 +675,12 @@ class Division_Transporte(Persistent):
 
     def getVehiculosParaEgreso(self):
         return filter(lambda unVehiculo: unVehiculo.puedeEgresar(), self.getVehiculos().values())
+    
+    def borraUsuario(self, viejoUsr):
+        self.zodb.borraUsuario(viejoUsr)
+    
+    def eliminarEmpleadoDisponible(self, empleado):
+        self.zodb.remove('empleados', empleado.getDocumento())
 
 ##############################################################################
 ########################## TEST DIVISION #####################################

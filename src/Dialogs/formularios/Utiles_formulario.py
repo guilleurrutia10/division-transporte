@@ -149,7 +149,8 @@ class TablaEmpleadosSeccion(SuperTabla):
         self.clearContents()
         self.setRowCount(self.calcularCantEmpleados(secciones))
         for seccion in secciones:
-            for empleado in seccion.getEmpleados().values():
+            #for empleado in seccion.getEmpleados().values():
+            for empleado in seccion.getEmpleados():
                 columna = 0
                 itemNombre = QtGui.QTableWidgetItem()
                 itemNombre.setText(unicode(empleado.getNombre()))
@@ -201,6 +202,12 @@ class TablaEmpleadosSeccion(SuperTabla):
         #return self.diccionario_empleados.get(self.getFilaSeleccionada())
         return self.getElementoSeleccionado()
 
+    def getPrimerEmpleado(self):
+        '''
+        Retorna el primer empleado de la lista de empleados
+        '''
+        return self.diccionarioFilaElemento.get(0)
+
 
 class TablaSecciones(SuperTabla):
 
@@ -248,6 +255,11 @@ class TablaSecciones(SuperTabla):
     def getSeccionSeleccionada(self):
         return self.getElementoSeleccionado()
 
+    def getPrimeraSeccion(self):
+        '''
+        Retorna la primera seccion de la lista de secciones
+        '''
+        return self.diccionarioFilaElemento.get(0)
 
 class TablaVehiculos(SuperTabla):
 

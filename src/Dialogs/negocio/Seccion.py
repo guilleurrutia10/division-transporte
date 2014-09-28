@@ -51,7 +51,7 @@ class Seccion(Persistent):
         @return: 
         @author: 
         '''
-        pass
+        self.encargado = encargado
 
     def setNombre(self):
         '''
