@@ -496,7 +496,7 @@ class TablaReparacionesNoPlanificadas(SuperTabla):
         reparaciones = orden.getReparaciones()
         reparaciones.sort()
         self.setRowCount(len(reparaciones))
-        
+
         for reparacion in reparaciones:
             columna = 0
             itemCodigo = QtGui.QTableWidgetItem()
@@ -514,15 +514,15 @@ class TablaReparacionesNoPlanificadas(SuperTabla):
             itemDescripcion = QtGui.QTableWidgetItem()
             itemDescripcion.setText(unicode(reparacion.getDescripcion()))
             self.setItem(fila, columna, itemDescripcion)
-            
+
             self.agregarAlDiccionario(fila, reparacion)
             fila += 1
 
 
     def getReparacionSeleccionada(self):
         return self.getElementoSeleccionado()
-    
-    
+
+
 class TablaReparacionesPlanificadas(SuperTabla):
     '''
         Tabla que lista reparaciones.
@@ -547,17 +547,21 @@ class TablaReparacionesPlanificadas(SuperTabla):
 
         for reparacion in reparaciones:
             columna = 0
+            itemNroOrden = QtGui.QTableWidgetItem()
+            itemNroOrden.setText(unicode("orden.nroOrden()"))
+            self.setItem(fila, columna, itemNroOrden)
+            columna += 1
+            itemFechaInicio = QtGui.QTableWidgetItem()
+            itemFechaInicio.setText(unicode(reparacion.getFechaInicio()))
+            self.setItem(fila, columna, itemFechaInicio)
+            columna += 1
+            itemFechaFin = QtGui.QTableWidgetItem()
+            itemFechaFin.setText(unicode(reparacion.getFechaFin()))
+            self.setItem(fila, columna, itemFechaFin)
+            columna += 1
             itemDescripcion = QtGui.QTableWidgetItem()
             itemDescripcion.setText(unicode(reparacion.getDescripcion()))
             self.setItem(fila, columna, itemDescripcion)
-#             columna += 1
-#             itemFechaInicio = QtGui.QTableWidgetItem()
-#             itemFechaInicio.setText(unicode(reparacion.getFechaInicio()))
-#             self.setItem(fila, columna, itemFechaInicio)
-#             columna += 1
-#             itemFechaFin = QtGui.QTableWidgetItem()
-#             itemFechaFin.setText(unicode(reparacion.getFechaFin()))
-#             self.setItem(fila, columna, itemFechaFin)
 
             self.agregarAlDiccionario(fila, reparacion)
             fila += 1

@@ -296,6 +296,9 @@ class OrdenReparacion(Persistent):
     def getReparacionesSinPlanificar(self):
         return filter(lambda rep: not rep.estaPlanificada(), self.reparaciones)
 
+    def getReparacionesPlanificadas(self):
+        return filter(lambda rep: rep.estaPlanificada(), self.reparaciones)
+
     def getSeccionesDeLasReparaciones(self):
         ''''
         Retorna las secciones por las que debe pasar el vehiculo para 

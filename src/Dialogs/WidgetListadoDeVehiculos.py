@@ -122,6 +122,8 @@ class Listado_Vehiculos_con_Reparaciones_no_Planificadas(QtGui.QWidget, Ui_Widge
         self.setupUi(self)
 #         self.widgetCentral = ListadoVehiculos(Division_Transporte().getVehiculosEnAprobada(), self)
         self.tableWidgetVehiculos.cargarConVehiculos(Division_Transporte().getVehiculosEnAprobada())
+        self.tableWidgetVehiculos.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
+        self.tableWidgetReparaciones.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self._ultimoVehiculoSeleccionado = None
 
         self.tableWidgetVehiculos.connect(self.tableWidgetVehiculos, QtCore.SIGNAL('cellClicked(int , int)'), self.mostrarReparaciones)

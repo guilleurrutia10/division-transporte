@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'workspace/division-transporte/src/ui/WidgetMostrarReparacionesPorVehiculo.ui'
+# Form implementation generated from reading ui file 'ui/WidgetMostrarReparacionesPorVehiculo.ui'
 #
-# Created: Fri Jul 25 12:28:38 2014
+# Created: Thu Sep 25 02:07:44 2014
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+
+from Utiles_formulario import TablaVehiculos, TablaReparacionesPlanificadas
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -23,15 +25,12 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-from Utiles_formulario import TablaVehiculos, TablaReparaciones
-
 class Ui_WidgetMostrarReparacionesPorVehiculo(object):
     def setupUi(self, WidgetMostrarReparacionesPorVehiculo):
         WidgetMostrarReparacionesPorVehiculo.setObjectName(_fromUtf8("WidgetMostrarReparacionesPorVehiculo"))
         WidgetMostrarReparacionesPorVehiculo.setWindowModality(QtCore.Qt.WindowModal)
-        WidgetMostrarReparacionesPorVehiculo.resize(1309, 639)
-        WidgetMostrarReparacionesPorVehiculo.setMinimumSize(QtCore.QSize(601, 460))
-        WidgetMostrarReparacionesPorVehiculo.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        WidgetMostrarReparacionesPorVehiculo.resize(1289, 620)
+        WidgetMostrarReparacionesPorVehiculo.setMinimumSize(QtCore.QSize(988, 460))
         self.verticalLayout = QtGui.QVBoxLayout(WidgetMostrarReparacionesPorVehiculo)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox_3 = QtGui.QGroupBox(WidgetMostrarReparacionesPorVehiculo)
@@ -68,8 +67,7 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         self.gridLayout = QtGui.QGridLayout(self.groupBox_2)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
 #         self.tableWidgetReparaciones = QtGui.QTableWidget(self.groupBox_2)
-        self.tableWidgetReparaciones = TablaReparaciones(WidgetMostrarReparacionesPorVehiculo)
-        self.tableWidgetReparaciones.setMaximumSize(QtCore.QSize(600, 16777215))
+        self.tableWidgetReparaciones = TablaReparacionesPlanificadas(self.groupBox_2)
         self.tableWidgetReparaciones.setObjectName(_fromUtf8("tableWidgetReparaciones"))
         self.tableWidgetReparaciones.setColumnCount(4)
         self.tableWidgetReparaciones.setRowCount(0)
@@ -81,13 +79,15 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         self.tableWidgetReparaciones.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidgetReparaciones.setHorizontalHeaderItem(3, item)
-        self.tableWidgetReparaciones.horizontalHeader().setDefaultSectionSize(120)
+        self.tableWidgetReparaciones.horizontalHeader().setCascadingSectionResizes(True)
+        self.tableWidgetReparaciones.horizontalHeader().setDefaultSectionSize(160)
+        self.tableWidgetReparaciones.horizontalHeader().setSortIndicatorShown(False)
         self.tableWidgetReparaciones.horizontalHeader().setStretchLastSection(True)
         self.gridLayout.addWidget(self.tableWidgetReparaciones, 1, 2, 1, 1)
 #         self.tableWidgetVehiculos = QtGui.QTableWidget(self.groupBox_2)
-        self.tableWidgetVehiculos = TablaVehiculos(WidgetMostrarReparacionesPorVehiculo)
-        self.tableWidgetVehiculos.setMinimumSize(QtCore.QSize(620, 0))
-        self.tableWidgetVehiculos.setMaximumSize(QtCore.QSize(550, 16777215))
+        self.tableWidgetVehiculos = TablaVehiculos(self.groupBox_2)
+        self.tableWidgetVehiculos.setMinimumSize(QtCore.QSize(600, 0))
+        self.tableWidgetVehiculos.setMaximumSize(QtCore.QSize(600, 16777215))
         self.tableWidgetVehiculos.setObjectName(_fromUtf8("tableWidgetVehiculos"))
         self.tableWidgetVehiculos.setColumnCount(5)
         self.tableWidgetVehiculos.setRowCount(0)
@@ -101,9 +101,9 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         self.tableWidgetVehiculos.setHorizontalHeaderItem(3, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidgetVehiculos.setHorizontalHeaderItem(4, item)
+        self.tableWidgetVehiculos.horizontalHeader().setCascadingSectionResizes(True)
         self.tableWidgetVehiculos.horizontalHeader().setDefaultSectionSize(120)
         self.tableWidgetVehiculos.horizontalHeader().setStretchLastSection(True)
-        self.tableWidgetVehiculos.verticalHeader().setStretchLastSection(False)
         self.gridLayout.addWidget(self.tableWidgetVehiculos, 1, 0, 1, 1)
         self.label_2 = QtGui.QLabel(self.groupBox_2)
         self.label_2.setObjectName(_fromUtf8("label_2"))
@@ -120,18 +120,18 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
 
     def retranslateUi(self, WidgetMostrarReparacionesPorVehiculo):
         WidgetMostrarReparacionesPorVehiculo.setWindowTitle(_translate("WidgetMostrarReparacionesPorVehiculo", "Mostrar Reparaciones Por Vehiculo", None))
-        self.groupBox_3.setTitle(_translate("WidgetMostrarReparacionesPorVehiculo", "Mostrar Reparaciones Realizadas a Vehiculos  ", None))
+        self.groupBox_3.setTitle(_translate("WidgetMostrarReparacionesPorVehiculo", "Mostrar Vehiculos con reparaciones sin planificar", None))
         self.groupBox_4.setTitle(_translate("WidgetMostrarReparacionesPorVehiculo", "Filtrar por Dominio", None))
         self.label.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Dominio:", None))
         self.pushButton.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Buscar", None))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(0)
-        item.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Descripcion", None))
+        item.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Orden", None))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(1)
         item.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Fecha Inicio", None))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(2)
         item.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Fecha Fin", None))
         item = self.tableWidgetReparaciones.horizontalHeaderItem(3)
-        item.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Nro Orden", None))
+        item.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Descripción", None))
         item = self.tableWidgetVehiculos.horizontalHeaderItem(0)
         item.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Dominio", None))
         item = self.tableWidgetVehiculos.horizontalHeaderItem(1)
@@ -143,5 +143,5 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         item = self.tableWidgetVehiculos.horizontalHeaderItem(4)
         item.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Chasis Nro", None))
         self.label_2.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Vehiculos:", None))
-        self.label_3.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Reparaciones Realizadas:", None))
+        self.label_3.setText(_translate("WidgetMostrarReparacionesPorVehiculo", "Reparaciones :", None))
 
