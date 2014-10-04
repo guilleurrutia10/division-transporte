@@ -18,7 +18,7 @@ USO:
                 break
 
 '''
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui
 
 from formularios.FormContrasenaEncargado import Ui_DialogCrearUsuarioEncargado
 
