@@ -10,13 +10,14 @@ from time import localtime
 
 from formularios.DialogRegistrarReparaciones import Ui_DialogRegistrarReparaciones
 #from Dialogs import DialogCrearReparacion
-import DialogCrearReparacion
+from DialogCrearReparacion import DialogCrearReparacion
 #from negocio.Division_Transporte import Division_Transporte
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
 #from Dialogs.DialogMostrarPedidoDeActuacion 
 from DialogMostrarPedidoDeActuacion import DialogMostrarPedidoDeActuacion
-
+from negocio.excepciones.Except_NoHayReparacionesDisponibles import Except_NoHayReparacionesDisponibles
+from Utiles_Dialogo import mostrarMensaje
 
 class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones):
     '''
@@ -94,7 +95,11 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
 
     def abrirDialogCrearReparacion(self):
         print 'abriendo dialogo Crear Reparacion'
-        dlgCrearReparacion = DialogCrearReparacion.DialogCrearReparacion(self, self.vehiculoSeleccionado)
+        try:
+            dlgCrearReparacion = DialogCrearReparacion(self, self.vehiculoSeleccionado)
+        except Except_NoHayReparacionesDisponibles:
+            mostrarMensaje(self, "La division no tiene tipos de repaciones disponibles", "No se pueden agregar reparaciones")
+            return
         #A partir de esta sentencia, dlgCrearReparacion posee una OR:
 #        dlgCrearReparacion.setOrdenDeReparacion(self.ordenDeReparacion)
         if dlgCrearReparacion.exec_():

@@ -1,25 +1,35 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'WidgetListadoDeVehiculos.ui'
+# Form implementation generated from reading ui file 'src/ui/WidgetListadoDeVehiculos.ui'
 #
-# Created: Sat Oct 04 15:33:22 2014
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Sep 10 21:47:42 2014
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-from Utiles_formulario import TablaVehiculos
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+
+from Utiles_formulario import TablaVehiculos
 
 class Ui_FormListadoVehiculos(object):
     def setupUi(self, FormListadoVehiculos):
         FormListadoVehiculos.setObjectName(_fromUtf8("FormListadoVehiculos"))
         FormListadoVehiculos.resize(771, 476)
         FormListadoVehiculos.setMinimumSize(QtCore.QSize(771, 476))
-        FormListadoVehiculos.setWindowTitle(QtGui.QApplication.translate("FormListadoVehiculos", "Form", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(FormListadoVehiculos)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(FormListadoVehiculos)
@@ -30,7 +40,6 @@ class Ui_FormListadoVehiculos(object):
         self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.labelDominio = QtGui.QLabel(self.groupBox)
-        self.labelDominio.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Filtrar:", None, QtGui.QApplication.UnicodeUTF8))
         self.labelDominio.setObjectName(_fromUtf8("labelDominio"))
         self.horizontalLayout.addWidget(self.labelDominio)
         self.lineEditBuscar = QtGui.QLineEdit(self.groupBox)
@@ -49,7 +58,6 @@ class Ui_FormListadoVehiculos(object):
         spacerItem = QtGui.QSpacerItem(513, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.pushButtonToPdf = QtGui.QPushButton(self.groupBox)
-        self.pushButtonToPdf.setToolTip(QtGui.QApplication.translate("FormListadoVehiculos", "Haga click para exportar el listado como pdf", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonToPdf.setText(_fromUtf8(""))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/pdf.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -59,28 +67,21 @@ class Ui_FormListadoVehiculos(object):
         self.horizontalLayout.addWidget(self.pushButtonToPdf)
         self.verticalLayout.addWidget(self.groupBox)
         self.labelListadoVehiculos = QtGui.QLabel(FormListadoVehiculos)
-        self.labelListadoVehiculos.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Listado de Vehículos", None, QtGui.QApplication.UnicodeUTF8))
         self.labelListadoVehiculos.setObjectName(_fromUtf8("labelListadoVehiculos"))
         self.verticalLayout.addWidget(self.labelListadoVehiculos)
-#        self.tableWidgetListadoDeVehiculos = QtGui.QTableWidget(FormListadoVehiculos)
         self.tableWidgetListadoDeVehiculos = TablaVehiculos(FormListadoVehiculos)
         self.tableWidgetListadoDeVehiculos.setObjectName(_fromUtf8("tableWidgetListadoDeVehiculos"))
         self.tableWidgetListadoDeVehiculos.setColumnCount(5)
         self.tableWidgetListadoDeVehiculos.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Registro Interno", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetListadoDeVehiculos.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Numero de Chasis", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetListadoDeVehiculos.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Marca", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetListadoDeVehiculos.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Modelo", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetListadoDeVehiculos.setHorizontalHeaderItem(3, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Dominio", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetListadoDeVehiculos.setHorizontalHeaderItem(4, item)
         self.tableWidgetListadoDeVehiculos.horizontalHeader().setDefaultSectionSize(150)
         self.tableWidgetListadoDeVehiculos.horizontalHeader().setStretchLastSection(True)
@@ -90,7 +91,6 @@ class Ui_FormListadoVehiculos(object):
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.pushButtonSeleccionar = QtGui.QPushButton(FormListadoVehiculos)
-        self.pushButtonSeleccionar.setText(QtGui.QApplication.translate("FormListadoVehiculos", "Seleccionar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonSeleccionar.setObjectName(_fromUtf8("pushButtonSeleccionar"))
         self.horizontalLayout_2.addWidget(self.pushButtonSeleccionar)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
@@ -99,20 +99,20 @@ class Ui_FormListadoVehiculos(object):
         QtCore.QMetaObject.connectSlotsByName(FormListadoVehiculos)
 
     def retranslateUi(self, FormListadoVehiculos):
+        FormListadoVehiculos.setWindowTitle(_translate("FormListadoVehiculos", "Form", None))
+        self.labelDominio.setText(_translate("FormListadoVehiculos", "Filtrar:", None))
+        self.pushButtonToPdf.setToolTip(_translate("FormListadoVehiculos", "Haga click para exportar el listado como pdf", None))
+        self.labelListadoVehiculos.setText(_translate("FormListadoVehiculos", "Listado de Vehículos", None))
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(0)
+        item.setText(_translate("FormListadoVehiculos", "Dominio", None))
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(1)
+        item.setText(_translate("FormListadoVehiculos", "Marca", None))
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(2)
+        item.setText(_translate("FormListadoVehiculos", "Registro Interno", None))
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(3)
+        item.setText(_translate("FormListadoVehiculos", "Numero de Chasis", None))
         item = self.tableWidgetListadoDeVehiculos.horizontalHeaderItem(4)
+        item.setText(_translate("FormListadoVehiculos", "Comisaría", None))
+        self.pushButtonSeleccionar.setText(_translate("FormListadoVehiculos", "Seleccionar", None))
 
 import recursos_rc
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    FormListadoVehiculos = QtGui.QWidget()
-    ui = Ui_FormListadoVehiculos()
-    ui.setupUi(FormListadoVehiculos)
-    FormListadoVehiculos.show()
-    sys.exit(app.exec_())
-

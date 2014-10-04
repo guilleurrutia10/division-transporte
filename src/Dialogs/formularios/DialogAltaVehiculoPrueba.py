@@ -6,6 +6,7 @@
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
+# Este archivo se modifico para informar la obligatoriedad de los campos de dialogo
 
 from PyQt4 import QtCore, QtGui
 
@@ -125,11 +126,11 @@ class Ui_DialogAltaVehiculo(object):
     def retranslateUi(self, DialogAltaVehiculo):
         DialogAltaVehiculo.setWindowTitle(_translate("DialogAltaVehiculo", "Alta Vehiculo", None))
         self.groupBox.setTitle(_translate("DialogAltaVehiculo", "Nuevo Vehículo", None))
-        self.label.setText(_translate("DialogAltaVehiculo", "Dominio:", None))
-        self.label_2.setText(_translate("DialogAltaVehiculo", "Marca:", None))
-        self.label_3.setText(_translate("DialogAltaVehiculo", "Registro Interno:", None))
-        self.label_4.setText(_translate("DialogAltaVehiculo", "Número de Chasis:", None))
-        self.label_5.setText(_translate("DialogAltaVehiculo", "Modelo:", None))
+        self.label.setText(_translate("DialogAltaVehiculo", "Dominio(*):", None))
+        self.label_2.setText(_translate("DialogAltaVehiculo", "Marca(*):", None))
+        self.label_3.setText(_translate("DialogAltaVehiculo", "Registro Interno(*):", None))
+        self.label_4.setText(_translate("DialogAltaVehiculo", "Número de Chasis(*):", None))
+        self.label_5.setText(_translate("DialogAltaVehiculo", "Modelo(*):", None))
         self.pushButton_2Aceptar.setText(_translate("DialogAltaVehiculo", "Aceptar", None))
         self.pushButton_Cancelar.setText(_translate("DialogAltaVehiculo", "Cancelar", None))
 

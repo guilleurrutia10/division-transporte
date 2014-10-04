@@ -283,14 +283,6 @@ class TablaVehiculos(SuperTabla):
         for vehiculo in vehiculos:
             #Crear items y setearlos
             columna = 0
-            itemDominio = QtGui.QTableWidgetItem()
-            itemDominio.setText(vehiculo.dominio)
-            self.setItem(fila, columna, itemDominio)
-            columna += 1
-            itemMarca = QtGui.QTableWidgetItem()
-            itemMarca.setText(vehiculo.marca)
-            self.setItem(fila, columna, itemMarca)
-            columna += 1
             itemRegistroInterno = QtGui.QTableWidgetItem()
             itemRegistroInterno.setText(vehiculo.registroInterno)
             self.setItem(fila, columna, itemRegistroInterno)
@@ -299,9 +291,17 @@ class TablaVehiculos(SuperTabla):
             itemNumeroChasis.setText(vehiculo.getNumeroChasis())
             self.setItem(fila, columna, itemNumeroChasis)
             columna += 1
-            itemComisaria = QtGui.QTableWidgetItem()
-            itemComisaria.setText(vehiculo.comisaria)
-            self.setItem(fila, columna, itemComisaria)
+            itemMarca = QtGui.QTableWidgetItem()
+            itemMarca.setText(vehiculo.marca)
+            self.setItem(fila, columna, itemMarca)
+            columna += 1
+            itemModelo = QtGui.QTableWidgetItem()
+            itemModelo.setText(vehiculo.modelo)
+            self.setItem(fila, columna, itemModelo)
+            columna += 1
+            itemDominio = QtGui.QTableWidgetItem()
+            itemDominio.setText(vehiculo.dominio)
+            self.setItem(fila, columna, itemDominio)
 
             self.agregarAlDiccionario(fila, vehiculo)
             fila += 1

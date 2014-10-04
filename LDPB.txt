@@ -1,0 +1,27 @@
+#LDPB (Lista de Pequenos Bugs)
+
+#Lista que contiene la observaciones de anomalias en la ejecucion, para arreglar.
+
+#Formato:
+
+## La siguiente linea divide por secciones: 
+##
+### ============= DiVISOR de SECCIONES ======================
+##
+## A continuacion se listan las anomalias, precedidas de su estado:
+### [Sin arreglar] Excepcion cuando...
+### [OK] Error al intentar...
+##
+
+
+#LDPB (Lista de Pequenos Bugs):
+
+============== Archivo ================================
+[Sin arreglar] Implementar "Cambiar de usuario"
+
+============== Verificacion y reparacion ==============
+[OK] En Alta Vehiculo: Indicar datos obligatorios.
+[OK] En Alta Vehiculo: Cambiar mensaje de exito en la carga.
+[OK] En registrar ingreso: Mostrar bien los atributos de los vehiculos
+[OK] En agregar reparacion: Hay una excepcion cuando se quieren agregar reparaciones, pero no hay
+	 ningun tipo de reparacion cargado en las secciones de la reparacion.
