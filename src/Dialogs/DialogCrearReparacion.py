@@ -12,7 +12,7 @@ from negocio.excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden
 from negocio.Reparacion import Reparacion
 from negocio.RepuestoUtilizados import RepuestoUtilizados
 import transaction
-
+from negocio.excepciones.Except_NoHayReparacionesDisponibles import Except_NoHayReparacionesDisponibles
 
 class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     '''
@@ -31,9 +31,12 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         # nuevo la zodb con el servidor. Esto provoca que los cambios
         # realizados sobre la lista de reparaciones se pierda.
         self._tiposDeReparaciones = self.DIVISION.getTipoReparaciones()
+        try:
+            self._tipoDeReparacionSeleccionado = self._tiposDeReparaciones[0]
+        except IndexError:
+            raise Except_NoHayReparacionesDisponibles() 
         self.llenarComboBoxTiposReparacion()
 #        self._tipoDeReparacionSeleccionado = None
-        self._tipoDeReparacionSeleccionado = self._tiposDeReparaciones[0]
         self._repuestosSolicitados = []
 #        self._ordenDeReparacion = ordenDeReparacion
         self._vehiculoSeleccionado = vehiculoSeleccionado

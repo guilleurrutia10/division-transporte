@@ -123,16 +123,6 @@
      </attribute>
      <column>
       <property name="text">
-       <string>Dominio</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Marca</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
        <string>Registro Interno</string>
       </property>
      </column>
@@ -143,7 +133,17 @@
      </column>
      <column>
       <property name="text">
-       <string>Comisaría</string>
+       <string>Marca</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Modelo</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Dominio</string>
       </property>
      </column>
     </widget>

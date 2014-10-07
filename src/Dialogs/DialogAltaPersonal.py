@@ -129,7 +129,8 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
             self.lineEditNroDocumento.clear()
             self.lineEditNroDocumento.setFocus()
             return
-        if not match('^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$', self.lineEditEmail.text()):
+        #Si, ingreso un mail, lo validamos, sino no nos ocupamos de validar...
+        if self.lineEditEmail.text() and not match('^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$', self.lineEditEmail.text()):
             self.mostrarMensaje('Debe ingresar un mail válido. Ejemplo: "pepe@pepe.com"', 'Ingreso')
             self.lineEditEmail.clear()
             self.lineEditEmail.setFocus()

@@ -94,7 +94,7 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
             return
         else:
             if self.cargarVehiculo():
-                self._mensaje.setMensaje('El vehiculo se ha ingresado correctamente!!! :)')
+                self._mensaje.setMensaje('El vehiculo se ha cargado correctamente')
                 self._mensaje.setInformative()
                 self.accept()
                 # Si se presionó Ok...

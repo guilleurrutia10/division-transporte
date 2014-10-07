@@ -27,8 +27,6 @@ class MyLogin(QtGui.QDialog, Ui_Dialog):
         #Mostrar asteriscos en lugar de los caracteres introducidos en realidad.
         self.linePassword.setEchoMode(2)
 
-        #self.aplicacionPadre = aplicacionPadre
-
     @QtCore.pyqtSlot()    
     def on_pushButtonOk_clicked(self):
         '''
