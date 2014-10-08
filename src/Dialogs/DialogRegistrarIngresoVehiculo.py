@@ -63,11 +63,13 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         @author: 
         '''
         '''
-        TODO: Obtener algún indicio de que el vehiculo seleccionado tiene Orden de
+        TODO: OK. Obtener algún indicio de que el vehiculo seleccionado tiene Orden de
         Reparacion en Curso.
+        -- A partir de ahora sólo se muestran aquellos vehículos sin orden de reparación.
         '''
         global itemglobal
         if itemglobal:
+            # TODO: Se debe enviar al DialogDatosIngresoVehiculo el vehículo para el ingreso a la división.
             dlgDatosIngreso = DialogDatosIngresoVehiculo()
             dlgDatosIngreso.exec_()
             itemglobal = None
@@ -89,9 +91,12 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
             self.mostrarMensaje('Debe seleccionar un Vehiculo.', 'Seleccionar Vehiculo')
 
     def seleccionarCelda(self, fila, columna):
-        itemVehiculo = self.listaDeVehiculos.tableWidgetListadoDeVehiculos.item(fila, 0)
+        #columnaDominio = self.listaDeVehiculos.tableWidgetListadoDeVehiculos.columnCount() -1
+        #itemVehiculo = self.listaDeVehiculos.tableWidgetListadoDeVehiculos.item(fila, columnaDominio)
         global itemglobal
-        itemglobal = itemVehiculo
+        itemVehiculo = self.listaDeVehiculos.tableWidgetListadoDeVehiculos.getVehiculoSeleccionado()
+        itemglobal = itemVehiculo.getDominio()
+        print itemglobal.text()
         print 'Presionando: %d ; %d' %(fila, columna)
 
     '''

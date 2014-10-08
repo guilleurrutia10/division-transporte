@@ -76,4 +76,5 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
             return
 
     def seleccionarCelda(self, fila, columna):
-        self.dominioVehiculo = unicode(self.listaDeVehiculos.tableWidgetListadoDeVehiculos.item(fila, 0).text())
+        #self.dominioVehiculo = unicode(self.listaDeVehiculos.tableWidgetListadoDeVehiculos.item(fila, 0).text())
+        self.dominioVehiculo = unicode(self.listaDeVehiculos.tableWidgetListadoDeVehiculos.getVehiculoSeleccionado().getDominio())

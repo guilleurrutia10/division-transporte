@@ -32,8 +32,9 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
         self.setupUi(self)
         self.miWidget = ListadoVehiculos(Division_Transporte().getVehiculos().values(), self.widget)
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
-        self.itemParaModificar = None
-        # Se oculta.
+        #self.itemParaModificar = None
+        self.vehiculoSeleccionado = None
+        # Se oculta el botón.
         self.miWidget.pushButtonSeleccionar.hide()
         # Layout que contiene el widget central
         self.verticalLayout_2.addWidget(self.miWidget)
@@ -46,14 +47,16 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
     def seleccionarCelda(self, row, column):
         print row, ',' , column
 #        item = QtGui.QTableWidgetItem()
-        item = self.miWidget.tableWidgetListadoDeVehiculos.item(row, 0)
-        print item.text()
-        self.itemParaModificar = item
-        global itemglobal
-        itemglobal = item
+#         item = self.miWidget.tableWidgetListadoDeVehiculos.item(row, 0)
+#         print item.text()
+#         self.itemParaModificar = item
+#         global itemglobal
+#         itemglobal = item
 #         dominio = unicode(item.text())
 #         vehiculoSeleccionado = Division_Transporte().getVehiculo(dominio)
-        vehiculo = self.miWidget.tableWidgetListadoDeVehiculos.getVehiculoSeleccionado()
+        self.vehiculoSeleccionado = self.miWidget.tableWidgetListadoDeVehiculos.getVehiculoSeleccionado()
+#         itemglobal = vehiculo.getDominio()
+#         self.dominioVehiculo = vehiculo.getDominio()
 
 #     @QtCore.pyqtSlot()
 #     def on_pushButtonAceptar_clicked(self):
@@ -69,16 +72,21 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
     def on_pushButtonModificarDatosDeVehiculo_clicked(self):
         '''
         '''
-        try:
-            global itemglobal
-            assert not(itemglobal is None)
-        except AssertionError:
+#         try:
+#             global itemglobal
+#             assert not(itemglobal is None)
+#         except AssertionError:
+#             self.mostrarMensaje('Debe seleccionar un Vehículo.', 'Ingresar Vehículo')
+#             return
+#         if not self.dominioVehiculo: # == None
+        if not self.vehiculoSeleccionado: # == None
             self.mostrarMensaje('Debe seleccionar un Vehículo.', 'Ingresar Vehículo')
             return
-        # TODO: Se debe enviar el vehículo a modificar.
-        dlgModificar = DialogModificarVehiculo()
+        # TODO: OK. Se debe enviar el vehículo a modificar.
+        dlgModificar = DialogModificarVehiculo(vehiculoSeleccionado=self.vehiculoSeleccionado)
         dlgModificar.exec_()
-        itemglobal = None
+#         itemglobal = None
+        self.vehiculoSeleccionado = None
 #         self.miWidget.cargarGrilla(Division_Transporte().getVehiculos().values())
         vehiculos = Division_Transporte().getVehiculos().values()
         self.miWidget.tableWidgetListadoDeVehiculos.cargarConVehiculos(vehiculos)
@@ -104,22 +112,24 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
     '''
     classdocs
     '''
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, vehiculoSeleccionado=None):
         '''
         Constructor
         '''
         super(DialogModificarVehiculo, self).__init__(parent)
         self.setupUi(self)
-        self.auto = None
-        global itemglobal
-        self.item = itemglobal
+#         self.auto = None
+        self.auto = vehiculoSeleccionado
+#         global itemglobal
+#         self.item = itemglobal
         self.cargarLineEdit()
         for label in self.findChildren(QtGui.QLabel):
             label.setObjectName('label')
 
     def cargarLineEdit(self):
-        division = Division_Transporte()
-        self.auto = division.getVehiculo(unicode(self.item.text()))
+#         division = Division_Transporte()
+        # self.auto = division.getVehiculo(unicode(self.item.text()))
+#         self.auto = division.getVehiculo(unicode(self.item))
 
         self.lineEditDominio.setText(self.auto.dominio)
         self.lineEditDominio.setReadOnly(True)
@@ -194,7 +204,7 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
             return
         return True
 
-    # TODO: Falta testear para que no haya campos vacíos
+    # TODO: OK. Falta testear para que no haya campos vacíos.
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         # Se comprueba burdamente que los haya cambiado al menos un LineEdit.
