@@ -110,6 +110,7 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
 
     # TODO: Falta tener en cuenta la fecha de baja y alta.
     def filtrarFechaNacimiento(self):
+        # QDate.toPyDate() -> datetime.date
         personal = filter(lambda p: self.dateEditFechaInicio.date().toPyDate() <= p.getFechaNacimiento()
                           and self.dateEditFechaFin.date().toPyDate() >= p.getFechaNacimiento(),
                           self.empleados)

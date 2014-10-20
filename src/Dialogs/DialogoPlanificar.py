@@ -6,21 +6,25 @@ Created on 20/07/2014
 '''
 
 from PyQt4 import QtCore, QtGui
-from formularios.DlgPlanificar import Ui_DialogPlanificar
+import transaction
 from datetime import date
+from time import localtime
+
+from formularios.DlgPlanificar import Ui_DialogPlanificar
 from Utiles_Dialogo import mostrarMensaje
 from negocio.Turno import Turno
-import transaction
+from negocio.Division_Transporte import Division_Transporte
+
 
 class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
     '''
     classdocs
     '''
-    def __init__(self, parent = None, vehiculo_a_planificar= None):
+    def __init__(self, parent=None, vehiculo_a_planificar=None):
         '''
         Constructor
-        
-        Observacion:
+
+        Observación:
         Forma de trabajo: cada elemento de la UI que puede cambiar dinamicamente
         tiene asociada un lista, luego existen metodos que refrescan dichos componentes,
         valiendose de las listas.
@@ -29,15 +33,18 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         self.setupUi(self)
         self._vehiculo = vehiculo_a_planificar
         self._secciones_del_vehiculo = self._vehiculo.obtenerOrdenDeReparacionEnCurso().getSeccionesDeLasReparaciones()
-        self._seccionSeleccionada = self._secciones_del_vehiculo[0] #Por defecto, la primer seccion del combo box.
-        self._todoCargado = False #Para que al principio no se pase automaticamente a la 2da pestana (al cargar el combo box)
+        self._seccionSeleccionada = self._secciones_del_vehiculo[0] # Por defecto, la primer sección del combo box.
+        self._todoCargado = False # Para que al principio no se pase automáticamente a la 2da pestaña (al cargar el combo box)
         self._reparaciones_asignadas = []
         self._reparaciones_sin_asignar = []
         self.seteoUi()
-        
+        # Cargamos la mínima fecha a tener en cuenta.
+        # A partir de esta fecha podemos deshacer commits.
+        self.DIVISION = Division_Transporte()
+        self.DIVISION.zodb.setFechaMinimaDeshacer(localtime())
 
     def seteoUi(self):
-        #Css
+        # Css
         self.label.setObjectName("label")
         self.label_2.setObjectName("label")
         self.labelFecha.setObjectName("label")
@@ -50,34 +57,33 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
 
         self.buttonBox.connect(self, QtCore.SIGNAL('accepted()'), self.aceptar)
         self.buttonBox.connect(self, QtCore.SIGNAL('rejected()'), self.cancelar)
-        
+
         self.comboBoxHoraTurno.clear()
         self.refrescarComboSecciones()
-        
-        #Seteamos el nombre del label de seccion por si se pasa a la 2da pestana directamente al abrir...
+
+        # Seteamos el nombre del label de seccion por si se pasa a la 2da pestana directamente al abrir...
         self.label_2.setText(self._seccionSeleccionada.getNombre())
-        
-        #Setamos las reparaciones disponibles, y refrescamos
+
+        # Setamos las reparaciones disponibles, y refrescamos
         self._reparaciones_sin_asignar = self._vehiculo.obtenerOrdenDeReparacionEnCurso().getReparacionesClasificadas()[self._seccionSeleccionada.getNombre()]
         self.refrescarTablas()
-        
-        #Seteamos la fecha del turno predefinida con la fecha de hoy:
+
+        # Seteamos la fecha del turno predefinida con la fecha de hoy:
         hoy = date.today()
         self.dateEditFechaTurno.setDate((QtCore.QDate(hoy.year, hoy.month, hoy.day)))
         self.dateEditFechaTurno.setMinimumDate((QtCore.QDate(hoy.year, hoy.month, hoy.day)))
-        
+
         self._todoCargado = True
-            
+
     def refrescarComboSecciones(self):
-        #Lo usan varios metodos...
-        #Limpiamos y cargamos el combo
+        # Lo usan varios métodos...
+        # Limpiamos y cargamos el combo
         self.comboBoxSecciones.clear()
         for seccion in self._secciones_del_vehiculo:
             self.comboBoxSecciones.addItems(QtCore.QStringList(seccion.getNombre()))
-        #seteamos la seccion de trabajo con la primera de las disponibles
+        # Seteamos la sección de trabajo con la primera de las disponibles
         self._seccionSeleccionada = self._secciones_del_vehiculo[0]
-    
-    
+
     def on_comboBoxSecciones_currentIndexChanged(self):
         if not self._todoCargado:
             return
@@ -92,22 +98,22 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
             self._seccionSeleccionada = self._seccionSeleccionada[0]
         except IndexError:
             self._seccionSeleccionada = self._secciones_del_vehiculo[0]
-        #seteamos el label de la tab2...
+        # Seteamos el label de la tab2...
         self.label_2.setText(nombre_seccion_selecionado)
-        #Setamos las reparaciones disponibles, y refrescamos
+        # Setamos las reparaciones disponibles, y refrescamos
         self._reparaciones_sin_asignar = self._vehiculo.obtenerOrdenDeReparacionEnCurso().getReparacionesClasificadas()[self._seccionSeleccionada.getNombre()]
         self.refrescarTablas()
 
-        #cambiamos a tab2...
+        # Cambiamos a tab2...
         self.tabWidget.setCurrentIndex(1)
-        
+
     def on_dateEditFechaTurno_dateChanged(self):
         self.refrescarComboHoras()
 
     def refrescarComboHoras(self):
-        #Lo utilizan varios metodos
+        # Lo utilizan varios métodos
         f = self.dateEditFechaTurno.date()
-        fecha = '%s/%s/%s' %(f.day(), f.month(), f.year())
+        fecha = '%s/%s/%s' % (f.day(), f.month(), f.year())
         print 'Fecha: ', fecha
         self.comboBoxHoraTurno.clear()
         horas = []
@@ -125,71 +131,90 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
             self.pushButtonAsignarReparacion.setEnabled(False)
         self.tableWidgetReparacionesAsignadas.cargarConReparaciones(self._reparaciones_asignadas)
         self.tableWidgetReparacionesSinAsignar.cargarConReparaciones(self._reparaciones_sin_asignar)
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAsignarReparacion_clicked(self):
         if not self.tableWidgetReparacionesSinAsignar.getReparacionSeleccionada():
             mostrarMensaje(self, 'Debe seleccionar un repuesto.', 'Seleccionar')
             return
         self._reparaciones_asignadas.append(self.tableWidgetReparacionesSinAsignar.getReparacionSeleccionada())
-        self._reparaciones_sin_asignar.remove(self.tableWidgetReparacionesSinAsignar.getReparacionSeleccionada())        
+        self._reparaciones_sin_asignar.remove(self.tableWidgetReparacionesSinAsignar.getReparacionSeleccionada())
         self.refrescarTablas()
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonDesasignarReparacion_clicked(self):
-        
+ 
         if not self.tableWidgetReparacionesAsignadas.getReparacionSeleccionada():
             mostrarMensaje(self, 'Debe seleccionar un repuesto.', 'Seleccionar')
             return
         self._reparaciones_sin_asignar.append(self.tableWidgetReparacionesAsignadas.getReparacionSeleccionada())
-        self._reparaciones_asignadas.remove(self.tableWidgetReparacionesAsignadas.getReparacionSeleccionada())        
+        self._reparaciones_asignadas.remove(self.tableWidgetReparacionesAsignadas.getReparacionSeleccionada())
         self.refrescarTablas()
-        
+
     @QtCore.pyqtSlot()
-    def on_pushButton_2_clicked(self):
-        #TODO: PushButton_2 --> PushButtonCrearTurno!!
-        #seccion.tieneTurnoLibreParaFechaHora('fechaSeleccionada', 'HoraSeleccionada') #Siempre True, Porque el dialogo no muestra opciones ocupadas
+    def on_PushButtonCrearTurno_clicked(self):
+        # TODO: [ok] PushButton_2 --> PushButtonCrearTurno!!
+        # seccion.tieneTurnoLibreParaFechaHora('fechaSeleccionada', 'HoraSeleccionada') #Siempre True, Porque el dialogo no muestra opciones ocupadas
         f = self.dateEditFechaTurno.date()
         fecha = '%s/%s/%s' %(f.day(), f.month(), f.year())
         hora = int(self.comboBoxHoraTurno.currentText())
-        turno_creado = Turno(self._seccionSeleccionada, self._vehiculo, fecha, hora, self._reparaciones_asignadas)
-        #Registrar el turno creado:
-        self._seccionSeleccionada.registrarTurno(turno_creado)
-        transaction.commit()#Para que turno quede en tabla de turnos...
-        self._vehiculo.agregarTurnoAlPlan(turno_creado)
-        transaction.commit()#Para que turno quede en el plan...
-        mostrarMensaje(self, "Turno creado con exito:\nDia: %s %d horas\nVehiculo: %s\nSeccion: %s"%(fecha, hora, self._vehiculo.getDominio(), self._seccionSeleccionada.getNombre()), 'Turno')
-        if self._vehiculo.tieneTodasLasReparacionesPlanificadas():
-            mostrarMensaje(self, "El vehiculo ya posee todas sus reparaciones planificadas\nOk para finalizar, Cancel para deshacer", 'Fin planificacion')
+        # TODO [ok]: Ver que se pueden crear turnos con detalles de plan vacíos.
+        # Además, puedo agregar varios turnos para una única reparación.
+
+        # Si == 0 mostrar debe registrar reparación
+        if len(self._reparaciones_asignadas) == 0:
+            mostrarMensaje(self, self.trUtf8('Debe seleccionar al menos una reparación para registrar el turno'), self.trUtf8('Truno'))
             return
-            
-        #todavia le quedan reparaciones para la seccion seleccionada?
+        turno_creado = Turno(self._seccionSeleccionada, self._vehiculo, fecha, hora, self._reparaciones_asignadas)
+        # Registrar el turno creado:
+        self._seccionSeleccionada.registrarTurno(turno_creado)
+        transaction.commit()# Para que turno quede en tabla de turnos...
+        self._vehiculo.agregarTurnoAlPlan(turno_creado)
+        transaction.commit()# Para que turno quede en el plan...
+#         mostrarMensaje(self,
+#                        self.trUtf8("Turno creado con éxito:\nDía: %s %d horas\nVehículo: %s\nSección: %s"%(fecha, hora, self._vehiculo.getDominio(), self._seccionSeleccionada.getNombre()),
+#                        self.trUtf8('Turno')))
+        mostrarMensaje(self, "Turno creado con exito:\nDia: %s %d horas\nVehiculo: %s\nSeccion: %s"%(fecha, hora, self._vehiculo.getDominio(), self._seccionSeleccionada), 'Turno')
+        if self._vehiculo.tieneTodasLasReparacionesPlanificadas():
+#             mostrarMensaje(self,
+#                            self.trUtf8("El vehículo ya posee todas sus reparaciones planificadas\nOk para finalizar, Cancel para deshacer"),
+#                            self.trUtf8('Fin planificación'))
+            mostrarMensaje(self,"El vehiculo ya posee todas sus reparaciones planificadas\nOk para finalizar, Cancel para deshacer", 'Fin planificación')
+            return
+
+        # Todavía le quedan reparaciones para la sección seleccionada?
         if self._vehiculo.getReparacionesSinPlanificarDeLaSeccion(self._seccionSeleccionada.getNombre()):
-            #yes
+            # yes
             self._reparaciones_sin_asignar = self._vehiculo.getReparacionesSinPlanificarDeLaSeccion(self._seccionSeleccionada.getNombre())
             self._reparaciones_asignadas = []
             self.refrescarTablas()
             self.refrescarComboHoras()
         else:
-            #No
-            #Pero igualmente quedan reparaciones de otras secciones (sino hubiera cortado mas arriba)
-            self._reparaciones_asignadas = []#Sino, se puede dar el caso en que quede con basura!
+            # No
+            # Pero igualmente quedan reparaciones de otras secciones (sino hubiera cortado más arriba)
+            self._reparaciones_asignadas = []# Sino, se puede dar el caso en que quede con basura!
             self._secciones_del_vehiculo = self._vehiculo.obtenerOrdenDeReparacionEnCurso().getSeccionesDeLasReparaciones()
             self.refrescarComboSecciones()
             self._seccionSeleccionada = self._secciones_del_vehiculo[0]
             self._reparaciones_sin_asignar = self._vehiculo.getReparacionesSinPlanificarDeLaSeccion(self._seccionSeleccionada.getNombre())
             self.refrescarComboHoras()
-            #cambiamos a tab1...
+            # cambiamos a tab1...
             self.tabWidget.setCurrentIndex(0)
 
     def aceptar(self):
         print 'Aceptar!!'
-        if self._vehiculo.tieneTodasLasReparacionesPlanificadas():#verificar xq pude hacer click en aceptar sin haber terminado...
+        if self._vehiculo.tieneTodasLasReparacionesPlanificadas():# Verificar xq pude hacer click en aceptar sin haber terminado...
             self._vehiculo.planificacionFinalizada()
             transaction.commit()
+        else:
+            # Se eliminan los turnos registrados anteriormente
+            self.DIVISION.zodb.deshacerCommits()
+            mostrarMensaje(self, self.trUtf8('No se registraron todos los trunos. Se van a eliminar los cambios realizados'),
+                           self.trUtf8('Planificar'))
 
     def cancelar(self):
-        #No tirar commits a lo loco
+        self.DIVISION.zodb.deshacerCommits()
+        #TODO [OK]: No tirar commits a lo loco. Ahora se deshacen los commits parciales.
         transaction.abort()
         #Y ademas:
         #alvehiculo.decirleQuePongaTodasSusReparacionesCOmoNoPlanificadas!

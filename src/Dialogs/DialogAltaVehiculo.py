@@ -143,7 +143,7 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
         numeroChasis = unicode(self.lineEditChasisNro.text())
         modelo = unicode(self.lineEditModelo.text())
         # Se carga el Vehículo en el sistema.
-        # TODO: falta mandar el modelo del vehículo.
+        # TODO: [ok] falta mandar el modelo del vehículo.
         try:
             self.DIVISION.agregarVehiculo(dominio, marca, registroInterno, numeroChasis, modelo)
         except ExcepcionVehiculoExiste, e:

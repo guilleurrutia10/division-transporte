@@ -80,7 +80,8 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
 #             return
 #         if not self.dominioVehiculo: # == None
         if not self.vehiculoSeleccionado: # == None
-            self.mostrarMensaje('Debe seleccionar un Vehículo.', 'Ingresar Vehículo')
+            self.mostrarMensaje(self.trUtf8('Debe seleccionar un Vehículo.'),
+                                self.trUtf8('Ingresar Vehículo'))
             return
         # TODO: OK. Se debe enviar el vehículo a modificar.
         dlgModificar = DialogModificarVehiculo(vehiculoSeleccionado=self.vehiculoSeleccionado)
@@ -97,8 +98,10 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
     '''
     def mostrarMensaje(self, mensaje, titulo):
         msgBox = QtGui.QMessageBox(self)
-        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
-        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+        msgBox.setText(mensaje)
+        #msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+        msgBox.setWindowTitle(titulo)
+        #msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
 
     #===========================================================================
@@ -106,6 +109,7 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
     #===========================================================================
     def showEvent(self, e):
         print 'Se tomo el foco', self.isVisible()
+
 
 
 class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
@@ -188,17 +192,20 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
 
     def evaluarCamposIngresados(self):
         if not match('[a-z|A-Z]+', self.lineEditMarca.text()):
-            self.mostrarMensaje('Debe ingresar la Marca del vehículo.Debe ser alfabético.', 'Ingresar Marca')
+            self.mostrarMensaje(self.trUtf8('Debe ingresar la Marca del vehículo.Debe ser un valor alfabético.'),
+                                self.trUtf8('Ingresar Marca'))
             self.lineEditMarca.clear()
             self.lineEditMarca.setFocus()
             return
         if not match('[0-9]+', self.lineEditRegistroInterno.text()):
-            self.mostrarMensaje('Debe ingresar el Registro Interno del vehículo.Debe ser numérico.', 'Ingresar Registro Interno')
+            self.mostrarMensaje(self.trUtf8('Debe ingresar el Registro Interno del vehículo. Debe ser un valor numérico.'),
+                                self.trUtf8('Ingresar Registro Interno'))
             self.lineEditRegistroInterno.clear()
             self.lineEditRegistroInterno.setFocus()
             return
         if not match('[0-9]+', self.lineEditChasisNro.text()):
-            self.mostrarMensaje('Debe ingresar el Número de Chasis del vehículo.Debe ser numérico.', 'Ingresar Número de Chasis')
+            self.mostrarMensaje(self.trUtf8('Debe ingresar el Número de Chasis del vehículo. Debe ser un valor numérico.'),
+                                self.trUtf8('Ingresar Número de Chasis'))
             self.lineEditChasisNro.clear()
             self.lineEditChasisNro.setFocus()
             return
@@ -215,7 +222,8 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
 #             self.mostrarMensaje('No se modificó ningún atributo del vehículo', 'Modificación de Vehículo')
 #             return
         if not (self.lineEditMarca.isModified() or self.lineEditRegistroInterno.isModified() or self.lineEditChasisNro.isModified()):
-            self.mostrarMensaje('No se modificó ningún atributo del vehículo', 'Modificación de Vehículo')
+            self.mostrarMensaje(self.trUtf8(u'No se modificó ningún atributo del vehículo'),
+                                self.trUtf8(u'Modificación de Vehículo'))
             return
         else:
             if not self.evaluarCamposIngresados():
@@ -230,7 +238,8 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
 #             # Se le pide a la Division que modifique el informacion del vehiculo.
             division.modificarVehiculo(dominio, marca, registroInterno, nroChasis)
 
-            if self.mostrarMensaje('El vehiculo se ha modificado correctamente!!! :)', 'Ingresando Vehiculo'):
+            if self.mostrarMensaje(self.trUtf8('El vehiculo se ha modificado correctamente!!! :)'),
+                                   self.trUtf8('Ingresando Vehículo')):
                 self.accept()
 
     '''
@@ -238,6 +247,8 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
     '''
     def mostrarMensaje(self, mensaje, titulo):
         msgBox = QtGui.QMessageBox(self)
-        msgBox.setText(QtCore.QString.fromUtf8(mensaje))
-        msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+        msgBox.setText(mensaje)
+        #msgBox.setText(QtCore.QString.fromUtf8(mensaje))
+        msgBox.setWindowTitle(titulo)
+        #msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()

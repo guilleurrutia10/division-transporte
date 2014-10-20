@@ -47,6 +47,8 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         # Layout que contiene al widget central
         self.verticalLayout_2.addWidget(self.listaDeVehiculos)
 
+        self.vehiculo = None
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         '''
@@ -67,12 +69,16 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         Reparacion en Curso.
         -- A partir de ahora sólo se muestran aquellos vehículos sin orden de reparación.
         '''
-        global itemglobal
-        if itemglobal:
-            # TODO: Se debe enviar al DialogDatosIngresoVehiculo el vehículo para el ingreso a la división.
-            dlgDatosIngreso = DialogDatosIngresoVehiculo()
+#         global itemglobal
+#         if itemglobal:
+        # Se comprueba que se haya seleccionado algún vehículo.
+        if self.vehiculo: # self.vehiculo != None
+            # TODO: OK. Se debe enviar al DialogDatosIngresoVehiculo el vehículo para el ingreso a la división.
+            # Ahora se envía el vehículo.
+            dlgDatosIngreso = DialogDatosIngresoVehiculo(vehiculoSeleccionado=self.vehiculo)
             dlgDatosIngreso.exec_()
-            itemglobal = None
+            self.vehiculo = None
+#             itemglobal = None
 #             self.listaDeVehiculos.cargarGrilla(self.DIVISION.getVehiculosSinOrdenEnCurso())
             vehiculosSinOrden = self.DIVISION.getVehiculosSinOrdenEnCurso()
             self.listaDeVehiculos.tableWidgetListadoDeVehiculos.cargarConVehiculos(vehiculosSinOrden)
@@ -95,8 +101,9 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
         #itemVehiculo = self.listaDeVehiculos.tableWidgetListadoDeVehiculos.item(fila, columnaDominio)
         global itemglobal
         itemVehiculo = self.listaDeVehiculos.tableWidgetListadoDeVehiculos.getVehiculoSeleccionado()
+        self.vehiculo = self.listaDeVehiculos.tableWidgetListadoDeVehiculos.getVehiculoSeleccionado()
         itemglobal = itemVehiculo.getDominio()
-        print itemglobal.text()
+#         print itemglobal.text()
         print 'Presionando: %d ; %d' %(fila, columna)
 
     '''
@@ -116,7 +123,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
     @author: 
     '''
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, vehiculoSeleccionado=None):
         '''
         Constructor
         @version: 
@@ -135,6 +142,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         self.validacionesLineEdit()
         #self.DIVISION = Division_Transporte.divisionTransporte()
         self.DIVISION = Division_Transporte()
+        self.vehiculo = vehiculoSeleccionado
 
     # Validación a medida que se escribe en el lineEdit
     def validacionesLineEdit(self):
@@ -152,19 +160,25 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         @author: 
         '''
         print 'Click sobre aceptar'
-        global itemglobal
-        print itemglobal.text()
-        try:
-            assert self.testearDialogo() is True
+#         global itemglobal
+#         print itemglobal.text()
+        if self.testearDialogo():
             self.registrarIngresoVehiculo()
             print 'Imprimiendo Orden-......'
             self.mostrarMensaje('Orden de Reparación Creada. :)', 'Creando Orden de Reparación')
             self.accept()
-        except AssertionError:
-            return
-        except ExcepcionPoseeOrdenReparacionEnCurso, e:
-            self.mostrarMensaje(e.getMensaje(), 'ERROR!')
-            self.reject()
+        return
+#         try:
+#             assert self.testearDialogo() is True
+#             self.registrarIngresoVehiculo()
+#             print 'Imprimiendo Orden-......'
+#             self.mostrarMensaje('Orden de Reparación Creada. :)', 'Creando Orden de Reparación')
+#             self.accept()
+#         except AssertionError:
+#             return
+#         except ExcepcionPoseeOrdenReparacionEnCurso, e:
+#             self.mostrarMensaje(e.getMensaje(), 'ERROR!')
+#             self.reject()
 
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -175,7 +189,8 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         self.reject()
 
     def registrarIngresoVehiculo(self):
-        dominio = unicode(itemglobal.text())
+        dominio = self.vehiculo.getDominio()
+#         dominio = unicode(itemglobal.text())
         #division = Division_Transporte()
         #vehiculo = division.getVehiculo(dominio)
         vehiculo = self.DIVISION.getVehiculo(dominio)
@@ -192,7 +207,8 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         #division.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad)
         self.DIVISION.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, chofer)
 
-        filename = QFileDialog().getSaveFileName(parent=self)
+        fileDialog = QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Orden de Reparación'))
+        filename = fileDialog.getSaveFileName(parent=self)
 #         if filename.isEmpty():
 #             return
         self.imprimirOrdenReparacion(filename)
@@ -234,7 +250,8 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         return msgBox.exec_()
 
     def imprimirOrdenReparacion(self, filename):
-        dominio = unicode(itemglobal.text())
+        dominio = self.vehiculo.getDominio()
+#         dominio = unicode(itemglobal.text())
 #         dominio = 'AAA111'
         vehiculo = Division_Transporte().getVehiculo(dominio)
         ordenReparacion = vehiculo.obtenerOrdenDeReparacionEnCurso()

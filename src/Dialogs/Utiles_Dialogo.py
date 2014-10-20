@@ -11,8 +11,8 @@ from PyQt4.QtCore import QString
 
 def mostrarMensaje(aplicacion, mensaje, titulo):
     msgBox = QtGui.QMessageBox(aplicacion)
-    msgBox.setText(QtCore.QString.fromUtf8(mensaje))
-    msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
+    msgBox.setText(mensaje)
+    msgBox.setWindowTitle(titulo)
     return msgBox.exec_()
 
 

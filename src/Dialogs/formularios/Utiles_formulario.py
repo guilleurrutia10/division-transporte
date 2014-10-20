@@ -491,7 +491,7 @@ class TablaReparacionesNoPlanificadas(SuperTabla):
         Puede: 
             - cargar con reparaciones recibidas
     '''
-    
+
     def cargarConReparaciones(self, orden):
         '''
             Recibe una lista de reparaciones para listar.
@@ -499,7 +499,7 @@ class TablaReparacionesNoPlanificadas(SuperTabla):
                 - codigo
                 - nombre
                 - descripcion
-                
+
             Ademas, mientras lista los reparaciones, va armando un diccionario para mantener un correlacion reparaciones-fila_en_la_que_se_encuentra
         '''
         self.inicializarTabla()

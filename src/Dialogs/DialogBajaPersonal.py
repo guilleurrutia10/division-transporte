@@ -182,6 +182,7 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
         para seleccionar una fecha de baja.
         '''
 #         from PyQt4.QtCore import QDate
+        # QDate.toPyDate() -> datetime.date
         print date.toPyDate().__str__()
 
     @QtCore.pyqtSlot()

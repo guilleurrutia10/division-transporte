@@ -135,6 +135,7 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
     def on_pushButtonAceptar_clicked(self):
         # ahora recibe un objeto pedido de actuacion!
         fecha = self.dateEditFechaRecepcioPedido.date()
+        # QDate.toPyDate() -> datetime.date
         unaFecha = date(day=fecha.toPyDate().day,
                         month=fecha.toPyDate().month,
                         year=fecha.toPyDate().year)

@@ -7,7 +7,6 @@ Created on 28/10/2012
 
 from persistent import Persistent
 import transaction
-#import Division_Transporte
 
 
 class Empleado(Persistent):
@@ -18,18 +17,20 @@ class Empleado(Persistent):
     ATTRIBUTES
 
         numeroDocumento  (private)
+        Documento  (private) -- documento del empleado. Tipo TipoDocumento.
 
-        nombre  (private)
+        nombre  (private) -- nombre del empleado. Tipo string unicode
 
-        apellido  (private)
+        apellido  (private) -- apellido del empleado. Tipo string unicode
 
-        fechaNacimiento  (private)
+        fechaNacimiento  (private) -- . Tipo datetime.date
 
-        fechaAlta  (private)
+        fechaAlta  (private) -- . Tipo datetime.date
 
-        fechaBaja  (private)
+        fechaBaja  (private) -- . Tipo datetime.date
 
-        email  (private)
+        email  (private) -- dirección de correo eléctrónico del empleado.
+                            Tipo string unicode
 
         telefono_  (private)
 

@@ -448,7 +448,7 @@ Elija una para asignar reparaciones a un turno:</string>
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_2">
+             <widget class="QPushButton" name="PushButtonCrearTurno">
               <property name="minimumSize">
                <size>
                 <width>100</width>
