@@ -5,14 +5,15 @@ Created on 03/10/2012
 @author: Usuario
 '''
 from PyQt4 import QtCore, QtGui
+import transaction
 
 from formularios.DialogCrearReparacion import Ui_DialogCrearReparacion
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden_Posee_Reparacion
 from negocio.Reparacion import Reparacion
 from negocio.RepuestoUtilizados import RepuestoUtilizados
-import transaction
 from negocio.excepciones.Except_NoHayReparacionesDisponibles import Except_NoHayReparacionesDisponibles
+
 
 class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
     '''
@@ -27,9 +28,6 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         super(DialogCrearReparacion, self).__init__(parent)
         self.setupUi(self)
         self.DIVISION = Division_Transporte()
-        # TODO: cuando se vuelven a pedir las reparaciones se sincroniza de
-        # nuevo la zodb con el servidor. Esto provoca que los cambios
-        # realizados sobre la lista de reparaciones se pierda.
         self._tiposDeReparaciones = self.DIVISION.getTipoReparaciones()
         try:
             self._tipoDeReparacionSeleccionado = self._tiposDeReparaciones[0]
@@ -70,11 +68,12 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         if not self.seleccionoAlgunRepuesto():
             QtGui.QMessageBox.critical(self, 'Error', 'Debe seleccionar por lo menos un repuesto para crear una reparacion')
             return
-        #crear la reparacion
+        # Crear la reparacion
         unaReparacion = Reparacion(self._tipoDeReparacionSeleccionado, unicode(self.lineEditDescripcion.text()), self._repuestosSolicitados)
         try:
-#            self._ordenDeReparacion.addReparacion(unaReparacion)
             self._vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso().addReparacion(unaReparacion)
+            # Para saber de qué cliente debemos borrar las transacciones.
+            transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
             transaction.commit()
         except Excepcion_Orden_Posee_Reparacion, e:
             QtGui.QMessageBox.critical(self, 'Error. No se agrego la Reparacion', e.getMensaje())
@@ -112,7 +111,6 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
 
     @QtCore.pyqtSlot('QString')
     def on_comboBoxTipoDeReparacion_currentIndexChanged(self, cadena):
-#     def on_comboBoxTipoDeReparacion_editTextChanged(self):
         if not len(cadena):
             return
         try:
@@ -126,7 +124,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         if not len(self._tipoDeReparacionSeleccionado):
             return
         self._tipoDeReparacionSeleccionado = self._tipoDeReparacionSeleccionado[0]
-        #Obtenemos los repuestos requeridos por la reparacion seleccionada
+        # Obtenemos los repuestos requeridos por la reparacion seleccionada
         repuestos = self._tipoDeReparacionSeleccionado.getRepuestos()
 
         self.tableWidgetRepuestosDisponibles.clearContents()
@@ -164,5 +162,4 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
 
     def buscarTipoReparacion(self, unTipoDeReparacion):
         division = Division_Transporte()
-        return division.getTipoReparacion(unicode(unTipoDeReparacion))
-
+        return division.getTipoReparacion(unicode(unTipoDeReparacion))

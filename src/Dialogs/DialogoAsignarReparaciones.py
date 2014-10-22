@@ -17,7 +17,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
     '''
     classdocs
     '''
-    def __init__(self, parent = None, seccion= None):
+    def __init__(self, parent=None, seccion=None):
         '''
         Constructor
         '''
@@ -36,7 +36,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
             mostrarMensaje(self, 'Su seccion no posee turnos sin asignar', 'Sin turnos no asignados')
             raise SinTurnosException("No turnos!")
         self._horaSeleccionada = self.refrescarComboHora()
-        self._turnoSeleccionado = self._seccion.getTurnoDeFechaHora(self._fechaSeleccionada,self._horaSeleccionada )
+        self._turnoSeleccionado = self._seccion.getTurnoDeFechaHora(self._fechaSeleccionada, self._horaSeleccionada)
         self.refrescarDatosTurno()
 #        self.refrescarReparaciones()
 #        self._empleadosSinAsignar = self._seccion.getEmpleados().values()
@@ -56,10 +56,12 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         self.refrescarDatosTurno()
 
     def on_comboBoxHora_currentIndexChanged(self):
-#        self._horaSeleccionada = int(self.comboBoxHora.currentText())
-        self._horaSeleccionada = self.comboBoxHora.currentText().toInt()
-        self._turnoSeleccionado = self._seccion.getTurnoDeFechaHora(self._fechaSeleccionada,self._horaSeleccionada)
-        self.refrescarDatosTurno()
+        # self.comboBoxHora.currentText().toInt() --> (int, bool)
+        self._horaSeleccionada, _ = self.comboBoxHora.currentText().toInt()
+        self._turnoSeleccionado = self._seccion.getTurnoDeFechaHora(self._fechaSeleccionada, self._horaSeleccionada)
+        # TODO: Ver None Object (self._turnoSeleccionado) ????
+        if self._turnoSeleccionado:
+            self.refrescarDatosTurno()
 
     def refrescarComboHora(self):
         '''

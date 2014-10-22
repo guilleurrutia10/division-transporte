@@ -74,6 +74,8 @@ class DialogCambiarDeSeccionUnEncargado(QtGui.QDialog, Ui_DialogCambiaDeSeccionU
         encargado_anterior.desregistrarUsuario()
         Division_Transporte().agregarEmpleadoDisponible(encargado_anterior)
         #7)Commitear
+        # Para saber de qué cliente debemos borrar las transacciones.
+        transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
         transaction.commit()
         
     def pedirPassEncargado(self, encargado):

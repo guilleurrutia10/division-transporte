@@ -168,8 +168,12 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         turno_creado = Turno(self._seccionSeleccionada, self._vehiculo, fecha, hora, self._reparaciones_asignadas)
         # Registrar el turno creado:
         self._seccionSeleccionada.registrarTurno(turno_creado)
+        # Para saber de qué cliente debemos borrar las transacciones.
+        transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
         transaction.commit()# Para que turno quede en tabla de turnos...
         self._vehiculo.agregarTurnoAlPlan(turno_creado)
+        # Para saber de qué cliente debemos borrar las transacciones.
+        transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
         transaction.commit()# Para que turno quede en el plan...
 #         mostrarMensaje(self,
 #                        self.trUtf8("Turno creado con éxito:\nDía: %s %d horas\nVehículo: %s\nSección: %s"%(fecha, hora, self._vehiculo.getDominio(), self._seccionSeleccionada.getNombre()),
@@ -205,6 +209,8 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         print 'Aceptar!!'
         if self._vehiculo.tieneTodasLasReparacionesPlanificadas():# Verificar xq pude hacer click en aceptar sin haber terminado...
             self._vehiculo.planificacionFinalizada()
+            # Para saber de qué cliente debemos borrar las transacciones.
+            transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
             transaction.commit()
         else:
             # Se eliminan los turnos registrados anteriormente

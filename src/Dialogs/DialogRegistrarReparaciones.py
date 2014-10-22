@@ -18,6 +18,9 @@ from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Or
 from DialogMostrarPedidoDeActuacion import DialogMostrarPedidoDeActuacion
 from negocio.excepciones.Except_NoHayReparacionesDisponibles import Except_NoHayReparacionesDisponibles
 from Utiles_Dialogo import mostrarMensaje
+from reportes import imprimirPedidoDeActuacion
+from Utiles_Dialogo import Mensaje
+
 
 class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones):
     '''
@@ -31,7 +34,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
 
     Recibe como parametro el objeto vehiculo con el cual se va a trabajar
     '''
-    def __init__(self, parent = None, vehiculoSeleccionado = None):
+    def __init__(self, parent=None, vehiculoSeleccionado=None):
         '''
         Constructor
         '''
@@ -122,6 +125,8 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.vehiculoSeleccionado.generarPedidoDeActuacion()
         self.mostrarPedidoDeActuacion(self.vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion())
         self.imprimirPedidoActuacion()
+        # Para saber de qué cliente debemos borrar las transacciones.
+        transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
         transaction.commit()
         self.accept()
 
@@ -144,6 +149,8 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         print 'Buscando............'
 
     def imprimirPedidoActuacion(self):
+        # TODO: obtener datos a imprimir
+        # datosImprimir = .....
         orden = self.vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso()
         pedido = orden.getPedidoDeActuacion()
         repuestosSolicitados = pedido.getRepuestosSolicitados()
@@ -152,6 +159,8 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
             tipoRepuesto = rep.getTipoDeRepuesto()
             repuestosImprimir.append([str(repuestosSolicitados.index(rep)) ,str(rep.getCantidad()), tipoRepuesto.getDescripcion()])
         print repuestosImprimir
+        # TODO: Armar método obtener nombre archivo
+        # nombreArchivo = .....
         fileDialog = QtGui.QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Pedido de Actuación'))
         fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave)
         if fileDialog.exec_() == QtGui.QFileDialog.AcceptSave:
@@ -159,8 +168,6 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
                 print 'Imprimiendo: %s' % filename
         else:
             return
-        from reportes import imprimirPedidoDeActuacion
-        from Utiles_Dialogo import Mensaje
         imprimirPedidoDeActuacion(pedido._nroDePedido, repuestosImprimir, unicode(filename))
         m = Mensaje(self)
         m.setTitle('PDF')

@@ -144,7 +144,7 @@ class Empleado(Persistent):
 
     def imprimirFechaNacimiento(self):
         return '%s/%s/%s' % (self.getFechaNacimiento().day, self.getFechaNacimiento().month, self.getFechaNacimiento().year)
-    
+
     def desregistrarUsuario(self):
         '''
         Borra el usuario del empleado. 
@@ -153,3 +153,45 @@ class Empleado(Persistent):
         #Division_Transporte.Division_Transporte().borraUsuario(self)
         self._usuario = None
         transaction.commit()
+
+    def getFechaAlta(self):
+        '''
+        Devuelve la fecha de alta en la División del empleado.
+        @return: Tipo datetime.date
+        '''
+        return self.fechaAlta
+
+    def setFechaAlta(self, fecha):
+        '''
+        Establece la fecha de alta del empleado en la División.
+        fecha: Tipo datetime.date
+        '''
+        self.fechaAlta = fecha
+
+    def imprimirFechaAlta(self):
+        '''
+        Devuelve un string de la fecha de alta del empleado.
+        @return: string
+        '''
+        return self.fechaAlta.ctime()
+
+    def getFechaBaja(self):
+        '''
+        Devuelve la fecha de baja en la División del empleado.
+        @return: Tipo datetime.date
+        '''
+        return self.fechaBaja
+
+    def setFechaBaja(self, fecha):
+        '''
+        Establece la fecha de baja del empleado en la División.
+        fecha: Tipo datetime.date
+        '''
+        self.fechaBaja = fecha
+
+    def imprimirFechaBaja(self):
+        '''
+        Devuelve un string de la fecha de baja del empleado.
+        @return: string
+        '''
+        return self.fechaBaja.ctime()

@@ -97,6 +97,8 @@ class Usuario():
         self.rol = usr[ROL] #Cargando rol...
         self.permisos = PERMISOS[usr[ROL]]  #Cargando permisos...
         print 'Usuario valido, cargando permisos...'
+        # asdsdaasdasdasdasd
+        Division_Transporte().zodb.seNombreUsuario(usr[0])
         return True
     
     def es_anonimo(self):

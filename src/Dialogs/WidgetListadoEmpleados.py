@@ -65,9 +65,13 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
             itemEmail.setText(empleado.getEmail())
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemEmail)
             columna += 1
-            itemtelefono = QtGui.QTableWidgetItem()
-            itemtelefono.setText(empleado.getTelefono())
-            self.tableWidgetDatosEmpleados.setItem(fila, columna, itemtelefono)
+            itemTelefono = QtGui.QTableWidgetItem()
+            itemTelefono.setText(empleado.getTelefono())
+            self.tableWidgetDatosEmpleados.setItem(fila, columna, itemTelefono)
+            columna += 1
+            itemFechaAlta = QtGui.QTableWidgetItem()
+            itemFechaAlta.setText(empleado.imprimirFechaAlta())
+            self.tableWidgetDatosEmpleados.setItem(fila, columna, itemFechaAlta)
 
             fila = fila + 1
 

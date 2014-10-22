@@ -9,6 +9,7 @@ from persistent import Persistent
 from persistent.list import PersistentList
 from sys import maxint
 from time import mktime
+from datetime import date
 
 from Empleado import Empleado
 from Legajo import Legajo
@@ -76,6 +77,8 @@ class MiZODB(object):
         '''
         # The object has been changed.
         self.raiz._p_changed = True
+        # setUser(user, path) -> "%s %s" % (path, user_name)
+        transaction.get().setUser(self.getNombreUsuario(), path='')
         transaction.commit()
 
     def getDiccionarioElementos(self, clave):
@@ -139,19 +142,25 @@ class MiZODB(object):
         '''
         Se utiliza para indicar la mínima fecha a tener en cuenta para
         deshacer los commits realizados en bd.
+        Convierte la fecha de tipo time tuple en un floating point number.
         fecha: a time tuple expressing local time.
             More information see time.localtime()
         '''
-        # time.mktime(tuple)
+        # Convert a time tuple in local time to seconds since the Epoch.
+        # time.mktime(tuple) -> floating point number.
         self.fechaMinima = mktime(fecha)
 
     def getFechaMinimaDeshacer(self):
+        '''
+        Devuelve un float a partir de la fecha establecida.
+        @return: floating point number.
+        '''
         return self.fechaMinima
 
     def deshacerCommits(self):
         '''
         Elimina todos los commits realizados hasta la fecha mínima
-        establecida.
+        establecida. Se tiene en cuenta el nombre del usuario.
         '''
         lista_deshacer = []
         # maxint -> Se lo pedimos a sys
@@ -159,19 +168,48 @@ class MiZODB(object):
             # Formato del diccionario que representa el commit.
             # {'description': '', 'id': 'A6mkrSvMssw=', 'size': 163,
             # 'time': 1411014550.265532, 'user_name': ''}
-            # Se obtiene el campo time de la transacción.
-            if item['time'] >= self.fechaMinima:
+            # Se obtiene el campo time y usuario de la transacción.
+            if item['time'] >= self.fechaMinima and item['user_name'] == ' ' + self.nombreUsuario:
                 lista_deshacer.append(item)
+        # TODO: [ok] Usar el user_name para filtrar por aplicación. En este
+        # momento se borran los commits realizados por todos clientes.
         for item in lista_deshacer:
             # Se obtiene el id de la transacción.
             tid = item['id']
             self.db.undo(tid)
+            transaction.get().setUser(self.getNombreUsuario(), path='')
             transaction.commit()
+
+    def seNombreUsuario(self, nombre):
+        '''
+        Se utiliza para indicar el nombre del usuario que utiliza la
+        aplicación.
+        Sirve para filtrar las transacciones hechas por el usuario
+        establecido.
+        nombre: string.
+        '''
+        self.nombreUsuario = nombre
+
+    def getNombreUsuario(self):
+        return self.nombreUsuario
+
+    def getTransacciones(self):
+        '''
+        Devuelve el historial de transacciones realizadas por el usuario de
+        la aplicación.
+        @return: list. De la forma [{T1}, {T2}, ..., {Tn}]
+        '''
+        lista_transacciones = []
+        for item in self.db.undoLog(0, maxint):
+            # if item['user_name'].strip(' ') == self.nombreUsuario:
+            if item['user_name'] == ' ' + self.nombreUsuario:
+                lista_transacciones.append(item)
+        return lista_transacciones
 
 
 class Division_Transporte(Persistent):
     '''
-    Clase que representa a la Divisi�n de Transporte.
+    Clase que representa a la División de Transporte.
     :version:
     :author:
     '''
@@ -336,6 +374,8 @@ class Division_Transporte(Persistent):
         tipoDocSeleccionado = tiposDocumentos[tipoDocumento]
         empleado = Empleado(nombre, apellido, numeroDocumento, tipoDocSeleccionado,
                             fechaNac, domicilio, telefono, email)
+        fecha = date.today()
+        empleado.setFechaAlta(fecha)
         # Se obtienen todos los empleados de la División.
         empleados = self.getEmpleados().values()
         # Se comprueba si el empleado se encuentra en la División.
@@ -345,7 +385,7 @@ class Division_Transporte(Persistent):
             if empleado.comparar(e):
                 raise ExcepcionObjetoExiste
         self.zodb.save('empleados', empleado.getDocumento(), empleado)
-        
+
     def agregarEmpleadoDisponible(self, empleado):
         '''
         Mejorable!
@@ -457,6 +497,7 @@ class Division_Transporte(Persistent):
         # TODO: Se debería comprobar si el dominio y el registro interno son iguales.
         try:
             self.zodb.save('vehiculos', dominio, vehiculo)
+            print self.zodb.getTransacciones()
         except ExcepcionObjetoExiste:
             raise ExcepcionVehiculoExiste(dominio)
         # TODO:

@@ -186,9 +186,11 @@ class ZopeDB(object):
     def cargarUsuarios(self):
          
         raiz = self.zodb.raiz
+        import hashlib
         USUARIOS = [("guille", "e96ff3826368162ce83d6aa3aec79ed3b2f99291", "jefeDivision"),
+                    ("loco", hashlib.sha1("loco"+"1234").hexdigest(), "jefeDivision"),
                     ("leo", "1234", "inspector"),
-                    ("samuel", "1234", "administrativo"),
+                    ("samuel", "e96ff3826368162ce83d6aa3aec79ed3b2f99291", "administrativo"),
                     ("diego", "1234", "otro"),
                     ("pepe1", "7800524dada57a4caf0f1cc37a13a881c3af5e88", "inspector")
                     ]
