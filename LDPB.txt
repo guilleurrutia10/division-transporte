@@ -30,8 +30,7 @@
 [OK] En Modificación de vehículo: Falta testear para que no haya campos vacíos.
 
 [Sin arreglar] En Modificación de vehículo: es necesario agregar el método modificarVehiculo o se puede realizar el commit acá mismo.
-[Sin arreglar] En registrar ingreso: Se debe enviar al DialogDatosIngresoVehiculo el vehículo para el ingreso a la división.
+[OK] En registrar ingreso: Se debe enviar al DialogDatosIngresoVehiculo el vehículo para el ingreso a la división.
 
 [OK] En Planificar Reparaciones de Vehículo: (DialogoPlanificar) No tirar commits a lo loco. Ahora se deshacen los commits parciales.
-[Sin arreglar] En Planificar Reparaciones de Vehículo: (DialogoPlanificar) Ver que se pueden crear turnos con detalles de plan vacíos. Además, puedo agregar varios turnos para una única reparación.
-[Sin arreglar] En Planificar Reparaciones de Vehículo: (DialogoPlanificar) PushButton_2 --> PushButtonCrearTurno!!
+[OK] En Planificar Reparaciones de Vehículo: (DialogoPlanificar) Ver que se pueden crear turnos con detalles de plan vacíos. Además, puedo agregar varios turnos para una única reparación.

@@ -89,10 +89,6 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
     def on_pushButtonAceptar_clicked(self):
         '''
         '''
-        try:
-            assert self.testearDialogo() is True
-        except AssertionError:
-            return
         if not self.testearDialogo():
             return
         self.cargarPersonal()
@@ -114,7 +110,7 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
     def testearDialogo(self):
         '''
         Función que se encarga de comprobar que los campos obligatorios se
-        completaron y correctamente.
+        completaron correctamente.
         '''
         if not match('[A-Za-z|\s]', self.lineEditNombre.text()):
             self.mostrarMensaje('Debe ingresar el nombre.', 'Ingreso')
@@ -131,7 +127,7 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
             self.lineEditNroDocumento.clear()
             self.lineEditNroDocumento.setFocus()
             return
-        # Si, ingreso un mail, lo validamos, sino no nos ocupamos de validar...
+        # Si ingresó un mail, lo validamos, sino no nos ocupamos de validar...
         if self.lineEditEmail.text() and not match('^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$', self.lineEditEmail.text()):
             self.mostrarMensaje('Debe ingresar un mail válido. Ejemplo: "pepe@pepe.com"', 'Ingreso')
             self.lineEditEmail.clear()
@@ -149,9 +145,9 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
         domicilio = unicode(self.lineEditDomicilio.text())
         telefono = unicode(self.lineEditTelefono.text())
         email = unicode(self.lineEditEmail.text())
-        # Se carga el empleado en el sistema.
         division = Division_Transporte()
         try:
+            # Se carga el empleado en el sistema.
             division.agregarEmpleado(nombre, apellido, nroDocumento, tipoDocumento,
                                      fechaNac, domicilio, telefono, email)
         except ExcepcionObjetoExiste:

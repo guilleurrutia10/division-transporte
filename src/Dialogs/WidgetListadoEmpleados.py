@@ -86,13 +86,6 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         self.empleados.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
         self.cargarGrillaEmpleadosSinAsignar(self.empleados)
 
-#     @QtCore.pyqtSlot('QString')
-#     def on_lineEditFiltroNombre_textChanged(self, cadena):
-#         filtro = unicode(cadena)
-#         personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), self.empleados)
-#         personal.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
-#         self.cargarGrillaEmpleadosSinAsignar(personal)
-
     # De esta manera queda un solo filtro para los strings...
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscarDocumento_textChanged(self, cadena):

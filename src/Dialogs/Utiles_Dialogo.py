@@ -64,15 +64,15 @@ class Mensaje(object):
 
     def __init__(self, aplicacion, mensaje='', titulo=''):
         self.messageBox = QMessageBox(aplicacion)
-        self.messageBox.setText(QString.fromUtf8(mensaje))
-        self.messageBox.setWindowTitle(QString.fromUtf8(titulo))
+        self.messageBox.setText(mensaje)
+        self.messageBox.setWindowTitle(titulo)
         self.messageBox.setStandardButtons(QMessageBox.Ok)
 
     def setTitle(self, titulo):
-        self.messageBox.setWindowTitle(QString.fromUtf8(titulo))
+        self.messageBox.setWindowTitle(titulo)
 
     def setMensaje(self, mensaje):
-        self.messageBox.setText(QString.fromUtf8(mensaje))
+        self.messageBox.setText(mensaje)
 
     def setCritical(self):
         '''
