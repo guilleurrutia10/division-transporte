@@ -8,12 +8,13 @@ from PyQt4 import QtCore, QtGui
 from re import match
 
 from formularios.DialogAltaPersonal import Ui_DialogAltaPersonal
+from AyudaManejador import AyudaManejador
 from negocio.Division_Transporte import Division_Transporte
 
 from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
 
 
-class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal):
+class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal, AyudaManejador):
     '''
     Atributos:
         - self.lineEditNombre
