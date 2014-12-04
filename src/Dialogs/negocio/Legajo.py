@@ -95,7 +95,7 @@ class Legajo(Persistent):
 
             raise Excepcion_Orden_No_Esta_En_Revision('La Orden de Reparacion del vehiculo no se encuentra en revision')
 
-    def crearOrdenDeReparacion(self, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha, chofer):
+    def crearOrdenDeReparacion(self, codigo, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha, chofer):
         '''
         @return: 
         @author: 
@@ -103,7 +103,8 @@ class Legajo(Persistent):
         # Antes de crear la orden, obtener orden en curso, si no existe(no tiene) crearla.
         try:
             self.obtenerOrdenDeReparacionEnCurso()
-            ordenReparacion = OrdenReparacion(self.dameNumeroOrden(), kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
+            #ordenReparacion = OrdenReparacion(self.dameNumeroOrden(), kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
+            ordenReparacion = OrdenReparacion(codigo, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, fecha)
             ordenReparacion.setChofer(chofer)
             self.ordenesDeReparacion.append(ordenReparacion)
         except ExcepcionPoseeOrdenReparacionEnCurso, e:
@@ -152,7 +153,8 @@ class Legajo(Persistent):
     def getPedidoActuacionSinFechaRecepcion(self):
 
         try:
-            ordenEnCurso = self.dameOrdenDeReparacionEnCurso()
+            #ordenEnCurso = self.dameOrdenDeReparacionEnCurso()
+            ordenEnCurso = self.obtenerOrdenDeReparacionEnCurso()
             return ordenEnCurso.getPedidoDeActuacionActual()
         except Excepcion_No_Posee_Orden_Reparacion_En_Curso:
             pass

@@ -20,7 +20,6 @@ from Plan import Plan
 
 
 class OrdenReparacion(Persistent):
-#class OrdenReparacion(object):
     '''
     La Orden de Reparacion se crea cuando se registra un ingreso de un vehiculo.
 
@@ -92,6 +91,8 @@ class OrdenReparacion(Persistent):
         self._fechaEgreso = None
         self._kilometrajeEgreso = None
         self._combustibleEgreso = None
+        
+        print "DEBUG: Nueva orden de reparacion creada: %s"%self
 
     def getCodigoOrdenReparacion(self):
         return self.codigoOrdenReparacion
@@ -196,7 +197,7 @@ class OrdenReparacion(Persistent):
         self._plan = unPlan
 
     def __str__(self):
-        return 'Orden de Reparacion | Estado: %s' %self.getEstado()
+        return 'Orden de Reparacion %s| Estado: %s' %(self.codigoOrdenReparacion, self.getEstado())
 
     def setPedidoDeActuacion(self, pedidoDeActuacion):
         self._pedidoDeActuacion = pedidoDeActuacion
@@ -274,6 +275,13 @@ class OrdenReparacion(Persistent):
         return isinstance(self.estado, EsperandoAprobacion)
 
     def getReparacionesClasificadas(self):
+        '''
+        Retorna un diccionario del siguiente tipo:
+        return {'Seccion1': [Reparacion1_S1,Reparacion2_S1,...,ReparacionN_S1],
+                ...,
+                'SeccionN': [Reparacion1_SN,Reparacion2_SN,...,ReparacionN_SN]
+                }
+        '''
         from Division_Transporte import Division_Transporte
         reparaciones_por_seccion = {}
 #        for reparacion in self.reparaciones:

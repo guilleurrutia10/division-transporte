@@ -166,7 +166,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         comisaria = unicode(self.lineEditComisaria.text())
         localidad = unicode(self.lineEditLocalidad.text())
         chofer = unicode(self.lineEditChoferAsignado.text())
-
+        
         self.DIVISION.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, chofer)
 
         fileDialog = QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Orden de Reparación'))

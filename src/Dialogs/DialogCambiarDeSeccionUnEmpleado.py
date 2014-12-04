@@ -42,7 +42,7 @@ class DialogCambiardeSeccionunEmpleado(QtGui.QDialog, Ui_DialogCambiarDeSeccionU
     def on_pushButtonCambiar_clicked(self):
         #Paso1: Recuperar el empleado que se quiere cambiar de Seccion:
         empleado_a_cambiar = self.tableWidgetEmpleados.getEmpleadoSeleccionado()
-        print 'Empleado a cambiar: %s' %(empleado_a_cambiar.quienSos())
+        #print 'Empleado a cambiar: %s' %(empleado_a_cambiar.quienSos())
         #Paso2: Recuperar todas las Secciones, menos en la que esté actualmente el empleado que se quiere cambiar.
         secciones_disponibles = Division_Transporte().getSeccionesParaCambiarEmpleado(empleado_a_cambiar) #print 'secciones totales: %d, \nsecciones disponibles: %d' %(len(Division_Transporte().getSecciones().values()),len(secciones_disponibles)) 
         #Paso3: Mostrar un Dialoguito ofreciendoles al usuario las secciones para que elija una...

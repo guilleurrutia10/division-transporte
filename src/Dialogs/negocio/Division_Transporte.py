@@ -417,14 +417,18 @@ class Division_Transporte(Persistent):
         @return:
         @author:
         '''
-        repuesto = TipoRepuesto(nombre, descripcion)
+        repTypeCode = self.getGestorDeCodigos().nextCodigoTipoDeRepuesto()
+        repuesto = TipoRepuesto(repTypeCode, nombre, descripcion)
         self.zodb.conexion.sync()
         try:
             tiposRepuestos = self.zodb.raiz['tiposRepuestos']
         except KeyError, e:
+            #Si se ejecuta el script de cargado de datos, nunca se debe ingresar aca...
             if e.message == 'tiposRepuestos':
                 self.zodb.raiz['tiposRepuestos'] = {}
-            tiposRepuestos[nombre] = repuesto
+            #tiposRepuestos[nombre] = repuesto
+        finally:
+            tiposRepuestos[repTypeCode] = repuesto
             transaction.commit()
 
     def getRepuestos(self):
@@ -527,7 +531,8 @@ class Division_Transporte(Persistent):
         '''
         import datetime
         hoy = datetime.datetime.now()
-        vehiculo.crearOrdenDeReparacion(kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy, chofer)
+        ordenReparationCode = self.getGestorDeCodigos().nextCodigoOrdenDeReparacion()
+        vehiculo.crearOrdenDeReparacion(ordenReparationCode, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, hoy, chofer)
         transaction.commit()
 
     def getVehiculosSinOrdenEnCurso(self):
@@ -722,6 +727,18 @@ class Division_Transporte(Persistent):
     
     def eliminarEmpleadoDisponible(self, empleado):
         self.zodb.remove('empleados', empleado.getDocumento())
+        
+    def getGestorDeCodigos(self):
+        '''
+        @return: El objeto manejador de los codigos de los objetos de la DIvision
+        @author:
+        '''
+        self.zodb.conexion.sync()
+        try:
+            return self.zodb.raiz['gestorDeCodigos']
+        except KeyError:
+            raise ExcepcionObjeNoExiste
+
 
 ##############################################################################
 ########################## TEST DIVISION #####################################

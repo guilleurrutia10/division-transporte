@@ -61,6 +61,7 @@ class Turno(Persistent):
     def finalizar(self, observaciones= ''):
         self._observaciones = observaciones
         self._finalizado = True
+        self.finalizarTodasLasReparaciones()
         #yo era el ultimo turno que faltaba?
         if self._vehiculo.tieneTodosLosTurnosFinalizados():
             #SI
@@ -74,13 +75,24 @@ class Turno(Persistent):
         Recupera las reparaciones de los detalles del plan
         y las marca como finalizadas
         '''
-        for reparacion in [detalle.getReparacion() for detalle in self._detallesPlan]:
+        #for reparacion in [detalle.getReparacion() for detalle in self._detallesPlan]:
+        for reparacion in self._detallesPlan:
             reparacion.finalizar()
+            #De paso aprovechamos para decrementar las reparaciones pendientes de cada empleado
+            for cada_empleado in self._empleadosAsignados:
+                cada_empleado.decrementarReparacionesPendientes()
+                print "%s: %d reparaciones pendientes"%(cada_empleado.nombreCompleto(), cada_empleado.reparaciones_pendientes())
         
     def asignarEmpleados(self, empleados):
         '''
         Recibe una lista de empleados y los asigna al turno
         '''
+        #Por cada empleado, incrementar las reparaciones que tienen asignadas...
+        cantidad_de_reparaciones = len(self._detallesPlan)
+        for cada_empleado in empleados:
+            cada_empleado.incrementarReparacionesAsignadas(cantidad_de_reparaciones)
+            print "%s: %d reparaciones pendientes"%(cada_empleado.nombreCompleto(), cada_empleado.reparaciones_pendientes())
+        #Y los asignamos a la lista de empleados del turno
         self._empleadosAsignados.extend(empleados)
         transaction.commit()
 

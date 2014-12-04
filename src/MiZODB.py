@@ -284,6 +284,7 @@ class ZopeDB(object):
         from Dialogs.negocio.TipoRepuesto import TipoRepuesto
         
         raiz = self.zodb.raiz
+        gestorNumeradorDeRepuestos = raiz['gestorDeCodigos']
         infoRepuestos = [('1001', 'Bujia Universal 2', 'Bujia Universal Mejorada'),
                          ('1002', 'Neumatico Universales', 'Neumaticos Universales con el mejor agarre'),
                          ('1003', 'Llanta Universal 2', 'Llanta mas linda'),
@@ -305,6 +306,7 @@ class ZopeDB(object):
 
         tiposRepuestos = {}
         for codigo, nombre, descripcion in infoRepuestos:
+            codigo = gestorNumeradorDeRepuestos.nextCodigoTipoDeRepuesto()
             tRepuesto = TipoRepuesto(codigo, nombre, descripcion)
             tiposRepuestos[codigo] = tRepuesto
         
@@ -312,3 +314,13 @@ class ZopeDB(object):
         self.zodb._p_changed = True
         transaction.commit()
         print "Tipos de Repuestos cargados con exito!"
+
+    def cargarGestorDeCodigos(self):
+        '''
+        Objeto que se encarga de gestionar todos los codigos de los objetos de la Division
+        '''
+        from Dialogs.negocio.GestorDeCodigos import GestorDeCodigos
+        raiz = self.zodb.raiz
+        raiz['gestorDeCodigos'] = GestorDeCodigos()
+        self.zodb._p_changed = True
+        transaction.commit()

@@ -38,4 +38,4 @@ class Plan(Persistent):
         return self._turnos
     
     def __str__(self):
-        return 'Plan: \n%s' %''.join('%s\n' %str(turno) for turno in self._turnos)
+        return 'Plan: \kn%s' %''.join('%s\n' %str(turno) for turno in self._turnos)

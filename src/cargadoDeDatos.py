@@ -18,6 +18,7 @@ from pprint import pprint
 if __name__ == '__main__':
     
     bd = ZopeDB(MiZODB())
+    bd.cargarGestorDeCodigos()
     bd.cargarTiposDeDocumentos()
     bd.cargarTiposDeReparaciones()
     bd.cargarUsuarios()

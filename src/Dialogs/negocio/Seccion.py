@@ -238,6 +238,11 @@ class Seccion(Persistent):
         '''
         queDia: string <<10/10/2014>>
         queHora: int in [8,9,10,11,12,16,17,18,19,20]'''
+        #De la nada (:p) empezo a enviar queHora en una tupla. Why??
+        #Comprobacion horrible:
+        if isinstance(queHora, tuple):
+            queHora = queHora[0]
+        print "Buscando turno del dia: %s a la hora: %d (%s)"%(queDia, queHora, type(queHora))
         return self.tablaDeTurnos.get(queDia).get(queHora)
 
     def __str__(self):

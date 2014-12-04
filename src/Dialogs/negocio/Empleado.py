@@ -57,6 +57,9 @@ class Empleado(Persistent):
         self.localidad = localidad
         # Se setea si el usuario termina siendo encargado...
         self._usuario = None
+        #Para saber si pueden se transferidos/borrados, el siguiente atributo:
+        self._reparaciones_asignadas = 0
+        self._reparaciones_pendientes = 0
 
     def __eq__(self, otro):
         return self.documento == otro.documento
@@ -110,8 +113,8 @@ class Empleado(Persistent):
         return self.localidad
 
     def tieneReparacionesPendientes(self):
-        # TODO: Implementar!
-        return False
+        # TODO: Implementar! [OK]
+        return self._reparaciones_pendientes > 0
 
     def quienSos(self):
         return 'Soy %s %s, %s nro: %s' % (self.getNombre(), self.getApellido(), self.getTipoDocumento(), self.getDocumento())
@@ -195,3 +198,16 @@ class Empleado(Persistent):
         @return: string
         '''
         return self.fechaBaja.ctime()
+
+    def incrementarReparacionesAsignadas(self, cantidadDeReparaciones):
+        self._reparaciones_pendientes += cantidadDeReparaciones
+        self._reparaciones_asignadas += cantidadDeReparaciones
+        
+    def reparaciones_asignadas(self):
+        return self._reparaciones_asignadas
+    
+    def reparaciones_pendientes(self):
+        return self._reparaciones_pendientes
+    
+    def decrementarReparacionesPendientes(self):
+        self._reparaciones_pendientes -= 1

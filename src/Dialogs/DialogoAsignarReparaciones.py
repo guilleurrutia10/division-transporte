@@ -11,7 +11,7 @@ from negocio.Division_Transporte import Division_Transporte
 from PyQt4.Qwt5.qplt import QString
 from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
 from negocio.excepciones.SinTurnosException import SinTurnosException
-
+import copy
 
 class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
     '''
@@ -20,6 +20,13 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
     def __init__(self, parent=None, seccion=None):
         '''
         Constructor
+            Recibimos la seccion del Jefe de Seccion que esta queriendo utilizar 
+            esta funcionalidad.
+            Las siguiente listas:
+                _empleadosSinAsignar
+                _empleadosAsignados
+            son empleadas para manejar los empleados del turno. Manipularlas y luego invocar al metodo refrescarTablasEmpleados()
+            para reflejar los cambios.
         '''
         super(DialogoAsignarReparaciones, self).__init__(parent)
         self.setupUi(self)
@@ -40,7 +47,14 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         self.refrescarDatosTurno()
 #        self.refrescarReparaciones()
 #        self._empleadosSinAsignar = self._seccion.getEmpleados().values()
-        self._empleadosSinAsignar = self._seccion.getEmpleados()
+        '''
+        Correccion BUG 1001: Copiamos la lista de empleados de la seccion
+        utilizando el modulo copy. Porque si no, al asignar empleados al turno, los removemos de la lista de seccion.
+        La cuestion si realizar la copia aca, o la misma seccion debe retornar la copia...
+        http://stackoverflow.com/questions/2612802/how-to-clone-or-copy-a-list-in-python
+        '''
+        #self._empleadosSinAsignar = self._seccion.getEmpleados()
+        self._empleadosSinAsignar = copy.copy(self._seccion.getEmpleados())
         self._empleadosAsignados = []
 
         self.tableWidgetEmpleadosAsignados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
