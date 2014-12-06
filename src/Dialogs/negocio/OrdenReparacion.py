@@ -252,6 +252,8 @@ class OrdenReparacion(Persistent):
         if isinstance(self.estado, Aprobada):
             #self.estado = Planificada(self, self.estado.plan)
             self.estado = Planificada(self)
+            from Division_Transporte import Division_Transporte
+            self.getPlan().setCodigo(Division_Transporte().getGestorDeCodigos().nextCodigoPlan())
             return True
         else:
             return False
@@ -374,3 +376,14 @@ class OrdenReparacion(Persistent):
 
     def setCombustibleEgreso(self, value):
         self._combustibleEgreso = value
+
+    def getTurnosOrdenados(self):
+        '''
+        Si la OR esta planificada, retorna lo que pidieron
+        '''
+        if self.estaPlanificada():
+            return self.getEstado().getTurnosOrdenados()
+        return None
+    
+    def getCodigoPlan(self):
+        self.getPlan().getCodigo()

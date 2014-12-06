@@ -69,3 +69,6 @@ class TipoDeReparacion(Persistent):
 
     def __eq__(self, otro):
         return self.getNombre() == otro.getNombre()
+    
+    def __str__(self):
+        return "%s: %s" %(self._nombre, self._descripcion)

@@ -14,7 +14,8 @@ from formularios.DlgPlanificar import Ui_DialogPlanificar
 from Utiles_Dialogo import mostrarMensaje
 from negocio.Turno import Turno
 from negocio.Division_Transporte import Division_Transporte
-
+from reportes import generarHojaDeRuta
+from PyQt4.QtGui import QFileDialog
 
 class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
     '''
@@ -165,7 +166,8 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         if len(self._reparaciones_asignadas) == 0:
             mostrarMensaje(self, self.trUtf8('Debe seleccionar al menos una reparación para registrar el turno'), self.trUtf8('Truno'))
             return
-        turno_creado = Turno(self._seccionSeleccionada, self._vehiculo, fecha, hora, self._reparaciones_asignadas)
+        codigo_turno = self.DIVISION.getGestorDeCodigos().nextCodigoTurno()
+        turno_creado = Turno(codigo_turno, self._seccionSeleccionada, self._vehiculo, fecha, hora, self._reparaciones_asignadas)
         # Registrar el turno creado:
         self._seccionSeleccionada.registrarTurno(turno_creado)
         # Para saber de qué cliente debemos borrar las transacciones.
@@ -209,6 +211,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         print 'Aceptar!!'
         if self._vehiculo.tieneTodasLasReparacionesPlanificadas():# Verificar xq pude hacer click en aceptar sin haber terminado...
             self._vehiculo.planificacionFinalizada()
+            self.mostrarHojaDeRuta()
             # Para saber de qué cliente debemos borrar las transacciones.
             transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
             transaction.commit()
@@ -224,3 +227,12 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         transaction.abort()
         #Y ademas:
         #alvehiculo.decirleQuePongaTodasSusReparacionesCOmoNoPlanificadas!
+
+    def mostrarHojaDeRuta(self):
+        '''
+        Primer paso para generar el reporte hoja de ruta:
+        '''
+        #turnos_ordenados = self._vehiculo.getTurnosOrdenados()
+        fileDialog = QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Orden de Reparación'))
+        filename = fileDialog.getSaveFileName(parent=self)
+        generarHojaDeRuta(self._vehiculo, filename)

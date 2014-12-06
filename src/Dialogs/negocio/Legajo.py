@@ -319,6 +319,20 @@ class Legajo(Persistent):
     def registrarEgreso(self, kilometraje, combustible, fecha):
         self.getOrdenParaEgreso().registrarEgreso(kilometraje, combustible, fecha)
 
+    def getTurnosOrdenados(self):
+        '''
+        Devuelve un diccionario con los turnos por los que debe pasar el vehiculo:
+        turnos= {   1:Turno1
+                    2:Turno2
+                    ...
+                    N:TurnoN
+                }
+        '''
+        #Tengo una OR planificada? Si, retornar lo que pidieron. No, return None
+        return self.obtenerOrdenDeReparacionEnCurso().getTurnosOrdenados()
+    
+    def getCodigoPlan(self):
+        return self.obtenerOrdenDeReparacionEnCurso().getCodigoPlan()
 ##############################################################################
 ########################## TEST LEGAJO #######################################
 ##############################################################################

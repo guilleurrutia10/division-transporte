@@ -16,10 +16,11 @@ class Turno(Persistent):
     '''
 
 
-    def __init__(self, seccion, vehiculo, fecha, hora = None, reparaciones = []):
+    def __init__(self, codigo, seccion, vehiculo, fecha, hora = None, reparaciones = []):
         '''
         Constructor
         '''
+        self._codigo = codigo
         self._seccion = seccion
         self._vehiculo = vehiculo
         self._fecha = fecha
@@ -111,3 +112,13 @@ class Turno(Persistent):
     def getEmpleadosAsignados(self):
         return self._empleadosAsignados
 
+    def getSeccion(self):
+        return self._seccion
+
+    def getCodigo(self):
+        return self._codigo
+
+    def setCodigo(self, value):
+        self._codigo = value
+   
+    

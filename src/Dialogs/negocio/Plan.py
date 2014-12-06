@@ -24,6 +24,8 @@ class Plan(Persistent):
         '''
         self._detalles = PersistentList()
         self._turnos = PersistentList()
+        #Codigo que se le setea cuando esta aprobado:
+        self._codigo = None
 
     def getDetalles(self):
         return self._detalles
@@ -39,3 +41,9 @@ class Plan(Persistent):
     
     def __str__(self):
         return 'Plan: \kn%s' %''.join('%s\n' %str(turno) for turno in self._turnos)
+    
+    def setCodigo(self, codigo):
+        self._codigo = codigo
+    
+    def getCodigo(self):
+        return self._codigo

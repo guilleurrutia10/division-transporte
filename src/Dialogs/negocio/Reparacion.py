@@ -142,3 +142,6 @@ class Reparacion(Persistent):
         
     def estaPlanificada(self):
         return self._planificada
+    
+    def __str__(self):
+        return '%s | %s | %s' %(self._codigo, self._tipoDeReparacion, self._descripcion)

@@ -25,8 +25,9 @@ class GestorDeCodigos(Persistent):
         self._codigosPlanes = 30000
         self._codigosEmpleados = 40000
         self._codigosVehiculos = 50000
+        self._codigosTiposDeReparaciones = 60000
         self._codigosTiposDeRepuestos = 80000
-        self._codigosTiposDeReparaciones = 90000
+        self._codigosTurnos = 90000
         
         
         
@@ -57,3 +58,17 @@ class GestorDeCodigos(Persistent):
         '''
         self._codigosTiposDeRepuestos +=1
         return 'TIPOREPUESTO-%d'%self._codigosTiposDeRepuestos
+
+    def nextCodigoTurno(self):
+        '''
+        Retorna un string con el prox codigo de turno disponible
+        '''
+        self._codigosTurnos +=1
+        return 'TURNO-%d'%self._codigosTurnos
+
+    def nextCodigoPlan(self):
+        '''
+        Retorna un string con el prox codigo de plan disponible
+        '''
+        self._codigosPlanes +=1
+        return 'PLAN-%d'%self._codigosPlanes

@@ -20,6 +20,12 @@ width, height = A4
 
 from negocio.Division_Transporte import Division_Transporte
 
+import time
+from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Image
+from reportlab.lib.styles import ParagraphStyle
+
 
 def footer(canvas, doc):
     '''
@@ -298,6 +304,63 @@ def imprimirPedidoDeActuacion(numeroPedido='', repuestosSolicitados='', filename
     Elements.append(table)
     imprimir(Elements, filename)
 
+def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
+    '''
+    Recibe un vehiculo y genera su hoja de ruta con el nombre nombre_hoja_de_ruta
+    '''
+    turnos_ordenados = un_vehiculo.getTurnosOrdenados()
+    
+    doc = SimpleDocTemplate(nombre_hoja_de_ruta,pagesize=letter,
+                            rightMargin=72,leftMargin=72,
+                            topMargin=72,bottomMargin=18)
+    Story=[]
+    logo = "imagenes/logo_hoja_de_ruta.png"
+    
+    formatted_time = time.ctime()
+     
+    styles=getSampleStyleSheet()
+    title = Paragraph("\t\tHoja de Ruta", styles["Heading1"])
+    Story.append(title)
+    im = Image(logo, 2*inch, 2*inch)
+    Story.append(im)
+     
+    styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
+     
+    # Crear subtitulo Turnos:
+    subtitulo = "Turnos del vehiculo: %s"%'CGI12'
+    ptext = '<font size=12>%s</font>' % subtitulo
+    Story.append(Paragraph(ptext, styles["Normal"]))       
+    Story.append(Spacer(1, 12))
+    
+    #Informacion de los turnos
+    for nro, cada_turno in turnos_ordenados.iteritems():
+     
+        ptext = '<font size=12>%s</font>'%'- - '*30
+        Story.append(Paragraph(ptext, styles["Justify"]))
+        ptext = '<font size=12>#%d</font>'%nro
+        Story.append(Paragraph(ptext, styles["Justify"]))
+        ptext = '<font size=12>%s</font>'%cada_turno.getCodigo()
+        Story.append(Paragraph(ptext, styles["Justify"]))
+        ptext = '<font size=12>%s</font>'%'- - '*30
+        Story.append(Paragraph(ptext, styles["Justify"]))
+        
+        ptext = '<font size=12>Dia: %s a las %dhs.</font>' %(cada_turno.getFecha(), cada_turno.getHora())
+        Story.append(Paragraph(ptext, styles["Justify"]))
+        ptext = '<font size=12>Seccion: %s.</font>' %cada_turno.getSeccion()
+        Story.append(Paragraph(ptext, styles["Justify"]))
+        ptext = '<font size=12>Reparaciones:</font>'
+        Story.append(Paragraph(ptext, styles["Justify"]))
+        #Armamos un parrafito por cada reparacion del turno:
+        parrafosreparaciones = [Paragraph("    "+textreparacion, styles["Justify"]) for textreparacion in [str(reparacion) for reparacion in cada_turno.getReparaciones()]]
+        for parrafo in parrafosreparaciones:
+            Story.append(parrafo)
+        Story.append(Spacer(1, 12))
+      
+    ptext = '<font size=12>Generada: %s</font>' % formatted_time
+    Story.append(Paragraph(ptext, styles["Normal"]))
+    Story.append(Spacer(1, 12))
+    doc.build(Story)
+    
 if __name__ == '__main__':
 #     division = Division_Transporte()
 #     vehiculos = division.getVehiculos().values()

@@ -38,3 +38,7 @@ class Planificada(EstadoOrdenReparacion):
     
     def finalizarVerificacionReparacion(self):
         self._orden_de_reparacion.setEstado(Finalizada(self._orden_de_reparacion))
+
+    def getTurnosOrdenados(self):
+        turnos_ordenados = sorted(self._orden_de_reparacion.getPlan().getTurnos(), key= lambda turno: turno.getFecha())
+        return dict(zip(range(50),turnos_ordenados))
