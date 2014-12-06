@@ -7,9 +7,11 @@ Created on 03/10/2012
 from PyQt4 import QtCore, QtGui
 
 from formularios.DialogAltaRepuesto import Ui_DialogAltaRepuesto
+from AyudaManejador import AyudaManejador
 from negocio.Division_Transporte import Division_Transporte
 
-class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto):
+
+class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto, AyudaManejador):
     '''
     classdocs
     '''
@@ -44,7 +46,7 @@ class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto):
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         try:
@@ -54,7 +56,7 @@ class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto):
         self.cargarRepuesto()
         if self.mostrarMensaje('El repuesto se ha ingresado correctamente!!! :)', 'Ingresando Vehiculo'):
             self.accept()
-            
+
     def testearDialogo(self):
         '''
         TODO: Cambiar el nombre si no es significativo.
@@ -70,7 +72,7 @@ class DialogAltaRepuesto(QtGui.QDialog, Ui_DialogAltaRepuesto):
             self.lineEditDescRepuesto.setFocus()
             return
         return True
-    
+
     def cargarRepuesto(self):
         '''
         TODO: Deberíamos atrapar una Excepción que nos lance la División_Transporte.
