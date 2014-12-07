@@ -6,8 +6,6 @@ Created on 3/12/2014
 '''
 
 from persistent import Persistent
-import transaction
-
 
 class GestorDeCodigos(Persistent):
     '''
@@ -26,6 +24,7 @@ class GestorDeCodigos(Persistent):
         self._codigosEmpleados = 40000
         self._codigosVehiculos = 50000
         self._codigosTiposDeReparaciones = 60000
+        self._codigosReparaciones = 70000
         self._codigosTiposDeRepuestos = 80000
         self._codigosTurnos = 90000
         
@@ -72,3 +71,11 @@ class GestorDeCodigos(Persistent):
         '''
         self._codigosPlanes +=1
         return 'PLAN-%d'%self._codigosPlanes
+
+    def nextCodigoReparacion(self):
+        '''
+        Retorna un string con el prox codigo de reparacion disponible
+        La repracion posee como atributo un Tipo de Reparacion
+        '''
+        self._codigosReparaciones +=1
+        return 'REP-%d'%self._codigosReparaciones

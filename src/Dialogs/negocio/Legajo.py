@@ -15,7 +15,7 @@ from excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_E
 from excepciones.Excepcion_No_Posee_Orden_Reparacion_En_Curso import Excepcion_No_Posee_Orden_Reparacion_En_Curso
 from Aprobada import Aprobada
 from Finalizada import Finalizada
-
+from persistent.list import PersistentList
 
 class Legajo(Persistent):
     '''
@@ -49,7 +49,8 @@ class Legajo(Persistent):
         self.comisaria = comisaria
         # Tener en consideraón luego.
         self.localidad = ''
-        self.ordenesDeReparacion = []
+        #self.ordenesDeReparacion = []
+        self.ordenesDeReparacion = PersistentList()
         self.numeroOrden = 0
 
     def noEstaFinalizada(self, ordenReparacion):

@@ -64,12 +64,15 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
             - Descripcion
             - Lista de repuestos.
         Esta reparacion creada, la agregamos a la orden de reparacion con la que el dialogo está trabajando
+        
+        Update: Le asignamos un codigo a la reparacion, consultando al Gestor de COdigos, del obj Division.
         '''
         if not self.seleccionoAlgunRepuesto():
             QtGui.QMessageBox.critical(self, 'Error', 'Debe seleccionar por lo menos un repuesto para crear una reparacion')
             return
         # Crear la reparacion
-        unaReparacion = Reparacion(self._tipoDeReparacionSeleccionado, unicode(self.lineEditDescripcion.text()), self._repuestosSolicitados)
+        reparation_code = self.DIVISION.getGestorDeCodigos().nextCodigoReparacion()
+        unaReparacion = Reparacion(self._tipoDeReparacionSeleccionado, unicode(self.lineEditDescripcion.text()), self._repuestosSolicitados, reparation_code)
         try:
             self._vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso().addReparacion(unaReparacion)
             # Para saber de qué cliente debemos borrar las transacciones.

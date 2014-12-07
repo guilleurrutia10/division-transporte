@@ -310,6 +310,7 @@ def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
     '''
     turnos_ordenados = un_vehiculo.getTurnosOrdenados()
     
+    nombre_hoja_de_ruta = "%s.pdf"%nombre_hoja_de_ruta
     doc = SimpleDocTemplate(nombre_hoja_de_ruta,pagesize=letter,
                             rightMargin=72,leftMargin=72,
                             topMargin=72,bottomMargin=18)

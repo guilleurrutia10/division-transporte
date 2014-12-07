@@ -215,6 +215,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
             # Para saber de qué cliente debemos borrar las transacciones.
             transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
             transaction.commit()
+            print "DEBUG: Orden de reparacion planificada: %s"%self._vehiculo.obtenerOrdenDeReparacionEnCurso()
         else:
             # Se eliminan los turnos registrados anteriormente
             self.DIVISION.zodb.deshacerCommits()

@@ -54,7 +54,12 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         http://stackoverflow.com/questions/2612802/how-to-clone-or-copy-a-list-in-python
         '''
         #self._empleadosSinAsignar = self._seccion.getEmpleados()
-        self._empleadosSinAsignar = copy.copy(self._seccion.getEmpleados())
+        #self._empleadosSinAsignar = copy.copy(self._seccion.getEmpleados())
+        #Al copiar un persistentList, lo copiamos de verdad, es decir es la misma lista, con el mismo id...
+        #solucion:
+        self._empleadosSinAsignar = []
+        self._empleadosSinAsignar.extend(self._seccion.getEmpleados())
+        
         self._empleadosAsignados = []
 
         self.tableWidgetEmpleadosAsignados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)

@@ -17,7 +17,7 @@ from Planificada import Planificada
 from Aprobada import Aprobada
 from Finalizada import Finalizada
 from Plan import Plan
-
+import transaction
 
 class OrdenReparacion(Persistent):
     '''
@@ -252,6 +252,7 @@ class OrdenReparacion(Persistent):
         if isinstance(self.estado, Aprobada):
             #self.estado = Planificada(self, self.estado.plan)
             self.estado = Planificada(self)
+            transaction.commit()
             from Division_Transporte import Division_Transporte
             self.getPlan().setCodigo(Division_Transporte().getGestorDeCodigos().nextCodigoPlan())
             return True

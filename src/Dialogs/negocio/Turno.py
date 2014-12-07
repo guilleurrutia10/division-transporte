@@ -6,6 +6,7 @@ Created on 11/07/2014
 from persistent import Persistent
 from persistent.list import PersistentList
 import transaction
+import copy
 
 class Turno(Persistent):
     '''
@@ -94,7 +95,9 @@ class Turno(Persistent):
             cada_empleado.incrementarReparacionesAsignadas(cantidad_de_reparaciones)
             print "%s: %d reparaciones pendientes"%(cada_empleado.nombreCompleto(), cada_empleado.reparaciones_pendientes())
         #Y los asignamos a la lista de empleados del turno
-        self._empleadosAsignados.extend(empleados)
+        #self._empleadosAsignados.extend(empleados)
+        #Sigue sacando los empleados de la seccion al asignar...prueba 1:
+        self._empleadosAsignados.extend(copy.copy(empleados))
         transaction.commit()
 
     def getReparaciones(self):
