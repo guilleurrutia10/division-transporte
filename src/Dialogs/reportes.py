@@ -416,7 +416,7 @@ def generarAgendaParaRangoDias(seccion, desde, hasta):
         agenda[diaAux] = seccion.getAgendaDelDia(diaAux , si_no_existe_crear_registro = False)
     
     print agenda
-    agenda_ordenada = sorted(agenda.keys())
+    agenda_ordenada = sorted(agenda.keys(), cmp=compara_fechas_en_cadenas)
     print "DEBUG: AGENDA ORDENADA:"
     print agenda_ordenada
     for dia in agenda_ordenada:

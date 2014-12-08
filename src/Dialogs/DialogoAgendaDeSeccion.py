@@ -38,7 +38,7 @@ class DialogoAgendaDeSeccion(QtGui.QDialog, Ui_DialogAgendaDeSeccion, AyudaManej
         self._seccion = self._seccion[0]
         
         hoy = date.today()
-        self.dateEdit_Hasta.setMinimumDate((QtCore.QDate(hoy.year, hoy.month, hoy.day)))
+        self.dateEdit_Hasta.setDate((QtCore.QDate(hoy.year, hoy.month, hoy.day)))
         self.dateEdit_Hasta.setVisible(False)
         
 
