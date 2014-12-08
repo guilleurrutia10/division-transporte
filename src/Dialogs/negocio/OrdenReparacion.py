@@ -154,7 +154,8 @@ class OrdenReparacion(Persistent):
         @author: 
         '''
         try:
-            self.estado.generarPedidoDeActuacion()
+            from Division_Transporte import Division_Transporte
+            self.estado.generarPedidoDeActuacion(Division_Transporte().getGestorDeCodigos().nextCodigoPedidoDeActuacion())
             #cambiando a proximo estado:
             self.estado = EsperandoAprobacion(self)
             return True

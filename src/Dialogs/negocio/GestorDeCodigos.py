@@ -27,6 +27,7 @@ class GestorDeCodigos(Persistent):
         self._codigosReparaciones = 70000
         self._codigosTiposDeRepuestos = 80000
         self._codigosTurnos = 90000
+        self._codigosPedidosDeActuacion = 10000
         
         
         
@@ -79,3 +80,10 @@ class GestorDeCodigos(Persistent):
         '''
         self._codigosReparaciones +=1
         return 'REP-%d'%self._codigosReparaciones
+
+    def nextCodigoPedidoDeActuacion(self):
+        '''
+        Retorna un string con el prox codigo de pedido de actuacion disponible
+        '''
+        self._codigosPedidosDeActuacion +=1
+        return 'PEDIDO-%d'%self._codigosPedidosDeActuacion

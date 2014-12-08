@@ -36,7 +36,8 @@ PERMISOS = {"jefeDivision": ['actionAlta_de_Vehiculo','actionRegistrar_Ingreso_d
                              'actionRegistrar_Finalizacion_de_Reparacion',
                              'actionListados_de_Seccion'],
             "jefeSeccion":   ['actionRegistrar_Finalizacion_de_Reparacion',
-                            'actionAsignar_Reparacion'],
+                            'actionAsignar_Reparacion',
+                            'actionConsultar_agenda'],
             "inspector":    ['actionAlta_de_Seccion'],
             "administrativo": ["alta_repuesto"],
             "otro": []

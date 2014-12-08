@@ -29,6 +29,15 @@ def mostrarMensajeParaConfirmar(aplicacion, mensaje, titulo):
 
 
 def compara_fechas_en_cadenas(fecha1, fecha2):
+    '''
+    Recibe dos fechas del tipo:
+        - 1/1/2000
+        - 12/1/2000
+    Retorna:
+        - 0 si son iguales
+        - 1 si fecha1 es mayor
+        - -1 si fecha2 es mayor
+    '''
     dia1, mes1, anio1 = [int(n) for n in fecha1.split('/')]
     dia2, mes2, anio2 = [int(n) for n in fecha2.split('/')]
 

@@ -22,13 +22,13 @@ class PedidoDeActuacion(Persistent):
     - repuestosUtilizados
     '''
 
-    def __init__(self, repuestosSolicitados):
+    def __init__(self, codigo, repuestosSolicitados):
         '''
         Constructor
         @return:
         @author:
         '''
-        self._nroDePedido = 1
+        self._nroDePedido = codigo
         self._repuestosSolicitados = repuestosSolicitados
 
         self._fechaRealizacion = datetime.date.today()

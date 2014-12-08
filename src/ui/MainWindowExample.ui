@@ -138,6 +138,8 @@
     <addaction name="actionAsignar_Reparacion"/>
     <addaction name="actionRegistrar_Finalizacion_de_Reparacion"/>
     <addaction name="separator"/>
+    <addaction name="actionConsultar_agenda"/>
+    <addaction name="separator"/>
     <addaction name="actionListados_de_Seccion"/>
    </widget>
    <widget class="QMenu" name="menuConfiguracion">
@@ -723,6 +725,17 @@
    </property>
    <property name="text">
     <string>Alta Tipo de Reparación</string>
+   </property>
+  </action>
+  <action name="actionConsultar_agenda">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Consultar agenda</string>
    </property>
   </action>
  </widget>

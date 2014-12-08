@@ -36,6 +36,7 @@ from Dialogs.DialogoAsignarReparaciones import DialogoAsignarReparaciones
 from Dialogs.negocio.excepciones.SinTurnosException import SinTurnosException
 from Dialogs.DialogoRegistrarFinTurno import DialogoRegistrarFinTurno
 from Dialogs.DialogRegistrarEgresoVehiculo import DialogDatosEgresoVehiculo
+from Dialogs.DialogoAgendaDeSeccion import DialogoAgendaDeSeccion
 
 class MyListado(QtGui.QWidget, Ui_Form):
     def __init__(self, parent = None):
@@ -109,7 +110,9 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                        'actionAlta_Tipo_de_Reparacion': self.actionAlta_Tipo_de_Reparacion,
                        'actionAsignar_Reparacion': self.actionAsignar_Reparacion,
                        'actionRegistrar_Finalizacion_de_Reparacion': self.actionRegistrar_Finalizacion_de_Reparacion,
-                       'actionListados_de_Seccion': self.actionListados_de_Seccion}
+                       'actionListados_de_Seccion': self.actionListados_de_Seccion,
+                       'actionConsultar_agenda': self.actionConsultar_agenda
+                       }
         
         #TODO: validar 12/12/13
         self.usuario = usuario
@@ -361,3 +364,10 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_actionAcerca_de_Division_de_Transporte_triggered(self):
         QtGui.QMessageBox.about(self, "Acerca de DivT", QtCore.QString.fromUtf8('<h1>DivT</h1><p>Aplicación desarrollada para Desarrollo de Software</p>'));
+
+    @QtCore.pyqtSlot()
+    def on_actionConsultar_agenda_triggered(self):            
+        print 'DEBUG: Consultar agenda'
+        dlgAgenda = DialogoAgendaDeSeccion(self) 
+        dlgAgenda.exec_()
+

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindowExample.ui'
 #
-# Created: Mon Dec 08 17:02:41 2014
+# Created: Fri Jul 18 15:45:26 2014
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -339,11 +339,6 @@ class Ui_MainWindow(object):
         self.actionAlta_Tipo_de_Reparacion.setEnabled(False)
         self.actionAlta_Tipo_de_Reparacion.setText(QtGui.QApplication.translate("MainWindow", "Alta Tipo de Reparación", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAlta_Tipo_de_Reparacion.setObjectName(_fromUtf8("actionAlta_Tipo_de_Reparacion"))
-        self.actionConsultar_agenda = QtGui.QAction(MainWindow)
-        self.actionConsultar_agenda.setCheckable(False)
-        self.actionConsultar_agenda.setEnabled(False)
-        self.actionConsultar_agenda.setText(QtGui.QApplication.translate("MainWindow", "Consultar agenda", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionConsultar_agenda.setObjectName(_fromUtf8("actionConsultar_agenda"))
         self.menuArchivo.addAction(self.actionCambiarDeUsuario)
         self.menuArchivo.addAction(self.actionAyuda)
         self.menuArchivo.addSeparator()
@@ -388,8 +383,6 @@ class Ui_MainWindow(object):
         self.menuSecciones.addAction(self.actionAlta_Tipo_de_Reparacion)
         self.menuSecciones.addAction(self.actionAsignar_Reparacion)
         self.menuSecciones.addAction(self.actionRegistrar_Finalizacion_de_Reparacion)
-        self.menuSecciones.addSeparator()
-        self.menuSecciones.addAction(self.actionConsultar_agenda)
         self.menuSecciones.addSeparator()
         self.menuSecciones.addAction(self.actionListados_de_Seccion)
         self.menuConfiguracion.addAction(self.actionPreferencias)

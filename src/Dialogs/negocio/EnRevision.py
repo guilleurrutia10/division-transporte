@@ -72,7 +72,7 @@ class EnRevision(EstadoOrdenReparacion):
         #unaOrdenReparacion.setPedidoDeActuacion(pedidoActuacion)
 #        unaOrdenReparacion.setPedidoDeActuacion(PedidoDeActuacion(repuestosSolicitados))
 
-    def generarPedidoDeActuacion(self):
+    def generarPedidoDeActuacion(self, pedido_de_actuation_code):
         '''
         Genera un pedido de actuacion con todos los repuestos de todas las reparaciones de la 
         orden de reparacion.
@@ -92,8 +92,8 @@ class EnRevision(EstadoOrdenReparacion):
                     repuestosSolicitados.append(repuesto)
         #creamos el Pedido de Actuacion y se lo agregamos a la orden:
 
-        self._orden_de_reparacion.setPedidoDeActuacion(PedidoDeActuacion(repuestosSolicitados))
-        print "PEDIDO DE ACTUACION GENERADO Y ASIGNADO A LA ORDEN"
+        self._orden_de_reparacion.setPedidoDeActuacion(PedidoDeActuacion(pedido_de_actuation_code, repuestosSolicitados))
+        print "DEBUG: PEDIDO DE ACTUACION GENERADO Y ASIGNADO A LA ORDEN"
 
     def __str__(self):
         return 'En Revision'

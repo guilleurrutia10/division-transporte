@@ -12,7 +12,8 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 
-from datetime import datetime
+from datetime import datetime, date, timedelta as td
+from Utiles_Dialogo import compara_fechas_en_cadenas
 
 styles = getSampleStyleSheet()
 Elements = []
@@ -361,6 +362,69 @@ def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
     Story.append(Paragraph(ptext, styles["Normal"]))
     Story.append(Spacer(1, 12))
     doc.build(Story)
+
+def generarAgendaParaUnDia(seccion, dia):
+    '''
+    dia --> 12/12/2014
+    type(dia) --> string
+    
+    Recordar que seccion.getAgendaDelDia()
+    devuelve un diccionario (OBTree) con la forma:
+    
+    {   8:Turno_de_las_8,
+        9:Turno_de_las_9,
+        ...
+        20:Turno_de_las_20
+        
+    }
+    
+    '''
+    
+    print 'Generando reporte de %s, para el dia %s'%(seccion.getNombre(), dia)
+    print 'El dia %s la seccion posee los suguientes turnos:'%dia
+    for hora, turno in seccion.getAgendaDelDia(dia, si_no_existe_crear_registro = False).iteritems():
+        print hora, '->', turno
+        
+    #A partir de aca, generar el reporte... 
+
+def generarAgendaParaRangoDias(seccion, desde, hasta):
+    '''
+    Las fechas desde y hasta son strings con el siguiente formato:
+        - 12/12/2014
+        
+    @precondition: hasta > desde
+    '''
+    print 'Generando reporte de %s, %s hasta %s'%(seccion.getNombre(), desde, hasta)
+
+    #1) Recuperar todas las agendas de los dias entre desde y hasta:
+    diaD, mesD, anioD = [int(termino) for termino in desde.split('/')]
+    diaH, mesH, anioH = [int(termino) for termino in hasta.split('/')]    
+    dateDesde = date(anioD,mesD,diaD)
+    dateHasta = date(anioH,mesH,diaH)
+    
+    delta = dateHasta - dateDesde
+    
+    agenda = {}
+    for dia_entre in range(delta.days + 1):
+        diaAux = dateDesde + td(days=dia_entre)
+        diaAux = "%s/%s/%s"%(diaAux.day,
+                             diaAux.month,
+                             diaAux.year
+                             )
+        #Solicitar el turno para el dia aux y guardarlo
+        #agenda[diaAux] = 'RecuperarTablaDeTurnosParaElDiaAux%s'%diaAux
+        agenda[diaAux] = seccion.getAgendaDelDia(diaAux , si_no_existe_crear_registro = False)
+    
+    print agenda
+    agenda_ordenada = sorted(agenda.keys())
+    print "DEBUG: AGENDA ORDENADA:"
+    print agenda_ordenada
+    for dia in agenda_ordenada:
+        print 'El dia %s la seccion posee los suguientes turnos:'%dia
+        for hora, turno in agenda[dia].iteritems():
+            print hora, '->', turno
+    
+    #A partir de aca, generar el reporte...
     
 if __name__ == '__main__':
 #     division = Division_Transporte()

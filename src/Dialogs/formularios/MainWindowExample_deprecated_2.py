@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindowExample.ui'
 #
-# Created: Mon Dec 08 17:02:41 2014
+# Created: Sun Dec 07 20:02:10 2014
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -340,8 +340,6 @@ class Ui_MainWindow(object):
         self.actionAlta_Tipo_de_Reparacion.setText(QtGui.QApplication.translate("MainWindow", "Alta Tipo de Reparación", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAlta_Tipo_de_Reparacion.setObjectName(_fromUtf8("actionAlta_Tipo_de_Reparacion"))
         self.actionConsultar_agenda = QtGui.QAction(MainWindow)
-        self.actionConsultar_agenda.setCheckable(False)
-        self.actionConsultar_agenda.setEnabled(False)
         self.actionConsultar_agenda.setText(QtGui.QApplication.translate("MainWindow", "Consultar agenda", None, QtGui.QApplication.UnicodeUTF8))
         self.actionConsultar_agenda.setObjectName(_fromUtf8("actionConsultar_agenda"))
         self.menuArchivo.addAction(self.actionCambiarDeUsuario)

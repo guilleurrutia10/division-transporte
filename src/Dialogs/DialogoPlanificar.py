@@ -210,7 +210,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
     def aceptar(self):
         print 'Aceptar!!'
         if self._vehiculo.tieneTodasLasReparacionesPlanificadas():# Verificar xq pude hacer click en aceptar sin haber terminado...
-            self._vehiculo.planificacionFinalizada()
+            self._vehiculo.planificacionFinalizada()#En este punto, la OR esta PLANIFICADA.
             self.mostrarHojaDeRuta()
             # Para saber de qué cliente debemos borrar las transacciones.
             transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')

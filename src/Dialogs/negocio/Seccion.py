@@ -216,12 +216,20 @@ class Seccion(Persistent):
         self.tablaDeTurnos.get(turno.getFecha())[turno.getHora()] = turno
 #        transaction.commit()
 
-    def getAgendaDelDia(self, queDia):
+    def getAgendaDelDia(self, queDia, si_no_existe_crear_registro = True):
+        '''
+        Retorna la agenda para el dia indicado.
+        Modificado para indicarle si crea un registro nuevo para el dia,
+        o que retorne un diccionario vacio...
+        '''
         if self.tieneRegistroParaElDia(queDia):
             return self.tablaDeTurnos.get(queDia)
         else:
-            self.crearRegistroParaElDia(queDia)
-            return self.tablaDeTurnos.get(queDia)
+            if si_no_existe_crear_registro:
+                self.crearRegistroParaElDia(queDia)
+                return self.tablaDeTurnos.get(queDia)
+            else:
+                return {}
 
     def getHorasSinTurnoParaElDia(self, dia):
         '''
