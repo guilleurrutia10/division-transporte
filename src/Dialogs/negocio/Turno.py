@@ -51,7 +51,7 @@ class Turno(Persistent):
                                                                                                self._seccion.getNombre(), 
                                                                                                self._fecha, 
                                                                                                self._hora,
-                                                                                               [str(detalle) for detalle in self._detallesPlan]
+                                                                                               [unicode(detalle) for detalle in self._detallesPlan]
                                                                                                )
     
     def addDetalle(self, nuevoDetallePlan):

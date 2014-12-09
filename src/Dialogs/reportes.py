@@ -154,6 +154,7 @@ def imprimirOrdenDeReparacion():
 # - header: que se debe imprimir en la cabecera
 # - footer: que se debe imprimir en el pie
 def imprimir(Elements, filename):
+    filename = filename + '.pdf'
     doc = BaseDocTemplate(filename, showBoundary=1)
     # normal frame as for SimpleFlowDocument
     frameT = Frame(doc.leftMargin, doc.bottomMargin,
@@ -363,69 +364,150 @@ def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
     Story.append(Spacer(1, 12))
     doc.build(Story)
 
+
 def generarAgendaParaUnDia(seccion, dia):
     '''
     dia --> 12/12/2014
     type(dia) --> string
-    
+
     Recordar que seccion.getAgendaDelDia()
     devuelve un diccionario (OBTree) con la forma:
-    
+
     {   8:Turno_de_las_8,
         9:Turno_de_las_9,
         ...
         20:Turno_de_las_20
-        
+
     }
-    
+
     '''
-    
-    print 'Generando reporte de %s, para el dia %s'%(seccion.getNombre(), dia)
-    print 'El dia %s la seccion posee los suguientes turnos:'%dia
-    for hora, turno in seccion.getAgendaDelDia(dia, si_no_existe_crear_registro = False).iteritems():
+
+    print 'Generando reporte de %s, para el dia %s' % (seccion.getNombre(), dia)
+    print 'El dia %s la seccion posee los suguientes turnos:' % dia
+    for hora, turno in seccion.getAgendaDelDia(dia, si_no_existe_crear_registro=False).iteritems():
         print hora, '->', turno
-        
-    #A partir de aca, generar el reporte... 
+
+    # A partir de aca, generar el reporte...
+    elements = []
+    titulo = u'Reporte de %s para el día %s' % (seccion.getNombre(), dia)
+    elements.append(Paragraph(titulo, style=styles['Title']))
+    elements.append(Spacer(inch, 0.2*inch))
+#     filename = u'reporte-%s-%s' % (seccion.getNombre(), dia)
+    d, m, a = dia.split('/')
+    filename = u'reporte-%s-%s-%s-%s' % (seccion.getNombre(), d, m, a)
+    # cabecera tabla turnos
+    cabecera = []
+    cabecera.append([Paragraph(u'Hora', style=styles['Heading4'])])
+    cabecera.append([Paragraph(u'Código', style=styles['Heading4'])])
+    cabecera.append([Paragraph(u'Vehículo', style=styles['Heading4'])])
+    cabecera.append([Paragraph(u'Sección', style=styles['Heading4'])])
+    cabecera.append([Paragraph(u'Fecha', style=styles['Heading4'])])
+    table_style = [('GRID', (0, 0), (-1, -1), 0.5, colors.grey)]
+
+    titulo_rep = []
+    titulo_rep.append([Paragraph(u'Reparaciones:', style=styles['Heading4'])])
+    titulo_rep.append('')
+    titulo_rep.append('')
+    titulo_rep.append('')
+    titulo_rep.append('')
+    # cabecera tabla reparaciones, tabla interior en turnos
+    cabecera_rep = []
+    cabecera_rep.append([Paragraph(u'Código', style=styles['Heading4'])])
+    cabecera_rep.append([Paragraph(u'Tipo de reparación', style=styles['Heading4'])])
+    cabecera_rep.append('')
+    cabecera_rep.append([Paragraph(u'Descripción', style=styles['Heading4'])])
+    cabecera_rep.append('')
+#     datos_tabla = []
+#     turnos = []
+    # conteo de filas en la tabla
+    ingresados = 2
+    for hora, turno in seccion.getAgendaDelDia(dia, si_no_existe_crear_registro=False).iteritems():
+        datos_tabla = []
+        turnos = []
+        datos_truno = []
+        datos_reparaciones = []
+        if not turno:
+            continue
+        hora_text = unicode(hora)
+        datos_truno.append([Paragraph(hora_text, style=styles['Normal'])])
+        datos_truno.append([Paragraph(turno.getCodigo(), style=styles['Normal'])])
+        vehiculo = unicode(turno.getVehiculo().getDominio())
+        datos_truno.append([Paragraph(vehiculo, style=styles['Normal'])])
+        seccion = unicode(turno.getSeccion().getNombre())
+        datos_truno.append([Paragraph(seccion, style=styles['Normal'])])
+        fecha = unicode(turno.getFecha())
+        datos_truno.append([Paragraph(fecha, style=styles['Normal'])])
+        for reparacion in turno.getDetalles():
+            datos_reparaciones.append([Paragraph(reparacion.getCodigo(), style=styles['Normal'])])
+            nombre = reparacion.getTipoDeReparacion().getNombre()
+            datos_reparaciones.append([Paragraph(nombre, style=styles['Normal'])])
+            datos_reparaciones.append('')
+            descripcion = reparacion.getTipoDeReparacion().getDescipcion()
+            datos_reparaciones.append([Paragraph(descripcion, style=styles['Normal'])])
+            datos_reparaciones.append('')
+        turnos.append(datos_truno)
+        turnos.append(titulo_rep)
+        turnos.append(cabecera_rep)
+        table_style.append(('SPAN', (0, ingresados), (-1, ingresados)))
+        table_style.append(('SPAN', (1, ingresados+1), (2, ingresados+1)))
+        table_style.append(('SPAN', (3, ingresados+1), (4, ingresados+1)))
+        table_style.append(('SPAN', (1, ingresados+2), (2, ingresados+2)))
+        table_style.append(('SPAN', (3, ingresados+2), (4, ingresados+2)))
+        turnos.append(datos_reparaciones)
+        datos_tabla.append(cabecera)
+        datos_tabla.extend(turnos)
+        table = Table(datos_tabla, colWidths=inch, style=table_style)
+        elements.append(table)
+        elements.append(Spacer(inch, 0.2*inch))
+#         ingresados += 3 + len(turno.getDetalles())
+#     datos_tabla.append(cabecera)
+#     datos_tabla.extend(turnos)
+#     table = Table(datos_tabla, colWidths=inch, style=table_style)
+#     elements.append(table)
+    imprimir(elements, filename)
+
 
 def generarAgendaParaRangoDias(seccion, desde, hasta):
     '''
     Las fechas desde y hasta son strings con el siguiente formato:
         - 12/12/2014
-        
+
     @precondition: hasta > desde
     '''
     print 'Generando reporte de %s, %s hasta %s'%(seccion.getNombre(), desde, hasta)
 
-    #1) Recuperar todas las agendas de los dias entre desde y hasta:
+    # 1) Recuperar todas las agendas de los dias entre desde y hasta:
     diaD, mesD, anioD = [int(termino) for termino in desde.split('/')]
-    diaH, mesH, anioH = [int(termino) for termino in hasta.split('/')]    
-    dateDesde = date(anioD,mesD,diaD)
-    dateHasta = date(anioH,mesH,diaH)
-    
+    diaH, mesH, anioH = [int(termino) for termino in hasta.split('/')]
+    dateDesde = date(anioD, mesD, diaD)
+    dateHasta = date(anioH, mesH, diaH)
+
     delta = dateHasta - dateDesde
-    
+
     agenda = {}
     for dia_entre in range(delta.days + 1):
         diaAux = dateDesde + td(days=dia_entre)
-        diaAux = "%s/%s/%s"%(diaAux.day,
-                             diaAux.month,
-                             diaAux.year
-                             )
-        #Solicitar el turno para el dia aux y guardarlo
-        #agenda[diaAux] = 'RecuperarTablaDeTurnosParaElDiaAux%s'%diaAux
-        agenda[diaAux] = seccion.getAgendaDelDia(diaAux , si_no_existe_crear_registro = False)
-    
+        diaAux = "%s/%s/%s" % (diaAux.day,
+                               diaAux.month,
+                               diaAux.year
+                               )
+        # Solicitar el turno para el dia aux y guardarlo
+        # agenda[diaAux] = 'RecuperarTablaDeTurnosParaElDiaAux%s'%diaAux
+        agenda[diaAux] = seccion.getAgendaDelDia(diaAux, si_no_existe_crear_registro=False)
+
     print agenda
     agenda_ordenada = sorted(agenda.keys(), cmp=compara_fechas_en_cadenas)
     print "DEBUG: AGENDA ORDENADA:"
     print agenda_ordenada
     for dia in agenda_ordenada:
-        print 'El dia %s la seccion posee los suguientes turnos:'%dia
+        print 'El dia %s la seccion posee los suguientes turnos:' % dia
         for hora, turno in agenda[dia].iteritems():
             print hora, '->', turno
-    
-    #A partir de aca, generar el reporte...
-    
+        #
+        generarAgendaParaUnDia(seccion, dia)
+
+    # A partir de aca, generar el reporte...
+
 if __name__ == '__main__':
 #     division = Division_Transporte()
 #     vehiculos = division.getVehiculos().values()
