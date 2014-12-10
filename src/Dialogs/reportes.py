@@ -26,6 +26,7 @@ from reportlab.lib.enums import TA_JUSTIFY
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Image
 from reportlab.lib.styles import ParagraphStyle
+import os
 
 
 def footer(canvas, doc):
@@ -208,7 +209,7 @@ def imprimirListadoVehiculos(cabecera, vehiculos, titulo='Listado de Vehículos'
 
 
 def imprimirOrden(ordenReparacion, titulo='Listado de Vehículos',
-                             filename='example.pdf'):
+                  filename='example.pdf'):
     '''
     TODO: Se pueden armar Templates para diferentes vistas...
 
@@ -365,7 +366,7 @@ def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
     doc.build(Story)
 
 
-def generarAgendaParaUnDia(seccion, dia):
+def generarAgendaParaUnDia(seccion, dia, folder):
     '''
     dia --> 12/12/2014
     type(dia) --> string
@@ -382,17 +383,21 @@ def generarAgendaParaUnDia(seccion, dia):
 
     '''
 
-    print 'Generando reporte de %s, para el dia %s' % (seccion.getNombre(), dia)
-    print 'El dia %s la seccion posee los suguientes turnos:' % dia
-    for hora, turno in seccion.getAgendaDelDia(dia, si_no_existe_crear_registro=False).iteritems():
-        print hora, '->', turno
+#     print 'Generando reporte de %s, para el dia %s' % (seccion.getNombre(), dia)
+#     print 'El dia %s la seccion posee los suguientes turnos:' % dia
+#     for hora, turno in seccion.getAgendaDelDia(dia, si_no_existe_crear_registro=False).iteritems():
+#         print hora, '->', turno
 
     # A partir de aca, generar el reporte...
+    if not seccion.tieneRegistroParaElDia(dia):
+        print u'La sección %s no posee registro para el día' % (seccion.getNombre())
+        return
     elements = []
     titulo = u'Reporte de %s para el día %s' % (seccion.getNombre(), dia)
     elements.append(Paragraph(titulo, style=styles['Title']))
     elements.append(Spacer(inch, 0.2*inch))
-#     filename = u'reporte-%s-%s' % (seccion.getNombre(), dia)
+    # Nos ubicamos en la carpeta seleccionada para generar el reporte
+    os.chdir(folder)
     d, m, a = dia.split('/')
     filename = u'reporte-%s-%s-%s-%s' % (seccion.getNombre(), d, m, a)
     # cabecera tabla turnos
@@ -417,8 +422,6 @@ def generarAgendaParaUnDia(seccion, dia):
     cabecera_rep.append('')
     cabecera_rep.append([Paragraph(u'Descripción', style=styles['Heading4'])])
     cabecera_rep.append('')
-#     datos_tabla = []
-#     turnos = []
     # conteo de filas en la tabla
     ingresados = 2
     for hora, turno in seccion.getAgendaDelDia(dia, si_no_existe_crear_registro=False).iteritems():
@@ -459,22 +462,19 @@ def generarAgendaParaUnDia(seccion, dia):
         table = Table(datos_tabla, colWidths=inch, style=table_style)
         elements.append(table)
         elements.append(Spacer(inch, 0.2*inch))
-#         ingresados += 3 + len(turno.getDetalles())
-#     datos_tabla.append(cabecera)
-#     datos_tabla.extend(turnos)
-#     table = Table(datos_tabla, colWidths=inch, style=table_style)
-#     elements.append(table)
+
     imprimir(elements, filename)
+    return filename
 
 
-def generarAgendaParaRangoDias(seccion, desde, hasta):
+def generarAgendaParaRangoDias(seccion, desde, hasta, folder):
     '''
     Las fechas desde y hasta son strings con el siguiente formato:
         - 12/12/2014
 
     @precondition: hasta > desde
     '''
-    print 'Generando reporte de %s, %s hasta %s'%(seccion.getNombre(), desde, hasta)
+    print 'Generando reporte de %s, %s hasta %s' % (seccion.getNombre(), desde, hasta)
 
     # 1) Recuperar todas las agendas de los dias entre desde y hasta:
     diaD, mesD, anioD = [int(termino) for termino in desde.split('/')]
@@ -499,12 +499,17 @@ def generarAgendaParaRangoDias(seccion, desde, hasta):
     agenda_ordenada = sorted(agenda.keys(), cmp=compara_fechas_en_cadenas)
     print "DEBUG: AGENDA ORDENADA:"
     print agenda_ordenada
+    lista_reportes = []
     for dia in agenda_ordenada:
         print 'El dia %s la seccion posee los suguientes turnos:' % dia
         for hora, turno in agenda[dia].iteritems():
             print hora, '->', turno
         #
-        generarAgendaParaUnDia(seccion, dia)
+        if seccion.tieneRegistroParaElDia(dia):
+            reporte = generarAgendaParaUnDia(seccion, dia, folder)
+            print reporte
+            lista_reportes.append(reporte)
+    return lista_reportes
 
     # A partir de aca, generar el reporte...
 
