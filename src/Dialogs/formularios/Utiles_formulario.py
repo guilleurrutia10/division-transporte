@@ -118,7 +118,9 @@ class TablaEmpleadosSeccion(SuperTabla):
             self.setItem(fila, columna, itemFechaNac)
             columna += 1
             itemEmail = QtGui.QTableWidgetItem()
-            itemEmail.setText(unicode(empleado.getEmail()))
+            textoemail = unicode(empleado.getEmail())
+            if not textoemail: textoemail = '-'
+            itemEmail.setText(textoemail)
             self.setItem(fila, columna, itemEmail)
             columna += 1
 

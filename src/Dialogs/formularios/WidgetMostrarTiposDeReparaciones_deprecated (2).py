@@ -2,10 +2,11 @@
 
 # Form implementation generated from reading ui file 'WidgetMostrarTiposDeReparaciones.ui'
 #
-# Created: Tue Dec 09 23:24:21 2014
+# Created: Tue Dec 09 22:36:54 2014
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
+# GUARNING! Cambio la columna Nombre por Codigo!
 
 from PyQt4 import QtCore, QtGui
 
@@ -68,23 +69,20 @@ class Ui_WidgetMostrarTiposDeReparaciones(object):
         self.tableWidgetTipoReparacionesDivision.setMinimumSize(QtCore.QSize(500, 0))
         self.tableWidgetTipoReparacionesDivision.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.tableWidgetTipoReparacionesDivision.setObjectName(_fromUtf8("tableWidgetTipoReparacionesDivision"))
-        self.tableWidgetTipoReparacionesDivision.setColumnCount(5)
+        self.tableWidgetTipoReparacionesDivision.setColumnCount(4)
         self.tableWidgetTipoReparacionesDivision.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarTiposDeReparaciones", "Codigo Tipo de Reparación", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarTiposDeReparaciones", "Codigo", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetTipoReparacionesDivision.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarTiposDeReparaciones", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarTiposDeReparaciones", "Descripción", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetTipoReparacionesDivision.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarTiposDeReparaciones", "Descripción", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarTiposDeReparaciones", "Realizada en Sección", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetTipoReparacionesDivision.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarTiposDeReparaciones", "Realizada en Sección", None, QtGui.QApplication.UnicodeUTF8))
-        self.tableWidgetTipoReparacionesDivision.setHorizontalHeaderItem(3, item)
-        item = QtGui.QTableWidgetItem()
         item.setText(QtGui.QApplication.translate("WidgetMostrarTiposDeReparaciones", "Tiempo Estimado", None, QtGui.QApplication.UnicodeUTF8))
-        self.tableWidgetTipoReparacionesDivision.setHorizontalHeaderItem(4, item)
+        self.tableWidgetTipoReparacionesDivision.setHorizontalHeaderItem(3, item)
         self.tableWidgetTipoReparacionesDivision.horizontalHeader().setDefaultSectionSize(180)
         self.tableWidgetTipoReparacionesDivision.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_2.addWidget(self.tableWidgetTipoReparacionesDivision)
@@ -98,7 +96,6 @@ class Ui_WidgetMostrarTiposDeReparaciones(object):
         item = self.tableWidgetTipoReparacionesDivision.horizontalHeaderItem(1)
         item = self.tableWidgetTipoReparacionesDivision.horizontalHeaderItem(2)
         item = self.tableWidgetTipoReparacionesDivision.horizontalHeaderItem(3)
-        item = self.tableWidgetTipoReparacionesDivision.horizontalHeaderItem(4)
 
 
 if __name__ == "__main__":

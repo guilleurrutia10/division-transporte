@@ -7,7 +7,6 @@ Created on 03/10/2012
 from PyQt4 import QtGui, QtCore
 
 from formularios.WidgetMostrarTiposDeReparaciones import Ui_WidgetMostrarTiposDeReparaciones
-
 from negocio.Division_Transporte import Division_Transporte
 
 
@@ -31,21 +30,27 @@ class WidgetMostrarTiposDeReparaciones(QtGui.QWidget, Ui_WidgetMostrarTiposDeRep
         fila = 0
         for reparacion in tiposReparaciones:
             columna = 0
+            itemCodigo = QtGui.QTableWidgetItem()
+            itemCodigo.setText(reparacion.getCodigo())
+            self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, itemCodigo)
+            columna += 1
             itemNombre = QtGui.QTableWidgetItem()
             itemNombre.setText(reparacion.getNombre())
             self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, itemNombre)
             columna += 1
-            itemFechaInicio = QtGui.QTableWidgetItem()
-            itemFechaInicio.setText(unicode('reparacion.tiempoEstimado()'))
-            self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, itemFechaInicio)
-            columna += 1
-            itemFechaFin = QtGui.QTableWidgetItem()
-            itemFechaFin.setText(unicode('reparacion.getSeccion()'))
-            self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, itemFechaFin)
-            columna += 1
             itemDescripcion = QtGui.QTableWidgetItem()
             itemDescripcion.setText(unicode(reparacion.getDescipcion()))
             self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, itemDescripcion)
+            columna += 1
+            seccion = Division_Transporte().seccion_a_la_que_pertenece(reparacion)
+            itemSeccion = QtGui.QTableWidgetItem()
+            itemSeccion.setText(unicode(seccion.getNombre()))
+            self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, itemSeccion)
+            columna += 1
+            itemTiempoEstimado = QtGui.QTableWidgetItem()
+            itemTiempoEstimado.setText(unicode(reparacion.getTiempoEstimado()))
+            self.tableWidgetTipoReparacionesDivision.setItem(fila, columna, itemTiempoEstimado)
+
             fila += 1
 
     def cargarGrillaInicial(self):

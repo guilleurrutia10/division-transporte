@@ -7,6 +7,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+# GUARNING, este archivo se modifico para reflejar los datos obligatorios y no recompilar... 
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -115,11 +116,11 @@ class Ui_DialogIngresoVehiculo(object):
     def retranslateUi(self, DialogIngresoVehiculo):
         DialogIngresoVehiculo.setWindowTitle(_translate("DialogIngresoVehiculo", "Registrar Ingreso Vehiculo", None))
         self.groupBox.setTitle(_translate("DialogIngresoVehiculo", "Registrar Ingreso Vehiculo", None))
-        self.label.setText(_translate("DialogIngresoVehiculo", "Kilometraje actual:", None))
-        self.label_2.setText(_translate("DialogIngresoVehiculo", "Nivel de combustible actual:", None))
-        self.label_5.setText(_translate("DialogIngresoVehiculo", "Comisaría:", None))
-        self.label_6.setText(_translate("DialogIngresoVehiculo", "Localidad:", None))
-        self.label_7.setText(_translate("DialogIngresoVehiculo", "Chofer asignado", None))
+        self.label.setText(_translate("DialogIngresoVehiculo", "Kilometraje actual(*):", None))
+        self.label_2.setText(_translate("DialogIngresoVehiculo", "Nivel de combustible actual(*):", None))
+        self.label_5.setText(_translate("DialogIngresoVehiculo", "Comisaría(*):", None))
+        self.label_6.setText(_translate("DialogIngresoVehiculo", "Localidad(*):", None))
+        self.label_7.setText(_translate("DialogIngresoVehiculo", "Chofer asignado(*):", None))
         self.label_4.setText(_translate("DialogIngresoVehiculo", "Reparación solicitada:", None))
         self.label_3.setText(_translate("DialogIngresoVehiculo", "Equipamiento:", None))
         self.comboBoxCombustible.setToolTip(_translate("DialogIngresoVehiculo", "<html><head/><body><p>Indica la cantidad de combustible en el vehículo.</p></body></html>", None))

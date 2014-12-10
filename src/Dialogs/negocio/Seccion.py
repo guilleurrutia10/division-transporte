@@ -119,7 +119,7 @@ class Seccion(Persistent):
         return self.encargado
 
     def getCodigo(self):
-        return 'codigo'
+        return self.codigoSeccion
 
     def removerEmpleado(self, empleadoARemover):
 #        del self.getEmpleados()[empleadoARemover.getDocumento()]
@@ -320,6 +320,8 @@ class Seccion(Persistent):
                     list_retorno.append(hora)
         return list_retorno
 
+    def realizaReparationType(self, untipodereparacion):
+        return untipodereparacion in self.getTiposDeReparaciones()
 ##############################################################################
 ########################## TEST SECCION ######################################
 ##############################################################################

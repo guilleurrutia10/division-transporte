@@ -30,7 +30,7 @@ class TipoDeReparacion(Persistent):
 
     '''
 
-    def __init__(self, nombre, descripcion, repuestos=[]):
+    def __init__(self, nombre, descripcion, repuestos=[], tiempo_estimado = 30, codigo= 'ERROR'):
         '''
         Constructor
         @return: 
@@ -40,6 +40,9 @@ class TipoDeReparacion(Persistent):
         self._descripcion = descripcion
         self._repuestos = PersistentList()
         self._repuestos.extend(repuestos)
+        self._tiempo_estimado = tiempo_estimado
+        self._codigo = codigo
+        print "DEBUG: Tipo de Reparacion: %s | %s | %s | %d"%(codigo, nombre, descripcion, tiempo_estimado)
 
     def getRepuestos(self):
         return self._repuestos
@@ -72,3 +75,19 @@ class TipoDeReparacion(Persistent):
     
     def __str__(self):
         return "%s: %s" %(self._nombre, self._descripcion)
+
+    def getTiempoEstimado(self):
+        return self._tiempo_estimado
+
+
+    def getCodigo(self):
+        return self._codigo
+
+
+    def setTiempoEstimado(self, value):
+        self._tiempo_estimado = value
+
+
+    def setCodigo(self, value):
+        self._codigo = value
+

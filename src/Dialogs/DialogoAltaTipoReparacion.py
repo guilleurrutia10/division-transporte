@@ -49,6 +49,7 @@ class DialogoAltaTipoReparacion(QtGui.QDialog, Ui_DialogAltaTipoReparacion):
         self.label_3.setObjectName("label")
         self.label_4.setObjectName("label")
         self.label_5.setObjectName("label")
+        self.label_6.setObjectName("label")
         self.label_7.setObjectName("label")
 
 
@@ -94,7 +95,10 @@ class DialogoAltaTipoReparacion(QtGui.QDialog, Ui_DialogAltaTipoReparacion):
 
         #Repuestos Requeridos ok.        
         #crear tipo de reparacion
-        tReparacion = TipoDeReparacion(nombreTipoReparacion, descripcionTipoReparacion, self._repuestosAsignados)
+        tiempoEstimadoTipoReparacion = self.lineEditTiempoEstimado.text().toInt()
+        tiempoEstimadoTipoReparacion = tiempoEstimadoTipoReparacion[0]
+        typeofreparationcode = Division_Transporte().getGestorDeCodigos().nextCodigoTipoDeReparacion()
+        tReparacion = TipoDeReparacion(nombreTipoReparacion, descripcionTipoReparacion, self._repuestosAsignados, tiempoEstimadoTipoReparacion, typeofreparationcode)
         #tomar la seccion ingresada y appendearle el tipo de reparacion creado
         nombre_seccion_seleccionada = unicode(self.comboBoxSeccion.currentText())
         seccionSeleccionada = filter(lambda s: s.getNombre() == nombre_seccion_seleccionada, self._secciones)

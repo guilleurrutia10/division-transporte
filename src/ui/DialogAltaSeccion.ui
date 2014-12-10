@@ -200,12 +200,32 @@
            </attribute>
            <column>
             <property name="text">
-             <string>Número de Documento</string>
+             <string>Nombre</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>Nombre</string>
+             <string>Apellido</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Tipo Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Documento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Fecha Nacimiento</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Email</string>
             </property>
            </column>
           </widget>
@@ -221,6 +241,12 @@
            </item>
            <item>
             <widget class="QTableWidget" name="tableWidgetEncargadoAsignado">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>65</height>
+              </size>
+             </property>
              <property name="maximumSize">
               <size>
                <width>16777215</width>
@@ -235,15 +261,25 @@
              </attribute>
              <column>
               <property name="text">
-               <string>Número de Documento</string>
-              </property>
-              <property name="textAlignment">
-               <set>AlignJustify|AlignVCenter</set>
+               <string>Nombre Encargado</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Nombre Encargado</string>
+               <string>Apellido Encargado</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Tipo Documento</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Documento</string>
+              </property>
+              <property name="textAlignment">
+               <set>AlignJustify|AlignVCenter</set>
               </property>
              </column>
             </widget>
@@ -265,12 +301,22 @@
              </attribute>
              <column>
               <property name="text">
-               <string>Número de Documento</string>
+               <string>Nombre</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Nombre</string>
+               <string>Apellido</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Tipo Documento</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Documento</string>
               </property>
              </column>
             </widget>

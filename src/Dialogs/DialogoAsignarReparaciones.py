@@ -141,6 +141,8 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
                        'Asignacion finalizada'
                        )
         self._turnoSeleccionado.asignarEmpleados(self._empleadosAsignados)
+        #Si el vehiculo ya tiene todos sus turnos asignados
+        #vehiculo.todosLosTurnosAsignados? -> OR -> Estado -> Plan.todosLosTurnosAsignados?? (CofR)
 
     def cancelar(self):
         #No tirar commits a lo loco

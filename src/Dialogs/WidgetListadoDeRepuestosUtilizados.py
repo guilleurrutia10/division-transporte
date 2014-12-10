@@ -60,12 +60,14 @@ class ListadoRepustosUtilizados(QtGui.QWidget, Ui_FormRepuestosUtilizados):
                         columna += 1
                         item = QtGui.QTableWidgetItem()
                         codigoPedido = orden.getPedidoDeActuacion().getNumeroPedido()
-                        item.setText(QtCore.QString.number(codigoPedido))
+                        #item.setText(QtCore.QString.number(codigoPedido))
+                        item.setText(unicode(codigoPedido))
                         self.tableWidgetRepuestos.setItem(fila, columna, item)
                         columna += 1
                         item = QtGui.QTableWidgetItem()
                         codigoReparacion = orden.getCodigoOrdenReparacion()
-                        item.setText(QtCore.QString.number(codigoReparacion))
+                        #item.setText(QtCore.QString.number(codigoReparacion))
+                        item.setText(codigoReparacion)
                         self.tableWidgetRepuestos.setItem(fila, columna, item)
                         columna += 1
                         item = QtGui.QTableWidgetItem()
