@@ -69,6 +69,25 @@ def mostrarMensajeOk(aplicacion, mensaje, titulo):
     return msgBox.exec_()
 
 
+def seleccionarCarpeta(aplicacion):
+        '''
+        Abre un QFileDialog en el cual sólo se puede seleccionar un directorio
+        para utlizar su path.
+        @params:
+            - aplicacion: QWidget object que invoca al mensaje.
+        @return: string, representa la ruta de la carpeta selecciona.
+        '''
+        folder = None
+        file_dialog = QtGui.QFileDialog(aplicacion)
+        file_dialog.setFileMode(QtGui.QFileDialog.Directory)
+        file_dialog.setOption(QtGui.QFileDialog.ShowDirsOnly)
+        if (file_dialog.exec_()):
+            print 'len: %s' % (len(file_dialog.selectedFiles()))
+            for folder in file_dialog.selectedFiles():
+                print 'Imprimiendo: %s' % folder
+        return folder
+
+
 class Mensaje(object):
 
     def __init__(self, aplicacion, mensaje='', titulo=''):
