@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogAltaSeccion.ui'
 #
-# Created: Tue Dec 09 22:11:36 2014
+# Created: Tue Dec 09 22:02:08 2014
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -126,7 +126,6 @@ class Ui_DialogAltaSeccion(object):
         self.verticalLayout_4.addWidget(self.label_2)
 #        self.tableWidgetEncargadoAsignado = QtGui.QTableWidget(self.groupBox_2)
         self.tableWidgetEncargadoAsignado = TablaEmpleadosSeccion(self.groupBox_2)
-        self.tableWidgetEncargadoAsignado.setMinimumSize(QtCore.QSize(0, 65))
         self.tableWidgetEncargadoAsignado.setMaximumSize(QtCore.QSize(16777215, 52))
         self.tableWidgetEncargadoAsignado.setObjectName(_fromUtf8("tableWidgetEncargadoAsignado"))
         self.tableWidgetEncargadoAsignado.setColumnCount(4)

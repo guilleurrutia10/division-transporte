@@ -246,6 +246,7 @@ class ZopeDB(object):
     def cargarTiposDeReparaciones(self):
         from Dialogs.negocio.TipoDeReparacion import TipoDeReparacion
         raiz = self.zodb.raiz
+        gestorNumeradorDeReparaciones = raiz['gestorDeCodigos']
         diccionario = {'Reacondicionamiento de motor':1,
                        'Afinado de motor':2,
                        'Ensayo de sistema de escape':3,
@@ -263,15 +264,15 @@ class ZopeDB(object):
             if nombre == 'Reparacion de frenos':
                 otroTipoRepuesto = TipoRepuesto('Pastilla de Freno', 'Siempre frena p77')
                 otroRepRequerido = RepuestoRequeridos(otroTipoRepuesto, 4)
-                tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepRequerido, otroRepRequerido])
+                tRep = TipoDeReparacion(nombre=nombre, descripcion=diccionario[nombre], repuestos=[unRepRequerido, otroRepRequerido], codigo=gestorNumeradorDeReparaciones.nextCodigoTipoDeReparacion())
                 print 'cargue rep frenos'
             elif nombre == 'Reparacion de radiador':
                 otroTipoRepuesto = TipoRepuesto('Radiador', 'RAD ULTRA 7500')
                 otroRepRequerido = RepuestoRequeridos(otroTipoRepuesto, 4)
-                tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepRequerido, otroRepRequerido])
+                tRep = TipoDeReparacion(nombre=nombre, descripcion=diccionario[nombre], repuestos=[unRepRequerido, otroRepRequerido], codigo=gestorNumeradorDeReparaciones.nextCodigoTipoDeReparacion())
                 print 'cargue Reparacion de radiador'
             else:
-                tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepRequerido])
+                tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepRequerido], tiempo_estimado=40, codigo=gestorNumeradorDeReparaciones.nextCodigoTipoDeReparacion())
                 print 'cargue Reparacion Normal'
                 
             tiposReparaciones[nombre] = tRep

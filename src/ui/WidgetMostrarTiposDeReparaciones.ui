@@ -49,11 +49,11 @@
         <property name="maximumSize">
          <size>
           <width>300</width>
-          <height>16777215</height>
+          <height>45</height>
          </size>
         </property>
         <property name="title">
-         <string>Filtrar por Nombre</string>
+         <string/>
         </property>
         <layout class="QFormLayout" name="formLayout">
          <property name="fieldGrowthPolicy">
@@ -104,11 +104,11 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Minimum</enum>
+         <enum>QSizePolicy::Expanding</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
+          <width>60</width>
           <height>20</height>
          </size>
         </property>
@@ -152,12 +152,17 @@
         </attribute>
         <column>
          <property name="text">
+          <string>Codigo Tipo de Reparación</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Nombre</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Tiempo Estimado</string>
+          <string>Descripción</string>
          </property>
         </column>
         <column>
@@ -167,7 +172,7 @@
         </column>
         <column>
          <property name="text">
-          <string>Descripción</string>
+          <string>Tiempo Estimado</string>
          </property>
         </column>
        </widget>

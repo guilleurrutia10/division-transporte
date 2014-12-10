@@ -1,41 +1,48 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'DlgAltaTipoReparacion.ui'
+# Form implementation generated from reading ui file 'ui/DlgAltaTipoReparacion.ui'
 #
-# Created: Tue Dec 09 22:41:33 2014
-#      by: PyQt4 UI code generator 4.8.6
+# Created: Wed Sep 10 22:42:54 2014
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
-# GUARNING! Se incorporaron estos modulos, tambien se modifico el orden de lis labels y lineedits para cambiar el orden del tab:
+
 from Utiles_formulario import TablaTiposDeRepuestos, TablaRepuestosRequeridos
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_DialogAltaTipoReparacion(object):
     def setupUi(self, DialogAltaTipoReparacion):
         DialogAltaTipoReparacion.setObjectName(_fromUtf8("DialogAltaTipoReparacion"))
         DialogAltaTipoReparacion.resize(1221, 568)
-        DialogAltaTipoReparacion.setWindowTitle(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Alta Tipo de Reparación", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogAltaTipoReparacion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.groupBox = QtGui.QGroupBox(DialogAltaTipoReparacion)
-        self.groupBox.setTitle(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Nuevo tipo de reparación", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.groupBox)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
         self.groupBox_3 = QtGui.QGroupBox(self.groupBox)
-        self.groupBox_3.setMaximumSize(QtCore.QSize(16777215, 120))
+        self.groupBox_3.setMaximumSize(QtCore.QSize(16777215, 100))
         self.groupBox_3.setTitle(_fromUtf8(""))
         self.groupBox_3.setObjectName(_fromUtf8("groupBox_3"))
         self.formLayout = QtGui.QFormLayout(self.groupBox_3)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(self.groupBox_3)
-        self.label.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Nombre:", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setObjectName(_fromUtf8("label"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.lineEditNombre = QtGui.QLineEdit(self.groupBox_3)
@@ -44,37 +51,24 @@ class Ui_DialogAltaTipoReparacion(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lineEditNombre.sizePolicy().hasHeightForWidth())
         self.lineEditNombre.setSizePolicy(sizePolicy)
-        self.lineEditNombre.setToolTip(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Ingrese aquí el nombre de la nueva sección", None, QtGui.QApplication.UnicodeUTF8))
         self.lineEditNombre.setObjectName(_fromUtf8("lineEditNombre"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEditNombre)
         self.label_5 = QtGui.QLabel(self.groupBox_3)
-        self.label_5.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Descripción:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_5)
         self.lineEditDescripcion = QtGui.QLineEdit(self.groupBox_3)
         self.lineEditDescripcion.setMaximumSize(QtCore.QSize(300, 16777215))
         self.lineEditDescripcion.setObjectName(_fromUtf8("lineEditDescripcion"))
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.lineEditDescripcion)
-        self.label_6 = QtGui.QLabel(self.groupBox_3)
-        self.label_6.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Tiempo estimado (min):", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_6.setObjectName(_fromUtf8("label_6"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_6)
-        self.lineEditTiempoEstimado = QtGui.QLineEdit(self.groupBox_3)
-        self.lineEditTiempoEstimado.setMaximumSize(QtCore.QSize(300, 16777215))
-        self.lineEditTiempoEstimado.setObjectName(_fromUtf8("lineEditTiempoEstimado"))
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.lineEditTiempoEstimado)
         self.label_2 = QtGui.QLabel(self.groupBox_3)
-        self.label_2.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Sección:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setObjectName(_fromUtf8("label_2"))
-        self.formLayout.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_2)
+        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_2)
         self.comboBoxSeccion = QtGui.QComboBox(self.groupBox_3)
         self.comboBoxSeccion.setMaximumSize(QtCore.QSize(300, 16777215))
         self.comboBoxSeccion.setObjectName(_fromUtf8("comboBoxSeccion"))
-        self.formLayout.setWidget(4, QtGui.QFormLayout.FieldRole, self.comboBoxSeccion)
-
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.comboBoxSeccion)
         self.verticalLayout_2.addWidget(self.groupBox_3)
         self.groupBox_2 = QtGui.QGroupBox(self.groupBox)
-        self.groupBox_2.setTitle(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Asignar Repuestos", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.gridLayout = QtGui.QGridLayout(self.groupBox_2)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
@@ -93,7 +87,6 @@ class Ui_DialogAltaTipoReparacion(object):
         self.verticalLayout_6 = QtGui.QVBoxLayout()
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
         self.label_7 = QtGui.QLabel(self.groupBox_4)
-        self.label_7.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Cantidad", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setAlignment(QtCore.Qt.AlignCenter)
         self.label_7.setObjectName(_fromUtf8("label_7"))
         self.verticalLayout_6.addWidget(self.label_7)
@@ -102,33 +95,24 @@ class Ui_DialogAltaTipoReparacion(object):
         self.verticalLayout_6.addWidget(self.lineEditCantidad)
         self.verticalLayout_5.addLayout(self.verticalLayout_6)
         self.pushButtonAsignarRepuesto = QtGui.QPushButton(self.groupBox_4)
-        self.pushButtonAsignarRepuesto.setToolTip(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Haga click aquí para agregar el empleado seleccionado a la sección", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonAsignarRepuesto.setWhatsThis(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Agrega el empleado seleccionado a la sección", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonAsignarRepuesto.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", ">", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAsignarRepuesto.setObjectName(_fromUtf8("pushButtonAsignarRepuesto"))
         self.verticalLayout_5.addWidget(self.pushButtonAsignarRepuesto)
         self.pushButtonDesasignarRepuesto = QtGui.QPushButton(self.groupBox_4)
-        self.pushButtonDesasignarRepuesto.setToolTip(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Haga click aquí para quitar el empleado seleccionado de la sección", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonDesasignarRepuesto.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "<", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonDesasignarRepuesto.setObjectName(_fromUtf8("pushButtonDesasignarRepuesto"))
         self.verticalLayout_5.addWidget(self.pushButtonDesasignarRepuesto)
         spacerItem2 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem2)
         self.verticalLayout_3.addLayout(self.verticalLayout_5)
         self.gridLayout.addWidget(self.groupBox_4, 1, 1, 1, 1)
-#        self.tableWidgetRepuestosSinAsignar = QtGui.QTableWidget(self.groupBox_2)
         self.tableWidgetRepuestosSinAsignar = TablaTiposDeRepuestos(self.groupBox_2)
         self.tableWidgetRepuestosSinAsignar.setObjectName(_fromUtf8("tableWidgetRepuestosSinAsignar"))
         self.tableWidgetRepuestosSinAsignar.setColumnCount(3)
         self.tableWidgetRepuestosSinAsignar.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Código", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestosSinAsignar.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestosSinAsignar.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Descripción", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestosSinAsignar.setHorizontalHeaderItem(2, item)
         self.tableWidgetRepuestosSinAsignar.horizontalHeader().setDefaultSectionSize(150)
         self.tableWidgetRepuestosSinAsignar.horizontalHeader().setStretchLastSection(True)
@@ -136,32 +120,26 @@ class Ui_DialogAltaTipoReparacion(object):
         self.verticalLayout_4 = QtGui.QVBoxLayout()
         self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
         self.label_3 = QtGui.QLabel(self.groupBox_2)
-        self.label_3.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Repuestos asignados:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setObjectName(_fromUtf8("label_3"))
         self.verticalLayout_4.addWidget(self.label_3)
-#        self.tableWidgetRepuestosAsignados = QtGui.QTableWidget(self.groupBox_2)
         self.tableWidgetRepuestosAsignados = TablaRepuestosRequeridos(self.groupBox_2)
         self.tableWidgetRepuestosAsignados.setObjectName(_fromUtf8("tableWidgetRepuestosAsignados"))
         self.tableWidgetRepuestosAsignados.setColumnCount(4)
         self.tableWidgetRepuestosAsignados.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Código", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestosAsignados.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestosAsignados.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
         item.setText(_fromUtf8("Descripción"))
         self.tableWidgetRepuestosAsignados.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Cantidad", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetRepuestosAsignados.setHorizontalHeaderItem(3, item)
         self.tableWidgetRepuestosAsignados.horizontalHeader().setDefaultSectionSize(150)
         self.tableWidgetRepuestosAsignados.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_4.addWidget(self.tableWidgetRepuestosAsignados)
         self.gridLayout.addLayout(self.verticalLayout_4, 1, 3, 1, 1)
         self.label_4 = QtGui.QLabel(self.groupBox_2)
-        self.label_4.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Repuestos sin asignar:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.gridLayout.addWidget(self.label_4, 0, 0, 1, 1)
         self.verticalLayout_2.addWidget(self.groupBox_2)
@@ -175,11 +153,9 @@ class Ui_DialogAltaTipoReparacion(object):
         self.gridLayout_2.setContentsMargins(9, 9, 9, 8)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout_2.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogAltaTipoReparacion", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout_2.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem3 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -192,21 +168,34 @@ class Ui_DialogAltaTipoReparacion(object):
         QtCore.QMetaObject.connectSlotsByName(DialogAltaTipoReparacion)
 
     def retranslateUi(self, DialogAltaTipoReparacion):
+        DialogAltaTipoReparacion.setWindowTitle(_translate("DialogAltaTipoReparacion", "Alta Tipo de Reparación", None))
+        self.groupBox.setTitle(_translate("DialogAltaTipoReparacion", "Nuevo tipo de reparación", None))
+        self.label.setText(_translate("DialogAltaTipoReparacion", "Nombre:", None))
+        self.lineEditNombre.setToolTip(_translate("DialogAltaTipoReparacion", "Ingrese aquí el nombre de la nueva sección", None))
+        self.label_5.setText(_translate("DialogAltaTipoReparacion", "Descripción:", None))
+        self.label_2.setText(_translate("DialogAltaTipoReparacion", "Sección:", None))
+        self.groupBox_2.setTitle(_translate("DialogAltaTipoReparacion", "Asignar Repuestos", None))
+        self.label_7.setText(_translate("DialogAltaTipoReparacion", "Cantidad", None))
+        self.pushButtonAsignarRepuesto.setToolTip(_translate("DialogAltaTipoReparacion", "Haga click aquí para agregar el empleado seleccionado a la sección", None))
+        self.pushButtonAsignarRepuesto.setWhatsThis(_translate("DialogAltaTipoReparacion", "Agrega el empleado seleccionado a la sección", None))
+        self.pushButtonAsignarRepuesto.setText(_translate("DialogAltaTipoReparacion", ">", None))
+        self.pushButtonDesasignarRepuesto.setToolTip(_translate("DialogAltaTipoReparacion", "Haga click aquí para quitar el empleado seleccionado de la sección", None))
+        self.pushButtonDesasignarRepuesto.setText(_translate("DialogAltaTipoReparacion", "<", None))
         item = self.tableWidgetRepuestosSinAsignar.horizontalHeaderItem(0)
+        item.setText(_translate("DialogAltaTipoReparacion", "Código", None))
         item = self.tableWidgetRepuestosSinAsignar.horizontalHeaderItem(1)
+        item.setText(_translate("DialogAltaTipoReparacion", "Nombre", None))
         item = self.tableWidgetRepuestosSinAsignar.horizontalHeaderItem(2)
+        item.setText(_translate("DialogAltaTipoReparacion", "Descripción", None))
+        self.label_3.setText(_translate("DialogAltaTipoReparacion", "Repuestos asignados:", None))
         item = self.tableWidgetRepuestosAsignados.horizontalHeaderItem(0)
+        item.setText(_translate("DialogAltaTipoReparacion", "Código", None))
         item = self.tableWidgetRepuestosAsignados.horizontalHeaderItem(1)
+        item.setText(_translate("DialogAltaTipoReparacion", "Nombre", None))
         item = self.tableWidgetRepuestosAsignados.horizontalHeaderItem(2)
         item = self.tableWidgetRepuestosAsignados.horizontalHeaderItem(3)
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    DialogAltaTipoReparacion = QtGui.QDialog()
-    ui = Ui_DialogAltaTipoReparacion()
-    ui.setupUi(DialogAltaTipoReparacion)
-    DialogAltaTipoReparacion.show()
-    sys.exit(app.exec_())
+        item.setText(_translate("DialogAltaTipoReparacion", "Cantidad", None))
+        self.label_4.setText(_translate("DialogAltaTipoReparacion", "Repuestos sin asignar:", None))
+        self.pushButtonAceptar.setText(_translate("DialogAltaTipoReparacion", "Aceptar", None))
+        self.pushButtonCancelar.setText(_translate("DialogAltaTipoReparacion", "Cancelar", None))
 

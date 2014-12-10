@@ -296,8 +296,9 @@ class Division_Transporte(Persistent):
             self.zodb.remove('empleados', empleado.getDocumento())
 
         self.zodb.remove('empleados', encargado.getDocumento())
-        codigoDeSeccion = len(self.secciones)
-        seccion = Seccion(codigoDeSeccion, nombreSeccion, empleados, encargado)
+        #codigoDeSeccion = len(self.secciones)
+        sectioncode = self.getGestorDeCodigos().nextCodigoSeccion()
+        seccion = Seccion(sectioncode, nombreSeccion, empleados, encargado)
 
         #TODO: Esto respeta el modelo, seguimos de esta forma?
         self.secciones.append(seccion)
@@ -739,6 +740,14 @@ class Division_Transporte(Persistent):
         except KeyError:
             raise ExcepcionObjeNoExiste
 
+    def seccion_a_la_que_pertenece(self, tipodereparacion):
+        seccion = filter(lambda cada_seccion: cada_seccion.realizaReparationType(tipodereparacion), self.getSecciones().values())
+        if not seccion: 
+            #seccion es []
+            return 'ERROR'
+        else:
+            return seccion[0]
+        
 
 ##############################################################################
 ########################## TEST DIVISION #####################################

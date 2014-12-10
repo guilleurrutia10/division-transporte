@@ -43,4 +43,10 @@ class ListadoSecciones(QtGui.QWidget, Ui_FormListadoSecciones):
             itemEncargado = QtGui.QTableWidgetItem()
             itemEncargado.setText(seccion.encargado.nombreCompleto())
             self.tableWidgetListadoSecciones.setItem(fila, columna, itemEncargado)
+            columna += 1
+            itemCode = QtGui.QTableWidgetItem()
+            itemCode.setText(unicode(seccion.getCodigo()))
+            self.tableWidgetListadoSecciones.setItem(fila, columna, itemCode)
+
             fila += 1
+            
