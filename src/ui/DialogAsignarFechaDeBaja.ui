@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Asignar Fecha de Baja</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../recursos.qrc">
+    <normaloff>:/recursos/iconos/car/planificar-icon.png</normaloff>:/recursos/iconos/car/planificar-icon.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox">
@@ -88,6 +92,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>

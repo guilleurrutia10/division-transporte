@@ -113,7 +113,7 @@ class Seccion(Persistent):
 
     def poseeAEmpleado(self, unEmpleado):
 #        return unEmpleado in self.getEmpleados().values()
-        return unEmpleado in self.getEmpleados()
+        return unEmpleado in self.getEmpleados() or unEmpleado is self.encargado
 
     def getEncargado(self):
         return self.encargado

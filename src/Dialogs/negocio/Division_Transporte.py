@@ -748,7 +748,17 @@ class Division_Transporte(Persistent):
         else:
             return seccion[0]
         
-
+    def nuevoEmpleadoDisponible(self, empleado):
+        self.zodb.save('empleados', empleado.getDocumento(), empleado)
+        
+    def bajaEmpleado(self, empleadoBaja):
+        '''
+        @precondition: El empleado posee su fecha de baja asignada.
+        '''
+        self.zodb.save('empleados_dados_de_baja', empleadoBaja.getDocumento(), empleadoBaja)
+        self.eliminarEmpleadoDisponible(empleadoBaja)
+        
+        
 ##############################################################################
 ########################## TEST DIVISION #####################################
 ##############################################################################

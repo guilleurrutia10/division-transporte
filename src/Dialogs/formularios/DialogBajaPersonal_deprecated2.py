@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'DialogBajaPersonal.ui'
 #
-# Created: Wed Dec 10 18:26:52 2014
+# Created: Wed Dec 10 18:08:49 2014
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -20,9 +20,6 @@ class Ui_DialogBajaPersonal(object):
         DialogBajaPersonal.setObjectName(_fromUtf8("DialogBajaPersonal"))
         DialogBajaPersonal.resize(835, 469)
         DialogBajaPersonal.setWindowTitle(QtGui.QApplication.translate("DialogBajaPersonal", "Baja de Personal", None, QtGui.QApplication.UnicodeUTF8))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/logoDivisionTransporte.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        DialogBajaPersonal.setWindowIcon(icon)
         self.gridLayout = QtGui.QGridLayout(DialogBajaPersonal)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.groupBox_5 = QtGui.QGroupBox(DialogBajaPersonal)
@@ -109,7 +106,6 @@ class Ui_DialogBajaPersonal(object):
         item = self.tableWidgetDatosEmpleados.horizontalHeaderItem(8)
         item = self.tableWidgetDatosEmpleados.horizontalHeaderItem(9)
 
-import recursos_rc
 
 if __name__ == "__main__":
     import sys

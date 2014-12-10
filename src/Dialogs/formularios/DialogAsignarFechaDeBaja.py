@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'src/ui/DialogAsignarFechaDeBaja.ui'
+# Form implementation generated from reading ui file 'DialogAsignarFechaDeBaja.ui'
 #
-# Created: Sun Aug  3 23:50:05 2014
-#      by: PyQt4 UI code generator 4.10.4
+# Created: Wed Dec 10 18:32:39 2014
+#      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,25 +12,21 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+    _fromUtf8 = lambda s: s
 
 class Ui_DialogAsignarFechaBaja(object):
     def setupUi(self, DialogAsignarFechaBaja):
         DialogAsignarFechaBaja.setObjectName(_fromUtf8("DialogAsignarFechaBaja"))
         DialogAsignarFechaBaja.resize(498, 294)
         DialogAsignarFechaBaja.setMaximumSize(QtCore.QSize(593, 300))
+        DialogAsignarFechaBaja.setWindowTitle(QtGui.QApplication.translate("DialogAsignarFechaBaja", "Asignar Fecha de Baja", None, QtGui.QApplication.UnicodeUTF8))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/car/planificar-icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        DialogAsignarFechaBaja.setWindowIcon(icon)
         self.gridLayout_2 = QtGui.QGridLayout(DialogAsignarFechaBaja)
         self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.groupBox = QtGui.QGroupBox(DialogAsignarFechaBaja)
+        self.groupBox.setTitle(QtGui.QApplication.translate("DialogAsignarFechaBaja", "Registrar Fecha de Baja", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.formLayout = QtGui.QFormLayout(self.groupBox)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
@@ -47,9 +43,11 @@ class Ui_DialogAsignarFechaBaja(object):
         self.gridLayout.setContentsMargins(9, 9, 9, 8)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.pushButtonAceptar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonAceptar.setText(QtGui.QApplication.translate("DialogAsignarFechaBaja", "Aceptar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonAceptar.setObjectName(_fromUtf8("pushButtonAceptar"))
         self.gridLayout.addWidget(self.pushButtonAceptar, 0, 1, 1, 1)
         self.pushButtonCancelar = QtGui.QPushButton(self.groupBoxButtonBox)
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogAsignarFechaBaja", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
         self.gridLayout.addWidget(self.pushButtonCancelar, 0, 2, 1, 1)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
@@ -60,8 +58,16 @@ class Ui_DialogAsignarFechaBaja(object):
         QtCore.QMetaObject.connectSlotsByName(DialogAsignarFechaBaja)
 
     def retranslateUi(self, DialogAsignarFechaBaja):
-        DialogAsignarFechaBaja.setWindowTitle(_translate("DialogAsignarFechaBaja", "Asignar Fecha de Baja", None))
-        self.groupBox.setTitle(_translate("DialogAsignarFechaBaja", "Registrar Fecha de Baja", None))
-        self.pushButtonAceptar.setText(_translate("DialogAsignarFechaBaja", "Aceptar", None))
-        self.pushButtonCancelar.setText(_translate("DialogAsignarFechaBaja", "Cancelar", None))
+        pass
+
+import recursos_rc
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    DialogAsignarFechaBaja = QtGui.QDialog()
+    ui = Ui_DialogAsignarFechaBaja()
+    ui.setupUi(DialogAsignarFechaBaja)
+    DialogAsignarFechaBaja.show()
+    sys.exit(app.exec_())
 

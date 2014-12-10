@@ -2,12 +2,11 @@
 
 # Form implementation generated from reading ui file 'DialogBajaPersonal.ui'
 #
-# Created: Wed Dec 10 18:26:52 2014
+# Created: Wed Dec 05 21:18:55 2012
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
-# GUARNING! Este fialogo posee un a tabla de empleados:
-from Utiles_formulario import TablaDeEmpleados
+
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -20,15 +19,12 @@ class Ui_DialogBajaPersonal(object):
         DialogBajaPersonal.setObjectName(_fromUtf8("DialogBajaPersonal"))
         DialogBajaPersonal.resize(835, 469)
         DialogBajaPersonal.setWindowTitle(QtGui.QApplication.translate("DialogBajaPersonal", "Baja de Personal", None, QtGui.QApplication.UnicodeUTF8))
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/logoDivisionTransporte.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        DialogBajaPersonal.setWindowIcon(icon)
         self.gridLayout = QtGui.QGridLayout(DialogBajaPersonal)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.groupBox_5 = QtGui.QGroupBox(DialogBajaPersonal)
         self.groupBox_5.setMinimumSize(QtCore.QSize(150, 70))
         self.groupBox_5.setMaximumSize(QtCore.QSize(200, 70))
-        self.groupBox_5.setTitle(QtGui.QApplication.translate("DialogBajaPersonal", "Filtro", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_5.setTitle(QtGui.QApplication.translate("DialogBajaPersonal", "Buscar Documento", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_5.setObjectName(_fromUtf8("groupBox_5"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox_5)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
@@ -36,30 +32,28 @@ class Ui_DialogBajaPersonal(object):
         self.lineEditBuscarDocumento.setObjectName(_fromUtf8("lineEditBuscarDocumento"))
         self.horizontalLayout.addWidget(self.lineEditBuscarDocumento)
         self.gridLayout.addWidget(self.groupBox_5, 0, 0, 1, 1)
+        self.groupBox_2 = QtGui.QGroupBox(DialogBajaPersonal)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.groupBox_2.sizePolicy().hasHeightForWidth())
+        self.groupBox_2.setSizePolicy(sizePolicy)
+        self.groupBox_2.setMinimumSize(QtCore.QSize(150, 70))
+        self.groupBox_2.setMaximumSize(QtCore.QSize(200, 70))
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("DialogBajaPersonal", "Buscar Nombre", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
+        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.groupBox_2)
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
+        self.lineEditBuscarNombre = QtGui.QLineEdit(self.groupBox_2)
+        self.lineEditBuscarNombre.setObjectName(_fromUtf8("lineEditBuscarNombre"))
+        self.horizontalLayout_2.addWidget(self.lineEditBuscarNombre)
+        self.gridLayout.addWidget(self.groupBox_2, 0, 1, 1, 1)
         spacerItem = QtGui.QSpacerItem(449, 57, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem, 0, 1, 1, 1)
-        self.groupBox_3 = QtGui.QGroupBox(DialogBajaPersonal)
-        self.groupBox_3.setMinimumSize(QtCore.QSize(50, 50))
-        self.groupBox_3.setTitle(_fromUtf8(""))
-        self.groupBox_3.setObjectName(_fromUtf8("groupBox_3"))
-        self.horizontalLayout_3 = QtGui.QHBoxLayout(self.groupBox_3)
-        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
-        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem1)
-        self.pushButtonDarDeBaja = QtGui.QPushButton(self.groupBox_3)
-        self.pushButtonDarDeBaja.setText(QtGui.QApplication.translate("DialogBajaPersonal", "Dar de Baja", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonDarDeBaja.setObjectName(_fromUtf8("pushButtonDarDeBaja"))
-        self.horizontalLayout_3.addWidget(self.pushButtonDarDeBaja)
-        self.pushButtonCancelar = QtGui.QPushButton(self.groupBox_3)
-        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogBajaPersonal", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
-        self.horizontalLayout_3.addWidget(self.pushButtonCancelar)
-        self.gridLayout.addWidget(self.groupBox_3, 2, 0, 1, 2)
-#        self.tableWidgetDatosEmpleados = QtGui.QTableWidget(DialogBajaPersonal)
-        self.tableWidgetDatosEmpleados = TablaDeEmpleados(DialogBajaPersonal)
+        self.gridLayout.addItem(spacerItem, 0, 2, 1, 1)
+        self.tableWidgetDatosEmpleados = QtGui.QTableWidget(DialogBajaPersonal)
         self.tableWidgetDatosEmpleados.setMinimumSize(QtCore.QSize(691, 216))
         self.tableWidgetDatosEmpleados.setObjectName(_fromUtf8("tableWidgetDatosEmpleados"))
-        self.tableWidgetDatosEmpleados.setColumnCount(10)
+        self.tableWidgetDatosEmpleados.setColumnCount(11)
         self.tableWidgetDatosEmpleados.setRowCount(0)
         item = QtGui.QTableWidgetItem()
         item.setText(QtGui.QApplication.translate("DialogBajaPersonal", "Nombre", None, QtGui.QApplication.UnicodeUTF8))
@@ -91,8 +85,28 @@ class Ui_DialogBajaPersonal(object):
         item = QtGui.QTableWidgetItem()
         item.setText(QtGui.QApplication.translate("DialogBajaPersonal", "Fecha Alta", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetDatosEmpleados.setHorizontalHeaderItem(9, item)
+        item = QtGui.QTableWidgetItem()
+        item.setText(QtGui.QApplication.translate("DialogBajaPersonal", "Fecha Baja", None, QtGui.QApplication.UnicodeUTF8))
+        self.tableWidgetDatosEmpleados.setHorizontalHeaderItem(10, item)
         self.tableWidgetDatosEmpleados.horizontalHeader().setDefaultSectionSize(120)
-        self.gridLayout.addWidget(self.tableWidgetDatosEmpleados, 1, 0, 1, 2)
+        self.gridLayout.addWidget(self.tableWidgetDatosEmpleados, 1, 0, 1, 3)
+        self.groupBox_3 = QtGui.QGroupBox(DialogBajaPersonal)
+        self.groupBox_3.setMinimumSize(QtCore.QSize(50, 50))
+        self.groupBox_3.setTitle(_fromUtf8(""))
+        self.groupBox_3.setObjectName(_fromUtf8("groupBox_3"))
+        self.horizontalLayout_3 = QtGui.QHBoxLayout(self.groupBox_3)
+        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem1)
+        self.pushButtonDarDeBaja = QtGui.QPushButton(self.groupBox_3)
+        self.pushButtonDarDeBaja.setText(QtGui.QApplication.translate("DialogBajaPersonal", "Dar de Baja", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonDarDeBaja.setObjectName(_fromUtf8("pushButtonDarDeBaja"))
+        self.horizontalLayout_3.addWidget(self.pushButtonDarDeBaja)
+        self.pushButtonCancelar = QtGui.QPushButton(self.groupBox_3)
+        self.pushButtonCancelar.setText(QtGui.QApplication.translate("DialogBajaPersonal", "Cancelar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButtonCancelar.setObjectName(_fromUtf8("pushButtonCancelar"))
+        self.horizontalLayout_3.addWidget(self.pushButtonCancelar)
+        self.gridLayout.addWidget(self.groupBox_3, 2, 0, 1, 3)
 
         self.retranslateUi(DialogBajaPersonal)
         QtCore.QMetaObject.connectSlotsByName(DialogBajaPersonal)
@@ -108,8 +122,8 @@ class Ui_DialogBajaPersonal(object):
         item = self.tableWidgetDatosEmpleados.horizontalHeaderItem(7)
         item = self.tableWidgetDatosEmpleados.horizontalHeaderItem(8)
         item = self.tableWidgetDatosEmpleados.horizontalHeaderItem(9)
+        item = self.tableWidgetDatosEmpleados.horizontalHeaderItem(10)
 
-import recursos_rc
 
 if __name__ == "__main__":
     import sys

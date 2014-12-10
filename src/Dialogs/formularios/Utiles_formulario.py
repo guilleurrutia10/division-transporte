@@ -582,3 +582,94 @@ class TablaReparacionesPlanificadas(SuperTabla):
 
     def getReparacionSeleccionada(self):
         return self.getElementoSeleccionado()
+
+class TablaDeEmpleados(SuperTabla):
+    '''
+        Tabla que lista empleados.
+        Puede: 
+            - cargar con empleados recibidos
+    '''
+
+    def cargarConEmpleados(self, empleados):
+        '''
+            Recibe una lista de empleados para listar.
+            Columnas:
+                - nombre
+                - apellido
+                - tipo de documento
+                - nro de documento
+                - seccion
+                - fecha de nacimiento
+                - domicilio
+                - email
+                - telefono
+                - fecha alta
+
+            Ademas, mientras lista los empleados, va armando un diccionario para mantener un correlacion empleado-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        self.setRowCount(len(empleados))
+
+        itemSeccionIgualParaTodos = QtGui.QTableWidgetItem()
+        itemSeccionIgualParaTodos.setText(unicode('.'))
+        empleados.sort()
+        for empleado in empleados:
+            columna = 0
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(empleado.nombre)
+            self.setItem(fila, columna, itemNombre)
+            columna += 1
+            itemApellido = QtGui.QTableWidgetItem()
+            itemApellido.setText(empleado.apellido)
+            self.setItem(fila, columna, itemApellido)
+            columna += 1
+            itemTipoDocumento = QtGui.QTableWidgetItem()
+            itemTipoDocumento.setText(empleado.tipoDocumento.get_codigo_tipo_documento())
+            self.setItem(fila, columna, itemTipoDocumento)
+            columna += 1
+            itemDocumento = QtGui.QTableWidgetItem()
+            itemDocumento.setText(empleado.documento)
+            self.setItem(fila, columna, itemDocumento)
+            columna += 1
+            itemSeccion = QtGui.QTableWidgetItem()
+            secciondelempleado = 'Sin asignar'
+#            if secciondelempleado:
+#                nombreseccion = secciondelempleado.getNombre()
+#            else: 
+#                nombreseccion = '-'
+#            itemSeccion.setText(nombreseccion)
+            itemSeccion.setText(secciondelempleado)
+            self.setItem(fila, columna, itemSeccion)
+            columna += 1
+            itemFechaNac = QtGui.QTableWidgetItem()
+            # TODO: Crear metodo para el string de fecha.
+            # Para que imprima lindo.
+            itemFechaNac.setText(empleado.imprimirFechaNacimiento())
+            self.setItem(fila, columna, itemFechaNac)
+            columna += 1
+            itemDomicilio = QtGui.QTableWidgetItem()
+            textodomicilio = empleado.getDomicilio() 
+            if not textodomicilio: textodomicilio = '-'  
+            itemDomicilio.setText(textodomicilio)
+            self.setItem(fila, columna, itemDomicilio)
+            columna += 1
+            itemEmail = QtGui.QTableWidgetItem()
+            textoemail = empleado.getEmail()
+            if not textoemail: textoemail = '-'
+            itemEmail.setText(textoemail)
+            self.setItem(fila, columna, itemEmail)
+            columna += 1
+            textotelefono = empleado.getTelefono()
+            if not textotelefono: textotelefono = '-'
+            itemTelefono = QtGui.QTableWidgetItem()
+            itemTelefono.setText(textotelefono)
+            self.setItem(fila, columna, itemTelefono)
+            columna += 1
+            itemFechaAlta = QtGui.QTableWidgetItem()
+            itemFechaAlta.setText(empleado.imprimirFechaAlta())
+            self.setItem(fila, columna, itemFechaAlta)
+
+            self.agregarAlDiccionario(fila, empleado)
+            fila += 1

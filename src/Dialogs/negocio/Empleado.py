@@ -7,7 +7,7 @@ Created on 28/10/2012
 
 from persistent import Persistent
 import transaction
-
+from datetime import date
 
 class Empleado(Persistent):
     '''
@@ -60,7 +60,13 @@ class Empleado(Persistent):
         #Para saber si pueden se transferidos/borrados, el siguiente atributo:
         self._reparaciones_asignadas = 0
         self._reparaciones_pendientes = 0
-
+        self._fechaAlta = date.today()
+        print "DEBUG: Nuevo empleado: %s | %s: %s"%(self.nombreCompleto(),
+                                                    self.tipoDocumento,
+                                                    self.documento
+                                                    ) 
+        self._fechaBaja = '-'
+        
     def __eq__(self, otro):
         return self.documento == otro.documento
 
@@ -183,14 +189,14 @@ class Empleado(Persistent):
         Devuelve la fecha de baja en la División del empleado.
         @return: Tipo datetime.date
         '''
-        return self.fechaBaja
+        return self._fechaBaja
 
     def setFechaBaja(self, fecha):
         '''
         Establece la fecha de baja del empleado en la División.
         fecha: Tipo datetime.date
         '''
-        self.fechaBaja = fecha
+        self._fechaBaja = fecha
 
     def imprimirFechaBaja(self):
         '''

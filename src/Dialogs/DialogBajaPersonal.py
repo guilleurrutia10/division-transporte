@@ -10,11 +10,11 @@ from PyQt4 import QtCore, QtGui
 from formularios.DialogBajaPersonal import Ui_DialogBajaPersonal
 from formularios.DialogAsignarFechaDeBaja import Ui_DialogAsignarFechaBaja
 from negocio.Division_Transporte import Division_Transporte
-
-
+from Utiles_Dialogo import Mensaje, mostrarMensaje
+from datetime import date
+            
 class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
     '''
-    classdocs
     Elementos:
         - tableWidgetDatosEmpleados
         - pushButtonCancelar
@@ -29,11 +29,18 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
         # Variable para mantener una lista con los empleados y evitar la
         # consulta continua a la BD.
         self.empleados = None
+        self.refrescarTabla()
         self.tableWidgetDatosEmpleados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
-        self.cargaGrillaInicial()
+        
         self.tableWidgetDatosEmpleados.connect(self.tableWidgetDatosEmpleados, QtCore.SIGNAL('cellClicked(int,int)'), self.celdaClickeada)
 
         self._empleadoSeleccionado = None
+
+    def refrescarTabla(self):
+        self.empleados = self.obtenerListaEmpleados()
+        self.empleados.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
+        #self.cargaGrillaInicial()
+        self.tableWidgetDatosEmpleados.cargarConEmpleados(self.empleados)
 
     def cargaGrillaInicial(self):
         self.empleados = self.obtenerListaEmpleados()
@@ -97,9 +104,11 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
         '''
         try:
             if self.itemDocumento:
-                dlgAsignarFecha = DialogAsignarFechaDeBaja(self._empleadoSeleccionado)
+#                dlgAsignarFecha = DialogAsignarFechaDeBaja(self._empleadoSeleccionado)
+                dlgAsignarFecha = DialogAsignarFechaDeBaja(self.tableWidgetDatosEmpleados.getElementoSeleccionado())
                 self.itemDocumento = None
                 dlgAsignarFecha.exec_()
+                self.refrescarTabla()
             else:
                 self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar Empleado')
         except AttributeError, e:
@@ -113,7 +122,8 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
         filtro = unicode(cadena)
         personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), self.empleados)
         personal.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
-        self.cargarGrilla(personal)
+#        self.cargarGrilla(personal)
+        self.tableWidgetDatosEmpleados.cargarConEmpleados(personal)
 
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscarDocumento_textChanged(self, cadena):
@@ -148,7 +158,7 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
 
     def obtenerListaEmpleados(self):
         division = Division_Transporte()
-        personal = division.getEmpleados()
+        personal = division.getEmpleadosSinAsignar()
         return personal.values()
 
 
@@ -165,8 +175,13 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
         '''
         super(DialogAsignarFechaDeBaja, self).__init__(parent)
         self.setupUi(self)
-        self.calendarWidgetRegistrarBaja
         self._empleado = empleado
+        hoy = date.today()
+        fecha_tope_bajo = self._empleado.getFechaAlta()
+        #self.calendarWidgetRegistrarBaja.setMaximumDate(QtCore.QDate(hoy.year, hoy.month, hoy.day))
+        self.calendarWidgetRegistrarBaja.setSelectedDate(QtCore.QDate(hoy.year, hoy.month, hoy.day))
+        self.calendarWidgetRegistrarBaja.setMinimumDate(QtCore.QDate(fecha_tope_bajo.year, fecha_tope_bajo.month, fecha_tope_bajo.day))
+        self._fechaSeleccionada = None
 
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -190,6 +205,27 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
         '''
         Método que se llama al realizar click sobre el botón Aceptar.
         '''
-        print 'Click sobre Aceptar'
-        print self._empleado
-        # TODO: Dar de Baja
+#        print 'Click sobre Aceptar'
+#        print self._empleado
+        # TODO: Dar de Baja (OK)
+        msg = 'Desea remover al empleado \'%s\' de la Division?' %(self._empleado.nombreCompleto())
+        msjConfirmar = Mensaje(self, msg, "Confirmar eliminar")
+        msjConfirmar.agregarBotonCancelar()
+        msjConfirmar.setCritical()
+        retorno = msjConfirmar.exec_()
+        if retorno == QtGui.QMessageBox.Cancel:
+            print "DEBUG: Cancelar accion remover empleado de seccion"
+            self.reject()
+        if retorno == QtGui.QMessageBox.Ok:
+            self._fechaSeleccionada = self.calendarWidgetRegistrarBaja.selectedDate()
+            self._fechaSeleccionada = date(self._fechaSeleccionada.year(), self._fechaSeleccionada.month(), self._fechaSeleccionada.day())
+            self._empleado.setFechaBaja(self._fechaSeleccionada)
+            Division_Transporte().bajaEmpleado(self._empleado)
+            msg = 'El empleado \'%s\' ha sido removido de la Division' %(self._empleado.nombreCompleto())
+            print 'DEBUG: ', msg
+            mostrarMensaje(self, msg, 'Empleado removido')
+            self.accept()
+
+    
+    def getFechaSeleccionada(self):
+        return self._fechaSeleccionada

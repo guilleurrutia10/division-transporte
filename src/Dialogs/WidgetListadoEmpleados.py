@@ -48,7 +48,12 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemDocumento)
             columna += 1
             itemSeccion = QtGui.QTableWidgetItem()
-            itemSeccion.setText('empleado.seccion')
+            secciondelempleado = Division_Transporte().getSeccionDeEmpleado(empleado)
+            if secciondelempleado:
+                nombreseccion = secciondelempleado.getNombre()
+            else: 
+                nombreseccion = '-'
+            itemSeccion.setText(nombreseccion)
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemSeccion)
             columna += 1
             itemFechaNac = QtGui.QTableWidgetItem()
@@ -58,20 +63,30 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemFechaNac)
             columna += 1
             itemDomicilio = QtGui.QTableWidgetItem()
-            itemDomicilio.setText(empleado.getDomicilio())
+            textodomicilio = empleado.getDomicilio() 
+            if not textodomicilio: textodomicilio = '-'  
+            itemDomicilio.setText(textodomicilio)
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemDomicilio)
             columna += 1
             itemEmail = QtGui.QTableWidgetItem()
-            itemEmail.setText(empleado.getEmail())
+            textoemail = empleado.getEmail()
+            if not textoemail: textoemail = '-'
+            itemEmail.setText(textoemail)
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemEmail)
             columna += 1
+            textotelefono = empleado.getTelefono()
+            if not textotelefono: textotelefono = '-'
             itemTelefono = QtGui.QTableWidgetItem()
-            itemTelefono.setText(empleado.getTelefono())
+            itemTelefono.setText(textotelefono)
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemTelefono)
             columna += 1
             itemFechaAlta = QtGui.QTableWidgetItem()
             itemFechaAlta.setText(empleado.imprimirFechaAlta())
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemFechaAlta)
+            columna += 1
+            itemFechaBaja = QtGui.QTableWidgetItem()
+            itemFechaBaja.setText('-')
+            self.tableWidgetDatosEmpleados.setItem(fila, columna, itemFechaBaja)
 
             fila = fila + 1
 
