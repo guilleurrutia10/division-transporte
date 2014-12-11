@@ -115,24 +115,29 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
             print e
             self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar Empleado')
 
-    @QtCore.pyqtSlot('QString')
-    def on_lineEditBuscarNombre_textChanged(self, cadena):
-        '''
-        '''
-        filtro = unicode(cadena)
-        personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), self.empleados)
-        personal.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
-#        self.cargarGrilla(personal)
-        self.tableWidgetDatosEmpleados.cargarConEmpleados(personal)
+#    @QtCore.pyqtSlot('QString')
+#    def on_lineEditBuscarNombre_textChanged(self, cadena):
+#        '''
+#        '''
+#        filtro = unicode(cadena)
+#        personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), self.empleados)
+#        personal.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
+##        self.cargarGrilla(personal)
+#        self.tableWidgetDatosEmpleados.cargarConEmpleados(personal)
 
+    def filtrame(self, filtrovalue, persona):
+        return unicode.lower(filtrovalue) in unicode.lower(unicode(persona.documento)) or unicode.lower(filtrovalue) in unicode.lower(unicode(persona.nombre)) or unicode.lower(filtrovalue) in unicode.lower(unicode(persona.getApellido()))
+    
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscarDocumento_textChanged(self, cadena):
         '''
+        Filtra por nombre, apellido y nro de documento
         '''
         filtro = unicode(cadena)
-        personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.documento)), self.empleados)
+        personal = filter(lambda p: self.filtrame(filtro, p), self.empleados)
         personal.sort(cmp=lambda x, y: cmp(x.documento, y.documento))
         self.cargarGrilla(personal)
+        self.tableWidgetDatosEmpleados.cargarConEmpleados(personal)
 
     def celdaClickeada(self, fila, columna):
         print 'Celda clickeada fila %s columna %s' % (fila, columna)

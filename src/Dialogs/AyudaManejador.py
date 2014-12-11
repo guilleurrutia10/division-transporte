@@ -31,7 +31,7 @@ class AyudaManejador:
         """
         # Super para manipular las demás teclas por defecto.
         super(type(self), self).keyPressEvent(keyEvent)
-        print 'Se presiono una tecla'
+#        print 'Se presiono una tecla'
 #         print self.windowTitle()
         # Atrapar el evento de teclear F1
         if keyEvent.key() == QtCore.Qt.Key_F1:

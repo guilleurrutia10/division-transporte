@@ -27,6 +27,9 @@ class Ui_DialogRegistrarReparaciones(object):
     def setupUi(self, DialogRegistrarReparaciones):
         DialogRegistrarReparaciones.setObjectName(_fromUtf8("DialogRegistrarReparaciones"))
         DialogRegistrarReparaciones.resize(540, 570)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("::/recursos/iconos/logoDivisionTransporte.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        DialogRegistrarReparaciones.setWindowIcon(icon)
         DialogRegistrarReparaciones.setMinimumSize(QtCore.QSize(540, 570))
         self.verticalLayout = QtGui.QVBoxLayout(DialogRegistrarReparaciones)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -166,3 +169,4 @@ class Ui_DialogRegistrarReparaciones(object):
         self.pushButtonAceptar.setText(_translate("DialogRegistrarReparaciones", "Aceptar", None))
         self.pushButtonCancelar.setText(_translate("DialogRegistrarReparaciones", "Cancelar", None))
 
+import recursos_rc
