@@ -7,7 +7,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-# GUARNING, este archivo se modifico para reflejar los datos obligatorios y no recompilar... 
+# GUARNING, este archivo se modifico para reflejar los datos obligatorios y no recompilar...
+# Tambien se agrego el icono a manopla 
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -28,6 +29,9 @@ class Ui_DialogIngresoVehiculo(object):
     def setupUi(self, DialogIngresoVehiculo):
         DialogIngresoVehiculo.setObjectName(_fromUtf8("DialogIngresoVehiculo"))
         DialogIngresoVehiculo.resize(584, 464)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/car/ingreso_car-icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        DialogIngresoVehiculo.setWindowIcon(icon)
         DialogIngresoVehiculo.setMinimumSize(QtCore.QSize(450, 300))
         self.verticalLayout = QtGui.QVBoxLayout(DialogIngresoVehiculo)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -132,3 +136,4 @@ class Ui_DialogIngresoVehiculo(object):
         self.pushButtonAceptar.setText(_translate("DialogIngresoVehiculo", "Aceptar", None))
         self.pushButtonCancelar.setText(_translate("DialogIngresoVehiculo", "Cancelar", None))
 
+import recursos_rc

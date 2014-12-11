@@ -7,6 +7,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+# Tambien se agrego el icono a manopla!
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -27,6 +28,9 @@ class Ui_DialogRegistrarIngresoVehiculo(object):
     def setupUi(self, DialogRegistrarIngresoVehiculo):
         DialogRegistrarIngresoVehiculo.setObjectName(_fromUtf8("DialogRegistrarIngresoVehiculo"))
         DialogRegistrarIngresoVehiculo.resize(800, 600)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/logoDivisionTransporte.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        DialogRegistrarIngresoVehiculo.setWindowIcon(icon)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -89,3 +93,4 @@ class Ui_DialogRegistrarIngresoVehiculo(object):
         self.pushButtonRegistrarNuevoIngreso.setText(_translate("DialogRegistrarIngresoVehiculo", "Registrar Nuevo Ingreso", None))
         self.pushButtonAceptar.setText(_translate("DialogRegistrarIngresoVehiculo", "Hecho", None))
 
+import recursos_rc

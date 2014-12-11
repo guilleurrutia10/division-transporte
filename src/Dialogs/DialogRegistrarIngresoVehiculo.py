@@ -15,7 +15,7 @@ from WidgetListadoDeVehiculos import ListadoVehiculos
 
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
-from Utiles_Dialogo import Mensaje
+from Utiles_Dialogo import Mensaje, mostrarMensaje
 from reportes import imprimirOrden
 
 
@@ -140,7 +140,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         if self.testearDialogo():
             self.registrarIngresoVehiculo()
             self._mensaje.setTitle(self.trUtf8('Creando Orden de Reparación'))
-            self._mensaje.setMensaje(self.trUtf8('Orden de Reparación Creada. :)'))
+            self._mensaje.setMensaje(self.trUtf8('Orden de Reparación Creada con éxito!'))
             self._mensaje.setInformative()
             self._mensaje.exec_()
 #             self.mostrarMensaje('Orden de Reparación Creada. :)', 'Creando Orden de Reparación')
@@ -156,6 +156,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         self.reject()
 
     def registrarIngresoVehiculo(self):
+        mostrarMensaje(self, "Se va a crear una nueva Orden de Reparación para el vehículo", "Nueva Orden de Reparación")
         dominio = self.vehiculo.getDominio()
         vehiculo = self.DIVISION.getVehiculo(dominio)
 

@@ -85,6 +85,7 @@ def seleccionarCarpeta(aplicacion):
             print 'len: %s' % (len(file_dialog.selectedFiles()))
             for folder in file_dialog.selectedFiles():
                 print 'Imprimiendo: %s' % folder
+        folder = unicode(folder)
         return folder
 
 
