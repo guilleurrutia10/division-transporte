@@ -24,6 +24,9 @@ class Aplicacion(QtGui.QApplication):
     def setUsuarioActual(self, usrActual):
         self.usuarioActual = usrActual
 
+    def getUsuarioActual(self):
+        return self.usuarioActual
+
     def exec_(self):
         '''
         @author: morales

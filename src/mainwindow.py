@@ -124,6 +124,13 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         for permiso in permisos:
             self.menues[permiso].setEnabled(True)
 
+    def deshabilitarMenues(self):
+        '''
+        Para cuando cambia de usuario...
+        '''
+        for action in self.menues.values():
+            action.setEnabled(False)
+
     def setearUI(self):
         #css:
         self.actionAlta_de_Seccion.setObjectName('action')
@@ -313,7 +320,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     def keyPressEvent(self, e):
         
-        print 'Se presiono una tecla'
+#        print 'Se presiono una tecla'
         if e.key() == QtCore.Qt.Key_F1:
             self.on_actionAlta_de_Personal_triggered()
         if e.key() == (QtCore.Qt.Key_F2):
@@ -371,3 +378,14 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         dlgAgenda = DialogoAgendaDeSeccion(self) 
         dlgAgenda.exec_()
 
+    @QtCore.pyqtSlot()
+    def on_actionCambiarDeUsuario_triggered(self):            
+        print 'DEBUG: Cambiando de usuario...'
+        from mainLogin import MyLogin
+        from Dialogs.Utiles_Dialogo import mostrarMensaje
+        myLogin = MyLogin()
+        if myLogin.exec_() == QtGui.QDialog.Accepted:
+            self.usuario = QtGui.QApplication.instance().getUsuarioActual()
+            self.deshabilitarMenues()
+            self.habilitarMenues()
+            mostrarMensaje(self, 'Cambio de usuario exitoso.', 'Cambio de usuario')

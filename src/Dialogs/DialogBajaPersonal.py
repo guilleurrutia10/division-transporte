@@ -137,6 +137,7 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
         personal = filter(lambda p: self.filtrame(filtro, p), self.empleados)
         personal.sort(cmp=lambda x, y: cmp(x.documento, y.documento))
         self.cargarGrilla(personal)
+        self.tableWidgetDatosEmpleados.cargarConEmpleados(personal)
 
     def celdaClickeada(self, fila, columna):
         print 'Celda clickeada fila %s columna %s' % (fila, columna)
