@@ -22,7 +22,7 @@ width, height = A4
 from negocio.Division_Transporte import Division_Transporte
 
 import time
-from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Image
 from reportlab.lib.styles import ParagraphStyle
@@ -53,7 +53,7 @@ def header(canvas, doc):
     canvas.setFont('Courier', 10)
     date = datetime.now()
     dateString = '%s/%s/%s' % (date.day, date.month, date.year)
-    canvas.drawString(7.5*inch, height-20, dateString)
+    canvas.drawString(7.*inch, height-20, dateString)
     canvas.drawString(inch/2, height - 20, 'División Transporte')
     canvas.restoreState()
 
@@ -307,59 +307,134 @@ def imprimirPedidoDeActuacion(numeroPedido='', repuestosSolicitados='', filename
     Elements.append(table)
     imprimir(Elements, filename)
 
+
 def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
     '''
     Recibe un vehiculo y genera su hoja de ruta con el nombre nombre_hoja_de_ruta
     '''
     turnos_ordenados = un_vehiculo.getTurnosOrdenados()
-    
-    nombre_hoja_de_ruta = "%s.pdf"%nombre_hoja_de_ruta
-    doc = SimpleDocTemplate(nombre_hoja_de_ruta,pagesize=letter,
-                            rightMargin=72,leftMargin=72,
-                            topMargin=72,bottomMargin=18)
-    Story=[]
-    logo = "imagenes/logo_hoja_de_ruta.png"
-    
+#    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta
+    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta
+    elements = []
+    titulo = Paragraph("Hoja de Ruta", styles["Title"])
+    elements.append(titulo)
+    logo = "imagenes/logo_hoja_de_ruta.jpg"
+    im = Image(logo, 2*inch, 2*inch)
+    elements.append(im)
+
+    styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
+
+    subtitulo = u"<b>Turnos del vehículo: %s</b>" % un_vehiculo.getDominio()
+    elements.append(Paragraph(subtitulo, styles["Center"]))
+    elements.append(Spacer(inch, 0.2*inch))
+    cabecera_turno = []
+    cabecera_turno.append([Paragraph(u'Número', styles['Heading4'])])
+    cabecera_turno.append([Paragraph(u'Código', styles['Heading4'])])
+    cabecera_turno.append([Paragraph(u'Día', styles['Heading4'])])
+    cabecera_turno.append([Paragraph(u'Sección', styles['Heading4'])])
+    table_style = [('GRID', (0, 0), (-1, -1), 0.5, colors.grey)]
+
+    titulo_rep = []
+    titulo_rep.append([Paragraph(u'Reparaciones:', styles['Heading4'])])
+    titulo_rep.append('')
+    titulo_rep.append('')
+    titulo_rep.append('')
+    # cabecera tabla reparaciones, tabla interior en turnos
+    cabecera_rep = []
+    cabecera_rep.append([Paragraph(u'Código', style=styles['Heading4'])])
+    cabecera_rep.append([Paragraph(u'Tipo de reparación', style=styles['Heading4'])])
+    cabecera_rep.append([Paragraph(u'Descripción', style=styles['Heading4'])])
+    cabecera_rep.append('')
+    ingresados = 2
+    for nro, cada_turno in turnos_ordenados.iteritems():
+        datos_turnos = []
+        turnos = []
+        datos_tabla = []
+        datos_reparaciones = []
+        datos_turnos.append([Paragraph(unicode(nro), style=styles['Normal'])])
+        codigo = cada_turno.getCodigo()
+        datos_turnos.append([Paragraph(unicode(codigo), style=styles['Normal'])])
+        dia = '%s a las %dhs.' % (cada_turno.getFecha(), cada_turno.getHora())
+        datos_turnos.append([Paragraph(dia, style=styles['Normal'])])
+        nombre_seccion = cada_turno.getSeccion().getNombre()
+        datos_turnos.append([Paragraph(nombre_seccion, style=styles['Normal'])])
+        for reparacion in cada_turno.getDetalles():
+            datos_reparaciones.append([Paragraph(reparacion.getCodigo(), style=styles['Normal'])])
+            nombre = reparacion.getTipoDeReparacion().getNombre()
+            datos_reparaciones.append([Paragraph(nombre, style=styles['Normal'])])
+            descripcion = reparacion.getTipoDeReparacion().getDescipcion()
+            datos_reparaciones.append([Paragraph(descripcion, style=styles['Normal'])])
+            datos_reparaciones.append('')
+        turnos.append(datos_turnos)
+        turnos.append(titulo_rep)
+        turnos.append(cabecera_rep)
+        # SPAN Reparaciones:
+        table_style.append(('SPAN', (0, ingresados), (-1, ingresados)))
+        # SPAN Descripcion
+        table_style.append(('SPAN', (2, ingresados+1), (3, ingresados+1)))
+        table_style.append(('SPAN', (2, ingresados+2), (3, ingresados+2)))
+        turnos.append(datos_reparaciones)
+        datos_tabla.append(cabecera_turno)
+        datos_tabla.extend(turnos)
+        table = Table(datos_tabla, colWidths=1.2*inch, style=table_style)
+        elements.append(table)
+        elements.append(Spacer(inch, 0.2*inch))
+    imprimir(elements, nombre_hoja_de_ruta)
+
+
+def generarHojaDeRuta2(un_vehiculo, nombre_hoja_de_ruta):
+    '''
+    Recibe un vehiculo y genera su hoja de ruta con el nombre nombre_hoja_de_ruta
+    '''
+    turnos_ordenados = un_vehiculo.getTurnosOrdenados()
+
+    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta
+    doc = SimpleDocTemplate(nombre_hoja_de_ruta, pagesize=letter,
+                            rightMargin=72, leftMargin=72,
+                            topMargin=72, bottomMargin=18)
+    Story = []
+    logo = "imagenes/logo_hoja_de_ruta.jpg"
+
     formatted_time = time.ctime()
-     
-    styles=getSampleStyleSheet()
+
+    styles = getSampleStyleSheet()
     title = Paragraph("\t\tHoja de Ruta", styles["Heading1"])
     Story.append(title)
     im = Image(logo, 2*inch, 2*inch)
     Story.append(im)
-     
+
     styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY))
-     
+
     # Crear subtitulo Turnos:
-    subtitulo = "Turnos del vehiculo: %s"%'CGI12'
+    subtitulo = "Turnos del vehiculo: %s" % 'CGI12'
     ptext = '<font size=12>%s</font>' % subtitulo
-    Story.append(Paragraph(ptext, styles["Normal"]))       
+    Story.append(Paragraph(ptext, styles["Normal"]))
     Story.append(Spacer(1, 12))
-    
-    #Informacion de los turnos
+
+    # Informacion de los turnos
     for nro, cada_turno in turnos_ordenados.iteritems():
-     
-        ptext = '<font size=12>%s</font>'%'- - '*30
+
+        ptext = '<font size=12>%s</font>' % '- - '*30
         Story.append(Paragraph(ptext, styles["Justify"]))
-        ptext = '<font size=12>#%d</font>'%nro
+        ptext = '<font size=12>#%d</font>' % nro
         Story.append(Paragraph(ptext, styles["Justify"]))
-        ptext = '<font size=12>%s</font>'%cada_turno.getCodigo()
+        ptext = '<font size=12>%s</font>' % cada_turno.getCodigo()
         Story.append(Paragraph(ptext, styles["Justify"]))
-        ptext = '<font size=12>%s</font>'%'- - '*30
+        ptext = '<font size=12>%s</font>' % '- - '*30
         Story.append(Paragraph(ptext, styles["Justify"]))
-        
-        ptext = '<font size=12>Dia: %s a las %dhs.</font>' %(cada_turno.getFecha(), cada_turno.getHora())
+
+        ptext = '<font size=12>Dia: %s a las %dhs.</font>' % (cada_turno.getFecha(), cada_turno.getHora())
         Story.append(Paragraph(ptext, styles["Justify"]))
-        ptext = '<font size=12>Seccion: %s.</font>' %cada_turno.getSeccion()
+        ptext = '<font size=12>Seccion: %s.</font>' % cada_turno.getSeccion()
         Story.append(Paragraph(ptext, styles["Justify"]))
         ptext = '<font size=12>Reparaciones:</font>'
         Story.append(Paragraph(ptext, styles["Justify"]))
-        #Armamos un parrafito por cada reparacion del turno:
+        # Armamos un parrafito por cada reparacion del turno:
         parrafosreparaciones = [Paragraph("    "+textreparacion, styles["Justify"]) for textreparacion in [str(reparacion) for reparacion in cada_turno.getReparaciones()]]
         for parrafo in parrafosreparaciones:
             Story.append(parrafo)
         Story.append(Spacer(1, 12))
-      
+
     ptext = '<font size=12>Generada: %s</font>' % formatted_time
     Story.append(Paragraph(ptext, styles["Normal"]))
     Story.append(Spacer(1, 12))
@@ -516,8 +591,20 @@ def generarAgendaParaRangoDias(seccion, desde, hasta, folder):
 if __name__ == '__main__':
 #     division = Division_Transporte()
 #     vehiculos = division.getVehiculos().values()
-    repuestosSolicitados = [['02', '01', 'Juego de juntas descarbonizacion'],
-                            ['03', '01', 'Juego de botadores'],
-                            ['04', '01', 'Juego de balancines'],
-                            ['05', '01', 'kit de distribucion']]
-    imprimirPedidoDeActuacion('002', repuestosSolicitados=repuestosSolicitados)
+#     repuestosSolicitados = [['02', '01', 'Juego de juntas descarbonizacion'],
+#                             ['03', '01', 'Juego de botadores'],
+#                             ['04', '01', 'Juego de balancines'],
+#                             ['05', '01', 'kit de distribucion']]
+#     imprimirPedidoDeActuacion('002', repuestosSolicitados=repuestosSolicitados)
+    elements = []
+    nombre_hoja_de_ruta = "%s.pdf" % 'nombre_hoja_de_ruta'
+    titulo = Paragraph("Hoja de Ruta", styles["Title"])
+    elements.append(titulo)
+    logo = "../imagenes/logo_hoja_de_ruta.jpg"
+    im = Image(logo, 2*inch, 2*inch)
+    elements.append(im)
+
+    styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
+    subtitulo = u"<b>Turnos del vehículo: %s</b>" % 'un_vehiculo'
+    elements.append(Paragraph(subtitulo, styles["Center"]))
+    imprimir(elements, nombre_hoja_de_ruta)
