@@ -19,6 +19,7 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         # Para evitar que se modifique la información presentada por la grilla.
         self.tableWidgetDatosEmpleados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
         self.empleados = None
+        self.infoSeccionDeLosEmpleados = {} #Diccionario para enviar las secciones a la que pertenece cada empleado
         self.cargarGrillaInicial()
         self.pushButtonToPDF.setObjectName('iconButton')
 
@@ -99,18 +100,24 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         p = division.getEmpleados()
         self.empleados = p.values()
         self.empleados.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
-        self.cargarGrillaEmpleadosSinAsignar(self.empleados)
+#        self.cargarGrillaEmpleadosSinAsignar(self.empleados)
+        for empleado in self.empleados:
+            if division.getSeccionDeEmpleado(empleado):
+                #Si tiene seccion, enviamos solo el nombre
+                self.infoSeccionDeLosEmpleados[empleado] = division.getSeccionDeEmpleado(empleado).getNombre() 
+        self.tableWidgetDatosEmpleados.cargarConEmpleados(self.empleados, self.infoSeccionDeLosEmpleados)
 
     # De esta manera queda un solo filtro para los strings...
     @QtCore.pyqtSlot('QString')
-    def on_lineEditBuscarDocumento_textChanged(self, cadena):
+    def on_lineEditFiltroMaster_textChanged(self, cadena):
         filtro = unicode(cadena).lower()
         personal = filter(lambda p: filtro in unicode(p.getDocumento()).lower()
                           or filtro in unicode(p.getNombre()).lower()
                           or filtro in unicode(p.getApellido()).lower(),
                           self.empleados)
         personal.sort(cmp=lambda x, y: cmp(x, y))
-        self.cargarGrillaEmpleadosSinAsignar(personal)
+        #self.cargarGrillaEmpleadosSinAsignar(personal)
+        self.tableWidgetDatosEmpleados.cargarConEmpleados(personal, self.infoSeccionDeLosEmpleados)
 
     @QtCore.pyqtSlot('QDate')
     def on_dateEditFechaInicio_dateChanged(self, date):
@@ -127,4 +134,5 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
                           and self.dateEditFechaFin.date().toPyDate() >= p.getFechaNacimiento(),
                           self.empleados)
         personal.sort(cmp=lambda x, y: cmp(x, y))
-        self.cargarGrillaEmpleadosSinAsignar(personal)
+#        self.cargarGrillaEmpleadosSinAsignar(personal)
+        self.tableWidgetDatosEmpleados.cargarConEmpleados(personal, self.infoSeccionDeLosEmpleados)

@@ -590,7 +590,7 @@ class TablaDeEmpleados(SuperTabla):
             - cargar con empleados recibidos
     '''
 
-    def cargarConEmpleados(self, empleados):
+    def cargarConEmpleados(self, empleados, empleadosysecciones={}):
         '''
             Recibe una lista de empleados para listar.
             Columnas:
@@ -606,6 +606,10 @@ class TablaDeEmpleados(SuperTabla):
                 - fecha alta
 
             Ademas, mientras lista los empleados, va armando un diccionario para mantener un correlacion empleado-fila_en_la_que_se_encuentra
+            
+            No es posible from src.Dialogs.negocio.Division_Transporte import Division_Transporte
+            
+            
         '''
         self.inicializarTabla()
         fila = 0
@@ -635,11 +639,9 @@ class TablaDeEmpleados(SuperTabla):
             columna += 1
             itemSeccion = QtGui.QTableWidgetItem()
             secciondelempleado = 'Sin asignar'
-#            if secciondelempleado:
-#                nombreseccion = secciondelempleado.getNombre()
-#            else: 
-#                nombreseccion = '-'
-#            itemSeccion.setText(nombreseccion)
+#            nombreseccion = Division_Transporte().getSeccionDeEmpleado(empleado)
+            if empleadosysecciones.has_key(empleado):
+                secciondelempleado = empleadosysecciones[empleado]
             itemSeccion.setText(secciondelempleado)
             self.setItem(fila, columna, itemSeccion)
             columna += 1
