@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'WidgetMostrarReparacionesPorVehiculo.ui'
 #
-# Created: Thu Dec 11 23:50:08 2014
+# Created: Thu Dec 11 22:27:06 2014
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -10,8 +10,6 @@
 from PyQt4 import QtCore, QtGui
 # GUARNING! Se agregaron las siguientes tablas
 from Utiles_formulario import TablaVehiculos, TablaReparaciones
-#Ademas se invirtio la ubicacion de los dateEdit (enroque)
-
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -55,14 +53,12 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         self.formLayout_2 = QtGui.QFormLayout(self.groupBox_5)
         self.formLayout_2.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout_2.setObjectName(_fromUtf8("formLayout_2"))
-        self.dateEditDesde = QtGui.QDateEdit(self.groupBox_5)
-        self.dateEditDesde.setCalendarPopup(True)
-        self.dateEditDesde.setObjectName(_fromUtf8("dateEditDesde"))
-        self.formLayout_2.setWidget(0, QtGui.QFormLayout.FieldRole, self.dateEditDesde)
-        self.dateEditHasta = QtGui.QDateEdit(self.groupBox_5)
-        self.dateEditHasta.setCalendarPopup(True)
-        self.dateEditHasta.setObjectName(_fromUtf8("dateEditHasta"))
-        self.formLayout_2.setWidget(1, QtGui.QFormLayout.FieldRole, self.dateEditHasta)
+        self.dateEdit = QtGui.QDateEdit(self.groupBox_5)
+        self.dateEdit.setObjectName(_fromUtf8("dateEdit"))
+        self.formLayout_2.setWidget(1, QtGui.QFormLayout.FieldRole, self.dateEdit)
+        self.dateEdit_2 = QtGui.QDateEdit(self.groupBox_5)
+        self.dateEdit_2.setObjectName(_fromUtf8("dateEdit_2"))
+        self.formLayout_2.setWidget(0, QtGui.QFormLayout.FieldRole, self.dateEdit_2)
         self.horizontalLayout.addWidget(self.groupBox_5)
         self.verticalLayout.addWidget(self.groupBox_3)
         self.groupBox_2 = QtGui.QGroupBox(WidgetMostrarReparacionesPorVehiculo)
@@ -103,19 +99,19 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         self.tableWidgetVehiculos.setColumnCount(5)
         self.tableWidgetVehiculos.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Registro Interno", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Dominio", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Chasis Nro", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Marca", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Marca", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Modelo", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Modelo", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Registro Interno", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(3, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Dominio", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Chasis Nro", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(4, item)
         self.tableWidgetVehiculos.horizontalHeader().setCascadingSectionResizes(True)
         self.tableWidgetVehiculos.horizontalHeader().setDefaultSectionSize(120)

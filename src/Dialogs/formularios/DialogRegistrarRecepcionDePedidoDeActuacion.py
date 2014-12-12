@@ -6,7 +6,7 @@
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
-
+# GUARNING! Fue modificado para agregar el icono!
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -27,6 +27,9 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
     def setupUi(self, DialogRegistrarRecepcionDePedidoDeActuacion):
         DialogRegistrarRecepcionDePedidoDeActuacion.setObjectName(_fromUtf8("DialogRegistrarRecepcionDePedidoDeActuacion"))
         DialogRegistrarRecepcionDePedidoDeActuacion.resize(600, 400)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/car/planificar-icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        DialogRegistrarRecepcionDePedidoDeActuacion.setWindowIcon(icon)
         DialogRegistrarRecepcionDePedidoDeActuacion.setMinimumSize(QtCore.QSize(600, 400))
         self.verticalLayout = QtGui.QVBoxLayout(DialogRegistrarRecepcionDePedidoDeActuacion)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
@@ -103,3 +106,4 @@ class Ui_DialogRegistrarRecepcionDePedidoDeActuacion(object):
         self.pushButton_Registrar.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Registrar Recepción", None))
         self.pushButtonHecho.setText(_translate("DialogRegistrarRecepcionDePedidoDeActuacion", "Hecho", None))
 
+import recursos_rc

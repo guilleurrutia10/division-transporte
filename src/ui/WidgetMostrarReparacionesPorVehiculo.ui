@@ -56,42 +56,16 @@
          </size>
         </property>
         <property name="title">
-         <string>Filtrar por Dominio</string>
+         <string>Filtrar vehículo</string>
         </property>
         <layout class="QFormLayout" name="formLayout">
          <property name="fieldGrowthPolicy">
           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
          </property>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Dominio:</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QLineEdit" name="lineEdit"/>
          </item>
         </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Buscar</string>
-        </property>
        </widget>
       </item>
       <item>
@@ -106,6 +80,44 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_5">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>73</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>Filtro por fecha de finalización</string>
+        </property>
+        <layout class="QFormLayout" name="formLayout_2">
+         <property name="fieldGrowthPolicy">
+          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+         </property>
+         <item row="1" column="1">
+          <widget class="QDateEdit" name="dateEditDesde">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QDateEdit" name="dateEditHasta">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -132,22 +144,27 @@
         </attribute>
         <column>
          <property name="text">
-          <string>Orden</string>
+          <string>Código</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Fecha Inicio</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Fecha Fin</string>
+          <string>Nombre</string>
          </property>
         </column>
         <column>
          <property name="text">
           <string>Descripción</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Pertenece a la Orden</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Fecha Fin</string>
          </property>
         </column>
        </widget>
@@ -177,7 +194,12 @@
         </attribute>
         <column>
          <property name="text">
-          <string>Dominio</string>
+          <string>Registro Interno</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Chasis Nro</string>
          </property>
         </column>
         <column>
@@ -192,12 +214,7 @@
         </column>
         <column>
          <property name="text">
-          <string>Registro Interno</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Chasis Nro</string>
+          <string>Dominio</string>
          </property>
         </column>
        </widget>

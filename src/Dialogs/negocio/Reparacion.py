@@ -7,6 +7,7 @@ Created on 28/10/2012
 
 from persistent import Persistent
 from persistent.list import PersistentList
+from datetime import date
 
 class Reparacion(Persistent):
     '''
@@ -120,7 +121,8 @@ class Reparacion(Persistent):
         else:
             return -1
     
-    def finalizar(self):    
+    def finalizar(self):
+        self.fechaFin = date.today()    
         self._finalizada = True
         
     def estaFinalizada(self):

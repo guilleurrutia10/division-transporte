@@ -7,7 +7,7 @@ from PyQt4 import QtCore, QtGui
 from formularios.DlgFinalizarTurno import Ui_DialogoFinalizarTurno
 from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
 from negocio.excepciones.SinTurnosException import SinTurnosException
-from PyQt4.Qwt5.qplt import QString
+from PyQt4.QtCore import QString
 import transaction
 
 

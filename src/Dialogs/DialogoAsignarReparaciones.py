@@ -8,7 +8,7 @@ from PyQt4 import QtCore, QtGui
 
 from formularios.DlgAsignarReparaciones import Ui_DialogoAsignarReparaciones
 from negocio.Division_Transporte import Division_Transporte
-from PyQt4.Qwt5.qplt import QString
+#from PyQt4.Qwt5.qplt import QString
 from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
 from negocio.excepciones.SinTurnosException import SinTurnosException
 import copy
@@ -110,7 +110,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         '''
         Primero setear el turno y luego llamar a este metodo
         '''
-        self.labelDominio.setText(QString(self._turnoSeleccionado.getVehiculo().getDominio()))
+        self.labelDominio.setText(QtCore.QString(self._turnoSeleccionado.getVehiculo().getDominio()))
         self._reparacionesTurno = self._turnoSeleccionado.getReparaciones()
         self.tableWidgetReparaciones.cargarConReparaciones(self._reparacionesTurno)
 

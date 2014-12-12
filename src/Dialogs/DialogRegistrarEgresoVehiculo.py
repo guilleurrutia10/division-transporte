@@ -12,7 +12,7 @@ from formularios.DialogDatosEgresoVehiculo import Ui_DialogDatosEgresoVehiculo
 from WidgetListadoDeVehiculos import ListadoVehiculos 
 
 from negocio.Division_Transporte import Division_Transporte
-from PyQt4.Qwt5.qplt import QString
+from PyQt4.QtCore import QString
 import transaction
 from Utiles_Dialogo import mostrarMensaje
 

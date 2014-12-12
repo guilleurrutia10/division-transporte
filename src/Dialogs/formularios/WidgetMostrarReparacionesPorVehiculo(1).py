@@ -2,16 +2,14 @@
 
 # Form implementation generated from reading ui file 'WidgetMostrarReparacionesPorVehiculo.ui'
 #
-# Created: Thu Dec 11 23:50:08 2014
+# Created: Thu Dec 11 22:03:16 2014
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
+# GUARNING! Se modifico para agregar la tabla de reparaciones
 
 from PyQt4 import QtCore, QtGui
-# GUARNING! Se agregaron las siguientes tablas
 from Utiles_formulario import TablaVehiculos, TablaReparaciones
-#Ademas se invirtio la ubicacion de los dateEdit (enroque)
-
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -36,34 +34,27 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         self.groupBox_4 = QtGui.QGroupBox(self.groupBox_3)
         self.groupBox_4.setMinimumSize(QtCore.QSize(300, 0))
         self.groupBox_4.setMaximumSize(QtCore.QSize(300, 16777215))
-        self.groupBox_4.setTitle(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Filtrar vehículo", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_4.setTitle(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Filtrar por Dominio", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_4.setObjectName(_fromUtf8("groupBox_4"))
         self.formLayout = QtGui.QFormLayout(self.groupBox_4)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
+        self.label = QtGui.QLabel(self.groupBox_4)
+        self.label.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Dominio:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setObjectName(_fromUtf8("label"))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.lineEdit = QtGui.QLineEdit(self.groupBox_4)
         self.lineEdit.setObjectName(_fromUtf8("lineEdit"))
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.lineEdit)
         self.horizontalLayout.addWidget(self.groupBox_4)
+        self.pushButton = QtGui.QPushButton(self.groupBox_3)
+        self.pushButton.setMinimumSize(QtCore.QSize(100, 0))
+        self.pushButton.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.pushButton.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Buscar", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
+        self.horizontalLayout.addWidget(self.pushButton)
         spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.groupBox_5 = QtGui.QGroupBox(self.groupBox_3)
-        self.groupBox_5.setMinimumSize(QtCore.QSize(300, 73))
-        self.groupBox_5.setMaximumSize(QtCore.QSize(300, 16777215))
-        self.groupBox_5.setTitle(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Filtro por fecha de finalización", None, QtGui.QApplication.UnicodeUTF8))
-        self.groupBox_5.setObjectName(_fromUtf8("groupBox_5"))
-        self.formLayout_2 = QtGui.QFormLayout(self.groupBox_5)
-        self.formLayout_2.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
-        self.formLayout_2.setObjectName(_fromUtf8("formLayout_2"))
-        self.dateEditDesde = QtGui.QDateEdit(self.groupBox_5)
-        self.dateEditDesde.setCalendarPopup(True)
-        self.dateEditDesde.setObjectName(_fromUtf8("dateEditDesde"))
-        self.formLayout_2.setWidget(0, QtGui.QFormLayout.FieldRole, self.dateEditDesde)
-        self.dateEditHasta = QtGui.QDateEdit(self.groupBox_5)
-        self.dateEditHasta.setCalendarPopup(True)
-        self.dateEditHasta.setObjectName(_fromUtf8("dateEditHasta"))
-        self.formLayout_2.setWidget(1, QtGui.QFormLayout.FieldRole, self.dateEditHasta)
-        self.horizontalLayout.addWidget(self.groupBox_5)
         self.verticalLayout.addWidget(self.groupBox_3)
         self.groupBox_2 = QtGui.QGroupBox(WidgetMostrarReparacionesPorVehiculo)
         self.groupBox_2.setTitle(_fromUtf8(""))
@@ -103,19 +94,19 @@ class Ui_WidgetMostrarReparacionesPorVehiculo(object):
         self.tableWidgetVehiculos.setColumnCount(5)
         self.tableWidgetVehiculos.setRowCount(0)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Registro Interno", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Dominio", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(0, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Chasis Nro", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Marca", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Marca", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Modelo", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Modelo", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Registro Interno", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(3, item)
         item = QtGui.QTableWidgetItem()
-        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Dominio", None, QtGui.QApplication.UnicodeUTF8))
+        item.setText(QtGui.QApplication.translate("WidgetMostrarReparacionesPorVehiculo", "Chasis Nro", None, QtGui.QApplication.UnicodeUTF8))
         self.tableWidgetVehiculos.setHorizontalHeaderItem(4, item)
         self.tableWidgetVehiculos.horizontalHeader().setCascadingSectionResizes(True)
         self.tableWidgetVehiculos.horizontalHeader().setDefaultSectionSize(120)

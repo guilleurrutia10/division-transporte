@@ -48,13 +48,13 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
             num += 1
         transaction.commit()
         # self.cargarGrilla(self.pedidosDeActuacion)
-        self.cargarGrilla()
+        self.cargarGrilla(self._pedidosDeActuacion)
 
-    def cargarGrilla(self):
+    def cargarGrilla(self, pedidos):
         self.tableWidget.clearContents()
-        self.tableWidget.setRowCount(len(self._pedidosDeActuacion))
+        self.tableWidget.setRowCount(len(pedidos))
         fila = 0
-        for pedido in self._pedidosDeActuacion:
+        for pedido in pedidos:
             columna = 0
             itemNumeroPedido = QtGui.QTableWidgetItem()
             itemNumeroPedido.setText(str(pedido.getNumeroPedido()))
@@ -99,6 +99,14 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
 
+    @QtCore.pyqtSlot('QString')
+    def on_lineEdit_textChanged(self, cadena):
+        filtro = unicode(cadena).upper()
+        pedidos = filter(lambda p: filtro in unicode(p.getNumeroPedido()),
+                          self._pedidosDeActuacion)
+        pedidos.sort(cmp=lambda x, y: cmp(x, y))
+        self.cargarGrilla(pedidos)
+
 
 class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignarFechaRecepcionPedidoActuacion):
 
@@ -130,6 +138,8 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
                 repuesto.setText(informacion)
                 repuesto.setTextAlignment(4)
                 self.listWidget.addItem(repuesto)
+                
+        self.dateEditFechaRecepcioPedido.setMinimumDate(QtCore.QDate(pedido.getFechaRealizacion().year,pedido.getFechaRealizacion().month, pedido.getFechaRealizacion().day))
 
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):

@@ -22,6 +22,8 @@ class DialogMostrarPedidoDeActuacion(QtGui.QDialog, Ui_DialogMostrarPedidoDeActu
         super(DialogMostrarPedidoDeActuacion, self).__init__()
         self.setupUi(self)
         self._pedidoDeActuacion = pedidoDeActuacion
+        self.label.setObjectName("label")
+        self.label_2.setObjectName("label")
     
     def setPedidoDeActuacion(self, pedidoDeActuacion):
         self._pedidoDeActuacion = pedidoDeActuacion

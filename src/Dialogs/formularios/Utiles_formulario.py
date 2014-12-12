@@ -386,7 +386,8 @@ class TablaReparaciones(SuperTabla):
         for reparacion in reparaciones:
             columna = 0
             itemCodigo = QtGui.QTableWidgetItem()
-            itemCodigo.setText(unicode('repuesto.getCodigo()'))
+#            itemCodigo.setText(unicode('repuesto.getCodigo()'))
+            itemCodigo.setText(unicode(reparacion.getCodigo()))
             self.setItem(fila, columna, itemCodigo)
             columna += 1
             itemNombre = QtGui.QTableWidgetItem()
@@ -400,7 +401,44 @@ class TablaReparaciones(SuperTabla):
             self.agregarAlDiccionario(fila, reparacion)
             fila += 1
 
+    def cargarConReparacionesDeOrdenes(self, reparacionespororden):
+        '''
+        Recibe un diccionario de la forma:
+            - {'ORD0001':[Rep1, Rep2,.., RepN],
+                ...
+              }
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        self.setRowCount(sum([len(reparaciones) for reparaciones in reparacionespororden.values()]))
+        for ordenname, reparaciones in reparacionespororden.iteritems():
+            reparaciones.sort()
+            for reparacion in reparaciones:
+                columna = 0
+                itemCodigo = QtGui.QTableWidgetItem()
+                itemCodigo.setText(unicode(reparacion.getCodigo()))
+                self.setItem(fila, columna, itemCodigo)
+                columna += 1
+                itemNombre = QtGui.QTableWidgetItem()
+                itemNombre.setText(unicode(reparacion.getNombre()))
+                self.setItem(fila, columna, itemNombre)
+                columna += 1
+                itemDescripcion = QtGui.QTableWidgetItem()
+                itemDescripcion.setText(unicode(reparacion.getDescripcion()))
+                self.setItem(fila, columna, itemDescripcion)
+                columna += 1
+                itemOrdenName = QtGui.QTableWidgetItem()
+                itemOrdenName.setText(unicode(ordenname))
+                self.setItem(fila, columna, itemOrdenName)
+                columna += 1
+                itemFechaFin = QtGui.QTableWidgetItem()
+                itemFechaFin.setText(unicode(reparacion.getFechaFin()))
+                self.setItem(fila, columna, itemFechaFin)
 
+                self.agregarAlDiccionario(fila, reparacion)
+                fila += 1
+        
     def getReparacionSeleccionada(self):
         return self.getElementoSeleccionado()
 

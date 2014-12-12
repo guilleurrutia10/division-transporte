@@ -260,6 +260,7 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         vehiculos_sin_planificar = Division_Transporte().getVehiculosEnAprobada()
         self.setCentralWidget(WidgetListadoDeVehiculos.ListadoVehiculos(vehiculos_sin_planificar, self))
         self.centralWidget().pushButtonSeleccionar.connect(self.centralWidget().pushButtonSeleccionar, QtCore.SIGNAL('clicked()'), self.planificar)
+        self.centralWidget().tableWidgetListadoDeVehiculos.connect(self.centralWidget().tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellDoubleClicked(int , int)'), self.planificar)
     
     def planificar(self):
         if self.centralWidget().tableWidgetListadoDeVehiculos.getVehiculoSeleccionado():

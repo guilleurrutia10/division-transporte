@@ -275,6 +275,21 @@ class Legajo(Persistent):
         reparaciones = [orden.getReparaciones() for orden in self.getOrdenesDeReparacionFinalizadas()]
         return reparaciones
 
+    def getReparacionesFinalizadasOrdenadasPorOrdenReparacion(self):
+        '''
+        Devuelve todas las reparaciones finalizadas de un vehículo. Busca
+        en cada orden de reparación aquellas reparaciones se encuentren
+        finalizadas.
+        @return: diccionario de la siguiente forma:
+            {'ORD0001':[Rep1, Rep2,.., RepN],
+            ...
+            }
+        '''
+        reparacionespororden = {}
+        for orden in self.getOrdenesDeReparacionFinalizadas():
+            reparacionespororden[orden.getCodigoOrdenReparacion()] = orden.getReparaciones()
+        return reparacionespororden
+
     def getOrdenesDeReparacion(self):
         return self.ordenesDeReparacion
 
@@ -299,6 +314,13 @@ class Legajo(Persistent):
         @return: list Reparacion
         '''
         return self.obtenerOrdenDeReparacionEnCurso().getReparacionesPlanificadas()
+
+    def getReparacionesFinalizadasActuales(self):
+        '''
+        Obtiene todas las reparaciones planificadas del vehículo de la OR actual.
+        @return: list Reparacion
+        '''
+        return self.obtenerOrdenDeReparacionEnCurso().getReparacionesFinalizadas()
 
     def tieneTodosLosTurnosFinalizados(self):
         return self.obtenerOrdenDeReparacionEnCurso().tieneTodosLosTurnosFinalizados()

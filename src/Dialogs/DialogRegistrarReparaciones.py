@@ -49,6 +49,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         # A partir de esta fecha podemos deshacer commits.
         fecha = localtime()
         self.DIVISION.zodb.setFechaMinimaDeshacer(fecha)
+        self.prepararCss()
 
     def exec_(self, *args, **kwargs):
         self.completarLabelsOR()
@@ -63,9 +64,18 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         fila = 0
         for reparacion in reparaciones:
             columna = 0
+            itemCodigoTipo = QtGui.QTableWidgetItem()
+            #itemNombreTipo.setText(reparacion.getTipoDeReparacion().getNombre())
+            itemCodigoTipo.setText(reparacion.getTipoDeReparacion().getCodigo())
+            self.tableWidgetReparaciones.setItem(fila,columna,itemCodigoTipo)
+            columna += 1
             itemNombreTipo = QtGui.QTableWidgetItem()
             itemNombreTipo.setText(reparacion.getTipoDeReparacion().getNombre())
             self.tableWidgetReparaciones.setItem(fila,columna,itemNombreTipo)
+            columna += 1
+            itemDescripcion = QtGui.QTableWidgetItem()
+            itemDescripcion.setText(reparacion.getCodigo())
+            self.tableWidgetReparaciones.setItem(fila,columna,itemDescripcion)
             columna += 1
             itemDescripcion = QtGui.QTableWidgetItem()
             itemDescripcion.setText(reparacion.getDescripcion())
@@ -91,6 +101,16 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
 
         #self.ordenDeReparacion = ordenDeReparacion
 
+    def prepararCss(self):
+        self.label.setObjectName("label")
+        self.label_2.setObjectName("label")
+        self.label_3.setObjectName("label")
+        self.label_6.setObjectName("label")
+        self.label_8.setObjectName("label")
+        self.label_10.setObjectName("label")
+        self.label_11.setObjectName("label")
+        self.label_12.setObjectName("label")
+        
     def buscarVehiculo(self):
         #division = Division_Transporte()
         #return division.getVehiculo(unicode(self.dominioVehiculo.text()))

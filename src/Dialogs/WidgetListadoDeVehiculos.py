@@ -40,7 +40,6 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         '''
         print 'selecciono el vehiculo: %d\n Coordenadas: (%d, %d)' %(fila, fila, columna)
         print self.tableWidgetListadoDeVehiculos.getVehiculoEn(fila).getDominio()
-        self.pushButtonToPdf
 
     @QtCore.pyqtSlot()
     def on_pushButtonToPdf_clicked(self):
