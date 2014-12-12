@@ -322,6 +322,42 @@ class Seccion(Persistent):
 
     def realizaReparationType(self, untipodereparacion):
         return untipodereparacion in self.getTiposDeReparaciones()
+    
+    def valores_csv(self):
+        return [self.getCodigo(),
+                self.getNombre(),
+                self.getEncargado().nombreCompleto(),
+                self.cantidadEmpleados()
+                ]
+    def dic_valores_csv(self):
+        '''
+            Retorna un diccionario con la siguiente forma:
+            - {'first_name': 'Baked', 'last_name': 'Beans'}
+        '''
+        return {
+                'Codigo de Seccion': self.getCodigo(),
+                'Nombre de Seccion': self.getNombre(),
+                'Encargado': self.getEncargado().nombreCompleto(),
+                'Cantidad de empleados': self.cantidadEmpleados(),
+                'Cantidad de reparaciones': self.cantidadDeReparaciones()
+                }
+
+    def getTurnosTodos(self):
+        '''
+        @return: all the turns of the division
+        '''
+        turnes = []
+        for dia, turnosdeldia in self.tablaDeTurnos.iteritems():
+            for hora, turno in turnosdeldia.iteritems():
+                if turno:
+                    turnes.append(turno)
+        return turnes
+    
+    def cantidadDeReparaciones(self):
+        '''
+        Retorna la cantidad de reparaciones de todos los turnos de la seccion
+        '''
+        return sum([len(turno.getReparaciones()) for turno in self.getTurnosTodos()])
 ##############################################################################
 ########################## TEST SECCION ######################################
 ##############################################################################
