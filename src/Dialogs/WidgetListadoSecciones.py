@@ -78,12 +78,24 @@ class SeleccionarReporteDeSeccion(QtGui.QDialog, Ui_Dialog):
         filename = fileDialog.getSaveFileName(parent=self)
         filename = '%s.csv'%filename
         with open(filename, 'w') as csvfile:
-            fieldnames = ['Codigo de Seccion', 'Nombre de Seccion', 'Encargado', 'Cantidad de empleados', 'Cantidad de reparaciones']
+#            fieldnames = ['Codigo de Seccion', 'Nombre de Seccion', 'Encargado', 'Cantidad de empleados', 'Cantidad de reparaciones']
+            fieldnames = ['Nombre Tipo de Reparacion', 'Codigo de Reparacion', 'Descripcion', 'Realizada en', 'Empleados asignados', 'Finalizada']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for seccion in self._secciones:
-                print seccion.dic_valores_csv()
-                writer.writerow(seccion.dic_valores_csv())
+                #print seccion.dic_valores_csv()
+                for turno in seccion.getTurnosTodos():
+                    for reparacion in turno.getReparaciones():
+                        r = {'Nombre Tipo de Reparacion': reparacion.getNombre(),
+                             'Codigo de Reparacion': reparacion.getCodigo(),
+                             'Descripcion': reparacion.getDescripcion(),
+                             'Realizada en': seccion.getNombre(),
+                             'Empleados asignados': turno.empleadosAsignados(),
+                             'Finalizada': reparacion.estaFinalizada()
+                             }
+                        print r 
+                        #writer.writerow(seccion.dic_valores_csv())
+                        writer.writerow(r)
                 #print seccion.getTurnosTodos()
         self.limpiar_csv(filename)
         mostrarMensaje(self, 'Archivo %s generado con exito!'%filename, 'Reporte csv: Reparaciones por Seccion')
@@ -111,7 +123,7 @@ class SeleccionarReporteDeSeccion(QtGui.QDialog, Ui_Dialog):
         
         # The slices will be ordered and plotted counter-clockwise.
 #        labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
-        labels = [seccion.getNombre() for seccion in self._secciones]
+        labels = ["%s[%d]"%(seccion.getNombre(), seccion.cantidadDeReparaciones()) for seccion in self._secciones]
 #        sizes = [15, 30, 45, 10]
         sizes = [seccion.cantidadDeReparaciones() for seccion in self._secciones]
         colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']

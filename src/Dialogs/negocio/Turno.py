@@ -114,6 +114,14 @@ class Turno(Persistent):
     
     def getEmpleadosAsignados(self):
         return self._empleadosAsignados
+    
+    def empleadosAsignados(self):
+        '''
+        @return: una cadena con los nombres de los encargados separados por coma
+        '''
+        if not self.getEmpleadosAsignados():
+            return '-'
+        return ', '.join([empleado.nombreCompleto() for empleado in self.getEmpleadosAsignados()])
 
     def getSeccion(self):
         return self._seccion
