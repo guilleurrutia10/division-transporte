@@ -6,7 +6,7 @@
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
-
+#Se modifico para agregar el icono
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -19,6 +19,9 @@ class Ui_DialogCrearUsuarioEncargado(object):
         DialogCrearUsuarioEncargado.setObjectName(_fromUtf8("DialogCrearUsuarioEncargado"))
         DialogCrearUsuarioEncargado.setWindowModality(QtCore.Qt.NonModal)
         DialogCrearUsuarioEncargado.resize(280, 183)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/personal/cambiar_encargado-icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        DialogCrearUsuarioEncargado.setWindowIcon(icon)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -228,6 +231,7 @@ class Ui_DialogCrearUsuarioEncargado(object):
     def retranslateUi(self, DialogCrearUsuarioEncargado):
         pass
 
+import recursos_rc
 
 if __name__ == "__main__":
     import sys

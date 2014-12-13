@@ -6,7 +6,7 @@
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
-
+# GUarning, se modifico el titulo de este dialogo
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -165,7 +165,7 @@ class Ui_DialogoAsignarReparaciones(object):
         QtCore.QMetaObject.connectSlotsByName(DialogoAsignarReparaciones)
 
     def retranslateUi(self, DialogoAsignarReparaciones):
-        DialogoAsignarReparaciones.setWindowTitle(_translate("DialogoAsignarReparaciones", "Dialog", None))
+        DialogoAsignarReparaciones.setWindowTitle(_translate("DialogoAsignarReparaciones", "Asignar reparaciones", None))
         self.groupBox.setTitle(_translate("DialogoAsignarReparaciones", "Seleccionar turno de la Sección", None))
         self.labelFecha.setText(_translate("DialogoAsignarReparaciones", "Fecha:", None))
         self.labelHora.setText(_translate("DialogoAsignarReparaciones", "Hora:", None))

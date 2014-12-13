@@ -418,9 +418,9 @@ class Division_Transporte(Persistent):
         @return:
         @author:
         '''
+        self.zodb.conexion.sync()
         repTypeCode = self.getGestorDeCodigos().nextCodigoTipoDeRepuesto()
         repuesto = TipoRepuesto(repTypeCode, nombre, descripcion)
-        self.zodb.conexion.sync()
         try:
             tiposRepuestos = self.zodb.raiz['tiposRepuestos']
         except KeyError, e:

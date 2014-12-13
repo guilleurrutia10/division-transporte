@@ -16,7 +16,7 @@ except AttributeError:
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.setObjectName(_fromUtf8("DialogSeleccionarReporteSeccion"))
         Dialog.resize(291, 127)
         Dialog.setMinimumSize(QtCore.QSize(291, 127))
         Dialog.setMaximumSize(QtCore.QSize(291, 127))

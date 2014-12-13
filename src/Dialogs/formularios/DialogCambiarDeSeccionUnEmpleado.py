@@ -6,7 +6,7 @@
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
-
+# Se modifico para agregarle el icono
 from PyQt4 import QtCore, QtGui
 from Utiles_formulario import TablaEmpleadosSeccion
 
@@ -19,6 +19,9 @@ class Ui_DialogCambiarDeSeccionUnEmpleado(object):
     def setupUi(self, DialogCambiarDeSeccionUnEmpleado):
         DialogCambiarDeSeccionUnEmpleado.setObjectName(_fromUtf8("DialogCambiarDeSeccionUnEmpleado"))
         DialogCambiarDeSeccionUnEmpleado.resize(723, 452)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/personal/change_person-icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        DialogCambiarDeSeccionUnEmpleado.setWindowIcon(icon)
         DialogCambiarDeSeccionUnEmpleado.setMaximumSize(QtCore.QSize(723, 16777215))
         DialogCambiarDeSeccionUnEmpleado.setWindowTitle(QtGui.QApplication.translate("DialogCambiarDeSeccionUnEmpleado", "Cambiar De Seccion Un Empleado", None, QtGui.QApplication.UnicodeUTF8))
         self.gridLayout = QtGui.QGridLayout(DialogCambiarDeSeccionUnEmpleado)
@@ -108,6 +111,7 @@ class Ui_DialogCambiarDeSeccionUnEmpleado(object):
         item = self.tableWidgetEmpleados.horizontalHeaderItem(5)
         item = self.tableWidgetEmpleados.horizontalHeaderItem(6)
 
+import recursos_rc
 
 if __name__ == "__main__":
     import sys

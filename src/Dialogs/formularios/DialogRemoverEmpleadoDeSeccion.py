@@ -6,9 +6,10 @@
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
-
+#Se modifico para agregar el icono y el titulo
 from PyQt4 import QtCore, QtGui
 from Utiles_formulario import TablaEmpleadosSeccion
+import recursos_rc
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -19,8 +20,12 @@ class Ui_DialogRemoverEmpleadoDeSeccion(object):
     def setupUi(self, DialogRemoverEmpleadoDeSeccion):
         DialogRemoverEmpleadoDeSeccion.setObjectName(_fromUtf8("DialogRemoverEmpleadoDeSeccion"))
         DialogRemoverEmpleadoDeSeccion.resize(720, 411)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/personal/remove_person-icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        DialogRemoverEmpleadoDeSeccion.setWindowIcon(icon)
+
         DialogRemoverEmpleadoDeSeccion.setMinimumSize(QtCore.QSize(720, 0))
-        DialogRemoverEmpleadoDeSeccion.setWindowTitle(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        DialogRemoverEmpleadoDeSeccion.setWindowTitle(QtGui.QApplication.translate("DialogRemoverEmpleadoDeSeccion", "Remover empleado de Seccion", None, QtGui.QApplication.UnicodeUTF8))
         self.gridLayout = QtGui.QGridLayout(DialogRemoverEmpleadoDeSeccion)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.groupBox = QtGui.QGroupBox(DialogRemoverEmpleadoDeSeccion)

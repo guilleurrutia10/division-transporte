@@ -8,7 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 #Importante: Si se recompila este formulario, se perderan los retoques hechos "manualmente"
-
+#Se modifico para agregar el icono
 from PyQt4 import QtCore, QtGui
 from Utiles_formulario import TablaEmpleadosSeccion, TablaSecciones
 
@@ -21,6 +21,9 @@ class Ui_DialogCambiaDeSeccionUnEncargado(object):
     def setupUi(self, DialogCambiaDeSeccionUnEncargado):
         DialogCambiaDeSeccionUnEncargado.setObjectName(_fromUtf8("DialogCambiaDeSeccionUnEncargado"))
         DialogCambiaDeSeccionUnEncargado.resize(979, 625)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/personal/cambiar_encargado-icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        DialogCambiaDeSeccionUnEncargado.setWindowIcon(icon)
         DialogCambiaDeSeccionUnEncargado.setMinimumSize(QtCore.QSize(979, 625))
         DialogCambiaDeSeccionUnEncargado.setWindowTitle(QtGui.QApplication.translate("DialogCambiaDeSeccionUnEncargado", "Cambia de Seccion un Encargado", None, QtGui.QApplication.UnicodeUTF8))
         self.verticalLayout = QtGui.QVBoxLayout(DialogCambiaDeSeccionUnEncargado)
@@ -245,6 +248,7 @@ class Ui_DialogCambiaDeSeccionUnEncargado(object):
         item = self.tableWidget_seccionSeleccionada.horizontalHeaderItem(2)
         item = self.tableWidget_seccionSeleccionada.horizontalHeaderItem(3)
 
+import recursos_rc
 
 if __name__ == "__main__":
     import sys
