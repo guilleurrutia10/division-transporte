@@ -713,3 +713,68 @@ class TablaDeEmpleados(SuperTabla):
 
             self.agregarAlDiccionario(fila, empleado)
             fila += 1
+
+    def cargarConEmpleadosParaModificar(self, empleados):
+        '''
+            Recibe una lista de empleados para listar.
+            Columnas:
+                - nombre
+                - apellido
+                - tipo de documento
+                - nro de documento
+                - fecha de nacimiento
+                - domicilio
+                - email
+                - telefono
+
+            Ademas, mientras lista los empleados, va armando un diccionario para mantener un correlacion empleado-fila_en_la_que_se_encuentra
+        '''
+        self.inicializarTabla()
+        fila = 0
+        self.clearContents()
+        self.setRowCount(len(empleados))
+
+        empleados.sort()
+        for empleado in empleados:
+            columna = 0
+            itemNombre = QtGui.QTableWidgetItem()
+            itemNombre.setText(unicode(empleado.getNombre()))
+            self.setItem(fila, columna, itemNombre)
+            columna += 1
+            itemApellido = QtGui.QTableWidgetItem()
+            itemApellido.setText(unicode(empleado.getApellido()))
+            self.setItem(fila, columna, itemApellido)
+            columna += 1
+            itemTipoDoc = QtGui.QTableWidgetItem()
+            itemTipoDoc.setText(str(empleado.getTipoDocumento().get_codigo_tipo_documento()))
+            self.setItem(fila, columna, itemTipoDoc)
+            columna += 1
+            itemDocumento = QtGui.QTableWidgetItem()
+            itemDocumento.setText(unicode(empleado.getDocumento()))
+            self.setItem(fila, columna, itemDocumento)
+            columna += 1
+            itemFechaNac = QtGui.QTableWidgetItem()
+#             itemFechaNac.setText(unicode('empleado.getFechaNacimiento()'))
+            itemFechaNac.setText(unicode(empleado.imprimirFechaNacimiento()))
+            self.setItem(fila, columna, itemFechaNac)
+            columna += 1
+            itemDomicilio = QtGui.QTableWidgetItem()
+            textodomicilio = empleado.getDomicilio() 
+            if not textodomicilio: textodomicilio = '-'  
+            itemDomicilio.setText(textodomicilio)
+            self.setItem(fila, columna, itemDomicilio)
+            columna += 1
+            itemEmail = QtGui.QTableWidgetItem()
+            textoemail = unicode(empleado.getEmail())
+            if not textoemail: textoemail = '-'
+            itemEmail.setText(textoemail)
+            self.setItem(fila, columna, itemEmail)
+            columna += 1
+            textotelefono = empleado.getTelefono()
+            if not textotelefono: textotelefono = '-'
+            itemTelefono = QtGui.QTableWidgetItem()
+            itemTelefono.setText(textotelefono)
+            self.setItem(fila, columna, itemTelefono)
+
+            self.agregarAlDiccionario(fila, empleado)
+            fila += 1

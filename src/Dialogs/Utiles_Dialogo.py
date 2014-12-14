@@ -180,3 +180,13 @@ class Mensaje(object):
 
     def exec_(self):
         return self.messageBox.exec_()
+
+class MensajeCritico(Mensaje):
+
+    def __init__(self, aplicacion, mensaje='', titulo=''):
+        self.messageBox = QMessageBox(aplicacion)
+        self.messageBox.setText(mensaje)
+        self.messageBox.setWindowTitle(titulo)
+        self.messageBox.setStandardButtons(QMessageBox.Ok)
+        self.agregarBotonCancelar()
+        self.setCritical()

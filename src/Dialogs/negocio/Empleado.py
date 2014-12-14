@@ -198,6 +198,7 @@ class Empleado(Persistent):
         '''
         self._fechaBaja = fecha
 
+    
     def imprimirFechaBaja(self):
         '''
         Devuelve un string de la fecha de baja del empleado.
@@ -217,3 +218,19 @@ class Empleado(Persistent):
     
     def decrementarReparacionesPendientes(self):
         self._reparaciones_pendientes -= 1
+   
+    def set_tipo_documento(self, value):
+        self.tipoDocumento = value
+
+    def set_fecha_nacimiento(self, value):
+        self.fechaNacimiento = value
+
+    def set_domicilio(self, value):
+        self.domicilio = value
+
+    def set_telefono(self, value):
+        self.telefono = value
+
+    def set_email(self, value):
+        self.email = value
+

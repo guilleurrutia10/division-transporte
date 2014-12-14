@@ -758,6 +758,41 @@ class Division_Transporte(Persistent):
         self.zodb.save('empleados_dados_de_baja', empleadoBaja.getDocumento(), empleadoBaja)
         self.eliminarEmpleadoDisponible(empleadoBaja)
         
+    def modificarEmpleado(self, empleadoamodificar, dicDatosActualizados):
+        '''
+        @raise exception: ExcepcionObjeNoExiste (el vehiculo con el dominio....)
+        Recibe:
+            - el nro de doc del empleado que se quiere modificar
+            - un diccionario de datos actualizados:
+            return {'nombre': unicode(self.lineEditNombre.text()),
+                'apellido':unicode(self.lineEditApellido.text()),
+                'nrodocumento': unicode(self.lineEditNroDocumento.text()),
+                'tipodocumento': unicode(self.comboBoxTipoDocumentoS.currentText()),
+                'fechanacimiento':self.dateEditFechaNacimiento.date().toPyDate(),
+                'domicilio': unicode(self.lineEditDomicilio.text()),
+                'telefono': unicode(self.lineEditTelefono.text()),
+                'email':unicode(self.lineEditEmail.text())
+                } 
+
+        
+        '''
+        self.zodb.conexion.sync()
+        if not empleadoamodificar in self.getEmpleados().values():
+            self.zodb.save('empleados', empleadoamodificar.getDocumento(), empleadoamodificar)
+            self.zodb.remove('empleados', empleadoamodificar)
+            print 'DEBUG: Cambio documento'
+        empleadoamodificar.setNombre(dicDatosActualizados['nombre'])
+        empleadoamodificar.setApellido(dicDatosActualizados['apellido'])
+        empleadoamodificar.setDocumento(dicDatosActualizados['nrodocumento'])
+        empleadoamodificar.set_fecha_nacimiento(dicDatosActualizados['fechanacimiento'])
+        empleadoamodificar.set_domicilio(dicDatosActualizados['domicilio'])
+        empleadoamodificar.set_telefono(dicDatosActualizados['telefono'])
+        empleadoamodificar.set_email(dicDatosActualizados['email'])
+        tiposDocumentos = self.zodb.raiz['tiposDocumentos']
+        empleadoamodificar.set_tipo_documento(tiposDocumentos[dicDatosActualizados['tipodocumento']])
+
+        transaction.commit()
+        
         
 ##############################################################################
 ########################## TEST DIVISION #####################################

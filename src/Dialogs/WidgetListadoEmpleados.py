@@ -113,7 +113,9 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         filtro = unicode(cadena).lower()
         personal = filter(lambda p: filtro in unicode(p.getDocumento()).lower()
                           or filtro in unicode(p.getNombre()).lower()
-                          or filtro in unicode(p.getApellido()).lower(),
+                          or filtro in unicode(p.getApellido()).lower()
+                          or filtro in unicode(p.getEmail()).lower()
+                          or filtro in unicode(p.getTelefono()).lower(),
                           self.empleados)
         personal.sort(cmp=lambda x, y: cmp(x, y))
         #self.cargarGrillaEmpleadosSinAsignar(personal)

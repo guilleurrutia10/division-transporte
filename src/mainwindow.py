@@ -284,7 +284,8 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot()
     def on_actionModificacion_de_Personal_triggered(self):
         print 'agregando Widget'
-        self.setCentralWidget(WidgetBajaPersonal.WidgetBajaPersonal(self))
+        from Dialogs.WidgetModificarPersonal import WidgetModificarPersonal
+        self.setCentralWidget(WidgetModificarPersonal(self))
         
     @QtCore.pyqtSlot()
     def on_actionListados_de_Seccion_triggered(self):            
