@@ -23,7 +23,7 @@ class MyLogin(QtGui.QDialog, Ui_Dialog, AyudaManejador):
         self.label_3.setObjectName('label')
         self.puedoAbrirVentanaPrincipal = False
 
-        self.lineEditUser.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9|a-z|A-z]+'),self))
+        #self.lineEditUser.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9|a-z|A-z]+'),self))
         self.linePassword.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp('[0-9|a-z|A-z]+'),self))
         #Mostrar asteriscos en lugar de los caracteres introducidos en realidad.
         self.linePassword.setEchoMode(2)

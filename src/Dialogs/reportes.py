@@ -15,6 +15,10 @@ from reportlab.lib import colors
 from datetime import datetime, date, timedelta as td
 from Utiles_Dialogo import compara_fechas_en_cadenas
 
+import sys
+reload(sys)
+sys.setdefaultencoding("latin-1")
+
 styles = getSampleStyleSheet()
 Elements = []
 width, height = A4

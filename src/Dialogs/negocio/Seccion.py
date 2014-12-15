@@ -233,7 +233,7 @@ class Seccion(Persistent):
 
     def getHorasSinTurnoParaElDia(self, dia):
         '''
-        Retorna una lista con todas las horas en las que la seccion
+        Retorna una lista (de enteros) con todas las horas en las que la seccion
         no tiene registrado un turno
         '''
         list_retorno = []

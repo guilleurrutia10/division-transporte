@@ -257,7 +257,8 @@ class Legajo(Persistent):
         return self.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion()
 
     def pedidoDeActuacionTePertenece(self, unPedidoDeActuacion):
-        return unPedidoDeActuacion == self.getPedidoDeActuacion()
+        #return unPedidoDeActuacion == self.getPedidoDeActuacion()
+        return unPedidoDeActuacion.getNumeroPedido() == self.getPedidoDeActuacion().getNumeroPedido()
 
     def tieneReparacionesMecanicas(self):
         pass
@@ -356,6 +357,22 @@ class Legajo(Persistent):
     
     def getCodigoPlan(self):
         return self.obtenerOrdenDeReparacionEnCurso().getCodigoPlan()
+    
+    def horasOcupadasParaElDia(self, dia):
+        '''
+        @param dia: QDate
+        @return: Una lista de entero que representan las horas en las que el vehiculo tiene ya asignado un turno
+                 para el dia recibido
+        '''
+        return self.obtenerOrdenDeReparacionEnCurso().getPlan().horasOcupadasParaElDia(dia)
+    
+    def getFechasDeTurnos(self):
+        '''
+        @return: lista de unafecha de tipo str.
+        
+        '''
+        ordenes = filter(lambda orden: orden.getFechaEgreso() == None, self.ordenesDeReparacion)
+        return ordenes[0].getPlan().getFechasDeTurnos()
 ##############################################################################
 ########################## TEST LEGAJO #######################################
 ##############################################################################

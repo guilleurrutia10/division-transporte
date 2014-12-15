@@ -41,7 +41,7 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
         self.reject()
 
     def cargarGrillaInicial(self):
-        self._pedidosDeActuacion.sort()
+        #self._pedidosDeActuacion.sort()
         num = 1
         for pda in self._pedidosDeActuacion:
             pda.setNumeroPedido(num)

@@ -47,3 +47,17 @@ class Plan(Persistent):
     
     def getCodigo(self):
         return self._codigo
+    
+    def horasOcupadasParaElDia(self, dia):
+        '''
+        @param dia: str del tipo 12/12/2012
+        @return: Una lista de enteros que representan horas de turnos para el dia recibido
+        '''
+        turnos_del_dia = filter(lambda turno: turno.getFecha() == dia, self.getTurnos())
+        return [turno.getHora() for  turno in turnos_del_dia]
+    
+    def getFechasDeTurnos(self):
+        '''
+        @return: una lista de fechas de tipo str
+        '''
+        return [turno.getFecha() for turno in self.getTurnos()]

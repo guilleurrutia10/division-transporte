@@ -14,7 +14,7 @@ from WidgetListadoDeVehiculos import ListadoVehiculos
 from negocio.Division_Transporte import Division_Transporte
 from PyQt4.QtCore import QString
 import transaction
-from Utiles_Dialogo import mostrarMensaje
+from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
 
 class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehiculo):
     '''
@@ -96,6 +96,11 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         self.label_2.setObjectName('label')
         self.label_3.setObjectName('label')
         self.label_4.setObjectName('label')
+        #Fecha minima:
+        fechas = self._vehiculo.getFechasDeTurnos()
+        fechaminima = sorted(fechas, cmp=compara_fechas_en_cadenas)[-1]
+        dia, mes, anio = [int(n) for n in fechaminima.split('/')]
+        self.dateEditFechaEgreso.setMinimumDate((QtCore.QDate(anio, mes, dia))) 
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):

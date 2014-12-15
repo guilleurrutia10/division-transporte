@@ -70,10 +70,12 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         self.refrescarTablas()
 
         # Seteamos la fecha del turno predefinida con la fecha de hoy:
-        hoy = date.today()
-        self.dateEditFechaTurno.setDate((QtCore.QDate(hoy.year, hoy.month, hoy.day)))
-        self.dateEditFechaTurno.setMinimumDate((QtCore.QDate(hoy.year, hoy.month, hoy.day)))
-
+#        hoy = date.today()
+        fecharecepcion = self._vehiculo.getPedidoDeActuacion().getFechaRecepcion()
+        self.dateEditFechaTurno.setDate((QtCore.QDate(fecharecepcion.year, fecharecepcion.month, fecharecepcion.day)))
+        self.dateEditFechaTurno.setMinimumDate((QtCore.QDate(fecharecepcion.year, fecharecepcion.month, fecharecepcion.day)))
+        #Popup verdadero:
+        self.dateEditFechaTurno.setCalendarPopup(True)
         self._todoCargado = True
 
     def refrescarComboSecciones(self):
@@ -120,8 +122,10 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         horas = []
         horas.extend(self._seccionSeleccionada.getHorasSinTurnoParaElDia(fecha))
         horas.sort()
+        horasEnLosQueElVehiculoYaEstaOcupado = self._vehiculo.horasOcupadasParaElDia(fecha)
         for hora in horas:
-            self.comboBoxHoraTurno.addItems(QtCore.QStringList(str(hora)))
+            if hora not in horasEnLosQueElVehiculoYaEstaOcupado:
+                self.comboBoxHoraTurno.addItems(QtCore.QStringList(str(hora)))
 
     def refrescarTablas(self):
         self.pushButtonAsignarReparacion.setEnabled(True)
