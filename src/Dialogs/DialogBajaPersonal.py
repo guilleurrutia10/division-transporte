@@ -112,7 +112,7 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
             else:
                 self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar Empleado')
         except AttributeError, e:
-            print e
+#            print e
             self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar Empleado')
 
 #    @QtCore.pyqtSlot('QString')
@@ -140,7 +140,7 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
         self.tableWidgetDatosEmpleados.cargarConEmpleados(personal)
 
     def celdaClickeada(self, fila, columna):
-        print 'Celda clickeada fila %s columna %s' % (fila, columna)
+#        print 'Celda clickeada fila %s columna %s' % (fila, columna)
         self.itemDocumento = self.tableWidgetDatosEmpleados.item(fila, 3)
         documento = self.itemDocumento.text()
         empleados = Division_Transporte().getEmpleados().values()
@@ -203,7 +203,7 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
         '''
 #         from PyQt4.QtCore import QDate
         # QDate.toPyDate() -> datetime.date
-        print date.toPyDate().__str__()
+        unafechabaja= date.toPyDate().__str__()
 
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
@@ -219,7 +219,7 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
         msjConfirmar.setCritical()
         retorno = msjConfirmar.exec_()
         if retorno == QtGui.QMessageBox.Cancel:
-            print "DEBUG: Cancelar accion remover empleado de seccion"
+#            print "DEBUG: Cancelar accion remover empleado de seccion"
             self.reject()
         if retorno == QtGui.QMessageBox.Ok:
             self._fechaSeleccionada = self.calendarWidgetRegistrarBaja.selectedDate()
@@ -227,7 +227,7 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
             self._empleado.setFechaBaja(self._fechaSeleccionada)
             Division_Transporte().bajaEmpleado(self._empleado)
             msg = 'El empleado \'%s\' ha sido removido de la Division' %(self._empleado.nombreCompleto())
-            print 'DEBUG: ', msg
+#            print 'DEBUG: ', msg
             mostrarMensaje(self, msg, 'Empleado removido')
             self.accept()
 

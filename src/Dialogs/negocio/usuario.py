@@ -92,13 +92,12 @@ class Usuario():
         #usrs = filter(lambda (n, p, r): self.name == n and p == password, USUARIOS)
         usrs = filter(lambda (n, p, r): self.name == n and p == hash_password, Division_Transporte().getUsuarios())
         if not usrs:
-            print "Usuario no valido!!!!!!!!"
+#            print "Usuario no valido!!!!!!!!"
             raise Excepcion_usrInvalido(self.name)
         usr = usrs[0]
         self.rol = usr[ROL] #Cargando rol...
         self.permisos = PERMISOS[usr[ROL]]  #Cargando permisos...
-        print 'Usuario valido, cargando permisos...'
-        # asdsdaasdasdasdasd
+#        print 'Usuario valido, cargando permisos...'
         Division_Transporte().zodb.seNombreUsuario(usr[0])
         return True
     

@@ -45,8 +45,8 @@ class WidgetMostrarReparacionesPorVehiculo(QtGui.QWidget, Ui_WidgetMostrarRepara
     def mostrarReparaciones(self, fila, columna):
         '''
         '''
-        print 'Debo mostrar las reparaciones para el vehiculo: '
-        print self.tableWidgetVehiculos.getVehiculoEn(fila).getDominio()
+#        print 'Debo mostrar las reparaciones para el vehiculo: '
+#        print self.tableWidgetVehiculos.getVehiculoEn(fila).getDominio()
         vehiculo = self.tableWidgetVehiculos.getVehiculoEn(fila)
         self.reparacionesOrdenadas = vehiculo.getReparacionesFinalizadasOrdenadasPorOrdenReparacion()
 #        for rep in vehiculo.getReparacionesFinalizadas():

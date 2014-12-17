@@ -1,0 +1,94 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<link rel="StyleSheet" href="css/dtree.css" type="text/css" />
+	<script type="text/javascript" src="js/dtree.js"></script>
+
+  <style type="text/css">
+    * html body{ /*IE6 hack*/
+    padding: 0 0 0 0;
+    }
+
+    body{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    height: 100%;
+    max-height: 100%;
+    }
+
+    #framecontent{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    #width:100%;
+    height: 100%;
+    overflow: auto;
+    border-right:1px dashed #d8d8d8;
+    }
+  </style>
+</head>
+<body>
+  <div id="framecontent">
+    <div class="dtree" style="margin:0px;padding:0px;padding-left:6px;padding-top:6px;">
+    	<script type="text/javascript">
+    		<!--
+    		d = new dTree('d');
+    		d.config.target="right";
+        d.config.useCookies=false;
+        
+d.add(0,-1,'División Transporte','topics/Welcome.htm');
+  d.add('1','0',"Bienvenido",'topics/Welcome.htm');
+    d.add('1.1','1',"Bienvenido",'topics/Bienvenido.htm');
+    d.add('1.2','1',"Instalación",'topics/Installation.htm');
+    d.add('1.3','1',"Requisitos del sistema",'topics/System requirements.htm');
+  d.add('2','0',"Interfaz de usuario",'topics/GUI.htm');
+    d.add('2.1','2',"Elementos basicos de la interfaz de usuario",'topics/mainForm.htm');
+    d.add('2.2','2',"Tooltip",'topics/Tooltip.htm');
+    d.add('2.3','2',"Dialog",'topics/Dialog.htm');
+    d.add('2.4','2',"Accesos Rápidos",'topics/Quick launch.htm');
+    d.add('2.5','2',"Main menu",'topics/Main Menu.htm');
+  d.add('3','0',"Funcionalidades",'topics/Funcionalidades.htm');
+    d.add('3.1','3',"Personal",'topics/Personal.htm');
+      d.add('3.1.1','3.1',"DialogAltaPersonal",'topics/DialogAltaPersonal.htm');
+      d.add('3.1.2','3.1',"DialogRemoverEmpleadoDeSeccion",'topics/DialogRemoverEmpleadoDeSeccion.htm');
+      d.add('3.1.3','3.1',"DialogCambiarDeSeccionUnEmpleado",'topics/DialogCambiarDeSeccionUnEmpleado.htm');
+      d.add('3.1.4','3.1',"DialogCambiaDeSeccionUnEncargado",'topics/DialogCambiaDeSeccionUnEncargado.htm');
+      d.add('3.1.5','3.1',"DialogBajaPersonal",'topics/DialogBajaPersonal.htm');
+    d.add('3.2','3',"Repuestos",'topics/REPUESTOS.htm');
+      d.add('3.2.1','3.2',"DialogAltaRepuesto",'topics/DialogAltaRepuesto.htm');
+    d.add('3.3','3',"Sección",'topics/Seccion.htm');
+      d.add('3.3.1','3.3',"DialogAltaSeccion",'topics/DialogAltaSeccion.htm');
+      d.add('3.3.2','3.3',"DialogAgendaDeSeccion",'topics/DialogAgendaDeSeccion.htm');
+      d.add('3.3.3','3.3',"DialogAltaTipoReparacion",'topics/DialogAltaTipoReparacion.htm');
+    d.add('3.4','3',"Verificación y Reparación",'topics/Verificaciony Reparacion.htm');
+      d.add('3.4.1','3.4',"DialogAltaVehiculo",'topics/DialogAltaVehiculo.htm');
+      d.add('3.4.2','3.4',"DialogModificarVehiculo",'topics/DialogModificarVehiculo.htm');
+      d.add('3.4.3','3.4',"DialogRegistrarIngresoVehiculo",'topics/DialogRegistrarIngresoVehiculo.htm');
+      d.add('3.4.4','3.4',"DialogDatosIngresoVehiculo",'topics/DialogDatosIngresoVehiculo.htm');
+      d.add('3.4.5','3.4',"DialogRegistrarRecepcionDePedidoDeActuacion",'topics/DialogRegistrarRecepcionDePedidoDeActuacion.htm');
+      d.add('3.4.6','3.4',"DialogAsignarFechaRecepcionPedidoActuacion",'topics/DialogAsignarFechaRecepcionPedidoActuacion.htm');
+      d.add('3.4.7','3.4',"DialogMostrarLosVehiculosParaAgregarReparacionesAOR",'topics/DialogMostrarLosVehiculosParaAgregarReparacionesAOR.htm');
+      d.add('3.4.8','3.4',"DialogRegistrarReparaciones",'topics/DialogRegistrarReparaciones.htm');
+      d.add('3.4.9','3.4',"DialogCrearReparacion",'topics/DialogCrearReparacion.htm');
+      d.add('3.4.10','3.4',"WidgetMostrarVehiculosSinPlanificar",'topics/WidgetMostrarVehiculosSinPlanificar.htm');
+      d.add('3.4.11','3.4',"DialogPlanificar",'topics/DialogPlanificar.htm');
+      d.add('3.4.12','3.4',"DialogMostrarPedidoDeActuacion",'topics/DialogMostrarPedidoDeActuacion.htm');
+      d.add('3.4.13','3.4',"DialogDatosEgresoVehiculo",'topics/DialogDatosEgresoVehiculo.htm');
+      d.add('3.4.14','3.4',"DialogoAsignarReparaciones",'topics/DialogoAsignarReparaciones.htm');
+      d.add('3.4.15','3.4',"DialogoFinalizarTurno",'topics/DialogoFinalizarTurno.htm');
+    d.add('3.5','3',"Archivo",'topics/Archivo.htm');
+      d.add('3.5.1','3.5',"Login",'topics/Login.htm');
+
+    		document.write(d);
+
+    		//-->
+    	</script>
+    </div>
+  </div>
+</body>
+</html>

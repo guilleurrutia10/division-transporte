@@ -92,7 +92,7 @@ class OrdenReparacion(Persistent):
         self._kilometrajeEgreso = None
         self._combustibleEgreso = None
         
-        print "DEBUG: Nueva orden de reparacion creada: %s"%self
+#        print "DEBUG: Nueva orden de reparacion creada: %s"%self
 
     def getCodigoOrdenReparacion(self):
         return self.codigoOrdenReparacion
@@ -160,7 +160,7 @@ class OrdenReparacion(Persistent):
             self.estado = EsperandoAprobacion(self)
             return True
         except AttributeError:
-            print 'No se pueden generar el pedido de actuacion'
+#            print 'No se pueden generar el pedido de actuacion'
             return False
 
     def registrarOrdenDeReparacionPlanificada(self):
@@ -182,7 +182,8 @@ class OrdenReparacion(Persistent):
         try:
             self.estado.addReparacion(unaReparacion)
         except AttributeError:
-            print 'No se pueden agregar reparaciones'
+#            print 'No se pueden agregar reparaciones'
+            return False
 
     def getreparacionesPendientes(self):
         '''

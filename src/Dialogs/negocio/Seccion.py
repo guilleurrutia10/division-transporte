@@ -145,7 +145,7 @@ class Seccion(Persistent):
         if not self.tablaDeTurnos.has_key(queDia):
             self.tablaDeTurnos.update({queDia: TURNOS_DEL_DIA_VACIA})
             transaction.commit()
-            print "El dia se ha registrado en la tabla de turnos exitosamente!"
+#            print "El dia se ha registrado en la tabla de turnos exitosamente!"
 
     def crearRegistroParaElDia(self, queDia):
         if not self.tablaDeTurnos.has_key(queDia):
@@ -153,7 +153,7 @@ class Seccion(Persistent):
             horas_turno.update(TURNOS_DEL_DIA_VACIA)
             self.tablaDeTurnos.update({queDia: horas_turno})
             transaction.commit()
-            print "El dia se ha registrado en la tabla de turnos exitosamente!"
+#            print "El dia se ha registrado en la tabla de turnos exitosamente!"
 
     def tieneTurnoLibreParaElDia(self, queDia):
         if not self.tieneRegistroParaElDia(queDia):
@@ -177,7 +177,7 @@ class Seccion(Persistent):
             self.crearRegistroParaElDia(queDia)
         #Obtengo el diccionario de horarios. Con copy los valores son las mismas referencias, pero a nos no nos importa xq no vamos a modificar nada
         horarios = self.tablaDeTurnos.get(queDia).copy()
-        #print 'Horarios: ',list(horarios.keys())
+#        print 'Horarios: ',list(horarios.keys())
 
         for hora, turno in horarios.iteritems():
             if turno == None:
@@ -193,7 +193,7 @@ class Seccion(Persistent):
 
         #si no viene con una hora indicada:
         if hora == None:
-            print 'El turno se creara en el primer turno libre disponible'
+#            print 'El turno se creara en el primer turno libre disponible'
             hora = self.getPrimerTurnoLibreParaElDia(queDia)
 
         #Creacion y asignacion del Turno:
@@ -209,7 +209,7 @@ class Seccion(Persistent):
 
         #si no viene con una hora indicada:
         if turno.getHora()== None:
-            print 'El turno se creara en el primer turno libre disponible'
+#            print 'El turno se creara en el primer turno libre disponible'
             turno.setHora(self.getPrimerTurnoLibreParaElDia(turno.getFecha()))
 
         #Creacion y asignacion del Turno:
@@ -250,7 +250,7 @@ class Seccion(Persistent):
         #Comprobacion horrible:
         if isinstance(queHora, tuple):
             queHora = queHora[0]
-        print "Buscando turno del dia: %s a la hora: %d (%s)"%(queDia, queHora, type(queHora))
+#        print "Buscando turno del dia: %s a la hora: %d (%s)"%(queDia, queHora, type(queHora))
         return self.tablaDeTurnos.get(queDia).get(queHora)
 
     def __str__(self):
@@ -400,5 +400,5 @@ class TddSeccion(unittest.TestCase):
     def test_get_agenda_del_dia(self):
         self.seccion.crearTurnoParaElDia(self.hoy, 16)
         agendaDelDia = self.seccion.getAgendaDelDia(self.hoy)
-        print 'Agenda del dia ', self.hoy, ': ', agendaDelDia
+#        print 'Agenda del dia ', self.hoy, ': ', agendaDelDia
         self.assertNotEqual(None, agendaDelDia)

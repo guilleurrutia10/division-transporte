@@ -117,7 +117,6 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         return self.DIVISION.getVehiculo(self.dominioVehiculo)
 
     def abrirDialogCrearReparacion(self):
-        print 'abriendo dialogo Crear Reparacion'
         try:
             dlgCrearReparacion = DialogCrearReparacion(self, self.vehiculoSeleccionado)
         except Except_NoHayReparacionesDisponibles:
@@ -133,7 +132,6 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
 
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        print 'Click sobre aceptar'
         #if not self.ordenDeReparacion.getReparaciones():
         if not self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones():
             QtGui.QMessageBox.critical(self, 'Error', 'Debe agregar por lo menos una Reparacion al Vehiculo para generar un Pedido de Actuacion')
@@ -166,7 +164,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
 
     @QtCore.pyqtSlot()
     def on_pushButtonBuscarVehiculo_clicked(self):
-        print 'Buscando............'
+        pass
 
     def imprimirPedidoActuacion(self):
         # TODO: obtener datos a imprimir
@@ -178,14 +176,15 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         for rep in repuestosSolicitados:
             tipoRepuesto = rep.getTipoDeRepuesto()
             repuestosImprimir.append([str(repuestosSolicitados.index(rep)) ,str(rep.getCantidad()), tipoRepuesto.getDescripcion()])
-        print repuestosImprimir
+#        print repuestosImprimir
         # TODO: Armar método obtener nombre archivo
         # nombreArchivo = .....
         fileDialog = QtGui.QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Pedido de Actuación'))
         fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave)
         if fileDialog.exec_() == QtGui.QFileDialog.AcceptSave:
             for filename in fileDialog.selectedFiles():
-                print 'Imprimiendo: %s' % filename
+#                print 'Imprimiendo: %s' % filename
+                aux = filename
         else:
             return
         imprimirPedidoDeActuacion(pedido._nroDePedido, repuestosImprimir, unicode(filename))

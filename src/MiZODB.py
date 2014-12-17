@@ -265,15 +265,15 @@ class ZopeDB(object):
                 otroTipoRepuesto = TipoRepuesto('Pastilla de Freno', 'Siempre frena p77')
                 otroRepRequerido = RepuestoRequeridos(otroTipoRepuesto, 4)
                 tRep = TipoDeReparacion(nombre=nombre, descripcion=diccionario[nombre], repuestos=[unRepRequerido, otroRepRequerido], codigo=gestorNumeradorDeReparaciones.nextCodigoTipoDeReparacion())
-                print 'cargue rep frenos'
+#                print 'cargue rep frenos'
             elif nombre == 'Reparacion de radiador':
                 otroTipoRepuesto = TipoRepuesto('Radiador', 'RAD ULTRA 7500')
                 otroRepRequerido = RepuestoRequeridos(otroTipoRepuesto, 4)
                 tRep = TipoDeReparacion(nombre=nombre, descripcion=diccionario[nombre], repuestos=[unRepRequerido, otroRepRequerido], codigo=gestorNumeradorDeReparaciones.nextCodigoTipoDeReparacion())
-                print 'cargue Reparacion de radiador'
+#                print 'cargue Reparacion de radiador'
             else:
                 tRep = TipoDeReparacion(nombre, diccionario[nombre], [unRepRequerido], tiempo_estimado=40, codigo=gestorNumeradorDeReparaciones.nextCodigoTipoDeReparacion())
-                print 'cargue Reparacion Normal'
+#                print 'cargue Reparacion Normal'
                 
             tiposReparaciones[nombre] = tRep
         
@@ -314,7 +314,7 @@ class ZopeDB(object):
         raiz['tiposRepuestos'] = tiposRepuestos
         self.zodb._p_changed = True
         transaction.commit()
-        print "Tipos de Repuestos cargados con exito!"
+#        print "Tipos de Repuestos cargados con exito!"
 
     def cargarGestorDeCodigos(self):
         '''

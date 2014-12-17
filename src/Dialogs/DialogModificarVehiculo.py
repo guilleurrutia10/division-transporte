@@ -45,7 +45,7 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
     # modificar.
     #===========================================================================
     def seleccionarCelda(self, row, column):
-        print row, ',' , column
+#        print row, ',' , column
 #        item = QtGui.QTableWidgetItem()
 #         item = self.miWidget.tableWidgetListadoDeVehiculos.item(row, 0)
 #         print item.text()
@@ -108,7 +108,8 @@ class DialogMostrarLosVehiculosParaModificar(QtGui.QDialog, Ui_DialogMostrarLosV
     # Evento que se dispara cada vez que el Dialog toma el Foco
     #===========================================================================
     def showEvent(self, e):
-        print 'Se tomo el foco', self.isVisible()
+#        print 'Se tomo el foco', self.isVisible()
+        return
 
 
 
@@ -215,9 +216,9 @@ class DialogModificarVehiculo(QtGui.QDialog, Ui_DialogModificarVehiculo):
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         # Se comprueba burdamente que los haya cambiado al menos un LineEdit.
-        print 'Marca modificado ', self.lineEditMarca.isModified()
-        print 'R.I modificado ', self.lineEditRegistroInterno.isModified()
-        print 'Chasis modificado ', self.lineEditChasisNro.isModified()
+#        print 'Marca modificado ', self.lineEditMarca.isModified()
+#        print 'R.I modificado ', self.lineEditRegistroInterno.isModified()
+#        print 'Chasis modificado ', self.lineEditChasisNro.isModified()
 #         if (self.lineEditMarca.text() == self.auto.marca) and (self.lineEditChasisNro.text() == self.auto.numeroChasis) and (self.lineEditRegistroInterno.text() == self.auto.registroInterno):
 #             self.mostrarMensaje('No se modificó ningún atributo del vehículo', 'Modificación de Vehículo')
 #             return

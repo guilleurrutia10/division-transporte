@@ -102,7 +102,8 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
 #                     self.accept()
             else:
 #                 self._mensaje.exec_()
-                print 'No se pudo cargar......'
+##                print 'No se pudo cargar......'
+                return False
         self._mensaje.exec_()
 
     def testearDialogo(self):

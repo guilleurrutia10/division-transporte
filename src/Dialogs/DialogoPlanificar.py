@@ -71,7 +71,8 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
 
         # Seteamos la fecha del turno predefinida con la fecha de hoy:
 #        hoy = date.today()
-        fecharecepcion = self._vehiculo.getPedidoDeActuacion().getFechaRecepcion()
+#        fecharecepcion = self._vehiculo.getPedidoDeActuacion().getFechaRecepcion()
+        fecharecepcion = self._vehiculo.getPedidoDeActuacion().getFechaRealizacion()
         self.dateEditFechaTurno.setDate((QtCore.QDate(fecharecepcion.year, fecharecepcion.month, fecharecepcion.day)))
         self.dateEditFechaTurno.setMinimumDate((QtCore.QDate(fecharecepcion.year, fecharecepcion.month, fecharecepcion.day)))
         #Popup verdadero:
@@ -91,9 +92,10 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         if not self._todoCargado:
             return
         try:
-            print 'Cambio el combo: %s' % self.comboBoxSecciones.currentText()
+#            print 'Cambio el combo: %s' % self.comboBoxSecciones.currentText()
+            uncurrentitemm = self.comboBoxSecciones.currentText()
         except IndexError:
-            print "No tendria que se posible!"
+#            print "No tendria que se posible!"
             return
         nombre_seccion_selecionado = unicode(self.comboBoxSecciones.currentText())
         self._seccionSeleccionada = filter(lambda s: s.getNombre() == nombre_seccion_selecionado, self._secciones_del_vehiculo)
@@ -117,7 +119,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         # Lo utilizan varios métodos
         f = self.dateEditFechaTurno.date()
         fecha = '%s/%s/%s' % (f.day(), f.month(), f.year())
-        print 'Fecha: ', fecha
+#        print 'Fecha: ', fecha
         self.comboBoxHoraTurno.clear()
         horas = []
         horas.extend(self._seccionSeleccionada.getHorasSinTurnoParaElDia(fecha))
@@ -212,14 +214,13 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
             self.tabWidget.setCurrentIndex(0)
 
     def aceptar(self):
-        print 'Aceptar!!'
         if self._vehiculo.tieneTodasLasReparacionesPlanificadas():# Verificar xq pude hacer click en aceptar sin haber terminado...
             self._vehiculo.planificacionFinalizada()#En este punto, la OR esta PLANIFICADA.
             self.mostrarHojaDeRuta()
             # Para saber de qué cliente debemos borrar las transacciones.
             transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
             transaction.commit()
-            print "DEBUG: Orden de reparacion planificada: %s"%self._vehiculo.obtenerOrdenDeReparacionEnCurso()
+#            print "DEBUG: Orden de reparacion planificada: %s"%self._vehiculo.obtenerOrdenDeReparacionEnCurso()
         else:
             # Se eliminan los turnos registrados anteriormente
             self.DIVISION.zodb.deshacerCommits()

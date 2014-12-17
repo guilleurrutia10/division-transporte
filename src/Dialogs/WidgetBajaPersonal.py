@@ -23,6 +23,5 @@ class WidgetBajaPersonal(QtGui.QWidget, Ui_FormBajaPersonal):
         self.connect(self.pushButtonModificar, QtCore.SIGNAL("pressed()"), self.abrirDialogModificarPersonal)
 
     def abrirDialogModificarPersonal(self):
-        print 'abriendo dialogo AsignarFechaReparacion'
         dlgModificarPersonal = DialogModificarPersonal(self)
         dlgModificarPersonal.exec_()

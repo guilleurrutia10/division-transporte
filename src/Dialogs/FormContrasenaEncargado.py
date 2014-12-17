@@ -58,7 +58,6 @@ class DialogCrearUsuarioEncargado(QtGui.QDialog, Ui_DialogCrearUsuarioEncargado)
         self.labelMsgError.setText(mensaje)
 
 if __name__ == '__main__':        
-    print 'Hola'
     dialoguito = DialogCrearUsuarioEncargado("Juan")
     dialoguito.exec_()
     

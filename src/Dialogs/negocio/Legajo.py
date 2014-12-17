@@ -186,7 +186,7 @@ class Legajo(Persistent):
             self.ordenesDeReparacion.append(ordenReparacion)
             return True
         else:
-            print 'El vehiculo ya posee una OR en curso. No se registro el ingreso'
+#            print 'El vehiculo ya posee una OR en curso. No se registro el ingreso'
             return False
 
     def registrarReparaciones(self, reparaciones):

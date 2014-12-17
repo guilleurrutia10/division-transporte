@@ -46,10 +46,10 @@ class DialogRemoverEmpleadoDeSeccion(QtGui.QDialog, Ui_DialogRemoverEmpleadoDeSe
         msjConfirmar.setCritical()
         retorno = msjConfirmar.exec_()
         if retorno == QMessageBox.Cancel:
-            print "DEBUG: Cancelar accion remover empleado de seccion"
+            debug= "DEBUG: Cancelar accion remover empleado de seccion"
+            return
         if retorno == QMessageBox.Ok:
             msg = 'El empleado \'%s\' ha sido removido de la seccion \'%s\'' %(empleado_seleccionado.nombreCompleto(), secciondelempleadoseleccionado.getNombre())
-            print 'DEBUG: ', msg
             Division_Transporte().nuevoEmpleadoDisponible(empleado_seleccionado)
             secciondelempleadoseleccionado.removerEmpleado(empleado_seleccionado)
             mostrarMensaje(self, msg, 'Empleado removido')

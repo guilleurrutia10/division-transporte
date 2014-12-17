@@ -42,7 +42,7 @@ class TipoDeReparacion(Persistent):
         self._repuestos.extend(repuestos)
         self._tiempo_estimado = tiempo_estimado
         self._codigo = codigo
-        print "DEBUG: Tipo de Reparacion: %s | %s | %s | %d"%(codigo, nombre, descripcion, tiempo_estimado)
+#        print "DEBUG: Tipo de Reparacion: %s | %s | %s | %d"%(codigo, nombre, descripcion, tiempo_estimado)
 
     def getRepuestos(self):
         return self._repuestos

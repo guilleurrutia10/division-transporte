@@ -1,0 +1,11 @@
+.image{
+	float: left;
+	margin-left: 5%;
+	margin-bottom: 5%;
+	max-width: 100%;
+}
+
+.left-text{
+	float: left;
+	margin-left: 5%;
+}

@@ -45,7 +45,7 @@ class DialogAltaPersonal(QtGui.QDialog, Ui_DialogAltaPersonal, AyudaManejador):
         self.label_7.setObjectName("label")
         self.label_8.setObjectName("label")
 
-        print self.parent().usuario.name
+##        print self.parent().usuario.name
 
     def validacionesLineEdit(self):
         '''

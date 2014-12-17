@@ -514,13 +514,13 @@ class TablaSuper(QtGui.QTableWidget):
         self.clearContents()
         self.setRowCount(len(lista_empleados))
         for empleado in lista_empleados:
-            print empleado.nombreCompleto()
+#            print empleado.nombreCompleto()
             columna = 0
             infoEmpleado = empleado.getInfo() 
             for clave in infoEmpleado.keys():
                 unItem = QtGui.QTableWidgetItem()
                 unItem.setText(unicode(infoEmpleado[clave]))
-                print infoEmpleado[clave]
+#                print infoEmpleado[clave]
                 self.setItem(fila, columna, unItem)
                 columna += 1
             fila += 1

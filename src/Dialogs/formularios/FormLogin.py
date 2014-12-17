@@ -6,7 +6,7 @@
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
-
+#Se modifico para que muetre la ayuda
 from PyQt4 import QtCore, QtGui
 
 try:
@@ -16,7 +16,7 @@ except AttributeError:
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.setObjectName(_fromUtf8("Login"))
         Dialog.setWindowModality(QtCore.Qt.NonModal)
         Dialog.resize(270, 150)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)

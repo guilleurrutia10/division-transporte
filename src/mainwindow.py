@@ -47,7 +47,6 @@ class MyListado(QtGui.QWidget, Ui_Form):
     
     def cargarGrillaEmpleadosSinAsignar(self):
         
-        print "Cargando Grilla"
         from Dialogs.negocio import Division_Transporte
         division = Division_Transporte.Division_Transporte()
         p = division.getEmpleados()
@@ -71,7 +70,6 @@ class MyListado(QtGui.QWidget, Ui_Form):
                 row = row + 1
     
     def celdaClick(self):
-        print "Click sobre una celda"
         self.close()
         
 MyOtroListado = MyListado
@@ -138,12 +136,10 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     @QtCore.pyqtSlot()
     def on_actionListado_triggered(self):
-        print 'agregando listado'
         self.setCentralWidget(MyListado(self))
         self.centralWidget().connect(self.centralWidget().tableWidgetDatosEmpleados,QtCore.SIGNAL('cellDoubleClicked(int,int)'), self.celdaClick)
         
     def celdaClick(self):
-        print "Click sobre una celda"
         self.centralWidget().close()
         self.setCentralWidget(DialogModificarPersonal.DialogModificarPersonal(self))
     
@@ -161,7 +157,6 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     #Conectamos la accion Verificar_Reparaciones_Necesarias_del_Vehiculo...
     @QtCore.pyqtSlot()
     def on_actionVerificar_Reparaciones_Necesarias_del_Vehiculo_triggered(self):
-        print 'abriendo dialogo Verificar_Reparaciones_Necesarias_del_Vehiculo'
         from Dialogs.DialogMostrarLosVehiculosParaAgregarReparacionesAOR import DialogMostrarLosVehiculosParaAgregarReparacionesAOR
         dlgRegistrarReparaciones = DialogMostrarLosVehiculosParaAgregarReparacionesAOR(self)
         dlgRegistrarReparaciones.exec_()
@@ -175,7 +170,6 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     #Conectamos la accion Alta Repuesto...
     @QtCore.pyqtSlot()
     def on_actionAlta_de_Repuesto_triggered(self):
-        print 'abriendo dialogo Alta Repuesto'
         dlgAltaRepuesto = DialogAltaRepuesto.DialogAltaRepuesto(self)
         dlgAltaRepuesto.exec_()
     
@@ -194,12 +188,10 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     @QtCore.pyqtSlot(bool)
     def on_actionAyuda_triggered(self, check):
         if check:
-            print 'agregando otro listado'
             self.setCentralWidget(MyOtroListado(self))
         
     @QtCore.pyqtSlot()
     def on_actionSobre_triggered(self):
-        print 'agregando dock'
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, QtGui.QDockWidget(QtCore.QString.fromUtf8('my dock'), self))
         
         
@@ -213,26 +205,22 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     #Agregada la lista de vehículos a listar
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_de_la_Division_2_triggered(self):
-        print 'DIV 2: agregando widget listado Vehiculos'
         widgetListadoVehiculos = WidgetListadoDeVehiculos.ListadoVehiculos(Division_Transporte().getVehiculos().values(), self)
         widgetListadoVehiculos.pushButtonSeleccionar.hide()
         self.setCentralWidget(widgetListadoVehiculos)
 
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_en_Reparacion_por_Seccion_triggered(self):
-        print 'En reparacion: agregando widget listado de Vehiculos'
         self.setCentralWidget(WidgetListadoDeVehiculos.Listado_Vehiculos_en_reparacion_por_Seccion(self))
         self.centralWidget().labelListadoVehiculos.setText(QtCore.QString.fromUtf8("Listado de Vehiculos en Reparacion por Seccion"))
     
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_Reparados_por_Seccion_2_triggered(self):
-        print 'Reparados: agregando widget listado de Vehiculos'
         self.setCentralWidget(WidgetListadoDeVehiculos.Listado_Vehiculos_Reparados_por_Seccion_2(self))
         self.centralWidget().labelListadoVehiculos.setText(QtCore.QString.fromUtf8("Listado de Vehiculos Reparados por Seccion"))
     
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_con_Reparaciones_Planificadas_2_triggered(self):
-        print 'Planificados: agregando widget listado de Vehiculos'
         self.setCentralWidget(WidgetMostrarReparacionesPorVehiculo.WidgetMostrarReparacionesPorVehiculoPlanificadas(Division_Transporte().getVehiculosEnPlanificacion(), self))
 #         self.setCentralWidget(WidgetMostrarReparacionesPorVehiculo.WidgetMostrarReparacionesPorVehiculo(Division_Transporte().getVehiculosEnPlanificacion(), self))
 #         self.setCentralWidget(WidgetListadoDeVehiculos.Listado_Vehiculos_con_Reparaciones_Planificadas(self))
@@ -245,18 +233,15 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     @QtCore.pyqtSlot()
     def on_actionListado_de_Reparaciones_Realizadas_a_un_Vehiculos_2_triggered(self):
-        print 'Reparaciones realizadas: agregando widget listado Vehiculos'
         self.setCentralWidget(WidgetMostrarReparacionesPorVehiculo.WidgetMostrarReparacionesPorVehiculo(Division_Transporte().getVehiculosEnFinalizada(), self))
 #         self.setCentralWidget(WidgetMostrarReparacionesPorVehiculo.WidgetMostrarReparacionesPorVehiculo(Division_Transporte().getVehiculosEnFinalizada(), self))
     
     @QtCore.pyqtSlot()
     def on_actionListado_de_Tipos_de_Reparaciones_de_la_Division_2_triggered(self):
-        print 'Tipos de Reparaciones: agregando widget listado Vehiculos'
         self.setCentralWidget(WidgetMostrarTiposDeReparaciones.WidgetMostrarTiposDeReparaciones(self))
     
     @QtCore.pyqtSlot()
     def on_actionPlanificar_Reparaciones_de_Vehiculo_triggered(self):
-        print 'Planificar reapraciones: agregando widget listado Vehiculos'
         vehiculos_sin_planificar = Division_Transporte().getVehiculosEnAprobada()
         self.setCentralWidget(WidgetListadoDeVehiculos.ListadoVehiculos(vehiculos_sin_planificar, self))
         self.centralWidget().pushButtonSeleccionar.connect(self.centralWidget().pushButtonSeleccionar, QtCore.SIGNAL('clicked()'), self.planificar)
@@ -270,36 +255,30 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
     @QtCore.pyqtSlot()
     def on_actionBaja_de_Personal_triggered(self):
-        print 'agregando Dialog baja personal'
         dlgBajaPersonal = DialogBajaPersonal.DialogBajaPersonal()
         dlgBajaPersonal.exec_()
         
     @QtCore.pyqtSlot()
     def on_actionModificacion_de_Repuesto_triggered(self):
-        print 'agregando widget baja personal'
         dlMuesRep = DialogMuestraLosRepuestos.DialogMuestraLosRepuestos()
         dlMuesRep.exec_()
     
     #Conectamos la accion Modificar Personal...
     @QtCore.pyqtSlot()
     def on_actionModificacion_de_Personal_triggered(self):
-        print 'agregando Widget'
         from Dialogs.WidgetModificarPersonal import WidgetModificarPersonal
         self.setCentralWidget(WidgetModificarPersonal(self))
         
     @QtCore.pyqtSlot()
     def on_actionListados_de_Seccion_triggered(self):            
-        print 'agregando Widget Listado de Secciones'
         self.setCentralWidget(WidgetListadoSecciones.ListadoSecciones(self))
 
     @QtCore.pyqtSlot()
     def on_actionListado_de_Repuestos_de_la_Division_triggered(self):
-        print 'agregando widget listado de repustos utilizados'
         self.setCentralWidget(WidgetListadoDeRepuestosUtilizados.ListadoRepustosUtilizados(self))
         
     @QtCore.pyqtSlot()
     def on_actionRegistrar_Recepcion_de_Pedido_de_Actuacion_triggered(self):
-        print 'agregando Dialog Registro Pedido de Actuacion'
         dlgRegistrarPedidoActuacion = DialogRegistrarRecepcionDePedidoDeActuacion.DialogRegistrarRecepcionDePedidoDeActuacion()
         dlgRegistrarPedidoActuacion.exec_()
     
@@ -311,9 +290,9 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             dlgAsignarReparaciones = DialogoAsignarReparaciones(self, seccion[0])
             dlgAsignarReparaciones.exec_()
         except SinTurnosException:
-            print 'Ok'
+            debug= 'Ok'
         except IndexError:
-            print 'No sos jefe de seccion'
+            debug= 'No sos jefe de seccion'
             
     @QtCore.pyqtSlot()
     def on_actionRegistrar_Ingreso_de_Vehiculo_triggered(self):
@@ -354,9 +333,9 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             dlgFinTurno = DialogoRegistrarFinTurno(self, seccion[0])
             dlgFinTurno.exec_()
         except SinTurnosException:
-            print 'Ok'
+            debug= 'Ok'
         except IndexError:
-            print 'No sos jefe de seccion'
+            debug= 'No sos jefe de seccion'
 
     @QtCore.pyqtSlot()
     def on_actionRegistrar_Egreso_triggered(self):
@@ -376,13 +355,12 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
     @QtCore.pyqtSlot()
     def on_actionConsultar_agenda_triggered(self):            
-        print 'DEBUG: Consultar agenda'
         dlgAgenda = DialogoAgendaDeSeccion(self) 
         dlgAgenda.exec_()
 
     @QtCore.pyqtSlot()
     def on_actionCambiarDeUsuario_triggered(self):            
-        print 'DEBUG: Cambiando de usuario...'
+#        print 'DEBUG: Cambiando de usuario...'
         from mainLogin import MyLogin
         from Dialogs.Utiles_Dialogo import mostrarMensaje
         myLogin = MyLogin()

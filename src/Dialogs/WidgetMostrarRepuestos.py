@@ -35,11 +35,9 @@ class DialogModificarRepuesto(QtGui.QDialog, Ui_DialogMoficarRepuesto):
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        print 'Aceptaradsasdsa'
         codigo = unicode(self.lineEditCodigo.text())
         nombre = unicode(self.lineEditNombreRepuesto.text())
         descripcion = unicode(self.plainTextEditDescripcion.toPlainText())
-        print codigo, ' ', nombre, ' ', descripcion
         Division_Transporte().modificarRepuesto(codigo, nombre, descripcion)
         mostrarMensajeOk(self, 'El repuesto ha sido modificado exitosamente', 'Tipo de Repuesto')
         self.accept()

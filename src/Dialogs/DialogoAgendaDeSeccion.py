@@ -50,7 +50,7 @@ class DialogoAgendaDeSeccion(QtGui.QDialog, Ui_DialogAgendaDeSeccion, AyudaManej
     def on_buttonBox_accepted(self):
         '''
         '''
-        print self.parent().usuario.name
+#        print self.parent().usuario.name
         desde = self.dateEdit_Desde.date()
         hasta = self.dateEdit_Hasta.date()
         desde = '%s/%s/%s' % (desde.day(), desde.month(), desde.year())

@@ -9,6 +9,7 @@ from PyQt4 import QtCore, QtGui
 from formularios.DialogModificarPersonal import Ui_DialogModificarPersonal
 from negocio.Division_Transporte import Division_Transporte
 from Utiles_Dialogo import MensajeCritico, mostrarMensaje
+from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
 
 class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
     '''
@@ -32,7 +33,7 @@ class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
         super(DialogModificarPersonal, self).__init__(parent)
         self.setupUi(self)
         self._empleado = empleado_a_modificar
-        print 'DEBUG Debo Modificar Empleado %s'%self._empleado.nombreCompleto()
+#        print 'DEBUG Debo Modificar Empleado %s'%self._empleado.nombreCompleto()
         #Guardamos los QDAtos para utilizar luego sus metodos de comparacion y saber si han sido modificados
         self.qDatosEmpleado= {'nombre':QtCore.QString(self._empleado.getNombre()),
                               'apellido':QtCore.QString(self._empleado.getApellido()),
@@ -50,7 +51,7 @@ class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
         textoemail = unicode(self._empleado.getEmail())
         if not textoemail: textoemail = '-'
         self.qDatosEmpleado.update({'email':QtCore.QString(textoemail)})
-        self.lineEditEmail.setText(self.qDatosEmpleado['domicilio'])
+        self.lineEditEmail.setText(self.qDatosEmpleado['email'])
         textotelefono = self._empleado.getTelefono()
         if not textotelefono: textotelefono = '-'
         self.qDatosEmpleado.update({'telefono':QtCore.QString(textotelefono)})
@@ -61,7 +62,7 @@ class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
             item = QtCore.QStringList(tipodocumento)
             if self._empleado.getTipoDocumento().get_codigo_tipo_documento() == tipodocumento: currentItem = index 
             self.comboBoxTipoDocumento.addItems(item)
-        print 'DEBUG: Current index %d'%currentItem
+#        print 'DEBUG: Current index %d'%currentItem
         self.qDatosEmpleado.update({'tipodocumento':currentItem})
         self.comboBoxTipoDocumento.setCurrentIndex(currentItem)
         
@@ -76,13 +77,17 @@ class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
         msjConfirmar = MensajeCritico(self, 'Confirma los cambios realizados?', 'Confirmar cambios')
         respuesta = msjConfirmar.exec_()
         if respuesta == QtGui.QMessageBox.Cancel:
-            print "DEBUG: Cancelar accion"
+#            print "DEBUG: Cancelar accion"
             self.reject()
         if respuesta == QtGui.QMessageBox.Ok:
-            Division_Transporte().modificarEmpleado(self._empleado, self.getValoresActualizados())
-            msg = 'Los datos del empleado \'%s\' han sido actualizados' %self._empleado.nombreCompleto()
-            mostrarMensaje(self, msg, 'Operacion exitosa!')
-            self.accept()
+            try:
+                Division_Transporte().modificarEmpleado(self._empleado, self.getValoresActualizados())
+                msg = 'Los datos del empleado \'%s\' han sido actualizados' %self._empleado.nombreCompleto()
+                mostrarMensaje(self, msg, 'Operacion exitosa!')
+                self.accept()
+            except ExcepcionObjetoExiste:
+                mostrarMensaje(self, 'Ya existe un empleado con los datos ingresados.\nNo se van a actualizar los datos', 'No se pueden actualizar los datos')
+                return
 
     def seActualizoAlgunValor(self):
         '''

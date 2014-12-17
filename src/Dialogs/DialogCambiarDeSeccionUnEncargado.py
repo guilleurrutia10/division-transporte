@@ -44,7 +44,10 @@ class DialogCambiarDeSeccionUnEncargado(QtGui.QDialog, Ui_DialogCambiaDeSeccionU
         self.tableWidget_empleados.cargarConEmpleados(Division_Transporte().getEmpleadosSinAsignar().values())
         fecha = localtime()
         self.DIVISION = Division_Transporte()
-        self.DIVISION.zodb.setFechaMinimaDeshacer(fecha) 
+        self.DIVISION.zodb.setFechaMinimaDeshacer(fecha)
+        self.pushButton_filtroEmpleado.setVisible(False)
+        self.pushButton_filtroEmpleado.setHidden(True)
+         
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -54,7 +57,7 @@ class DialogCambiarDeSeccionUnEncargado(QtGui.QDialog, Ui_DialogCambiaDeSeccionU
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         #1)Tomar el empleado seleccionado
-        print self.tableWidget_empleadoSeleccionado.getPrimerEmpleado().nombreCompleto()
+#        print self.tableWidget_empleadoSeleccionado.getPrimerEmpleado().nombreCompleto()
         empleado_que_va_a_ser_encargado = self.tableWidget_empleadoSeleccionado.getPrimerEmpleado()
         #2)Pedir una contrasena para el nuevo encargado
         if not self.pedirPassEncargado(empleado_que_va_a_ser_encargado):
@@ -88,7 +91,7 @@ class DialogCambiarDeSeccionUnEncargado(QtGui.QDialog, Ui_DialogCambiaDeSeccionU
             if dialog.exec_() == QtGui.QDialog.Accepted:
                 if dialog.contrasenasValidas():
                     encargado.setPassword(dialog.getPassEncargado())
-                    print 'Pass Encargado: %s' % (dialog.getPassEncargado())
+#                    print 'Pass Encargado: %s' % (dialog.getPassEncargado())
                     return True
                 else:
                     dialog.preparar_para_volver_a_pedir()

@@ -33,7 +33,6 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
 
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        print 'Click sobre aceptar'
         self.accept()
 
     @QtCore.pyqtSlot()
@@ -68,8 +67,8 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
     def seleccionarCelda(self, fila, columna):
         item = self.tableWidget.item(fila, 0)
         self._pedidoSeleccionado = self._pedidosDeActuacion[fila]
-        print 'PEDIDO: ', self._pedidoSeleccionado
-        print item.text(), '(fila %s,col %s)' % (fila, columna)
+#        print 'PEDIDO: ', self._pedidoSeleccionado
+#        print item.text(), '(fila %s,col %s)' % (fila, columna)
 
     @QtCore.pyqtSlot()
     def on_pushButton_Registrar_clicked(self):
@@ -149,7 +148,7 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
         unaFecha = date(day=fecha.toPyDate().day,
                         month=fecha.toPyDate().month,
                         year=fecha.toPyDate().year)
-        print unaFecha, type(fecha.toPyDate())
+#        print unaFecha, type(fecha.toPyDate())
         # TODO: atrapar excepción por fecha incorrecta????
         # try:
         resu = self._vehiculo.registrarRecepcionPedidoActuacion(unaFecha)

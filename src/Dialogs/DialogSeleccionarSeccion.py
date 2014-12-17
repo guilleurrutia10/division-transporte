@@ -27,7 +27,6 @@ class DialogSeleccionarSeccion(QtGui.QDialog, Ui_Dialog_SeleccionarSeccion):
         
     @QtCore.pyqtSlot()
     def on_pushButton_Seleccionar_clicked(self):
-        print "Click sobre Seleccionar"
         self.close()
         dlgSelecSec = DialogAsignarReparacion.DialogAsignarReparacion()
         dlgSelecSec.exec_()

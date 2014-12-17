@@ -35,7 +35,7 @@ class EnRevision(EstadoOrdenReparacion):
         #TODO: Agregar la reparacion a la OR si no estaba en la reparacion...
         if not unaReparacion in self._orden_de_reparacion.getReparaciones():
             self._orden_de_reparacion.getReparaciones().append(unaReparacion)
-            print 'Se agrego una nueva Reparación'
+#            print 'Se agrego una nueva Reparación'
         else:
             raise Excepcion_Orden_Posee_Reparacion('La Reparacion ya se encuentra en la Orden de Reparacion del Vehiculo')
         #reparacion[numero] = reparacion
@@ -93,7 +93,7 @@ class EnRevision(EstadoOrdenReparacion):
         #creamos el Pedido de Actuacion y se lo agregamos a la orden:
 
         self._orden_de_reparacion.setPedidoDeActuacion(PedidoDeActuacion(pedido_de_actuation_code, repuestosSolicitados))
-        print "DEBUG: PEDIDO DE ACTUACION GENERADO Y ASIGNADO A LA ORDEN"
+#        print "DEBUG: PEDIDO DE ACTUACION GENERADO Y ASIGNADO A LA ORDEN"
 
     def __str__(self):
         return 'En Revision'

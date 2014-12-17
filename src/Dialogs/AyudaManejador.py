@@ -35,19 +35,20 @@ class AyudaManejador:
 #         print self.windowTitle()
         # Atrapar el evento de teclear F1
         if keyEvent.key() == QtCore.Qt.Key_F1:
-            print 'Se presiono la tecla F1 en %s' % (self.windowTitle())
+#            print 'Se presiono la tecla F1 en %s' % (self.windowTitle())
             qlanguage = QtCore.QLocale().language()
-            language = QtCore.QLocale.languageToString(qlanguage)
+            #language = QtCore.QLocale.languageToString(qlanguage)
+            language = 'Spanish'
             # Para mostrar internacionalización
-            print 'Mostrar ayuda para idioma: %s' % (language)
+#            print 'Mostrar ayuda para idioma: %s' % (language)
             path = QtCore.QDir.currentPath()
             urlTranslate = 'file://%s/Tranlate/%s/' % (path, language)
-            print 'URL - Translate:'
-            print urlTranslate
+#            print 'URL - Translate:'
+#            print urlTranslate
             # Se arma la URL para caragr en el Browser
             urlHelp = 'file:///%s/Help/%s/topics/%s.htm' % (path, language, self.objectName())
             url = QtCore.QUrl(urlHelp)
-            print 'URL - Help:'
-            print url.path()
+#            print 'URL - Help:'
+#            print url.path()
             # Solicitamos que se abra el Browser con la url indicada
-#             QtGui.QDesktopServices.openUrl(url)
+            QtGui.QDesktopServices.openUrl(url)

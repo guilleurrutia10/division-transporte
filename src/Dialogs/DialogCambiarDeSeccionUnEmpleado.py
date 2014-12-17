@@ -53,12 +53,13 @@ class DialogCambiardeSeccionunEmpleado(QtGui.QDialog, Ui_DialogCambiarDeSeccionU
             #if mostrarMensajeParaConfirmar(self, msj, 'Tranferir empleado') == QtGui.QMessageBox.Accepted:
             if mostrarMensajeParaConfirmar(self, msj, 'Tranferir empleado') == 'Ok':
                 #TODO: Paso4: Cambiar de seccion al empleado:
-                print 'El usuario eligio esta Seccion: %s' %(dialog.getSeccion_Seleccionada())
+#                print 'El usuario eligio esta Seccion: %s' %(dialog.getSeccion_Seleccionada())
                 Division_Transporte().cambiarDeSeccionAEmpleado(empleado_a_cambiar, dialog.getSeccion_Seleccionada())
                 seccc = dialog.getSeccion_Seleccionada() #Para debbugear...
                 self.accept()
             else:
-                print 'Anda el Rejected!!!!!'
+#                print 'Anda el Rejected!!!!!'
+                return
 
         
     def cargarListaDeEmpleados(self):

@@ -27,7 +27,7 @@ class WidgetModificarPersonal(QtGui.QWidget, Ui_WidgetModificarPersonal):
 
     def abrirDialogModificarPersonal(self):
         #Enviarle el empleado al dialogo...
-        print 'DEBUG: Modificar %s'%self.tableWidgetEmpleados.getElementoSeleccionado().nombreCompleto()
+#        print 'DEBUG: Modificar %s'%self.tableWidgetEmpleados.getElementoSeleccionado().nombreCompleto()
         dlgModificarPersonal = DialogModificarPersonal(self, self.tableWidgetEmpleados.getElementoSeleccionado())
         dlgModificarPersonal.exec_()
         #Cuando vuelve actualizamos la tabla

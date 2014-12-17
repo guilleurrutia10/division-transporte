@@ -36,4 +36,4 @@ class DialogAsignarReparacion(QtGui.QDialog, Ui_DialogAsignarReparacion):
         @version: 
         @author: 
         '''
-        print 'Click sobre aceptar'
+        pass

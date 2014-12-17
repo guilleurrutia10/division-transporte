@@ -117,9 +117,9 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         if not len(cadena):
             return
         try:
-            print 'Cambio el combo: %s' % self.comboBoxTipoDeReparacion.currentText()
+#            print '%s' % self.comboBoxTipoDeReparacion.currentText()
+            uncurrentitem = self.comboBoxTipoDeReparacion.currentText()
         except IndexError:
-            print "Cualquiera"
             return
 #        self._tipoDeReparacionSeleccionado = self.buscarTipoReparacion(self.comboBoxTipoDeReparacion.currentText())
         nombre_tReparacion_selecionado = unicode(self.comboBoxTipoDeReparacion.currentText())

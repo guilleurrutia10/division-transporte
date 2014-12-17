@@ -61,10 +61,7 @@ class Empleado(Persistent):
         self._reparaciones_asignadas = 0
         self._reparaciones_pendientes = 0
         self._fechaAlta = date.today()
-        print "DEBUG: Nuevo empleado: %s | %s: %s"%(self.nombreCompleto(),
-                                                    self.tipoDocumento,
-                                                    self.documento
-                                                    ) 
+#        print "DEBUG: Nuevo empleado: %s | %s: %s"%(self.nombreCompleto(), self.tipoDocumento, self.documento) 
         self._fechaBaja = '-'
         
     def __eq__(self, otro):

@@ -52,7 +52,6 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         @version: 
         @author: 
         '''
-        print 'Click sobre aceptar'
         self.accept()
 
     @QtCore.pyqtSlot()
@@ -62,7 +61,7 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         @author: 
         '''
         if self.dominioVehiculo:
-            print 'DOMINIO:', self.dominioVehiculo
+#            print 'DOMINIO:', self.dominioVehiculo
             dlgRegistrarReparacionesVehiculo = DialogRegistrarReparaciones(self, self.DIVISION.getVehiculo(self.dominioVehiculo))
             try:
                 dlgRegistrarReparacionesVehiculo.exec_()

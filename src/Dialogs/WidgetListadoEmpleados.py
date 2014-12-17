@@ -22,6 +22,7 @@ class WidgetListadoEmpleados(QtGui.QWidget, Ui_Form):
         self.infoSeccionDeLosEmpleados = {} #Diccionario para enviar las secciones a la que pertenece cada empleado
         self.cargarGrillaInicial()
         self.pushButtonToPDF.setObjectName('iconButton')
+        self.pushButtonToPDF.setHidden(True)
 
     # TODO: Utilizar utilies_formularios para la tabla de empleados.
     def cargarGrillaEmpleadosSinAsignar(self, empleados):

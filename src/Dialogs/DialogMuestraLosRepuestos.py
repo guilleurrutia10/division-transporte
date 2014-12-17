@@ -71,11 +71,11 @@ class DialogMuestraLosRepuestos(QtGui.QDialog, Ui_Dialog):
         self.cargarGrilla(self.repuestos)
          
     def seleccionarCelda(self, fila, columna):
-        print 'Celda Seleccionada fila %s columna %s' % (fila, columna)
+#        print 'Celda Seleccionada fila %s columna %s' % (fila, columna)
         itemSeleccionado = self.tableWidgetDatosRepuestos.item(fila, 0)
         division = Division_Transporte()
         self.repuestoSeleccionado = division.getRepuesto(unicode(itemSeleccionado.text()))
-        print self.repuestoSeleccionado
+#        print self.repuestoSeleccionado
         
     @QtCore.pyqtSlot()
     def on_pushButtonModificarRepuesto_clicked(self):

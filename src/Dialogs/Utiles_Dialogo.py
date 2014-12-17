@@ -24,7 +24,6 @@ def mostrarMensajeParaConfirmarTwo(aplicacion, mensaje, titulo):
 
 
 def mostrarMensajeParaConfirmar(aplicacion, mensaje, titulo):
-    print 'Aca va un dialogo!' + mensaje
     return 'Ok'
 
 
@@ -82,9 +81,9 @@ def seleccionarCarpeta(aplicacion):
         file_dialog.setFileMode(QtGui.QFileDialog.Directory)
         file_dialog.setOption(QtGui.QFileDialog.ShowDirsOnly)
         if (file_dialog.exec_()):
-            print 'len: %s' % (len(file_dialog.selectedFiles()))
+#            print 'len: %s' % (len(file_dialog.selectedFiles()))
             for folder in file_dialog.selectedFiles():
-                print 'Imprimiendo: %s' % folder
+                debug= 'Imprimiendo: %s' % folder
         folder = unicode(folder)
         return folder
 

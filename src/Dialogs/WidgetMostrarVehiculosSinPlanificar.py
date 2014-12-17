@@ -22,7 +22,7 @@ class DialogAsignarFechaReparacion(QtGui.QDialog, Ui_AsignarFechaReparacion):
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        print 'Click sobre Aceptar'
+        pass
         
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
@@ -41,7 +41,6 @@ class DialogPlanificarReparaciones(QtGui.QDialog, Ui_DialogPlanificarReparacione
         self.connect(self.pushButtonPlanificarReparacion, QtCore.SIGNAL("pressed()"), self.abrirDialogAsignarFechaReparacion)
        
     def abrirDialogAsignarFechaReparacion(self):
-        print 'abriendo dialogo AsignarFechaReparacion'
         dlgAsignarFechaReparacion = DialogAsignarFechaReparacion(self)
         dlgAsignarFechaReparacion.exec_()
         
@@ -55,7 +54,7 @@ class DialogPlanificarReparaciones(QtGui.QDialog, Ui_DialogPlanificarReparacione
         
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        print 'Click sobre Aceptar...'    
+        pass    
     
 
 class WidgetMostrarVehiculosSinPlanificar(QtGui.QWidget, Ui_WidgetMostrarVehiculosSinPlanificar):
@@ -73,7 +72,6 @@ class WidgetMostrarVehiculosSinPlanificar(QtGui.QWidget, Ui_WidgetMostrarVehicul
         self.pushButtonGuardar
        
     def abrirDialogPlanificarReparaciones(self):
-        print 'abriendo dialogo Planificar Reparaciones'
         dlgPlanificarReparaciones = DialogPlanificarReparaciones(self)
         dlgPlanificarReparaciones.exec_()
 
@@ -87,4 +85,4 @@ class WidgetMostrarVehiculosSinPlanificar(QtGui.QWidget, Ui_WidgetMostrarVehicul
         
     @QtCore.pyqtSlot()
     def on_pushButtonGuardar_clicked(self):
-        print 'Click sobre Guardar...'    
+        return    

@@ -11,11 +11,11 @@ from negocio.Division_Transporte import Division_Transporte
 from FormContrasenaEncargado import DialogCrearUsuarioEncargado
 
 from Utiles_Dialogo import mostrarMensaje
-
+from AyudaManejador import AyudaManejador
 COLUMNA_DNI = 0
 
 
-class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
+class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion, AyudaManejador):
     '''
     classdocs
     '''
@@ -64,7 +64,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
         if not self._encargado:
             mostrarMensaje(self, 'No se ha asignado el Encargado de la Seccion.', 'Error al cargar encargado')
             return
-        print 'Cargando la nueva Seccion...'
+##        print 'Cargando la nueva Seccion...'
 
         #self._encargado.setPassword('') #Seteamos una variable dinamica en el encargado
         self.pedirPassEncargado()
@@ -89,7 +89,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
             if dialog.exec_() == QtGui.QDialog.Accepted:
                 if dialog.contrasenasValidas():
                     self._encargado.setPassword(dialog.getPassEncargado())
-                    print 'Pass Encargado: %s' % (dialog.getPassEncargado())
+#                    print 'Pass Encargado: %s' % (dialog.getPassEncargado())
                     break
                 else:
 #                    dialog.lineEditPassword.clear()
@@ -103,7 +103,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion):
    
 #        if dialog.exec_() == QtGui.QDialog.Accepted:
 #            self._encargado.setPassword(dialog.getPassEncargado())
-#            print 'Pass Encargado: %s' % (dialog.getPassEncargado())
+##            print 'Pass Encargado: %s' % (dialog.getPassEncargado())
 
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):

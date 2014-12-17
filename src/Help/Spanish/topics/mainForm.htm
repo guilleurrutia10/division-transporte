@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Basic elements</title>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../css/styles_standard.css">
+<link rel="stylesheet" type="text/css" href="../css/divt.css">
+</head>
+<body>
+
+  <div id="topictop">&nbsp;</div>
+  <div id="topictitleleft">
+    <div id="topictitle">
+      <h3>Elementos básicos de la interfaz de usuario</h3>
+    </div>
+  </div>
+  
+  <div id="main">
+    <img src="../img/desktop.png" style="float: left; margin-right:12px;" />
+    <p>
+     La siguiente imagen muestra los elementos básicos de la interfaz de usuario de la DivT.
+     <br />
+     Haz click sobre la etiqueta deseada para obtener una descripción más detallada del componente de
+     interfaz.
+    </p>
+     <div align="center" style="clear:both; margin-top:16px;">
+     <!-- <img src="../img/main.png" usemap="#main" style="max-width:100%;"/> -->
+     <img src="../img/main.png" usemap="#main" id="img" class="image"/>
+      <map id="mapa" name="main">
+        <area shape="rect" coords="488,27,608,58" href="Main Menu.htm" target="">
+        <area shape="rect" coords="77,61,186,92" href="Quick launch.htm" target="">
+        <area shape="rect" coords="75,200,185,233" href="Widget.htm" target="">
+        <area shape="rect" coords="654,200,725,235" href="Dialog.htm" target="">
+        <area shape="rect" coords="82,568,156,600" href="Tooltip.htm" target="">
+      </map>
+    </div>
+    
+    <p class="big" style="padding-top:2%;">
+      Visión general de los componentes de interfaz.
+    </p>
+    <ul class="shr">
+      <li><a href="Main Menu.htm">Main menu</a></li>
+      <li><a href="Quick launch.htm">Quick launch</a></li>
+      <li><a href="Dialog.htm">Dialog</a></li>
+      <li><a href="Tooltip.htm">Tooltip</a></li>
+    </ul>
+  </div>
+  
+  <div id="foot">
+    &copy; DivT - Software
+  </div>
+  <script type="text/javascript">
+  window.addEventListener('resize', function(event){
+    event.preventDefault();
+    map = document.getElementById('mapa');
+    img = document.getElementById('img').parentNode;
+    ancho = img.clientWidth;
+    alto = img.clientHeight;
+    for (var index in map.children)
+    {
+      map.children[index].coords;
+    }
+    });
+  window.addEventListener('resize', function(event){
+    event.preventDefault();
+    map = document.getElementById('mapa');
+    img = document.getElementById('img').parentNode;
+    ancho = img.clientWidth;
+    alto = img.clientHeight;
+    for (var index in map.children)
+    {
+      map.children[index].coords;
+    }
+  });
+  </script>
+</body>
+</html>

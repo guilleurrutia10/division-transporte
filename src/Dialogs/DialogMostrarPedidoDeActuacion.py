@@ -57,7 +57,6 @@ class DialogMostrarPedidoDeActuacion(QtGui.QDialog, Ui_DialogMostrarPedidoDeActu
             
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        print 'Click sobre aceptar'
         self.accept()
     
     @QtCore.pyqtSlot()

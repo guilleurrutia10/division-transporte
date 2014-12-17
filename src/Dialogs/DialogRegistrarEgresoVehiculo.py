@@ -62,7 +62,7 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
             self.mostrarMensaje('Debe seleccionar un vehículo.', 'Seleccionar vehículo')
             
     def seleccionarCelda(self, fila, columna):
-        print 'Celda seleccionada: %s,%s' % (fila, columna)
+#        print 'Celda seleccionada: %s,%s' % (fila, columna)
         self.itemDominio = self.miWidget.tableWidgetListadoDeVehiculos.item(fila, 0)
         
     '''
@@ -108,7 +108,6 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         @version: 
         @author: 
         '''
-        print 'Click sobre aceptar'
         kilometraje = int(self.lineEditKilometraje.text())
         combustible = int(self.lineEditCombustible.text())
         f = self.dateEditFechaEgreso.date()

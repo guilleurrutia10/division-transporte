@@ -72,7 +72,6 @@ class SeleccionarReporteDeSeccion(QtGui.QDialog, Ui_Dialog):
         self._secciones = secciones
     
     def generarReporteCsv(self):
-        print 'CSV'
     
         fileDialog = QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Reparaciones por Seccion'))
         filename = fileDialog.getSaveFileName(parent=self)
@@ -93,7 +92,7 @@ class SeleccionarReporteDeSeccion(QtGui.QDialog, Ui_Dialog):
                              'Empleados asignados': turno.empleadosAsignados(),
                              'Finalizada': reparacion.estaFinalizada()
                              }
-                        print r 
+#                        print r 
                         #writer.writerow(seccion.dic_valores_csv())
                         writer.writerow(r)
                 #print seccion.getTurnosTodos()
@@ -118,7 +117,6 @@ class SeleccionarReporteDeSeccion(QtGui.QDialog, Ui_Dialog):
         os.rename(nametemp, filename)
 
     def generarReporteTorta(self):
-        print 'TORTA'
         import matplotlib.pyplot as plt
         
         # The slices will be ordered and plotted counter-clockwise.

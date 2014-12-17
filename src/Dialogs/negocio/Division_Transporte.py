@@ -47,7 +47,8 @@ class MiZODB(object):
             self.conexion = self.db.open()
             self.raiz = self.conexion.root()
         except ClientDisconnected:
-            print 'El cliente se ha desconectado debido a que el Servidor no corre...'
+#            print 'El cliente se ha desconectado debido a que el Servidor no corre...'
+            return
 
     def open(self):
         '''
@@ -249,7 +250,7 @@ class Division_Transporte(Persistent):
         self.instance.id = 1
         # TODO: try: ... ClientDisconnected -> Error en BD
         self.zodb = MiZODB()
-        print "La base soporta undo: %s" % self.zodb.db.supportsUndo()
+#        print "La base soporta undo: %s" % self.zodb.db.supportsUndo()
         self.legajos = PersistentList()
         self.localidades = PersistentList()
         self.empleados = PersistentList()
@@ -362,7 +363,7 @@ class Division_Transporte(Persistent):
         try:
             return self.zodb.raiz['empleados'][clave]
         except KeyError:
-            raise ExcepcionObjeNoExiste
+            raise ExcepcionObjeNoExiste(clave)
 
     def agregarEmpleado(self, nombre, apellido, numeroDocumento, tipoDocumento,
                         fechaNac, domicilio, telefono, email):
@@ -502,7 +503,7 @@ class Division_Transporte(Persistent):
         # TODO: Se debería comprobar si el dominio y el registro interno son iguales.
         try:
             self.zodb.save('vehiculos', dominio, vehiculo)
-            print self.zodb.getTransacciones()
+#            print self.zodb.getTransacciones()
         except ExcepcionObjetoExiste:
             raise ExcepcionVehiculoExiste(dominio)
         # TODO:
@@ -777,22 +778,42 @@ class Division_Transporte(Persistent):
         
         '''
         self.zodb.conexion.sync()
-        if not empleadoamodificar in self.getEmpleados().values():
-            self.zodb.save('empleados', empleadoamodificar.getDocumento(), empleadoamodificar)
-            self.zodb.remove('empleados', empleadoamodificar)
-            print 'DEBUG: Cambio documento'
-        empleadoamodificar.setNombre(dicDatosActualizados['nombre'])
-        empleadoamodificar.setApellido(dicDatosActualizados['apellido'])
-        empleadoamodificar.setDocumento(dicDatosActualizados['nrodocumento'])
-        empleadoamodificar.set_fecha_nacimiento(dicDatosActualizados['fechanacimiento'])
-        empleadoamodificar.set_domicilio(dicDatosActualizados['domicilio'])
-        empleadoamodificar.set_telefono(dicDatosActualizados['telefono'])
-        empleadoamodificar.set_email(dicDatosActualizados['email'])
-        tiposDocumentos = self.zodb.raiz['tiposDocumentos']
-        empleadoamodificar.set_tipo_documento(tiposDocumentos[dicDatosActualizados['tipodocumento']])
+        if empleadoamodificar.getDocumento() != dicDatosActualizados['nrodocumento']:
+            #Quieren modificar el documento
+            try:
+                empleadoAux = self.getEmpleado(dicDatosActualizados['nrodocumento'])
+#                print "DEBUG: Usuario ya existia"
+                raise ExcepcionObjetoExiste(dicDatosActualizados['nrodocumento'])
+            except ExcepcionObjeNoExiste:
+                self.zodb.save('empleados', dicDatosActualizados['nrodocumento'], empleadoamodificar)
+                #self.zodb.remove('empleados', empleadoamodificar)
+#                print 'DEBUG: Cambio documento'
+                empleadoamodificar.setNombre(dicDatosActualizados['nombre'])
+                empleadoamodificar.setApellido(dicDatosActualizados['apellido'])
+                empleadoamodificar.setDocumento(dicDatosActualizados['nrodocumento'])
+                empleadoamodificar.set_fecha_nacimiento(dicDatosActualizados['fechanacimiento'])
+                empleadoamodificar.set_domicilio(dicDatosActualizados['domicilio'])
+                empleadoamodificar.set_telefono(dicDatosActualizados['telefono'])
+                empleadoamodificar.set_email(dicDatosActualizados['email'])
+                tiposDocumentos = self.zodb.raiz['tiposDocumentos']
+                empleadoamodificar.set_tipo_documento(tiposDocumentos[dicDatosActualizados['tipodocumento']])
+                transaction.commit()
+        else:
+            if not empleadoamodificar in self.getEmpleados().values():
+                self.zodb.save('empleados', empleadoamodificar.getDocumento(), empleadoamodificar)
+                self.zodb.remove('empleados', empleadoamodificar)
+#                print 'DEBUG: Cambio documento'
+            empleadoamodificar.setNombre(dicDatosActualizados['nombre'])
+            empleadoamodificar.setApellido(dicDatosActualizados['apellido'])
+            empleadoamodificar.setDocumento(dicDatosActualizados['nrodocumento'])
+            empleadoamodificar.set_fecha_nacimiento(dicDatosActualizados['fechanacimiento'])
+            empleadoamodificar.set_domicilio(dicDatosActualizados['domicilio'])
+            empleadoamodificar.set_telefono(dicDatosActualizados['telefono'])
+            empleadoamodificar.set_email(dicDatosActualizados['email'])
+            tiposDocumentos = self.zodb.raiz['tiposDocumentos']
+            empleadoamodificar.set_tipo_documento(tiposDocumentos[dicDatosActualizados['tipodocumento']])
+            transaction.commit()
 
-        transaction.commit()
-        
         
 ##############################################################################
 ########################## TEST DIVISION #####################################

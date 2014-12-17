@@ -38,8 +38,8 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         '''
         Planificar vehiculo
         '''
-        print 'selecciono el vehiculo: %d\n Coordenadas: (%d, %d)' %(fila, fila, columna)
-        print self.tableWidgetListadoDeVehiculos.getVehiculoEn(fila).getDominio()
+#        print 'selecciono el vehiculo: %d\n Coordenadas: (%d, %d)' %(fila, fila, columna)
+        debug= self.tableWidgetListadoDeVehiculos.getVehiculoEn(fila).getDominio()
 
     @QtCore.pyqtSlot()
     def on_pushButtonToPdf_clicked(self):
@@ -47,7 +47,7 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
         fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave)
         if fileDialog.exec_() == QtGui.QFileDialog.AcceptSave:
             for filename in fileDialog.selectedFiles():
-                print 'Imprimiendo: %s' % filename
+                debug= 'Imprimiendo: %s' % filename
         else:
             return
         cabeceraVehiculos = ['',
@@ -94,11 +94,6 @@ class DialogPlanificar_1(QtGui.QDialog, Ui_DlgPlanificar_1):
         super(DialogPlanificar_1, self).__init__(parent)
         self.setupUi(self)
         self._vehiculo = vehiculoSeleccionado
-        print 'Vehiculo', self._vehiculo.getDominio()
-        print 'Mecanica? ', self._vehiculo.tieneReparacionesMecanicas()
-#        print 'Electronica? ', self._vehiculo.tieneReparacionesElectricas()
-#        print 'Chapa? ', self._vehiculo.tieneReparacionesChapa()
-#        print 'Gomeria? ', self._vehiculo.tieneReparacionesGomeria()
 
 
 class Listado_Vehiculos_en_reparacion_por_Seccion(QtGui.QWidget, Ui_FormListadoVehiculos):
