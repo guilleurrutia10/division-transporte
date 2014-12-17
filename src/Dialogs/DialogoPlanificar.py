@@ -7,17 +7,18 @@ Created on 20/07/2014
 
 from PyQt4 import QtCore, QtGui
 import transaction
-from datetime import date
 from time import localtime
+from PyQt4.QtGui import QFileDialog
 
 from formularios.DlgPlanificar import Ui_DialogPlanificar
 from Utiles_Dialogo import mostrarMensaje
 from negocio.Turno import Turno
 from negocio.Division_Transporte import Division_Transporte
 from reportes import generarHojaDeRuta
-from PyQt4.QtGui import QFileDialog
+from AyudaManejador import AyudaManejador
 
-class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
+
+class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
     '''
     classdocs
     '''
@@ -75,7 +76,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         fecharecepcion = self._vehiculo.getPedidoDeActuacion().getFechaRealizacion()
         self.dateEditFechaTurno.setDate((QtCore.QDate(fecharecepcion.year, fecharecepcion.month, fecharecepcion.day)))
         self.dateEditFechaTurno.setMinimumDate((QtCore.QDate(fecharecepcion.year, fecharecepcion.month, fecharecepcion.day)))
-        #Popup verdadero:
+        # Popup verdadero:
         self.dateEditFechaTurno.setCalendarPopup(True)
         self._todoCargado = True
 
@@ -119,7 +120,6 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         # Lo utilizan varios métodos
         f = self.dateEditFechaTurno.date()
         fecha = '%s/%s/%s' % (f.day(), f.month(), f.year())
-#        print 'Fecha: ', fecha
         self.comboBoxHoraTurno.clear()
         horas = []
         horas.extend(self._seccionSeleccionada.getHorasSinTurnoParaElDia(fecha))
@@ -160,15 +160,9 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
 
     @QtCore.pyqtSlot()
     def on_PushButtonCrearTurno_clicked(self):
-        # TODO: [ok] PushButton_2 --> PushButtonCrearTurno!!
-        # seccion.tieneTurnoLibreParaFechaHora('fechaSeleccionada', 'HoraSeleccionada') #Siempre True, Porque el dialogo no muestra opciones ocupadas
         f = self.dateEditFechaTurno.date()
-        fecha = '%s/%s/%s' %(f.day(), f.month(), f.year())
+        fecha = '%s/%s/%s' % (f.day(), f.month(), f.year())
         hora = int(self.comboBoxHoraTurno.currentText())
-        # TODO [ok]: Ver que se pueden crear turnos con detalles de plan vacíos.
-        # Además, puedo agregar varios turnos para una única reparación.
-
-        # Si == 0 mostrar debe registrar reparación
         if len(self._reparaciones_asignadas) == 0:
             mostrarMensaje(self, self.trUtf8('Debe seleccionar al menos una reparación para registrar el turno'), self.trUtf8('Truno'))
             return
@@ -183,14 +177,8 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
         # Para saber de qué cliente debemos borrar las transacciones.
         transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
         transaction.commit()# Para que turno quede en el plan...
-#         mostrarMensaje(self,
-#                        self.trUtf8("Turno creado con éxito:\nDía: %s %d horas\nVehículo: %s\nSección: %s"%(fecha, hora, self._vehiculo.getDominio(), self._seccionSeleccionada.getNombre()),
-#                        self.trUtf8('Turno')))
         mostrarMensaje(self, "Turno creado con exito:\nDia: %s %d horas\nVehiculo: %s\nSeccion: %s"%(fecha, hora, self._vehiculo.getDominio(), self._seccionSeleccionada), 'Turno')
         if self._vehiculo.tieneTodasLasReparacionesPlanificadas():
-#             mostrarMensaje(self,
-#                            self.trUtf8("El vehículo ya posee todas sus reparaciones planificadas\nOk para finalizar, Cancel para deshacer"),
-#                            self.trUtf8('Fin planificación'))
             mostrarMensaje(self,"El vehiculo ya posee todas sus reparaciones planificadas\nOk para finalizar, Cancel para deshacer", 'Fin planificación')
             return
 
@@ -229,16 +217,15 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar):
 
     def cancelar(self):
         self.DIVISION.zodb.deshacerCommits()
-        #TODO [OK]: No tirar commits a lo loco. Ahora se deshacen los commits parciales.
         transaction.abort()
-        #Y ademas:
-        #alvehiculo.decirleQuePongaTodasSusReparacionesCOmoNoPlanificadas!
+        # Y ademas:
+        # alvehiculo.decirleQuePongaTodasSusReparacionesCOmoNoPlanificadas!
 
     def mostrarHojaDeRuta(self):
         '''
         Primer paso para generar el reporte hoja de ruta:
         '''
-        #turnos_ordenados = self._vehiculo.getTurnosOrdenados()
+        # turnos_ordenados = self._vehiculo.getTurnosOrdenados()
         fileDialog = QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Orden de Reparación'))
         filename = fileDialog.getSaveFileName(parent=self)
         generarHojaDeRuta(self._vehiculo, filename)

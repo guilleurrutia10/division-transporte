@@ -10,9 +10,10 @@ from DialogRegistrarReparaciones import DialogRegistrarReparaciones
 from WidgetListadoDeVehiculos import ListadoVehiculos
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
+from AyudaManejador import AyudaManejador
 
 
-class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_DialogMostrarLosVehiculosParaAgregarReparacionesAOR):
+class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_DialogMostrarLosVehiculosParaAgregarReparacionesAOR, AyudaManejador):
     '''
     Dialogo que muestra todos los vehiculos de la Division y brinda
     la posibilidad de registrarle sus reparaciones.
@@ -30,7 +31,6 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         super(DialogMostrarLosVehiculosParaAgregarReparacionesAOR, self).__init__(parent)
         self.setupUi(self)
         self.DIVISION = Division_Transporte()
-        #self.listaDeVehiculos = WidgetListadoDeVehiculos.ListadoVehiculos(self.DIVISION.getVehiculos().values(), self.widget)
         self.listaDeVehiculos = ListadoVehiculos(self.DIVISION.getVehiculosEnRevision(), self.widget)
         self.listaDeVehiculos.connect(self.listaDeVehiculos.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
         self.dominioVehiculo = None
@@ -61,11 +61,9 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
         @author: 
         '''
         if self.dominioVehiculo:
-#            print 'DOMINIO:', self.dominioVehiculo
             dlgRegistrarReparacionesVehiculo = DialogRegistrarReparaciones(self, self.DIVISION.getVehiculo(self.dominioVehiculo))
             try:
                 dlgRegistrarReparacionesVehiculo.exec_()
-#                 self.listaDeVehiculos.cargarGrilla(self.DIVISION.getVehiculosEnRevision())
                 vehiculosEnRevision = self.DIVISION.getVehiculosEnRevision()
                 self.listaDeVehiculos.tableWidgetListadoDeVehiculos.cargarConVehiculos(vehiculosEnRevision)
             except Excepcion_Orden_No_Esta_En_Revision, e:
@@ -75,5 +73,4 @@ class DialogMostrarLosVehiculosParaAgregarReparacionesAOR(QtGui.QDialog, Ui_Dial
             return
 
     def seleccionarCelda(self, fila, columna):
-        #self.dominioVehiculo = unicode(self.listaDeVehiculos.tableWidgetListadoDeVehiculos.item(fila, 0).text())
         self.dominioVehiculo = unicode(self.listaDeVehiculos.tableWidgetListadoDeVehiculos.getVehiculoSeleccionado().getDominio())

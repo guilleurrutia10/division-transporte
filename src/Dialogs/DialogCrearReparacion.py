@@ -13,9 +13,10 @@ from negocio.excepciones.Excepcion_Orden_Posee_Reparacion import Excepcion_Orden
 from negocio.Reparacion import Reparacion
 from negocio.RepuestoUtilizados import RepuestoUtilizados
 from negocio.excepciones.Except_NoHayReparacionesDisponibles import Except_NoHayReparacionesDisponibles
+from AyudaManejador import AyudaManejador
 
 
-class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
+class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion, AyudaManejador):
     '''
     Atributos:
     _tipoDeReparacionSeleccionado
@@ -32,11 +33,9 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
         try:
             self._tipoDeReparacionSeleccionado = self._tiposDeReparaciones[0]
         except IndexError:
-            raise Except_NoHayReparacionesDisponibles() 
+            raise Except_NoHayReparacionesDisponibles()
         self.llenarComboBoxTiposReparacion()
-#        self._tipoDeReparacionSeleccionado = None
         self._repuestosSolicitados = []
-#        self._ordenDeReparacion = ordenDeReparacion
         self._vehiculoSeleccionado = vehiculoSeleccionado
 
     def llenarComboBoxTiposReparacion(self):
@@ -64,7 +63,7 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
             - Descripcion
             - Lista de repuestos.
         Esta reparacion creada, la agregamos a la orden de reparacion con la que el dialogo está trabajando
-        
+
         Update: Le asignamos un codigo a la reparacion, consultando al Gestor de COdigos, del obj Division.
         '''
         if not self.seleccionoAlgunRepuesto():
@@ -165,4 +164,4 @@ class DialogCrearReparacion(QtGui.QDialog, Ui_DialogCrearReparacion):
 
     def buscarTipoReparacion(self, unTipoDeReparacion):
         division = Division_Transporte()
-        return division.getTipoReparacion(unicode(unTipoDeReparacion))
+        return division.getTipoReparacion(unicode(unTipoDeReparacion))

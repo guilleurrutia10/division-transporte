@@ -25,7 +25,7 @@ except AttributeError:
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
+        Dialog.setObjectName(_fromUtf8("DialogMuestraLosRepuestos"))
         Dialog.resize(800, 600)
         Dialog.setMinimumSize(QtCore.QSize(800, 600))
         self.verticalLayout = QtGui.QVBoxLayout(Dialog)

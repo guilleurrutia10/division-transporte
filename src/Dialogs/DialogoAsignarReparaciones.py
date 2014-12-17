@@ -5,15 +5,15 @@ Created on 22/07/2014
 '''
 
 from PyQt4 import QtCore, QtGui
-
-from formularios.DlgAsignarReparaciones import Ui_DialogoAsignarReparaciones
-from negocio.Division_Transporte import Division_Transporte
-#from PyQt4.Qwt5.qplt import QString
-from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
-from negocio.excepciones.SinTurnosException import SinTurnosException
 import copy
 
-class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
+from formularios.DlgAsignarReparaciones import Ui_DialogoAsignarReparaciones
+from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
+from negocio.excepciones.SinTurnosException import SinTurnosException
+from AyudaManejador import AyudaManejador
+
+
+class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones, AyudaManejador):
     '''
     classdocs
     '''
@@ -59,7 +59,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
         #solucion:
         self._empleadosSinAsignar = []
         self._empleadosSinAsignar.extend(self._seccion.getEmpleados())
-        
+
         self._empleadosAsignados = []
 
         self.tableWidgetEmpleadosAsignados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
@@ -120,7 +120,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
             mostrarMensaje(self, 'Debe seleccionar un empleado.', 'Seleccionar')
             return
         self._empleadosAsignados.append(self.tableWidgetEmpleadosDisponibles.getEmpleadoSeleccionado())
-        self._empleadosSinAsignar.remove(self.tableWidgetEmpleadosDisponibles.getEmpleadoSeleccionado())        
+        self._empleadosSinAsignar.remove(self.tableWidgetEmpleadosDisponibles.getEmpleadoSeleccionado())
         self.refrescarTablasEmpleados()
 
     @QtCore.pyqtSlot()
@@ -130,22 +130,22 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones):
             mostrarMensaje(self, 'Debe seleccionar un empleado.', 'Seleccionar')
             return
         self._empleadosSinAsignar.append(self.tableWidgetEmpleadosAsignados.getEmpleadoSeleccionado())
-        self._empleadosAsignados.remove(self.tableWidgetEmpleadosAsignados.getEmpleadoSeleccionado())        
+        self._empleadosAsignados.remove(self.tableWidgetEmpleadosAsignados.getEmpleadoSeleccionado())
         self.refrescarTablasEmpleados()
 
     def aceptar(self):
         mostrarMensaje(self,
-                       'Turno: %s %dhs.\nSe asignaron los siguientes empleados:\n%s'%(self._fechaSeleccionada,
-                                                                                      self._horaSeleccionada,
-                                                                                      '\n'.join([e.getNombre() for e in self._empleadosAsignados])),
+                       'Turno: %s %dhs.\nSe asignaron los siguientes empleados:\n%s '% (self._fechaSeleccionada,
+                                                                                        self._horaSeleccionada,
+                                                                                        '\n'.join([e.getNombre() for e in self._empleadosAsignados])),
                        'Asignacion finalizada'
                        )
         self._turnoSeleccionado.asignarEmpleados(self._empleadosAsignados)
-        #Si el vehiculo ya tiene todos sus turnos asignados
-        #vehiculo.todosLosTurnosAsignados? -> OR -> Estado -> Plan.todosLosTurnosAsignados?? (CofR)
+        # Si el vehiculo ya tiene todos sus turnos asignados
+        # vehiculo.todosLosTurnosAsignados? -> OR -> Estado -> Plan.todosLosTurnosAsignados?? (CofR)
 
     def cancelar(self):
-        #No tirar commits a lo loco
-        #Y ademas:
-        #alvehiculo.decirleQuePongaTodasSusReparacionesCOmoNoPlanificadas!
+        # No tirar commits a lo loco
+        # Y ademas:
+        # alvehiculo.decirleQuePongaTodasSusReparacionesCOmoNoPlanificadas!
         pass

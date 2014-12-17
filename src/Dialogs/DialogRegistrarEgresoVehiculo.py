@@ -6,23 +6,23 @@ Created on 03/11/2012
 '''
 
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtCore import QString
+import transaction
 
 from formularios.DialogRegistrarEgresoVehiculo import Ui_DialogRegistraEgresoVehiculo
 from formularios.DialogDatosEgresoVehiculo import Ui_DialogDatosEgresoVehiculo
-from WidgetListadoDeVehiculos import ListadoVehiculos 
-
+from WidgetListadoDeVehiculos import ListadoVehiculos
 from negocio.Division_Transporte import Division_Transporte
-from PyQt4.QtCore import QString
-import transaction
 from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
+from AyudaManejador import AyudaManejador
 
-class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehiculo):
+
+class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehiculo, AyudaManejador):
     '''
     classdocs
     @version: 
     @author: 
     '''
-    
     def __init__(self, parent=None):
         '''
         Constructor
@@ -31,11 +31,9 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
         '''
         super(DialogRegistrarEgresoVehiculo, self).__init__(parent)
         self.setupUi(self)
-#        WidgetListadoDeVehiculos.ListadoVehiculos(self.widget)
-#         self.miWidget = ListadoVehiculos(self.widget)
         self.miWidget = ListadoVehiculos(Division_Transporte().getVehiculos().values())
         self.miWidget.connect(self.miWidget.tableWidgetListadoDeVehiculos, QtCore.SIGNAL('cellClicked(int,int)'), self.seleccionarCelda)
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         '''
@@ -43,7 +41,7 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
         @author: 
         '''
         self.reject()
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonRegistrarEgreso_clicked(self):
         '''
@@ -60,11 +58,10 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
                 self.mostrarMensaje('Debe seleccionar un vehículo.', 'Seleccionar vehículo')
         except AttributeError:
             self.mostrarMensaje('Debe seleccionar un vehículo.', 'Seleccionar vehículo')
-            
+
     def seleccionarCelda(self, fila, columna):
-#        print 'Celda seleccionada: %s,%s' % (fila, columna)
         self.itemDominio = self.miWidget.tableWidgetListadoDeVehiculos.item(fila, 0)
-        
+
     '''
     TODO: Este método se repite en varios Dialogs.
     '''
@@ -73,14 +70,14 @@ class DialogRegistrarEgresoVehiculo(QtGui.QDialog, Ui_DialogRegistraEgresoVehicu
         msgBox.setText(QtCore.QString.fromUtf8(mensaje))
         msgBox.setWindowTitle(QtCore.QString.fromUtf8(titulo))
         return msgBox.exec_()
-        
+
+
 class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
     '''
     classdocs
     @version: 
     @author: 
     '''
-    
     def __init__(self, parent=None, vehiculo= None):
         '''
         Constructor
@@ -91,17 +88,17 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         self.setupUi(self)
         self._vehiculo = vehiculo
         self.labelDominio.setText(QString(self._vehiculo.getDominio()))
-        #Css
+        # Css
         self.label.setObjectName('label')
         self.label_2.setObjectName('label')
         self.label_3.setObjectName('label')
         self.label_4.setObjectName('label')
-        #Fecha minima:
+        # Fecha minima:
         fechas = self._vehiculo.getFechasDeTurnos()
         fechaminima = sorted(fechas, cmp=compara_fechas_en_cadenas)[-1]
         dia, mes, anio = [int(n) for n in fechaminima.split('/')]
         self.dateEditFechaEgreso.setMinimumDate((QtCore.QDate(anio, mes, dia))) 
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         '''
@@ -111,12 +108,12 @@ class DialogDatosEgresoVehiculo(QtGui.QDialog, Ui_DialogDatosEgresoVehiculo):
         kilometraje = int(self.lineEditKilometraje.text())
         combustible = int(self.lineEditCombustible.text())
         f = self.dateEditFechaEgreso.date()
-        fecha = '%s/%s/%s' %(f.day(), f.month(), f.year())
+        fecha = '%s/%s/%s' % (f.day(), f.month(), f.year())
         self._vehiculo.registrarEgreso(kilometraje, combustible, fecha)
         transaction.commit()
         mostrarMensaje(self, u'Egreso del vehículo %s registrado con exito'%(self._vehiculo.getDominio()), 'Egreso exitoso')
         self.accept()
-    
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         '''

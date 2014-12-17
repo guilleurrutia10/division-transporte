@@ -4,14 +4,16 @@ Created on 29/07/2014
 @author: LeoMorales
 '''
 from PyQt4 import QtCore, QtGui
-from formularios.DlgFinalizarTurno import Ui_DialogoFinalizarTurno
-from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
-from negocio.excepciones.SinTurnosException import SinTurnosException
 from PyQt4.QtCore import QString
 import transaction
 
+from formularios.DlgFinalizarTurno import Ui_DialogoFinalizarTurno
+from Utiles_Dialogo import mostrarMensaje, compara_fechas_en_cadenas
+from negocio.excepciones.SinTurnosException import SinTurnosException
+from AyudaManejador import AyudaManejador
 
-class DialogoRegistrarFinTurno(QtGui.QDialog, Ui_DialogoFinalizarTurno):
+
+class DialogoRegistrarFinTurno(QtGui.QDialog, Ui_DialogoFinalizarTurno, AyudaManejador):
     '''
     Atributos:
         self._seccion
@@ -19,18 +21,19 @@ class DialogoRegistrarFinTurno(QtGui.QDialog, Ui_DialogoFinalizarTurno):
         self._horaSeleccionada
         self._turnoSeleccionado
     '''
-    def __init__(self, parent = None, seccion= None):
+    def __init__(self, parent=None, seccion=None):
         '''
         Constructor
         '''
         super(DialogoRegistrarFinTurno, self).__init__(parent)
         self.setupUi(self)
         self._seccion = seccion
-        self._todoCargado = False #Variable para ignorar los cambios en los combo en el momento de carga de los mismos...
+        # Variable para ignorar los cambios en los combo en el momento de carga de los mismos...
+        self._todoCargado = False
         self.inicializar()
 
     def inicializar(self):
-        #comboBoxFecha:
+        # omboBoxFecha:
         dias_con_turnos = list(self._seccion.getDiasEnLosQueHayTurnoAsignado())
         dias_con_turnos.sort(cmp=compara_fechas_en_cadenas)
         for dia in dias_con_turnos:

@@ -10,8 +10,10 @@ from formularios.DialogModificarPersonal import Ui_DialogModificarPersonal
 from negocio.Division_Transporte import Division_Transporte
 from Utiles_Dialogo import MensajeCritico, mostrarMensaje
 from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionObjetoExiste
+from AyudaManejador import AyudaManejador
 
-class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
+
+class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal, AyudaManejador):
     '''
     classdocs
     Elementos:
@@ -33,8 +35,7 @@ class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
         super(DialogModificarPersonal, self).__init__(parent)
         self.setupUi(self)
         self._empleado = empleado_a_modificar
-#        print 'DEBUG Debo Modificar Empleado %s'%self._empleado.nombreCompleto()
-        #Guardamos los QDAtos para utilizar luego sus metodos de comparacion y saber si han sido modificados
+        # Guardamos los QDAtos para utilizar luego sus metodos de comparacion y saber si han sido modificados
         self.qDatosEmpleado= {'nombre':QtCore.QString(self._empleado.getNombre()),
                               'apellido':QtCore.QString(self._empleado.getApellido()),
                               'nrodocumento':QtCore.QString(self._empleado.getDocumento()),
@@ -57,15 +58,14 @@ class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
         self.qDatosEmpleado.update({'telefono':QtCore.QString(textotelefono)})
         self.lineEditTelefono.setText(self.qDatosEmpleado['telefono'])
         self.comboBoxTipoDocumento.clear()
-        currentItem= 0
+        currentItem = 0
         for index, tipodocumento in enumerate(Division_Transporte().getTipoDeDocumentos()):
             item = QtCore.QStringList(tipodocumento)
             if self._empleado.getTipoDocumento().get_codigo_tipo_documento() == tipodocumento: currentItem = index 
             self.comboBoxTipoDocumento.addItems(item)
-#        print 'DEBUG: Current index %d'%currentItem
         self.qDatosEmpleado.update({'tipodocumento':currentItem})
         self.comboBoxTipoDocumento.setCurrentIndex(currentItem)
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         if not self.seActualizoAlgunValor():
@@ -93,7 +93,7 @@ class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
         '''
         Devuelve True si algun valor fue modificado
         '''
-        #Lo siguiente es para legibilidad:
+        # Lo siguiente es para legibilidad:
         valores = []
         valores.append(self.qDatosEmpleado['nombre'] != self.lineEditNombre.text())
         valores.append(self.qDatosEmpleado['apellido'] != self.lineEditApellido.text())
@@ -104,7 +104,7 @@ class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
         valores.append(self.qDatosEmpleado['fechanacimiento'] != self.dateEditFechaNacimiento.date())
         valores.append(self.qDatosEmpleado['tipodocumento'] != self.comboBoxTipoDocumento.currentIndex())
         return True in valores 
-                
+
     def getValoresActualizados(self):
         return {'nombre': unicode(self.lineEditNombre.text()),
                 'apellido':unicode(self.lineEditApellido.text()),
@@ -114,7 +114,7 @@ class DialogModificarPersonal(QtGui.QDialog, Ui_DialogModificarPersonal):
                 'domicilio': unicode(self.lineEditDomicilio.text()),
                 'telefono': unicode(self.lineEditTelefono.text()),
                 'email':unicode(self.lineEditEmail.text())
-                } 
+                }
 
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):

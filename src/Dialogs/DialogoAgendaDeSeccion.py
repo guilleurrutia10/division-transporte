@@ -50,7 +50,6 @@ class DialogoAgendaDeSeccion(QtGui.QDialog, Ui_DialogAgendaDeSeccion, AyudaManej
     def on_buttonBox_accepted(self):
         '''
         '''
-#        print self.parent().usuario.name
         desde = self.dateEdit_Desde.date()
         hasta = self.dateEdit_Hasta.date()
         desde = '%s/%s/%s' % (desde.day(), desde.month(), desde.year())
@@ -79,14 +78,11 @@ class DialogoAgendaDeSeccion(QtGui.QDialog, Ui_DialogAgendaDeSeccion, AyudaManej
     # @QtCore.pyqtSlot()
     def cambioEstadoCheckBox(self):
         if self.checkBox_porRango.isChecked():
-            #print "Esta chequeado"
-            #self.label_Hasta.setText("")
             self.label_Desde.setText(QtGui.QApplication.translate("DialogAgendaDeSeccion", "Desde:", None, QtGui.QApplication.UnicodeUTF8))
             self.label_Hasta.setText(QtGui.QApplication.translate("DialogAgendaDeSeccion", "Hasta:", None, QtGui.QApplication.UnicodeUTF8))
             self.dateEdit_Hasta.setVisible(True)
             self.dateEdit_Hasta.setEnabled(True)
         else:
-            #print "No esta chequeado..."
             self.label_Desde.setText(QtGui.QApplication.translate("DialogAgendaDeSeccion", "Día:", None, QtGui.QApplication.UnicodeUTF8))
             self.label_Hasta.setText(QtGui.QApplication.translate("DialogAgendaDeSeccion", "", None, QtGui.QApplication.UnicodeUTF8))
             self.dateEdit_Hasta.setEnabled(False)
