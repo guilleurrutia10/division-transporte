@@ -40,8 +40,10 @@ class DialogCambiarDeSeccionUnEncargado(QtGui.QDialog, Ui_DialogCambiaDeSeccionU
         '''
         super(DialogCambiarDeSeccionUnEncargado, self).__init__(parent)
         self.setupUi(self)
-        self.tableWidget_secciones.cargarConSecciones(Division_Transporte().getSecciones().values())
-        self.tableWidget_empleados.cargarConEmpleados(Division_Transporte().getEmpleadosSinAsignar().values())
+        self._secciones = Division_Transporte().getSecciones().values()#secciones con las que trabajara el dialogo
+        self.tableWidget_secciones.cargarConSecciones(self._secciones)
+        self._empleados = Division_Transporte().getEmpleadosSinAsignar().values()#empleados con los que trabajara el empleado
+        self.tableWidget_empleados.cargarConEmpleados(self._empleados)
         fecha = localtime()
         self.DIVISION = Division_Transporte()
         self.DIVISION.zodb.setFechaMinimaDeshacer(fecha)
@@ -126,4 +128,21 @@ class DialogCambiarDeSeccionUnEncargado(QtGui.QDialog, Ui_DialogCambiaDeSeccionU
         self.tableWidget_seccionSeleccionada.cargarConSecciones([])
         self.pushButton_removerSeccion.setEnabled(False)
         self.pushButton_elegirSeccion.setEnabled(True)
-        
+
+    @QtCore.pyqtSlot('QString')
+    def on_lineEdit_filtroEmpleado_textChanged(self, cadena):
+        filtro = unicode(cadena).lower()
+        personal = filter(lambda p: filtro in unicode(p.getDocumento()).lower()
+                          or filtro in unicode(p.getNombre()).lower()
+                          or filtro in unicode(p.getApellido()).lower()
+                          or filtro in unicode(p.getEmail()).lower()
+                          or filtro in unicode(p.getTelefono()).lower(),
+                          self._empleados)
+        personal.sort(cmp=lambda x, y: cmp(x, y))
+        self.tableWidget_empleados.cargarConEmpleados(personal)
+
+    @QtCore.pyqtSlot('QString')
+    def on_lineEdit_filtroSeccion_textChanged(self, cadena):
+        filtro = unicode(cadena).lower()
+        secciones = filter(lambda seccion: filtro in unicode(seccion.getNombre()).lower(), self._secciones)
+        self.tableWidget_secciones.cargarConSecciones(secciones)

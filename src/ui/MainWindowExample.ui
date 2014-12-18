@@ -47,7 +47,6 @@
      <string>&amp;Archivo</string>
     </property>
     <addaction name="actionCambiarDeUsuario"/>
-    <addaction name="actionAyuda"/>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
@@ -142,16 +141,11 @@
     <addaction name="separator"/>
     <addaction name="actionListados_de_Seccion"/>
    </widget>
-   <widget class="QMenu" name="menuConfiguracion">
-    <property name="title">
-     <string>&amp;Configuración</string>
-    </property>
-    <addaction name="actionPreferencias"/>
-   </widget>
    <widget class="QMenu" name="menuAyuda">
     <property name="title">
      <string>&amp;Ayuda</string>
     </property>
+    <addaction name="actionAyuda"/>
     <addaction name="actionAcerca_de_Division_de_Transporte"/>
    </widget>
    <addaction name="menuArchivo"/>
@@ -159,7 +153,6 @@
    <addaction name="menuPersonal"/>
    <addaction name="menuRepuestos"/>
    <addaction name="menuSecciones"/>
-   <addaction name="menuConfiguracion"/>
    <addaction name="menuAyuda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
