@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on 22/07/2014
 
@@ -40,7 +41,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones, A
         try:
             self._fechaSeleccionada = dias_con_turnos[0]
         except IndexError:
-            mostrarMensaje(self, 'Su seccion no posee turnos sin asignar', 'Sin turnos no asignados')
+            mostrarMensaje(self, 'Su sección no posee turnos sin asignar', 'Sin turnos no asignados')
             raise SinTurnosException("No turnos!")
         self._horaSeleccionada = self.refrescarComboHora()
         self._turnoSeleccionado = self._seccion.getTurnoDeFechaHora(self._fechaSeleccionada, self._horaSeleccionada)
@@ -138,7 +139,7 @@ class DialogoAsignarReparaciones(QtGui.QDialog, Ui_DialogoAsignarReparaciones, A
                        'Turno: %s %dhs.\nSe asignaron los siguientes empleados:\n%s '% (self._fechaSeleccionada,
                                                                                         self._horaSeleccionada,
                                                                                         '\n'.join([e.getNombre() for e in self._empleadosAsignados])),
-                       'Asignacion finalizada'
+                       'Asignación finalizada'
                        )
         self._turnoSeleccionado.asignarEmpleados(self._empleadosAsignados)
         # Si el vehiculo ya tiene todos sus turnos asignados

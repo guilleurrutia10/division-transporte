@@ -87,11 +87,11 @@ class DialogoAltaTipoReparacion(QtGui.QDialog, Ui_DialogAltaTipoReparacion, Ayud
     def on_pushButtonAceptar_clicked(self):
         nombreTipoReparacion = unicode(self.lineEditNombre.text())
         if len(nombreTipoReparacion) == 0:
-            mostrarMensaje(self, 'Debe ingresar el nombre del tipo de reparaci�n', 'Ingresar nombre del tipo de reparaci�n')
+            mostrarMensaje(self, 'Debe ingresar el nombre del tipo de reparación', 'Ingresar nombre del tipo de reparación')
             return
         descripcionTipoReparacion = unicode(self.lineEditDescripcion.text())
         if not self._repuestosAsignados:
-            mostrarMensaje(self, 'No se han cargado repuestos al Tipo de Reparacion.', 'Error al cargar repuestos')
+            mostrarMensaje(self, 'No se han cargado repuestos al Tipo de Reparación.', 'Error al cargar repuestos')
             return
 
         # Repuestos Requeridos ok.
@@ -106,6 +106,6 @@ class DialogoAltaTipoReparacion(QtGui.QDialog, Ui_DialogAltaTipoReparacion, Ayud
         seccionSeleccionada = seccionSeleccionada[0]
         seccionSeleccionada.agregarTipoDeReparacion(tReparacion)  
 
-        if mostrarMensaje(self, 'El tipo de reparacion se ha creado exitosamente!\nSe agrego a la seccion indicada', 'Creacion exitosa'):
+        if mostrarMensaje(self, 'El tipo de reparación se ha creado exitosamente!\nSe agregó a la sección indicada', 'Creación exitosa'):
             transaction.commit()
             self.accept()

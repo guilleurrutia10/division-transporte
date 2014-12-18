@@ -31,6 +31,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Image
 from reportlab.lib.styles import ParagraphStyle
 import os
+styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
 
 styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
 
@@ -311,13 +312,15 @@ def imprimirPedidoDeActuacion(numeroPedido='', repuestosSolicitados='', filename
     imprimir(Elements, filename)
 
 
-def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
+def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta_recibido):
     '''
     Recibe un vehiculo y genera su hoja de ruta con el nombre nombre_hoja_de_ruta
     '''
     turnos_ordenados = un_vehiculo.getTurnosOrdenados()
 #    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta
-    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta
+    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta_recibido
+    if not nombre_hoja_de_ruta_recibido:
+        nombre_hoja_de_ruta = '%s_hoja_de_ruta.pdf'%un_vehiculo.getDominio()
     elements = []
     titulo = Paragraph("Hoja de Ruta", styles["Title"])
     elements.append(titulo)
@@ -383,6 +386,7 @@ def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
         elements.append(table)
         elements.append(Spacer(inch, 0.2*inch))
     imprimir(elements, nombre_hoja_de_ruta)
+    return nombre_hoja_de_ruta
 
 
 def generarHojaDeRuta2(un_vehiculo, nombre_hoja_de_ruta):

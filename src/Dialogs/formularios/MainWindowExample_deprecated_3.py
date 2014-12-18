@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindowExample.ui'
 #
-# Created: Thu Dec 18 00:04:47 2014
+# Created: Mon Dec 08 17:02:41 2014
 #      by: PyQt4 UI code generator 4.8.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -65,6 +65,9 @@ class Ui_MainWindow(object):
         self.menuSecciones = QtGui.QMenu(self.menubar)
         self.menuSecciones.setTitle(QtGui.QApplication.translate("MainWindow", "&Secciones", None, QtGui.QApplication.UnicodeUTF8))
         self.menuSecciones.setObjectName(_fromUtf8("menuSecciones"))
+        self.menuConfiguracion = QtGui.QMenu(self.menubar)
+        self.menuConfiguracion.setTitle(QtGui.QApplication.translate("MainWindow", "&Configuración", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuConfiguracion.setObjectName(_fromUtf8("menuConfiguracion"))
         self.menuAyuda = QtGui.QMenu(self.menubar)
         self.menuAyuda.setTitle(QtGui.QApplication.translate("MainWindow", "&Ayuda", None, QtGui.QApplication.UnicodeUTF8))
         self.menuAyuda.setObjectName(_fromUtf8("menuAyuda"))
@@ -342,6 +345,7 @@ class Ui_MainWindow(object):
         self.actionConsultar_agenda.setText(QtGui.QApplication.translate("MainWindow", "Consultar agenda", None, QtGui.QApplication.UnicodeUTF8))
         self.actionConsultar_agenda.setObjectName(_fromUtf8("actionConsultar_agenda"))
         self.menuArchivo.addAction(self.actionCambiarDeUsuario)
+        self.menuArchivo.addAction(self.actionAyuda)
         self.menuArchivo.addSeparator()
         self.menuArchivo.addAction(self.actionSalir)
         self.menuListados_de_Vehiculos.addAction(self.actionListado_Vehiculos_de_la_Division_2)
@@ -388,13 +392,14 @@ class Ui_MainWindow(object):
         self.menuSecciones.addAction(self.actionConsultar_agenda)
         self.menuSecciones.addSeparator()
         self.menuSecciones.addAction(self.actionListados_de_Seccion)
-        self.menuAyuda.addAction(self.actionAyuda)
+        self.menuConfiguracion.addAction(self.actionPreferencias)
         self.menuAyuda.addAction(self.actionAcerca_de_Division_de_Transporte)
         self.menubar.addAction(self.menuArchivo.menuAction())
         self.menubar.addAction(self.menuVerificacion_y_Reparacion.menuAction())
         self.menubar.addAction(self.menuPersonal.menuAction())
         self.menubar.addAction(self.menuRepuestos.menuAction())
         self.menubar.addAction(self.menuSecciones.menuAction())
+        self.menubar.addAction(self.menuConfiguracion.menuAction())
         self.menubar.addAction(self.menuAyuda.menuAction())
         self.toolBar.addAction(self.actionAlta_de_Vehiculo)
         self.toolBar.addAction(self.actionModificacion_de_Vehiculo)

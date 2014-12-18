@@ -78,7 +78,7 @@ class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVeh
             self.listaDeVehiculos.tableWidgetListadoDeVehiculos.cargarConVehiculos(vehiculosSinOrden)
         else:
             self._mensaje.setMensaje(self.trUtf8('Debe seleccionar un Vehículo.'))
-            self._mensaje.setTitle(self.trUtf8('Seleccionar Vehículo'))
+            self._mensaje.setTitle(self.trUtf8(QtCore.QString.fromUtf8('Seleccionar Vehículo')))
             self._mensaje.setInformative()
             self._mensaje.exec_()
 #             self.mostrarMensaje('Debe seleccionar un Vehiculo.', 'Seleccionar Vehiculo')
@@ -172,6 +172,8 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
 
         fileDialog = QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Orden de Reparación'))
         filename = fileDialog.getSaveFileName(parent=self)
+        if not filename:
+            mostrarMensaje(self, 'No se ingreso titulo para la orden, activado valor por defecto', 'Advertencia')
         self.imprimirOrdenReparacion(filename)
 
     def testearDialogo(self):

@@ -36,10 +36,15 @@ PERMISOS = {"jefeDivision": ['actionAlta_de_Vehiculo','actionRegistrar_Ingreso_d
                              'actionRegistrar_Finalizacion_de_Reparacion',
                              'actionListados_de_Seccion'],
             "jefeSeccion":   ['actionRegistrar_Finalizacion_de_Reparacion',
-                            'actionAsignar_Reparacion',
-                            'actionConsultar_agenda'],
-            "inspector":    ['actionAlta_de_Seccion'],
-            "administrativo": ["alta_repuesto"],
+                              'actionAsignar_Reparacion',
+                              'actionConsultar_agenda'],
+            "inspector":     ['actionAlta_de_Seccion',
+                             'actionVerificar_Reparaciones_Necesarias_del_Vehiculo',
+                             'actionListado_de_Tipos_de_Reparaciones_de_la_Division_2'],
+            "administrativo": ['actionAlta_de_Vehiculo',
+                               'actionRegistrar_Ingreso_de_Vehiculo',
+                               'actionRegistrar_Egreso',
+                               'actionModificacion_de_Vehiculo'],
             "otro": []
             }
 

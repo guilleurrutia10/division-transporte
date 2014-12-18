@@ -110,7 +110,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones,
         try:
             dlgCrearReparacion = DialogCrearReparacion(self, self.vehiculoSeleccionado)
         except Except_NoHayReparacionesDisponibles:
-            mostrarMensaje(self, "La division no tiene tipos de repaciones disponibles", "No se pueden agregar reparaciones")
+            mostrarMensaje(self, "La división no tiene tipos de repaciones disponibles", "No se pueden agregar reparaciones")
             return
         # A partir de esta sentencia, dlgCrearReparacion posee una OR:
         if dlgCrearReparacion.exec_():
@@ -121,7 +121,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones,
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
         if not self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones():
-            QtGui.QMessageBox.critical(self, 'Error', 'Debe agregar por lo menos una Reparacion al Vehiculo para generar un Pedido de Actuacion')
+            QtGui.QMessageBox.critical(self, 'Error', 'Debe agregar por lo menos una reparación al Vehículo para generar un Pedido de Actuación')
             return
         # 1ro Recuperamos el vehiculo, ok, el dialogo ya trabaja con un vehiculo
         # directamente le decimos que genere el pedido
