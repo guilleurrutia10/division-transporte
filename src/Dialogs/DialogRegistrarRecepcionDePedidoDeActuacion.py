@@ -11,11 +11,11 @@ import transaction
 
 from formularios.DialogRegistrarRecepcionDePedidoDeActuacion import Ui_DialogRegistrarRecepcionDePedidoDeActuacion 
 from formularios.DialogAsignarFechaRecepcionPedidoActuacion import Ui_DialogAsignarFechaRecepcionPedidoActuacion
-
+from AyudaManejador import AyudaManejador
 from negocio.Division_Transporte import Division_Transporte
 
 
-class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegistrarRecepcionDePedidoDeActuacion):
+class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegistrarRecepcionDePedidoDeActuacion, AyudaManejador):
     def __init__(self, parent=None):
         '''
         Este dialogo va a manejar pedidos de actuacion.
@@ -40,13 +40,11 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
         self.reject()
 
     def cargarGrillaInicial(self):
-        #self._pedidosDeActuacion.sort()
         num = 1
         for pda in self._pedidosDeActuacion:
             pda.setNumeroPedido(num)
             num += 1
         transaction.commit()
-        # self.cargarGrilla(self.pedidosDeActuacion)
         self.cargarGrilla(self._pedidosDeActuacion)
 
     def cargarGrilla(self, pedidos):
@@ -67,17 +65,13 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
     def seleccionarCelda(self, fila, columna):
         item = self.tableWidget.item(fila, 0)
         self._pedidoSeleccionado = self._pedidosDeActuacion[fila]
-#        print 'PEDIDO: ', self._pedidoSeleccionado
-#        print item.text(), '(fila %s,col %s)' % (fila, columna)
 
     @QtCore.pyqtSlot()
     def on_pushButton_Registrar_clicked(self):
         try:
             if self._pedidoSeleccionado:
-                # dlgAsignarFecha = DialogAsignarFechaRecepcionPedidoActuacion(self, self._pedidoSeleccionado)
                 self._vehiculoDuenioPedido = filter(lambda vehiculo: vehiculo.pedidoDeActuacionTePertenece(self._pedidoSeleccionado), self.DIVISION.getVehiculosEsperandoAprobacion())
                 self._vehiculoDuenioPedido = self._vehiculoDuenioPedido[0]
-                # print 'Pertenece al vehiculo ', self._vehiculoDuenioPedido.getDominio() 
                 dlgAsignarFecha = DialogAsignarFechaRecepcionPedidoActuacion(self, self._vehiculoDuenioPedido)
                 if dlgAsignarFecha.exec_():
                     self._pedidosDeActuacion = [vehiculo.getPedidoDeActuacion() for vehiculo in self.DIVISION.getVehiculosEsperandoAprobacion()]
@@ -107,7 +101,7 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
         self.cargarGrilla(pedidos)
 
 
-class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignarFechaRecepcionPedidoActuacion):
+class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignarFechaRecepcionPedidoActuacion, AyudaManejador):
 
     def __init__(self, parent=None, vehiculo=None):
         super(DialogAsignarFechaRecepcionPedidoActuacion, self).__init__(parent)
@@ -137,7 +131,7 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
                 repuesto.setText(informacion)
                 repuesto.setTextAlignment(4)
                 self.listWidget.addItem(repuesto)
-                
+
         self.dateEditFechaRecepcioPedido.setMinimumDate(QtCore.QDate(pedido.getFechaRealizacion().year,pedido.getFechaRealizacion().month, pedido.getFechaRealizacion().day))
 
     @QtCore.pyqtSlot()
@@ -148,7 +142,6 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
         unaFecha = date(day=fecha.toPyDate().day,
                         month=fecha.toPyDate().month,
                         year=fecha.toPyDate().year)
-#        print unaFecha, type(fecha.toPyDate())
         # TODO: atrapar excepción por fecha incorrecta????
         # try:
         resu = self._vehiculo.registrarRecepcionPedidoActuacion(unaFecha)

@@ -54,8 +54,7 @@ class ListadoVehiculos(QtGui.QWidget, Ui_FormListadoVehiculos):
                              'Dominio',
                              'Marca',
                              'Registro Interno',
-                             u'Número de Chasis',
-                             u'Comisaría'
+                             u'Número de Chasis'
                              ]
         imprimirListadoVehiculos(cabeceraVehiculos, self.vehiculos, filename=unicode(filename))
         m = Mensaje(self)

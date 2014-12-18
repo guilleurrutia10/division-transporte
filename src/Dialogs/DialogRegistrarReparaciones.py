@@ -9,20 +9,18 @@ from PyQt4 import QtCore, QtGui
 from time import localtime
 
 from formularios.DialogRegistrarReparaciones import Ui_DialogRegistrarReparaciones
-#from Dialogs import DialogCrearReparacion
 from DialogCrearReparacion import DialogCrearReparacion
-#from negocio.Division_Transporte import Division_Transporte
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.Excepcion_Orden_No_Esta_En_Revision import Excepcion_Orden_No_Esta_En_Revision
-#from Dialogs.DialogMostrarPedidoDeActuacion 
 from DialogMostrarPedidoDeActuacion import DialogMostrarPedidoDeActuacion
 from negocio.excepciones.Except_NoHayReparacionesDisponibles import Except_NoHayReparacionesDisponibles
 from Utiles_Dialogo import mostrarMensaje
 from reportes import imprimirPedidoDeActuacion
 from Utiles_Dialogo import Mensaje
+from AyudaManejador import AyudaManejador
 
 
-class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones):
+class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones, AyudaManejador):
     '''
     Atributos:
 
@@ -40,10 +38,9 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         '''
         super(DialogRegistrarReparaciones, self).__init__(parent)
         self.setupUi(self)
-        #Conectamos el boton Agregar Reparaciones...
+        # Conectamos el boton Agregar Reparaciones...
         self.connect(self.pushButtonAgregarReparacion, QtCore.SIGNAL("pressed()"), self.abrirDialogCrearReparacion)
         self.vehiculoSeleccionado = vehiculoSeleccionado
-#        self.dominioVehiculo = None
         self.DIVISION = Division_Transporte()
         # Cargamos la mínima fecha a tener en cuenta.
         # A partir de esta fecha podemos deshacer commits.
@@ -65,7 +62,6 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         for reparacion in reparaciones:
             columna = 0
             itemCodigoTipo = QtGui.QTableWidgetItem()
-            #itemNombreTipo.setText(reparacion.getTipoDeReparacion().getNombre())
             itemCodigoTipo.setText(reparacion.getTipoDeReparacion().getCodigo())
             self.tableWidgetReparaciones.setItem(fila,columna,itemCodigoTipo)
             columna += 1
@@ -83,14 +79,12 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
             fila += 1
 
     def completarLabelsOR(self):
-        #print self.dominioVehiculo.text()
-        #self.vehiculoSeleccionado = self.buscarVehiculo()
         try:
             ordenDeReparacion = self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso()
         except Excepcion_Orden_No_Esta_En_Revision, e:
             raise Excepcion_Orden_No_Esta_En_Revision(e.getMensaje())
 
-        #Completar los labels:
+        # Completar los labels:
         self.labelChoferAsignado.setText(ordenDeReparacion.getChofer())
         self.labelIdOrden.setText(unicode(ordenDeReparacion.getCodigoOrdenReparacion()))
         self.labelFechaOrden.setText(ordenDeReparacion.getFecha().ctime())
@@ -98,8 +92,6 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.labelEquipamiento.setText(ordenDeReparacion.getEquipamiento())
         self.labelCombustible.setText(unicode(ordenDeReparacion.getCombustibleActual()))
         self.labelComisaria.setText(ordenDeReparacion.getComisaria())
-
-        #self.ordenDeReparacion = ordenDeReparacion
 
     def prepararCss(self):
         self.label.setObjectName("label")
@@ -110,10 +102,8 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         self.label_10.setObjectName("label")
         self.label_11.setObjectName("label")
         self.label_12.setObjectName("label")
-        
+
     def buscarVehiculo(self):
-        #division = Division_Transporte()
-        #return division.getVehiculo(unicode(self.dominioVehiculo.text()))
         return self.DIVISION.getVehiculo(self.dominioVehiculo)
 
     def abrirDialogCrearReparacion(self):
@@ -122,24 +112,19 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
         except Except_NoHayReparacionesDisponibles:
             mostrarMensaje(self, "La division no tiene tipos de repaciones disponibles", "No se pueden agregar reparaciones")
             return
-        #A partir de esta sentencia, dlgCrearReparacion posee una OR:
-#        dlgCrearReparacion.setOrdenDeReparacion(self.ordenDeReparacion)
+        # A partir de esta sentencia, dlgCrearReparacion posee una OR:
         if dlgCrearReparacion.exec_():
-            #Toma la variable ordenDeReparacion generada en tiempo de ejecucion
-            #por el metodo completarLabelsOR()
-#            self.cargarListaReparaciones(self.ordenDeReparacion.getReparaciones())
+            # Toma la variable ordenDeReparacion generada en tiempo de ejecucion
+            # por el metodo completarLabelsOR()
             self.cargarListaReparaciones(self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones()) # Este dialogo trabaja con VEHICULO!!
 
     @QtCore.pyqtSlot()
     def on_pushButtonAceptar_clicked(self):
-        #if not self.ordenDeReparacion.getReparaciones():
         if not self.vehiculoSeleccionado.getOrdenDeReparacionEnCurso().getReparaciones():
             QtGui.QMessageBox.critical(self, 'Error', 'Debe agregar por lo menos una Reparacion al Vehiculo para generar un Pedido de Actuacion')
             return
-#        division = Division_Transporte()
-#        division.registrarReparaciones(self.vehiculoSeleccionado)
-        #1ro Recuperamos el vehiculo, ok, el dialogo ya trabaja con un vehiculo
-        #directamente le decimos que genere el pedido
+        # 1ro Recuperamos el vehiculo, ok, el dialogo ya trabaja con un vehiculo
+        # directamente le decimos que genere el pedido
         self.vehiculoSeleccionado.generarPedidoDeActuacion()
         self.mostrarPedidoDeActuacion(self.vehiculoSeleccionado.obtenerOrdenDeReparacionEnCurso().getPedidoDeActuacion())
         self.imprimirPedidoActuacion()
@@ -151,9 +136,7 @@ class DialogRegistrarReparaciones(QtGui.QDialog, Ui_DialogRegistrarReparaciones)
     def mostrarPedidoDeActuacion(self, unPedidoDeActuacion):
         '''
         '''
-        #TODO [ok]: Aca ahora imprimimos algo, pero debemos mostrar un nuevo dialogo...
         dlgMostrarPedido = DialogMostrarPedidoDeActuacion(self, unPedidoDeActuacion)
-        #dlgMostrarPedido.setPedidoDeActuacion(unPedidoDeActuacion)
         dlgMostrarPedido.exec_()
 
     @QtCore.pyqtSlot()

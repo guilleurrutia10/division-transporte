@@ -6,13 +6,15 @@ Created on 13/11/2012
 '''
 
 from PyQt4 import QtCore, QtGui
+from PyQt4.QtGui import QMessageBox
 
 from formularios.DialogRemoverEmpleadoDeSeccion import Ui_DialogRemoverEmpleadoDeSeccion
 from negocio.Division_Transporte import Division_Transporte
 from Utiles_Dialogo import mostrarMensaje, Mensaje
-from PyQt4.QtGui import QMessageBox
+from AyudaManejador import AyudaManejador
 
-class DialogRemoverEmpleadoDeSeccion(QtGui.QDialog, Ui_DialogRemoverEmpleadoDeSeccion):
+
+class DialogRemoverEmpleadoDeSeccion(QtGui.QDialog, Ui_DialogRemoverEmpleadoDeSeccion, AyudaManejador):
     '''
     Dialog contiene:
         - lineEdit_condicionDeFiltro
@@ -21,16 +23,16 @@ class DialogRemoverEmpleadoDeSeccion(QtGui.QDialog, Ui_DialogRemoverEmpleadoDeSe
         - pushButton_removerEmpleados
         - pushButtonAceptar
         - pushButtonCancelar
-        
+
     '''
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         '''
         Constructor
         '''
         super(DialogRemoverEmpleadoDeSeccion, self).__init__(parent)
         self.setupUi(self)
         self.tableWidget_empleados.cargarConEmpleadosDeSecciones(Division_Transporte().getSeccionesQuePuedenTransferir())
-        
+
     @QtCore.pyqtSlot()
     def on_pushButtonCancelar_clicked(self):
         self.reject()
@@ -40,7 +42,6 @@ class DialogRemoverEmpleadoDeSeccion(QtGui.QDialog, Ui_DialogRemoverEmpleadoDeSe
         empleado_seleccionado = self.tableWidget_empleados.getEmpleadoSeleccionado()
         secciondelempleadoseleccionado = Division_Transporte().getSeccionDeEmpleado(empleado_seleccionado)
         msg = 'Desea remover al empleado \'%s\' de la seccion \'%s\'?' %(empleado_seleccionado.nombreCompleto(), secciondelempleadoseleccionado.getNombre()) 
-        #mostrarMensaje(self, msg, 'Confirmar remover empleado')
         msjConfirmar = Mensaje(self, msg, "Confirmar remover")
         msjConfirmar.agregarBotonCancelar()
         msjConfirmar.setCritical()
@@ -54,6 +55,6 @@ class DialogRemoverEmpleadoDeSeccion(QtGui.QDialog, Ui_DialogRemoverEmpleadoDeSe
             secciondelempleadoseleccionado.removerEmpleado(empleado_seleccionado)
             mostrarMensaje(self, msg, 'Empleado removido')
         self.refrescarTabla()
-        
+
     def refrescarTabla(self):
         self.tableWidget_empleados.cargarConEmpleadosDeSecciones(Division_Transporte().getSeccionesQuePuedenTransferir())

@@ -17,9 +17,10 @@ from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.ExcepcionPoseeOrdenReparacionEnCurso import ExcepcionPoseeOrdenReparacionEnCurso
 from Utiles_Dialogo import Mensaje, mostrarMensaje
 from reportes import imprimirOrden
+from AyudaManejador import AyudaManejador
 
 
-class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVehiculo):
+class DialogRegistrarIngresoVehiculo(QtGui.QDialog, Ui_DialogRegistrarIngresoVehiculo, AyudaManejador):
     '''
     classdocs
     @version: 
@@ -143,7 +144,6 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
             self._mensaje.setMensaje(self.trUtf8('Orden de Reparación Creada con éxito!'))
             self._mensaje.setInformative()
             self._mensaje.exec_()
-#             self.mostrarMensaje('Orden de Reparación Creada. :)', 'Creando Orden de Reparación')
             self.accept()
         return
 
@@ -167,7 +167,7 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
         comisaria = unicode(self.lineEditComisaria.text())
         localidad = unicode(self.lineEditLocalidad.text())
         chofer = unicode(self.lineEditChoferAsignado.text())
-        
+
         self.DIVISION.registrarIngresoDeVehiculo(vehiculo.dominio, kilometrajeActual, combustibleActual, equipamiento, reparacion, comisaria, localidad, chofer)
 
         fileDialog = QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Orden de Reparación'))
@@ -184,7 +184,6 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
             self._mensaje.setTitle(self.trUtf8('Ingresar Kilometraje'))
             self._mensaje.setMensaje(self.trUtf8('Debe ingresar el kilometraje.'))
             self._mensaje.exec_()
-#             self.mostrarMensaje('Debe ingresar el kilometraje.', 'Ingresar Kilometraje')
             self.lineEditKilometraje.clear()
             self.lineEditKilometraje.setFocus()
             return
@@ -192,7 +191,6 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
             self._mensaje.setTitle(self.trUtf8('Ingresar Comisaría'))
             self._mensaje.setMensaje(self.trUtf8('Debe ingresar la comisaría'))
             self._mensaje.exec_()
-#             self.mostrarMensaje('Debe ingresar la Comisaria solicitada', 'Ingresar Comisaria')
             self.lineEditComisaria.clear()
             self.lineEditComisaria.setFocus()
             return
@@ -200,7 +198,6 @@ class DialogDatosIngresoVehiculo(QtGui.QDialog, Ui_DialogIngresoVehiculo):
             self._mensaje.setTitle(self.trUtf8('Ingresar Localidad'))
             self._mensaje.setMensaje(self.trUtf8('Debe ingresar la localidad'))
             self._mensaje.exec_()
-#             self.mostrarMensaje('Debe ingresar la Localidad solicitada', 'Ingresar Localidad')
             self.lineEditLocalidad.clear()
             self.lineEditLocalidad.setFocus()
             return

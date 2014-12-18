@@ -34,3 +34,6 @@ pip-log.txt
 # My Files
 zeo.conf
 .conf
+
+# Ignore Folders
+src/Help/*

@@ -12,9 +12,10 @@ from formularios.DialogAltaVehiculoPrueba import Ui_DialogAltaVehiculo
 from negocio.Division_Transporte import Division_Transporte
 from negocio.excepciones.ExcepcionObjetoExiste import ExcepcionVehiculoExiste
 from Utiles_Dialogo import Mensaje
+from AyudaManejador import AyudaManejador
 
 
-class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo):
+class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo, AyudaManejador):
     '''
         Elementos:
             lineEditDominio

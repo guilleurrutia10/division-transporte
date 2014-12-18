@@ -6,14 +6,16 @@ Created on 22/11/2012
 '''
 
 from PyQt4 import QtCore, QtGui
+from datetime import date
 
 from formularios.DialogBajaPersonal import Ui_DialogBajaPersonal
 from formularios.DialogAsignarFechaDeBaja import Ui_DialogAsignarFechaBaja
 from negocio.Division_Transporte import Division_Transporte
 from Utiles_Dialogo import Mensaje, mostrarMensaje
-from datetime import date
-            
-class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
+from AyudaManejador import AyudaManejador
+
+
+class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal, AyudaManejador):
     '''
     Elementos:
         - tableWidgetDatosEmpleados
@@ -31,7 +33,7 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
         self.empleados = None
         self.refrescarTabla()
         self.tableWidgetDatosEmpleados.setEditTriggers(QtGui.QTableWidget.NoEditTriggers)
-        
+
         self.tableWidgetDatosEmpleados.connect(self.tableWidgetDatosEmpleados, QtCore.SIGNAL('cellClicked(int,int)'), self.celdaClickeada)
 
         self._empleadoSeleccionado = None
@@ -39,7 +41,6 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
     def refrescarTabla(self):
         self.empleados = self.obtenerListaEmpleados()
         self.empleados.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
-        #self.cargaGrillaInicial()
         self.tableWidgetDatosEmpleados.cargarConEmpleados(self.empleados)
 
     def cargaGrillaInicial(self):
@@ -68,27 +69,6 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
             itemDocumento = QtGui.QTableWidgetItem()
             itemDocumento.setText(empleado.documento)
             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemDocumento)
-            # Tener en cuenta a posterior.....
-#             columna += 1
-#             itemSeccion = QtGui.QTableWidgetItem()
-#             itemSeccion.setText(empleado.getSeccion)
-#             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemSeccion)
-#             columna += 1
-#             itemFechaNac = QtGui.QTableWidgetItem()
-#             itemFechaNac.setText(empleado.getFechaNacimiento())
-#             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemFechaNac)
-#             columna += 1
-#             itemDomicilio = QtGui.QTableWidgetItem()
-#             itemDomicilio.setText(empleado.getDomicilio())
-#             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemDomicilio)
-#             columna += 1
-#             itemMail = QtGui.QTableWidgetItem()
-#             itemMail.setText(empleado.getEmail())
-#             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemMail)
-#             columna += 1
-#             itemTelefono = QtGui.QTableWidgetItem()
-#             itemTelefono.setText(empleado.getTelefono())
-#             self.tableWidgetDatosEmpleados.setItem(fila, columna, itemTelefono)
 
             fila += 1
 
@@ -104,7 +84,6 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
         '''
         try:
             if self.itemDocumento:
-#                dlgAsignarFecha = DialogAsignarFechaDeBaja(self._empleadoSeleccionado)
                 dlgAsignarFecha = DialogAsignarFechaDeBaja(self.tableWidgetDatosEmpleados.getElementoSeleccionado())
                 self.itemDocumento = None
                 dlgAsignarFecha.exec_()
@@ -115,19 +94,9 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
 #            print e
             self.mostrarMensaje('Debe Seleccionar un Empleado.', 'Seleccionar Empleado')
 
-#    @QtCore.pyqtSlot('QString')
-#    def on_lineEditBuscarNombre_textChanged(self, cadena):
-#        '''
-#        '''
-#        filtro = unicode(cadena)
-#        personal = filter(lambda p: unicode.lower(filtro) in unicode.lower(unicode(p.nombre)), self.empleados)
-#        personal.sort(cmp=lambda x, y: cmp(x.nombre, y.nombre))
-##        self.cargarGrilla(personal)
-#        self.tableWidgetDatosEmpleados.cargarConEmpleados(personal)
-
     def filtrame(self, filtrovalue, persona):
         return unicode.lower(filtrovalue) in unicode.lower(unicode(persona.documento)) or unicode.lower(filtrovalue) in unicode.lower(unicode(persona.nombre)) or unicode.lower(filtrovalue) in unicode.lower(unicode(persona.getApellido()))
-    
+
     @QtCore.pyqtSlot('QString')
     def on_lineEditBuscarDocumento_textChanged(self, cadena):
         '''
@@ -167,7 +136,7 @@ class DialogBajaPersonal(QtGui.QDialog, Ui_DialogBajaPersonal):
         return personal.values()
 
 
-class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
+class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja, AyudaManejador):
     '''
     Elementos
         - calendarWidgetRegistrarBaja
@@ -183,7 +152,6 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
         self._empleado = empleado
         hoy = date.today()
         fecha_tope_bajo = self._empleado.getFechaAlta()
-        #self.calendarWidgetRegistrarBaja.setMaximumDate(QtCore.QDate(hoy.year, hoy.month, hoy.day))
         self.calendarWidgetRegistrarBaja.setSelectedDate(QtCore.QDate(hoy.year, hoy.month, hoy.day))
         self.calendarWidgetRegistrarBaja.setMinimumDate(QtCore.QDate(fecha_tope_bajo.year, fecha_tope_bajo.month, fecha_tope_bajo.day))
         self._fechaSeleccionada = None
@@ -212,7 +180,6 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
         '''
 #        print 'Click sobre Aceptar'
 #        print self._empleado
-        # TODO: Dar de Baja (OK)
         msg = 'Desea remover al empleado \'%s\' de la Division?' %(self._empleado.nombreCompleto())
         msjConfirmar = Mensaje(self, msg, "Confirmar eliminar")
         msjConfirmar.agregarBotonCancelar()
@@ -231,6 +198,5 @@ class DialogAsignarFechaDeBaja(QtGui.QDialog, Ui_DialogAsignarFechaBaja):
             mostrarMensaje(self, msg, 'Empleado removido')
             self.accept()
 
-    
     def getFechaSeleccionada(self):
         return self._fechaSeleccionada

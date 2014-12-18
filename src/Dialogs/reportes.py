@@ -193,8 +193,7 @@ def imprimirListadoVehiculos(cabecera, vehiculos, titulo='Listado de Vehículos'
                      v.getDominio(),
                      v.getMarca(),
                      v.getRegistroInterno(),
-                     v.getNumeroChasis(),
-                     v.getComisaria()
+                     v.getNumeroChasis()
                      ])
 
     # Se arma el título del listado.
@@ -207,7 +206,6 @@ def imprimirListadoVehiculos(cabecera, vehiculos, titulo='Listado de Vehículos'
     Elements = []
     Elements.append(title)
     Elements.append(table)
-#     Elements.append(PageBreak())
     imprimir(Elements, filename)
 
 
@@ -224,19 +222,21 @@ def imprimirOrden(ordenReparacion, titulo='Listado de Vehículos',
         - filename: nombre del archivo a generar.
     '''
     # Se arma el título del listado.
-    title = Paragraph(titulo, style=styles['Heading4'])
-    fechaDeEntrada = 'Fecha de Entrada %s' % ordenReparacion[0]
-    registroInterno = u'R.I N°: %s' % ordenReparacion[1]
-    modelo = 'Modelo %s' % ordenReparacion[2]
-    kilometros = 'Kilometros %s' % ordenReparacion[3]
-    heading = [[Paragraph(fechaDeEntrada, style=styles['Heading4'])],
-               [Paragraph(registroInterno, style=styles["Heading4"])],
-               [Paragraph(modelo, style=styles["Heading4"])],
-               [Paragraph(kilometros, style=styles["Heading4"])]
+    styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
+    title_text = '<b>%s</b>' % (titulo)
+    title = Paragraph(title_text, style=styles['Center'])
+    fechaDeEntrada = '<b>Fecha de Entrada:</b> %s' % ordenReparacion[0]
+    registroInterno = u'<b>R.I N°:</b> %s' % ordenReparacion[1]
+    modelo = '<b>Model:o</b> %s' % ordenReparacion[2]
+    kilometros = '<b>Kilometros:</b> %s' % ordenReparacion[3]
+    heading = [[Paragraph(fechaDeEntrada, style=styles['Normal'])],
+               [Paragraph(registroInterno, style=styles["Normal"])],
+               [Paragraph(modelo, style=styles["Normal"])],
+               [Paragraph(kilometros, style=styles["Normal"])]
                ]
-    asignadoCon = 'ASIGNADO A: %s' % ordenReparacion[4]
-    equipadoCon = 'EQUIPADO CON: %s' % ordenReparacion[5]
-    reparacionSolicitada = u'REPARACIÓN SOLICITADA: %s' % ordenReparacion[6]
+    asignadoCon = '<b>ASIGNADO A:</b> %s' % ordenReparacion[4]
+    equipadoCon = '<b>EQUIPADO CON:</b> %s' % ordenReparacion[5]
+    reparacionSolicitada = u'<b>REPARACIÓN SOLICITADA:</b> %s' % ordenReparacion[6]
     data = [[Paragraph(asignadoCon, style=styles['Normal'])],
             [Paragraph(equipadoCon, style=styles['Normal'])],
             [Paragraph(reparacionSolicitada, style=styles['Normal'])]
@@ -258,8 +258,6 @@ def imprimirOrden(ordenReparacion, titulo='Listado de Vehículos',
 
 def imprimirPedidoDeActuacion(numeroPedido='', repuestosSolicitados='', filename='example.pdf'):
     '''
-    TODO: Se pueden armar Templates para diferentes vistas...
-
     Arma tabla de Flowables datos vehículos.
     @params:
 
