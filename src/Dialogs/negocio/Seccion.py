@@ -152,7 +152,7 @@ class Seccion(Persistent):
             horas_turno = OOBTree()
             horas_turno.update(TURNOS_DEL_DIA_VACIA)
             self.tablaDeTurnos.update({queDia: horas_turno})
-            transaction.commit()
+            #transaction.commit()
 #            print "El dia se ha registrado en la tabla de turnos exitosamente!"
 
     def tieneTurnoLibreParaElDia(self, queDia):

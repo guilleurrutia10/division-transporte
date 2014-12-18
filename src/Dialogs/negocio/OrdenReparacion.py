@@ -393,3 +393,6 @@ class OrdenReparacion(Persistent):
     
     def getCodigoPlan(self):
         self.getPlan().getCodigo()
+
+    def setReparacionesComoNoPlanificadas(self):
+        map(lambda reparacion: reparacion.setNoPlanificada(False), self.reparaciones)

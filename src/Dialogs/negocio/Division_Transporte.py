@@ -178,8 +178,8 @@ class MiZODB(object):
             # Se obtiene el id de la transacción.
             tid = item['id']
             self.db.undo(tid)
-            transaction.get().setUser(self.getNombreUsuario(), path='')
-            transaction.commit()
+        transaction.get().setUser(self.getNombreUsuario(), path='')
+        transaction.commit()
 
     def seNombreUsuario(self, nombre):
         '''

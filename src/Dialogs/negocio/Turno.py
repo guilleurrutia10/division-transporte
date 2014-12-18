@@ -31,11 +31,11 @@ class Turno(Persistent):
         for reparacion in reparaciones:
             reparacion.planificada()
         self._detallesPlan.extend(reparaciones)
-        transaction.commit()#Para guardar reparaciones en estado planificada
+        #transaction.commit()#Para guardar reparaciones en estado planificada
         self._finalizado = False
         self._empleadosAsignados = PersistentList()
         self._observaciones = ''
-        transaction.commit()#Para guardar reparaciones en estado planificada
+        #transaction.commit()#Para guardar reparaciones en estado planificada
         
     def getHora(self):
         return self._hora
@@ -79,7 +79,7 @@ class Turno(Persistent):
         '''
         #for reparacion in [detalle.getReparacion() for detalle in self._detallesPlan]:
         for reparacion in self._detallesPlan:
-            reparacion.finalizar()
+            reparacion.finalizar(self._fecha)
             #De paso aprovechamos para decrementar las reparaciones pendientes de cada empleado
             for cada_empleado in self._empleadosAsignados:
                 cada_empleado.decrementarReparacionesPendientes()

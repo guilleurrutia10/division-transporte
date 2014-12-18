@@ -171,8 +171,8 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
         # Registrar el turno creado:
         self._seccionSeleccionada.registrarTurno(turno_creado)
         # Para saber de qué cliente debemos borrar las transacciones.
-        transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
-        transaction.commit()# Para que turno quede en tabla de turnos...
+#         transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
+#         transaction.commit()# Para que turno quede en tabla de turnos...
         self._vehiculo.agregarTurnoAlPlan(turno_creado)
         # Para saber de qué cliente debemos borrar las transacciones.
         transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
@@ -217,7 +217,10 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
 
     def cancelar(self):
         self.DIVISION.zodb.deshacerCommits()
-        transaction.abort()
+        self._vehiculo.obtenerOrdenDeReparacionEnCurso().setReparacionesComoNoPlanificadas()
+        transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
+        transaction.commit()
+        # transaction.abort()
         # Y ademas:
         # alvehiculo.decirleQuePongaTodasSusReparacionesCOmoNoPlanificadas!
 

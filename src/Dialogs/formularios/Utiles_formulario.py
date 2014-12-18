@@ -433,7 +433,7 @@ class TablaReparaciones(SuperTabla):
                 self.setItem(fila, columna, itemOrdenName)
                 columna += 1
                 itemFechaFin = QtGui.QTableWidgetItem()
-                itemFechaFin.setText(unicode(reparacion.getFechaFin()))
+                itemFechaFin.setText(unicode(reparacion.getFechaFinTurno()))
                 self.setItem(fila, columna, itemFechaFin)
 
                 self.agregarAlDiccionario(fila, reparacion)
