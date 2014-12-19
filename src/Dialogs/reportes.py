@@ -31,6 +31,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Image
 from reportlab.lib.styles import ParagraphStyle
 import os
+styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
 
 
 def footer(canvas, doc):
@@ -222,7 +223,7 @@ def imprimirOrden(ordenReparacion, titulo='Listado de Vehículos',
         - filename: nombre del archivo a generar.
     '''
     # Se arma el título del listado.
-    styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
+#    styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
     title_text = '<b>%s</b>' % (titulo)
     title = Paragraph(title_text, style=styles['Center'])
     fechaDeEntrada = '<b>Fecha de Entrada:</b> %s' % ordenReparacion[0]
@@ -309,13 +310,15 @@ def imprimirPedidoDeActuacion(numeroPedido='', repuestosSolicitados='', filename
     imprimir(Elements, filename)
 
 
-def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
+def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta_recibido):
     '''
     Recibe un vehiculo y genera su hoja de ruta con el nombre nombre_hoja_de_ruta
     '''
     turnos_ordenados = un_vehiculo.getTurnosOrdenados()
 #    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta
-    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta
+    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta_recibido
+    if not nombre_hoja_de_ruta_recibido:
+        nombre_hoja_de_ruta = '%s_hoja_de_ruta.pdf'%un_vehiculo.getDominio()
     elements = []
     titulo = Paragraph("Hoja de Ruta", styles["Title"])
     elements.append(titulo)
@@ -323,7 +326,7 @@ def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
     im = Image(logo, 2*inch, 2*inch)
     elements.append(im)
 
-    styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
+#    styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
 
     subtitulo = u"<b>Turnos del vehículo: %s</b>" % un_vehiculo.getDominio()
     elements.append(Paragraph(subtitulo, styles["Center"]))
@@ -381,6 +384,7 @@ def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta):
         elements.append(table)
         elements.append(Spacer(inch, 0.2*inch))
     imprimir(elements, nombre_hoja_de_ruta)
+    return nombre_hoja_de_ruta
 
 
 def generarHojaDeRuta2(un_vehiculo, nombre_hoja_de_ruta):
@@ -605,7 +609,7 @@ if __name__ == '__main__':
     im = Image(logo, 2*inch, 2*inch)
     elements.append(im)
 
-    styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
+#    styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
     subtitulo = u"<b>Turnos del vehículo: %s</b>" % 'un_vehiculo'
     elements.append(Paragraph(subtitulo, styles["Center"]))
     imprimir(elements, nombre_hoja_de_ruta)

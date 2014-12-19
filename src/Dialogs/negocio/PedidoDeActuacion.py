@@ -74,3 +74,6 @@ class PedidoDeActuacion(Persistent):
 
     def getFechaRecepcion(self):
         return self._fechaRecepcion
+
+    def getFechaHoraDeRealizacion(self):
+        return self._fechaHoraRealizacion

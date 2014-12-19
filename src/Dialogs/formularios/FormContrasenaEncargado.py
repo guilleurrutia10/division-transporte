@@ -20,7 +20,7 @@ class Ui_DialogCrearUsuarioEncargado(object):
         DialogCrearUsuarioEncargado.setWindowModality(QtCore.Qt.NonModal)
         DialogCrearUsuarioEncargado.resize(280, 183)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/personal/cambiar_encargado-icon.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/recursos/iconos/logoDivisionTransporte.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         DialogCrearUsuarioEncargado.setWindowIcon(icon)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)

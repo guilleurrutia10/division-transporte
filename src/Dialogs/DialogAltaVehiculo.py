@@ -42,7 +42,7 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo, AyudaManejador):
         self.label_5.setObjectName("label")
         # El único diálogo para mostrar alertas
         self._mensaje = Mensaje(self)
-        self._mensaje.setTitle('Alta Vehículo')
+        self._mensaje.setTitle(QtCore.QString.fromUtf8('Alta Vehículo'))
 
     def validacionesLineEdit(self):
         '''
@@ -55,10 +55,10 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo, AyudaManejador):
         marcaRegExp = QtCore.QRegExp('[A-Z|a-z]+')
         validadorRegExp = QtGui.QRegExpValidator(marcaRegExp, self)
         self.lineEditMarca.setValidator(validadorRegExp)
-        registroInternoRegExp = QtCore.QRegExp('[0-9]+')
+        registroInternoRegExp = QtCore.QRegExp('[0-9]{12}')
         validadorRegExp = QtGui.QRegExpValidator(registroInternoRegExp, self)
         self.lineEditRegistroInterno.setValidator(validadorRegExp)
-        numChasisRegExp = QtCore.QRegExp('[0-9]+')
+        numChasisRegExp = QtCore.QRegExp('[0-9]{12}')
         validadorRegExp = QtGui.QRegExpValidator(numChasisRegExp, self)
         self.lineEditChasisNro.setValidator(validadorRegExp)
 
@@ -113,25 +113,25 @@ class DialogAltaVehiculo(QtGui.QDialog, Ui_DialogAltaVehiculo, AyudaManejador):
         '''
         self._mensaje.setWarning()
         if not match('([A-Z|a-z]{3})([0-9]{3})', self.lineEditDominio.text()):
-            self._mensaje.setMensaje('Debe ingresar el dominio del vehículo. Debe ser alfanumérico.')
+            self._mensaje.setMensaje(QtCore.QString.fromUtf8('Debe ingresar el dominio del vehículo. Debe ser alfanumérico.'))
 #             self.mostrarMensaje('Debe ingresar el dominio del vehículo. Debe ser alfanumérico.', 'Ingresar Dominio')
             self.lineEditDominio.clear()
             self.lineEditDominio.setFocus()
             return
         if not match('[a-z|A-Z]+', self.lineEditMarca.text()):
-            self._mensaje.setMensaje('Debe ingresar la Marca del vehículo.Debe ser alfabético.')
+            self._mensaje.setMensaje(QtCore.QString.fromUtf8('Debe ingresar la Marca del vehículo.Debe ser alfabético.'))
 #             self.mostrarMensaje('Debe ingresar la Marca del vehículo.Debe ser alfabético.', 'Ingresar Marca')
             self.lineEditMarca.clear()
             self.lineEditMarca.setFocus()
             return
         if not match('[0-9]+', self.lineEditRegistroInterno.text()):
-            self._mensaje.setMensaje('Debe ingresar el Registro Interno del vehículo.Debe ser numérico.')
+            self._mensaje.setMensaje(QtCore.QString.fromUtf8('Debe ingresar el Registro Interno del vehículo.Debe ser numérico.'))
 #             self.mostrarMensaje('Debe ingresar el Registro Interno del vehículo.Debe ser numérico.', 'Ingresar Registro Interno')
             self.lineEditRegistroInterno.clear()
             self.lineEditRegistroInterno.setFocus()
             return
         if not match('[0-9]+', self.lineEditChasisNro.text()):
-            self._mensaje.setMensaje('Debe ingresar el Número de Chasis del vehículo.Debe ser numérico.')
+            self._mensaje.setMensaje(QtCore.QString.fromUtf8('Debe ingresar el Número de Chasis del vehículo.Debe ser numérico.'))
 #             self.mostrarMensaje('Debe ingresar el Número de Chasis del vehículo.Debe ser numérico.', 'Ingresar Número de Chasis')
             self.lineEditChasisNro.clear()
             self.lineEditChasisNro.setFocus()

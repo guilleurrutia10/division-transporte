@@ -58,7 +58,8 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
             self.tableWidget.setItem(fila, columna, itemNumeroPedido)
             columna += 1
             itemFechaRealizacion = QtGui.QTableWidgetItem()
-            itemFechaRealizacion.setText(pedido.getFechaRealizacion().ctime())
+#            itemFechaRealizacion.setText(pedido.getFechaRealizacion().ctime())
+            itemFechaRealizacion.setText(pedido.getFechaHoraDeRealizacion().ctime())
             self.tableWidget.setItem(fila, columna, itemFechaRealizacion)
             fila += 1
 
@@ -76,7 +77,7 @@ class DialogRegistrarRecepcionDePedidoDeActuacion(QtGui.QDialog, Ui_DialogRegist
                 if dlgAsignarFecha.exec_():
                     self._pedidosDeActuacion = [vehiculo.getPedidoDeActuacion() for vehiculo in self.DIVISION.getVehiculosEsperandoAprobacion()]
                     self.cargarGrillaInicial()
-                    self.mostrarMensaje('La fecha se ha cargado correctamente. ;)', 'Fecha cargada')
+                    self.mostrarMensaje('La fecha se ha cargado correctamente.', 'Fecha cargada')
                 self._pedidoSeleccionado = None
             else:
                 self.mostrarMensaje('Debe Seleccionar el Pedido.', 'Seleccionar Pedido')
@@ -119,7 +120,8 @@ class DialogAsignarFechaRecepcionPedidoActuacion(QtGui.QDialog, Ui_DialogAsignar
     def cargarDatosPedido(self):
         pedido = self._vehiculo.getPedidoActuacionSinFechaRecepcion()
         self.labelNroPedido.setText(str(pedido.getNumeroPedido()))
-        fechaRealizacion = QtCore.QString(pedido.getFechaRealizacion().ctime())
+##        fechaRealizacion = QtCore.QString(pedido.getFechaRealizacion().ctime())
+        fechaRealizacion = QtCore.QString(pedido.getFechaHoraDeRealizacion().ctime())
         self.labelFechaRealizacionPedido.setText(fechaRealizacion)
         # Provisorio, seguro es un tableWidget
         for reparacion in self._vehiculo.getReparaciones():

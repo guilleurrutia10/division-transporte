@@ -84,7 +84,7 @@ class DialogAltaSeccion(QtGui.QDialog, Ui_DialogAltaSeccion, AyudaManejador):
             Crea un Usuario nuevo para que el Encargado de la Seccion pueda logearse como tal.
             @precondition: self._encargado != None.
         '''
-        dialog = DialogCrearUsuarioEncargado(self._encargado.nombreCompletoUsr())
+        dialog = DialogCrearUsuarioEncargado(self._encargado.nombreCompletoUsr(), self)
         while True:
             if dialog.exec_() == QtGui.QDialog.Accepted:
                 if dialog.contrasenasValidas():

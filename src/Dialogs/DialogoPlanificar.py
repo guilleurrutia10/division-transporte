@@ -37,6 +37,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
         self._secciones_del_vehiculo = self._vehiculo.obtenerOrdenDeReparacionEnCurso().getSeccionesDeLasReparaciones()
         self._seccionSeleccionada = self._secciones_del_vehiculo[0] # Por defecto, la primer sección del combo box.
         self._todoCargado = False # Para que al principio no se pase automáticamente a la 2da pestaña (al cargar el combo box)
+        self._refrescarComboSecciones = True
         self._reparaciones_asignadas = []
         self._reparaciones_sin_asignar = []
         self.seteoUi()
@@ -44,6 +45,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
         # A partir de esta fecha podemos deshacer commits.
         self.DIVISION = Division_Transporte()
         self.DIVISION.zodb.setFechaMinimaDeshacer(localtime())
+        
 
     def seteoUi(self):
         # Css
@@ -83,6 +85,8 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
     def refrescarComboSecciones(self):
         # Lo usan varios métodos...
         # Limpiamos y cargamos el combo
+        if not self._refrescarComboSecciones:
+            return
         self.comboBoxSecciones.clear()
         for seccion in self._secciones_del_vehiculo:
             self.comboBoxSecciones.addItems(QtCore.QStringList(seccion.getNombre()))
@@ -142,7 +146,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
     @QtCore.pyqtSlot()
     def on_pushButtonAsignarReparacion_clicked(self):
         if not self.tableWidgetReparacionesSinAsignar.getReparacionSeleccionada():
-            mostrarMensaje(self, 'Debe seleccionar un repuesto.', 'Seleccionar')
+            mostrarMensaje(self, 'Debe seleccionar una reparación.', 'Seleccionar')
             return
         self._reparaciones_asignadas.append(self.tableWidgetReparacionesSinAsignar.getReparacionSeleccionada())
         self._reparaciones_sin_asignar.remove(self.tableWidgetReparacionesSinAsignar.getReparacionSeleccionada())
@@ -152,7 +156,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
     def on_pushButtonDesasignarReparacion_clicked(self):
  
         if not self.tableWidgetReparacionesAsignadas.getReparacionSeleccionada():
-            mostrarMensaje(self, 'Debe seleccionar un repuesto.', 'Seleccionar')
+            mostrarMensaje(self, 'Debe seleccionar una reparación.', 'Seleccionar')
             return
         self._reparaciones_sin_asignar.append(self.tableWidgetReparacionesAsignadas.getReparacionSeleccionada())
         self._reparaciones_asignadas.remove(self.tableWidgetReparacionesAsignadas.getReparacionSeleccionada())
@@ -179,8 +183,12 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
         transaction.commit()# Para que turno quede en el plan...
         mostrarMensaje(self, "Turno creado con exito:\nDia: %s %d horas\nVehiculo: %s\nSeccion: %s"%(fecha, hora, self._vehiculo.getDominio(), self._seccionSeleccionada), 'Turno')
         if self._vehiculo.tieneTodasLasReparacionesPlanificadas():
-            mostrarMensaje(self,"El vehiculo ya posee todas sus reparaciones planificadas\nOk para finalizar, Cancel para deshacer", 'Fin planificación')
+            mostrarMensaje(self,"El vehículo ya posee todas sus reparaciones planificadas\nOk para finalizar, Cancel para deshacer", 'Fin planificación')
             return
+#            self._todoCargado = False
+#            self._refrescarComboSecciones = False
+#            self.aceptar()
+#            self.accept()
 
         # Todavía le quedan reparaciones para la sección seleccionada?
         if self._vehiculo.getReparacionesSinPlanificarDeLaSeccion(self._seccionSeleccionada.getNombre()):
@@ -204,10 +212,12 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
     def aceptar(self):
         if self._vehiculo.tieneTodasLasReparacionesPlanificadas():# Verificar xq pude hacer click en aceptar sin haber terminado...
             self._vehiculo.planificacionFinalizada()#En este punto, la OR esta PLANIFICADA.
+            mostrarMensaje(self, 'Se va a generar la hoja de ruta del vehiculo', 'Hoja de Ruta')
             self.mostrarHojaDeRuta()
             # Para saber de qué cliente debemos borrar las transacciones.
             transaction.get().setUser(self.DIVISION.zodb.getNombreUsuario(), '')
             transaction.commit()
+            mostrarMensaje(self, 'Hoja de ruta generada con exito', 'Hoja de Ruta')
 #            print "DEBUG: Orden de reparacion planificada: %s"%self._vehiculo.obtenerOrdenDeReparacionEnCurso()
         else:
             # Se eliminan los turnos registrados anteriormente
@@ -228,4 +238,7 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
         # turnos_ordenados = self._vehiculo.getTurnosOrdenados()
         fileDialog = QFileDialog(caption=QtCore.QString.fromUtf8('Guardar Orden de Reparación'))
         filename = fileDialog.getSaveFileName(parent=self)
-        generarHojaDeRuta(self._vehiculo, filename)
+        if not filename:
+            mostrarMensaje(self, 'No se ingreso nombre, se utilizará un nombre por defecto', 'Advertencia')
+        name = generarHojaDeRuta(self._vehiculo, filename)
+        mostrarMensaje(self, u'Hoja de ruta creada con éxito!\n%s'%name, 'Creación exitosa')

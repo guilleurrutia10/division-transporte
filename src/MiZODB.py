@@ -188,11 +188,13 @@ class ZopeDB(object):
         raiz = self.zodb.raiz
         import hashlib
         USUARIOS = [("guille", "e96ff3826368162ce83d6aa3aec79ed3b2f99291", "jefeDivision"),
-                    ("loco", hashlib.sha1("loco"+"1234").hexdigest(), "jefeDivision"),
+                    ("UrrutiaGuillermo", hashlib.sha1("UrrutiaGuillermo"+"1234").hexdigest(), "jefeDivision"),
                     ("leo", "1234", "inspector"),
                     ("samuel", "e96ff3826368162ce83d6aa3aec79ed3b2f99291", "administrativo"),
                     ("diego", "1234", "otro"),
-                    ("pepe1", "7800524dada57a4caf0f1cc37a13a881c3af5e88", "inspector")
+                    ("pepe1", "7800524dada57a4caf0f1cc37a13a881c3af5e88", "inspector"),
+                    ("InspHector", hashlib.sha1("InspHector1234").hexdigest(), "inspector"),
+                    ("AdministrativoKutzarida", hashlib.sha1("AdministrativoKutzarida1234").hexdigest(), "administrativo"),
                     ]
 
         raiz['USUARIOS'] = USUARIOS
