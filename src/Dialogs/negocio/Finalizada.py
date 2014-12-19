@@ -26,7 +26,8 @@ class Finalizada(EstadoOrdenReparacion):
         return 'Finalizada'
     
     def noEstoyFinalizada(self):
-        return False
+        return self._orden_de_reparacion.getFechaEgreso() == None
+#        return False#Si, estoy finalizada!
     
     def puedeEgresar(self):
         return self._orden_de_reparacion.getFechaEgreso() == None

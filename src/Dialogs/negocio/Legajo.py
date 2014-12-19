@@ -165,9 +165,9 @@ class Legajo(Persistent):
         return recepcion_exitosa
 
     def puedeRegistrarIngreso(self):
-        ordenEnCurso = filter(lambda unaOrden: unaOrden.noEstaFinalizada(), self.ordenesDeReparacion)
+        ordenesEnCurso = filter(lambda unaOrden: unaOrden.noEstaFinalizada(), self.ordenesDeReparacion)
         # Si el vehiculo posee una orden en curso, es decir, una orden que no este finalizada, no puede registrar el ingreso.
-        if len(ordenEnCurso) != 0:
+        if ordenesEnCurso:
             return False
         return True
 

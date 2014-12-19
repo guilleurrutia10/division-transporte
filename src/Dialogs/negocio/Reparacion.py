@@ -142,6 +142,8 @@ class Reparacion(Persistent):
         return self.fechaFin
 
     def getFechaFinTurno(self):
+        '''
+        @return: string fecha del turno!'''
         return self.fechaFinTurno
 
     def planificada(self):

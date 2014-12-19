@@ -20,44 +20,39 @@
     <img src="../img/setup.png" style="float: left; margin-right:12px;" />
     <p>DivT es una aplición distribuida cliente/servidor.</p>
     <p>
-      DivT is distributed either as a... The platform and has no special hardware
-      nor software requirements (see <a href="System requirements.htm">System requirements</a>).
-    </p>
-    <p>
-      Precision Helper is distributed either as a standard setup package
-      or in the form of "zip archive" for portable installation.
-      The product is designed for Microsft Windows platform and has no special hardware
-      nor software requirements (see <a href="System requirements.htm">System requirements</a>).
+      DivT se distribuye a través de... Para tener información acerca de los requerimientos de hardware (ver <a href="System requirements.htm">Requisitos del sistema</a>).
     </p>
 
     <p class="big" style="padding-top:8px;">
-      How to install?
+      Cómo instalar?
     </p>
+    <p>- Cliente</p>
     <p>
-      Execute the downloaded installer and <b>follow the setup wizard instructions</b>.<br>
-      On Windows Vista you must allow user rights elevation to administrative rights during installation.
+      Para correr la aplicación se necesita contar con lo siguiente:
     </p>
+    <p style="margin-left: 2%;">- <b>Python 2.7:</b> Interprete de código python. Disponible en <a href="https://www.python.org/downloads/">Python</a></p>
+    <p style="margin-left: 2%;">- Paquetes de python:</p>
+    <p style="margin-left: 4%;">- <b>PyQt4</b></p>
+    <p style="margin-left: 4%;">- <b>matplotlib</b></p>
+    <p style="margin-left: 4%;">- <b>ZODB</b></p>
+    <p style="margin-left: 4%;">- <b>ZEO</b></p>
+    <p style="margin-left: 4%;">Estos paquetes pueden ser instalados utilizando la herramienta pip, gestor de paquetes de   python, easy_install en Windows, o descargando directamente los fuentes de cada paquete las   paqinas web oficiales correspondientes.</p>
+    <p style="margin-left: 2%;">- <b>En Windows</b>:</p>
+    <p style="margin-left: 4%;">- Código fuente de la aplicación: Copiar el código fuente del proyecto en la carpeta <b>C:\ProgramFiles\DivisionTransporte</b>. Mover el acceso directo a la aplicación “División Transporte” al escritorio.</p>
+    <p style="margin-left: 2%;">- <b>En Linux</b>:</p>
+    <p style="margin-left: 4%;">- Código fuente de la aplicación: Copiar el código fuente del proyecto en la carpeta <b>~/DivisionTransporte</b> (~, carpeta de usuario. Ejemplo <b>/home/usr/</b>). Ejecutar el archivo main.py de la siguiente manera <b>python main.py</b>.</p>
     <div align="center" style="margin-bottom:8px;">
       <img src="../img/ss_setup.jpg"/>
     </div>
+    <p>- Servidor</p>
+    <p>
+      Para correr la aplicación se necesita contar con lo siguiente:
+    </p>
+    <p style="margin-left: 2%;">- Correr el script <b>runzeo</b> que provee el paquete <b>ZEO</b>.</p>
+    <p style="margin-left: 4%;">En la carpeta raíz del proyecto se provee un ejecutable que corre el srcipt. Uno para cada plataforma.</p>
+    <p style="margin-left: 4%;">Para más información sobre como ejecutar el script <b>runzeo</b> en su sistema puede revisar el código <a href="https://github.com/zopefoundation/ZEO/blob/master/src/ZEO/runzeo.py">runzeo.py</a>.</p>
+
     
-    <br>
-    <p>
-      A <b>portable version</b> can be simply unpacked into desired folder and used by executing
-      the PrecisionHelper.exe file.
-    </p>
-    <br>
-    <p>
-      <b>Microsoft Html Help Workshop</b> must be installed to properly compile resulting help
-      into the <i>Microsoft CHM format</i>.
-      In fact, only a few dll files from this product are needed, but Microsoft does not
-      recommend to install and register them outside of it's product.
-      The setup wizard will automatically ask you for download and install Microsoft
-      Html Help Workshop if it is not presented on your system.
-    </p>
-    <div align="center" style="margin-bottom:8px;">
-      <img src="../img/ss_setuphhw.jpg"/>
-    </div>
   </div>
   <div id="foot">
     &copy; DivT - Software

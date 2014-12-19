@@ -72,10 +72,10 @@ class DialogoPlanificar(QtGui.QDialog, Ui_DialogPlanificar, AyudaManejador):
         self._reparaciones_sin_asignar = self._vehiculo.obtenerOrdenDeReparacionEnCurso().getReparacionesClasificadas()[self._seccionSeleccionada.getNombre()]
         self.refrescarTablas()
 
-        # Seteamos la fecha del turno predefinida con la fecha de hoy:
+        # Seteamos la fecha del turno predefinida con la primera fecha disponible:
 #        hoy = date.today()
-#        fecharecepcion = self._vehiculo.getPedidoDeActuacion().getFechaRecepcion()
-        fecharecepcion = self._vehiculo.getPedidoDeActuacion().getFechaRealizacion()
+        fecharecepcion = self._vehiculo.getPedidoDeActuacion().getFechaRecepcion()
+#        fecharecepcion = self._vehiculo.getPedidoDeActuacion().getFechaRealizacion()
         self.dateEditFechaTurno.setDate((QtCore.QDate(fecharecepcion.year, fecharecepcion.month, fecharecepcion.day)))
         self.dateEditFechaTurno.setMinimumDate((QtCore.QDate(fecharecepcion.year, fecharecepcion.month, fecharecepcion.day)))
         # Popup verdadero:

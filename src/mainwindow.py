@@ -187,8 +187,14 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     @QtCore.pyqtSlot(bool)
     def on_actionAyuda_triggered(self, check):
-        if check:
-            self.setCentralWidget(MyOtroListado(self))
+#        if check:
+#            self.setCentralWidget(MyOtroListado(self))
+        path = QtCore.QDir.currentPath()
+        urlHelp = 'file:///%s/Help/%s/%s.htm' % (path, 'Spanish', 'index')
+        url = QtCore.QUrl(urlHelp)
+        QtGui.QDesktopServices.openUrl(url)
+
+        
         
     @QtCore.pyqtSlot()
     def on_actionSobre_triggered(self):
@@ -221,7 +227,11 @@ class MyMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     
     @QtCore.pyqtSlot()
     def on_actionListado_Vehiculos_con_Reparaciones_Planificadas_2_triggered(self):
-        self.setCentralWidget(WidgetMostrarReparacionesPorVehiculo.WidgetMostrarReparacionesPorVehiculoPlanificadas(Division_Transporte().getVehiculosEnPlanificacion(), self))
+        widgetprincipal = WidgetMostrarReparacionesPorVehiculo.WidgetMostrarReparacionesPorVehiculoPlanificadas(Division_Transporte().getVehiculosEnPlanificacion(), self)
+        self.setCentralWidget(widgetprincipal)
+        widgetprincipal.groupBox_3.setTitle(QtCore.QString('Vehiculos con reparaciones planificadas'))
+        widgetprincipal.groupBox_5.setHidden(True)
+
 #         self.setCentralWidget(WidgetMostrarReparacionesPorVehiculo.WidgetMostrarReparacionesPorVehiculo(Division_Transporte().getVehiculosEnPlanificacion(), self))
 #         self.setCentralWidget(WidgetListadoDeVehiculos.Listado_Vehiculos_con_Reparaciones_Planificadas(self))
 #         self.centralWidget().labelListadoVehiculos.setText(QtCore.QString.fromUtf8("Listado de Vehiculos con Reparaciones Planificadas"))

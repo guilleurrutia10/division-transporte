@@ -25,6 +25,7 @@ class WidgetMostrarReparacionesPorVehiculo(QtGui.QWidget, Ui_WidgetMostrarRepara
         '''
         super(WidgetMostrarReparacionesPorVehiculo, self).__init__(parent)
         self.setupUi(self)
+        self.groupBox_3.setTitle(QtCore.QString('Todas las reparaciones de los vehiculos'))
         self._vehiculos = vehiculos
 
         #self.tableWidgetVehiculos = ListadoVehiculos(Division_Transporte().getVehiculosEnFinalizada(), self)
@@ -63,7 +64,12 @@ class WidgetMostrarReparacionesPorVehiculo(QtGui.QWidget, Ui_WidgetMostrarRepara
         self.filtrarFechaFinalizacionDeReparacion()
 
     def reparacionEntreFechas(self, reparacion):
-        return self.dateEditDesde.date().toPyDate() <= reparacion.getFechaFin() <= self.dateEditHasta.date().toPyDate()
+        fechaReparacion = reparacion.getFechaFinTurno()
+        from datetime import date
+        dia, mes, anio = [int(n) for n in fechaReparacion.split('/')]
+        fechaReparacion = date(anio, mes, dia)
+#        return self.dateEditDesde.date().toPyDate() <= reparacion.getFechaFin() <= self.dateEditHasta.date().toPyDate()
+        return self.dateEditDesde.date().toPyDate() <= fechaReparacion <= self.dateEditHasta.date().toPyDate()
      
     # TODO: Falta tener en cuenta la fecha de fin de las reparaciones.(OK)
     def filtrarFechaFinalizacionDeReparacion(self):

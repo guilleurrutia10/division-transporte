@@ -33,8 +33,6 @@ from reportlab.lib.styles import ParagraphStyle
 import os
 styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
 
-styles.add(ParagraphStyle(name='Center', alignment=TA_CENTER))
-
 
 def footer(canvas, doc):
     '''
@@ -318,9 +316,10 @@ def generarHojaDeRuta(un_vehiculo, nombre_hoja_de_ruta_recibido):
     '''
     turnos_ordenados = un_vehiculo.getTurnosOrdenados()
 #    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta
-    nombre_hoja_de_ruta = "%s.pdf" % nombre_hoja_de_ruta_recibido
     if not nombre_hoja_de_ruta_recibido:
-        nombre_hoja_de_ruta = '%s_hoja_de_ruta.pdf'%un_vehiculo.getDominio()
+        nombre_hoja_de_ruta = '%s_hoja_de_ruta'%un_vehiculo.getDominio()
+    else:
+        nombre_hoja_de_ruta = "%s" % nombre_hoja_de_ruta_recibido
     elements = []
     titulo = Paragraph("Hoja de Ruta", styles["Title"])
     elements.append(titulo)

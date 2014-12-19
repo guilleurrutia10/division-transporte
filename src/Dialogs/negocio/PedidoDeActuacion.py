@@ -41,7 +41,7 @@ class PedidoDeActuacion(Persistent):
         @return:
         @author:
         '''
-        if (self.getFechaRealizacion() < fechaRecepcion):
+        if (self.getFechaRealizacion() <= fechaRecepcion):
             self._fechaRecepcion = fechaRecepcion
         # else
         # error
